@@ -1,8 +1,5 @@
 package com.longluo.leetcode.string;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 1678. 设计 Goal 解析器
  * 请你设计一个可以解释字符串 command 的 Goal 解析器 。command 由 "G"、"()" 和/或 "(al)" 按某种顺序组成。
@@ -31,7 +28,7 @@ import java.util.Map;
  * 1 <= command.length <= 100
  * command 由 "G"、"()" 和/或 "(al)" 按某种顺序组成
  */
-public class Offer1678_interpret {
+public class Problem1678_interpret {
 
     public static String interpret(String command) {
         StringBuilder sb = new StringBuilder();

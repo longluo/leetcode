@@ -34,6 +34,27 @@ public class Offer03_findRepeatNumber {
         return 0;
     }
 
+    public static int findRepeatNumber2(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            if (map.containsKey(num)) {
+                return num;
+            } else {
+                map.put(num, map.getOrDefault(num, 0) + 1);
+            }
+        }
+
+        return 0;
+    }
+
+    public static int findRepeatNumber3(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+
+        }
+
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 3 ?= " + findRepeatNumber(new int[]{2, 3, 1, 0, 2, 5, 3}));
     }

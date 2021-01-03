@@ -1,8 +1,6 @@
 package com.longluo.offer;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * 剑指 Offer 61. 扑克牌中的顺子
