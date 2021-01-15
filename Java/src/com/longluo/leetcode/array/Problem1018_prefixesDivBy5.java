@@ -1,8 +1,6 @@
 package com.longluo.leetcode.array;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -57,8 +55,24 @@ public class Problem1018_prefixesDivBy5 {
         return ans;
     }
 
+    public static List<Boolean> prefixesDivBy5_2(int[] A) {
+        if (A == null || A.length == 0) {
+            return new ArrayList<Boolean>();
+        }
+
+        List<Boolean> ans = new ArrayList<>(A.length);
+        int prefix = 0;
+        for (int i = 0; i < A.length; i++) {
+            prefix = ((prefix << 1) + A[i]) % 5;
+            ans.add(prefix == 0);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
-        System.out.println("[true,false,false] ?= " + prefixesDivBy5(new int[]{0, 1, 1}));
+//        System.out.println("[true,false,false] ?= " + prefixesDivBy5(new int[]{0, 1, 1}));
+        System.out.println("[true,false,false] ?= " + prefixesDivBy5_2(new int[]{0, 1, 1}));
         System.out.println("[ ] ?= " + prefixesDivBy5(new int[]{1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1}))
         ;
     }
