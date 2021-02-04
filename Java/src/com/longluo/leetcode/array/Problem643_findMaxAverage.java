@@ -20,26 +20,18 @@ public class Problem643_findMaxAverage {
             return 0;
         }
 
-        int left = 0;
-        int right = left + k - 1;
-        double ans = 0.0;
-        double sum = 0;
-        for (int i = left; i <= right; i++) {
+        int sum = 0;
+        for (int i = 0; i < k; i++) {
             sum += nums[i];
         }
-        ans = sum / k;
-        while (right < nums.length - 1) {
-            sum -= nums[left];
-            left++;
-            right++;
-            sum += nums[right];
-            double average = sum / k;
-            if (average> ans) {
-                ans = average;
-            }
+
+        int max = sum;
+        for (int i = k; i < nums.length; i++) {
+            sum = sum - nums[i - k] + nums[i];
+            max = Math.max(sum, max);
         }
 
-        return ans;
+        return (double) max / k;
     }
 
     public static void main(String[] args) {
