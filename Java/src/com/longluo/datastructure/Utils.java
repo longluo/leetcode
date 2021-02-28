@@ -27,6 +27,9 @@ public class Utils {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < row; i++) {
             sb.append(Arrays.toString(arr[i]));
+            if (i < row - 1) {
+                sb.append(",");
+            }
         }
 
         return sb.toString();
