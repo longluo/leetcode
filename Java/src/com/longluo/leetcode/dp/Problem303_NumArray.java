@@ -31,33 +31,42 @@ package com.longluo.leetcode.dp;
 public class Problem303_NumArray {
 
     static class NumArray {
-        int[] arr;
-        int[] dp;
+        int[] array;
 
         public NumArray(int[] nums) {
             if (nums == null || nums.length == 0) {
                 return;
             }
-            arr = new int[nums.length];
-            System.arraycopy(nums, 0, arr, 0, nums.length);
-            dp = new int[nums.length];
-            dp[0] = arr[0];
-            for (int i = 1; i < nums.length; i++) {
-                dp[i] = dp[i - 1] + nums[i];
-            }
+            array = new int[nums.length];
+            System.arraycopy(nums, 0, array, 0, nums.length);
         }
 
         public int sumRange(int i, int j) {
             int total = 0;
             for (int idx = i; idx <= j; idx++) {
-                total += arr[idx];
+                total += array[idx];
             }
 
             return total;
         }
+    }
 
-        public int sumRange_dp(int i, int j) {
-            return dp[j] - dp[i] + arr[i];
+    static class NumArray_2 {
+        int[] dp;
+
+        public NumArray_2(int[] nums) {
+            if (nums == null || nums.length == 0) {
+                return;
+            }
+            dp = new int[nums.length + 1];
+            dp[0] = 0;
+            for (int i = 0; i < nums.length; i++) {
+                dp[i + 1] = dp[i] + nums[i];
+            }
+        }
+
+        public int sumRange(int i, int j) {
+            return dp[j + 1] - dp[i];
         }
     }
 
@@ -75,8 +84,9 @@ public class Problem303_NumArray {
         System.out.println("-1 ?= " + numArray.sumRange(2, 5));
         System.out.println("-3 ?= " + numArray.sumRange(0, 5));
 
-        System.out.println("1 ?= " + numArray.sumRange_dp(0, 2));
-        System.out.println("-1 ?= " + numArray.sumRange_dp(2, 5));
-        System.out.println("-3 ?= " + numArray.sumRange_dp(0, 5));
+        NumArray_2 numArray_2 = new NumArray_2(testArr);
+        System.out.println("1 ?= " + numArray_2.sumRange(0, 2));
+        System.out.println("-1 ?= " + numArray_2.sumRange(2, 5));
+        System.out.println("-3 ?= " + numArray_2.sumRange(0, 5));
     }
 }
