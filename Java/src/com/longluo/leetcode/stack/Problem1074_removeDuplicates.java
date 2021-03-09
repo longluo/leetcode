@@ -51,10 +51,33 @@ public class Problem1074_removeDuplicates {
         return sb.toString();
     }
 
+    public static String removeDuplicates_2(String S) {
+        if (S == null || S.length() <= 1) {
+            return S;
+        }
+
+        int n = S.length();
+        StringBuilder sb = new StringBuilder(n);
+        for (int i = 0; i < n; i++) {
+            if (sb.length() > 0 && sb.charAt(sb.length() - 1) == S.charAt(i)) {
+                sb.deleteCharAt(sb.length() - 1);
+            } else {
+                sb.append(S.charAt(i));
+            }
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("ca ?= " + removeDuplicates("abbaca"));
         System.out.println("c ?= " + removeDuplicates("c"));
         System.out.println(" ?= " + removeDuplicates("aa"));
         System.out.println("ab ?= " + removeDuplicates("ab"));
+
+        System.out.println("ca ?= " + removeDuplicates_2("abbaca"));
+        System.out.println("c ?= " + removeDuplicates_2("c"));
+        System.out.println(" ?= " + removeDuplicates_2("aa"));
+        System.out.println("ab ?= " + removeDuplicates_2("ab"));
     }
 }
