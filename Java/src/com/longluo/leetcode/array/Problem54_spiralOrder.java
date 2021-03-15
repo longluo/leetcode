@@ -86,9 +86,88 @@ public class Problem54_spiralOrder {
         return ans;
     }
 
+    public static List<Integer> spiralOrder_2(int[][] matrix) {
+        List<Integer> res = new ArrayList<>();
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return res;
+        }
+
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int[][] dirs = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int rowIdx = 0;
+        int colIdx = 0;
+        boolean[][] visited = new boolean[row][col];
+        int dirIdx = 0;
+        for (int i = 0; i < row * col; i++) {
+            res.add(matrix[rowIdx][colIdx]);
+            visited[rowIdx][colIdx] = true;
+            int nextRow = rowIdx + dirs[dirIdx][0];
+            int nextCol = colIdx + dirs[dirIdx][1];
+            if (nextRow < 0 || nextRow >= row || nextCol < 0 || nextCol >= col || visited[nextRow][nextCol]) {
+                dirIdx = (dirIdx + 1) % 4;
+            }
+            rowIdx = rowIdx + dirs[dirIdx][0];
+            colIdx = colIdx + dirs[dirIdx][1];
+        }
+
+        return res;
+    }
+
+    public static List<Integer> spiralOrder_3(int[][] matrix) {
+        List<Integer> res = new ArrayList<>();
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return res;
+        }
+
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int left = 0;
+        int right = col - 1;
+        int top = 0;
+        int bottom = row - 1;
+        while (left <= right && top <= bottom) {
+            for (int colIdx = left; colIdx <= right; colIdx++) {
+                res.add(matrix[top][colIdx]);
+            }
+
+            for (int rowIdx = top + 1; rowIdx <= bottom; rowIdx++) {
+                res.add(matrix[rowIdx][right]);
+            }
+
+            if (left < right && top < bottom) {
+                for (int colIdx = right - 1; colIdx >= left; colIdx--) {
+                    res.add(matrix[bottom][colIdx]);
+                }
+
+                for (int rowIdx = bottom - 1; rowIdx > top; rowIdx--) {
+                    res.add(matrix[rowIdx][left]);
+                }
+            }
+
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
+        System.out.println(" Method 1: ");
         System.out.println("[1,2,3,6,9,8,7,4,5] ?= " + spiralOrder(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
         System.out.println("[1,2,3,4,8,12,11,10,9,5,6,7] ?= " + spiralOrder(new int[][]{{1, 2, 3, 4},
+                {5, 6, 7, 8}, {9, 10, 11, 12}}));
+
+        System.out.println(" Method 2: ");
+        System.out.println("[1,2,3,6,9,8,7,4,5] ?= " + spiralOrder_2(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
+        System.out.println("[1,2,3,4,8,12,11,10,9,5,6,7] ?= " + spiralOrder_2(new int[][]{{1, 2, 3, 4},
+                {5, 6, 7, 8}, {9, 10, 11, 12}}));
+
+        System.out.println(" Method 3: ");
+        System.out.println("[1,2,3,6,9,8,7,4,5] ?= " + spiralOrder_3(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
+        System.out.println("[1,2,3,4,8,12,11,10,9,5,6,7] ?= " + spiralOrder_3(new int[][]{{1, 2, 3, 4},
                 {5, 6, 7, 8}, {9, 10, 11, 12}}));
     }
 }
