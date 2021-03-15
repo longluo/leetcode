@@ -30,45 +30,16 @@ package com.longluo.leetcode.design;
 public class Problem1603_designParkingSystem {
 
     class ParkingSystem {
-        int bigParkingLotVolume;
-        int mediumParkingLotVolume;
-        int smallParkingLotVolume;
-
-        int bigIdx;
-        int mediumIdx;
-        int smallIdx;
+        int[] carParkingLot = new int[3];
 
         public ParkingSystem(int big, int medium, int small) {
-            bigParkingLotVolume = big;
-            mediumParkingLotVolume = medium;
-            smallParkingLotVolume = small;
+            carParkingLot[0] = big;
+            carParkingLot[1] = medium;
+            carParkingLot[2] = small;
         }
 
         public boolean addCar(int carType) {
-            switch (carType) {
-                case 1:
-                    if (bigIdx < bigParkingLotVolume) {
-                        bigIdx++;
-                        return true;
-                    }
-                    break;
-
-                case 2:
-                    if (mediumIdx < mediumParkingLotVolume) {
-                        mediumIdx++;
-                        return true;
-                    }
-                    break;
-
-                case 3:
-                    if (smallIdx < smallParkingLotVolume) {
-                        smallIdx++;
-                        return true;
-                    }
-                    break;
-            }
-
-            return false;
+            return carParkingLot[carType - 1]-- > 0;
         }
     }
 }
