@@ -37,26 +37,40 @@ import java.util.*;
 public class Problem705_designHashSet {
 
     class MyHashSet {
-        Map<Object, Object> myMap;
+        private static final int BASE = 593;
+        private LinkedList[] data;
 
         /**
          * Initialize your data structure here.
          */
         public MyHashSet() {
-            myMap = new HashMap<>();
-        }
-
-        public void add(int key) {
-            if (myMap.containsKey(key)) {
-                return;
-            } else {
-                myMap.put(key, key);
+            data = new LinkedList[BASE];
+            for (int i = 0; i < BASE; i++) {
+                data[i] = new LinkedList<Integer>();
             }
         }
 
+        public void add(int key) {
+            int loc = hash(key);
+            Iterator<Integer> iterator = data[loc].iterator();
+            while (iterator.hasNext()) {
+                Integer number = iterator.next();
+                if (number == key) {
+                    return;
+                }
+            }
+            data[loc].offerLast(key);
+        }
+
         public void remove(int key) {
-            if (myMap.containsKey(key)) {
-                myMap.remove(key);
+            int loc = hash(key);
+            Iterator<Integer> iterator = data[loc].iterator();
+            while (iterator.hasNext()) {
+                Integer element = iterator.next();
+                if (element == key) {
+                    data[loc].remove(element);
+                    return;
+                }
             }
         }
 
@@ -64,10 +78,19 @@ public class Problem705_designHashSet {
          * Returns true if this set contains the specified element
          */
         public boolean contains(int key) {
-            if (myMap.containsKey(key)) {
-                return true;
+            int loc = hash(key);
+            Iterator<Integer> iterator = data[loc].iterator();
+            while (iterator.hasNext()) {
+                Integer element = iterator.next();
+                if (element == key) {
+                    return true;
+                }
             }
             return false;
+        }
+
+        private int hash(int key) {
+            return key % BASE;
         }
     }
 
