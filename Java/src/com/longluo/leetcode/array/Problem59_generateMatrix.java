@@ -1,20 +1,23 @@
 package com.longluo.leetcode.array;
 
+import com.longluo.datastructure.Utils;
+
 import java.util.Arrays;
 
-/*
-59. 螺旋矩阵 II
-给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。
-
-示例:
-
-输入: 3
-输出:
-[
- [ 1, 2, 3 ],
- [ 8, 9, 4 ],
- [ 7, 6, 5 ]
-]
+/**
+ * 59. 螺旋矩阵 II
+ * 给你一个正整数n，生成一个包含1到n^2所有元素，且元素按顺时针顺序螺旋排列的n x n正方形矩阵matrix。
+ * <p>
+ * 示例 1：
+ * 输入：n = 3
+ * 输出：[[1,2,3],[8,9,4],[7,6,5]]
+ * <p>
+ * 示例 2：
+ * 输入：n = 1
+ * 输出：[[1]]
+ * <p>
+ * 提示：
+ * 1 <= n <= 20
  */
 public class Problem59_generateMatrix {
 
@@ -54,8 +57,84 @@ public class Problem59_generateMatrix {
         return ans;
     }
 
-    public static void main(String[] args) {
-        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + Arrays.asList(generateMatrix(3)));
+    public static int[][] generateMatrix_2(int n) {
+        if (n == 0) {
+            return new int[][]{};
+        }
 
+        int[][] res = new int[n][n];
+        int[][] dirs = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        boolean[][] visited = new boolean[n][n];
+        int row = 0;
+        int col = 0;
+        int dirIdx = 0;
+        for (int i = 1; i <= n * n; i++) {
+            res[row][col] = i;
+            visited[row][col] = true;
+            int nextRow = row + dirs[dirIdx][0];
+            int nextCol = col + dirs[dirIdx][1];
+            if (nextRow < 0 || nextRow >= n || nextCol < 0 || nextCol >= n || visited[nextRow][nextCol]) {
+                dirIdx = (dirIdx + 1) % 4;
+            }
+            row = row + dirs[dirIdx][0];
+            col = col + dirs[dirIdx][1];
+        }
+
+        return res;
+    }
+
+    public static int[][] generateMatrix_3(int n) {
+        int[][] res = new int[n][n];
+
+        int left = 0;
+        int right = n - 1;
+        int top = 0;
+        int bottom = n - 1;
+        int count = 1;
+
+        while (left <= right && top <= bottom) {
+            for (int i = left; i <= right; i++) {
+                res[top][i] = count;
+                count++;
+            }
+
+            for (int i = top + 1; i <= bottom; i++) {
+                res[i][right] = count;
+                count++;
+            }
+
+            if (left < right && top < bottom) {
+                for (int i = right - 1; i >= left; i--) {
+                    res[bottom][i] = count;
+                    count++;
+                }
+
+                for (int i = bottom - 1; i > top; i--) {
+                    res[i][left] = count;
+                    count++;
+                }
+            }
+
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+
+        return res;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(" Method 1:");
+        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + Utils.print2DArray(generateMatrix(3)));
+        System.out.println("{{1}} ?= " + Utils.print2DArray(generateMatrix(1)));
+
+        System.out.println(" Method 2:");
+        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + Utils.print2DArray(generateMatrix_2(3)));
+        System.out.println("{{1}} ?= " + Utils.print2DArray(generateMatrix_2(1)));
+
+        System.out.println(" Method 3:");
+        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + Utils.print2DArray(generateMatrix_3(3)));
+        System.out.println("{{1}} ?= " + Utils.print2DArray(generateMatrix_3(1)));
     }
 }
