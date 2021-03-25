@@ -1,6 +1,7 @@
 package com.longluo.offer;
 
 import com.longluo.datastructure.ListNode;
+import com.longluo.datastructure.Utils;
 
 /**
  * 剑指 Offer 18. 删除链表的节点
@@ -27,15 +28,29 @@ public class Offer18_deleteNode {
     public static ListNode deleteNode(ListNode head, int val) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
+        ListNode temp = dummy;
 
         while (dummy != null) {
-            dummy = dummy.next;
+            if (dummy.next != null && dummy.next.next != null && dummy.next.val == val) {
+                dummy.next = dummy.next.next;
+            } else if (dummy.next != null && dummy.next.next == null && dummy.next.val == val) {
+                dummy.next = null;
+            } else {
+                dummy = dummy.next;
+            }
         }
 
-        return head;
+        return temp.next;
     }
 
     public static void main(String[] args) {
+        ListNode test1 = Utils.makeListNode(new int[]{4, 5, 1, 9});
+        System.out.println("[4,1,9] ?= " + Utils.printLinkedList(deleteNode(test1, 5)));
 
+        ListNode test2 = Utils.makeListNode(new int[]{4, 5, 1, 9});
+        System.out.println("[4,5,9] ?= " + Utils.printLinkedList(deleteNode(test2, 1)));
+
+        ListNode test3 = Utils.makeListNode(new int[]{-3, 5, -99});
+        System.out.println("[-3,5] ?= " + Utils.printLinkedList(deleteNode(test3, -99)));
     }
 }
