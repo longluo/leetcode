@@ -3,8 +3,6 @@ package com.longluo.leetcode.linkedlist;
 import com.longluo.datastructure.ListNode;
 import com.longluo.datastructure.Utils;
 
-import java.util.List;
-
 /**
  * 876. 链表的中间结点
  * 给定一个头结点为 head 的非空单链表，返回链表的中间结点。
@@ -27,7 +25,36 @@ import java.util.List;
  */
 public class Problem876_middleOfTheLinkedList {
 
-    public static ListNode middleNode(ListNode head) {
+    public static ListNode middleNode1(ListNode head) {
+        ListNode[] arr = new ListNode[100];
+        int n = 0;
+        while (head != null) {
+            arr[n++] = head;
+            head = head.next;
+        }
+
+        return arr[n / 2];
+    }
+
+    public static ListNode middleNode2(ListNode head) {
+        int n = 0;
+        ListNode cur = head;
+        while (cur != null) {
+            n++;
+            cur = cur.next;
+        }
+
+        int k = 0;
+        cur = head;
+        while (k < n / 2) {
+            k++;
+            cur = cur.next;
+        }
+
+        return cur;
+    }
+
+    public static ListNode middleNode3(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -45,12 +72,18 @@ public class Problem876_middleOfTheLinkedList {
 
     public static void main(String[] args) {
         ListNode test1 = Utils.makeListNode(new int[]{1, 2, 3, 4, 5});
-        System.out.println("[3,4,5] ?= " + Utils.printLinkedList(middleNode(test1)));
+        System.out.println("[3,4,5] ?= " + Utils.printLinkedList(middleNode1(test1)));
+        System.out.println("[3,4,5] ?= " + Utils.printLinkedList(middleNode2(test1)));
+        System.out.println("[3,4,5] ?= " + Utils.printLinkedList(middleNode3(test1)));
 
         ListNode test2 = Utils.makeListNode(new int[]{1, 2, 3, 4, 5, 6});
-        System.out.println("[4,5,6] ?= " + Utils.printLinkedList(middleNode(test2)));
+        System.out.println("[4,5,6] ?= " + Utils.printLinkedList(middleNode1(test2)));
+        System.out.println("[4,5,6] ?= " + Utils.printLinkedList(middleNode2(test2)));
+        System.out.println("[4,5,6] ?= " + Utils.printLinkedList(middleNode3(test2)));
 
         ListNode test3 = Utils.makeListNode(new int[]{1});
-        System.out.println("[1] ?= " + Utils.printLinkedList(middleNode(test3)));
+        System.out.println("[1] ?= " + Utils.printLinkedList(middleNode1(test3)));
+        System.out.println("[1] ?= " + Utils.printLinkedList(middleNode2(test3)));
+        System.out.println("[1] ?= " + Utils.printLinkedList(middleNode3(test3)));
     }
 }
