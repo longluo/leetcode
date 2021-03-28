@@ -58,11 +58,57 @@ public class Problem896_isMonotonic {
         return true;
     }
 
+    public static boolean isMonotonic_2(int[] A) {
+        boolean isInc = true;
+        boolean isDec = true;
+        for (int i = 1; i < A.length; i++) {
+            if (A[i] < A[i - 1]) {
+                isInc = false;
+            }
+
+            if (A[i] > A[i - 1]) {
+                isDec = false;
+            }
+        }
+
+        return isInc || isDec;
+    }
+
+    public static boolean isMonotonic_3(int[] A) {
+        return isSorted(A, true) || isSorted(A, false);
+    }
+
+    public static boolean isSorted(int[] A, boolean isInc) {
+        for (int i = 1; i < A.length; i++) {
+            if (isInc) {
+                if (A[i] < A[i - 1]) {
+                    return false;
+                }
+            } else {
+                if (A[i] > A[i - 1]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + isMonotonic(new int[]{1, 2, 2, 3}));
+        System.out.println("true ?= " + isMonotonic_2(new int[]{1, 2, 2, 3}));
+        System.out.println("true ?= " + isMonotonic_3(new int[]{1, 2, 2, 3}));
         System.out.println("true ?= " + isMonotonic(new int[]{6, 5, 4, 4}));
+        System.out.println("true ?= " + isMonotonic_2(new int[]{6, 5, 4, 4}));
+        System.out.println("true ?= " + isMonotonic_3(new int[]{6, 5, 4, 4}));
         System.out.println("false ?= " + isMonotonic(new int[]{1, 3, 2}));
+        System.out.println("false ?= " + isMonotonic_2(new int[]{1, 3, 2}));
+        System.out.println("false ?= " + isMonotonic_3(new int[]{1, 3, 2}));
         System.out.println("true ?= " + isMonotonic(new int[]{1, 2, 4, 5}));
+        System.out.println("true ?= " + isMonotonic_2(new int[]{1, 2, 4, 5}));
+        System.out.println("true ?= " + isMonotonic_3(new int[]{1, 2, 4, 5}));
         System.out.println("true ?= " + isMonotonic(new int[]{1, 1, 1}));
+        System.out.println("true ?= " + isMonotonic_2(new int[]{1, 1, 1}));
+        System.out.println("true ?= " + isMonotonic_3(new int[]{1, 1, 1}));
     }
 }
