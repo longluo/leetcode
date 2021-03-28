@@ -1,7 +1,7 @@
 package com.longluo.leetcode.linkedlist;
 
 import com.longluo.datastructure.ListNode;
-import com.longluo.datastructure.Utils;
+import com.longluo.datastructure.LinkedListUtils;
 
 /**
  * 61. 旋转链表
@@ -47,19 +47,19 @@ public class Problem61_rotateLinkedList {
     }
 
     public static void main(String[] args) {
-        ListNode test1 = Utils.makeListNode(new int[]{1, 2, 3, 4, 5});
-        System.out.println("[4,5,1,2,3] ?=" + Utils.printLinkedList(rotateRight(test1, 2)));
+        ListNode test1 = LinkedListUtils.makeListNode(new int[]{1, 2, 3, 4, 5});
+        System.out.println("[4,5,1,2,3] ?=" + LinkedListUtils.printLinkedList(rotateRight(test1, 2)));
 
-        ListNode test2 = Utils.makeListNode(new int[]{0, 1, 2});
-        System.out.println("[2,0,1] ?=" + Utils.printLinkedList(rotateRight(test2, 4)));
+        ListNode test2 = LinkedListUtils.makeListNode(new int[]{0, 1, 2});
+        System.out.println("[2,0,1] ?=" + LinkedListUtils.printLinkedList(rotateRight(test2, 4)));
 
-        ListNode test3 = Utils.makeListNode(new int[]{1, 2});
-        System.out.println("[2,1] ?=" + Utils.printLinkedList(rotateRight(test3, 1)));
+        ListNode test3 = LinkedListUtils.makeListNode(new int[]{1, 2});
+        System.out.println("[2,1] ?=" + LinkedListUtils.printLinkedList(rotateRight(test3, 1)));
 
-        ListNode test4 = Utils.makeListNode(new int[]{1, 2, 3});
-        System.out.println("[2,3,1] ?=" + Utils.printLinkedList(rotateRight(test4, 2000000000)));
+        ListNode test4 = LinkedListUtils.makeListNode(new int[]{1, 2, 3});
+        System.out.println("[2,3,1] ?=" + LinkedListUtils.printLinkedList(rotateRight(test4, 2000000000)));
 
-        ListNode test5 = Utils.makeListNode(new int[]{1, 2});
-        System.out.println("[1,2] ?=" + Utils.printLinkedList(rotateRight(test5, 2)));
+        ListNode test5 = LinkedListUtils.makeListNode(new int[]{1, 2});
+        System.out.println("[1,2] ?=" + LinkedListUtils.printLinkedList(rotateRight(test5, 2)));
     }
 }

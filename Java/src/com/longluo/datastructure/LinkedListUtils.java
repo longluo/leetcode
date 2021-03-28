@@ -5,22 +5,8 @@ import java.util.Arrays;
 /**
  * The Utility of ListNode
  */
-public class Utils {
-
-    public static void printListNode(ListNode head) {
-        if (head == null) {
-            System.out.println("");
-        }
-
-        StringBuilder sb = new StringBuilder();
-        while (head != null) {
-            sb.append(head.val);
-            head = head.next;
-        }
-
-        System.out.println(sb.toString());
-    }
-
+public class LinkedListUtils {
+    
     public static String print2DArray(int[][] arr) {
         int row = arr.length;
 
@@ -53,7 +39,7 @@ public class Utils {
 
     public static String printLinkedList(ListNode head) {
         if (head == null) {
-            return "";
+            return "[]";
         } else if (head.next == null) {
             return "[" + head.val + "]";
         }
