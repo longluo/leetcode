@@ -1,40 +1,71 @@
 package com.longluo.datastructure;
 
-import java.util.Arrays;
-
 /**
  * The Utility of ListNode
  */
 public class LinkedListUtils {
-    
-    public static String print2DArray(int[][] arr) {
-        int row = arr.length;
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < row; i++) {
-            sb.append(Arrays.toString(arr[i]));
-            if (i < row - 1) {
-                sb.append(",");
-            }
-        }
-
-        return sb.toString();
-    }
-
-    public static ListNode makeListNode(int[] array) {
-        if (array == null || array.length == 0) {
+    public static ListNode constructListNode(int[] numbers) {
+        if (numbers == null || numbers.length == 0) {
             return null;
         }
 
-        ListNode head = new ListNode(-1);
-        ListNode backup = head;
-        for (int i = 0; i < array.length; i++) {
-            ListNode temp = new ListNode(array[i]);
-            head.next = temp;
-            head = head.next;
+        ListNode dummyNode = new ListNode(-1);
+        ListNode preNode = dummyNode;
+        for (int i = 0; i < numbers.length; i++) {
+            ListNode currNode = new ListNode(numbers[i]);
+            preNode.next = currNode;
+            preNode = preNode.next;
         }
 
-        return backup.next;
+        return dummyNode.next;
+    }
+
+    /**
+     * 根据各种字符串输入，构建链表
+     * 允许的字符串形式：
+     * "1->2->3->4->5->NULL"
+     * "1->2->3->4->5"
+     * "[1, 2, 3, 4 ,5]"
+     * "[1, 2, 3, 4 ,5, NULL]"
+     * 注意：
+     * 1. 字符串前后可以有空格
+     * 2. NULL为大写或小写均可
+     */
+    public static ListNode constructListNode(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+
+        String listStr = str.replaceAll(" ", "");
+        String[] numbersStrArray;
+        if (listStr.charAt(0) == '[' && listStr.charAt(listStr.length() - 1) == ']') {
+            listStr = listStr.substring(1, listStr.length() - 1);
+            numbersStrArray = listStr.split(",");
+        } else if (listStr.contains("->")) {
+            numbersStrArray = listStr.split("->");
+        } else {
+            numbersStrArray = new String[1];
+            numbersStrArray[0] = listStr;
+        }
+
+        int numLength = 0;
+        if (numbersStrArray.length > 1) {
+            if (numbersStrArray[numbersStrArray.length - 1].equalsIgnoreCase("null")) {
+                numLength = numbersStrArray.length - 1;
+            } else {
+                numLength = numbersStrArray.length;
+            }
+        } else {
+            numLength = 1;
+        }
+
+        int[] numbers = new int[numLength];
+        for (int i = 0; i < numLength; i++) {
+            numbers[i] = Integer.parseInt(numbersStrArray[i]);
+        }
+
+        return constructListNode(numbers);
     }
 
     public static String printLinkedList(ListNode head) {
@@ -46,15 +77,24 @@ public class LinkedListUtils {
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        while (head != null) {
+        while (head.next != null) {
             sb.append(head.val);
-            head = head.next;
             if (head != null) {
                 sb.append(",");
             }
+            head = head.next;
         }
-        sb.append("]");
+        sb.append(head.val).append("]");
 
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(printLinkedList(constructListNode("1->2->3->4->5->NULL ")));
+        System.out.println(printLinkedList(constructListNode(" 1->2->3->4->5")));
+        System.out.println(printLinkedList(constructListNode(" 1->2->3->4 ->5 -> null ")));
+        System.out.println(printLinkedList(constructListNode("[1, 2, 3, 4 ,5]")));
+        System.out.println(printLinkedList(constructListNode("[1, 2, 3, 4 , 5, null]")));
+        System.out.println(printLinkedList(constructListNode("[1,  2, 3, 4 , 5, NULL]")));
     }
 }
