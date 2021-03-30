@@ -87,10 +87,43 @@ public class Problem606_constructStringFromBinaryTree {
         return sb.substring(1, sb.length() - 1);
     }
 
+    public static String tree2str3(TreeNode t) {
+        if (t == null) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        preOrder(null, t, sb);
+        return sb.toString();
+    }
+
+    public static void preOrder(TreeNode parent, TreeNode node, StringBuilder sb) {
+        if (node != null) {
+            if (parent == null) {
+                sb.append(node.val);
+                preOrder(node, node.left, sb);
+                preOrder(node, node.right, sb);
+            } else {
+                sb.append("(");
+                sb.append(node.val);
+                preOrder(node, node.left, sb);
+                preOrder(node, node.right, sb);
+                sb.append(")");
+            }
+        } else {
+            if (parent.left == null && parent.right != null) {
+                sb.append("()");
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("1(2(4))(3) ?= " + tree2str(TreeUtils.constructTree(new Integer[]{1, 2, 3, 4})));
         System.out.println("1(2(4))(3) ?= " + tree2str2(TreeUtils.constructTree(new Integer[]{1, 2, 3, 4})));
+        System.out.println("1(2(4))(3) ?= " + tree2str3(TreeUtils.constructTree(new Integer[]{1, 2, 3, 4})));
+
         System.out.println("1(2()(4))(3) ?= " + tree2str(TreeUtils.constructTree(new Integer[]{1, 2, 3, null, 4})));
         System.out.println("1(2()(4))(3) ?= " + tree2str2(TreeUtils.constructTree(new Integer[]{1, 2, 3, null, 4})));
+        System.out.println("1(2()(4))(3) ?= " + tree2str3(TreeUtils.constructTree(new Integer[]{1, 2, 3, null, 4})));
     }
 }
