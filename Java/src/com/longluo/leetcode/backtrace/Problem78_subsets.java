@@ -1,5 +1,7 @@
 package com.longluo.leetcode.backtrace;
 
+import com.longluo.datastructure.ArrayUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,57 +9,48 @@ import java.util.List;
 
 /**
  * 78. 子集
- * 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+ * 给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。
+ * 解集 不能 包含重复的子集。你可以按 任意顺序 返回解集。
  * <p>
- * 说明：解集不能包含重复的子集。
+ * 示例 1：
+ * 输入：nums = [1,2,3]
+ * 输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
  * <p>
- * 示例:
+ * 示例 2：
+ * 输入：nums = [0]
+ * 输出：[[],[0]]
  * <p>
- * 输入: nums = [1,2,3]
- * 输出:
- * [
- * [3],
- * [1],
- * [2],
- * [1,2,3],
- * [1,3],
- * [2,3],
- * [1,2],
- * []
- * ]
+ * 提示：
+ * 1 <= nums.length <= 10
+ * -10 <= nums[i] <= 10
+ * nums 中的所有元素 互不相同
  */
 public class Problem78_subsets {
 
     public static List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
-
-        for (int i = 0; i < nums.length; i++) {
-
+        if (nums == null || nums.length == 0) {
+            return new ArrayList<>();
         }
 
+        List<List<Integer>> ans = new ArrayList<>();
+        backtrace(ans, new ArrayList<>(), nums, 0);
         return ans;
     }
 
-    private static void backtrace(List<List<Integer>> ans, int index, int[] nums, List<Integer> oneAns) {
-        if (oneAns.size() > nums.length) {
+    public static void backtrace(List<List<Integer>> ans, List<Integer> oneList, int[] numbers, int index) {
+        if (index == numbers.length) {
+            ans.add(new ArrayList<>(oneList));
             return;
-        } else {
-            ans.add(oneAns);
         }
 
-        for (int i = 0; i < nums.length; i++) {
-            oneAns.add(nums[i]);
-            for (int j = i + 1; j < nums.length; j++) {
-
-
-            }
-            backtrace(ans, i, nums, oneAns);
-            oneAns.remove(oneAns.size() - 1);
-        }
+        oneList.add(numbers[index]);
+        backtrace(ans, oneList, numbers, index + 1);
+        oneList.remove(oneList.size() - 1);
+        backtrace(ans, oneList, numbers, index + 1);
     }
 
     public static void main(String[] args) {
-        int[] tst1 = {1, 2, 3};
-        System.out.println(" " + subsets(tst1));
+        System.out.println("[[],[1],[1,2],[1,2,2],[2],[2,2]] ?= " + ArrayUtils.print2DList(subsets(new int[]{1, 2, 2})));
+        System.out.println("[[],[0]] ?= " + ArrayUtils.print2DList(subsets(new int[]{0})));
     }
 }
