@@ -2,10 +2,7 @@ package com.longluo.leetcode.backtrace;
 
 import com.longluo.datastructure.ArrayUtils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 90. 子集 II
@@ -33,6 +30,36 @@ public class Problem90_subsets_ii {
 
         List<List<Integer>> ans = new ArrayList<>();
         backtrace(ans, new ArrayList<>(), nums, 0);
+        Collections.sort(ans, new Comparator<List<Integer>>() {
+            @Override
+            public int compare(List<Integer> o1, List<Integer> o2) {
+                return o1.size() - o2.size();
+            }
+        });
+
+        Set<Integer> remove = new HashSet<>();
+        for (int i = 0; i < ans.size(); i++) {
+            List<Integer> curList = ans.get(i);
+            for (int j = i + 1; j < ans.size(); j++) {
+                List<Integer> otherList = ans.get(j);
+                Collections.sort(curList);
+                Collections.sort(otherList);
+                if (curList.size() == otherList.size()) {
+                    if (curList.toString().equalsIgnoreCase(otherList.toString())) {
+                        remove.add(j);
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+
+        Integer[] arr = remove.toArray(new Integer[0]);
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int temp = arr[i];
+            ans.remove(temp);
+        }
+
         return ans;
     }
 
@@ -50,6 +77,7 @@ public class Problem90_subsets_ii {
 
     public static void main(String[] args) {
         System.out.println("[[],[1],[1,2],[1,2,2],[2],[2,2]] ?= " + ArrayUtils.print2DList(subsetsWithDup(new int[]{1, 2, 2})));
+        System.out.println("[[],[1],[1,1],[1,1,2],[1,1,2,2],[1,2],[1,2,2],[2],[2,2]] ?= " + ArrayUtils.print2DList(subsetsWithDup(new int[]{1, 1, 2, 2})));
         System.out.println("[[],[0]] ?= " + ArrayUtils.print2DList(subsetsWithDup(new int[]{0})));
     }
 }
