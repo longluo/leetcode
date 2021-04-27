@@ -1,5 +1,7 @@
 package com.longluo.leetcode.binarysearch;
 
+import java.util.Arrays;
+
 /**
  * 1011. 在 D 天内送达包裹的能力
  * 传送带上的包裹必须在 D 天内从一个港口运送到另一个港口。
@@ -108,9 +110,39 @@ public class Problem1011_capacityToShipPackagesWithinDDays {
         return false;
     }
 
+    public static int shipWithinDays_answer(int[] weights, int D) {
+        int low = Arrays.stream(weights).max().getAsInt();
+        int high = Arrays.stream(weights).sum();
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            int need = 1;
+            int cur = 0;
+            for (int weight : weights) {
+                if (cur + weight > mid) {
+                    need++;
+                    cur = 0;
+                }
+                cur += weight;
+            }
+
+            if (need <= D) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return high;
+    }
+
     public static void main(String[] args) {
         System.out.println("15 ?= " + shipWithinDays(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5));
+        System.out.println("15 ?= " + shipWithinDays_answer(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5));
         System.out.println("6 ?= " + shipWithinDays(new int[]{3, 2, 2, 4, 1, 4}, 3));
+        System.out.println("6 ?= " + shipWithinDays_answer(new int[]{3, 2, 2, 4, 1, 4}, 3));
         System.out.println("3 ?= " + shipWithinDays(new int[]{1, 2, 3, 1, 1}, 4));
+        System.out.println("3 ?= " + shipWithinDays_answer(new int[]{1, 2, 3, 1, 1}, 4));
     }
 }
