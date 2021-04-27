@@ -46,6 +46,8 @@ import java.util.Arrays;
  * 提示：
  * 1 <= D <= weights.length <= 50000
  * 1 <= weights[i] <= 500
+ * <p>
+ * https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/
  */
 public class Problem1011_capacityToShipPackagesWithinDDays {
 
