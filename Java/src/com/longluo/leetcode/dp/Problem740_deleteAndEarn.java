@@ -1,7 +1,5 @@
 package com.longluo.leetcode.dp;
 
-import java.util.Arrays;
-
 /**
  * 740. 删除并获得点数
  * <p>
@@ -62,11 +60,48 @@ public class Problem740_deleteAndEarn {
         return dp[maxVal];
     }
 
+    public static int deleteAndEarn_2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        } else if (nums.length == 1) {
+            return nums[0];
+        }
+
+        int maxVal = 0;
+        for (int i = 0; i < nums.length; i++) {
+            maxVal = Math.max(nums[i], maxVal);
+        }
+
+        int[] sums = new int[maxVal + 1];
+        for (int num : nums) {
+            sums[num] += num;
+        }
+
+        return rob(sums);
+    }
+
+    public static int rob(int[] sums) {
+        int first = sums[0];
+        int second = Math.max(sums[0], sums[1]);
+        for (int i = 2; i < sums.length; i++) {
+            int temp = second;
+            second = Math.max(second, first + sums[i]);
+            first = temp;
+        }
+
+        return second;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + deleteAndEarn(new int[]{0}));
+        System.out.println("0 ?= " + deleteAndEarn_2(new int[]{0}));
         System.out.println("1 ?= " + deleteAndEarn(new int[]{1}));
+        System.out.println("1 ?= " + deleteAndEarn_2(new int[]{1}));
         System.out.println("6 ?= " + deleteAndEarn(new int[]{3, 4, 2}));
+        System.out.println("6 ?= " + deleteAndEarn_2(new int[]{3, 4, 2}));
         System.out.println("9 ?= " + deleteAndEarn(new int[]{2, 2, 3, 3, 3, 4}));
+        System.out.println("9 ?= " + deleteAndEarn_2(new int[]{2, 2, 3, 3, 3, 4}));
         System.out.println("4 ?= " + deleteAndEarn(new int[]{3, 1}));
+        System.out.println("4 ?= " + deleteAndEarn_2(new int[]{3, 1}));
     }
 }
