@@ -2,8 +2,8 @@ package com.longluo.leetcode.twopointers;
 
 /**
  * 26. 删除有序数组中的重复项
- * 给你一个有序数组nums，请你原地删除重复出现的元素，使每个元素只出现一次，返回删除后数组的新长度。
  * <p>
+ * 给你一个有序数组nums，请你原地删除重复出现的元素，使每个元素只出现一次，返回删除后数组的新长度。
  * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
  * <p>
  * 说明:
@@ -34,6 +34,8 @@ package com.longluo.leetcode.twopointers;
  * 0 <= nums.length <= 3 * 10^4
  * -10^4 <= nums[i] <= 10^4
  * nums 已按升序排列
+ * <p>
+ * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
  */
 public class Problem26_removeDuplicatesFromSortedArray {
 
