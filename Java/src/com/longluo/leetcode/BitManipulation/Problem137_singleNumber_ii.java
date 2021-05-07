@@ -1,9 +1,10 @@
-package com.longluo.leetcode.bit;
+package com.longluo.leetcode.BitManipulation;
 
 import java.util.*;
 
 /**
  * 137. 只出现一次的数字 II
+ * <p>
  * 给你一个整数数组 nums ，除某个元素仅出现 一次 外，其余每个元素都恰出现 三次 。请你找出并返回那个只出现了一次的元素。
  * <p>
  * 示例 1：
@@ -23,7 +24,7 @@ import java.util.*;
  * <p>
  * https://leetcode-cn.com/problems/single-number-ii/
  */
-public class Problem137_singleNumber {
+public class Problem137_singleNumber_ii {
 
     public static int singleNumber(int[] nums) {
         if (nums == null || nums.length == 0) {

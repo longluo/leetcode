@@ -1,9 +1,10 @@
-package com.longluo.leetcode.bit;
+package com.longluo.leetcode.BitManipulation;
 
 import java.util.Arrays;
 
 /**
  * 1720. 解码异或后的数组
+ * <p>
  * 未知 整数数组 arr 由 n 个非负整数组成。
  * 经编码后变为长度为 n - 1 的另一个整数数组 encoded ，其中 encoded[i] = arr[i] XOR arr[i + 1] 。
  * 例如，arr = [1,0,2,1] 经编码后得到 encoded = [1,2,3] 。
