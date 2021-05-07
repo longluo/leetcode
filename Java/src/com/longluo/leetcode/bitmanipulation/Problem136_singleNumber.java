@@ -1,4 +1,4 @@
-package com.longluo.leetcode.BitManipulation;
+package com.longluo.leetcode.bitmanipulation;
 
 /**
  * 136. 只出现一次的数字

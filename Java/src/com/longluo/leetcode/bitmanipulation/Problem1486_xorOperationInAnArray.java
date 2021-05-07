@@ -1,4 +1,4 @@
-package com.longluo.leetcode.BitManipulation;
+package com.longluo.leetcode.bitmanipulation;
 
 /**
  * 1486. 数组异或操作

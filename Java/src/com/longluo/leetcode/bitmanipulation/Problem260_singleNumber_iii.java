@@ -1,4 +1,4 @@
-package com.longluo.leetcode.BitManipulation;
+package com.longluo.leetcode.bitmanipulation;
 
 import java.util.Arrays;
 import java.util.HashMap;
