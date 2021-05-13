@@ -1,11 +1,10 @@
 package com.longluo.leetcode.array;
 
-import com.longluo.datastructure.Utils;
-
-import java.util.Arrays;
+import com.longluo.datastructure.ArrayUtils;
 
 /**
  * 59. 螺旋矩阵 II
+ * <p>
  * 给你一个正整数n，生成一个包含1到n^2所有元素，且元素按顺时针顺序螺旋排列的n x n正方形矩阵matrix。
  * <p>
  * 示例 1：
@@ -18,8 +17,10 @@ import java.util.Arrays;
  * <p>
  * 提示：
  * 1 <= n <= 20
+ * <p>
+ * https://leetcode-cn.com/problems/spiral-matrix-ii/
  */
-public class Problem59_generateMatrix {
+public class Problem59_spiralMatrix_ii {
 
     public static int[][] generateMatrix(int n) {
         int[][] ans = new int[n][n];
@@ -126,15 +127,15 @@ public class Problem59_generateMatrix {
 
     public static void main(String[] args) {
         System.out.println(" Method 1:");
-        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + Utils.print2DArray(generateMatrix(3)));
-        System.out.println("{{1}} ?= " + Utils.print2DArray(generateMatrix(1)));
+        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + ArrayUtils.print2DArray(generateMatrix(3)));
+        System.out.println("{{1}} ?= " + ArrayUtils.print2DArray(generateMatrix(1)));
 
         System.out.println(" Method 2:");
-        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + Utils.print2DArray(generateMatrix_2(3)));
-        System.out.println("{{1}} ?= " + Utils.print2DArray(generateMatrix_2(1)));
+        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + ArrayUtils.print2DArray(generateMatrix_2(3)));
+        System.out.println("{{1}} ?= " + ArrayUtils.print2DArray(generateMatrix_2(1)));
 
         System.out.println(" Method 3:");
-        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + Utils.print2DArray(generateMatrix_3(3)));
-        System.out.println("{{1}} ?= " + Utils.print2DArray(generateMatrix_3(1)));
+        System.out.println("{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}} ?= " + ArrayUtils.print2DArray(generateMatrix_3(3)));
+        System.out.println("{{1}} ?= " + ArrayUtils.print2DArray(generateMatrix_3(1)));
     }
 }
