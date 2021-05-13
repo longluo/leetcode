@@ -2,6 +2,7 @@ package com.longluo.leetcode.array;
 
 /**
  * 153. 寻找旋转排序数组中的最小值
+ * <p>
  * 已知一个长度为n的数组，预先按照升序排列，经由1到n次 旋转后，得到输入数组。例如，
  * 原数组 nums = [0,1,2,4,5,6,7] 在变化后可能得到：
  * 若旋转4次，则可以得到[4,5,6,7,0,1,2]
@@ -31,6 +32,8 @@ package com.longluo.leetcode.array;
  * -5000 <= nums[i] <= 5000
  * nums中的所有整数互不相同
  * nums原来是一个升序排序的数组，并进行了1至n次旋转
+ * <p>
+ * https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/
  */
 public class Problem153_findMinimumInRotatedSortedArray {
 
