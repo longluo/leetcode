@@ -2,6 +2,7 @@ package com.longluo.leetcode.array;
 
 /**
  * 1672. 最富有客户的资产总量
+ * <p>
  * 给你一个 m x n 的整数网格 accounts ，其中 accounts[i][j]是第i位客户在第j家银行托管的资产数量。
  * 返回最富有客户所拥有的 资产总量 。
  * 客户的 资产总量 就是他们在各家银行托管的资产数量之和。最富有客户就是 资产总量 最大的客户。
@@ -32,8 +33,10 @@ package com.longluo.leetcode.array;
  * n == accounts[i].length
  * 1 <= m, n <= 50
  * 1 <= accounts[i][j] <= 100
+ * <p>
+ * https://leetcode-cn.com/problems/richest-customer-wealth/
  */
-public class Offer1672_maximumWealth {
+public class Problem1672_richestCustomerWealth {
 
     public static int maximumWealth(int[][] accounts) {
         if (accounts == null || accounts.length == 0 || accounts[0].length == 0) {
