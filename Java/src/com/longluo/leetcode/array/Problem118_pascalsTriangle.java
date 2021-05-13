@@ -61,7 +61,30 @@ public class Problem118_pascalsTriangle {
         return ans;
     }
 
+    public static List<List<Integer>> generate_2(int numRows) {
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> oneRow = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    oneRow.add(1);
+                } else {
+                    oneRow.add(ans.get(i - 1).get(j - 1) + ans.get(i - 1).get(j));
+                }
+            }
+
+            ans.add(oneRow);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
+        generate(1);
+        generate(2);
         generate(5);
+        generate_2(1);
+        generate_2(2);
+        generate_2(5);
     }
 }
