@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * 1480. 一维数组的动态和
+ * <p>
  * 给你一个数组nums。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。
  * 请返回nums的动态和。
  * <p>
@@ -24,8 +25,10 @@ import java.util.Arrays;
  * 提示：
  * 1 <= nums.length <= 1000
  * -10^6 <= nums[i] <= 10^6
+ * <p>
+ * https://leetcode-cn.com/problems/running-sum-of-1d-array/
  */
-public class Offer1480_runningSum {
+public class Problem1480_runningSumOf1dArray {
 
     public static int[] runningSum(int[] nums) {
         int[] sums = new int[nums.length];
