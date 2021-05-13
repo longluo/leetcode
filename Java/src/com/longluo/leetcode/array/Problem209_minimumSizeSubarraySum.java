@@ -2,7 +2,9 @@ package com.longluo.leetcode.array;
 
 /**
  * 209. 长度最小的子数组
- * 给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的 连续 子数组，并返回其长度。如果不存在符合条件的子数组，返回 0。
+ * <p>
+ * 给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的 连续 子数组，
+ * 并返回其长度。如果不存在符合条件的子数组，返回 0。
  * <p>
  * 示例：
  * <p>
@@ -11,10 +13,11 @@ package com.longluo.leetcode.array;
  * 解释：子数组 [4,3] 是该条件下的长度最小的子数组。
  * <p>
  * 进阶：
- * <p>
  * 如果你已经完成了 O(n) 时间复杂度的解法, 请尝试 O(n log n) 时间复杂度的解法。
+ * <p>
+ * https://leetcode-cn.com/problems/minimum-size-subarray-sum/
  */
-public class Problem209_minSubArrayLen {
+public class Problem209_minimumSizeSubarraySum {
 
     public static int minSubArrayLen(int s, int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -49,6 +52,8 @@ public class Problem209_minSubArrayLen {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("2 ?= " + minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
+        System.out.println("1 ?= " + minSubArrayLen(4, new int[]{1, 4, 4}));
+        System.out.println("0 ?= " + minSubArrayLen(11, new int[]{1, 1, 1, 1, 1, 1, 1, 1}));
     }
 }
