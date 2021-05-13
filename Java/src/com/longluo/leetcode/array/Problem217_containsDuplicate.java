@@ -20,6 +20,8 @@ import java.util.Map;
  * 示例 3:
  * 输入: [1,1,1,3,3,4,3,2,4,2]
  * 输出: true
+ * <p>
+ * https://leetcode-cn.com/problems/contains-duplicate/
  */
 public class Problem217_containsDuplicate {
 
