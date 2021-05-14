@@ -142,11 +142,56 @@ public class Problem12_integerToRoman {
         return sb.toString();
     }
 
+    static int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    static String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+    public static String intToRoman_2(int num) {
+        StringBuffer roman = new StringBuffer();
+        for (int i = 0; i < values.length; ++i) {
+            int value = values[i];
+            String symbol = symbols[i];
+            while (num >= value) {
+                num -= value;
+                roman.append(symbol);
+            }
+            if (num == 0) {
+                break;
+            }
+        }
+        return roman.toString();
+    }
+
+    static String[] thousands = {"", "M", "MM", "MMM"};
+    static String[] hundreds = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+    static String[] tens = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+    static String[] ones = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+
+    public static String intToRoman_3(int num) {
+        StringBuffer roman = new StringBuffer();
+        roman.append(thousands[num / 1000]);
+        roman.append(hundreds[num % 1000 / 100]);
+        roman.append(tens[num % 100 / 10]);
+        roman.append(ones[num % 10]);
+        return roman.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("III ?= " + intToRoman(3));
         System.out.println("IV ?= " + intToRoman(4));
         System.out.println("IX ?= " + intToRoman(9));
         System.out.println("LVIII ?= " + intToRoman(58));
         System.out.println("MCMXCIV ?= " + intToRoman(1994));
+
+        System.out.println("III ?= " + intToRoman_2(3));
+        System.out.println("IV ?= " + intToRoman_2(4));
+        System.out.println("IX ?= " + intToRoman_2(9));
+        System.out.println("LVIII ?= " + intToRoman_2(58));
+        System.out.println("MCMXCIV ?= " + intToRoman_2(1994));
+
+        System.out.println("III ?= " + intToRoman_3(3));
+        System.out.println("IV ?= " + intToRoman_3(4));
+        System.out.println("IX ?= " + intToRoman_3(9));
+        System.out.println("LVIII ?= " + intToRoman_3(58));
+        System.out.println("MCMXCIV ?= " + intToRoman_3(1994));
     }
 }
