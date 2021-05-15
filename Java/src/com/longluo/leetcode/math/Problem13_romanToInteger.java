@@ -1,5 +1,8 @@
 package com.longluo.leetcode.math;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 13. 罗马数字转整数
  * <p>
@@ -127,11 +130,41 @@ public class Problem13_romanToInteger {
         return ans;
     }
 
+    static Map<Character, Integer> symbolValues = new HashMap<Character, Integer>() {{
+        put('I', 1);
+        put('V', 5);
+        put('X', 10);
+        put('L', 50);
+        put('C', 100);
+        put('D', 500);
+        put('M', 1000);
+    }};
+
+    public static int romanToInt_2(String s) {
+        int ans = 0;
+        int n = s.length();
+        for (int i = 0; i < n; ++i) {
+            int value = symbolValues.get(s.charAt(i));
+            if (i < n - 1 && value < symbolValues.get(s.charAt(i + 1))) {
+                ans -= value;
+            } else {
+                ans += value;
+            }
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + romanToInt("III"));
         System.out.println("4 ?= " + romanToInt("IV"));
         System.out.println("9 ?= " + romanToInt("IX"));
         System.out.println("58 ?= " + romanToInt("LVIII"));
         System.out.println("1994 ?= " + romanToInt("MCMXCIV"));
+
+        System.out.println("3 ?= " + romanToInt_2("III"));
+        System.out.println("4 ?= " + romanToInt_2("IV"));
+        System.out.println("9 ?= " + romanToInt_2("IX"));
+        System.out.println("58 ?= " + romanToInt_2("LVIII"));
+        System.out.println("1994 ?= " + romanToInt_2("MCMXCIV"));
     }
 }
