@@ -30,6 +30,26 @@ import java.util.Queue;
 public class Problem111_minimumDepthOfBinaryTree {
 
     public static int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        int minDepth = Integer.MAX_VALUE;
+        if (root.left != null) {
+            minDepth = Math.min(minDepth(root.left), minDepth);
+        }
+        if (root.right != null) {
+            minDepth = Math.min(minDepth(root.right), minDepth);
+        }
+
+        return minDepth + 1;
+    }
+
+    public static int minDepth_dfs(TreeNode root) {
         return dfs(root, 0);
     }
 
@@ -88,22 +108,27 @@ public class Problem111_minimumDepthOfBinaryTree {
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 9, 20, null, null, 15, 7});
         System.out.println("2 ?= " + minDepth(tst1));
+        System.out.println("2 ?= " + minDepth_dfs(tst1));
         System.out.println("2 ?= " + minDepth_bfs(tst1));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{2, null, 3, null, 4, null, 5, null, 6});
         System.out.println("5 ?= " + minDepth(tst2));
+        System.out.println("5 ?= " + minDepth_dfs(tst2));
         System.out.println("5 ?= " + minDepth_bfs(tst2));
 
         TreeNode tst3 = TreeUtils.constructTree(new Integer[]{1, 2, 3, 4, 5});
         System.out.println("2 ?= " + minDepth(tst3));
+        System.out.println("2 ?= " + minDepth_dfs(tst3));
         System.out.println("2 ?= " + minDepth_bfs(tst3));
 
         TreeNode tst4 = TreeUtils.constructTree(new Integer[]{});
         System.out.println("0 ?= " + minDepth(tst4));
+        System.out.println("0 ?= " + minDepth_dfs(tst4));
         System.out.println("0 ?= " + minDepth_bfs(tst4));
 
         TreeNode tst5 = TreeUtils.constructTree(new Integer[]{1});
         System.out.println("1 ?= " + minDepth(tst5));
+        System.out.println("1 ?= " + minDepth_dfs(tst5));
         System.out.println("1 ?= " + minDepth_bfs(tst5));
     }
 }
