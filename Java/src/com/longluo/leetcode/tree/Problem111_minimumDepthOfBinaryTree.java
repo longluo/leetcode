@@ -3,6 +3,9 @@ package com.longluo.leetcode.tree;
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 111. 二叉树的最小深度
  * <p>
@@ -46,20 +49,61 @@ public class Problem111_minimumDepthOfBinaryTree {
         return Math.min(dfs(root.left, level + 1), dfs(root.right, level + 1));
     }
 
+    static class Node {
+        TreeNode node;
+        int depth;
+
+        Node(TreeNode root, int depth) {
+            this.node = root;
+            this.depth = depth;
+        }
+    }
+
+    public static int minDepth_bfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(new Node(root, 1));
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            TreeNode treeNode = node.node;
+            int depth = node.depth;
+            if (treeNode.left == null && treeNode.right == null) {
+                return depth;
+            }
+
+            if (treeNode.left != null) {
+                queue.offer(new Node(treeNode.left, depth + 1));
+            }
+            if (treeNode.right != null) {
+                queue.offer(new Node(treeNode.right, depth + 1));
+            }
+        }
+
+        return 0;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 9, 20, null, null, 15, 7});
         System.out.println("2 ?= " + minDepth(tst1));
+        System.out.println("2 ?= " + minDepth_bfs(tst1));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{2, null, 3, null, 4, null, 5, null, 6});
         System.out.println("5 ?= " + minDepth(tst2));
+        System.out.println("5 ?= " + minDepth_bfs(tst2));
 
         TreeNode tst3 = TreeUtils.constructTree(new Integer[]{1, 2, 3, 4, 5});
         System.out.println("2 ?= " + minDepth(tst3));
+        System.out.println("2 ?= " + minDepth_bfs(tst3));
 
         TreeNode tst4 = TreeUtils.constructTree(new Integer[]{});
         System.out.println("0 ?= " + minDepth(tst4));
+        System.out.println("0 ?= " + minDepth_bfs(tst4));
 
         TreeNode tst5 = TreeUtils.constructTree(new Integer[]{1});
         System.out.println("1 ?= " + minDepth(tst5));
+        System.out.println("1 ?= " + minDepth_bfs(tst5));
     }
 }

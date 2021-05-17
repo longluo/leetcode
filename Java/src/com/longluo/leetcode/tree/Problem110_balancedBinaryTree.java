@@ -46,14 +46,35 @@ public class Problem110_balancedBinaryTree {
         }
     }
 
+    public static boolean isBalanced_2(TreeNode root) {
+        return treeHeight(root) >= 0;
+    }
+
+    public static int treeHeight(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int leftHeight = treeHeight(root.left);
+        int rightHeight = treeHeight(root.right);
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        } else {
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 9, 20, null, null, 15, 7});
         System.out.println("true ?= " + isBalanced(tst1));
+        System.out.println("true ?= " + isBalanced_2(tst1));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{1, 2, 2, 3, 3, null, null, 4, 4});
         System.out.println("false ?= " + isBalanced(tst2));
+        System.out.println("false ?= " + isBalanced_2(tst2));
 
         TreeNode tst3 = TreeUtils.constructTree(new Integer[]{});
         System.out.println("true ?= " + isBalanced(tst3));
+        System.out.println("true ?= " + isBalanced_2(tst3));
     }
 }
