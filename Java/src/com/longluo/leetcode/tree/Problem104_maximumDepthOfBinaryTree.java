@@ -31,8 +31,24 @@ public class Problem104_maximumDepthOfBinaryTree {
         }
     }
 
+    public static int maxDepth_dfs(TreeNode root) {
+        return dfs(root, 0);
+    }
+
+    public static int dfs(TreeNode root, int depth) {
+        if (root == null) {
+            return depth;
+        }
+
+        int leftDepth = dfs(root.left, depth + 1);
+        int rightDepth = dfs(root.right, depth + 1);
+
+        return Math.max(leftDepth, rightDepth);
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 9, 20, null, null, 15, 7});
         System.out.println("3 ?= " + maxDepth(tst1));
+        System.out.println("3 ?= " + maxDepth_dfs(tst1));
     }
 }
