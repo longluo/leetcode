@@ -4,7 +4,6 @@ import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
 
 import java.util.ArrayDeque;
-import java.util.LinkedList;
 import java.util.Queue;
 
 /**
