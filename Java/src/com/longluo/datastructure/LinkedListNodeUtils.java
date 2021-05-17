@@ -3,7 +3,7 @@ package com.longluo.datastructure;
 /**
  * The Utility of ListNode
  */
-public class LinkedListUtils {
+public class LinkedListNodeUtils {
 
     public static ListNode constructListNode(int[] numbers) {
         if (numbers == null || numbers.length == 0) {
