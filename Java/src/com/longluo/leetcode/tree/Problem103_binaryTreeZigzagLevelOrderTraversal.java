@@ -5,10 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import com.longluo.datastructure.ArrayUtils;
 import com.longluo.datastructure.TreeNode;
+import com.longluo.datastructure.TreeUtils;
 
 /**
  * 103. 二叉树的锯齿形层序遍历
+ * <p>
  * 给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
  * <p>
  * 例如：
@@ -24,10 +27,12 @@ import com.longluo.datastructure.TreeNode;
  * [20,9],
  * [15,7]
  * ]
+ * <p>
+ * https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
  */
-public class Problem103_zigzagLevelOrder {
+public class Problem103_binaryTreeZigzagLevelOrderTraversal {
 
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+    public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) {
             return res;
@@ -63,6 +68,7 @@ public class Problem103_zigzagLevelOrder {
     }
 
     public static void main(String[] args) {
-
+        TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 9, 20, null, null, 15, 7});
+        System.out.println("[[3], [20,9], [15,7]] ?= " + ArrayUtils.print2DList(zigzagLevelOrder(tst1)));
     }
 }
