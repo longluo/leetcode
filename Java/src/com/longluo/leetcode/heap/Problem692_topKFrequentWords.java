@@ -69,8 +69,38 @@ public class Problem692_topKFrequentWords {
         return res;
     }
 
+    public static List<String> topKFrequent_2(String[] words, int k) {
+        Map<String, Integer> cnt = new HashMap<>();
+        for (int i = 0; i < words.length; i++) {
+            cnt.put(words[i], cnt.getOrDefault(words[i], 0) + 1);
+        }
+
+        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o1.getValue() == o2.getValue() ? o2.getKey().compareTo(o1.getKey()) : o1.getValue() - o2.getValue();
+            }
+        });
+
+        for (Map.Entry<String, Integer> entry : cnt.entrySet()) {
+            pq.offer(entry);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        List<String> ans = new ArrayList<>();
+        while (!pq.isEmpty()) {
+            ans.add(pq.poll().getKey());
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[i, love] ?= " + topKFrequent(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
+        System.out.println("[i, love] ?= " + topKFrequent_2(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
         System.out.println("[the, is, sunny, day] ?= " + topKFrequent(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
+        System.out.println("[the, is, sunny, day] ?= " + topKFrequent_2(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
     }
 }
