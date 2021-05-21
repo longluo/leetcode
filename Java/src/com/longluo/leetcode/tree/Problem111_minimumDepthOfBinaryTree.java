@@ -69,11 +69,11 @@ public class Problem111_minimumDepthOfBinaryTree {
         return Math.min(dfs(root.left, level + 1), dfs(root.right, level + 1));
     }
 
-    static class Node {
+    static class DepthNode {
         TreeNode node;
         int depth;
 
-        Node(TreeNode root, int depth) {
+        DepthNode(TreeNode root, int depth) {
             this.node = root;
             this.depth = depth;
         }
@@ -84,21 +84,21 @@ public class Problem111_minimumDepthOfBinaryTree {
             return 0;
         }
 
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(new Node(root, 1));
+        Queue<DepthNode> queue = new LinkedList<>();
+        queue.offer(new DepthNode(root, 1));
         while (!queue.isEmpty()) {
-            Node node = queue.poll();
-            TreeNode treeNode = node.node;
-            int depth = node.depth;
+            DepthNode depthNode = queue.poll();
+            TreeNode treeNode = depthNode.node;
+            int depth = depthNode.depth;
             if (treeNode.left == null && treeNode.right == null) {
                 return depth;
             }
 
             if (treeNode.left != null) {
-                queue.offer(new Node(treeNode.left, depth + 1));
+                queue.offer(new DepthNode(treeNode.left, depth + 1));
             }
             if (treeNode.right != null) {
-                queue.offer(new Node(treeNode.right, depth + 1));
+                queue.offer(new DepthNode(treeNode.right, depth + 1));
             }
         }
 
