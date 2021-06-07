@@ -103,11 +103,14 @@ public class Problem1114_printInOrder {
                 e.printStackTrace();
             }
         }).start();
-        new Thread(() -> {
-            try {
-                foo.second(secondRunnable);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    foo.second(secondRunnable);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }
