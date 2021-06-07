@@ -91,4 +91,28 @@ public class Problem1226_diningPhilosophersPhilosophers {
             eatLimit.release();//限制的人数 +1
         }
     }
+
+    public static void main(String[] args) {
+        final int n = 1;
+        final int[] philosophers = {0, 1, 2, 3, 4};
+        DiningPhilosophers diningPhilosophers = new DiningPhilosophers();
+        for (int philosopher : philosophers) {
+            new Thread(() -> {
+                for (int i = 0; i < n; i++) {
+                    try {
+                        diningPhilosophers.wantsToEat(philosopher,
+                                () -> System.out.print(String.format("[%d,1,1]", philosopher)),
+                                () -> System.out.print(String.format("[%d,2,1]", philosopher)),
+                                () -> System.out.print(String.format("[%d,0,3]", philosopher)),
+                                () -> System.out.print(String.format("[%d,1,2]", philosopher)),
+                                () -> System.out.print(String.format("[%d,2,2]", philosopher))
+                        );
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
 }

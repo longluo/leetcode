@@ -36,17 +36,12 @@ import java.util.concurrent.Semaphore;
 public class Problem1117_buildingH2O {
 
     static class H2O {
-        String str;
 
         private Semaphore hydrogenSemaphore = new Semaphore(2);
         private Semaphore oxygenSemaphore = new Semaphore(2);
 
         public H2O() {
 
-        }
-
-        public H2O(String s) {
-            this.str = s;
         }
 
         public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
@@ -65,7 +60,8 @@ public class Problem1117_buildingH2O {
     }
 
     public static void main(String[] args) {
-        H2O h2O = new H2O("HOHHOHOHHHHOOHHHOH");
+        H2O h2O = new H2O();
+
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {
                 try {
