@@ -38,11 +38,11 @@ import java.util.concurrent.Semaphore;
  */
 public class Problem1115_printFoobarAlternately {
 
-    class FooBar {
+    static class FooBar {
         private int n;
 
         private Semaphore fooSignal = new Semaphore(1);
-        private Semaphore barSignal = new Semaphore(1);
+        private Semaphore barSignal = new Semaphore(0);
 
         public FooBar(int n) {
             this.n = n;
@@ -51,10 +51,10 @@ public class Problem1115_printFoobarAlternately {
         public void foo(Runnable printFoo) throws InterruptedException {
 
             for (int i = 0; i < n; i++) {
-                barSignal.acquire();
+                fooSignal.acquire();
                 // printFoo.run() outputs "foo". Do not change or remove this line.
                 printFoo.run();
-                fooSignal.release();
+                barSignal.release();
             }
         }
 
@@ -67,5 +67,38 @@ public class Problem1115_printFoobarAlternately {
                 fooSignal.release();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        FooBar fooBar = new FooBar(2);
+
+        Runnable printFoo = new Runnable() {
+            @Override
+            public void run() {
+                System.out.print("foo");
+            }
+        };
+
+        Runnable printBar = new Runnable() {
+            @Override
+            public void run() {
+                System.out.print("bar");
+            }
+        };
+
+        new Thread(() -> {
+            try {
+                fooBar.foo(printFoo);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        new Thread(() -> {
+            try {
+                fooBar.bar(printBar);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
