@@ -1,6 +1,6 @@
 package com.longluo.concurrency;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.Semaphore;
 
 /**
  * 1114. 按序打印
@@ -41,9 +41,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Problem1114_printInOrder {
 
-    class Foo {
-
-        public volatile int flag = 1;
+    static class Foo {
+        private Semaphore firstSemaphore = new Semaphore(1);
+        private Semaphore secondSemaphore = new Semaphore(0);
+        private Semaphore thirdSemaphore = new Semaphore(0);
 
         public Foo() {
 
@@ -51,62 +52,63 @@ public class Problem1114_printInOrder {
 
         public void first(Runnable printFirst) throws InterruptedException {
             // printFirst.run() outputs "first". Do not change or remove this line.
+            firstSemaphore.acquire();
             printFirst.run();
-            flag = 2;
+            secondSemaphore.release();
         }
 
         public void second(Runnable printSecond) throws InterruptedException {
-            while (flag != 2) {
-
-            }
-
+            secondSemaphore.acquire();
             // printSecond.run() outputs "second". Do not change or remove this line.
             printSecond.run();
-            flag = 3;
+            thirdSemaphore.release();
         }
 
         public void third(Runnable printThird) throws InterruptedException {
-            while (flag != 3) {
-
-            }
-
+            thirdSemaphore.acquire();
             // printThird.run() outputs "third". Do not change or remove this line.
             printThird.run();
+            firstSemaphore.release();
         }
     }
 
-    class Foo2 {
-
-        private AtomicInteger firstJobDone = new AtomicInteger(0);
-        private AtomicInteger secondJobDone = new AtomicInteger(0);
-
-        public Foo2() {
-
-        }
-
-        public void first(Runnable printFirst) throws InterruptedException {
-            // printFirst.run() outputs "first". Do not change or remove this line.
-            printFirst.run();
-            firstJobDone.incrementAndGet();
-        }
-
-        public void second(Runnable printSecond) throws InterruptedException {
-            while (firstJobDone.get() != 1) {
-
+    public static void main(String[] args) throws InterruptedException {
+        Foo foo = new Foo();
+        Runnable firstRunnable = () -> {
+            System.out.print("first");
+        };
+        Runnable secondRunnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.print("second");
             }
-
-            // printSecond.run() outputs "second". Do not change or remove this line.
-            printSecond.run();
-            secondJobDone.incrementAndGet();
-        }
-
-        public void third(Runnable printThird) throws InterruptedException {
-            while (secondJobDone.get() != 2) {
-
+        };
+        Runnable thirdRunnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.print("third");
             }
-
-            // printThird.run() outputs "third". Do not change or remove this line.
-            printThird.run();
-        }
+        };
+        new Thread(() -> {
+            try {
+                foo.first(firstRunnable);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        new Thread(() -> {
+            try {
+                foo.third(thirdRunnable);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        new Thread(() -> {
+            try {
+                foo.second(secondRunnable);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
