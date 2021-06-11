@@ -1,9 +1,6 @@
 package com.longluo.leetcode.bfs;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 279. 完全平方数
@@ -67,6 +64,35 @@ public class Problem279_perfectSquares {
         return ans;
     }
 
+    public static int numSquares_bfs_2(int n) {
+        Queue<Integer> queue = new LinkedList<>();
+        Set<Integer> visited = new HashSet<>();
+        queue.offer(n);
+        visited.add(n);
+        int level = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            level++;
+            for (int i = 0; i < size; i++) {
+                int value = queue.poll();
+                for (int j = 1; j * j <= value; j++) {
+                    int tmp = value - j * j;
+                    if (tmp == 0) {
+                        return level;
+                    }
+
+                    if (!visited.contains(tmp)) {
+                        visited.add(tmp);
+                        queue.offer(tmp);
+                    }
+                }
+            }
+        }
+
+        return level;
+    }
+
     public static int numSquares_dp(int n) {
         List<Integer> squares = new ArrayList();
         for (int i = 1; i * i <= n; i++) {
@@ -90,8 +116,10 @@ public class Problem279_perfectSquares {
 
     public static void main(String[] args) {
         System.out.println("1 ?= " + numSquares_bfs(1));
+        System.out.println("1 ?= " + numSquares_bfs_2(1));
         System.out.println("1 ?= " + numSquares_dp(1));
         System.out.println("2 ?= " + numSquares_bfs(2));
+        System.out.println("2 ?= " + numSquares_bfs_2(2));
         System.out.println("2 ?= " + numSquares_dp(2));
         System.out.println("3 ?= " + numSquares_bfs(3));
         System.out.println("3 ?= " + numSquares_dp(3));
@@ -104,6 +132,7 @@ public class Problem279_perfectSquares {
         System.out.println("2 ?= " + numSquares_bfs(13));
         System.out.println("2 ?= " + numSquares_dp(13));
         System.out.println("2 ?= " + numSquares_bfs(41));
+        System.out.println("2 ?= " + numSquares_bfs_2(41));
         System.out.println("2 ?= " + numSquares_dp(41));
     }
 }
