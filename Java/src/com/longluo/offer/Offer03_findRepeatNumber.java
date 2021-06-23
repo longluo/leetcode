@@ -1,12 +1,10 @@
 package com.longluo.offer;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 剑指 Offer 03. 数组中重复的数字
+ * <p>
  * 找出数组中重复的数字。
  * 在一个长度为 n 的数组nums里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，
  * 也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
@@ -18,6 +16,8 @@ import java.util.Set;
  * <p>
  * 限制：
  * 2 <= n <= 100000
+ * <p>
+ * https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
  */
 public class Offer03_findRepeatNumber {
 
@@ -48,14 +48,30 @@ public class Offer03_findRepeatNumber {
     }
 
     public static int findRepeatNumber3(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-
+        if (nums == null || nums.length == 0) {
+            return -1;
         }
 
-        return 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i == nums[i]) {
+                continue;
+            }
+
+            if (nums[i] == nums[nums[i]]) {
+                return nums[i];
+            }
+
+            int temp = nums[i];
+            nums[i] = nums[temp];
+            nums[temp] = temp;
+        }
+
+        return -1;
     }
 
     public static void main(String[] args) {
         System.out.println("2 3 ?= " + findRepeatNumber(new int[]{2, 3, 1, 0, 2, 5, 3}));
+        System.out.println("2 3 ?= " + findRepeatNumber2(new int[]{2, 3, 1, 0, 2, 5, 3}));
+        System.out.println("2 3 ?= " + findRepeatNumber3(new int[]{2, 3, 1, 0, 2, 5, 3}));
     }
 }
