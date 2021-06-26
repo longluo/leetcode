@@ -60,6 +60,7 @@
 | [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem700_searchInABinarySearchTree.java) |
 | [740. 删除并获得点数](https://leetcode-cn.com/problems/delete-and-earn/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem740_deleteAndEarn.java) |
 | [752. 打开转盘锁](https://leetcode-cn.com/problems/open-the-lock/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem752_openTheLock.java) |
+| [773. 滑动谜题](https://leetcode-cn.com/problems/sliding-puzzle/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem773_slidingPuzzle.java) |
 | [832. 翻转图像](https://leetcode-cn.com/problems/flipping-an-image/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem832_flippingAnImage.java) |
 | [867. 转置矩阵](https://leetcode-cn.com/problems/transpose-matrix/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem867_transposeMatrix.java) |
 | [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem896_monotonicArray.java) |
