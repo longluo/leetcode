@@ -30,6 +30,8 @@
 | [137. 只出现一次的数字 II](https://leetcode-cn.com/problems/single-number-ii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem137_singleNumber_ii.java) |
 | [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem145_binaryTreePostorderTraversal.java) |
 | [153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem153_findMinimumInRotatedSortedArray.java) |
+| [168. Excel表列名称](https://leetcode-cn.com/problems/excel-sheet-column-title/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/math/Problem168_excelSheetColumnTitle.java) |
+| [171. Excel表列序号](https://leetcode-cn.com/problems/excel-sheet-column-number/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/math/Problem171_excelSheetColumnNumber.java) |
 | [179. 最大数](https://leetcode-cn.com/problems/largest-number/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/sort/Problem179_largestNumber.java) |
 | [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem198_houseRobber.java) |
 | [209. 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem209_minimumSizeSubarraySum.java) |
@@ -64,6 +66,7 @@
 | [832. 翻转图像](https://leetcode-cn.com/problems/flipping-an-image/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem832_flippingAnImage.java) |
 | [867. 转置矩阵](https://leetcode-cn.com/problems/transpose-matrix/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem867_transposeMatrix.java) |
 | [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem896_monotonicArray.java) |
+| [909. 蛇梯棋](https://leetcode-cn.com/problems/snakes-and-ladders/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem909_snakesAndLadders.java) |
 | [933. 最近的请求次数](https://leetcode-cn.com/problems/number-of-recent-calls/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/queue/Problem933_numberOfRecentCalls.java) |
 | [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem938_rangeSumOfBST.java) |
 | [965. 单值二叉树](https://leetcode-cn.com/problems/univalued-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem965_univaluedBinaryTree.java) |
