@@ -11,7 +11,6 @@ import java.util.Queue;
  * N x N 的棋盘 board 上，按从 1 到 N*N 的数字给方格编号，编号 从左下角开始，每一行交替方向。
  * 例如，一块 6 x 6 大小的棋盘，编号如下：
  * <p>
- * <p>
  * r 行 c 列的棋盘，按前述方法编号，棋盘格中可能存在 “蛇” 或 “梯子”；如果 board[r][c] != -1，那个蛇或梯子的目的地将会是 board[r][c]。
  * 玩家从棋盘上的方格 1 （总是在最后一行、第一列）开始出发。
  * 每一回合，玩家需要从当前方格 x 开始出发，按下述要求前进：
@@ -55,27 +54,34 @@ public class Problem909_snakesAndLadders {
         }
 
         int n = board.length;
-        boolean[] visited = new boolean[n * n + 1];
+        boolean[][] visited = new boolean[n][n];
         int step = 0;
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{n - 1, 0});
-        visited[1] = true;
+        visited[n - 1][0] = true;
         int[] target = getPosByIndex(board, n * n);
         while (!queue.isEmpty()) {
             step++;
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 int[] status = queue.poll();
-                List<int[]> nextStatusList = getNextStep(board, status);
-                for (int[] next : nextStatusList) {
-                    if (next[0] == target[0] && next[1] == target[1]) {
-                        return step;
-                    }
-                    if (visited[0]) {
+                if (status[0] == target[0] && status[1] == target[1]) {
+                    return step - 1;
+                }
+                int index = getIndexByPos(board, status);
+                for (int j = 1; j <= 6; j++) {
+                    if (index + j > n * n) {
                         continue;
                     }
+                    int[] next = getPosByIndex(board, index + j);
+                    if (board[next[0]][next[1]] > 0) {
+                        next = getPosByIndex(board, board[next[0]][next[1]]);
+                    }
+                    if (visited[next[0]][next[1]]) {
+                        continue;
+                    }
+                    visited[next[0]][next[1]] = true;
                     queue.offer(next);
-                    visited[0] = true;
                 }
             }
         }
@@ -85,27 +91,30 @@ public class Problem909_snakesAndLadders {
 
     public static List<int[]> getNextStep(int[][] board, int[] status) {
         List<int[]> ans = new ArrayList<>();
+        int n = board.length;
         int idx = getIndexByPos(board, status);
         for (int i = 1; i <= 6; i++) {
+            if (idx + i > n * n) {
+                break;
+            }
             int[] next = getPosByIndex(board, idx + i);
             ans.add(next);
         }
-
         return ans;
     }
 
     public static int getIndexByPos(int[][] board, int[] pos) {
         int n = board.length;
-        int ans = n * n;
+        int ans = 0;
         if (board[pos[0]][pos[1]] > 0) {
             ans = board[pos[0]][pos[1]];
         } else {
-            int row = pos[0];
+            int row = n - 1 - pos[0];
             int col = pos[1];
-            if (row % 2 != 1) {
+            if (row % 2 == 1) {
                 col = n - 1 - col;
             }
-            ans = ans - ((n - 1 - row) * n + col);
+            ans = row * n + col;
         }
 
         return ans + 1;
@@ -160,11 +169,75 @@ public class Problem909_snakesAndLadders {
         return new int[]{n - 1 - r, c};
     }
 
+    public static int snakesAndLadders_3(int[][] board) {
+        if (board == null || board.length == 0 || board[0].length == 0) {
+            return -1;
+        }
+
+        int n = board.length;
+        int[] nums = new int[n * n + 1];
+        boolean isRight = false;
+        int idx = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (!isRight) {
+                for (int j = 0; j < n; j++) {
+                    nums[idx++] = board[i][j];
+                }
+            } else {
+                for (int j = n - 1; j >= 0; j--) {
+                    nums[idx++] = board[i][j];
+                }
+            }
+
+            isRight = !isRight;
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[nums.length];
+        queue.offer(1);
+        visited[1] = true;
+        int step = 0;
+        while (!queue.isEmpty()) {
+            step++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int current = queue.poll();
+                for (int j = 1; j <= 6; j++) {
+                    int next = current + j;
+                    if (next > n * n) {
+                        break;
+                    }
+
+                    if (nums[next] > 0) {
+                        next = nums[next];
+                    }
+
+                    if (next == n * n) {
+                        return step;
+                    }
+
+                    if (visited[next]) {
+                        continue;
+                    }
+
+                    visited[next] = true;
+                    queue.offer(next);
+                }
+            }
+        }
+
+        return -1;
+    }
 
     public static void main(String[] args) {
-//        System.out.println("4 ?= " + snakesAndLadders(new int[][]{{-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 35, -1, -1, 13, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 15, -1, -1, -1, -1}}));
+        System.out.println("4 ?= " + snakesAndLadders(new int[][]{{-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 35, -1, -1, 13, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 15, -1, -1, -1, -1}}));
         System.out.println("4 ?= " + snakesAndLadders_bfs(new int[][]{{-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 35, -1, -1, 13, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 15, -1, -1, -1, -1}}));
-//        System.out.println("2 ?= " + snakesAndLadders(new int[][]{{-1, 4, -1}, {6, 2, 6}, {-1, 3, -1}}));
+        System.out.println("4 ?= " + snakesAndLadders_3(new int[][]{{-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 35, -1, -1, 13, -1}, {-1, -1, -1, -1, -1, -1}, {-1, 15, -1, -1, -1, -1}}));
+        System.out.println("2 ?= " + snakesAndLadders(new int[][]{{-1, 4, -1}, {6, 2, 6}, {-1, 3, -1}}));
         System.out.println("2 ?= " + snakesAndLadders_bfs(new int[][]{{-1, 4, -1}, {6, 2, 6}, {-1, 3, -1}}));
+        System.out.println("2 ?= " + snakesAndLadders_3(new int[][]{{-1, 4, -1}, {6, 2, 6}, {-1, 3, -1}}));
+        System.out.println("2 ?= " + snakesAndLadders(new int[][]{{-1, -1, 2, 21, -1}, {16, -1, 24, -1, 4}, {2, 3, -1, -1, -1}, {-1, 11, 23, 18, -1}, {-1, -1, -1, 23, -1}}));
+        System.out.println("1 ?= " + snakesAndLadders_3(new int[][]{{-1, -1, -1}, {-1, 9, 8}, {-1, 8, 9}}));
+
     }
 }
