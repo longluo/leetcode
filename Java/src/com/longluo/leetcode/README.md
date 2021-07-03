@@ -44,6 +44,7 @@
 | [337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem337_houseRobber_iii.java) |
 | [395. 至少有K个重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/string/Problem395_longestSubstringWithAtLeastKRepeatingCharacters.java) |
 | [401. 二进制手表](https://leetcode-cn.com/problems/binary-watch/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem401_binaryWatch.java) |
+| [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/hash/Problem451_sortCharactersByFrequency.java) |
 | [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem501_findModeInBinarySearchTree.java) |
 | [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem530_minimumAbsoluteDifferenceInBst.java) |
 | [543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem543_diameterOfBinaryTree.java) |
@@ -86,6 +87,7 @@
 | [1672. 最富有客户的资产总量](https://leetcode-cn.com/problems/richest-customer-wealth/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem1672_richestCustomerWealthy.java) |
 | [1720. 解码异或后的数组](https://leetcode-cn.com/problems/decode-xored-array/) | Easy  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem1720_decodeXoredArray.java) |
 | [1723. 完成所有工作的最短时间](https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs/) | Hard  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem1720_decodeXoredArray.java) |
+| [1833. 雪糕的最大数量](https://leetcode-cn.com/problems/maximum-ice-cream-bars/) | Medium  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem1833_maximumIceCreamBars.java) |
 
 
 # Tree
