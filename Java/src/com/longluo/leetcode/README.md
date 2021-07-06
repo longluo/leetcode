@@ -62,6 +62,7 @@
 | [692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/heap/Problem692_topKFrequentWords.java) |
 | [697. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem697_degreeOfAnArray.java) |
 | [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem700_searchInABinarySearchTree.java) |
+| [726. 原子的数量](https://leetcode-cn.com/problems/number-of-atoms/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/stack/Problem726_numberOfAtoms.java) |
 | [740. 删除并获得点数](https://leetcode-cn.com/problems/delete-and-earn/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem740_deleteAndEarn.java) |
 | [752. 打开转盘锁](https://leetcode-cn.com/problems/open-the-lock/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem752_openTheLock.java) |
 | [773. 滑动谜题](https://leetcode-cn.com/problems/sliding-puzzle/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem773_slidingPuzzle.java) |
