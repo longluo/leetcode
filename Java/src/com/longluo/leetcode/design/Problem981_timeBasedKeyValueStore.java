@@ -81,28 +81,39 @@ public class Problem981_timeBasedKeyValueStore {
                 return "";
             } else {
                 List<Node> list = map.get(key);
-                Collections.sort(list, new Comparator<Node>() {
-                    @Override
-                    public int compare(Node o1, Node o2) {
-                        return o1.timestamp - o2.timestamp;
-                    }
-                });
-
+                if (list.size() == 0) {
+                    return "";
+                }
                 if (list.get(0).timestamp > timestamp) {
                     return "";
                 }
+                if (list.get(list.size() - 1).timestamp <= timestamp) {
+                    return list.get(list.size() - 1).value;
+                }
 
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).timestamp == timestamp) {
-                        return list.get(i).value;
-                    }
+//                for (int i = 0; i < list.size(); i++) {
+//                    if (list.get(i).timestamp == timestamp) {
+//                        return list.get(i).value;
+//                    }
+//
+//                    if (i + 1 < list.size() && list.get(i).timestamp < timestamp && list.get(i + 1).timestamp > timestamp) {
+//                        return list.get(i).value;
+//                    }
+//                }
 
-                    if (i + 1 < list.size() && list.get(i).timestamp < timestamp && list.get(i + 1).timestamp > timestamp) {
-                        return list.get(i).value;
+                int start = 0;
+                int end = list.size() - 1;
+                while (start < end) {
+                    int mid = start + (end - start) / 2;
+                    int stamp = list.get(mid).timestamp;
+                    if (stamp <= timestamp) {
+                        start = mid + 1;
+                    } else {
+                        end = mid;
                     }
                 }
 
-                return list.get(list.size() - 1).value;
+                return list.get(start - 1).value;
             }
         }
     }
@@ -127,22 +138,24 @@ public class Problem981_timeBasedKeyValueStore {
             }
         });
 
+        int timestamp = 15;
         int start = 0;
         int end = list.size() - 1;
-        int mid = 0;
         while (start < end) {
-            mid = start + (end - start) / 2;
+            int mid = start + (end - start) / 2;
             int stamp = list.get(mid).timestamp;
-            if (stamp == 15) {
-                System.out.println(mid);
-            } else if (stamp > 15) {
-                end = mid - 1;
-            } else {
+            if (stamp <= timestamp) {
                 start = mid + 1;
+            } else {
+                end = mid;
             }
         }
 
+
+
+        System.out.println(start + " " + " " + end);
+        System.out.println(list.get(start - 1).value);
         System.out.println(list.get(start).value);
-        System.out.println(list.get(mid).value);
+        System.out.println(list.get(end).value);
     }
 }
