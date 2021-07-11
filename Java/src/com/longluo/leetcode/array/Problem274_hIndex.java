@@ -17,6 +17,8 @@ package com.longluo.leetcode.array;
  * <p>
  * <p>
  * 提示：如果 h 有多种可能的值，h 指数是其中最大的那个。
+ *
+ * https://leetcode-cn.com/problems/h-index/
  */
 public class Problem274_hIndex {
 
