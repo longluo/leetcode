@@ -41,6 +41,7 @@
 | [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem257_binaryTreePaths.java) |
 | [260. 只出现一次的数字 III](https://leetcode-cn.com/problems/single-number-iii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem260_singleNumber_iii.java) |
 | [274. H指数](https://leetcode-cn.com/problems/h-index/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem274_hIndex.java) |
+| [275. H指数 II](https://leetcode-cn.com/problems/h-index-ii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem275_hIndex_ii.java) |
 | [292. Nim游戏](https://leetcode-cn.com/problems/nim-game/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/minimax/Problem292_nimGame.java) |
 | [337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem337_houseRobber_iii.java) |
 | [395. 至少有K个重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/string/Problem395_longestSubstringWithAtLeastKRepeatingCharacters.java) |
