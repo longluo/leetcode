@@ -93,7 +93,7 @@ public class Problem1818_minimumAbsoluteSumDifference {
             }
         }
 
-        return (sum - maxn) % MOD;
+        return (sum - maxn + MOD) % MOD;
     }
 
     public static int binarySearch(int[] nums, int target) {
