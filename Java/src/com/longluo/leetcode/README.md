@@ -97,7 +97,8 @@
 | [1720. 解码异或后的数组](https://leetcode-cn.com/problems/decode-xored-array/) | Easy  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem1720_decodeXoredArray.java) |
 | [1723. 完成所有工作的最短时间](https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs/) | Hard  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem1720_decodeXoredArray.java) |
 | [1833. 雪糕的最大数量](https://leetcode-cn.com/problems/maximum-ice-cream-bars/) | Medium  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem1833_maximumIceCreamBars.java) |
-
+| [1877. 数组中最大数对和的最小值](https://leetcode-cn.com/problems/minimize-maximum-pair-sum-in-array/) | Medium  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem1877_minimizeMaximumPairSumInArray.java) |
+| [1893. 检查是否区域内所有整数都被覆盖](https://leetcode-cn.com/problems/check-if-all-the-integers-in-a-range-are-covered/) | Easy  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem1893_checkIfAllTheIntegersInARangeAreCovered.java) |
 
 # Tree
 
