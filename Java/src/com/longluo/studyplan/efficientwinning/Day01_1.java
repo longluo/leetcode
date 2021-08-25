@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * https://leetcode-cn.com/problems/two-sum/
  */
-public class Problem001_TwoSum {
+public class Day01_1 {
 
     public static int[] twoSum(int[] nums, int target) {
         int[] ans = new int[2];
