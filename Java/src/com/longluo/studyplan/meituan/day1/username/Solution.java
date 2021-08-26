@@ -7,6 +7,8 @@ import java.util.Scanner;
  */
 public class Solution {
 
+    private static final String regex = "^([a-zA-Z])([a-zA-Z0-9]*)([0-9]+)([a-zA-Z0-9]*)$";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = Integer.parseInt(scanner.nextLine());
@@ -14,24 +16,20 @@ public class Solution {
         for (int i = 0; i < n; i++) {
             namesArray[i] = scanner.nextLine();
         }
-        String[] result = new String[n];
-        checkNameValid(namesArray, result);
-        for (String output : result) {
-            System.out.println(output);
+        for (int i = 0; i < n; i++) {
+            System.out.println(checkNameValid(namesArray[i]));
         }
     }
 
-    public static void checkNameValid(String[] namesArray, String[] result) {
-        if (namesArray == null || namesArray.length == 0 || result == null || result.length == 0) {
-            return;
+    public static String checkNameValid(String name) {
+        if (name == null || name.length() <= 1) {
+            return "Wrong";
         }
 
-        int n = namesArray.length;
+        int n = name.length();
         for (int i = 0; i < n; i++) {
-            String name = namesArray[i];
             if (!Character.isLetter(name.charAt(0)) || name.length() <= 1) {
-                result[i] = "Wrong";
-                continue;
+                return "Wrong";
             }
 
             int letterNum = 0;
@@ -42,15 +40,16 @@ public class Solution {
                 } else if (Character.isLetter(ch)) {
                     letterNum++;
                 } else {
-                    result[i] = "Wrong";
-                    break;
+                    return "Wrong";
                 }
             }
             if (letterNum > 0 && digitNum > 0) {
-                result[i] = "Accept";
+                return "Accept";
             } else {
-                result[i] = "Wrong";
+                return "Wrong";
             }
         }
+
+        return "Wrong";
     }
 }
