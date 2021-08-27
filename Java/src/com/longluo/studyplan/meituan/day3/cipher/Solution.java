@@ -33,18 +33,12 @@ import java.util.Scanner;
 public class Solution {
 
     public static void main(String[] args) {
-        String regexHead = "([a-zA-Z]*)M([a-zA-Z]*)T$";
-        String regexEnd = "([a-zA-Z]*)([a-zA-Z]*)M([0-9]+)([a-zA-Z0-9]*)$";
-        Scanner sc = new Scanner(System.in);
+//        String regexHead = "([a-zA-Z]*)M([a-zA-Z]*)T$";
+//        String regexEnd = "([a-zA-Z]*)([a-zA-Z]*)M([0-9]+)([a-zA-Z0-9]*)$";
 
+        Scanner sc = new Scanner(System.in);
         int len = Integer.parseInt(sc.nextLine());
         String encryptStr = sc.nextLine();
-
-//        int len = 10;
-//        String encryptStr = "MMATSATMMT";
-
-//        int idx = encryptStr.indexOf("MT");
-//        int startIdx = encryptStr.indexOf("MT", 0);
 
         int idx = 0;
         int begin = 0;

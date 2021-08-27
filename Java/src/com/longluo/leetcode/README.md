@@ -26,6 +26,7 @@
 | [112. 路径总和](https://leetcode-cn.com/problems/path-sum/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem112_pathSum.java) |
 | [118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem118_pascalsTriangle.java) |
 | [119. 杨辉三角 II](https://leetcode-cn.com/problems/pascals-triangle-ii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem119_pascalsTriangle_ii.java) |
+| [135. 分发糖果](https://leetcode-cn.com/problems/candy/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem135_candy.java) |
 | [136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem136_singleNumber.java) |
 | [137. 只出现一次的数字 II](https://leetcode-cn.com/problems/single-number-ii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem137_singleNumber_ii.java) |
 | [138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/hash/Problem138_copyListWithRandomPointer.java) |
@@ -82,6 +83,7 @@
 | [815. 公交路线](https://leetcode-cn.com/problems/bus-routes/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem815_busRoutes.java) |
 | [832. 翻转图像](https://leetcode-cn.com/problems/flipping-an-image/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem832_flippingAnImage.java) |
 | [867. 转置矩阵](https://leetcode-cn.com/problems/transpose-matrix/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem867_transposeMatrix.java) |
+| [881. 救生艇](https://leetcode-cn.com/problems/boats-to-save-people/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem881_boatsToSavePeople.java) |
 | [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem896_monotonicArray.java) |
 | [909. 蛇梯棋](https://leetcode-cn.com/problems/snakes-and-ladders/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem909_snakesAndLadders.java) |
 | [930. 和相同的二元子数组](https://leetcode-cn.com/problems/binary-subarrays-with-sum/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem930_binarySubarraysWithSum.java) |
