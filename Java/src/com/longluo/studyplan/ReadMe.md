@@ -1,7 +1,9 @@
 # Leetcode Study Plan
 
-
-[meituan]()
-
+## [algorithms](./algorithms)
+## [datastructures](./datastructures)
+## [dynamicprogramming](./dynamicprogramming)
+## [efficientwinning](./efficientwinning)
+## [meituan](./meituan)
 
 
