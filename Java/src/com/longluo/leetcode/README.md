@@ -6,146 +6,146 @@
 
 |   Leetcode题目   |     难度     |          解答          |   Source Code   |
 |    :-----        |    :----:    |         :----:         |      :----:     |
-| [12. 整数转罗马数字](https://leetcode-cn.com/problems/integer-to-roman/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/math/Problem12_integerToRoman.java) |
-| [13. 罗马数字转整数](https://leetcode-cn.com/problems/roman-to-integer/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/math/Problem13_romanToInteger.java) |
-| [26. 删除有序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/twopointers/Problem26_removeDuplicatesFromSortedArray.java) |
-| [27. 移除元素](https://leetcode-cn.com/problems/remove-element/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/twopointers/Problem27_removeElement.java) |
-| [48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem48_rotateImage.java) |
-| [54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem54_spiralMatrix.java) |
-| [59. 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem59_spiralMatrix_ii.java) |
-| [73. 矩阵置零](https://leetcode-cn.com/problems/set-matrix-zeroes/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem73_setMatrixZeroes.java) |
-| [74. 搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/binarysearch/Problem74_searchA2DMatrix.java) |
-| [80. 删除有序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/twopointers/Problem80_removeDuplicatesFromSortedArray_ii.java) |
-| [81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/binarysearch/Problem81_searchInRotatedSortedArray_ii.java) |
-| [88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem88_mergeSortedArray.java) |
-| [103. 二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem103_binaryTreeZigzagLevelOrderTraversal.java) |
-| [104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem104_maximumDepthOfBinaryTree.java) |
-| [108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem108_convertSortedArrayToBinarySearchTree.java) |
-| [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem110_balancedBinaryTree.java) |
-| [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem111_minimumDepthOfBinaryTree.java) |
-| [112. 路径总和](https://leetcode-cn.com/problems/path-sum/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem112_pathSum.java) |
-| [118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem118_pascalsTriangle.java) |
-| [119. 杨辉三角 II](https://leetcode-cn.com/problems/pascals-triangle-ii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem119_pascalsTriangle_ii.java) |
-| [135. 分发糖果](https://leetcode-cn.com/problems/candy/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem135_candy.java) |
-| [136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem136_singleNumber.java) |
-| [137. 只出现一次的数字 II](https://leetcode-cn.com/problems/single-number-ii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem137_singleNumber_ii.java) |
-| [138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/hash/Problem138_copyListWithRandomPointer.java) |
-| [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem145_binaryTreePostorderTraversal.java) |
-| [153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem153_findMinimumInRotatedSortedArray.java) |
-| [168. Excel表列名称](https://leetcode-cn.com/problems/excel-sheet-column-title/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/math/Problem168_excelSheetColumnTitle.java) |
-| [171. Excel表列序号](https://leetcode-cn.com/problems/excel-sheet-column-number/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/math/Problem171_excelSheetColumnNumber.java) |
-| [179. 最大数](https://leetcode-cn.com/problems/largest-number/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/sort/Problem179_largestNumber.java) |
-| [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem198_houseRobber.java) |
-| [209. 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem209_minimumSizeSubarraySum.java) |
-| [213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem213_houseRobber_ii.java) |
-| [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/heap/Problem215_kthLargestElementInAnArray.java) |
-| [217. 存在重复元素](https://leetcode-cn.com/problems/contains-duplicate/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem217_containsDuplicate.java) |
-| [225. 用队列实现栈](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/stack/Problem225_implementStackUsingQueues.java) |
-| [232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/stack/Problem232_implementQueueUsingStacks.java) |
-| [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem257_binaryTreePaths.java) |
-| [260. 只出现一次的数字 III](https://leetcode-cn.com/problems/single-number-iii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem260_singleNumber_iii.java) |
-| [274. H指数](https://leetcode-cn.com/problems/h-index/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem274_hIndex.java) |
-| [275. H指数 II](https://leetcode-cn.com/problems/h-index-ii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem275_hIndex_ii.java) |
-| [292. Nim游戏](https://leetcode-cn.com/problems/nim-game/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/minimax/Problem292_nimGame.java) |
-| [337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem337_houseRobber_iii.java) |
-| [344. 反转字符串](https://leetcode-cn.com/problems/reverse-string/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/string/Problem344_reverseString.java) |
-| [345. 反转字符串中的元音字母](https://leetcode-cn.com/problems/reverse-vowels-of-a-string/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/twopointers/Problem345_reverseVowelsOfAString.java) |
-| [395. 至少有K个重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/string/Problem395_longestSubstringWithAtLeastKRepeatingCharacters.java) |
-| [401. 二进制手表](https://leetcode-cn.com/problems/binary-watch/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem401_binaryWatch.java) |
-| [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/hash/Problem451_sortCharactersByFrequency.java) |
-| [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem501_findModeInBinarySearchTree.java) |
-| [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem530_minimumAbsoluteDifferenceInBst.java) |
-| [541. 反转字符串II](https://leetcode-cn.com/problems/reverse-string-ii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/twopointers/Problem541_reverseString_ii.java) |
-| [543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem543_diameterOfBinaryTree.java) |
-| [551. 学生出勤记录I](https://leetcode-cn.com/problems/student-attendance-record-i/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/string/Problem551_studentAttendanceRecord_i.java) |
-| [552. 学生出勤记录II](https://leetcode-cn.com/problems/student-attendance-record-ii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem552_studentAttendanceRecord_ii.java) |
-| [557. 反转字符串中的单词III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/twopointers/Problem557_reverseWordsInAString_iii.java) |
-| [559. N 叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem559_maximumDepthOfNAryTree.java) |
-| [589. N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem589_nAryTreePreorderTraversal.java) |
-| [590. N 叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem590_nAryTreePostorderTraversal.java) |
-| [611. 有效三角形的个数](https://leetcode-cn.com/problems/valid-triangle-number/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem611_validTriangleNumber.java) |
-| [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem617_mergeTwoBinaryTrees.java) |
-| [622. 设计循环队列](https://leetcode-cn.com/problems/design-circular-queue/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/design/Problem622_designCircularQueue.java) |
-| [633. 平方数之和](https://leetcode-cn.com/problems/sum-of-square-numbers/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/math/Problem633_sumOfSquareNumbers.java) |
-| [637. 二叉树的层平均值](https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem637_averageOfLevelsInBinaryTree.java) |
-| [645. 错误的集合](https://leetcode-cn.com/problems/set-mismatch/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem645_setMismatch.java) |
-| [653. 两数之和 IV - 输入 BST](https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem653_twoSumIvInputIsABst.java) |
-| [665. 非递减数列](https://leetcode-cn.com/problems/non-decreasing-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem665_nonDecreasingArray.java) |
-| [671. 二叉树中第二小的节点](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem671_secondMinimumNodeInABinaryTree.java) |
-| [690. 员工的重要性](https://leetcode-cn.com/problems/employee-importance/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem690_employeeImportance.java) |
-| [692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/heap/Problem692_topKFrequentWords.java) |
-| [697. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem697_degreeOfAnArray.java) |
-| [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem700_searchInABinarySearchTree.java) |
-| [726. 原子的数量](https://leetcode-cn.com/problems/number-of-atoms/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/stack/Problem726_numberOfAtoms.java) |
-| [740. 删除并获得点数](https://leetcode-cn.com/problems/delete-and-earn/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem740_deleteAndEarn.java) |
-| [752. 打开转盘锁](https://leetcode-cn.com/problems/open-the-lock/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem752_openTheLock.java) |
-| [773. 滑动谜题](https://leetcode-cn.com/problems/sliding-puzzle/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem773_slidingPuzzle.java) |
-| [815. 公交路线](https://leetcode-cn.com/problems/bus-routes/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem815_busRoutes.java) |
-| [832. 翻转图像](https://leetcode-cn.com/problems/flipping-an-image/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem832_flippingAnImage.java) |
-| [867. 转置矩阵](https://leetcode-cn.com/problems/transpose-matrix/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem867_transposeMatrix.java) |
-| [881. 救生艇](https://leetcode-cn.com/problems/boats-to-save-people/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem881_boatsToSavePeople.java) |
-| [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem896_monotonicArray.java) |
-| [909. 蛇梯棋](https://leetcode-cn.com/problems/snakes-and-ladders/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bfs/Problem909_snakesAndLadders.java) |
-| [930. 和相同的二元子数组](https://leetcode-cn.com/problems/binary-subarrays-with-sum/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem930_binarySubarraysWithSum.java) |
-| [933. 最近的请求次数](https://leetcode-cn.com/problems/number-of-recent-calls/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/queue/Problem933_numberOfRecentCalls.java) |
-| [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem938_rangeSumOfBST.java) |
-| [965. 单值二叉树](https://leetcode-cn.com/problems/univalued-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem965_univaluedBinaryTree.java) |
-| [978. 最长湍流子数组](https://leetcode-cn.com/problems/longest-turbulent-subarray/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem978_longestTurbulentSubarray.java) |
-| [981. 基于时间的键值存储](https://leetcode-cn.com/problems/time-based-key-value-store/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/design/Problem981_timeBasedKeyValueStore.java) |
-| [993. 二叉树的堂兄弟节点](https://leetcode-cn.com/problems/cousins-in-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem993_cousinsInBinaryTree.java) |
-| [995. K连续位的最小翻转次数](https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/slidingwindow/Problem995_minimumNumberOfKConsecutiveBitFlips.java) |
-| [997. 找到小镇的法官](https://leetcode-cn.com/problems/find-the-town-judge/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/graph/Problem997_findTheTownJudge.java) |
-| [1004. 最大连续1的个数 III](https://leetcode-cn.com/problems/max-consecutive-ones-iii/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/slidingwindow/Problem1004_maxConsecutiveOnes_iii.java) |
-| [1011. 在D天内送达包裹的能力](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/) | Medium  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/binarysearch/Problem1011_capacityToShipPackagesWithinDDays.java) |
-| [1137. 第N个泰波那契数](https://leetcode-cn.com/problems/n-th-tribonacci-number/) | Easy  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/memoization/Problem1137_nThTribonacciNumber.java) |
-| [1178. 猜字谜](https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/) | Hard  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem1178_numberOfValidWordsForEachPuzzle.java) |
-| [1818. 绝对差值和](https://leetcode-cn.com/problems/minimum-absolute-sum-difference/) | Medium  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem1818_minimumAbsoluteSumDifference.java) |
-| [1232. 缀点成线](https://leetcode-cn.com/problems/check-if-it-is-a-straight-line/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/geometry/Problem1232_checkIfItIsAStraightLine.java) |
-| [1269. 停在原地的方案数](https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/) | Hard | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem1269_numberOfWaysToStayInTheSamePlaceAfterSomeSteps.java) |
-| [1337. 矩阵中战斗力最弱的K行]( https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem1337_theKWeakestRowsInAMatrix.java) |
-| [1418. 点菜展示表](https://leetcode-cn.com/problems/display-table-of-food-orders-in-a-restaurant/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem1418_displayTableOfFoodOrdersInARestaurant.java) |
-| [1480. 一维数组的动态和](https://leetcode-cn.com/problems/running-sum-of-1d-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem1480_runningSumOf1dArray.java) |
-| [1486. 数组异或操作](https://leetcode-cn.com/problems/xor-operation-in-an-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem1486_xorOperationInAnArray.java) |
-| [1449. 数位成本和为目标值的最大数字](https://leetcode-cn.com/problems/form-largest-integer-with-digits-that-add-up-to-target/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/dp/Problem1449_formLargestIntegerWithDigitsThatAddUpToTarget.java) |
-| [1672. 最富有客户的资产总量](https://leetcode-cn.com/problems/richest-customer-wealth/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem1672_richestCustomerWealthy.java) |
-| [1711. 大餐计数](https://leetcode-cn.com/problems/count-good-meals/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem1711_countGoodMeals.java) |
-| [1720. 解码异或后的数组](https://leetcode-cn.com/problems/decode-xored-array/) | Easy  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem1720_decodeXoredArray.java) |
-| [1723. 完成所有工作的最短时间](https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs/) | Hard  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/bitmanipulation/Problem1720_decodeXoredArray.java) |
-| [1833. 雪糕的最大数量](https://leetcode-cn.com/problems/maximum-ice-cream-bars/) | Medium  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem1833_maximumIceCreamBars.java) |
-| [1877. 数组中最大数对和的最小值](https://leetcode-cn.com/problems/minimize-maximum-pair-sum-in-array/) | Medium  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/greedy/Problem1877_minimizeMaximumPairSumInArray.java) |
-| [1893. 检查是否区域内所有整数都被覆盖](https://leetcode-cn.com/problems/check-if-all-the-integers-in-a-range-are-covered/) | Easy  | []() | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem1893_checkIfAllTheIntegersInARangeAreCovered.java) |
+| [12. 整数转罗马数字](https://leetcode-cn.com/problems/integer-to-roman/) | Easy | []()  | [Java](./math/Problem12_integerToRoman.java) |
+| [13. 罗马数字转整数](https://leetcode-cn.com/problems/roman-to-integer/) | Easy | []()  | [Java](./math/Problem13_romanToInteger.java) |
+| [26. 删除有序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/) | Easy | []()  | [Java](./twopointers/Problem26_removeDuplicatesFromSortedArray.java) |
+| [27. 移除元素](https://leetcode-cn.com/problems/remove-element/) | Easy | []()  | [Java](./twopointers/Problem27_removeElement.java) |
+| [48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/) | Medium | []()  | [Java](./array/Problem48_rotateImage.java) |
+| [54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/) | Medium | []()  | [Java](./array/Problem54_spiralMatrix.java) |
+| [59. 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/) | Medium | []()  | [Java](./array/Problem59_spiralMatrix_ii.java) |
+| [73. 矩阵置零](https://leetcode-cn.com/problems/set-matrix-zeroes/) | Medium | []()  | [Java](./array/Problem73_setMatrixZeroes.java) |
+| [74. 搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/) | Easy | []()  | [Java](./binarysearch/Problem74_searchA2DMatrix.java) |
+| [80. 删除有序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/) | Easy | []()  | [Java](./twopointers/Problem80_removeDuplicatesFromSortedArray_ii.java) |
+| [81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/) | Easy | []()  | [Java](./binarysearch/Problem81_searchInRotatedSortedArray_ii.java) |
+| [88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/) | Easy | []()  | [Java](./array/Problem88_mergeSortedArray.java) |
+| [103. 二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/) | Medium | []()  | [Java](./tree/Problem103_binaryTreeZigzagLevelOrderTraversal.java) |
+| [104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) | Easy | []()  | [Java](./tree/Problem104_maximumDepthOfBinaryTree.java) |
+| [108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem108_convertSortedArrayToBinarySearchTree.java) |
+| [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/) | Easy | []()  | [Java](./tree/Problem110_balancedBinaryTree.java) |
+| [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) | Easy | []()  | [Java](./tree/Problem111_minimumDepthOfBinaryTree.java) |
+| [112. 路径总和](https://leetcode-cn.com/problems/path-sum/) | Easy | []()  | [Java](./tree/Problem112_pathSum.java) |
+| [118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/) | Easy | []()  | [Java](./array/Problem118_pascalsTriangle.java) |
+| [119. 杨辉三角 II](https://leetcode-cn.com/problems/pascals-triangle-ii/) | Easy | []()  | [Java](./array/Problem119_pascalsTriangle_ii.java) |
+| [135. 分发糖果](https://leetcode-cn.com/problems/candy/) | Hard | []()  | [Java](./greedy/Problem135_candy.java) |
+| [136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/) | Easy | []()  | [Java](./bitmanipulation/Problem136_singleNumber.java) |
+| [137. 只出现一次的数字 II](https://leetcode-cn.com/problems/single-number-ii/) | Easy | []()  | [Java](./bitmanipulation/Problem137_singleNumber_ii.java) |
+| [138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/) | Medium | []()  | [Java](./hash/Problem138_copyListWithRandomPointer.java) |
+| [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | Easy | []()  | [Java](./tree/Problem145_binaryTreePostorderTraversal.java) |
+| [153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/) | Medium | []()  | [Java](./array/Problem153_findMinimumInRotatedSortedArray.java) |
+| [168. Excel表列名称](https://leetcode-cn.com/problems/excel-sheet-column-title/) | Easy | []()  | [Java](./math/Problem168_excelSheetColumnTitle.java) |
+| [171. Excel表列序号](https://leetcode-cn.com/problems/excel-sheet-column-number/) | Easy | []()  | [Java](./math/Problem171_excelSheetColumnNumber.java) |
+| [179. 最大数](https://leetcode-cn.com/problems/largest-number/) | Medium | []()  | [Java](./sort/Problem179_largestNumber.java) |
+| [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/) | Medium | []()  | [Java](./dp/Problem198_houseRobber.java) |
+| [209. 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) | Medium | []()  | [Java](./array/Problem209_minimumSizeSubarraySum.java) |
+| [213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/) | Medium | []()  | [Java](./dp/Problem213_houseRobber_ii.java) |
+| [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) | Medium | []()  | [Java](./heap/Problem215_kthLargestElementInAnArray.java) |
+| [217. 存在重复元素](https://leetcode-cn.com/problems/contains-duplicate/) | Easy | []()  | [Java](./array/Problem217_containsDuplicate.java) |
+| [225. 用队列实现栈](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](./stack/Problem225_implementStackUsingQueues.java) |
+| [232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](./stack/Problem232_implementQueueUsingStacks.java) |
+| [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/) | Easy | []()  | [Java](./tree/Problem257_binaryTreePaths.java) |
+| [260. 只出现一次的数字 III](https://leetcode-cn.com/problems/single-number-iii/) | Easy | []()  | [Java](./bitmanipulation/Problem260_singleNumber_iii.java) |
+| [274. H指数](https://leetcode-cn.com/problems/h-index/) | Easy | []()  | [Java](./array/Problem274_hIndex.java) |
+| [275. H指数 II](https://leetcode-cn.com/problems/h-index-ii/) | Medium | []()  | [Java](./array/Problem275_hIndex_ii.java) |
+| [292. Nim游戏](https://leetcode-cn.com/problems/nim-game/) | Easy | []()  | [Java](./minimax/Problem292_nimGame.java) |
+| [337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/) | Medium | []()  | [Java](./dp/Problem337_houseRobber_iii.java) |
+| [344. 反转字符串](https://leetcode-cn.com/problems/reverse-string/) | Easy | []()  | [Java](./string/Problem344_reverseString.java) |
+| [345. 反转字符串中的元音字母](https://leetcode-cn.com/problems/reverse-vowels-of-a-string/) | Easy | []()  | [Java](./twopointers/Problem345_reverseVowelsOfAString.java) |
+| [395. 至少有K个重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/) | Medium | []()  | [Java](./string/Problem395_longestSubstringWithAtLeastKRepeatingCharacters.java) |
+| [401. 二进制手表](https://leetcode-cn.com/problems/binary-watch/) | Easy | []()  | [Java](./bitmanipulation/Problem401_binaryWatch.java) |
+| [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) | Medium | []()  | [Java](./hash/Problem451_sortCharactersByFrequency.java) |
+| [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem501_findModeInBinarySearchTree.java) |
+| [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) | Easy | []()  | [Java](./tree/Problem530_minimumAbsoluteDifferenceInBst.java) |
+| [541. 反转字符串II](https://leetcode-cn.com/problems/reverse-string-ii/) | Easy | []()  | [Java](./twopointers/Problem541_reverseString_ii.java) |
+| [543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/) | Easy | []()  | [Java](./tree/Problem543_diameterOfBinaryTree.java) |
+| [551. 学生出勤记录I](https://leetcode-cn.com/problems/student-attendance-record-i/) | Easy | []()  | [Java](./string/Problem551_studentAttendanceRecord_i.java) |
+| [552. 学生出勤记录II](https://leetcode-cn.com/problems/student-attendance-record-ii/) | Medium | []()  | [Java](./dp/Problem552_studentAttendanceRecord_ii.java) |
+| [557. 反转字符串中的单词III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/) | Easy | []()  | [Java](./twopointers/Problem557_reverseWordsInAString_iii.java) |
+| [559. N 叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/) | Easy | []()  | [Java](./tree/Problem559_maximumDepthOfNAryTree.java) |
+| [589. N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/) | Easy | []()  | [Java](./tree/Problem589_nAryTreePreorderTraversal.java) |
+| [590. N 叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/) | Easy | []()  | [Java](./tree/Problem590_nAryTreePostorderTraversal.java) |
+| [611. 有效三角形的个数](https://leetcode-cn.com/problems/valid-triangle-number/) | Medium | []()  | [Java](./greedy/Problem611_validTriangleNumber.java) |
+| [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/) | Easy | []()  | [Java](./tree/Problem617_mergeTwoBinaryTrees.java) |
+| [622. 设计循环队列](https://leetcode-cn.com/problems/design-circular-queue/) | Medium | []()  | [Java](./design/Problem622_designCircularQueue.java) |
+| [633. 平方数之和](https://leetcode-cn.com/problems/sum-of-square-numbers/) | Easy | []()  | [Java](./math/Problem633_sumOfSquareNumbers.java) |
+| [637. 二叉树的层平均值](https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/) | Easy | []()  | [Java](./tree/Problem637_averageOfLevelsInBinaryTree.java) |
+| [645. 错误的集合](https://leetcode-cn.com/problems/set-mismatch/) | Easy | []()  | [Java](./bitmanipulation/Problem645_setMismatch.java) |
+| [653. 两数之和 IV - 输入 BST](https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/) | Easy | []()  | [Java](./tree/Problem653_twoSumIvInputIsABst.java) |
+| [665. 非递减数列](https://leetcode-cn.com/problems/non-decreasing-array/) | Easy | []()  | [Java](./array/Problem665_nonDecreasingArray.java) |
+| [671. 二叉树中第二小的节点](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/) | Easy | []()  | [Java](./tree/Problem671_secondMinimumNodeInABinaryTree.java) |
+| [690. 员工的重要性](https://leetcode-cn.com/problems/employee-importance/) | Medium | []()  | [Java](./bfs/Problem690_employeeImportance.java) |
+| [692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/) | Medium | []()  | [Java](./heap/Problem692_topKFrequentWords.java) |
+| [697. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/) | Easy | []()  | [Java](./array/Problem697_degreeOfAnArray.java) |
+| [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem700_searchInABinarySearchTree.java) |
+| [726. 原子的数量](https://leetcode-cn.com/problems/number-of-atoms/) | Hard | []()  | [Java](./stack/Problem726_numberOfAtoms.java) |
+| [740. 删除并获得点数](https://leetcode-cn.com/problems/delete-and-earn/) | Medium | []()  | [Java](./dp/Problem740_deleteAndEarn.java) |
+| [752. 打开转盘锁](https://leetcode-cn.com/problems/open-the-lock/) | Medium | []()  | [Java](./bfs/Problem752_openTheLock.java) |
+| [773. 滑动谜题](https://leetcode-cn.com/problems/sliding-puzzle/) | Hard | []()  | [Java](./bfs/Problem773_slidingPuzzle.java) |
+| [815. 公交路线](https://leetcode-cn.com/problems/bus-routes/) | Medium | []()  | [Java](./bfs/Problem815_busRoutes.java) |
+| [832. 翻转图像](https://leetcode-cn.com/problems/flipping-an-image/) | Easy | []()  | [Java](./array/Problem832_flippingAnImage.java) |
+| [867. 转置矩阵](https://leetcode-cn.com/problems/transpose-matrix/) | Easy | []()  | [Java](./array/Problem867_transposeMatrix.java) |
+| [881. 救生艇](https://leetcode-cn.com/problems/boats-to-save-people/) | Medium | []()  | [Java](./greedy/Problem881_boatsToSavePeople.java) |
+| [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array/) | Easy | []()  | [Java](./array/Problem896_monotonicArray.java) |
+| [909. 蛇梯棋](https://leetcode-cn.com/problems/snakes-and-ladders/) | Medium | []()  | [Java](./bfs/Problem909_snakesAndLadders.java) |
+| [930. 和相同的二元子数组](https://leetcode-cn.com/problems/binary-subarrays-with-sum/) | Medium | []()  | [Java](./array/Problem930_binarySubarraysWithSum.java) |
+| [933. 最近的请求次数](https://leetcode-cn.com/problems/number-of-recent-calls/) | Easy | []()  | [Java](./queue/Problem933_numberOfRecentCalls.java) |
+| [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst/) | Easy | []()  | [Java](./tree/Problem938_rangeSumOfBST.java) |
+| [965. 单值二叉树](https://leetcode-cn.com/problems/univalued-binary-tree/) | Easy | []()  | [Java](./tree/Problem965_univaluedBinaryTree.java) |
+| [978. 最长湍流子数组](https://leetcode-cn.com/problems/longest-turbulent-subarray/) | Medium | []()  | [Java](./tree/Problem978_longestTurbulentSubarray.java) |
+| [981. 基于时间的键值存储](https://leetcode-cn.com/problems/time-based-key-value-store/) | Medium | []()  | [Java](./design/Problem981_timeBasedKeyValueStore.java) |
+| [993. 二叉树的堂兄弟节点](https://leetcode-cn.com/problems/cousins-in-binary-tree/) | Easy | []()  | [Java](./tree/Problem993_cousinsInBinaryTree.java) |
+| [995. K连续位的最小翻转次数](https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/) | Hard | []()  | [Java](./slidingwindow/Problem995_minimumNumberOfKConsecutiveBitFlips.java) |
+| [997. 找到小镇的法官](https://leetcode-cn.com/problems/find-the-town-judge/) | Easy | []()  | [Java](./graph/Problem997_findTheTownJudge.java) |
+| [1004. 最大连续1的个数 III](https://leetcode-cn.com/problems/max-consecutive-ones-iii/) | Medium | []()  | [Java](./slidingwindow/Problem1004_maxConsecutiveOnes_iii.java) |
+| [1011. 在D天内送达包裹的能力](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/) | Medium  | []() | [Java](./binarysearch/Problem1011_capacityToShipPackagesWithinDDays.java) |
+| [1137. 第N个泰波那契数](https://leetcode-cn.com/problems/n-th-tribonacci-number/) | Easy  | []() | [Java](./memoization/Problem1137_nThTribonacciNumber.java) |
+| [1178. 猜字谜](https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/) | Hard  | []() | [Java](./bitmanipulation/Problem1178_numberOfValidWordsForEachPuzzle.java) |
+| [1818. 绝对差值和](https://leetcode-cn.com/problems/minimum-absolute-sum-difference/) | Medium  | []() | [Java](./greedy/Problem1818_minimumAbsoluteSumDifference.java) |
+| [1232. 缀点成线](https://leetcode-cn.com/problems/check-if-it-is-a-straight-line/) | Easy | []()  | [Java](./geometry/Problem1232_checkIfItIsAStraightLine.java) |
+| [1269. 停在原地的方案数](https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/) | Hard | []()  | [Java](./dp/Problem1269_numberOfWaysToStayInTheSamePlaceAfterSomeSteps.java) |
+| [1337. 矩阵中战斗力最弱的K行]( https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix/) | Easy | []()  | [Java](./array/Problem1337_theKWeakestRowsInAMatrix.java) |
+| [1418. 点菜展示表](https://leetcode-cn.com/problems/display-table-of-food-orders-in-a-restaurant/) | Medium | []()  | [Java](./array/Problem1418_displayTableOfFoodOrdersInARestaurant.java) |
+| [1480. 一维数组的动态和](https://leetcode-cn.com/problems/running-sum-of-1d-array/) | Easy | []()  | [Java](./array/Problem1480_runningSumOf1dArray.java) |
+| [1486. 数组异或操作](https://leetcode-cn.com/problems/xor-operation-in-an-array/) | Easy | []()  | [Java](./bitmanipulation/Problem1486_xorOperationInAnArray.java) |
+| [1449. 数位成本和为目标值的最大数字](https://leetcode-cn.com/problems/form-largest-integer-with-digits-that-add-up-to-target/) | Easy | []()  | [Java](./dp/Problem1449_formLargestIntegerWithDigitsThatAddUpToTarget.java) |
+| [1672. 最富有客户的资产总量](https://leetcode-cn.com/problems/richest-customer-wealth/) | Easy | []()  | [Java](./array/Problem1672_richestCustomerWealthy.java) |
+| [1711. 大餐计数](https://leetcode-cn.com/problems/count-good-meals/) | Medium | []()  | [Java](./array/Problem1711_countGoodMeals.java) |
+| [1720. 解码异或后的数组](https://leetcode-cn.com/problems/decode-xored-array/) | Easy  | []() | [Java](./bitmanipulation/Problem1720_decodeXoredArray.java) |
+| [1723. 完成所有工作的最短时间](https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs/) | Hard  | []() | [Java](./bitmanipulation/Problem1720_decodeXoredArray.java) |
+| [1833. 雪糕的最大数量](https://leetcode-cn.com/problems/maximum-ice-cream-bars/) | Medium  | []() | [Java](./greedy/Problem1833_maximumIceCreamBars.java) |
+| [1877. 数组中最大数对和的最小值](https://leetcode-cn.com/problems/minimize-maximum-pair-sum-in-array/) | Medium  | []() | [Java](./greedy/Problem1877_minimizeMaximumPairSumInArray.java) |
+| [1893. 检查是否区域内所有整数都被覆盖](https://leetcode-cn.com/problems/check-if-all-the-integers-in-a-range-are-covered/) | Easy  | []() | [Java](./array/Problem1893_checkIfAllTheIntegersInARangeAreCovered.java) |
 
 # Tree
 
 |   Leetcode题目   |     难度     |          解答          |   Source Code   |
 |    :-----        |    :----:    |         :----:         |      :----:     |
-| [103. 二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem103_binaryTreeZigzagLevelOrderTraversal.java) |
-| [104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem104_maximumDepthOfBinaryTree.java) |
-| [108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem108_convertSortedArrayToBinarySearchTree.java) |
-| [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem110_balancedBinaryTree.java) |
-| [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem111_minimumDepthOfBinaryTree.java) |
-| [112. 路径总和](https://leetcode-cn.com/problems/path-sum/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem112_pathSum.java) |
-| [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem145_binaryTreePostorderTraversal.java) |
-| [235. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem235_lowestCommonAncestorOfABinarySearchTree.java) |
-| [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem257_binaryTreePaths.java) |
-| [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem501_findModeInBinarySearchTree.java) |
-| [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem530_minimumAbsoluteDifferenceInBst.java) |
-| [543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem543_diameterOfBinaryTree.java) |
-| [559. N 叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem559_maximumDepthOfNAryTree.java) |
-| [572. 另一个树的子树](https://leetcode-cn.com/problems/subtree-of-another-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem572_subtreeOfAnotherTree.java) |
-| [589. N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem589_nAryTreePreorderTraversal.java) |
-| [590. N 叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem590_nAryTreePostorderTraversal.java) |
-| [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem671_secondMinimumNodeInABinaryTree.java) |
-| [637. 二叉树的层平均值](https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem637_averageOfLevelsInBinaryTree.java) |
-| [653. 两数之和 IV - 输入 BST](https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem653_twoSumIvInputIsABst.java) |
-| [665. 非递减数列](https://leetcode-cn.com/problems/non-decreasing-array/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/array/Problem665_nonDecreasingArray.java) |
-| [671. 二叉树中第二小的节点](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem671_secondMinimumNodeInABinaryTree.java) |
-| [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem700_searchInABinarySearchTree.java) |
-| [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem938_rangeSumOfBST.java) |
-| [965. 单值二叉树](https://leetcode-cn.com/problems/univalued-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem965_univaluedBinaryTree.java) |
-| [978. 最长湍流子数组](https://leetcode-cn.com/problems/longest-turbulent-subarray/) | Medium | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem978_longestTurbulentSubarray.java) |
-| [993. 二叉树的堂兄弟节点](https://leetcode-cn.com/problems/cousins-in-binary-tree/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem993_cousinsInBinaryTree.java) |
-| [1022. 从根到叶的二进制数之和](https://leetcode-cn.com/problems/sum-of-root-to-leaf-binary-numbers/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/tree/master/Java/src/com/longluo/leetcode/tree/Problem1022_sumOfRootToLeafBinaryNumbers.java) |
+| [103. 二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/) | Medium | []()  | [Java](./tree/Problem103_binaryTreeZigzagLevelOrderTraversal.java) |
+| [104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) | Easy | []()  | [Java](./tree/Problem104_maximumDepthOfBinaryTree.java) |
+| [108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem108_convertSortedArrayToBinarySearchTree.java) |
+| [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/) | Easy | []()  | [Java](./tree/Problem110_balancedBinaryTree.java) |
+| [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) | Easy | []()  | [Java](./tree/Problem111_minimumDepthOfBinaryTree.java) |
+| [112. 路径总和](https://leetcode-cn.com/problems/path-sum/) | Easy | []()  | [Java](./tree/Problem112_pathSum.java) |
+| [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | Easy | []()  | [Java](./tree/Problem145_binaryTreePostorderTraversal.java) |
+| [235. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem235_lowestCommonAncestorOfABinarySearchTree.java) |
+| [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/) | Easy | []()  | [Java](./tree/Problem257_binaryTreePaths.java) |
+| [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem501_findModeInBinarySearchTree.java) |
+| [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) | Easy | []()  | [Java](./tree/Problem530_minimumAbsoluteDifferenceInBst.java) |
+| [543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/) | Easy | []()  | [Java](./tree/Problem543_diameterOfBinaryTree.java) |
+| [559. N 叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/) | Easy | []()  | [Java](./tree/Problem559_maximumDepthOfNAryTree.java) |
+| [572. 另一个树的子树](https://leetcode-cn.com/problems/subtree-of-another-tree/) | Easy | []()  | [Java](./tree/Problem572_subtreeOfAnotherTree.java) |
+| [589. N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/) | Easy | []()  | [Java](./tree/Problem589_nAryTreePreorderTraversal.java) |
+| [590. N 叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/) | Easy | []()  | [Java](./tree/Problem590_nAryTreePostorderTraversal.java) |
+| [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/) | Easy | []()  | [Java](./tree/Problem671_secondMinimumNodeInABinaryTree.java) |
+| [637. 二叉树的层平均值](https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/) | Easy | []()  | [Java](./tree/Problem637_averageOfLevelsInBinaryTree.java) |
+| [653. 两数之和 IV - 输入 BST](https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/) | Easy | []()  | [Java](./tree/Problem653_twoSumIvInputIsABst.java) |
+| [665. 非递减数列](https://leetcode-cn.com/problems/non-decreasing-array/) | Easy | []()  | [Java](./array/Problem665_nonDecreasingArray.java) |
+| [671. 二叉树中第二小的节点](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/) | Easy | []()  | [Java](./tree/Problem671_secondMinimumNodeInABinaryTree.java) |
+| [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem700_searchInABinarySearchTree.java) |
+| [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst/) | Easy | []()  | [Java](./tree/Problem938_rangeSumOfBST.java) |
+| [965. 单值二叉树](https://leetcode-cn.com/problems/univalued-binary-tree/) | Easy | []()  | [Java](./tree/Problem965_univaluedBinaryTree.java) |
+| [978. 最长湍流子数组](https://leetcode-cn.com/problems/longest-turbulent-subarray/) | Medium | []()  | [Java](./tree/Problem978_longestTurbulentSubarray.java) |
+| [993. 二叉树的堂兄弟节点](https://leetcode-cn.com/problems/cousins-in-binary-tree/) | Easy | []()  | [Java](./tree/Problem993_cousinsInBinaryTree.java) |
+| [1022. 从根到叶的二进制数之和](https://leetcode-cn.com/problems/sum-of-root-to-leaf-binary-numbers/) | Easy | []()  | [Java](./tree/Problem1022_sumOfRootToLeafBinaryNumbers.java) |
 
 
 欢迎光临[我的个人网站](http://www.longluo.me)

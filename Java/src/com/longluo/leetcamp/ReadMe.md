@@ -8,7 +8,7 @@
 
 |   Leetcode题目   |     难度     |          解答          |   Source Code   |
 |    :-----        |    :----:    |         :----:         |      :----:     |
-| [LCP07. 传递信息](https://leetcode-cn.com/problems/chuan-di-xin-xi/) | Easy | []()  | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/leetcamp/Lcp07_chuanDiXinXi.java) |
+| [LCP07. 传递信息](https://leetcode-cn.com/problems/chuan-di-xin-xi/) | Easy | []()  | [Java](./Lcp07_chuanDiXinXi.java) |
 
 
 欢迎光临[我的个人网站](http://www.longluo.me)
