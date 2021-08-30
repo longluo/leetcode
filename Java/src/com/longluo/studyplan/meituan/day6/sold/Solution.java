@@ -1,8 +1,6 @@
 package com.longluo.studyplan.meituan.day6.sold;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * meituan-011. 搭配出售
@@ -27,6 +25,7 @@ import java.util.Scanner;
  */
 public class Solution {
 
+    /*
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         long max = 0;
@@ -58,5 +57,45 @@ public class Solution {
             }
         }
         System.out.println(max);
+    }
+
+    */
+
+    public static void main(String[] args) {
+        PriorityQueue<AbstractMap.SimpleEntry<Long, Long>> priorityQueue = new PriorityQueue<>(new Comparator<AbstractMap.SimpleEntry<Long, Long>>() {
+            @Override
+            public int compare(AbstractMap.SimpleEntry<Long, Long> o1, AbstractMap.SimpleEntry<Long, Long> o2) {
+                return (int) (o2.getValue() - o1.getValue());
+            }
+        });
+
+        Scanner sc = new Scanner(System.in);
+        String[] str = sc.nextLine().split(" ");
+
+        long a = Long.parseLong(str[0]);
+        long b = Long.parseLong(str[1]);
+        long c = Long.parseLong(str[2]);
+        long d = Long.parseLong(str[3]);
+        long e = Long.parseLong(str[4]);
+        long f = Long.parseLong(str[5]);
+        long g = Long.parseLong(str[6]);
+
+        priorityQueue.add(new AbstractMap.SimpleEntry<>(a, e));
+        priorityQueue.add(new AbstractMap.SimpleEntry<>(b, f));
+        priorityQueue.add(new AbstractMap.SimpleEntry<>(c, g));
+
+        long res = 0;
+        while (d > 0 && !priorityQueue.isEmpty()) {
+            Map.Entry<Long, Long> head = priorityQueue.poll();
+            Long num = head.getKey();
+            if (d <= num) {
+                res += d * head.getValue();
+                break;
+            } else {
+                res += num * head.getValue();
+                d -= num;
+            }
+        }
+        System.out.println(res);
     }
 }
