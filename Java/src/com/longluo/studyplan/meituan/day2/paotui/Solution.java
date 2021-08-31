@@ -1,11 +1,6 @@
 package com.longluo.studyplan.meituan.day2.paotui;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * meituan-003. 小美的跑腿代购
@@ -46,6 +41,44 @@ public class Solution {
         int orderTotal = scanner.nextInt();
         int orderAllow = scanner.nextInt();
         scanner.nextLine();
+        int[][] orders = new int[orderTotal][2];
+        for (int i = 0; i < orderTotal; i++) {
+            orders[i][0] = scanner.nextInt();
+            orders[i][1] = scanner.nextInt();
+        }
+
+        Queue<int[]> priorityQueue = new PriorityQueue<int[]>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[1] == o2[1]) {
+                    return o1[0] - o2[0];
+                }
+                return o2[1] - o1[1];
+            }
+        });
+
+        for (int i = 0; i < orderTotal; i++) {
+            int money = orders[i][0] + orders[i][1] * 2;
+            priorityQueue.add(new int[]{i + 1, money});
+        }
+
+        int[] result = new int[orderAllow];
+        int idx = 0;
+        while (orderAllow-- > 0) {
+            result[idx++] = priorityQueue.poll()[0];
+        }
+        Arrays.sort(result);
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(result[i] + " ");
+        }
+    }
+
+    /*
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int orderTotal = scanner.nextInt();
+        int orderAllow = scanner.nextInt();
+        scanner.nextLine();
         List<int[]> orders = new ArrayList<>();
         for (int i = 0; i < orderTotal; i++) {
             int[] order = new int[3];
@@ -76,4 +109,5 @@ public class Solution {
             System.out.print(res[i] + " ");
         }
     }
+    */
 }
