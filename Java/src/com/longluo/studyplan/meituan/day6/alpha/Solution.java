@@ -39,16 +39,101 @@ public class Solution {
         Scanner sc = new Scanner(System.in);
         int n = Integer.parseInt(sc.nextLine());
         String str = sc.nextLine();
+        int ans = 0;
+        int cnt = 0;
+        for (int i = 0; i < n; i++) {
+            if (str.charAt(i) == 'E') {
+                cnt += 1;
+                ans = Math.max(ans, cnt);
+            } else {
+                if (cnt > 0) {
+                    cnt--;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+
+    /*
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        String str = sc.nextLine();
+        char[] arr = str.toCharArray();
+        int[] diff = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            if (arr[i - 1] == 'E') {
+                diff[i] = diff[i - 1] + 1;
+            } else {
+                diff[i] = diff[i - 1] - 1;
+            }
+        }
+
+        int cur = 0;
+        int max = 0;
+        for (int i = 1; i <= n; i++) {
+            cur = diff[i] - diff[i - 1] + cur >= 0 ? diff[i] - diff[i - 1] + cur : 0;
+            max = Math.max(cur, max);
+        }
+
+        System.out.println(max);
+    }
+    */
+
+    /*
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        String str = sc.nextLine();
+        char[] arr = str.toCharArray();
+        int[] cntE = new int[n];
+        int[] cntF = new int[n];
+        int ans = 0;
+
+        if (arr[0] == 'E') {
+            cntE[0] = 1;
+        } else {
+            cntF[0] = 1;
+        }
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i] == 'E') {
+                cntE[i] = cntE[i - 1] + 1;
+                cntF[i] = cntF[i - 1];
+            } else {
+                cntF[i] = cntF[i - 1] + 1;
+                cntE[i] = cntE[i - 1];
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int eNum = cntE[j] - cntE[i];
+                int fNum = cntF[j] - cntF[i];
+                ans = Math.max(ans, eNum - fNum);
+            }
+        }
+
+        System.out.println(ans);
+    }
+    */
+
+    /*
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        String str = sc.nextLine();
         char[] arr = str.toCharArray();
         int ans = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+            for (int j = i; j < n; j++) {
                 ans = Math.max(ans, getDiff(arr, i, j));
             }
         }
 
         System.out.println(ans);
     }
+    */
 
     public static int getDiff(char[] arr, int start, int end) {
         int cntE = 0;
