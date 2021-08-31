@@ -44,6 +44,37 @@ public class Solution {
         for (int i = 0; i < len; i++) {
             nums[i] = sc.nextInt();
         }
+        int ans = 0;
+        for (int i = 1; i <= maxValue; i++) {
+            int left = i;
+            int right = maxValue + 1;
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (check(nums, i, mid)) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            ans += maxValue - left + 1;
+            if (left == maxValue + 1) {
+                break;
+            }
+        }
+
+        System.out.println(ans);
+    }
+
+    /*
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int maxValue = sc.nextInt();
+        int len = sc.nextInt();
+        sc.nextLine();
+        int[] nums = new int[len];
+        for (int i = 0; i < len; i++) {
+            nums[i] = sc.nextInt();
+        }
         List<int[]> res = new ArrayList<>();
         for (int i = 1; i <= maxValue; i++) {
             int[] onePair = new int[2];
@@ -58,6 +89,7 @@ public class Solution {
 
         System.out.println(res.size());
     }
+    */
 
     private static boolean check(int[] arr, int left, int right) {
         int pre = 0;
