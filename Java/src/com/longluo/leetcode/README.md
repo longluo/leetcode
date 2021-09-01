@@ -32,6 +32,7 @@
 | [138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/) | Medium | []()  | [Java](./hash/Problem138_copyListWithRandomPointer.java) |
 | [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | Easy | []()  | [Java](./tree/Problem145_binaryTreePostorderTraversal.java) |
 | [153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/) | Medium | []()  | [Java](./array/Problem153_findMinimumInRotatedSortedArray.java) |
+| [165. 比较版本号](https://leetcode-cn.com/problems/compare-version-numbers/) | Medium | []()  | [Java](./twopointers/Problem165_compareVersionNumbers.java) |
 | [168. Excel表列名称](https://leetcode-cn.com/problems/excel-sheet-column-title/) | Easy | []()  | [Java](./math/Problem168_excelSheetColumnTitle.java) |
 | [171. Excel表列序号](https://leetcode-cn.com/problems/excel-sheet-column-number/) | Easy | []()  | [Java](./math/Problem171_excelSheetColumnNumber.java) |
 | [179. 最大数](https://leetcode-cn.com/problems/largest-number/) | Medium | []()  | [Java](./sort/Problem179_largestNumber.java) |
@@ -50,6 +51,7 @@
 | [337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/) | Medium | []()  | [Java](./dp/Problem337_houseRobber_iii.java) |
 | [344. 反转字符串](https://leetcode-cn.com/problems/reverse-string/) | Easy | []()  | [Java](./string/Problem344_reverseString.java) |
 | [345. 反转字符串中的元音字母](https://leetcode-cn.com/problems/reverse-vowels-of-a-string/) | Easy | []()  | [Java](./twopointers/Problem345_reverseVowelsOfAString.java) |
+| [387. 字符串中的第一个唯一字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/) | Easy | []()  | [Java](./hash/Problem387_firstUniqChar.java) |
 | [395. 至少有K个重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/) | Medium | []()  | [Java](./string/Problem395_longestSubstringWithAtLeastKRepeatingCharacters.java) |
 | [401. 二进制手表](https://leetcode-cn.com/problems/binary-watch/) | Easy | []()  | [Java](./bitmanipulation/Problem401_binaryWatch.java) |
 | [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) | Medium | []()  | [Java](./hash/Problem451_sortCharactersByFrequency.java) |
