@@ -93,6 +93,29 @@ public class Problem165_compareVersionNumbers {
         return 0;
     }
 
+    public static int compareVersion_opt(String version1, String version2) {
+        int n = version1.length();
+        int m = version2.length();
+        int i = 0;
+        int j = 0;
+        while (i < n || j < m) {
+            int x = 0;
+            for (; i < n && version1.charAt(i) != '.'; ++i) {
+                x = x * 10 + version1.charAt(i) - '0';
+            }
+            ++i;
+            int y = 0;
+            for (; j < m && version2.charAt(j) != '.'; ++j) {
+                y = y * 10 + version2.charAt(j) - '0';
+            }
+            ++j;
+            if (x != y) {
+                return x > y ? 1 : -1;
+            }
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + compareVersion("1.01", "1.001"));
         System.out.println("0 ?= " + compareVersion("1.0", "1.0.0"));
