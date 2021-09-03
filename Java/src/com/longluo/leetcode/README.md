@@ -10,7 +10,9 @@
 | [13. 罗马数字转整数](https://leetcode-cn.com/problems/roman-to-integer/) | Easy | []()  | [Java](./math/Problem13_romanToInteger.java) |
 | [26. 删除有序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/) | Easy | []()  | [Java](./twopointers/Problem26_removeDuplicatesFromSortedArray.java) |
 | [27. 移除元素](https://leetcode-cn.com/problems/remove-element/) | Easy | []()  | [Java](./twopointers/Problem27_removeElement.java) |
+| [28. 实现strStr()](https://leetcode-cn.com/problems/implement-strstr/) | Easy | []()  | [Java](./twopointers/Problem28_implementStrStr.java) |
 | [48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/) | Medium | []()  | [Java](./array/Problem48_rotateImage.java) |
+| [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/) | Easy | []()  | [Java](./array/Problem53_maximumSubarray.java) |
 | [54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/) | Medium | []()  | [Java](./array/Problem54_spiralMatrix.java) |
 | [59. 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/) | Medium | []()  | [Java](./array/Problem59_spiralMatrix_ii.java) |
 | [73. 矩阵置零](https://leetcode-cn.com/problems/set-matrix-zeroes/) | Medium | []()  | [Java](./array/Problem73_setMatrixZeroes.java) |
@@ -78,6 +80,7 @@
 | [692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/) | Medium | []()  | [Java](./heap/Problem692_topKFrequentWords.java) |
 | [697. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/) | Easy | []()  | [Java](./array/Problem697_degreeOfAnArray.java) |
 | [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem700_searchInABinarySearchTree.java) |
+| [720. 词典中最长的单词](https://leetcode-cn.com/problems/longest-word-in-dictionary/) | Easy | []()  | [Java](./trie/Problem720_longestWordInDictionary.java) |
 | [726. 原子的数量](https://leetcode-cn.com/problems/number-of-atoms/) | Hard | []()  | [Java](./stack/Problem726_numberOfAtoms.java) |
 | [740. 删除并获得点数](https://leetcode-cn.com/problems/delete-and-earn/) | Medium | []()  | [Java](./dp/Problem740_deleteAndEarn.java) |
 | [752. 打开转盘锁](https://leetcode-cn.com/problems/open-the-lock/) | Medium | []()  | [Java](./bfs/Problem752_openTheLock.java) |
