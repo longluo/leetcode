@@ -1,5 +1,7 @@
 package com.longluo.studyplan.meituan.day3.cipher;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -32,10 +34,88 @@ import java.util.Scanner;
  */
 public class Solution {
 
+    /*
+10
+MMATSATMMT
+     */
     public static void main(String[] args) {
-//        String regexHead = "([a-zA-Z]*)M([a-zA-Z]*)T$";
-//        String regexEnd = "([a-zA-Z]*)([a-zA-Z]*)M([0-9]+)([a-zA-Z0-9]*)$";
+        Scanner sc = new Scanner(System.in);
+        int len = Integer.parseInt(sc.nextLine());
+        String encryptStr = sc.nextLine();
+        if (len <= 4) {
+            System.out.println("");
+            return;
+        }
 
+        List<Integer> mIdxList = new ArrayList<>();
+        List<Integer> tIdxList = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            if (encryptStr.charAt(i) == 'M') {
+                mIdxList.add(i);
+            } else if (encryptStr.charAt(i) == 'T') {
+                tIdxList.add(i);
+            }
+        }
+
+        if (mIdxList.size() <= 1 || tIdxList.size() <= 1) {
+            System.out.println("");
+            return;
+        }
+
+        int start = 0;
+        int end = len - 1;
+
+        int left = 0;
+        int right = tIdxList.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (tIdxList.get(mid) >= mIdxList.get(0)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        start = left;
+
+        left = 0;
+        right = mIdxList.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (mIdxList.get(mid) > tIdxList.get(tIdxList.size() - 1)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        end = right;
+
+        int ansStart = tIdxList.get(start) + 1;
+        int ansEnd = mIdxList.get(end);
+        System.out.println(encryptStr.substring(ansStart, ansEnd));
+    }
+
+    private static int binarySearch(List<Integer> list, int begin, int end, int target) {
+        if (begin > end) {
+            return -1;
+        }
+
+        while (begin <= end) {
+            int mid = begin + (end - begin) / 2;
+            if ((mid == begin || mid == end) && list.get(mid) > target) {
+                return mid;
+            }
+            if (list.get(mid) > target) {
+                return binarySearch(list, begin, mid - 1, target);
+            } else {
+                return binarySearch(list, mid + 1, end, target);
+            }
+        }
+
+        return -1;
+    }
+
+    /*
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int len = Integer.parseInt(sc.nextLine());
         String encryptStr = sc.nextLine();
@@ -74,4 +154,5 @@ public class Solution {
         String srcStr = encryptStr.substring(begin, end);
         System.out.println(srcStr);
     }
+    */
 }
