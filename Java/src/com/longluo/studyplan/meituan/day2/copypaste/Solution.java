@@ -1,6 +1,11 @@
 package com.longluo.studyplan.meituan.day2.copypaste;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -72,20 +77,89 @@ import java.util.Scanner;
  */
 public class Solution {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = Integer.parseInt(scanner.nextLine());
+    public static void main(String[] args) throws IOException {
+        BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(sc.readLine());
         int[] arrayA = new int[n];
         int[] arrayB = new int[n];
+        Arrays.fill(arrayA, -1);
         Arrays.fill(arrayB, -1);
-        String numStr = scanner.nextLine();
+        String[] nums = sc.readLine().split("\\s+");
+        for (int i = 0; i < n; i++) {
+            arrayA[i] = Integer.parseInt(nums[i]);
+        }
+        int count = Integer.parseInt(sc.readLine());
+        List<int[]> operList = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            String[] opts = sc.readLine().split("\\s+");
+            if (opts[0].equals("1")) {
+                int k = Integer.parseInt(opts[1]);
+                int x = Integer.parseInt(opts[2]);
+                int y = Integer.parseInt(opts[3]);
+                operList.add(new int[]{k, x - 1, y - 1});
+            } else if (opts[0].equals("2")) {
+                int queryIdx = Integer.parseInt(opts[1]);
+                queryIdx--;
+                for (int j = operList.size() - 1; j >= 0; j--) {
+                    int[] op = operList.get(j);
+                    if (queryIdx >= op[2] && queryIdx <= op[0] + op[2] - 1) {
+                        int offset = queryIdx - op[2];
+                        arrayB[queryIdx] = arrayA[op[1] + offset];
+                        break;
+                    }
+                }
+                System.out.println(arrayB[queryIdx]);
+            }
+        }
+
+        sc.close();
+    }
+
+    /*
+    public static void main(String[] args) {
+        sc sc = new sc(System.in);
+        int n = Integer.parseInt(sc.readLine());
+        int[] arrayA = new int[2 * n];
+        int[] arrayB = new int[2 * n];
+        Arrays.fill(arrayB, -1);
+        String numStr = sc.readLine();
         String[] numArr = numStr.split("\\s+");
         for (int i = 0; i < n; i++) {
             arrayA[i] = Integer.parseInt(numArr[i]);
         }
-        int operationNum = Integer.parseInt(scanner.nextLine());
+        int operationNum = Integer.parseInt(sc.readLine());
         for (int i = 0; i < operationNum; i++) {
-            String operStr = scanner.nextLine();
+            String operStr = sc.readLine();
+            String[] operStrArr = operStr.split("\\s+");
+            int operation = Integer.parseInt(operStrArr[0]);
+            if (operation == 1) {
+                int k = Integer.parseInt(operStrArr[1]);
+                int x = Integer.parseInt(operStrArr[2]);
+                int y = Integer.parseInt(operStrArr[3]);
+                System.arraycopy(arrayA, x - 1, arrayB, y - 1, k);
+            } else if (operation == 2) {
+                int queryIdx = Integer.parseInt(operStrArr[1]);
+                System.out.println(arrayB[queryIdx - 1]);
+            }
+        }
+    }
+     */
+
+    /*
+    public static void main(String[] args) {
+        sc sc = new sc(System.in);
+        int n = Integer.parseInt(sc.readLine());
+        int[] arrayA = new int[n];
+        int[] arrayB = new int[n];
+        Arrays.fill(arrayB, -1);
+        String numStr = sc.readLine();
+        String[] numArr = numStr.split("\\s+");
+        for (int i = 0; i < n; i++) {
+            arrayA[i] = Integer.parseInt(numArr[i]);
+        }
+        int operationNum = Integer.parseInt(sc.readLine());
+        for (int i = 0; i < operationNum; i++) {
+            String operStr = sc.readLine();
             String[] operStrArr = operStr.split("\\s+");
             int operation = Integer.parseInt(operStrArr[0]);
             if (operation == 1) {
@@ -104,4 +178,5 @@ public class Solution {
             }
         }
     }
+    */
 }
