@@ -58,6 +58,31 @@ public class Problem28_implementStrStr {
         return ans;
     }
 
+    public static int strStr_2(String haystack, String needle) {
+        if (needle == null || needle.length() == 0) {
+            return 0;
+        }
+
+        int m = haystack.length();
+        int n = needle.length();
+        for (int i = 0; i + n <= m; i++) {
+            boolean isEqual = true;
+            for (int j = 0; j < n; j++) {
+                if (haystack.charAt(i + j) != needle.charAt(j)) {
+                    isEqual = false;
+                    break;
+                }
+            }
+            if (isEqual) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + strStr("hello", "ll"));
         System.out.println("-1 ?= " + strStr("aaaaa", "bba"));
