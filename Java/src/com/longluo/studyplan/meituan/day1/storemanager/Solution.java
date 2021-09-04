@@ -44,6 +44,11 @@ import java.util.*;
  */
 public class Solution {
 
+/*
+5
+3 2 4 4 5
+4 3 5 2 1
+*/
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         int n = Integer.parseInt(scanner.nextLine());
@@ -67,10 +72,13 @@ public class Solution {
         for (int i = n - 1; i >= 0; i--) {
             int x = Integer.parseInt(q[i]);
             res[i] = maxW;
-            if (i == 0) break;
+            if (i == 0) {
+                break;
+            }
             //更新最大重量
             int cur = arr[x];
-            int left = x, right = x;//左边界和右边界,注意如果左右无连通区域则区间为[x,x],所以初始化为x
+            int left = x;
+            int right = x;//左边界和右边界,注意如果左右无连通区域则区间为[x,x],所以初始化为x
             //每次只会将左右两块区域连成一块,我们只需关心一段区间的左边界和右边界,就能通过前缀和数组查询到区间和
             if (x + 1 <= n && d[x + 1][0] != -1) {
                 cur += prev[d[x + 1][1]] - prev[d[x + 1][0] - 1];
