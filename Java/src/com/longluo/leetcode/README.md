@@ -33,6 +33,7 @@
 | [137. 只出现一次的数字 II](https://leetcode-cn.com/problems/single-number-ii/) | Easy | []()  | [Java](./bitmanipulation/Problem137_singleNumber_ii.java) |
 | [138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/) | Medium | []()  | [Java](./hash/Problem138_copyListWithRandomPointer.java) |
 | [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | Easy | []()  | [Java](./tree/Problem145_binaryTreePostorderTraversal.java) |
+| [146. LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/) | Medium | []()  | [Java](./design/Problem146_lruCache.java) |
 | [153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/) | Medium | []()  | [Java](./array/Problem153_findMinimumInRotatedSortedArray.java) |
 | [165. 比较版本号](https://leetcode-cn.com/problems/compare-version-numbers/) | Medium | []()  | [Java](./twopointers/Problem165_compareVersionNumbers.java) |
 | [168. Excel表列名称](https://leetcode-cn.com/problems/excel-sheet-column-title/) | Easy | []()  | [Java](./math/Problem168_excelSheetColumnTitle.java) |
