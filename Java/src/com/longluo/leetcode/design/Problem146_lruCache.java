@@ -73,7 +73,6 @@ public class Problem146_lruCache {
      * int param_1 = obj.get(key);
      * obj.put(key,value);
      */
-
     public static void main(String[] args) {
 
     }
