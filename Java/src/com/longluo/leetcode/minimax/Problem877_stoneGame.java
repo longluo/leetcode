@@ -41,6 +41,14 @@ public class Problem877_stoneGame {
         return sumA > sumB;
     }
 
+    public static boolean stoneGame_2(int[] piles) {
+        return true;
+    }
+
+    public static boolean stoneGame_dp(int[] piles) {
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + stoneGame(new int[]{5, 3, 4, 5}));
     }
