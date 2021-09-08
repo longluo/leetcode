@@ -59,6 +59,7 @@
 | [401. 二进制手表](https://leetcode-cn.com/problems/binary-watch/) | Easy | []()  | [Java](./bitmanipulation/Problem401_binaryWatch.java) |
 | [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) | Medium | []()  | [Java](./hash/Problem451_sortCharactersByFrequency.java) |
 | [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem501_findModeInBinarySearchTree.java) |
+| [502. IPO](https://leetcode-cn.com/problems/ipo/) | Hard | []()  | [Java](./greedy/Problem502_ipo.java) |
 | [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) | Easy | []()  | [Java](./tree/Problem530_minimumAbsoluteDifferenceInBst.java) |
 | [541. 反转字符串II](https://leetcode-cn.com/problems/reverse-string-ii/) | Easy | []()  | [Java](./twopointers/Problem541_reverseString_ii.java) |
 | [543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/) | Easy | []()  | [Java](./tree/Problem543_diameterOfBinaryTree.java) |
