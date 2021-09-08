@@ -55,6 +55,20 @@ public class ArrayUtils {
         return sb.toString();
     }
 
+    public static String print2DListString(List<List<String>> input) {
+        if (input == null || input.size() == 0) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder(input.size());
+        for (int i = 0; i < input.size(); i++) {
+            sb.append(input.get(i).toString());
+        }
+        sb.append("]");
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("print2DArray -->");
         int[][] tstArr1 = {{1, 2, 3}, {8, 9, 4}, {7, 6, 5}};
