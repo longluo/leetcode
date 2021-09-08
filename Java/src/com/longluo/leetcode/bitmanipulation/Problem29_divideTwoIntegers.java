@@ -27,12 +27,51 @@ package com.longluo.leetcode.bitmanipulation;
 public class Problem29_divideTwoIntegers {
 
     public static int divide(int dividend, int divisor) {
+        if (dividend == 0) {
+            return 0;
+        }
 
-        return 0;
+        long dividendLong = dividend;
+        long divisorLong = divisor;
+
+        boolean isNegative = false;
+        if (dividendLong < 0 && divisorLong < 0) {
+            dividendLong = -dividendLong;
+            divisorLong = -divisorLong;
+        } else if (dividendLong < 0 && divisorLong > 0) {
+            isNegative = true;
+            dividendLong = -dividendLong;
+        } else if (dividendLong > 0 && divisorLong < 0) {
+            isNegative = true;
+            divisorLong = -divisorLong;
+        }
+
+        long ans = 0;
+        while (dividendLong >= divisorLong) {
+            dividendLong -= divisorLong;
+            ans++;
+        }
+
+        if (isNegative) {
+            ans = -ans;
+        }
+
+        if (ans > 2147483647) {
+            return 2147483647;
+        }
+
+        return (int) ans;
     }
 
     public static void main(String[] args) {
+        int val = Math.abs(-2147483648);
+        System.out.println("val = " + val);
+        System.out.println("2147483648 ?= " + Math.abs(-2147483648));
         System.out.println("3 ?= " + divide(10, 3));
         System.out.println("-2 ?= " + divide(7, -3));
+        System.out.println("1 ?= " + divide(1, 1));
+        System.out.println("2147483647 ?= " + divide(-2147483648, -1));
+        System.out.println("-2147483648 ?= " + divide(-2147483648, 1));
+        System.out.println("-1073741824 ?= " + divide(-2147483648, 2));
     }
 }
