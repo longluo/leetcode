@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * 135. 分发糖果
+ * <p>
  * 老师想给孩子们分发糖果，有 N 个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。
  * <p>
  * 你需要按照以下要求，帮助老师给这些孩子分发糖果：
@@ -22,6 +23,8 @@ import java.util.Arrays;
  * 输出: 4
  * 解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。
  * 第三个孩子只得到 1 颗糖果，这已满足上述两个条件。
+ * <p>
+ * https://leetcode-cn.com/problems/candy/
  */
 public class Problem135_candy {
 
