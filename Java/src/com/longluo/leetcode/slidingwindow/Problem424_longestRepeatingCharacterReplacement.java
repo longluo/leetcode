@@ -1,7 +1,8 @@
-package com.longluo.leetcode.slidewindow;
+package com.longluo.leetcode.slidingwindow;
 
 /**
  * 424. 替换后的最长重复字符
+ * <p>
  * 给你一个仅由大写英文字母组成的字符串，你可以将任意位置上的字符替换成另外的字符，总共可最多替换k次。
  * 在执行上述操作后，找到包含重复字母的最长子串的长度。
  * 注意：字符串长度 和 k 不会超过 104。
@@ -19,8 +20,10 @@ package com.longluo.leetcode.slidewindow;
  * 解释：
  * 将中间的一个'A'替换为'B',字符串变为 "AABBBBA"。
  * 子串 "BBBB" 有最长重复字母, 答案为 4。
+ * <p>
+ * https://leetcode-cn.com/problems/longest-repeating-character-replacement/
  */
-public class Problem424_CharacterReplacement {
+public class Problem424_longestRepeatingCharacterReplacement {
 
     public static int characterReplacement(String s, int k) {
         if (s == null || s.length() == 0) {
