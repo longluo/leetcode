@@ -2,6 +2,7 @@ package com.longluo.leetcode.slidingwindow;
 
 /**
  * 1004. 最大连续1的个数 III
+ * <p>
  * 给定一个由若干 0 和 1 组成的数组 A，我们最多可以将 K 个值从 0 变成 1 。
  * 返回仅包含 1 的最长（连续）子数组的长度。
  * <p>
@@ -23,8 +24,10 @@ package com.longluo.leetcode.slidingwindow;
  * 1 <= A.length <= 20000
  * 0 <= K <= A.length
  * A[i] 为 0 或 1
+ * <p>
+ * https://leetcode-cn.com/problems/max-consecutive-ones-iii/
  */
-public class Problem1004_longestOnes {
+public class Problem1004_maxConsecutiveOnes_iii {
 
     public static int longestOnes(int[] A, int K) {
         if (A == null || A.length == 0) {
