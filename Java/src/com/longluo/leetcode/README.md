@@ -121,6 +121,7 @@
 | [1833. 雪糕的最大数量](https://leetcode-cn.com/problems/maximum-ice-cream-bars/) | Medium  | []() | [Java](./greedy/Problem1833_maximumIceCreamBars.java) |
 | [1877. 数组中最大数对和的最小值](https://leetcode-cn.com/problems/minimize-maximum-pair-sum-in-array/) | Medium  | []() | [Java](./greedy/Problem1877_minimizeMaximumPairSumInArray.java) |
 | [1893. 检查是否区域内所有整数都被覆盖](https://leetcode-cn.com/problems/check-if-all-the-integers-in-a-range-are-covered/) | Easy  | []() | [Java](./array/Problem1893_checkIfAllTheIntegersInARangeAreCovered.java) |
+| [1894. 找到需要补充粉笔的学生编号](https://leetcode-cn.com/problems/find-the-student-that-will-replace-the-chalk/) | Medium  | []() | [Java](./array/Problem1894_chalkReplacer.java) |
 
 # Tree
 
