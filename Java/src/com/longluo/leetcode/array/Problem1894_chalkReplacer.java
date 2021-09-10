@@ -58,15 +58,11 @@ public class Problem1894_chalkReplacer {
         for (int i = 0; i < n; i++) {
             sum += chalk[i];
         }
-        int cycle = (int) (k / sum);
-        long remain = k - cycle * sum;
-        if (remain == 0) {
-            return 0;
-        }
-        int ans = 0;
+        k %= sum;
+        int ans = -1;
         for (int i = 0; i < n; i++) {
-            if (remain >= chalk[i]) {
-                remain -= chalk[i];
+            if (k >= chalk[i]) {
+                k -= chalk[i];
             } else {
                 ans = i;
                 break;
@@ -76,8 +72,42 @@ public class Problem1894_chalkReplacer {
         return ans;
     }
 
+    public static int chalkReplacer_better(int[] chalk, int k) {
+        int n = chalk.length;
+        if (chalk[0] > k) {
+            return 0;
+        }
+
+        for (int i = 1; i < n; i++) {
+            chalk[i] += chalk[i - 1];
+            if (chalk[i] > k) {
+                return i;
+            }
+        }
+
+        k %= chalk[n - 1];
+        return binarySearch(chalk, k);
+    }
+
+    public static int binarySearch(int[] arr, int target) {
+        int low = 0;
+        int high = arr.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] <= target) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+
+        return low;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + chalkReplacer(new int[]{5, 1, 5}, 22));
+        System.out.println("0 ?= " + chalkReplacer_better(new int[]{5, 1, 5}, 22));
         System.out.println("1 ?= " + chalkReplacer(new int[]{3, 4, 1, 2}, 25));
+        System.out.println("1 ?= " + chalkReplacer_better(new int[]{3, 4, 1, 2}, 25));
     }
 }
