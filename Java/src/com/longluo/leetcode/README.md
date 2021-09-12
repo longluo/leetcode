@@ -44,7 +44,9 @@
 | [213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/) | Medium | []()  | [Java](./dp/Problem213_houseRobber_ii.java) |
 | [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) | Medium | []()  | [Java](./heap/Problem215_kthLargestElementInAnArray.java) |
 | [217. 存在重复元素](https://leetcode-cn.com/problems/contains-duplicate/) | Easy | []()  | [Java](./array/Problem217_containsDuplicate.java) |
+| [224. 基本计算器](https://leetcode-cn.com/problems/basic-calculator/) | Medium | []()  | [Java](./stack/Problem224_basicCalculator.java) |
 | [225. 用队列实现栈](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](./stack/Problem225_implementStackUsingQueues.java) |
+| [227. 基本计算器II](https://leetcode-cn.com/problems/basic-calculator-ii/) | Medium | []()  | [Java](./stack/Problem227_basicCalculator_ii.java) |
 | [232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](./stack/Problem232_implementQueueUsingStacks.java) |
 | [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/) | Easy | []()  | [Java](./tree/Problem257_binaryTreePaths.java) |
 | [260. 只出现一次的数字 III](https://leetcode-cn.com/problems/single-number-iii/) | Easy | []()  | [Java](./bitmanipulation/Problem260_singleNumber_iii.java) |
@@ -69,6 +71,7 @@
 | [559. N 叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/) | Easy | []()  | [Java](./tree/Problem559_maximumDepthOfNAryTree.java) |
 | [589. N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/) | Easy | []()  | [Java](./tree/Problem589_nAryTreePreorderTraversal.java) |
 | [590. N 叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/) | Easy | []()  | [Java](./tree/Problem590_nAryTreePostorderTraversal.java) |
+| [600. 不含连续1的非负整数](https://leetcode-cn.com/problems/non-negative-integers-without-consecutive-ones/) | Hard | []()  | [Java](./dp/Problem600_findIntegers.java) |
 | [611. 有效三角形的个数](https://leetcode-cn.com/problems/valid-triangle-number/) | Medium | []()  | [Java](./greedy/Problem611_validTriangleNumber.java) |
 | [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/) | Easy | []()  | [Java](./tree/Problem617_mergeTwoBinaryTrees.java) |
 | [622. 设计循环队列](https://leetcode-cn.com/problems/design-circular-queue/) | Medium | []()  | [Java](./design/Problem622_designCircularQueue.java) |
