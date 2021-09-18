@@ -62,6 +62,26 @@ public class Offer54_kthLargest {
         getNumList(root.right);
     }
 
+    public static int kthLargest_2(TreeNode root, int k) {
+        if (root == null) {
+            return 0;
+        }
+
+        searchList(root);
+        int size = numList.size();
+        return numList.get(size - k);
+    }
+
+    public static void searchList(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        getNumList(root.left);
+        numList.add(root.val);
+        getNumList(root.right);
+    }
+
     public static void main(String[] args) {
         TreeNode tstNode1 = TreeUtils.constructTree(new Integer[]{3, 1, 4, null, 2});
         System.out.println("4 ?= " + kthLargest(tstNode1, 1));
