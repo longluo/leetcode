@@ -1,4 +1,4 @@
-package com.longluo.leetcode.minimax;
+package com.longluo.leetcode.math;
 
 /**
  * 292. Nim 游戏
@@ -44,6 +44,10 @@ public class Problem292_nimGame {
         }
 
         return true;
+    }
+
+    public static boolean canWinNim_2(int n) {
+        return n % 4 != 0;
     }
 
     public static void main(String[] args) {
