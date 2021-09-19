@@ -38,6 +38,9 @@ public class Offer61_isStraight {
         return nums[nums.length - 1] - nums[jokerNum] < 5;
     }
 
+    /**
+     * 暴力
+     */
     public static boolean isStraight_1(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return true;
@@ -55,6 +58,8 @@ public class Offer61_isStraight {
             } else if (nums[i] < nums[i + 1]) {
                 if (nums[i + 1] - nums[i] > (jokerNum + 1)) {
                     return false;
+                } else if (nums[i + 1] - nums[i] == (jokerNum + 1)) {
+                    jokerNum = 0;
                 }
             }
         }
