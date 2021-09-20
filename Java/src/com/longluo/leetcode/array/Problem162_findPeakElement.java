@@ -53,9 +53,29 @@ public class Problem162_findPeakElement {
         return 0;
     }
 
+    public static int findPeakElement_2(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return 0;
+        }
+
+        int len = nums.length;
+        if (len == 2) {
+            if (nums[1] > nums[0]) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + findPeakElement(new int[]{1, 2, 3, 1}));
+        System.out.println("2 ?= " + findPeakElement_2(new int[]{1, 2, 3, 1}));
         System.out.println("1 ?= " + findPeakElement(new int[]{1, 2, 1, 3, 5, 6, 4}));
+        System.out.println("1 ?= " + findPeakElement_2(new int[]{1, 2, 1, 3, 5, 6, 4}));
         System.out.println("3 ?= " + findPeakElement(new int[]{3, 1, 2}));
+        System.out.println("3 ?= " + findPeakElement_2(new int[]{3, 1, 2}));
     }
 }
