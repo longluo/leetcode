@@ -19,6 +19,8 @@ import java.util.Arrays;
  * <p>
  * 0 <= k <= arr.length <= 10000
  * 0 <= arr[i] <= 10000
+ * <p>
+ * https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/
  */
 public class Offer40_getLeastNumbers {
 
@@ -27,11 +29,12 @@ public class Offer40_getLeastNumbers {
             return new int[]{};
         }
 
-        int[] ans = new int[k];
-        Arrays.sort(arr);
-        if (k > arr.length) {
+        if (k >= arr.length) {
             return arr;
         }
+
+        int[] ans = new int[k];
+        Arrays.sort(arr);
         for (int i = 0; i < k; i++) {
             ans[i] = arr[i];
         }
