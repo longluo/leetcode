@@ -1,6 +1,8 @@
 package com.longluo.offer;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * 剑指 Offer 40. 最小的k个数
@@ -42,8 +44,40 @@ public class Offer40_getLeastNumbers {
         return ans;
     }
 
+    // Queue
+    public static int[] getLeastNumbers_1(int[] arr, int k) {
+        if (arr == null || arr.length == 0 || k == 0) {
+            return new int[]{};
+        }
+
+        if (k >= arr.length) {
+            return arr;
+        }
+
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            priorityQueue.add(arr[i]);
+        }
+
+        int[] ans = new int[k];
+        int idx = 0;
+        while (!priorityQueue.isEmpty()) {
+            int value = priorityQueue.poll();
+            ans[idx] = value;
+            idx++;
+            if (idx >= k) {
+                break;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1, 2] ?= " + Arrays.toString(getLeastNumbers(new int[]{3, 2, 1}, 2)));
+        System.out.println("[1, 2] ?= " + Arrays.toString(getLeastNumbers_1(new int[]{3, 2, 1}, 2)));
         System.out.println("[0] ?= " + Arrays.toString(getLeastNumbers(new int[]{0, 1, 2, 1}, 1)));
+        System.out.println("[0] ?= " + Arrays.toString(getLeastNumbers_1(new int[]{0, 1, 2, 1}, 1)));
     }
 }
