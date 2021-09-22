@@ -121,7 +121,9 @@ public class Problem725_splitListToParts {
             n++;
             temp = temp.next;
         }
-        int quotient = n / k, remainder = n % k;
+
+        int quotient = n / k;
+        int remainder = n % k;
 
         ListNode[] parts = new ListNode[k];
         ListNode curr = head;
