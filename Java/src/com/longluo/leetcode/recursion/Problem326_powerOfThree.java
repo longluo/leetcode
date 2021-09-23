@@ -50,6 +50,22 @@ public class Problem326_powerOfThree {
         return true;
     }
 
+    public static boolean isPowerOfThree_rec(int n) {
+        if (n <= 0) {
+            return false;
+        } else if (n == 1) {
+            return true;
+        } else if (n == 2) {
+            return false;
+        }
+
+        if (n % 3 == 0) {
+            return isPowerOfThree_rec(n / 3);
+        } else {
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + isPowerOfThree(0));
         System.out.println("true ?= " + isPowerOfThree(1));
@@ -58,5 +74,7 @@ public class Problem326_powerOfThree {
         System.out.println("true ?= " + isPowerOfThree(9));
         System.out.println("true ?= " + isPowerOfThree(27));
         System.out.println("false ?= " + isPowerOfThree(45));
+        System.out.println("true ?= " + isPowerOfThree_rec(3));
+        System.out.println("false ?= " + isPowerOfThree_rec(45));
     }
 }
