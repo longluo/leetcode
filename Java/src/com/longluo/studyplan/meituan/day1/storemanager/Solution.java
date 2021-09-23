@@ -49,6 +49,7 @@ public class Solution {
 3 2 4 4 5
 4 3 5 2 1
 */
+    /*
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         int n = Integer.parseInt(scanner.nextLine());
@@ -101,8 +102,8 @@ public class Solution {
             System.out.println(res[i]);
         }
     }
+    */
 
-    /*
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
@@ -120,26 +121,34 @@ public class Solution {
         int[] ans = new int[n];
         for (int i = 0; i < n; i++) {
             weight[number[i] - 1] = 0;
-            ans[i] = getMax(weight, number[i]);
+            ans[i] = getMax(weight);
         }
 
         for (int i = 0; i < n; i++) {
             System.out.println(ans[i]);
         }
     }
-    */
 
-    private static int getMax(int[] weight, int no) {
-        int leftTotal = 0;
-        int rightTotal = 0;
-        for (int i = 0; i < (no - 1); i++) {
-            leftTotal += weight[i];
+    private static int getMax(int[] weight) {
+        int maxSum = 0;
+        int n = weight.length;
+        int idx = 0;
+        while (idx < n) {
+            while (idx < n && weight[idx] == 0) {
+                idx++;
+            }
+
+            if (idx < n && weight[idx] != 0) {
+                int sum = 0;
+                while (idx < n && weight[idx] != 0) {
+                    sum += weight[idx];
+                    idx++;
+                }
+
+                maxSum = Math.max(sum, maxSum);
+            }
         }
 
-        for (int i = no; i < weight.length; i++) {
-            rightTotal += weight[i];
-        }
-
-        return Math.max(leftTotal, rightTotal);
+        return maxSum;
     }
 }
