@@ -1,5 +1,6 @@
 package com.longluo.studyplan.meituan.day1.storemanager;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -45,65 +46,65 @@ import java.util.TreeSet;
  */
 public class Solution {
 
-/*
+    /*
 5
 3 2 4 4 5
 4 3 5 2 1
-*/
-    /*
-    public static void main(String[] args) throws IOException {
+    */
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = Integer.parseInt(scanner.nextLine());
-        int[] arr = new int[n + 1];
-        int[] prev = new int[n + 1];
+
         String[] weights = scanner.nextLine().split(" ");
+        int[] weight = new int[n + 1];
+        int[] prefixSum = new int[n + 1];
         for (int i = 1; i <= n; i++) {
-            arr[i] = Integer.parseInt(weights[i - 1]);
-            prev[i] += prev[i - 1] + arr[i];
+            weight[i] = Integer.parseInt(weights[i - 1]);
+            prefixSum[i] = prefixSum[i - 1] + weight[i];
         }
 
-        int[][] d = new int[n + 1][2];
+        String[] number = scanner.nextLine().split(" ");
+
+        int[][] bounds = new int[n + 1][2];
         for (int i = 0; i <= n; i++) {
-            d[i] = new int[]{-1, -1};//将d数组值初始化为-1,便于判断空位置
+            bounds[i] = new int[]{-1, -1};
         }
 
-        int[] res = new int[n];//存储结果的数组
+        int[] ans = new int[n];
 
-        int maxW = 0;
-        String[] q = scanner.nextLine().split(" ");
+        int maxWeight = 0;
         for (int i = n - 1; i >= 0; i--) {
-            int x = Integer.parseInt(q[i]);
-            res[i] = maxW;
+            int x = Integer.parseInt(number[i]);
+            ans[i] = maxWeight;
             if (i == 0) {
                 break;
             }
-            //更新最大重量
-            int cur = arr[x];
+            // 更新最大重量
+            int cur = weight[x];
             int left = x;
             int right = x;//左边界和右边界,注意如果左右无连通区域则区间为[x,x],所以初始化为x
             //每次只会将左右两块区域连成一块,我们只需关心一段区间的左边界和右边界,就能通过前缀和数组查询到区间和
-            if (x + 1 <= n && d[x + 1][0] != -1) {
-                cur += prev[d[x + 1][1]] - prev[d[x + 1][0] - 1];
-                right = d[x + 1][1]; //更新右边界
+            if (x + 1 <= n && bounds[x + 1][0] != -1) {
+                cur += prefixSum[bounds[x + 1][1]] - prefixSum[bounds[x + 1][0] - 1];
+                right = bounds[x + 1][1]; //更新右边界
             }
-            if (x - 1 > 0 && d[x - 1][1] != -1) {
-                cur += prev[d[x - 1][1]] - prev[d[x - 1][0] - 1];
-                left = d[x - 1][0]; //更新左边界
+            if (x - 1 > 0 && bounds[x - 1][1] != -1) {
+                cur += prefixSum[bounds[x - 1][1]] - prefixSum[bounds[x - 1][0] - 1];
+                left = bounds[x - 1][0]; //更新左边界
             }
 
-            maxW = Math.max(maxW, cur);
-            //更新两端点的左右区间
-            d[left][0] = left;
-            d[left][1] = right;
-            d[right][0] = left;
-            d[right][1] = right;
+            maxWeight = Math.max(maxWeight, cur);
+            // 更新两端点的左右区间
+            bounds[left][0] = left;
+            bounds[left][1] = right;
+            bounds[right][0] = left;
+            bounds[right][1] = right;
         }
 
         for (int i = 0; i < n; i++) {
-            System.out.println(res[i]);
+            System.out.println(ans[i]);
         }
     }
-    */
 
     /*
     // Wrong Method for not only 2 packages.
@@ -198,6 +199,7 @@ public class Solution {
     }
      */
 
+    /*
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
@@ -252,6 +254,5 @@ public class Solution {
             System.out.println(ans[i]);
         }
     }
-
-
+    */
 }
