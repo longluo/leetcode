@@ -1,7 +1,8 @@
 package com.longluo.studyplan.meituan.day1.storemanager;
 
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * meituan-002. 小美的仓库整理
@@ -104,6 +105,50 @@ public class Solution {
     }
     */
 
+    /*
+    // Wrong Method for not only 2 packages.
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        int[] weight = new int[n];
+        for (int i = 0; i < n; i++) {
+            weight[i] = scanner.nextInt();
+        }
+
+        int[] number = new int[n];
+        for (int i = 0; i < n; i++) {
+            number[i] = scanner.nextInt();
+        }
+
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            weight[number[i] - 1] = 0;
+            ans[i] = getMax(weight, number[i]);
+        }
+
+        for (int i = 0; i < n; i++) {
+            System.out.println(ans[i]);
+        }
+    }
+
+    private static int getMax(int[] weight, int no) {
+        int leftTotal = 0;
+        int rightTotal = 0;
+        for (int i = 0; i < (no - 1); i++) {
+            leftTotal += weight[i];
+        }
+
+        for (int i = no; i < weight.length; i++) {
+            rightTotal += weight[i];
+        }
+
+        return Math.max(leftTotal, rightTotal);
+    }
+    */
+
+    /*
+    // Okay
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
@@ -151,4 +196,62 @@ public class Solution {
 
         return maxSum;
     }
+     */
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        int[] weight = new int[n];
+        for (int i = 0; i < n; i++) {
+            weight[i] = scanner.nextInt();
+        }
+
+        int[] number = new int[n];
+        for (int i = 0; i < n; i++) {
+            number[i] = scanner.nextInt();
+        }
+
+        int[] prefixSum = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefixSum[i + 1] = weight[i] + prefixSum[i];
+        }
+
+        int[] ans = new int[n];
+
+        TreeSet<Integer> boundSet = new TreeSet<>();
+        boundSet.add(0);
+        boundSet.add(n + 1);
+
+        TreeMap<Integer, Integer> sumMap = new TreeMap<>();
+
+        for (int i = 0; i < n; i++) {
+            int pos = number[i];
+            int left = boundSet.lower(pos);
+            int right = boundSet.higher(pos);
+            boundSet.add(pos);
+
+            int segSum = prefixSum[right - 1] - prefixSum[left];
+            Integer count = sumMap.get(segSum);
+            if (count != null) {
+                if (count == 1) {
+                    sumMap.remove(segSum);
+                } else {
+                    sumMap.put(segSum, count - 1);
+                }
+            }
+
+            int leftSum = prefixSum[pos - 1] - prefixSum[left];
+            int rightSum = prefixSum[right - 1] - prefixSum[pos];
+            sumMap.put(leftSum, sumMap.getOrDefault(leftSum, 0) + 1);
+            sumMap.put(rightSum, sumMap.getOrDefault(rightSum, 0) + 1);
+            ans[i] = sumMap.lastKey();
+        }
+
+        for (int i = 0; i < n; i++) {
+            System.out.println(ans[i]);
+        }
+    }
+
+
 }
