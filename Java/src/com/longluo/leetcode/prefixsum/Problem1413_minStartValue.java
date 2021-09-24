@@ -57,9 +57,28 @@ public class Problem1413_minStartValue {
         return ans;
     }
 
+    public static int minStartValue_prefix(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return 1;
+        }
+
+        int n = nums.length;
+        int[] preSum = new int[n + 1];
+        int ans = 1;
+        for (int i = 0; i < n; i++) {
+            preSum[i + 1] = preSum[i] + nums[i];
+            ans = Math.max(ans, 1 - preSum[i + 1]);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("5 ?= " + minStartValue(new int[]{-3, 2, -3, 4, 2}));
+        System.out.println("5 ?= " + minStartValue_prefix(new int[]{-3, 2, -3, 4, 2}));
         System.out.println("1 ?= " + minStartValue(new int[]{1, 2}));
+        System.out.println("1 ?= " + minStartValue_prefix(new int[]{1, 2}));
         System.out.println("5 ?= " + minStartValue(new int[]{1, -2, -3}));
+        System.out.println("5 ?= " + minStartValue_prefix(new int[]{1, -2, -3}));
     }
 }
