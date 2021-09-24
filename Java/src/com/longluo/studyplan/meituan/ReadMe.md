@@ -4,7 +4,7 @@
 |   [美团](https://leetcode-cn.com/study-plan/meituan/?progress=9d3e19m)     |   题目     |    难度     |          Solution          |    题解   |
 |    :-----     |    :----:    |  :----:      |     :----:        |     :----:        |   
 |   Day 1       | [meituan-001. 小美的用户名](https://leetcode-cn.com/problems/BaR9fy/) | 简单 | [Java](./day1/username/Solution.java) |  [题解](https://leetcode-cn.com/problems/BaR9fy/solution/javabao-li-fa-zi-fu-chuan-jin-xing-chu-l-pofz/) |
-|   Day 1       | [meituan-002. 小美的仓库整理](https://leetcode-cn.com/problems/TJZLyC/) | 中等 | [Java](./day1/storemanager/Solution.java) | [题解]() |
+|   Day 1       | [meituan-002. 小美的仓库整理](https://leetcode-cn.com/problems/TJZLyC/) | 中等 | [Java](./day1/storemanager/Solution.java) | [题解](https://leetcode-cn.com/problems/TJZLyC/solution/java-cong-bao-li-dao-you-hua-by-longluo-xwj2/) |
 |   Day 2       | [meituan-003. 小美的跑腿代购](https://leetcode-cn.com/problems/GXV5dX/) | 简单 | [Java](./day2/paotui/Solution.java) | [题解](https://leetcode-cn.com/problems/GXV5dX/solution/java-pai-xu-you-xian-dui-lie-zhu-yi-shu-y7xur/) |
 |   Day 2       | [meituan-004. 小团的复制粘贴](https://leetcode-cn.com/problems/TOVGD1/) | 困难 | [Java](./day2/copypaste/Solution.java) | [题解](https://leetcode-cn.com/problems/TOVGD1/solution/java-bao-li-mo-ni-cha-xun-shang-yi-ci-1d-0ubg/) |
 |   Day 3       | [meituan-006. 小团的神秘暗号](https://leetcode-cn.com/problems/z3XKBp/) | 简单 | [Java](./day3/cipher/Solution.java) | [题解](https://leetcode-cn.com/problems/z3XKBp/solution/java-shuang-zhi-zhen-fa-er-fen-sou-suo-2-5ltz/) |
