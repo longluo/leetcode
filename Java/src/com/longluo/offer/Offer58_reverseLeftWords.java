@@ -21,13 +21,13 @@ package com.longluo.offer;
  */
 public class Offer58_reverseLeftWords {
 
-    public static String reverseLeftWords(String s, int n) {
-        if (s == null || s.length() <= 1 || n == 0) {
+    public static String reverseLeftWords(String s, int k) {
+        if (s == null || s.length() <= 1 || k == 0) {
             return s;
         }
 
         int len = s.length();
-        int shift = n % len;
+        int shift = k % len;
         if (shift == 0) {
             return s;
         }
@@ -41,8 +41,20 @@ public class Offer58_reverseLeftWords {
         return new String(res);
     }
 
+    public static String reverseLeftWords_1(String s, int k) {
+        if (s == null || s.length() <= 1 || k == 0) {
+            return s;
+        }
+
+        int len = s.length();
+        String res = s.substring(k, len) + s.substring(0, k);
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("cdefgab ?= " + reverseLeftWords("abcdefg", 2));
+        System.out.println("cdefgab ?= " + reverseLeftWords_1("abcdefg", 2));
         System.out.println("umghlrlose ?= " + reverseLeftWords("lrloseumgh", 6));
+        System.out.println("umghlrlose ?= " + reverseLeftWords_1("lrloseumgh", 6));
     }
 }
