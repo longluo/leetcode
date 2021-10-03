@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * 剑指 Offer 17. 打印从1到最大的n位数
+ * <p>
  * 输入数字n，按顺序打印出从1到最大的n位十进制数。比如输入3，则打印出1、2、3一直到最大的3位数999。
  * <p>
  * 示例 1:
@@ -15,6 +16,8 @@ import java.util.List;
  * 说明：
  * 用返回一个整数列表来代替打印
  * n为正整数
+ * <p>
+ * https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/
  */
 public class Offer17_printNumbers {
 
@@ -39,7 +42,18 @@ public class Offer17_printNumbers {
         return res;
     }
 
+    public static int[] printNumbers_1(int n) {
+        int maxNum = (int) (Math.pow(10, n));
+        int[] res = new int[maxNum - 1];
+        for (int i = 1; i < maxNum; i++) {
+            res[i - 1] = i;
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1,2,3,4,5,6,7,8,9] ?= " + Arrays.toString(printNumbers(1)));
+        System.out.println("[1,2,3,4,5,6,7,8,9] ?= " + Arrays.toString(printNumbers_1(1)));
     }
 }

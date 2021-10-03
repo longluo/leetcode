@@ -15,6 +15,7 @@
 | [剑指Offer 09. 用两个栈实现队列](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/) | Easy | []()  | [Java](./Offer09_CQueue.java) |
 | [剑指Offer 12. 矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/) | Medium | []()  | [Java](./Offer12_exist.java) |
 | [剑指Offer 15. 二进制中1的个数](https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/) | Easy | []()  | [Java](./Offer15_erJinZhiZhong1DeGeShuLcof.java) |
+| [剑指Offer 17. 打印从1到最大的n位数](https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/) | Easy | []()  | [Java](./Offer17_printNumbers.java) |
 | [剑指Offer 37. 序列化二叉树](https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/) | Hard | []()  | [Java](./Offer37_xuLieHuaErChaShuLcof.java) |
 | [剑指Offer 39. 数组中出现次数超过一半的数字](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/) | Easy | []()  | [Java](./Offer39_majorityElement.java) |
 | [剑指Offer 40. 最小的k个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/) | Easy | []()  | [Java](./Offer40_getLeastNumbers.java) |
