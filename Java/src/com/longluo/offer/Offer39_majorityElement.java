@@ -50,8 +50,25 @@ public class Offer39_majorityElement {
         return nums[n / 2];
     }
 
+    // Hash
+    public static int majorityElement_2(int[] nums) {
+        int n = nums.length;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            int freq = map.getOrDefault(num, 0);
+            if (freq + 1 > n / 2) {
+                return num;
+            } else {
+                map.put(num, freq + 1);
+            }
+        }
+
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + majorityElement(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2}));
         System.out.println("2 ?= " + majorityElement_1(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2}));
+        System.out.println("2 ?= " + majorityElement_2(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2}));
     }
 }
