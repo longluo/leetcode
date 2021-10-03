@@ -1,10 +1,12 @@
 package com.longluo.offer;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 剑指 Offer 39. 数组中出现次数超过一半的数字
+ * <p>
  * 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
  * <p>
  * 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
@@ -16,9 +18,12 @@ import java.util.Map;
  * <p>
  * 限制：
  * 1 <= 数组长度 <= 50000
+ * <p>
+ * https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/
  */
 public class Offer39_majorityElement {
 
+    // Map
     public static int majorityElement(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums[0];
@@ -38,7 +43,15 @@ public class Offer39_majorityElement {
         return 0;
     }
 
+    // Sort
+    public static int majorityElement_1(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        return nums[n / 2];
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + majorityElement(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2}));
+        System.out.println("2 ?= " + majorityElement_1(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2}));
     }
 }

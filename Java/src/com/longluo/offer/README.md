@@ -16,8 +16,10 @@
 | [剑指Offer 12. 矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/) | Medium | []()  | [Java](./Offer12_exist.java) |
 | [剑指Offer 15. 二进制中1的个数](https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/) | Easy | []()  | [Java](./Offer15_erJinZhiZhong1DeGeShuLcof.java) |
 | [剑指Offer 37. 序列化二叉树](https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/) | Hard | []()  | [Java](./Offer37_xuLieHuaErChaShuLcof.java) |
+| [剑指Offer 39. 数组中出现次数超过一半的数字](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/) | Easy | []()  | [Java](./Offer39_majorityElement.java) |
 | [剑指Offer 40. 最小的k个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/) | Easy | []()  | [Java](./Offer40_getLeastNumbers.java) |
 | [剑指Offer 52. 两个链表的第一个公共节点](https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/) | Easy | []()  | [Java](./Offer52_getIntersectionNode.java) |
+| [剑指Offer 53 - I. 在排序数组中查找数字 I](https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/) | Easy | []()  | [Java](./Offer53_search.java) |
 | [剑指Offer 55 - I. 二叉树的深度](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/) | Easy | [
 递归 + DFS + BFS 3种方法](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/solution/di-gui-dfs-bfs-3chong-fang-fa-by-longluo-so5i/)  | [Java](./Offer55_maxDepth.java) |
 | [剑指Offer 55 - II. 平衡二叉树](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/) | Easy | []()  | [Java](./Offer55_balancedTree.java) |
