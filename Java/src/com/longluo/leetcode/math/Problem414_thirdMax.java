@@ -53,6 +53,28 @@ public class Problem414_thirdMax {
         }
     }
 
+    public static int thirdMax_sort(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int max = nums[n - 1];
+        if (n < 3) {
+            return max;
+        } else {
+            for (int i = n - 2; i >= 0; i--) {
+                if (nums[i] < max) {
+                    int max_sec = nums[i];
+                    for (int j = i - 1; j >= 0; j--) {
+                        if (nums[j] < max_sec) {
+                            return nums[j];
+                        }
+                    }
+                }
+            }
+        }
+
+        return max;
+    }
+
     public static int thirdMax_pq(int[] nums) {
         if (nums.length == 1) {
             return nums[0];
