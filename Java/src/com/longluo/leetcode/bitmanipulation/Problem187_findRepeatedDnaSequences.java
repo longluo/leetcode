@@ -1,7 +1,9 @@
 package com.longluo.leetcode.bitmanipulation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 187. 重复的DNA序列
@@ -27,6 +29,25 @@ import java.util.List;
 public class Problem187_findRepeatedDnaSequences {
 
     public static List<String> findRepeatedDnaSequences(String s) {
+        List<String> ans = new ArrayList<>();
+        if (s == null || s.length() < 10) {
+            return ans;
+        }
+
+        int n = s.length();
+        Map<String, Integer> freq = new HashMap<>();
+        for (int i = 0; i <= n - 10; i++) {
+            String str = s.substring(i, i + 10);
+            freq.put(str, freq.getOrDefault(str, 0) + 1);
+            if (freq.get(str) == 2) {
+                ans.add(str);
+            }
+        }
+
+        return ans;
+    }
+
+    public static List<String> findRepeatedDnaSequences_win(String s) {
         List<String> ans = new ArrayList<>();
         if (s == null || s.length() < 10) {
             return ans;
