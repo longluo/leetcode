@@ -37,8 +37,6 @@ public class Problem273_integerToEnglishWords {
 
     private static String[] thousands = {"", "Thousand", "Million", "Billion"};
 
-    private static int count = 0;
-
     public static String numberToWords(int num) {
         if (num == 0) {
             return "Zero";
@@ -71,6 +69,48 @@ public class Problem273_integerToEnglishWords {
         return sb.toString().trim();
     }
 
+    public static String numberToWords_rec(int num) {
+        if (num == 0) {
+            return "Zero";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 3, unit = 1000000000; i >= 0; i--, unit /= 1000) {
+            int curNum = num / unit;
+            if (curNum != 0) {
+                num -= unit * curNum;
+                StringBuffer curr = new StringBuffer();
+                recurion(curr, curNum);
+                sb.append(curr).append(" ").append(thousands[i]).append(" ");
+            }
+        }
+
+        return sb.toString().trim();
+    }
+
+    private static void recurion(StringBuffer sb, int num) {
+        if (num == 0) {
+            return;
+        } else if (num < 10) {
+            sb.append(onesDigit[num]);
+        } else if (num < 20) {
+            sb.append(teensDigit[num - 10]);
+        } else if (num < 100) {
+            sb.append(tensDigit[num / 10]);
+            if (num % 10 != 0) {
+                sb.append(" ");
+                recurion(sb, num % 10);
+            }
+        } else {
+            sb.append(onesDigit[num / 100]);
+            sb.append(" Hundred");
+            if (num % 100 != 0) {
+                sb.append(" ");
+                recurion(sb, num % 100);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Zero ?= " + numberToWords(0));
         System.out.println("Two ?= " + numberToWords(2));
@@ -80,13 +120,11 @@ public class Problem273_integerToEnglishWords {
         System.out.println("Sixty Seven ?= " + numberToWords(67));
         System.out.println("One Hundred ?= " + numberToWords(100));
         System.out.println("One Hundred Twenty Three ?= " + numberToWords(123));
+        System.out.println("One Hundred Twenty Three ?= " + numberToWords_rec(123));
         System.out.println("Three Hundred ?= " + numberToWords(300));
         System.out.println("One Thousand ?= " + numberToWords(1000));
-        count = 0;
         System.out.println("Twelve Thousand Three Hundred Forty Five ?= " + numberToWords(12345));
-        count = 0;
         System.out.println("One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven ?= " + numberToWords(1234567));
-        count = 0;
         System.out.println("One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One ?= " + numberToWords(1234567891));
     }
 }
