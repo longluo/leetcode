@@ -63,6 +63,40 @@ public class Problem29_divideTwoIntegers {
         return (int) ans;
     }
 
+    public static int divide_1(int dividend, int divisor) {
+        if (dividend == 0) {
+            return 0;
+        }
+
+        if (dividend == -2147483648 && divisor == -1) {
+            return 2147483647;
+        }
+
+        int ans = 0;
+        boolean isNegative = true;
+        if (dividend > 0 && divisor > 0) {
+            dividend = -dividend;
+            isNegative = false;
+        } else if (dividend > 0 && divisor < 0) {
+            dividend = -dividend;
+            divisor = -divisor;
+        } else if (dividend < 0 && divisor < 0) {
+            isNegative = false;
+            divisor = -divisor;
+        }
+
+        while (dividend + divisor <= 0) {
+            dividend += divisor;
+            ans++;
+        }
+
+        if (isNegative) {
+            ans = -ans;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         int val = Math.abs(-2147483648);
         System.out.println("val = " + val);
@@ -70,6 +104,8 @@ public class Problem29_divideTwoIntegers {
         System.out.println("3 ?= " + divide(10, 3));
         System.out.println("-2 ?= " + divide(7, -3));
         System.out.println("1 ?= " + divide(1, 1));
+        System.out.println("-1 ?= " + divide(-1, 1));
+        System.out.println("-1 ?= " + divide_1(-1, 1));
         System.out.println("2147483647 ?= " + divide(-2147483648, -1));
         System.out.println("-2147483648 ?= " + divide(-2147483648, 1));
         System.out.println("-1073741824 ?= " + divide(-2147483648, 2));

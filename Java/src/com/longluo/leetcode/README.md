@@ -11,6 +11,7 @@
 | [26. 删除有序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/) | Easy | []()  | [Java](./twopointers/Problem26_removeDuplicatesFromSortedArray.java) |
 | [27. 移除元素](https://leetcode-cn.com/problems/remove-element/) | Easy | []()  | [Java](./twopointers/Problem27_removeElement.java) |
 | [28. 实现strStr()](https://leetcode-cn.com/problems/implement-strstr/) | Easy | []()  | [Java](./twopointers/Problem28_implementStrStr.java) |
+| [29. 两数相除](https://leetcode-cn.com/problems/divide-two-integers/) | Medium | []()  | [Java](./bitmanipulation/Problem29_divideTwoIntegers.java) |
 | [48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/) | Medium | []()  | [Java](./array/Problem48_rotateImage.java) |
 | [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/) | Easy | []()  | [Java](./array/Problem53_maximumSubarray.java) |
 | [54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/) | Medium | []()  | [Java](./array/Problem54_spiralMatrix.java) |
