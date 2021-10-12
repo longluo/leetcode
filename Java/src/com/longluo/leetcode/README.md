@@ -13,6 +13,7 @@
 | [28. 实现strStr()](https://leetcode-cn.com/problems/implement-strstr/) | Easy | []()  | [Java](./twopointers/Problem28_implementStrStr.java) |
 | [29. 两数相除](https://leetcode-cn.com/problems/divide-two-integers/) | Medium | []()  | [Java](./bitmanipulation/Problem29_divideTwoIntegers.java) |
 | [48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/) | Medium | []()  | [Java](./array/Problem48_rotateImage.java) |
+| [50. Pow(x, n)](https://leetcode-cn.com/problems/powx-n/) | Medium | []()  | [Java](./math/Problem50_powxn.java) |
 | [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/) | Easy | []()  | [Java](./array/Problem53_maximumSubarray.java) |
 | [54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/) | Medium | []()  | [Java](./array/Problem54_spiralMatrix.java) |
 | [59. 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/) | Medium | []()  | [Java](./array/Problem59_spiralMatrix_ii.java) |
