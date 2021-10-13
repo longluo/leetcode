@@ -77,6 +77,39 @@ public class Problem50_powxn {
         }
     }
 
+    public static double myPow_2(double x, int n) {
+        long N = n;
+        return N >= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
+    }
+
+    public static double quickMul(double x, long N) {
+        if (N == 0) {
+            return 1.0;
+        }
+        double y = quickMul(x, N / 2);
+        return N % 2 == 0 ? y * y : y * y * x;
+    }
+
+    public static double myPow_3(double x, int n) {
+        long N = n;
+        return N >= 0 ? quickMul_iter(x, N) : 1.0 / quickMul_iter(x, -N);
+    }
+
+    public static double quickMul_iter(double x, long N) {
+        double ans = 1.0;
+        double x_mul = x;
+        while (N > 0) {
+            if (N % 2 == 1) {
+                ans = ans * x_mul;
+            }
+
+            x_mul = x_mul * x_mul;
+            N /= 2;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1024.00000 ?= " + myPow(2.00000, 10));
         System.out.println("9.26100 ?= " + myPow(2.10000, 3));
