@@ -53,6 +53,30 @@ public class Problem50_powxn {
         return ans;
     }
 
+    //
+    public static double myPow_quick(double x, int n) {
+        if (n == 0) {
+            return 1.0;
+        } else if (n > 0) {
+            return quickMul(x, n);
+        } else {
+            return 1.0 / quickMul(x, -n);
+        }
+    }
+
+    public static double quickMul(double x, int n) {
+        if (n == 0) {
+            return 1.0;
+        }
+
+        double y = quickMul(x, n / 2);
+        if (n % 2 == 0) {
+            return y * y;
+        } else {
+            return y * y * x;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("1024.00000 ?= " + myPow(2.00000, 10));
         System.out.println("9.26100 ?= " + myPow(2.10000, 3));
