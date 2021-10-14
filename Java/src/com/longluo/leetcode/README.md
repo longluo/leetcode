@@ -61,7 +61,8 @@
 | [387. 字符串中的第一个唯一字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/) | Easy | []()  | [Java](./hash/Problem387_firstUniqChar.java) |
 | [395. 至少有K个重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/) | Medium | []()  | [Java](./string/Problem395_longestSubstringWithAtLeastKRepeatingCharacters.java) |
 | [401. 二进制手表](https://leetcode-cn.com/problems/binary-watch/) | Easy | []()  | [Java](./bitmanipulation/Problem401_binaryWatch.java) |
-| [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) | Medium | []()  | [Java](./hash/Problem451_sortCharactersByFrequency.java) |
+| [412. Fizz Buzz](https://leetcode-cn.com/problems/fizz-buzz/) | Easy | []()  | [Java](./math/Problem401_binaryWatch.java) |
+| [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/) | Medium | []()  | [Java](./hash/Problem412_fizzBuzz.java) |
 | [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem501_findModeInBinarySearchTree.java) |
 | [502. IPO](https://leetcode-cn.com/problems/ipo/) | Hard | []()  | [Java](./greedy/Problem502_ipo.java) |
 | [509. 斐波那契数](https://leetcode-cn.com/problems/fibonacci-number/) | Easy | []()  | [Java](./recursion/Problem509_fib.java) |
