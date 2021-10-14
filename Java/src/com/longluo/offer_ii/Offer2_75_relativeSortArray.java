@@ -97,18 +97,29 @@ public class Offer2_75_relativeSortArray {
 
     public static int[] relativeSortArray_2(int[] arr1, int[] arr2) {
         int maxNum = 0;
-        for (int num : arr2) {
+        for (int num : arr1) {
             maxNum = Math.max(maxNum, num);
         }
 
         int[] freq = new int[maxNum + 1];
-        for (int num : arr2) {
+        for (int num : arr1) {
             freq[num]++;
         }
 
         int[] ans = new int[arr1.length];
-        for (int i = 0; i < arr1.length; i++) {
+        int idx = 0;
+        for (int num : arr2) {
+            for (int i = 0; i < freq[num]; i++) {
+                ans[idx++] = num;
+            }
 
+            freq[num] = 0;
+        }
+
+        for (int i = 0; i <= maxNum; i++) {
+            for (int j = 0; j < freq[i]; j++) {
+                ans[idx++] = i;
+            }
         }
 
         return ans;
@@ -117,5 +128,6 @@ public class Offer2_75_relativeSortArray {
     public static void main(String[] args) {
         System.out.println("[2,2,2,1,4,3,3,9,6,7,19] ?= " + Arrays.toString(relativeSortArray(new int[]{2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19}, new int[]{2, 1, 4, 3, 9, 6})));
         System.out.println("[2,2,2,1,4,3,3,9,6,7,19] ?= " + Arrays.toString(relativeSortArray_1(new int[]{2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19}, new int[]{2, 1, 4, 3, 9, 6})));
+        System.out.println("[2,2,2,1,4,3,3,9,6,7,19] ?= " + Arrays.toString(relativeSortArray_2(new int[]{2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19}, new int[]{2, 1, 4, 3, 9, 6})));
     }
 }
