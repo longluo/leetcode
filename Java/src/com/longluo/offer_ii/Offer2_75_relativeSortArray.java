@@ -25,6 +25,8 @@ import java.util.*;
  * 本题与主站1122题相同：https://leetcode-cn.com/problems/relative-sort-array/
  * <p>
  * https://leetcode-cn.com/problems/0H97ZC/
+ * <p>
+ * https://leetcode-cn.com/problems/relative-sort-array/
  */
 public class Offer2_75_relativeSortArray {
 
@@ -64,7 +66,56 @@ public class Offer2_75_relativeSortArray {
         return res;
     }
 
+    public static int[] relativeSortArray_1(int[] arr1, int[] arr2) {
+        List<Integer> list = new ArrayList<>(arr1.length);
+        for (int num : arr1) {
+            list.add(num);
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr2.length; i++) {
+            map.put(arr2[i], i);
+        }
+
+        Collections.sort(list, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer x, Integer y) {
+                if (map.containsKey(x) || map.containsKey(y)) {
+                    return map.getOrDefault(x, 1001) - map.getOrDefault(y, 1001);
+                }
+
+                return x - y;
+            }
+        });
+
+        int[] ans = new int[arr1.length];
+        for (int i = 0; i < list.size(); i++) {
+            ans[i] = list.get(i);
+        }
+
+        return ans;
+    }
+
+    public static int[] relativeSortArray_2(int[] arr1, int[] arr2) {
+        int maxNum = 0;
+        for (int num : arr2) {
+            maxNum = Math.max(maxNum, num);
+        }
+
+        int[] freq = new int[maxNum + 1];
+        for (int num : arr2) {
+            freq[num]++;
+        }
+
+        int[] ans = new int[arr1.length];
+        for (int i = 0; i < arr1.length; i++) {
+
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2,2,2,1,4,3,3,9,6,7,19] ?= " + Arrays.toString(relativeSortArray(new int[]{2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19}, new int[]{2, 1, 4, 3, 9, 6})));
+        System.out.println("[2,2,2,1,4,3,3,9,6,7,19] ?= " + Arrays.toString(relativeSortArray_1(new int[]{2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19}, new int[]{2, 1, 4, 3, 9, 6})));
     }
 }
