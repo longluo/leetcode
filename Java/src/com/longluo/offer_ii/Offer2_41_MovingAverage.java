@@ -40,8 +40,7 @@ import java.util.Queue;
 public class Offer2_41_MovingAverage {
 
     static class MovingAverage {
-
-        int sum;
+        double sum = 0.0;
         int size;
         Queue<Integer> queue;
 
@@ -61,12 +60,12 @@ public class Offer2_41_MovingAverage {
                 sum -= temp;
                 queue.offer(val);
                 sum += val;
-                return (double) sum / size;
+                return sum / size;
             }
 
             queue.offer(val);
             sum += val;
-            return (double) sum / queue.size();
+            return sum / queue.size();
         }
     }
 
