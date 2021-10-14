@@ -92,7 +92,12 @@ public class KMP {
             if (i == -1 || pattern.charAt(i) == pattern.charAt(j)) {
                 i++;
                 j++;
-                next[i] = j;
+                if (pattern.charAt(i) != pattern.charAt(j)) {
+                    next[j] = i;
+                } else {
+                    //因为不能出现p[j] = p[next[j]]，所以当出现时需要继续递归，k = next[k] = next[next[k]]
+                    next[j] = next[i];
+                }
             } else {
                 i = next[i];
             }
@@ -106,6 +111,5 @@ public class KMP {
         System.out.println("2 ?= " + ViolentMatch("ababababca", "abababca"));
 
         System.out.println("2 ?= " + KMP("ababababca", "abababca"));
-
     }
 }
