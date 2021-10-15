@@ -74,9 +74,40 @@ public class Offer2_06_twoSum {
         return res;
     }
 
+    public static int[] twoSum_2(int[] numbers, int target) {
+        int[] res = new int[2];
+        int n = numbers.length;
+        int idx = 0;
+        while (idx < n && numbers[idx] <= target / 2) {
+            int low = idx + 1;
+            int high = n - 1;
+            while (low <= high) {
+                int mid = low + (high - low) / 2;
+                if (numbers[mid] == target - numbers[idx]) {
+                    res[0] = idx;
+                    res[1] = mid;
+                    return res;
+                } else if (numbers[mid] > target - numbers[idx]) {
+                    high = mid - 1;
+                } else if (numbers[mid] < target - numbers[idx]) {
+                    low = mid + 1;
+                }
+            }
+
+            idx++;
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1, 3] ?= " + Arrays.toString(twoSum(new int[]{1, 2, 4, 6, 10}, 8)));
         System.out.println("[1, 3] ?= " + Arrays.toString(twoSum_1(new int[]{1, 2, 4, 6, 10}, 8)));
+        System.out.println("[1, 3] ?= " + Arrays.toString(twoSum_2(new int[]{1, 2, 4, 6, 10}, 8)));
+
         System.out.println("[0, 2] ?= " + Arrays.toString(twoSum(new int[]{2, 3, 4}, 6)));
+        System.out.println("[0, 2] ?= " + Arrays.toString(twoSum_2(new int[]{2, 3, 4}, 6)));
+        System.out.println("[0, 1] ?= " + Arrays.toString(twoSum_2(new int[]{0, 0, 3, 4}, 0)));
+        System.out.println("[3, 4] ?= " + Arrays.toString(twoSum_2(new int[]{1, 2, 3, 4, 4, 9, 56, 90}, 8)));
     }
 }
