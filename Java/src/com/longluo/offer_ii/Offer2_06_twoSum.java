@@ -52,8 +52,31 @@ public class Offer2_06_twoSum {
         return res;
     }
 
+    public static int[] twoSum_1(int[] numbers, int target) {
+        int[] res = new int[2];
+        int n = numbers.length;
+        int left = 0;
+        int right = n - 1;
+        while (left < right) {
+            while (numbers[left] + numbers[right] > target) {
+                right--;
+            }
+            while (numbers[left] + numbers[right] < target) {
+                left++;
+            }
+            if (numbers[left] + numbers[right] == target) {
+                res[0] = left;
+                res[1] = right;
+                return res;
+            }
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1, 3] ?= " + Arrays.toString(twoSum(new int[]{1, 2, 4, 6, 10}, 8)));
+        System.out.println("[1, 3] ?= " + Arrays.toString(twoSum_1(new int[]{1, 2, 4, 6, 10}, 8)));
         System.out.println("[0, 2] ?= " + Arrays.toString(twoSum(new int[]{2, 3, 4}, 6)));
     }
 }
