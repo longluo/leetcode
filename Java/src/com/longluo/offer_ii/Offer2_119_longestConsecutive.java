@@ -1,6 +1,8 @@
 package com.longluo.offer_ii;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 剑指 Offer II 119. 最长连续序列
@@ -55,8 +57,38 @@ public class Offer2_119_longestConsecutive {
         return ans;
     }
 
+    public static int longestConsecutive_1(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums.length;
+        }
+
+        int ans = 1;
+        int n = nums.length;
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            set.add(x);
+        }
+
+        for (int x : nums) {
+            if (!set.contains(x - 1)) {
+                int curNum = x;
+                int curLen = 1;
+                while (set.contains(curNum + 1)) {
+                    curLen++;
+                    curNum++;
+                }
+
+                ans = Math.max(ans, curLen);
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + longestConsecutive(new int[]{100, 4, 200, 1, 3, 2}));
+        System.out.println("4 ?= " + longestConsecutive_1(new int[]{100, 4, 200, 1, 3, 2}));
         System.out.println("9 ?= " + longestConsecutive(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}));
+        System.out.println("9 ?= " + longestConsecutive_1(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}));
     }
 }
