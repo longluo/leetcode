@@ -43,11 +43,31 @@ public class Offer2_04_singleNumber {
             }
         }
 
-        return freq.entrySet().iterator().next().getKey();
+        return freq.keySet().iterator().next().intValue();
+    }
+
+    public static int singleNumber_hash(int[] nums) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int x : nums) {
+            freq.put(x, freq.getOrDefault(x, 0) + 1);
+        }
+
+        int ans = 0;
+        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
+            int num = entry.getKey();
+            int occ = entry.getValue();
+            if (occ == 1) {
+                ans = num;
+                break;
+            }
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
         System.out.println("3 ?= " + singleNumber(new int[]{2, 2, 3, 2}));
         System.out.println("100 ?= " + singleNumber(new int[]{0, 1, 0, 1, 0, 1, 100}));
+        System.out.println("100 ?= " + singleNumber_hash(new int[]{0, 1, 0, 1, 0, 1, 100}));
     }
 }
