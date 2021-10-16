@@ -2,7 +2,7 @@
 
 [Leetcode中 剑指Offer（专项突击版）](https://leetcode-cn.com/problem-list/e8X3pBZi/)
 
-[《剑指Offer》刷题记录](http://www.longluo.me/blog/2020/12/20/Coding-Interviews/)
+[《剑指Offer（专项突击版）》刷题记录](http://www.longluo.me/blog/2021/09/20/Coding-Interviews-2/)
 
 -------------------
 
@@ -18,6 +18,8 @@
 | [剑指Offer II 008. 和大于等于target的最短子数组](https://leetcode-cn.com/problems/2VG8Kg/) | Medium | []()  | [Java](./Offer2_08_minSubArrayLen.java) |
 | [剑指Offer II 011. 0 和 1 个数相同的子数组](https://leetcode-cn.com/problems/A1NYOS/) | Medium | []()  | [Java](./Offer2_11_findMaxLength.java) |
 | [剑指Offer II 012. 左右两边子数组的和相等](https://leetcode-cn.com/problems/tvdfij/) | Easy | []()  | [Java](./Offer2_12_pivotIndex.java) |
+| [剑指Offer II 081. 允许重复选择元素的组合](https://leetcode-cn.com/problems/Ygoe9J/) | Easy | []()  | [Java](./Offer2_81_combinationSum.java) |
+| [剑指Offer II 085. 生成匹配的括号](https://leetcode-cn.com/problems/IDBivT/) | Medium | []()  | [Java](./Offer2_85_generateParenthesis.java) |
 
 
 欢迎光临[我的个人网站](http://www.longluo.me)
