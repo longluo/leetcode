@@ -1,7 +1,6 @@
 package com.longluo.leetcode.twopointers;
 
 import com.longluo.datastructure.ArrayUtils;
-import com.longluo.datastructure.LinkedListNodeUtils;
 
 import java.util.*;
 
