@@ -55,10 +55,56 @@ public class Offer2_07_threeSum {
         return new ArrayList<>(res);
     }
 
+    public static List<List<Integer>> threeSum_tp(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return new ArrayList<>();
+        }
+
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
+        Arrays.sort(nums);
+        for (int i = 0; i < n - 2; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            int left = i + 1;
+            int right = n - 1;
+            int target = -nums[i];
+            while (left < right) {
+                int sum = nums[left] + nums[right];
+                if (sum > target) {
+                    right--;
+                } else if (sum < target) {
+                    left++;
+                } else if (sum == target) {
+                    ans.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+                    while (left < right && nums[left] == nums[left - 1]) {
+                        left++;
+                    }
+                    while (left < right && nums[right] == nums[right + 1]) {
+                        right--;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[] ?= " + threeSum(new int[]{}));
         System.out.println("[] ?= " + threeSum(new int[]{0}));
         System.out.println("[[-1,-1,2],[-1,0,1]] ?= " + threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
+        System.out.println("[[-1,-1,2],[-1,0,1]] ?= " + threeSum_tp(new int[]{-1, 0, 1, 2, -1, -4}));
         System.out.println("[0, 0, 0] ?= " + threeSum(new int[]{0, 0, 0, 0}));
+        System.out.println("[0, 0, 0] ?= " + threeSum_tp(new int[]{0, 0, 0, 0}));
+        System.out.println("[0, 0, 0] ?= " + threeSum_tp(new int[]{0, 0, 0}));
     }
 }
