@@ -1,5 +1,7 @@
 package com.longluo.top_interviews;
 
+import java.math.BigInteger;
+
 /**
  * 172. 阶乘后的零
  * <p>
@@ -28,6 +30,21 @@ package com.longluo.top_interviews;
  * https://leetcode-cn.com/problems/factorial-trailing-zeroes/
  */
 public class Problem172_factorialTrailingZeroes {
+
+    public static int trailingZeroes_big(int n) {
+        BigInteger nFactorResult = BigInteger.ONE;
+        for (int i = 2; i <= n; i++) {
+            nFactorResult = nFactorResult.multiply(BigInteger.valueOf(i));
+        }
+
+        int ans = 0;
+        while (nFactorResult.mod(BigInteger.TEN).equals(BigInteger.ZERO)) {
+            ans++;
+            nFactorResult = nFactorResult.divide(BigInteger.TEN);
+        }
+
+        return ans;
+    }
 
     public static int trailingZeroes(int n) {
         int ans = 0;

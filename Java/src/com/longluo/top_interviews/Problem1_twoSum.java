@@ -33,7 +33,7 @@ import java.util.Map;
  * <p>
  * https://leetcode-cn.com/problems/two-sum/
  */
-public class Problem2_twoSum {
+public class Problem1_twoSum {
 
     public static int[] twoSum(int[] nums, int target) {
         int[] ans = new int[2];
