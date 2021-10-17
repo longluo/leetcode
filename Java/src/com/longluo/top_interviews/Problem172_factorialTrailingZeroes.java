@@ -30,10 +30,6 @@ package com.longluo.top_interviews;
 public class Problem172_factorialTrailingZeroes {
 
     public static int trailingZeroes(int n) {
-        if (n <= 4) {
-            return 0;
-        }
-
         int ans = 0;
         for (int i = 5; i <= n; i++) {
             int temp = i;
@@ -46,10 +42,35 @@ public class Problem172_factorialTrailingZeroes {
         return ans;
     }
 
+    public static int trailingZeroes_opt(int n) {
+        int ans = 0;
+        for (int i = 5; i <= n; i += 5) {
+            int temp = i;
+            while (temp % 5 == 0) {
+                ans++;
+                temp /= 5;
+            }
+        }
+
+        return ans;
+    }
+
+    public static int trailingZeroes_log(int n) {
+        int ans = 0;
+        while (n > 0) {
+            n /= 5;
+            ans += n;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + trailingZeroes(0));
         System.out.println("0 ?= " + trailingZeroes(1));
         System.out.println("0 ?= " + trailingZeroes(3));
+        System.out.println("0 ?= " + trailingZeroes_log(3));
         System.out.println("1 ?= " + trailingZeroes(5));
+        System.out.println("1 ?= " + trailingZeroes_log(5));
     }
 }
