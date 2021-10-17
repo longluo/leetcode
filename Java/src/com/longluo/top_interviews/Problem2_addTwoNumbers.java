@@ -77,7 +77,6 @@ public class Problem2_addTwoNumbers {
             ListNode node = new ListNode(sum);
             pNode.next = node;
             pNode = pNode.next;
-
             pNode2 = pNode2.next;
         }
 
@@ -89,9 +88,38 @@ public class Problem2_addTwoNumbers {
         return dummyNode.next;
     }
 
+    public static ListNode addTwoNumbers_opt(ListNode l1, ListNode l2) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode pNode = dummyNode;
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int num1 = l1 != null ? l1.val : 0;
+            int num2 = l2 != null ? l2.val : 0;
+            int sum = num1 + num2 + carry;
+            carry = sum / 10;
+            pNode.next = new ListNode(sum % 10);
+            pNode = pNode.next;
+
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+
+        if (carry > 0) {
+            pNode.next = new ListNode(carry);
+        }
+
+        return dummyNode.next;
+    }
+
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{2, 4, 3});
         ListNode tst2 = LinkedListNodeUtils.constructListNode(new int[]{5, 6, 4});
         System.out.println("[7, 0, 8] ?= " + LinkedListNodeUtils.printLinkedList(addTwoNumbers(tst1, tst2)));
+        System.out.println("[7, 0, 8] ?= " + LinkedListNodeUtils.printLinkedList(addTwoNumbers_opt(tst1, tst2)));
     }
 }
