@@ -1,5 +1,6 @@
 package com.longluo.leetcode.array;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,11 +44,7 @@ public class Problem209_minimumSizeSubarraySum {
             }
         }
 
-        if (ans == Integer.MAX_VALUE) {
-            return 0;
-        }
-
-        return ans;
+        return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 
     public static int minSubArrayLen_prefix(int target, int[] nums) {
@@ -74,16 +71,88 @@ public class Problem209_minimumSizeSubarraySum {
             }
         }
 
-        if (ans == Integer.MAX_VALUE) {
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+
+    public static int minSubArrayLen_bs(int target, int[] nums) {
+        if (nums == null || nums.length == 0) {
             return 0;
         }
 
-        return ans;
+        int len = nums.length;
+        int ans = Integer.MAX_VALUE;
+        int[] prefixSums = new int[len + 1];
+        for (int i = 1; i <= len; i++) {
+            prefixSums[i] = prefixSums[i - 1] + nums[i - 1];
+        }
+
+        for (int i = 1; i <= len; i++) {
+            int value = target + prefixSums[i - 1];
+            int upperBound = binarySearch(prefixSums, i, value);
+//            int upperBound = Arrays.binarySearch(prefixSums, value);
+            if (upperBound == -1) {
+                continue;
+            }
+            if (upperBound <= len) {
+                ans = Math.min(ans, upperBound - i + 1);
+            }
+        }
+
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+
+    public static int binarySearch(int[] nums, int start, int target) {
+        int len = nums.length;
+        if (start > len || nums[len - 1] < target) {
+            return -1;
+        }
+
+        if (nums[start] > target) {
+            return start;
+        }
+
+        int end = len - 1;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (nums[mid] >= target) {
+                end = mid;
+            } else if (nums[mid] < target) {
+                start = mid + 1;
+            }
+        }
+
+        return end;
+    }
+
+    public static int minSubArrayLen_sw(int target, int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int len = nums.length;
+        int ans = Integer.MAX_VALUE;
+        int start = 0;
+        int end = 0;
+        int sum = 0;
+        while (end < len) {
+            sum += nums[end];
+            while (sum >= target) {
+                ans = Math.min(ans, end - start + 1);
+                sum -= nums[start];
+                start++;
+            }
+
+            end++;
+        }
+
+        return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
         System.out.println("2 ?= " + minSubArrayLen_prefix(7, new int[]{2, 3, 1, 2, 4, 3}));
+        System.out.println("2 ?= " + minSubArrayLen_bs(7, new int[]{2, 3, 1, 2, 4, 3}));
+        System.out.println("2 ?= " + minSubArrayLen_sw(7, new int[]{2, 3, 1, 2, 4, 3}));
         System.out.println("5 ?= " + minSubArrayLen_prefix(15, new int[]{1, 2, 3, 4, 5}));
         System.out.println("2 ?= " + minSubArrayLen_prefix(15, new int[]{5, 1, 3, 5, 10, 7, 4, 9, 2, 8}));
         System.out.println("1 ?= " + minSubArrayLen(4, new int[]{1, 4, 4}));
