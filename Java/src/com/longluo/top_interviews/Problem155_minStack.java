@@ -82,6 +82,36 @@ public class Problem155_minStack {
      * int param_4 = obj.getMin();
      */
 
+    static class MinStack_min {
+
+        Stack<Integer> numStack;
+        Stack<Integer> minStack;
+
+        public MinStack_min() {
+            numStack = new Stack<>();
+            minStack = new Stack<>();
+            minStack.push(Integer.MAX_VALUE);
+        }
+
+        public void push(int val) {
+            numStack.push(val);
+            minStack.push(Math.min(numStack.peek(), minStack.peek()));
+        }
+
+        public void pop() {
+            numStack.pop();
+            minStack.pop();
+        }
+
+        public int top() {
+            return numStack.peek();
+        }
+
+        public int getMin() {
+            return minStack.peek();
+        }
+    }
+
     public static void main(String[] args) {
 
     }
