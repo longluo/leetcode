@@ -56,13 +56,14 @@ public class Problem29_divideTwoIntegers {
             ans = -ans;
         }
 
-        if (ans > 2147483647) {
-            return 2147483647;
+        if (ans > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
         }
 
         return (int) ans;
     }
 
+    // only use 32
     public static int divide_1(int dividend, int divisor) {
         if (dividend == 0) {
             return 0;
@@ -97,6 +98,88 @@ public class Problem29_divideTwoIntegers {
         return ans;
     }
 
+    // fast
+    public static int divide_2(int dividend, int divisor) {
+        if (dividend == 0) {
+            return 0;
+        }
+
+        if (divisor == Integer.MIN_VALUE) {
+            return dividend == Integer.MIN_VALUE ? 1 : 0;
+        }
+
+        if (dividend == Integer.MIN_VALUE) {
+            if (divisor == Integer.MIN_VALUE) {
+                return 1;
+            }
+            if (divisor == -1) {
+                return Integer.MAX_VALUE;
+            }
+            if (divisor == 1) {
+                return Integer.MIN_VALUE;
+            }
+        }
+
+        boolean isNegative = false;
+        if (dividend > 0) {
+            dividend = -dividend;
+            isNegative = !isNegative;
+        }
+        if (divisor > 0) {
+            divisor = -divisor;
+            isNegative = !isNegative;
+        }
+        int left = 1;
+        int right = Integer.MAX_VALUE;
+        int ans = 0;
+        while (left <= right) {
+            int mid = left + ((right - left) >> 1);
+            boolean check = quickAdd(dividend, divisor, mid);
+            if (check) {
+                ans = mid;
+                if (mid == Integer.MAX_VALUE) {
+                    break;
+                }
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        if (isNegative) {
+            ans = -ans;
+        }
+
+        return ans;
+    }
+
+    public static boolean quickAdd(int x, int y, int z) {
+        int result = 0;
+        int add = y;
+        // x < 0, y < 0, z > 0, find z * y >= x
+        while (z != 0) {
+            if ((z & 1) != 0) {
+                // result + add >= x
+                if (result < x - add) {
+                    return false;
+                }
+
+                result += add;
+            }
+            if (z != 1) {
+                if (add < x - add) {
+                    return false;
+                }
+
+                add += add;
+            }
+
+            z = z >> 1;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         int val = Math.abs(-2147483648);
         System.out.println("val = " + val);
@@ -109,5 +192,6 @@ public class Problem29_divideTwoIntegers {
         System.out.println("2147483647 ?= " + divide(-2147483648, -1));
         System.out.println("-2147483648 ?= " + divide(-2147483648, 1));
         System.out.println("-1073741824 ?= " + divide(-2147483648, 2));
+        System.out.println("3 ?= " + divide_2(10, 3));
     }
 }
