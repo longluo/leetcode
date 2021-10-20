@@ -1,9 +1,11 @@
 package com.longluo.top_interviews;
 
 import com.longluo.datastructure.TreeNode;
+import com.longluo.datastructure.TreeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * 230. 二叉搜索树中第K小的元素
@@ -45,7 +47,44 @@ public class Problem230_kthSmallestElementInABst {
         inOrder(root.right, numberList);
     }
 
-    public static void main(String[] args) {
+    public static int kthSmallest_it(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> nums = new ArrayList<>();
+        while (root != null || !stack.empty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            nums.add(root.val);
+            root = root.right;
+        }
 
+        return nums.get(k - 1);
+    }
+
+    public static int kthSmallest_it_2(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.empty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            k--;
+            if (k == 0) {
+                break;
+            }
+            root = root.right;
+        }
+
+        return root.val;
+    }
+
+    public static void main(String[] args) {
+        TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 1, 4, null, 2});
+        System.out.println("1 ?= " + kthSmallest(tst1, 1));
+        System.out.println("1 ?= " + kthSmallest_it(tst1, 1));
+        System.out.println("1 ?= " + kthSmallest_it_2(tst1, 1));
     }
 }
