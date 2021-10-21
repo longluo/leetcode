@@ -90,7 +90,92 @@ public class Problem4_findMedianSortedArrays {
             return nums[count / 2];
         }
     }
-    
+
+    public static double findMedianSortedArrays_1(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        if (m == 0) {
+            if (n % 2 == 0) {
+                return (nums2[n / 2 - 1] + nums2[n / 2]) / 2.0;
+            } else {
+                return nums2[n / 2];
+            }
+        }
+        if (n == 0) {
+            if (m % 2 == 0) {
+                return (nums1[m / 2 - 1] + nums1[m / 2]) / 2.0;
+            } else {
+                return nums1[m / 2];
+            }
+        }
+
+        int len = m + n;
+        int left = -1;
+        int right = -1;
+        int aIdx = 0;
+        int bIdx = 0;
+        for (int i = 0; i <= len / 2; i++) {
+            left = right;
+            if (aIdx < m && (bIdx >= n || nums1[aIdx] < nums2[bIdx])) {
+                right = nums1[aIdx++];
+            } else {
+                right = nums2[bIdx++];
+            }
+        }
+
+        if (len % 2 == 0) {
+            return (double) (left + right) / 2;
+        } else {
+            return right;
+        }
+    }
+
+    public static double findMedianSortedArrays_bs(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        int totalLen = m + n;
+        if (totalLen % 2 == 1) {
+            int midIdx = totalLen / 2;
+            double median = getKthElement(nums1, nums2, midIdx + 1);
+            return median;
+        } else {
+            int midIndex1 = totalLen / 2 - 1;
+            int midIndex2 = totalLen / 2;
+            double median = (getKthElement(nums1, nums2, midIndex1 + 1) + getKthElement(nums1, nums2, midIndex2 + 1)) / 2.0;
+            return median;
+        }
+    }
+
+    public static int getKthElement(int[] nums1, int[] nums2, int k) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        int idx1 = 0;
+        int idx2 = 0;
+        int kthElement = 0;
+        while (true) {
+            if (idx1 == len1) {
+                return nums2[idx2 + k - 1];
+            }
+            if (idx2 == len2) {
+                return nums1[idx1 + k - 1];
+            }
+            if (k == 1) {
+                return Math.min(nums1[idx1], nums2[idx2]);
+            }
+            int half = k / 2;
+            int newIndex1 = Math.min(idx1 + half, len1) - 1;
+            int newIndex2 = Math.min(idx2 + half, len2) - 1;
+            int pivot1 = nums1[newIndex1], pivot2 = nums2[newIndex2];
+            if (pivot1 <= pivot2) {
+                k -= (newIndex1 - idx1 + 1);
+                idx1 = newIndex1 + 1;
+            } else {
+                k -= (newIndex2 - idx2 + 1);
+                idx2 = newIndex2 + 1;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("1.00000 ?= " + findMedianSortedArrays(new int[]{}, new int[]{1}));
         System.out.println("2.00000 ?= " + findMedianSortedArrays(new int[]{1, 3}, new int[]{2}));
@@ -98,5 +183,7 @@ public class Problem4_findMedianSortedArrays {
         System.out.println("0.00000 ?= " + findMedianSortedArrays(new int[]{0, 0}, new int[]{0, 0}));
         System.out.println("2.00000 ?= " + findMedianSortedArrays(new int[]{2}, new int[]{}));
         System.out.println("0.00000 ?= " + findMedianSortedArrays(new int[]{0, 0, 0, 0, 0}, new int[]{-1, 0, 0, 0, 0, 0, 1}));
+        System.out.println("0.0 ?= " + findMedianSortedArrays_1(new int[]{0, 0}, new int[]{0, 0}));
+        System.out.println("2.0 ?= " + findMedianSortedArrays_1(new int[]{2}, new int[]{}));
     }
 }
