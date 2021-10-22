@@ -1,9 +1,7 @@
 package com.longluo.leetcode.array;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 447. 回旋镖的数量
