@@ -73,14 +73,16 @@ public class Problem206_reverseList {
             return head;
         }
 
-
-
-        return head;
+        ListNode newHead = reverseList_rec(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
     }
 
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
 //        System.out.println(LinkedListNodeUtils.printLinkedList(reverseList(tst1)));
-        System.out.println(LinkedListNodeUtils.printLinkedList(reverseList_opt(tst1)));
+//        System.out.println(LinkedListNodeUtils.printLinkedList(reverseList_opt(tst1)));
+        System.out.println(LinkedListNodeUtils.printLinkedList(reverseList_rec(tst1)));
     }
 }
