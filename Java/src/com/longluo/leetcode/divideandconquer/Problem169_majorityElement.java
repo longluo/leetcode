@@ -63,11 +63,29 @@ public class Problem169_majorityElement {
         return 0;
     }
 
+    public static int majorityElement_vote(int[] nums) {
+        int vote = 0;
+        int target = 0;
+        for (int x : nums) {
+            if (vote > 0 && target == x) {
+                vote++;
+            } else if (vote == 0) {
+                target = x;
+                vote++;
+            } else {
+                vote--;
+            }
+        }
+
+        return target;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + majorityElement(new int[]{3, 2, 3}));
         System.out.println("2 ?= " + majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
 
         System.out.println("3 ?= " + majorityElement_hash(new int[]{3, 2, 3}));
         System.out.println("2 ?= " + majorityElement_hash(new int[]{2, 2, 1, 1, 1, 2, 2}));
+        System.out.println("2 ?= " + majorityElement_vote(new int[]{2, 2, 1, 1, 1, 2, 2}));
     }
 }
