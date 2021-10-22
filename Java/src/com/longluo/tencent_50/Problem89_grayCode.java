@@ -38,18 +38,22 @@ import java.util.List;
 public class Problem89_grayCode {
 
     public static List<Integer> grayCode(int n) {
+        int num = (int) Math.pow(2, n);
+        boolean[] used = new boolean[num];
         List<Integer> ans = new ArrayList<>();
-        if (n == 0) {
-            ans.add(0);
-            return ans;
-        }
-
-
+        dfs(ans, used, n, 0);
         return ans;
     }
 
-    public static void backtrace(List<Integer> res, int has, int total) {
-
+    public static void dfs(List<Integer> res, boolean[] used, int n, int num) {
+        used[num] = true;
+        res.add(num);
+        for (int i = 0; i < n; i++) {
+            int diff = 1 << i;
+            if (used[num | diff] == false) {
+                dfs(res, used, n, num | diff);
+            }
+        }
     }
 
     public static List<Integer> grayCode_mirror(int n) {
