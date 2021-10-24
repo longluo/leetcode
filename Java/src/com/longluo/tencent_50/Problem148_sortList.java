@@ -1,5 +1,6 @@
 package com.longluo.tencent_50;
 
+import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
 
 import java.util.ArrayList;
@@ -58,7 +59,71 @@ public class Problem148_sortList {
         return pNode.next;
     }
 
-    public static void main(String[] args) {
+    public static ListNode sortList_fast(ListNode head) {
+        return sortList_merge(head, null);
+    }
 
+    public static ListNode sortList_merge(ListNode head, ListNode tail) {
+        if (head == null) {
+            return head;
+        }
+
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != tail) {
+            fast = fast.next;
+            slow = slow.next;
+            if (fast != tail) {
+                fast = fast.next;
+            }
+        }
+
+        ListNode mid = slow;
+        ListNode node1 = sortList_merge(head, mid);
+        ListNode node2 = sortList_merge(mid, tail);
+        ListNode pNode = mergeList(node1, node2);
+        return pNode;
+    }
+
+    public static ListNode mergeList(ListNode node1, ListNode node2) {
+        ListNode dummyNode = new ListNode(0);
+        ListNode head = dummyNode;
+        ListNode temp1 = node1;
+        ListNode temp2 = node2;
+        while (temp1 != null && temp2 != null) {
+            if (temp1.val <= temp2.val) {
+                head.next = temp1;
+                temp1 = temp1.next;
+            } else {
+                head.next = temp2;
+                temp2 = temp2.next;
+            }
+
+            head = head.next;
+        }
+
+        while (temp1 != null) {
+            head.next = temp1;
+            temp1 = temp1.next;
+            head = head.next;
+        }
+
+        while (temp2 != null) {
+            head.next = temp2;
+            temp2 = temp2.next;
+            head = head.next;
+        }
+
+        return dummyNode.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{4, 2, 1, 3});
+        System.out.println(LinkedListNodeUtils.printLinkedList(sortList_fast(tst1)));
     }
 }
