@@ -31,6 +31,30 @@ public class Problem912_sortArray {
         return nums;
     }
 
+    public static int[] sortArray_bubble(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+
+        int len = nums.length;
+        for (int i = len - 1; i >= 0; i--) {
+            boolean isSorted = true;
+            for (int j = 0; j < i; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    isSorted = false;
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                }
+            }
+            if (isSorted) {
+                break;
+            }
+        }
+
+        return nums;
+    }
+
     public static int[] sortArray_merge(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums;
@@ -77,7 +101,48 @@ public class Problem912_sortArray {
         }
     }
 
+    public static int[] sortArray_quick(int[] nums) {
+        quickSort(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    public static void quickSort(int[] nums, int low, int high) {
+        if (low < high) {
+            int pos = partition(nums, low, high);
+            quickSort(nums, low, pos - 1);
+            quickSort(nums, pos + 1, high);
+        }
+    }
+
+    public static int partition(int[] nums, int low, int high) {
+        int pivot = nums[low];
+        while (low < high) {
+            while (low < high && nums[high] > pivot) {
+                high--;
+            }
+            if (low < high) {
+                nums[low] = nums[high];
+            }
+            while (low < high && nums[low] < pivot) {
+                low++;
+            }
+            if (low < high) {
+                nums[high] = nums[low];
+            }
+        }
+        nums[low] = pivot;
+        return low;
+    }
+
+    public static void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+
     public static void main(String[] args) {
+        System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(sortArray(new int[]{5, 2, 3, 1})));
+        System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(sortArray_bubble(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(sortArray_merge(new int[]{5, 2, 3, 1})));
     }
 }
