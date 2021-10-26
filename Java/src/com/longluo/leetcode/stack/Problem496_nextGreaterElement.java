@@ -93,8 +93,32 @@ public class Problem496_nextGreaterElement {
         return ans;
     }
 
+    public static int[] nextGreaterElement_stack(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        int[] ans = new int[m];
+        Stack<Integer> stack = new Stack<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = n - 1; i >= 0; i--) {
+            int num = nums2[i];
+            while (!stack.empty() && num >= stack.peek()) {
+                stack.pop();
+            }
+
+            map.put(num, stack.empty() ? -1 : stack.peek());
+            stack.push(num);
+        }
+
+        for (int i = 0; i < m; i++) {
+            ans[i] = map.get(nums1[i]);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[-1, 3, -1] ?= " + Arrays.toString(nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2})));
+        System.out.println("[-1, 3, -1] ?= " + Arrays.toString(nextGreaterElement_stack(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2})));
         System.out.println("[3, -1] ?= " + Arrays.toString(nextGreaterElement(new int[]{2, 4}, new int[]{1, 2, 3, 4})));
 
         System.out.println("[-1, 3, -1] ?= " + Arrays.toString(nextGreaterElement_2(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2})));
