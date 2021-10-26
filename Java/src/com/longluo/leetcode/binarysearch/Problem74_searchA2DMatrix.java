@@ -34,6 +34,10 @@ public class Problem74_searchA2DMatrix {
         int row = matrix.length;
         int col = matrix[0].length;
 
+        if (matrix[0][0] > target || matrix[row - 1][col - 1] < target) {
+            return false;
+        }
+
         for (int i = 0; i < row; i++) {
             if (target >= matrix[i][0] && target <= matrix[i][col - 1]) {
                 for (int j = 0; j < col; j++) {
@@ -47,13 +51,17 @@ public class Problem74_searchA2DMatrix {
         return false;
     }
 
-    public static boolean searchMatrix2(int[][] matrix, int target) {
+    public static boolean searchMatrix_1(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
         }
 
         int row = matrix.length;
         int col = matrix[0].length;
+
+        if (matrix[0][0] > target || matrix[row - 1][col - 1] < target) {
+            return false;
+        }
 
         for (int i = 0; i < row; i++) {
             if (target >= matrix[i][0] && target <= matrix[i][col - 1]) {
@@ -85,10 +93,10 @@ public class Problem74_searchA2DMatrix {
 
     public static void main(String[] args) {
         System.out.println("true ?= " + searchMatrix(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3));
-        System.out.println("true ?= " + searchMatrix2(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3));
+        System.out.println("true ?= " + searchMatrix_1(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3));
         System.out.println("false ?= " + searchMatrix(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
-        System.out.println("false ?= " + searchMatrix2(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
+        System.out.println("false ?= " + searchMatrix_1(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
         System.out.println("true ?= " + searchMatrix(new int[][]{{1}}, 1));
-        System.out.println("true ?= " + searchMatrix2(new int[][]{{1}}, 1));
+        System.out.println("true ?= " + searchMatrix_1(new int[][]{{1}}, 1));
     }
 }
