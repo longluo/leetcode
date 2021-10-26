@@ -93,6 +93,41 @@ public class Problem912_sortArray {
         return nums;
     }
 
+    public static int[] shellSort(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+
+        int len = nums.length;
+        for (int gap = len / 2; gap >= 1; gap /= 2) {
+            for (int i = gap; i < len; i++) {
+                int j = i;
+                while (j - gap >= 0 && nums[j] < nums[j - gap]) {
+                    int temp = nums[j];
+                    nums[j] = nums[j - gap];
+                    nums[j - gap] = temp;
+                    j -= gap;
+                }
+            }
+        }
+
+        return nums;
+    }
+
+    public static int[] heapSort(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+
+        int len = nums.length;
+        for (int gap = len / 2; gap >= 0; gap--) {
+
+
+        }
+
+        return nums;
+    }
+
     public static int[] mergeSort(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums;
@@ -183,6 +218,8 @@ public class Problem912_sortArray {
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(bubbleSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(selectSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(insertSort(new int[]{5, 2, 3, 1})));
+        System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(shellSort(new int[]{5, 2, 3, 1})));
+        System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(heapSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(mergeSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(quickSort(new int[]{5, 2, 3, 1})));
     }
