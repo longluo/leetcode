@@ -1,6 +1,8 @@
 package com.longluo.leetcode.stack;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -32,8 +34,8 @@ import java.util.Stack;
  * nums1 中的所有整数同样出现在 nums2 中
  * <p>
  * 进阶：你可以设计一个时间复杂度为 O(nums1.length + nums2.length) 的解决方案吗？
- *
- *
+ * <p>
+ * https://leetcode-cn.com/problems/next-greater-element-i/
  */
 public class Problem496_nextGreaterElement {
 
@@ -42,15 +44,15 @@ public class Problem496_nextGreaterElement {
             return nums1;
         }
 
-        int n1 = nums1.length;
-        int n2 = nums2.length;
-        int[] ans = new int[n1];
+        int m = nums1.length;
+        int n = nums2.length;
+        int[] ans = new int[m];
         Arrays.fill(ans, -1);
 
-        for (int i = 0; i < n1; i++) {
-            for (int j = 0; j < n2; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (nums1[i] == nums2[j]) {
-                    for (int k = j + 1; k < n2; k++) {
+                    for (int k = j + 1; k < n; k++) {
                         if (nums2[k] > nums2[j]) {
                             ans[i] = nums2[k];
                             break;
@@ -69,16 +71,23 @@ public class Problem496_nextGreaterElement {
             return nums1;
         }
 
-        int n1 = nums1.length;
-        int n2 = nums2.length;
-        int[] ans = new int[n1];
+        int m = nums1.length;
+        int n = nums2.length;
+        int[] ans = new int[m];
         Arrays.fill(ans, -1);
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.put(nums2[i], i);
+        }
 
-        Stack<Integer> st = new Stack<>();
-
-        for (int i = 0; i < n1; i++) {
-
-
+        for (int i = 0; i < m; i++) {
+            int idx = map.getOrDefault(nums1[i], -1);
+            for (int j = idx + 1; j < n; j++) {
+                if (nums2[j] > nums1[i]) {
+                    ans[i] = nums2[j];
+                    break;
+                }
+            }
         }
 
         return ans;
