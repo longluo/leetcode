@@ -66,6 +66,7 @@
 | [496. 下一个更大元素I](https://leetcode-cn.com/problems/next-greater-element-i/) | Easy | []()  | [Java](./stack/Problem496_nextGreaterElement.java) |
 | [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/) | Easy | []()  | [Java](./tree/Problem501_findModeInBinarySearchTree.java) |
 | [502. IPO](https://leetcode-cn.com/problems/ipo/) | Hard | []()  | [Java](./greedy/Problem502_ipo.java) |
+| [503. 下一个更大元素 II](https://leetcode-cn.com/problems/next-greater-element-ii/) | Medium | []()  | [Java](./stack/Problem503_nextGreaterElements.java) |
 | [509. 斐波那契数](https://leetcode-cn.com/problems/fibonacci-number/) | Easy | []()  | [Java](./recursion/Problem509_fib.java) |
 | [524. 通过删除字母匹配到字典里最长单词](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/) | Medium | [](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/solution/java-dui-zi-dian-li-mei-ge-zi-fu-chuan-h-jzgn/)  | [Java](./array/Problem524_findLongestWord.java) |
 | [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/) | Easy | []()  | [Java](./tree/Problem530_minimumAbsoluteDifferenceInBst.java) |
@@ -73,6 +74,7 @@
 | [543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/) | Easy | []()  | [Java](./tree/Problem543_diameterOfBinaryTree.java) |
 | [551. 学生出勤记录I](https://leetcode-cn.com/problems/student-attendance-record-i/) | Easy | []()  | [Java](./string/Problem551_studentAttendanceRecord_i.java) |
 | [552. 学生出勤记录II](https://leetcode-cn.com/problems/student-attendance-record-ii/) | Medium | []()  | [Java](./dp/Problem552_studentAttendanceRecord_ii.java) |
+| [556. 下一个更大元素 III](https://leetcode-cn.com/problems/next-greater-element-iii/) | Medium | []()  | [Java](./math/Problem556_nextGreaterElement.java) |
 | [557. 反转字符串中的单词III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/) | Easy | []()  | [Java](./twopointers/Problem557_reverseWordsInAString_iii.java) |
 | [559. N 叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/) | Easy | []()  | [Java](./tree/Problem559_maximumDepthOfNAryTree.java) |
 | [589. N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/) | Easy | []()  | [Java](./tree/Problem589_nAryTreePreorderTraversal.java) |
@@ -102,6 +104,7 @@
 | [881. 救生艇](https://leetcode-cn.com/problems/boats-to-save-people/) | Medium | []()  | [Java](./greedy/Problem881_boatsToSavePeople.java) |
 | [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array/) | Easy | []()  | [Java](./array/Problem896_monotonicArray.java) |
 | [909. 蛇梯棋](https://leetcode-cn.com/problems/snakes-and-ladders/) | Medium | []()  | [Java](./bfs/Problem909_snakesAndLadders.java) |
+| [912. 排序数组](https://leetcode-cn.com/problems/sort-an-array/) | Medium | []()  | [Java](./array/Problem912_sortArray.java) |
 | [930. 和相同的二元子数组](https://leetcode-cn.com/problems/binary-subarrays-with-sum/) | Medium | []()  | [Java](./array/Problem930_binarySubarraysWithSum.java) |
 | [933. 最近的请求次数](https://leetcode-cn.com/problems/number-of-recent-calls/) | Easy | []()  | [Java](./queue/Problem933_numberOfRecentCalls.java) |
 | [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst/) | Easy | []()  | [Java](./tree/Problem938_rangeSumOfBST.java) |
