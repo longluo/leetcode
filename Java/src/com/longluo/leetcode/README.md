@@ -50,6 +50,7 @@
 | [225. 用队列实现栈](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](./stack/Problem225_implementStackUsingQueues.java) |
 | [227. 基本计算器II](https://leetcode-cn.com/problems/basic-calculator-ii/) | Medium | []()  | [Java](./stack/Problem227_basicCalculator_ii.java) |
 | [232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](./stack/Problem232_implementQueueUsingStacks.java) |
+| [240. 搜索二维矩阵II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/) | Medium | []()  | [Java](./array/Problem240_searchMatrix.java) |
 | [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/) | Easy | []()  | [Java](./tree/Problem257_binaryTreePaths.java) |
 | [260. 只出现一次的数字 III](https://leetcode-cn.com/problems/single-number-iii/) | Easy | []()  | [Java](./bitmanipulation/Problem260_singleNumber_iii.java) |
 | [274. H指数](https://leetcode-cn.com/problems/h-index/) | Easy | []()  | [Java](./array/Problem274_hIndex.java) |
