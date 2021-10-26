@@ -43,7 +43,7 @@ public class Problem556_nextGreaterElement {
             right--;
         }
         swap(array, left, right);
-        reverse(array, left + 1, len - 1);
+        reverse(array, left + 1);
         long res = Long.parseLong(new String(array));
         if (res > Integer.MAX_VALUE) {
             return -1;
@@ -52,7 +52,8 @@ public class Problem556_nextGreaterElement {
         return (int) res;
     }
 
-    public static void reverse(char[] arr, int low, int high) {
+    public static void reverse(char[] arr, int low) {
+        int high = arr.length - 1;
         while (low < high) {
             swap(arr, low, high);
             low++;
