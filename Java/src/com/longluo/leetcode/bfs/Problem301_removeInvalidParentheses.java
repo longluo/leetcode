@@ -66,7 +66,7 @@ public class Problem301_removeInvalidParentheses {
         }
 
         for (int i = start; i < str.length(); i++) {
-            if (lremove + rremove > str.length()) {
+            if (lremove + rremove > str.length() - i) {
                 break;
             }
 
