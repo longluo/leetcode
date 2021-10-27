@@ -66,8 +66,12 @@ public class Problem301_removeInvalidParentheses {
         }
 
         for (int i = start; i < str.length(); i++) {
+            if (i != start && str.charAt(i) == str.charAt(i - 1)) {
+                continue;
+            }
+
             if (lremove + rremove > str.length() - i) {
-                break;
+                return;
             }
 
             if (lremove > 0 && str.charAt(i) == '(') {
