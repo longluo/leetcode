@@ -66,11 +66,15 @@ public class Problem301_removeInvalidParentheses {
         }
 
         for (int i = start; i < str.length(); i++) {
-            if (str.charAt(i) == '(') {
+            if (lremove + rremove > str.length()) {
+                break;
+            }
+
+            if (lremove > 0 && str.charAt(i) == '(') {
                 backtrack(str.substring(0, i) + str.substring(i + 1), res, i, lcnt + 1, rcnt, lremove - 1, rremove);
             }
 
-            if (str.charAt(i) == ')') {
+            if (rremove > 0 && str.charAt(i) == ')') {
                 backtrack(str.substring(0, i) + str.substring(i + 1), res, i, lcnt, rcnt + 1, lremove, rremove - 1);
             }
         }
