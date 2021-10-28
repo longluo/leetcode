@@ -102,6 +102,7 @@
 | [815. 公交路线](https://leetcode-cn.com/problems/bus-routes/) | Medium | []()  | [Java](./bfs/Problem815_busRoutes.java) |
 | [832. 翻转图像](https://leetcode-cn.com/problems/flipping-an-image/) | Easy | []()  | [Java](./array/Problem832_flippingAnImage.java) |
 | [867. 转置矩阵](https://leetcode-cn.com/problems/transpose-matrix/) | Easy | []()  | [Java](./array/Problem867_transposeMatrix.java) |
+| [869. 重新排序得到2的幂](https://leetcode-cn.com/problems/reordered-power-of-2/) | Medium | []()  | [Java](./math/Problem869_reorderedPowerOf2.java) |
 | [881. 救生艇](https://leetcode-cn.com/problems/boats-to-save-people/) | Medium | []()  | [Java](./greedy/Problem881_boatsToSavePeople.java) |
 | [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array/) | Easy | []()  | [Java](./array/Problem896_monotonicArray.java) |
 | [909. 蛇梯棋](https://leetcode-cn.com/problems/snakes-and-ladders/) | Medium | []()  | [Java](./bfs/Problem909_snakesAndLadders.java) |
