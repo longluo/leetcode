@@ -1,7 +1,5 @@
 package com.longluo.leetcode.math;
 
-import java.util.Arrays;
-
 /**
  * 31. 下一个排列
  * <p>
