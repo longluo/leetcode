@@ -12,6 +12,9 @@
 | [27. 移除元素](https://leetcode-cn.com/problems/remove-element/) | Easy | []()  | [Java](./twopointers/Problem27_removeElement.java) |
 | [28. 实现strStr()](https://leetcode-cn.com/problems/implement-strstr/) | Easy | []()  | [Java](./twopointers/Problem28_implementStrStr.java) |
 | [29. 两数相除](https://leetcode-cn.com/problems/divide-two-integers/) | Medium | []()  | [Java](./bitmanipulation/Problem29_divideTwoIntegers.java) |
+| [31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/) | Medium | []()  | [Java](./math/Problem31_nextPermutation.java) |
+| [46. 全排列](https://leetcode-cn.com/problems/next-permutation/) | Medium | []()  | [Java](./backtracking/Problem46_permute.java) |
+| [47. 全排列II](https://leetcode-cn.com/problems/permutations-ii/) | Medium | []()  | [Java](./backtracking/Problem47_permutations_ii.java) |
 | [48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/) | Medium | []()  | [Java](./array/Problem48_rotateImage.java) |
 | [50. Pow(x, n)](https://leetcode-cn.com/problems/powx-n/) | Medium | []()  | [Java](./math/Problem50_powxn.java) |
 | [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/) | Easy | []()  | [Java](./array/Problem53_maximumSubarray.java) |
