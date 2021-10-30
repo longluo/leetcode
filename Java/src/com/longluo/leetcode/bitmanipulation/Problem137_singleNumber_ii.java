@@ -27,11 +27,7 @@ import java.util.*;
 public class Problem137_singleNumber_ii {
 
     public static int singleNumber(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-
-        if (nums.length <= 3) {
+        if (nums == null || nums.length <= 3) {
             return nums[0];
         }
 

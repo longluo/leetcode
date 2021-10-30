@@ -50,13 +50,13 @@ public class Problem260_singleNumber_iii {
             }
         }
 
-        Iterator<Map.Entry<Integer, Integer>> entries = map.entrySet().iterator();
-        int j = 0;
-        while (entries.hasNext()) {
-            Map.Entry<Integer, Integer> entry = entries.next();
+        int idx = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             if (entry.getValue() == 1) {
-                ans[j] = entry.getKey();
-                j++;
+                ans[idx++] = entry.getKey();
+                if (idx == 2) {
+                    break;
+                }
             }
         }
 
@@ -85,8 +85,35 @@ public class Problem260_singleNumber_iii {
         return new int[]{a, b};
     }
 
+    public static int[] singleNumber_sort(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return new int[]{};
+        }
+
+        int[] ans = new int[2];
+        int n = nums.length;
+        Arrays.sort(nums);
+        int idx = 0;
+        for (int i = 0; i < n; i++) {
+            if (i == 0 && nums[i] != nums[i + 1]) {
+                ans[idx++] = nums[i];
+            } else if (i == n - 1 && nums[i] != nums[i - 1]) {
+                ans[idx++] = nums[i];
+                break;
+            } else if (i > 0 && nums[i] != nums[i - 1] && nums[i] != nums[i + 1]) {
+                ans[idx++] = nums[i];
+                if (idx == 2) {
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[3, 5] ?= " + Arrays.toString(singleNumber(new int[]{1, 2, 1, 3, 2, 5})));
+        System.out.println("[3, 5] ?= " + Arrays.toString(singleNumber_sort(new int[]{1, 2, 1, 3, 2, 5})));
         System.out.println("[3, 5] ?= " + Arrays.toString(singleNumber_bit(new int[]{1, 2, 1, 3, 2, 5})));
         System.out.println("[-1, 0] ?= " + Arrays.toString(singleNumber(new int[]{-1, 0})));
         System.out.println("[-1, 0] ?= " + Arrays.toString(singleNumber_bit(new int[]{-1, 0})));
