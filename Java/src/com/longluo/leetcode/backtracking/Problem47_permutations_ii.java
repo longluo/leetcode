@@ -28,14 +28,13 @@ public class Problem47_permutations_ii {
 
     public static List<List<Integer>> permuteUnique(int[] nums) {
         Arrays.sort(nums);
-//        List<List<Integer>> ans = new ArrayList<>();
-        Set<List<Integer>> ans = new HashSet<>();
+        List<List<Integer>> ans = new ArrayList<>();
         boolean[] visited = new boolean[nums.length];
         backtrack(ans, new ArrayList<>(), nums, visited, 0);
-        return new ArrayList<>(ans);
+        return ans;
     }
 
-    public static void backtrack(Set<List<Integer>> res, List<Integer> path, int[] nums, boolean[] visited, int len) {
+    public static void backtrack(List<List<Integer>> res, List<Integer> path, int[] nums, boolean[] visited, int len) {
         if (len == nums.length) {
             res.add(new ArrayList<>(path));
             return;
