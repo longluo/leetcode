@@ -31,31 +31,32 @@ import java.util.List;
 public class Problem46_permute {
 
     public static List<List<Integer>> permute(int[] nums) {
-        Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
         boolean[] visited = new boolean[nums.length];
-        backtrack(ans, new ArrayList<>(), nums, visited, 0, nums.length);
+        backtrack(ans, new ArrayList<>(), nums, visited, 0);
         return ans;
     }
 
-    public static void backtrack(List<List<Integer>> res, List<Integer> list, int[] nums, boolean[] visited, int idx, int len) {
-        if (idx == len) {
+    public static void backtrack(List<List<Integer>> res, List<Integer> list, int[] nums, boolean[] visited, int idx) {
+        if (idx == nums.length) {
             res.add(new ArrayList<>(list));
             return;
         }
 
-        for (int i = 0; i < len; i++) {
-            visited[i] = true;
-            list.add(nums[idx]);
-            if (visited[i]) {
-                backtrack(res, list, nums, visited, idx + 1, len);
+        for (int i = 0; i < nums.length; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                list.add(nums[i]);
+                backtrack(res, list, nums, visited, idx + 1);
+                list.remove(list.size() - 1);
+                visited[i] = false;
             }
-            list.remove(list.size() - 1);
-            visited[i] = false;
         }
     }
 
     public static void main(String[] args) {
-
+        permute(new int[]{1});
+        permute(new int[]{1, 2});
+        permute(new int[]{1, 2, 3});
     }
 }
