@@ -1,5 +1,8 @@
 package com.longluo.leetcode.bitmanipulation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 136. 只出现一次的数字
  *
@@ -28,6 +31,47 @@ public class Problem136_singleNumber {
         int ans = 0;
         for (int i = 0; i < nums.length; i++) {
             ans ^= nums[i];
+        }
+
+        return ans;
+    }
+
+    public static int singleNumber_1(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int ans = 0;
+        int cnt = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (cnt == 0 && ans == nums[i]) {
+                ans = nums[i];
+                cnt++;
+            } else if (cnt > 1) {
+                cnt--;
+            }
+        }
+
+        return ans;
+    }
+
+    public static int singleNumber_2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        Map<Integer, Integer> freq = new HashMap<>();
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
+        }
+
+        int ans = 0;
+        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
+            if (entry.getValue() == 1) {
+               ans = entry.getKey();
+               break;
+            }
         }
 
         return ans;
