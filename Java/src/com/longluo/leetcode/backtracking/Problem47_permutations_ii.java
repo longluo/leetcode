@@ -42,13 +42,19 @@ public class Problem47_permutations_ii {
         }
 
         for (int i = 0; i < nums.length; i++) {
-            if (!visited[i]) {
-                visited[i] = true;
-                path.add(nums[i]);
-                backtrack(res, path, nums, visited, len + 1);
-                path.remove(path.size() - 1);
-                visited[i] = false;
+            if (visited[i]) {
+                continue;
             }
+
+            if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) {
+                continue;
+            }
+
+            path.add(nums[i]);
+            visited[i] = true;
+            backtrack(res, path, nums, visited, len + 1);
+            visited[i] = false;
+            path.remove(path.size() - 1);
         }
     }
 
