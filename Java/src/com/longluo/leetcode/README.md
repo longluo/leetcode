@@ -35,7 +35,7 @@
 | [119. 杨辉三角 II](https://leetcode-cn.com/problems/pascals-triangle-ii/) | Easy | []()  | [Java](./array/Problem119_pascalsTriangle_ii.java) |
 | [135. 分发糖果](https://leetcode-cn.com/problems/candy/) | Hard | []()  | [Java](./greedy/Problem135_candy.java) |
 | [136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/) | Easy | []()  | [Java](./bitmanipulation/Problem136_singleNumber.java) |
-| [137. 只出现一次的数字 II](https://leetcode-cn.com/problems/single-number-ii/) | Easy | []()  | [Java](./bitmanipulation/Problem137_singleNumber_ii.java) |
+| [137. 只出现一次的数字 II](https://leetcode-cn.com/problems/single-number-ii/) | Medium | []()  | [Java](./bitmanipulation/Problem137_singleNumber_ii.java) |
 | [138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/) | Medium | []()  | [Java](./hash/Problem138_copyListWithRandomPointer.java) |
 | [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/) | Easy | []()  | [Java](./tree/Problem145_binaryTreePostorderTraversal.java) |
 | [146. LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/) | Medium | []()  | [Java](./design/Problem146_lruCache.java) |
@@ -55,7 +55,7 @@
 | [232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/) | Easy | []()  | [Java](./stack/Problem232_implementQueueUsingStacks.java) |
 | [240. 搜索二维矩阵II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/) | Medium | []()  | [Java](./array/Problem240_searchMatrix.java) |
 | [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/) | Easy | []()  | [Java](./tree/Problem257_binaryTreePaths.java) |
-| [260. 只出现一次的数字 III](https://leetcode-cn.com/problems/single-number-iii/) | Easy | []()  | [Java](./bitmanipulation/Problem260_singleNumber_iii.java) |
+| [260. 只出现一次的数字 III](https://leetcode-cn.com/problems/single-number-iii/) | Medium | []()  | [Java](./bitmanipulation/Problem260_singleNumber_iii.java) |
 | [274. H指数](https://leetcode-cn.com/problems/h-index/) | Easy | []()  | [Java](./array/Problem274_hIndex.java) |
 | [275. H指数 II](https://leetcode-cn.com/problems/h-index-ii/) | Medium | []()  | [Java](./array/Problem275_hIndex_ii.java) |
 | [292. Nim游戏](https://leetcode-cn.com/problems/nim-game/) | Easy | []()  | [Java](./minimax/Problem292_nimGame.java) |
