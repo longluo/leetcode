@@ -1,11 +1,12 @@
 package com.longluo.leetcode.bitmanipulation;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 136. 只出现一次的数字
- *
+ * <p>
  * 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
  * <p>
  * 说明：
@@ -24,8 +25,8 @@ import java.util.Map;
 public class Problem136_singleNumber {
 
     public static int singleNumber(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
+        if (nums == null || nums.length <= 1) {
+            return nums[0];
         }
 
         int ans = 0;
@@ -37,18 +38,23 @@ public class Problem136_singleNumber {
     }
 
     public static int singleNumber_1(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
+        if (nums == null || nums.length <= 1) {
+            return nums[0];
         }
 
         int ans = 0;
-        int cnt = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (cnt == 0 && ans == nums[i]) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        for (int i = 0; i < n; i++) {
+            if (i == 0 && i < n - 1 && nums[i] != nums[i + 1]) {
                 ans = nums[i];
-                cnt++;
-            } else if (cnt > 1) {
-                cnt--;
+                break;
+            } else if (i == n - 1 && nums[i] != nums[i - 1]) {
+                ans = nums[i];
+                break;
+            } else if (i > 0 && nums[i] != nums[i - 1] && nums[i] != nums[i + 1]) {
+                ans = nums[i];
+                break;
             }
         }
 
@@ -56,8 +62,8 @@ public class Problem136_singleNumber {
     }
 
     public static int singleNumber_2(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
+        if (nums == null || nums.length <= 1) {
+            return nums[0];
         }
 
         Map<Integer, Integer> freq = new HashMap<>();
@@ -69,8 +75,8 @@ public class Problem136_singleNumber {
         int ans = 0;
         for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
             if (entry.getValue() == 1) {
-               ans = entry.getKey();
-               break;
+                ans = entry.getKey();
+                break;
             }
         }
 
@@ -80,5 +86,7 @@ public class Problem136_singleNumber {
     public static void main(String[] args) {
         System.out.println("1 ?= " + singleNumber(new int[]{2, 2, 1}));
         System.out.println("4 ?= " + singleNumber(new int[]{4, 1, 2, 1, 2}));
+        System.out.println("4 ?= " + singleNumber_1(new int[]{4, 1, 2, 1, 2}));
+        System.out.println("4 ?= " + singleNumber_2(new int[]{4, 1, 2, 1, 2}));
     }
 }
