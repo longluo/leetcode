@@ -45,15 +45,14 @@ public class Problem137_singleNumber_ii {
             }
         }
 
-        Iterator<Map.Entry<Integer, Integer>> entries = freq.entrySet().iterator();
-        while (entries.hasNext()) {
-            Map.Entry<Integer, Integer> entry = entries.next();
+        int ans = 0;
+        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
             if (entry.getValue() == 1) {
-                return entry.getKey();
+                ans = entry.getKey();
             }
         }
 
-        return 0;
+        return ans;
     }
 
     public static int singleNumber_bit(int[] nums) {
