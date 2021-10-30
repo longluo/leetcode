@@ -49,6 +49,7 @@ public class Problem137_singleNumber_ii {
         for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
             if (entry.getValue() == 1) {
                 ans = entry.getKey();
+                break;
             }
         }
 
