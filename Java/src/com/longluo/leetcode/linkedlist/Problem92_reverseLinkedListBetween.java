@@ -1,10 +1,11 @@
 package com.longluo.leetcode.linkedlist;
 
 import com.longluo.datastructure.ListNode;
-import com.longluo.datastructure.LinkedListUtils;
+import com.longluo.datastructure.LinkedListNodeUtils;
 
 /**
  * 92. 反转链表 II
+ * <p>
  * 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left <= right 。请你反转从位置 left 到位置 right 的链表节点，
  * 返回 反转后的链表 。
  * <p>
@@ -21,6 +22,8 @@ import com.longluo.datastructure.LinkedListUtils;
  * 1 <= n <= 500
  * -500 <= Node.val <= 500
  * 1 <= left <= right <= n
+ * <p>
+ * https://leetcode-cn.com/problems/reverse-linked-list-ii/
  */
 public class Problem92_reverseLinkedListBetween {
 
@@ -73,14 +76,14 @@ public class Problem92_reverseLinkedListBetween {
     }
 
     public static void main(String[] args) {
-        ListNode test1 = LinkedListUtils.makeListNode(new int[]{1, 2, 3, 4, 5});
-        System.out.println("[1,4,3,2,5] ?= " + LinkedListUtils.printLinkedList(reverseBetween(test1, 2, 4)));
+        ListNode test1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
+        System.out.println("[1,4,3,2,5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween(test1, 2, 4)));
 
-        ListNode test2 = LinkedListUtils.makeListNode(new int[]{5});
-        System.out.println("[5] ?= " + LinkedListUtils.printLinkedList(reverseBetween(test2, 1, 1)));
+        ListNode test2 = LinkedListNodeUtils.constructListNode(new int[]{5});
+        System.out.println("[5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween(test2, 1, 1)));
 
-        ListNode test3 = LinkedListUtils.makeListNode(new int[]{3, 5});
-        System.out.println("[5,3] ?= " + LinkedListUtils.printLinkedList(reverseBetween(test3, 1, 2)));
+        ListNode test3 = LinkedListNodeUtils.constructListNode(new int[]{3, 5});
+        System.out.println("[5,3] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween(test3, 1, 2)));
 
     }
 }
