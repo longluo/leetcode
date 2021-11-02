@@ -1,10 +1,11 @@
 package com.longluo.leetcode.linkedlist;
 
 import com.longluo.datastructure.ListNode;
-import com.longluo.datastructure.Utils;
+import com.longluo.datastructure.LinkedListNodeUtils;
 
 /**
  * 82. 删除排序链表中的重复元素 II
+ * <p>
  * 存在一个按升序排列的链表，给你这个链表的头节点head，请你删除链表中所有存在数字重复情况的节点，
  * 只保留原始链表中没有重复出现的数字。
  * <p>
@@ -22,6 +23,8 @@ import com.longluo.datastructure.Utils;
  * 链表中节点数目在范围 [0, 300] 内
  * -100 <= Node.val <= 100
  * 题目数据保证链表已经按升序排列
+ * <p>
+ * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/
  */
 public class Problem82_removeDuplicatesFromSortedList {
 
@@ -49,22 +52,22 @@ public class Problem82_removeDuplicatesFromSortedList {
     }
 
     public static void main(String[] args) {
-        ListNode test0 = Utils.makeListNode(new int[]{});
-        System.out.println("[] ?= " + Utils.printLinkedList(deleteDuplicates(test0)));
+        ListNode test0 = LinkedListNodeUtils.constructListNode(new int[]{});
+        System.out.println("[] ?= " + LinkedListNodeUtils.printLinkedList(deleteDuplicates(test0)));
 
-        ListNode test1 = Utils.makeListNode(new int[]{1});
-        System.out.println("[1] ?= " + Utils.printLinkedList(deleteDuplicates(test1)));
+        ListNode test1 = LinkedListNodeUtils.constructListNode(new int[]{1});
+        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(deleteDuplicates(test1)));
 
-        ListNode test2 = Utils.makeListNode(new int[]{1, 1});
-        System.out.println("[] ?= " + Utils.printLinkedList(deleteDuplicates(test2)));
+        ListNode test2 = LinkedListNodeUtils.constructListNode(new int[]{1, 1});
+        System.out.println("[] ?= " + LinkedListNodeUtils.printLinkedList(deleteDuplicates(test2)));
 
-        ListNode test3 = Utils.makeListNode(new int[]{1, 2, 3});
-        System.out.println("[1,2,3] ?= " + Utils.printLinkedList(deleteDuplicates(test3)));
+        ListNode test3 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3});
+        System.out.println("[1,2,3] ?= " + LinkedListNodeUtils.printLinkedList(deleteDuplicates(test3)));
 
-        ListNode test4 = Utils.makeListNode(new int[]{1, 2, 3, 3, 4, 4, 5});
-        System.out.println("[1,2,5] ?= " + Utils.printLinkedList(deleteDuplicates(test4)));
+        ListNode test4 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 3, 4, 4, 5});
+        System.out.println("[1,2,5] ?= " + LinkedListNodeUtils.printLinkedList(deleteDuplicates(test4)));
 
-        ListNode test5 = Utils.makeListNode(new int[]{1, 1, 1, 2, 3});
-        System.out.println("[2,3] ?= " + Utils.printLinkedList(deleteDuplicates(test5)));
+        ListNode test5 = LinkedListNodeUtils.constructListNode(new int[]{1, 1, 1, 2, 3});
+        System.out.println("[2,3] ?= " + LinkedListNodeUtils.printLinkedList(deleteDuplicates(test5)));
     }
 }
