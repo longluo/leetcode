@@ -20,6 +20,7 @@
 | [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/) | Easy | []()  | [Java](./array/Problem53_maximumSubarray.java) |
 | [54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/) | Medium | []()  | [Java](./array/Problem54_spiralMatrix.java) |
 | [59. 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/) | Medium | []()  | [Java](./array/Problem59_spiralMatrix_ii.java) |
+| [61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/) | Medium | []()  | [Java](./linkedlist/Problem61_rotateLinkedList.java) |
 | [73. 矩阵置零](https://leetcode-cn.com/problems/set-matrix-zeroes/) | Medium | []()  | [Java](./array/Problem73_setMatrixZeroes.java) |
 | [74. 搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/) | Easy | []()  | [Java](./binarysearch/Problem74_searchA2DMatrix.java) |
 | [80. 删除有序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/) | Easy | []()  | [Java](./twopointers/Problem80_removeDuplicatesFromSortedArray_ii.java) |
