@@ -36,9 +36,31 @@ public class Problem367_validPerfectSquare {
     }
 
     public static boolean isPerfectSquare_n(int num) {
-        for (int i = 1; i * i <= num; i++) {
-            if (i * i == num) {
+        long i = 1;
+        long square = 1;
+        while (square <= num) {
+            if (square == num) {
                 return true;
+            }
+            i++;
+            square = i * i;
+        }
+
+        return false;
+    }
+
+    public static boolean isPerfectSquare_bs(int num) {
+        int low = 1;
+        int high = num / 2 + 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            long square = (long) mid * mid;
+            if (square == num) {
+                return true;
+            } else if (square < num) {
+                low = mid + 1;
+            } else if (square > num) {
+                high = mid - 1;
             }
         }
 
@@ -47,6 +69,10 @@ public class Problem367_validPerfectSquare {
 
     public static void main(String[] args) {
         System.out.println("true ?= " + isPerfectSquare(16));
+        System.out.println("true ?= " + isPerfectSquare_bs(16));
+        System.out.println("true ?= " + isPerfectSquare_bs(1));
+        System.out.println("true ?= " + isPerfectSquare_bs(808201));
         System.out.println("false ?= " + isPerfectSquare(14));
+        System.out.println("false ?= " + isPerfectSquare_bs(14));
     }
 }
