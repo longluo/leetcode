@@ -27,9 +27,19 @@ public class Problem367_validPerfectSquare {
         }
 
         double root = Math.sqrt(num);
-        int res = (int)root;
-        if (res ==  root) {
+        int res = (int) root;
+        if (res == root) {
             return true;
+        }
+
+        return false;
+    }
+
+    public static boolean isPerfectSquare_n(int num) {
+        for (int i = 1; i * i <= num; i++) {
+            if (i * i == num) {
+                return true;
+            }
         }
 
         return false;
