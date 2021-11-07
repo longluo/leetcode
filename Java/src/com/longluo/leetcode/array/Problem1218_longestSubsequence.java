@@ -53,31 +53,13 @@ public class Problem1218_longestSubsequence {
         return ans;
     }
 
-    public static int longestSubsequence_hash(int[] arr, int difference) {
+    public static int longestSubsequence_dp(int[] arr, int difference) {
         int len = arr.length;
         int ans = 1;
-        Map<Integer, Integer> freq = new HashMap<>();
+        Map<Integer, Integer> dp = new HashMap<>();
         for (int i = 0; i < len; i++) {
-            freq.put(arr[i], freq.getOrDefault(arr[i], 0) + 1);
-        }
-
-        if (difference == 0) {
-            int maxFreq = 0;
-            for (int val : freq.values()) {
-                maxFreq = Math.max(maxFreq, val);
-            }
-            return maxFreq;
-        }
-
-        for (int i = 0; i < len; i++) {
-            int value = arr[i];
-            int cnt = 0;
-            while (freq.containsKey(value)) {
-                cnt++;
-                value += difference;
-            }
-
-            ans = Math.max(ans, cnt);
+            dp.put(arr[i], dp.getOrDefault(arr[i] - difference, 0) + 1);
+            ans = Math.max(ans, dp.get(arr[i]));
         }
 
         return ans;
@@ -91,5 +73,6 @@ public class Problem1218_longestSubsequence {
         System.out.println("4 ?= " + longestSubsequence(new int[]{1, 3, 5, 7}, 2));
         System.out.println("4 ?= " + longestSubsequence(new int[]{1, 5, 7, 8, 5, 3, 4, 2, 1}, -2));
         System.out.println("2 ?= " + longestSubsequence(new int[]{3, 0, -3, 4, -4, 7, 6}, 3));
+        System.out.println("2 ?= " + longestSubsequence_dp(new int[]{3, 0, -3, 4, -4, 7, 6}, 3));
     }
 }
