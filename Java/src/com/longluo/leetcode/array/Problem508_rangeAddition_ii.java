@@ -41,6 +41,10 @@ package com.longluo.leetcode.array;
 public class Problem508_rangeAddition_ii {
 
     public static int maxCount(int m, int n, int[][] ops) {
+        if (ops == null || ops.length == 0 || ops[0].length == 0) {
+            return m * n;
+        }
+
         int ans = 0;
         int[][] mat = new int[m][n];
         for (int[] op : ops) {
@@ -65,7 +69,19 @@ public class Problem508_rangeAddition_ii {
         return ans;
     }
 
+    public static int maxCount_fast(int m, int n, int[][] ops) {
+        int minRow = m;
+        int minCol = n;
+        for (int[] op : ops) {
+            minRow = Math.min(minRow, op[0]);
+            minCol = Math.min(minCol, op[1]);
+        }
+
+        return minRow * minCol;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + maxCount(3, 3, new int[][]{{2, 2}, {3, 3}}));
+        System.out.println("4 ?= " + maxCount_fast(3, 3, new int[][]{{2, 2}, {3, 3}}));
     }
 }
