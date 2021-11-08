@@ -78,6 +78,31 @@ public class Problem299_bullsAndCows {
         return bulls + "A" + cows + "B";
     }
 
+    public static String getHint_better(String secret, String guess) {
+        int len = secret.length();
+        int bulls = 0;
+        int cows = 0;
+        int[] secNums = new int[10];
+        int[] gusNums = new int[10];
+        for (int i = 0; i < len; i++) {
+            int secVal = secret.charAt(i) - '0';
+            int guessVal = guess.charAt(i) - '0';
+            secNums[secVal]++;
+            gusNums[guessVal]++;
+            if (secVal == guessVal) {
+                bulls++;
+                secNums[secVal]--;
+                gusNums[guessVal]--;
+            }
+        }
+
+        for (int i = 0; i <= 9; i++) {
+            cows += Math.min(secNums[i], gusNums[i]);
+        }
+
+        return bulls + "A" + cows + "B";
+    }
+
     public static void main(String[] args) {
         System.out.println("1A3B ?= " + getHint("1807", "7810"));
         System.out.println("1A1B ?= " + getHint("1123", "0111"));
