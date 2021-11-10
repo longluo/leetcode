@@ -58,9 +58,26 @@ public class Problem495_findPoisonedDuration {
         return ans;
     }
 
+    public static int findPoisonedDuration_1(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        for (int i = 0; i < timeSeries.length; i++) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+
+            expired = timeSeries[i] + duration;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + findPoisonedDuration(new int[]{1, 4}, 2));
         System.out.println("3 ?= " + findPoisonedDuration(new int[]{1, 2}, 2));
         System.out.println("9 ?= " + findPoisonedDuration(new int[]{1, 2, 3, 4, 5}, 5));
+        System.out.println("9 ?= " + findPoisonedDuration_1(new int[]{1, 2, 3, 4, 5}, 5));
     }
 }
