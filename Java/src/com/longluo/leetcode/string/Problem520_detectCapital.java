@@ -57,6 +57,21 @@ public class Problem520_detectCapital {
         return false;
     }
 
+    public static boolean detectCapitalUse_1(String word) {
+        if (word.length() >= 2 && Character.isLowerCase(word.charAt(0)) && Character.isUpperCase(word.charAt(1))) {
+            return false;
+        }
+
+        // 无论第 1 个字母是否大写，其他字母必须与第 2 个字母的大小写相同
+        for (int i = 2; i < word.length(); ++i) {
+            if (Character.isLowerCase(word.charAt(i)) ^ Character.isLowerCase(word.charAt(1))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + detectCapitalUse("USA"));
         System.out.println("true ?= " + detectCapitalUse("GG"));
