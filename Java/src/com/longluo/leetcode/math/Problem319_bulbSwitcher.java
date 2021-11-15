@@ -62,6 +62,10 @@ public class Problem319_bulbSwitcher {
         return ans;
     }
 
+    public static int bulbSwitch_fast(int n) {
+        return (int) Math.sqrt(n + 0.5);
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + bulbSwitch(0));
         System.out.println("1 ?= " + bulbSwitch(1));
@@ -69,5 +73,6 @@ public class Problem319_bulbSwitcher {
         System.out.println("1 ?= " + bulbSwitch(3));
         System.out.println("2 ?= " + bulbSwitch(4));
         System.out.println("2 ?= " + bulbSwitch(5));
+        System.out.println("2 ?= " + bulbSwitch(99999));
     }
 }
