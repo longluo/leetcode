@@ -1,5 +1,6 @@
 package com.longluo.leetcode.array;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,11 +74,24 @@ public class Problem594_findLHS {
     }
 
     public static int findLHS_sort(int[] nums) {
+        Arrays.sort(nums);
         int len = nums.length;
+        if (nums[len - 1] == nums[0]) {
+            return 0;
+        }
+        int left = 0;
         int ans = 0;
+        for (int right = 0; right < len; right++) {
+            while (nums[right] - nums[left] > 1) {
+                left++;
+            }
 
+            if (nums[right] - nums[left] == 1) {
+                ans = Math.max(ans, right - left + 1);
+            }
+        }
 
-        return ans;
+        return ans == 1 ? 0 : ans;
     }
 
     public static void main(String[] args) {
@@ -87,6 +101,16 @@ public class Problem594_findLHS {
         System.out.println("7 ?= " + findLHS(new int[]{1, 2, 2, 3, 4, 5, 1, 1, 1, 1}));
         System.out.println("4 ?= " + findLHS(new int[]{-3, -1, -1, -1, -3, -2}));
         System.out.println("20 ?= " + findLHS(new int[]{2, 2, 2, 2, 2, 2, 2, 3, 1, 0, 0, 0, 3, 1, -1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 0, 1, 2, 2, 3, 2}));
+
+        System.out.println("0 ?= " + findLHS_hash(new int[]{1, 1, 1, 1}));
         System.out.println("20 ?= " + findLHS_hash(new int[]{2, 2, 2, 2, 2, 2, 2, 3, 1, 0, 0, 0, 3, 1, -1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 0, 1, 2, 2, 3, 2}));
+
+        System.out.println("0 ?= " + findLHS_sort(new int[]{1, 1, 1, 1}));
+        System.out.println("4 ?= " + findLHS_sort(new int[]{1, 2, 2, 1}));
+        System.out.println("7 ?= " + findLHS_sort(new int[]{1, 2, 2, 3, 4, 5, 1, 1, 1, 1}));
+        System.out.println("0 ?= " + findLHS_sort(new int[]{1, 3, 5, 7, 9, 11, 13, 15, 17}));
+        System.out.println("2 ?= " + findLHS_sort(new int[]{1, 4, 1, 3, 1, -14, 1, -13}));
+        System.out.println("3 ?= " + findLHS_sort(new int[]{1, 2, 3, 3, 1, -14, 13, 4}));
+        System.out.println("20 ?= " + findLHS_sort(new int[]{2, 2, 2, 2, 2, 2, 2, 3, 1, 0, 0, 0, 3, 1, -1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 0, 1, 2, 2, 3, 2}));
     }
 }
