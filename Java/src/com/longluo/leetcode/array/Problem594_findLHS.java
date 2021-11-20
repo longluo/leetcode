@@ -73,12 +73,26 @@ public class Problem594_findLHS {
         return ans;
     }
 
+    public static int findLHS_hash_opt(int[] nums) {
+        int ans = 0;
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int x : nums) {
+            freq.put(x, freq.getOrDefault(x, 0) + 1);
+        }
+
+        for (int key : freq.keySet()) {
+            if (freq.containsKey(key + 1)) {
+                int temp = freq.get(key) + freq.get(key + 1);
+                ans = Math.max(ans, temp);
+            }
+        }
+
+        return ans;
+    }
+
     public static int findLHS_sort(int[] nums) {
         Arrays.sort(nums);
         int len = nums.length;
-        if (nums[len - 1] == nums[0]) {
-            return 0;
-        }
         int left = 0;
         int ans = 0;
         for (int right = 0; right < len; right++) {
