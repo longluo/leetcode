@@ -53,6 +53,33 @@ public class Problem594_findLHS {
         return ans;
     }
 
+    public static int findLHS_hash(int[] nums) {
+        int ans = 0;
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int x : nums) {
+            freq.put(x, freq.getOrDefault(x, 0) + 1);
+        }
+
+        for (int x : nums) {
+            if (freq.getOrDefault(x + 1, 0) == 0 && freq.getOrDefault(x - 1, 0) == 0) {
+                continue;
+            }
+            int plus = freq.get(x) + freq.getOrDefault(x + 1, 0);
+            int minus = freq.get(x) + freq.getOrDefault(x - 1, 0);
+            ans = Math.max(ans, Math.max(plus, minus));
+        }
+
+        return ans;
+    }
+
+    public static int findLHS_sort(int[] nums) {
+        int len = nums.length;
+        int ans = 0;
+
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("5 ?= " + findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
         System.out.println("2 ?= " + findLHS(new int[]{1, 2, 3, 4}));
@@ -60,5 +87,6 @@ public class Problem594_findLHS {
         System.out.println("7 ?= " + findLHS(new int[]{1, 2, 2, 3, 4, 5, 1, 1, 1, 1}));
         System.out.println("4 ?= " + findLHS(new int[]{-3, -1, -1, -1, -3, -2}));
         System.out.println("20 ?= " + findLHS(new int[]{2, 2, 2, 2, 2, 2, 2, 3, 1, 0, 0, 0, 3, 1, -1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 0, 1, 2, 2, 3, 2}));
+        System.out.println("20 ?= " + findLHS_hash(new int[]{2, 2, 2, 2, 2, 2, 2, 3, 1, 0, 0, 0, 3, 1, -1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 0, 1, 2, 2, 3, 2}));
     }
 }
