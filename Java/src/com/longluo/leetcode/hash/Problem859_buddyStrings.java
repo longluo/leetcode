@@ -39,23 +39,49 @@ import java.util.Map;
 public class Problem859_buddyStrings {
 
     public static boolean buddyStrings(String s, String goal) {
-        if (s == null || goal == null || s.length() <= 1 || goal.length() <= 1 || s.length() != goal.length()) {
+        if (s == null || goal == null || s.length() <= 1 || goal.length() <= 1
+                || s.length() != goal.length()) {
             return false;
         }
 
         int len = s.length();
-        for (int i = 0; i < len; i++) {
-            int cnt[] = new int[26];
-
+        int first = -1;
+        int second = -1;
+        if (s.equals(goal)) {
+            int[] count = new int[26];
+            for (int i = 0; i < len; i++) {
+                count[s.charAt(i) - 'a']++;
+                if (count[s.charAt(i) - 'a'] > 1) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            for (int i = 0; i < len; i++) {
+                if (s.charAt(i) != goal.charAt(i)) {
+                    if (first == -1) {
+                        first = i;
+                    } else if (second == -1) {
+                        second = i;
+                    } else {
+                        return false;
+                    }
+                }
+            }
         }
 
-        return true;
+        if (first != second && first >= 0 && second >= 0 && s.charAt(first) == goal.charAt(second) && s.charAt(second) == goal.charAt(first)) {
+            return true;
+        }
+
+        return false;
     }
 
     public static void main(String[] args) {
         System.out.println("true ?= " + buddyStrings("aa", "aa"));
         System.out.println("false ?= " + buddyStrings("ab", "ab"));
         System.out.println("true ?= " + buddyStrings("ab", "ba"));
+        System.out.println("false ?= " + buddyStrings("abac", "abad"));
         System.out.println("true ?= " + buddyStrings("aaaaaaabc", "aaaaaaacb"));
     }
 }
