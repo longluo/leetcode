@@ -1,7 +1,4 @@
-package com.longluo.leetcode.hash;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.longluo.leetcode.string;
 
 /**
  * 859. 亲密字符串
