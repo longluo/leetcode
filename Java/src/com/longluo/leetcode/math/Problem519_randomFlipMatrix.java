@@ -42,20 +42,27 @@ public class Problem519_randomFlipMatrix {
         int[][] matrix;
         int row;
         int col;
+        int sum;
+        int rowIdx;
+        int colIdx;
+        Random random;
 
         public Solution(int m, int n) {
             matrix = new int[m][n];
             row = m;
             col = n;
+            sum = row * col;
+            random = new Random();
         }
 
         public int[] flip() {
-            Random random = new Random();
-            int rowIdx = random.nextInt(row);
-            int colIdx = random.nextInt(col);
+            int temp = random.nextInt(sum);
+            rowIdx = temp / col;
+            colIdx = temp % col;
             while (matrix[rowIdx][colIdx] == 1) {
-                rowIdx = random.nextInt(row);
-                colIdx = random.nextInt(col);
+                temp = random.nextInt(sum);
+                rowIdx = temp / col;
+                colIdx = temp % col;
             }
 
             matrix[rowIdx][colIdx] = 1;
