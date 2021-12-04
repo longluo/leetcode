@@ -54,6 +54,23 @@ public class Problem383_ransomNote {
         return true;
     }
 
+    public static boolean canConstruct_array(String ransomNote, String magazine) {
+        int[] freq = new int[26];
+        for (char ch : magazine.toCharArray()) {
+            freq[ch - 'a']++;
+        }
+
+        for (char ch : ransomNote.toCharArray()) {
+            if (freq[ch - 'a'] > 0) {
+                freq[ch - 'a']--;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + canConstruct("a", "b"));
         System.out.println("false ?= " + canConstruct("aa", "ab"));
