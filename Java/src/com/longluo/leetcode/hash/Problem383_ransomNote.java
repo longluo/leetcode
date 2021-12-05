@@ -61,9 +61,8 @@ public class Problem383_ransomNote {
         }
 
         for (char ch : ransomNote.toCharArray()) {
-            if (freq[ch - 'a'] > 0) {
-                freq[ch - 'a']--;
-            } else {
+            freq[ch - 'a']--;
+            if (freq[ch - 'a'] < 0) {
                 return false;
             }
         }
