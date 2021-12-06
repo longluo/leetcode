@@ -41,16 +41,33 @@ public class Problem1816_truncateSentence {
 
     public static String truncateSentence(String s, int k) {
         String[] array = s.split("\\s+");
-        int len = s.length();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0;  i < k; i++) {
+        for (int i = 0; i < k; i++) {
             sb.append(array[i]).append(" ");
         }
 
         return sb.toString().trim();
     }
 
-    public static void main(String[] args) {
+    public static String truncateSentence_bf(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            sb.append(s.charAt(i));
+            if (s.charAt(i) == ' ') {
+                k--;
+            }
+            if (k == 0) {
+                sb.deleteCharAt(sb.length() - 1);
+                break;
+            }
+        }
 
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Hello how are you ?= " + truncateSentence_bf("Hello how are you Contestant", 4));
+        System.out.println("What is the solution ?= " + truncateSentence_bf("What is the solution to this problem", 4));
     }
 }
