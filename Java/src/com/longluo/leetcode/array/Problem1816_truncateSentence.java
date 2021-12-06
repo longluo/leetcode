@@ -66,8 +66,37 @@ public class Problem1816_truncateSentence {
         return sb.toString();
     }
 
+    public static String truncateSentence_best(String s, int k) {
+        int len = s.length();
+        int cnt = 0;
+        int end = 0;
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == ' ') {
+                cnt++;
+            }
+
+            if (cnt == k) {
+                if (i == len) {
+                    end = len - 1;
+                } else {
+                    end = i;
+                }
+
+                break;
+            }
+
+            if (i == len - 1) {
+                end = len;
+            }
+        }
+
+        return s.substring(0, end);
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello how are you ?= " + truncateSentence_bf("Hello how are you Contestant", 4));
         System.out.println("What is the solution ?= " + truncateSentence_bf("What is the solution to this problem", 4));
+        System.out.println("What is the solution ?= " + truncateSentence_best("What is the solution to this problem", 4));
+        System.out.println("chopper is not a tanuki ?= " + truncateSentence_best("chopper is not a tanuki",5));
     }
 }
