@@ -38,16 +38,11 @@ public class Problem1154_dayOfYear {
         int month = Integer.parseInt(date.substring(5, 7));
         int day = Integer.parseInt(date.substring(8, 10));
         int ans = 0;
-        boolean isLeapYear = false;
         if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-            isLeapYear = true;
+            months[1]++;
         }
         for (int i = 0; i < month - 1; i++) {
-            if (i == 1 && isLeapYear) {
-                ans += 29;
-            } else {
-                ans += months[i];
-            }
+            ans += months[i];
         }
 
         ans += day;
