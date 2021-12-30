@@ -1,6 +1,8 @@
 package com.longluo.leetcode.greedy;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 846. 一手顺子
@@ -43,8 +45,6 @@ public class Problem846_handOfStraights {
 
         int len = hand.length;
         Arrays.sort(hand);
-        int[] nums = new int[len];
-        System.arraycopy(hand, 0, nums, 0, len);
         int seqCnt = 0;
         for (int i = 0; i < len; i++) {
             if (hand[i] != -1) {
@@ -73,10 +73,44 @@ public class Problem846_handOfStraights {
         return false;
     }
 
+    public static boolean isNStraightHand_greedy(int[] hand, int groupSize) {
+        if (hand == null || hand.length < groupSize || hand.length % groupSize != 0) {
+            return false;
+        }
+
+        if (groupSize == 1) {
+            return true;
+        }
+        Arrays.sort(hand);
+        Map<Integer, Integer> cntMap = new HashMap<>();
+        for (int num : hand) {
+            cntMap.put(num, cntMap.getOrDefault(num, 0) + 1);
+        }
+        for (int num : hand) {
+            if (!cntMap.containsKey(num)) {
+                return false;
+            }
+            if (cntMap.get(num) > 0) {
+                for (int j = num; j < num + groupSize; j++) {
+                    if (cntMap.containsKey(j) && cntMap.get(j) > 0) {
+                        cntMap.put(j, cntMap.getOrDefault(j, 0) - 1);
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + isNStraightHand(new int[]{1, 2, 3}, 1));
+        System.out.println("true ?= " + isNStraightHand(new int[]{2, 1}, 2));
         System.out.println("false ?= " + isNStraightHand(new int[]{1, 1, 2, 2, 3, 3}, 2));
+        System.out.println("false ?= " + isNStraightHand_greedy(new int[]{1, 1, 2, 2, 3, 3}, 2));
         System.out.println("true ?= " + isNStraightHand(new int[]{1, 2, 3, 6, 2, 3, 4, 7, 8}, 3));
+        System.out.println("true ?= " + isNStraightHand_greedy(new int[]{1, 2, 3, 6, 2, 3, 4, 7, 8}, 3));
         System.out.println("false ?= " + isNStraightHand(new int[]{1, 2, 3, 4, 5}, 4));
     }
 }
