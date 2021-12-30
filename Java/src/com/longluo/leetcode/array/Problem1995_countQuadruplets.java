@@ -1,5 +1,8 @@
 package com.longluo.leetcode.array;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 1995. 统计特殊四元组
  * <p>
@@ -57,7 +60,49 @@ public class Problem1995_countQuadruplets {
         return ans;
     }
 
-    public static void main(String[] args) {
+    public static int countQuadruplets_hash(int[] nums) {
+        if (nums == null || nums.length < 4) {
+            return 0;
+        }
 
+        int ans = 0;
+        int len = nums.length;
+        Map<Integer, Integer> cntMap = new HashMap<>();
+        for (int c = len - 2; c >= 2; c--) {
+            cntMap.put(nums[c + 1], cntMap.getOrDefault(nums[c + 1], 0) + 1);
+            for (int a = 0; a < c; a++) {
+                for (int b = a + 1; b < c; b++) {
+                    int sum = nums[a] + nums[b] + nums[c];
+                    ans += cntMap.getOrDefault(sum, 0);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    public static int countQuadruplets_hash_better(int[] nums) {
+        if (nums == null || nums.length < 4) {
+            return 0;
+        }
+
+        int ans = 0;
+        int len = nums.length;
+        Map<Integer, Integer> cntMap = new HashMap<>();
+        for (int b = len - 3; b >= 1; b--) {
+            for (int d = b + 2; d < len; d++) {
+                int delta = nums[d] - nums[b + 1];
+                cntMap.put(delta, cntMap.getOrDefault(delta, 0) + 1);
+            }
+            for (int a = 0; a < b; a++) {
+                ans += cntMap.getOrDefault(nums[a] + nums[b], 0);
+            }
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("1 ?= " + countQuadruplets_hash_better(new int[]{1, 2, 3, 6}));
     }
 }
