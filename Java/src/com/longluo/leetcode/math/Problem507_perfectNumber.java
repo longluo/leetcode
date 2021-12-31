@@ -54,11 +54,34 @@ public class Problem507_perfectNumber {
         return false;
     }
 
+    public static boolean checkPerfectNumber_fast(int num) {
+        if (num < 5) {
+            return false;
+        }
+
+        int sum = 1;
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
+                sum += i;
+                if (i != num / i) {
+                    sum += num / i;
+                }
+            }
+        }
+
+        if (sum == num) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + checkPerfectNumber(1));
         System.out.println("false ?= " + checkPerfectNumber(2));
         System.out.println("false ?= " + checkPerfectNumber(3));
         System.out.println("true ?= " + checkPerfectNumber(28));
+        System.out.println("true ?= " + checkPerfectNumber_fast(28));
         System.out.println("true ?= " + checkPerfectNumber(6));
         System.out.println("true ?= " + checkPerfectNumber(496));
         System.out.println("true ?= " + checkPerfectNumber(8128));
