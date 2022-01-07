@@ -53,8 +53,18 @@ public class Problem1614_maximumNestingDepthOfTheParentheses {
 
         int len = s.length();
         int ans = 0;
-
-
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') {
+                stack.push('(');
+            } else if (ch == ')') {
+                if (!stack.empty()) {
+                    ans = Math.max(ans, stack.size());
+                    stack.pop();
+                }
+            }
+        }
 
         return ans;
     }
