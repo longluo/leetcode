@@ -76,7 +76,28 @@ public class Problem1629_slowestKey {
             }
         });
 
-        return (char)ans.get(0)[1];
+        return (char) ans.get(0)[1];
+    }
+
+    public static char slowestKey_better(int[] releaseTimes, String keysPressed) {
+        if (releaseTimes == null || releaseTimes.length <= 1) {
+            return keysPressed.charAt(0);
+        }
+
+        int len = releaseTimes.length;
+        char ans = keysPressed.charAt(0);
+        int maxTime = releaseTimes[0];
+        for (int i = 1; i < len; i++) {
+            int diff = releaseTimes[i] - releaseTimes[i - 1];
+            if (diff > maxTime) {
+                maxTime = diff;
+                ans = keysPressed.charAt(i);
+            } else if (diff == maxTime && ans < keysPressed.charAt(i)) {
+                ans = keysPressed.charAt(i);
+            }
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
