@@ -1,5 +1,7 @@
 package com.longluo.leetcode.greedy;
 
+import java.util.*;
+
 /**
  * 334. 递增的三元子序列
  * <p>
@@ -76,9 +78,67 @@ public class Problem334_increasingTripletSubsequence {
         return false;
     }
 
+    public static boolean increasingTriplet_tp(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return false;
+        }
+
+        int len = nums.length;
+        int first = 0;
+        int second = first + 1;
+        int third = len - 1;
+
+        while (first < second && second < third) {
+            while (second < third && nums[first] > nums[second]) {
+                first++;
+                second++;
+            }
+
+            while (second < third && nums[third] < nums[first]) {
+                third--;
+            }
+
+            if (nums[first] < nums[second] && nums[second] < nums[third]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean increasingTriplet_greedy(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return false;
+        }
+
+        int len = nums.length;
+        int first = nums[0];
+        int second = Integer.MAX_VALUE;
+        for (int i = 1; i < len; i++) {
+            int value = nums[i];
+            if (value > second) {
+                return true;
+            } else if (value > first) {
+                second = value;
+            } else {
+                first = value;
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + increasingTriplet(new int[]{1, 2, 3, 4, 5}));
         System.out.println("false ?= " + increasingTriplet(new int[]{5, 4, 3, 2, 1}));
         System.out.println("true ?= " + increasingTriplet(new int[]{2, 1, 5, 0, 4, 6}));
+
+        System.out.println("true ?= " + increasingTriplet_greedy(new int[]{1, 2, 3, 4, 5}));
+        System.out.println("true ?= " + increasingTriplet_greedy(new int[]{2, 1, 5, 0, 4, 6}));
+        System.out.println("true ?= " + increasingTriplet_greedy(new int[]{20, 100, 10, 12, 5, 13}));
+        System.out.println("false ?= " + increasingTriplet_greedy(new int[]{5, 1, 6}));
+
+        System.out.println("false ?= " + increasingTriplet_tp(new int[]{5, 4, 3, 2, 1}));
+        System.out.println("true ?= " + increasingTriplet_tp(new int[]{20, 100, 10, 12, 5, 13}));
     }
 }
