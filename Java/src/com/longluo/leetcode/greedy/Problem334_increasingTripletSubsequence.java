@@ -51,6 +51,31 @@ public class Problem334_increasingTripletSubsequence {
         return false;
     }
 
+    public static boolean increasingTriplet_better(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return false;
+        }
+
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (nums[j] <= nums[i]) {
+                    continue;
+                }
+                for (int k = j + 1; k < len; k++) {
+                    if (nums[k] <= nums[j]) {
+                        continue;
+                    }
+                    if (nums[i] < nums[j] && nums[j] < nums[k]) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + increasingTriplet(new int[]{1, 2, 3, 4, 5}));
         System.out.println("false ?= " + increasingTriplet(new int[]{5, 4, 3, 2, 1}));
