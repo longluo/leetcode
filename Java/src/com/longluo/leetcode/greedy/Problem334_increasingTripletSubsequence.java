@@ -84,21 +84,20 @@ public class Problem334_increasingTripletSubsequence {
         }
 
         int len = nums.length;
-        int first = 0;
-        int second = first + 1;
-        int third = len - 1;
+        int[] leftMin = new int[len];
+        leftMin[0] = nums[0];
+        for (int i = 1; i < len; i++) {
+            leftMin[i] = Math.min(leftMin[i - 1], nums[i]);
+        }
 
-        while (first < second && second < third) {
-            while (second < third && nums[first] > nums[second]) {
-                first++;
-                second++;
-            }
+        int[] rightMax = new int[len];
+        rightMax[len - 1] = nums[len - 1];
+        for (int i = len - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], nums[i]);
+        }
 
-            while (second < third && nums[third] < nums[first]) {
-                third--;
-            }
-
-            if (nums[first] < nums[second] && nums[second] < nums[third]) {
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > leftMin[i] && nums[i] < rightMax[i]) {
                 return true;
             }
         }
@@ -132,6 +131,7 @@ public class Problem334_increasingTripletSubsequence {
         System.out.println("true ?= " + increasingTriplet(new int[]{1, 2, 3, 4, 5}));
         System.out.println("false ?= " + increasingTriplet(new int[]{5, 4, 3, 2, 1}));
         System.out.println("true ?= " + increasingTriplet(new int[]{2, 1, 5, 0, 4, 6}));
+        System.out.println("true ?= " + increasingTriplet_better(new int[]{2, 1, 5, 0, 4, 6}));
 
         System.out.println("true ?= " + increasingTriplet_greedy(new int[]{1, 2, 3, 4, 5}));
         System.out.println("true ?= " + increasingTriplet_greedy(new int[]{2, 1, 5, 0, 4, 6}));
