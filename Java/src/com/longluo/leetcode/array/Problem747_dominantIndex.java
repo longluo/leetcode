@@ -56,7 +56,60 @@ public class Problem747_dominantIndex {
         return ans;
     }
 
-    public static void main(String[] args) {
+    public static int dominantIndex_better(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return 0;
+        }
 
+        int len = nums.length;
+        int max = -1;
+        int ans = -1;
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
+                ans = i;
+            }
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (i != ans) {
+                if (max - nums[i] < nums[i]) {
+                    return -1;
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    public static int dominantIndex_best(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return 0;
+        }
+
+        int len = nums.length;
+        int max = -1;
+        int subMax = -1;
+        int ans = -1;
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > max) {
+                subMax = max;
+                max = nums[i];
+                ans = i;
+            } else if (nums[i] > subMax) {
+                subMax = nums[i];
+            }
+        }
+
+        return max >= subMax * 2 ? ans : -1;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("0 ?= " + dominantIndex(new int[]{1}));
+        System.out.println("-1 ?= " + dominantIndex(new int[]{1, 2, 3, 4}));
+        System.out.println("1 ?= " + dominantIndex(new int[]{3, 6, 1, 0}));
+        System.out.println("1 ?= " + dominantIndex_better(new int[]{3, 6, 1, 0}));
+        System.out.println("0 ?= " + dominantIndex_better(new int[]{1, 0}));
+        System.out.println("0 ?= " + dominantIndex_best(new int[]{1, 0}));
     }
 }
