@@ -49,9 +49,26 @@ public class Problem1716_calculateMoneyInLeetcodeBank {
         return sum;
     }
 
+    public static int totalMoney_better(int n) {
+        int sum = 0;
+        int cycle = n / 7;
+        int mod = n % 7;
+        for (int i = 1; i <= mod; i++) {
+            sum += (i + cycle);
+        }
+
+        sum += cycle * 28 + (cycle - 1) * cycle / 2 * 7;
+
+        return sum;
+    }
+
     public static void main(String[] args) {
         System.out.println("10 ?= " + totalMoney(4));
         System.out.println("37 ?= " + totalMoney(10));
         System.out.println("96 ?= " + totalMoney(20));
+
+        System.out.println("10 ?= " + totalMoney_better(4));
+        System.out.println("37 ?= " + totalMoney_better(10));
+        System.out.println("96 ?= " + totalMoney_better(20));
     }
 }
