@@ -1,5 +1,8 @@
 package com.longluo.leetcode.array;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 219. 存在重复元素 II
  * <p>
@@ -46,9 +49,50 @@ public class Problem219_containsDuplicate_ii {
         return false;
     }
 
+    public static boolean containsNearbyDuplicate_hash(int[] nums, int k) {
+        if (nums == null || nums.length <= 1 || k <= 0) {
+            return false;
+        }
+
+        int len = nums.length;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            if (map.containsKey(nums[i])) {
+                int idx = map.get(nums[i]);
+                if (Math.abs(i - idx) <= k) {
+                    return true;
+                }
+                map.put(nums[i], i);
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean containsNearbyDuplicate_win(int[] nums, int k) {
+        if (nums == null || nums.length <= 1 || k <= 0) {
+            return false;
+        }
+
+        int len = nums.length;
+        int left = 0;
+        int right = left + k;
+        while (left < right && right < len) {
+
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + containsNearbyDuplicate(new int[]{1, 2, 3, 1}, 3));
         System.out.println("true ?= " + containsNearbyDuplicate(new int[]{1, 0, 1, 1}, 1));
         System.out.println("false ?= " + containsNearbyDuplicate(new int[]{1, 2, 3, 1, 2, 3}, 2));
+
+        System.out.println("true ?= " + containsNearbyDuplicate_hash(new int[]{1, 2, 3, 1}, 3));
+        System.out.println("true ?= " + containsNearbyDuplicate_hash(new int[]{1, 0, 1, 1}, 1));
+        System.out.println("false ?= " + containsNearbyDuplicate_hash(new int[]{1, 2, 3, 1, 2, 3}, 2));
     }
 }
