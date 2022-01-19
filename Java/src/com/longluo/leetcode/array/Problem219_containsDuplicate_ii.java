@@ -1,7 +1,9 @@
 package com.longluo.leetcode.array;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 219. 存在重复元素 II
@@ -77,10 +79,28 @@ public class Problem219_containsDuplicate_ii {
         }
 
         int len = nums.length;
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i <= k && i < len; i++) {
+            if (set.contains(nums[i])) {
+                return true;
+            } else {
+                set.add(nums[i]);
+            }
+        }
+
         int left = 0;
         int right = left + k;
         while (left < right && right < len) {
+            right++;
+            set.remove(nums[left]);
+            left++;
+            if (right < len) {
+                if (set.contains(nums[right])) {
+                    return true;
+                }
 
+                set.add(nums[right]);
+            }
         }
 
         return false;
@@ -94,5 +114,9 @@ public class Problem219_containsDuplicate_ii {
         System.out.println("true ?= " + containsNearbyDuplicate_hash(new int[]{1, 2, 3, 1}, 3));
         System.out.println("true ?= " + containsNearbyDuplicate_hash(new int[]{1, 0, 1, 1}, 1));
         System.out.println("false ?= " + containsNearbyDuplicate_hash(new int[]{1, 2, 3, 1, 2, 3}, 2));
+
+        System.out.println("true ?= " + containsNearbyDuplicate_win(new int[]{1, 2, 3, 1}, 3));
+        System.out.println("true ?= " + containsNearbyDuplicate_win(new int[]{1, 0, 1, 1}, 1));
+        System.out.println("false ?= " + containsNearbyDuplicate_win(new int[]{1, 2, 3, 1, 2, 3}, 2));
     }
 }
