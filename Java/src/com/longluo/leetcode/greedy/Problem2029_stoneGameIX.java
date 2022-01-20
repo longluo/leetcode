@@ -50,13 +50,23 @@ import java.util.Comparator;
 public class Problem2029_stoneGameIX {
 
     public static boolean stoneGameIX(int[] stones) {
-        if (stones == null || stones.length <= 1) {
-            return false;
+        int cnt0 = 0, cnt1 = 0, cnt2 = 0;
+        for (int stone : stones) {
+            int type = stone % 3;
+            if (type == 0) {
+                ++cnt0;
+            } else if (type == 1) {
+                ++cnt1;
+            } else {
+                ++cnt2;
+            }
         }
 
-        int len = stones.length;
+        if (cnt0 % 2 == 0) {
+            return cnt1 >= 1 && cnt2 >= 1;
+        }
 
-        return true;
+        return cnt1 - cnt2 > 2 || cnt2 - cnt1 > 2;
     }
 
     public static void main(String[] args) {
