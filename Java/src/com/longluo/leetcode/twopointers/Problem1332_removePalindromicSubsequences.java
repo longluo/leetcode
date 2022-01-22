@@ -41,19 +41,18 @@ public class Problem1332_removePalindromicSubsequences {
         int len = s.length();
         int left = 0;
         int right = len - 1;
-        int ans = 1;
         while (left < right) {
-            while (s.charAt(left) == s.charAt(right)) {
+            while (left < right && s.charAt(left) == s.charAt(right)) {
                 left++;
                 right--;
             }
 
-            if () {
-
+            if (left < right) {
+                return 2;
             }
         }
 
-        return ans;
+        return 1;
     }
 
     public static void main(String[] args) {
