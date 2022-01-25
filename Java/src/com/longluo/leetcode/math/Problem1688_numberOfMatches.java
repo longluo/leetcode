@@ -55,8 +55,31 @@ public class Problem1688_numberOfMatches {
         return ans;
     }
 
+    public static int numberOfMatches_dp(int n) {
+        if (n <= 1) {
+            return 0;
+        }
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 0;
+        dp[2] = 1;
+        for (int i = 3; i <= n; i++) {
+            if (i % 2 == 0) {
+                dp[i] = i / 2 + dp[i / 2];
+            } else {
+                dp[i] = (i - 1) / 2 + dp[(i - 1) / 2 + 1];
+            }
+        }
+
+        return dp[n];
+    }
+
     public static void main(String[] args) {
         System.out.println("6 ?= " + numberOfMatches(7));
         System.out.println("13 ?= " + numberOfMatches(14));
+
+        System.out.println("0 ?= " + numberOfMatches_dp(1));
+        System.out.println("6 ?= " + numberOfMatches_dp(7));
+        System.out.println("13 ?= " + numberOfMatches_dp(14));
     }
 }
