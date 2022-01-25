@@ -74,6 +74,10 @@ public class Problem1688_numberOfMatches {
         return dp[n];
     }
 
+    public static int numberOfMatches_math(int n) {
+        return n - 1;
+    }
+
     public static void main(String[] args) {
         System.out.println("6 ?= " + numberOfMatches(7));
         System.out.println("13 ?= " + numberOfMatches(14));
@@ -81,5 +85,6 @@ public class Problem1688_numberOfMatches {
         System.out.println("0 ?= " + numberOfMatches_dp(1));
         System.out.println("6 ?= " + numberOfMatches_dp(7));
         System.out.println("13 ?= " + numberOfMatches_dp(14));
+        System.out.println(numberOfMatches_math(28));
     }
 }
