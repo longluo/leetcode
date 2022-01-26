@@ -85,6 +85,9 @@ public class Problem1688_numberOfMatches {
         System.out.println("0 ?= " + numberOfMatches_dp(1));
         System.out.println("6 ?= " + numberOfMatches_dp(7));
         System.out.println("13 ?= " + numberOfMatches_dp(14));
-        System.out.println(numberOfMatches_math(28));
+
+        System.out.println("0 ?= " + numberOfMatches_math(1));
+        System.out.println("6 ?= " + numberOfMatches_math(7));
+        System.out.println("13 ?= " + numberOfMatches_math(14));
     }
 }
