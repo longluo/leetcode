@@ -1,7 +1,9 @@
 package com.longluo.leetcode.array;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 1748. 唯一元素的和
@@ -53,7 +55,27 @@ public class Problem1748_sumOfUniqueElements {
         return sum;
     }
 
-    public static void main(String[] args) {
+    public static int sumOfUnique_better(int[] nums) {
+        int sum = 0;
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int num : nums) {
+            if (freq.containsKey(num)) {
+                if (freq.get(num) == 1) {
+                    sum -= num;
+                    freq.put(num, freq.getOrDefault(num, 0) + 1);
+                }
+            } else {
+                sum += num;
+                freq.put(num, 1);
+            }
+        }
 
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("0 ?= " + sumOfUnique_better(new int[]{1, 1, 1, 1}));
+        System.out.println("0 ?= " + sumOfUnique_better(new int[]{1, 1, 1, 1, 1}));
+        System.out.println("25 ?= " + sumOfUnique_better(new int[]{10, 6, 9, 6, 9, 6, 8, 7}));
     }
 }
