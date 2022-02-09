@@ -1,5 +1,8 @@
 package com.longluo.leetcode.array;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 2006. 差的绝对值为 K 的数对数目
  * <p>
@@ -54,6 +57,26 @@ public class Problem2006_countKDifference {
                     ans++;
                 }
             }
+        }
+
+        return ans;
+    }
+
+    public static int countKDifference_hash(int[] nums, int k) {
+        if (nums == null || nums.length < 2) {
+            return 0;
+        }
+
+        int ans = 0;
+        int len = nums.length;
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            int num = nums[i];
+            if (freq.containsKey(num + k) || freq.containsKey(num - k)) {
+                ans += freq.getOrDefault(num + k, 0);
+                ans += freq.getOrDefault(num - k, 0);
+            }
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
         }
 
         return ans;
