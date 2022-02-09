@@ -42,7 +42,21 @@ package com.longluo.leetcode.array;
 public class Problem2006_countKDifference {
 
     public static int countKDifference(int[] nums, int k) {
+        if (nums == null || nums.length < 2) {
+            return 0;
+        }
 
+        int ans = 0;
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (Math.abs(nums[i] - nums[j]) == k) {
+                    ans++;
+                }
+            }
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
