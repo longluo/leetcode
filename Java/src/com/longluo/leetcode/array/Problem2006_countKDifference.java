@@ -82,6 +82,28 @@ public class Problem2006_countKDifference {
         return ans;
     }
 
+    public static int countKDifference_count(int[] nums, int k) {
+        if (nums == null || nums.length < 2) {
+            return 0;
+        }
+
+        int ans = 0;
+        int[] array = new int[101];
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            int num = nums[i];
+            if (num + k <= 100) {
+                ans += array[num + k];
+            }
+            if (num - k >= 1) {
+                ans += array[num - k];
+            }
+            array[num]++;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
 
     }
