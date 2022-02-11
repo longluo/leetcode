@@ -43,8 +43,14 @@ public class Problem1984_minimumDifference {
 
         Arrays.sort(nums);
         int len = nums.length;
-        int ans = nums[len - 1] - nums[0];
-
+        int left = 0;
+        int right = k - 1;
+        int ans = nums[right] - nums[left];
+        while (left < right && right < len - 1) {
+            right++;
+            left++;
+            ans = Math.min(ans, nums[right] - nums[left]);
+        }
 
         return ans;
     }
