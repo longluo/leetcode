@@ -72,6 +72,20 @@ public class Problem1791_findCenterOfStarGraph {
         return 0;
     }
 
+    public static int findCenter_3(int[][] edges) {
+        int[] id = new int[2];
+        id[0] = edges[0][0];
+        id[1] = edges[0][1];
+        for (int i = 0; i < 2; i++) {
+            int idTemp = id[i];
+            if (idTemp == edges[1][0] || idTemp == edges[1][1]) {
+                return idTemp;
+            }
+        }
+
+        return 0;
+    }
+
     public static void main(String[] args) {
 
     }
