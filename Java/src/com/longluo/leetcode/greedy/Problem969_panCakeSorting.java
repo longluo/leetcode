@@ -47,6 +47,7 @@ public class Problem969_panCakeSorting {
     public static List<Integer> pancakeSort(int[] arr) {
         List<Integer> res = new ArrayList<>();
 
+
         return res;
     }
 
