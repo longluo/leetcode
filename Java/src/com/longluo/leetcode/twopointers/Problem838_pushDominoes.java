@@ -78,8 +78,69 @@ public class Problem838_pushDominoes {
         return sb.toString();
     }
 
+    public static String pushDominoes_tp(String dominoes) {
+        if (dominoes == null || dominoes.length() <= 1) {
+            return dominoes;
+        }
+
+        int len = dominoes.length();
+        char[] res = new char[len];
+        int left = 0;
+        int right = len - 1;
+
+        if (dominoes.charAt(left) == '.' && dominoes.charAt(left + 1) == 'L') {
+            res[left] = 'L';
+        } else {
+            res[left] = dominoes.charAt(0);
+        }
+
+        if (right > 1 && dominoes.charAt(right - 1) == 'R' && dominoes.charAt(right) == '.') {
+            res[right] = 'R';
+        } else {
+            res[right] = dominoes.charAt(len - 1);
+        }
+
+        left++;
+        right--;
+        while (left < right) {
+            while (dominoes.charAt(left) == 'L' || dominoes.charAt(left) == 'R') {
+                res[left] = dominoes.charAt(left);
+                left++;
+            }
+
+            while (dominoes.charAt(right) == 'L' || dominoes.charAt(right) == 'R') {
+                res[right] = dominoes.charAt(right);
+                right--;
+            }
+
+            while (left + 1 < len && ((res[left - 1] == 'L' && dominoes.charAt(left + 1) == 'R')
+                    || (res[left - 1] == 'R' && dominoes.charAt(left + 1) == 'L'))) {
+                res[left] = '.';
+                left++;
+            }
+
+            while (right > left && dominoes.charAt(right - 1) == 'L') {
+                res[right] = dominoes.charAt(right);
+                right--;
+            }
+
+            if (res[left - 1] == 'L' && (dominoes.charAt(left + 1) == '.' || dominoes.charAt(left + 1) == 'L')) {
+                res[left] = 'L';
+                left++;
+            } else if (res[left - 1] == 'R') {
+                res[left] = 'R';
+                left++;
+            }
+        }
+
+        return new String(res);
+    }
+
     public static void main(String[] args) {
         System.out.println("RR.L ?= " + pushDominoes("RR.L"));
         System.out.println("LL.RR.LLRRLL.. ?= " + pushDominoes(".L.R...LR..L.."));
+
+        System.out.println("RR.L ?= " + pushDominoes_tp("RR.L"));
+        System.out.println("LL.RR.LLRRLL.. ?= " + pushDominoes_tp(".L.R...LR..L.."));
     }
 }
