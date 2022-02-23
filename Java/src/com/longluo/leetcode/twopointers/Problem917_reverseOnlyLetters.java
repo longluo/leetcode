@@ -40,12 +40,12 @@ public class Problem917_reverseOnlyLetters {
         int left = 0;
         int right = len - 1;
         while (left <= right) {
-            while (!Character.isLetter(s.charAt(left))) {
+            while (left < right && !Character.isLetter(s.charAt(left))) {
                 res[left] = s.charAt(left);
                 left++;
             }
 
-            while (!Character.isLetter(s.charAt(right))) {
+            while (right > left && !Character.isLetter(s.charAt(right))) {
                 res[right] = s.charAt(right);
                 right--;
             }
@@ -63,5 +63,6 @@ public class Problem917_reverseOnlyLetters {
         System.out.println("dc-ba ?= " + reverseOnlyLetters("ab-cd"));
         System.out.println("j-Ih-gfE-dCba ?= " + reverseOnlyLetters("a-bC-dEf-ghIj"));
         System.out.println("Qedo1ct-eeLg=ntse-T! ?= " + reverseOnlyLetters("Test1ng-Leet=code-Q!"));
+        System.out.println("7_28] ?= " + reverseOnlyLetters("7_28]"));
     }
 }
