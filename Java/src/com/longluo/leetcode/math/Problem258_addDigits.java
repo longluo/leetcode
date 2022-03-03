@@ -36,12 +36,29 @@ public class Problem258_addDigits {
         }
     }
 
+    public static int addDigits_bf(int num) {
+        int ans = 0;
+        if (num >= 10) {
+            while (num > 0) {
+                ans += num % 10;
+                num /= 10;
+            }
+            ans = addDigits_bf(ans);
+        } else {
+            ans = num;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + addDigits(0));
         System.out.println("1 ?= " + addDigits(1));
         System.out.println("9 ?= " + addDigits(9));
         System.out.println("1 ?= " + addDigits(10));
         System.out.println("2 ?= " + addDigits(38));
+
+        System.out.println("2 ?= " + addDigits_bf(38));
     }
 }
 
