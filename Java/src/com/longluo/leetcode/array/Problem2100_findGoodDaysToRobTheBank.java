@@ -1,6 +1,7 @@
 package com.longluo.leetcode.array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -86,7 +87,31 @@ public class Problem2100_findGoodDaysToRobTheBank {
         return ans;
     }
 
-    public static void main(String[] args) {
+    public static List<Integer> goodDaysToRobBank_dp(int[] security, int time) {
+        List<Integer> ans = new ArrayList<>();
+        int len = security.length;
+        int[] left = new int[len];
+        int[] right = new int[len];
+        for (int i = 0; i < len; i++) {
+            if (i >= 1 && security[i] >= security[i - 1]) {
+                left[i] = left[i - 1] + 1;
+            }
 
+            if (len - i - 2 >= 0 && security[len - 1 - i] <= security[len - i - 2]) {
+                right[len - i - 2] = right[len - 1 - i] + 1;
+            }
+        }
+
+        for (int i = time; i < len - time; i++) {
+            if (left[i] <= i && i >= right[i]) {
+                ans.add(i);
+            }
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("[2, 3] ?= " + goodDaysToRobBank_dp(new int[]{5, 3, 3, 3, 5, 6, 2}, 2).toString());
     }
 }
