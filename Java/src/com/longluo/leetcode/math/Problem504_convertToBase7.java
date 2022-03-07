@@ -44,6 +44,25 @@ public class Problem504_convertToBase7 {
         return sb.reverse().toString();
     }
 
+    public static String convertToBase7_opt(int num) {
+        if (num == 0) {
+            return "0";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        boolean isNegative = num < 0;
+        num = Math.abs(num);
+        while (num > 0) {
+            sb.append(num % 7);
+            num = num / 7;
+        }
+        if (isNegative) {
+            sb.append("-");
+        }
+
+        return sb.reverse().toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + convertToBase7(0));
         System.out.println("5 ?= " + convertToBase7(5));
@@ -51,5 +70,8 @@ public class Problem504_convertToBase7 {
         System.out.println("11 ?= " + convertToBase7(8));
         System.out.println("-10 ?= " + convertToBase7(-7));
         System.out.println("202 ?= " + convertToBase7(100));
+
+        System.out.println("-10 ?= " + convertToBase7_opt(-7));
+        System.out.println("202 ?= " + convertToBase7_opt(100));
     }
 }
