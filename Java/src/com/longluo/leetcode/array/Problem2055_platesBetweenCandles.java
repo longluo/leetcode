@@ -1,5 +1,7 @@
 package com.longluo.leetcode.array;
 
+import java.util.Arrays;
+
 /**
  * 2055. 蜡烛之间的盘子
  * <p>
@@ -68,7 +70,43 @@ public class Problem2055_platesBetweenCandles {
         return ans;
     }
 
+    public static int[] platesBetweenCandles_prefix(String s, int[][] queries) {
+        int[] ans = new int[queries.length];
+        int len = s.length();
+        int[] prefixSum = new int[len + 1];
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == '*') {
+                prefixSum[i + 1] = prefixSum[i] + 1;
+            } else {
+                prefixSum[i + 1] = prefixSum[i];
+            }
+        }
+
+        for (int i = 0; i < queries.length; i++) {
+            int left = queries[i][0];
+            int right = queries[i][1];
+
+            while (left < right) {
+                while (left < right && s.charAt(left) == '*') {
+                    left++;
+                }
+
+                while (right > left && s.charAt(right) == '*') {
+                    right--;
+                }
+
+                if (s.charAt(left) == '|' && s.charAt(right) == '|') {
+                    ans[i] = prefixSum[right + 1] - prefixSum[left];
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
-        System.out.println("[2, 3] ?= " + platesBetweenCandles("**|**|***|", new int[][]{{2, 5}, {5, 9}}).toString());
+        System.out.println("[2, 3] ?= " + Arrays.toString(platesBetweenCandles("**|**|***|", new int[][]{{2, 5}, {5, 9}})));
+        System.out.println("[2, 3] ?= " + Arrays.toString(platesBetweenCandles_prefix("**|**|***|", new int[][]{{2, 5}, {5, 9}})));
     }
 }
