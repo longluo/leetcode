@@ -105,8 +105,68 @@ public class Problem2055_platesBetweenCandles {
         return ans;
     }
 
+    public static int[] platesBetweenCandles_bs(String s, int[][] queries) {
+        int[] ans = new int[queries.length];
+        int len = s.length();
+        int[] candlesSum = new int[len + 1];
+        int[] platesSum = new int[len + 1];
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == '*') {
+                platesSum[i + 1] = platesSum[i] + 1;
+                candlesSum[i + 1] = candlesSum[i];
+            } else {
+                platesSum[i + 1] = platesSum[i];
+                candlesSum[i + 1] = candlesSum[i] + 1;
+            }
+        }
+
+        for (int i = 0; i < queries.length; i++) {
+            int left = queries[i][0];
+            int right = queries[i][1];
+            if (candlesSum[right + 1] - 1 <= candlesSum[left]) {
+                ans[i] = 0;
+                break;
+            } else {
+                while (left < right) {
+                    while (left < right && s.charAt(left) == '*') {
+                        left++;
+                    }
+
+                    while (right > left && s.charAt(right) == '*') {
+                        right--;
+                    }
+
+                    if (s.charAt(left) == '|' && s.charAt(right) == '|') {
+                        ans[i] = platesSum[right + 1] - platesSum[left];
+                        break;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    public static int[] binarySearch(String s, int low, int high) {
+        int[] ans = new int[2];
+        if (s.charAt(low) == '|') {
+            ans[0] = low;
+        }
+        if (s.charAt(high) == '|') {
+            ans[1] = high;
+        }
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 3] ?= " + Arrays.toString(platesBetweenCandles("**|**|***|", new int[][]{{2, 5}, {5, 9}})));
         System.out.println("[2, 3] ?= " + Arrays.toString(platesBetweenCandles_prefix("**|**|***|", new int[][]{{2, 5}, {5, 9}})));
+        System.out.println("[2, 3] ?= " + Arrays.toString(platesBetweenCandles_bs("**|**|***|", new int[][]{{2, 5}, {5, 9}})));
     }
 }
