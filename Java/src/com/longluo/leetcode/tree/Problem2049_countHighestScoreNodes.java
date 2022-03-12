@@ -1,5 +1,7 @@
 package com.longluo.leetcode.tree;
 
+import java.util.*;
+
 /**
  * 2049. 统计最高分的节点数目
  * <p>
@@ -44,12 +46,45 @@ package com.longluo.leetcode.tree;
 public class Problem2049_countHighestScoreNodes {
 
     public static int countHighestScoreNodes(int[] parents) {
+        if (parents == null || parents.length <= 1) {
+            return parents.length;
+        }
+
         int ans = 0;
+        int len = parents.length;
+        Map<Integer, List<Integer>> nodeMap = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            List<Integer> list = new LinkedList<>();
+            bfs(parents, i, list);
+            nodeMap.put(i, list);
+        }
+
+        for (int i = 0; i < len; i++) {
+
+        }
 
         return ans;
     }
 
-    public static void main(String[] args) {
+    public static void bfs(int[] parents, int nodeIdx, List<Integer> list) {
+        int len = parents.length;
+        boolean[] visited = new boolean[len];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(nodeIdx);
+        visited[nodeIdx] = true;
+        while (!queue.isEmpty()) {
+            int nodeNum = queue.poll();
+            for (int i = 0; i < len; i++) {
+                if (parents[i] == nodeNum && !visited[i]) {
+                    queue.offer(i);
+                    visited[i] = true;
+                    list.add(i);
+                }
+            }
+        }
+    }
 
+    public static void main(String[] args) {
+        System.out.println("3 ?= " + countHighestScoreNodes(new int[]{-1, 2, 0, 2, 0}));
     }
 }
