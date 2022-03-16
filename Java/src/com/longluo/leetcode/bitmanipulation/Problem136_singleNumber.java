@@ -20,10 +20,17 @@ import java.util.Map;
  * 输入: [4,1,2,1,2]
  * 输出: 4
  * <p>
+ * 1 <= nums.length <= 3 * 10^4
+ * -3 * 10^4 <= nums[i] <= 3 * 10^4
+ * Each element in the array appears twice except for one element which appears only once.
+ * <p>
  * https://leetcode-cn.com/problems/single-number/
+ * <p>
+ * https://leetcode.com/problems/single-number/
  */
 public class Problem136_singleNumber {
 
+    // XOR
     public static int singleNumber(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums[0];
@@ -37,7 +44,27 @@ public class Problem136_singleNumber {
         return ans;
     }
 
-    public static int singleNumber_1(int[] nums) {
+    public static int singleNumber_map(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums[0];
+        }
+
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int num : nums) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+        }
+
+        for (int num : freq.keySet()) {
+            if (freq.get(num) == 1) {
+                return num;
+            }
+        }
+
+        return 0;
+    }
+
+    // Sort
+    public static int singleNumber_sort(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums[0];
         }
@@ -61,7 +88,8 @@ public class Problem136_singleNumber {
         return ans;
     }
 
-    public static int singleNumber_2(int[] nums) {
+    // HashMap
+    public static int singleNumber_hash(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums[0];
         }
@@ -86,7 +114,7 @@ public class Problem136_singleNumber {
     public static void main(String[] args) {
         System.out.println("1 ?= " + singleNumber(new int[]{2, 2, 1}));
         System.out.println("4 ?= " + singleNumber(new int[]{4, 1, 2, 1, 2}));
-        System.out.println("4 ?= " + singleNumber_1(new int[]{4, 1, 2, 1, 2}));
-        System.out.println("4 ?= " + singleNumber_2(new int[]{4, 1, 2, 1, 2}));
+        System.out.println("4 ?= " + singleNumber_sort(new int[]{4, 1, 2, 1, 2}));
+        System.out.println("4 ?= " + singleNumber_map(new int[]{4, 1, 2, 1, 2}));
     }
 }
