@@ -70,6 +70,38 @@ public class Problem946_validateStackSequences {
         return false;
     }
 
+    public static boolean validateStackSequences_stack(int[] pushed, int[] popped) {
+        if (popped == null || pushed.length <= 1) {
+            return true;
+        }
+
+        int len = pushed.length;
+        int popIdx = 0;
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < len; i++) {
+            stack.push(pushed[i]);
+            while (!stack.empty() && popIdx < len && stack.peek() == popped[popIdx]) {
+                stack.pop();
+                popIdx++;
+            }
+        }
+
+        return popIdx == len;
+    }
+
+    public boolean validateStackSequences_fast(int[] pushed, int[] popped) {
+        int size = 0;
+        for (int i = 0, j = 0; i < pushed.length; i++) {
+            pushed[size++] = pushed[i];
+            while (size != 0 && pushed[size - 1] == popped[j]) {
+                size--;
+                j++;
+            }
+        }
+
+        return size == 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1}));
         System.out.println("false ?= " + validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 1, 2}));
