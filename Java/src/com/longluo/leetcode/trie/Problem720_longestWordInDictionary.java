@@ -1,5 +1,10 @@
 package com.longluo.leetcode.trie;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 720. 词典中最长的单词
  * <p>
@@ -31,8 +36,44 @@ package com.longluo.leetcode.trie;
 public class Problem720_longestWordInDictionary {
 
     public static String longestWord(String[] words) {
+        if (words == null) {
+            return "";
+        }
 
-        return "";
+        Arrays.sort(words, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                if (o1.length() == o2.length()) {
+                    return o2.compareTo(o1);
+                }
+
+                return o1.length() - o2.length();
+            }
+        });
+
+        int len = words.length;
+        Set<String> res = new HashSet<>();
+        String ans = "";
+        res.add("");
+        for (int i = 0; i < len; i++) {
+            String word = words[i];
+            if (res.contains(word.substring(0, word.length() - 1))) {
+                res.add(word);
+                ans = word;
+            }
+        }
+
+        return ans;
+    }
+
+    class Trie {
+        int len;
+        char[] array;
+
+        Trie(int len, char ch) {
+            this.len = len;
+
+        }
     }
 
     public static void main(String[] args) {
