@@ -48,7 +48,6 @@ public class Problem856_scoreOfParentheses {
             }
 
             res += (int) Math.pow(2, stack.size() - 1);
-            ;
 
             while (idx < len && !stack.empty() && s.charAt(idx) == ')') {
                 idx++;
@@ -97,10 +96,32 @@ public class Problem856_scoreOfParentheses {
         return stack.pop();
     }
 
+    public static int scoreOfParentheses_best(String s) {
+        int ans = 0;
+        int level = 0;
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') {
+                level++;
+            } else {
+                level--;
+                if (i > 0 && s.charAt(i - 1) == '(') {
+                    ans += Math.pow(2, level);
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + scoreOfParentheses("()"));
         System.out.println("2 ?= " + scoreOfParentheses("(())"));
         System.out.println("4 ?= " + scoreOfParentheses("((()))"));
         System.out.println("2 ?= " + scoreOfParentheses("()()"));
+
+        System.out.println("1 ?= " + scoreOfParentheses_best("()"));
+        System.out.println("2 ?= " + scoreOfParentheses_best("()()"));
     }
 }
