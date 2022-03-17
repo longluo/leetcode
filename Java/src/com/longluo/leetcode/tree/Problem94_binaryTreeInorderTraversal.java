@@ -37,14 +37,13 @@ import java.util.Stack;
  * -100 <= Node.val <= 100
  * <p>
  * https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
+ * <p>
+ * https://leetcode.com/problems/binary-tree-inorder-traversal/
  */
 public class Problem94_binaryTreeInorderTraversal {
 
     public static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
-        if (root == null) {
-            return ans;
-        }
         inorder(root, ans);
         return ans;
     }

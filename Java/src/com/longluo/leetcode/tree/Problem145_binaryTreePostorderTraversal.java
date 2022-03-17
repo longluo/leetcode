@@ -23,6 +23,8 @@ import java.util.*;
  * 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
  * <p>
  * https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+ * <p>
+ * https://leetcode.com/problems/binary-tree-postorder-traversal
  */
 public class Problem145_binaryTreePostorderTraversal {
 
@@ -42,7 +44,7 @@ public class Problem145_binaryTreePostorderTraversal {
         list.add(root.val);
     }
 
-    public static List<Integer> postorderTraversal_2(TreeNode root) {
+    public static List<Integer> postorderTraversal_iter(TreeNode root) {
         List<Integer> ans = new LinkedList<>();
         if (root == null) {
             return ans;
@@ -73,6 +75,6 @@ public class Problem145_binaryTreePostorderTraversal {
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, null, 2, 3});
         System.out.println("[3, 2, 1] ?= " + postorderTraversal(tst1).toString());
-        System.out.println("[3, 2, 1] ?= " + postorderTraversal_2(tst1).toString());
+        System.out.println("[3, 2, 1] ?= " + postorderTraversal_iter(tst1).toString());
     }
 }
