@@ -38,7 +38,6 @@ public class Problem856_scoreOfParentheses {
         }
 
         int res = 0;
-        int score = 0;
         Stack<Character> stack = new Stack<>();
         int len = s.length();
         int idx = 0;
@@ -48,7 +47,8 @@ public class Problem856_scoreOfParentheses {
                 stack.push('(');
             }
 
-            res += (int) Math.pow(2, stack.size() - 1);;
+            res += (int) Math.pow(2, stack.size() - 1);
+            ;
 
             while (idx < len && !stack.empty() && s.charAt(idx) == ')') {
                 idx++;
@@ -57,6 +57,44 @@ public class Problem856_scoreOfParentheses {
         }
 
         return res;
+    }
+
+    public static int scoreOfParentheses_opt(String s) {
+        int res = 0;
+        Stack<Integer> stack = new Stack<>();
+        int len = s.length();
+        int idx = 0;
+        while (idx < len) {
+            while (s.charAt(idx) == '(') {
+                idx++;
+                stack.push(1);
+            }
+
+            res += (int) Math.pow(2, stack.size() - 1);
+
+            while (!stack.empty() && s.charAt(idx) == ')') {
+                idx++;
+                stack.pop();
+            }
+        }
+
+        return res;
+    }
+
+    public static int scoreOfParentheses_stack(String s) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+        for (char ch : s.toCharArray()) {
+            if (ch == '(') {
+                stack.push(0);
+            } else {
+                int subBottom = stack.pop();
+                int bottom = stack.pop();
+                stack.push(bottom + Math.max(2 * subBottom, 1));
+            }
+        }
+
+        return stack.pop();
     }
 
     public static void main(String[] args) {
