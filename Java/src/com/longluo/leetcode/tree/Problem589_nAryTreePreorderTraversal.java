@@ -28,6 +28,8 @@ import java.util.Stack;
  * 节点总数在范围 [0, 10^4] 内
  * <p>
  * https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/
+ * <p>
+ * https://leetcode.com/problems/n-ary-tree-preorder-traversal/
  */
 public class Problem589_nAryTreePreorderTraversal {
 

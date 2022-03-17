@@ -26,6 +26,8 @@ import java.util.*;
  * 节点总数在范围 [0, 10^4] 内
  * <p>
  * https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/
+ * <p>
+ * https://leetcode.com/problems/n-ary-tree-postorder-traversal/
  */
 public class Problem590_nAryTreePostorderTraversal {
 
