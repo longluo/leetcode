@@ -58,6 +58,34 @@ public class Problem856_scoreOfParentheses {
         return res;
     }
 
+    public static int scoreOfParentheses_divide(String s) {
+        return score(s, 0, s.length());
+    }
+
+    public static int score(String str, int start, int end) {
+        int ans = 0;
+        int balance = 0;
+        for (int i = start; i < end; i++) {
+            if (str.charAt(i) == '(') {
+                balance++;
+            } else {
+                balance--;
+            }
+
+            if (balance == 0) {
+                if (i - start == 1) {
+                    ans++;
+                } else {
+                    ans += 2 * score(str, start + 1, i);
+                }
+
+                start = i + 1;
+            }
+        }
+
+        return ans;
+    }
+
     public static int scoreOfParentheses_opt(String s) {
         int res = 0;
         Stack<Integer> stack = new Stack<>();
