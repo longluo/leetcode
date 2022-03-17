@@ -3,6 +3,9 @@ package com.longluo.leetcode.tree;
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 104. 二叉树的最大深度
  * <p>
@@ -46,9 +49,35 @@ public class Problem104_maximumDepthOfBinaryTree {
         return Math.max(leftDepth, rightDepth);
     }
 
+    public static int maxDepth_bfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int ans = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            ans++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 9, 20, null, null, 15, 7});
         System.out.println("3 ?= " + maxDepth(tst1));
         System.out.println("3 ?= " + maxDepth_dfs(tst1));
+        System.out.println("3 ?= " + maxDepth_bfs(tst1));
     }
 }
