@@ -49,6 +49,22 @@ public class Problem344_reverseString {
         }
     }
 
+    public static void reverseString_rec(char[] s) {
+        reverse(s, 0, s.length - 1);
+    }
+
+    public static void reverse(char[] str, int begin, int end) {
+        if (begin >= end) {
+            return;
+        }
+
+        char ch = str[begin];
+        str[begin] = str[end];
+        str[end] = ch;
+
+        reverse(str, begin + 1, end - 1);
+    }
+
     public static void main(String[] args) {
 //        System.out.println(" " + reverseString(new char[]{'h', 'e', 'l', 'l', 'o'}););
 //        System.out.println(" " + reverseString(new char[]{'H', 'a', 'n', 'n', 'a', 'h'}););
