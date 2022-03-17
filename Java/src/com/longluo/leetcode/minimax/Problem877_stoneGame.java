@@ -26,6 +26,8 @@ package com.longluo.leetcode.minimax;
  * sum(piles) 是奇数。
  * <p>
  * https://leetcode-cn.com/problems/stone-game/
+ * <p>
+ * https://leetcode.com/problems/stone-game
  */
 public class Problem877_stoneGame {
 
@@ -41,15 +43,12 @@ public class Problem877_stoneGame {
         return sumA > sumB;
     }
 
-    public static boolean stoneGame_2(int[] piles) {
-        return true;
-    }
-
-    public static boolean stoneGame_dp(int[] piles) {
+    public static boolean stoneGame_math(int[] piles) {
         return true;
     }
 
     public static void main(String[] args) {
         System.out.println("true ?= " + stoneGame(new int[]{5, 3, 4, 5}));
+        System.out.println("true ?= " + stoneGame_math(new int[]{3, 7, 2, 3}));
     }
 }
