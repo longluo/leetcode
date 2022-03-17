@@ -65,9 +65,24 @@ public class Problem21_mergeTwoSortedList {
         return dummyNode.next;
     }
 
+    public static ListNode mergeTwoLists_rec(ListNode list1, ListNode list2) {
+        if (list1 == null) {
+            return list2;
+        } else if (list2 == null) {
+            return list1;
+        } else if (list1.val <= list2.val) {
+            list1.next = mergeTwoLists_rec(list1.next, list2);
+            return list1;
+        } else {
+            list2.next = mergeTwoLists_rec(list1, list2.next);
+            return list2;
+        }
+    }
+
     public static void main(String[] args) {
         ListNode list1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 4});
         ListNode list2 = LinkedListNodeUtils.constructListNode(new int[]{1, 3, 4});
         System.out.println("  ?= " + mergeTwoLists(list1, list2));
+        System.out.println("  ?= " + mergeTwoLists_rec(list1, list2));
     }
 }
