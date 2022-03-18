@@ -35,7 +35,6 @@ public class Problem121_bestTimeToBuyAndSellStock {
                 if (prices[j] <= prices[i]) {
                     continue;
                 }
-
                 maxProfit = Math.max(maxProfit, prices[j] - prices[i]);
             }
         }
@@ -43,7 +42,38 @@ public class Problem121_bestTimeToBuyAndSellStock {
         return maxProfit;
     }
 
-    public static void main(String[] args) {
+    public static int maxProfit_bf(int[] prices) {
+        int len = prices.length;
+        int maxProfit = 0;
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
+                int profit = prices[j] - prices[i];
+                if (profit > maxProfit) {
+                    maxProfit = profit;
+                }
+            }
+        }
 
+        return maxProfit;
+    }
+
+    public static int maxProfit_opt(int[] prices) {
+        int len = prices.length;
+        int minPrice = prices[0];
+        int maxProfit = 0;
+        for (int i = 1; i < len; i++) {
+            minPrice = Math.min(prices[i], minPrice);
+            maxProfit = Math.max(maxProfit, prices[i] - minPrice);
+        }
+
+        return maxProfit;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("5 ?= " + maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println("0 ?= " + maxProfit(new int[]{7, 6, 4, 3, 1}));
+
+        System.out.println("5 ?= " + maxProfit_opt(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println("0 ?= " + maxProfit_opt(new int[]{7, 6, 4, 3, 1}));
     }
 }
