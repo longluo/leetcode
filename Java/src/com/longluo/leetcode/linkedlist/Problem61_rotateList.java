@@ -23,7 +23,7 @@ import com.longluo.datastructure.LinkedListNodeUtils;
  * <p>
  * https://leetcode-cn.com/problems/rotate-list/
  */
-public class Problem61_rotateLinkedList {
+public class Problem61_rotateList {
 
     public static ListNode rotateRight(ListNode head, int k) {
         if (head == null || head.next == null || k == 0) {
