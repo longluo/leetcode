@@ -2,8 +2,7 @@ package com.longluo.hot100;
 
 import com.longluo.datastructure.ListNode;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 141. Linked List Cycle
@@ -43,18 +42,34 @@ public class Problem141_linkedListCycle {
             return false;
         }
 
-        int idx = 0;
-        Map<ListNode, Integer> map = new HashMap<>();
+        Set<ListNode> set = new HashSet<>();
         while (head != null) {
-            if (map.containsKey(head)) {
+            if (set.contains(head)) {
                 return true;
             }
-            map.put(head, idx);
+            set.add(head);
             head = head.next;
-            idx++;
         }
 
         return false;
+    }
+
+    public static boolean hasCycle_fast(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != slow) {
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
