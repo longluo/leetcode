@@ -2,6 +2,7 @@ package com.longluo.hot100;
 
 import com.longluo.datastructure.ListNode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,6 +48,40 @@ public class Problem234_palindromeLinkedList {
         }
 
         return true;
+    }
+
+    public static boolean isPalindrome_better(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        List<Integer> list = new ArrayList<>();
+        while (head != null) {
+            list.add(head.val);
+            head = head.next;
+        }
+
+        int left = 0;
+        int right = list.size() - 1;
+        while (left < right) {
+            if (list.get(left) != list.get(right)) {
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    public static boolean isPalindrome_rec(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+
+        return false;
     }
 
     public static void main(String[] args) {
