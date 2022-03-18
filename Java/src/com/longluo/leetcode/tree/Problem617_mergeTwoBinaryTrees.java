@@ -31,6 +31,8 @@ import java.util.Queue;
  * 注意: 合并必须从两个树的根节点开始。
  * <p>
  * https://leetcode-cn.com/problems/merge-two-binary-trees/
+ * <p>
+ * https://leetcode.com/problems/merge-two-binary-trees/
  */
 public class Problem617_mergeTwoBinaryTrees {
 
@@ -45,6 +47,23 @@ public class Problem617_mergeTwoBinaryTrees {
         merged.left = mergeTrees(root1.left, root2.left);
         merged.right = mergeTrees(root1.right, root2.right);
         return merged;
+    }
+
+    public static TreeNode mergeTrees_rec(TreeNode root1, TreeNode root2) {
+        if (root1 == null) {
+            return root2;
+        }
+        if (root2 == null) {
+            return root1;
+        }
+
+        if (root1 != null) {
+            root1.val += root2.val;
+            root1.left = mergeTrees_rec(root1.left, root2.left);
+            root1.right = mergeTrees_rec(root1.right, root2.right);
+        }
+
+        return root1;
     }
 
     public static TreeNode mergeTrees_bfs(TreeNode root1, TreeNode root2) {
