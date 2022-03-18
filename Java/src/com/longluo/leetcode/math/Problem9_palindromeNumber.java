@@ -1,5 +1,8 @@
 package com.longluo.leetcode.math;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 9. Palindrome Number
  * Easy
@@ -42,6 +45,31 @@ public class Problem9_palindromeNumber {
         int right = len - 1;
         while (left < right) {
             if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    public static boolean isPalindrome_math(int x) {
+        if (x < 0) {
+            return false;
+        }
+
+        List<Integer> list = new ArrayList<>();
+        while (x > 0) {
+            list.add(x % 10);
+            x /= 10;
+        }
+
+        int left = 0;
+        int right = list.size() - 1;
+        while (left < right) {
+            if (list.get(left) != list.get(right)) {
                 return false;
             }
 
