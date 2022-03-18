@@ -116,12 +116,39 @@ public class Problem617_mergeTwoBinaryTrees {
         return merged;
     }
 
+    public static TreeNode mergeTrees_dfs(TreeNode root1, TreeNode root2) {
+        if (root1 == null) {
+            return root2;
+        }
+        dfs(root1, root2);
+        return root1;
+    }
+
+    public static void dfs(TreeNode root1, TreeNode root2) {
+        if (root1 != null && root2 != null) {
+            if (root1 != root2) {
+                root1.val += root2.val;
+            }
+
+            if (root1.left == null) {
+                root1.left = root2.left;
+            }
+            if (root1.right == null) {
+                root1.right = root2.right;
+            }
+            dfs(root1.left, root2.left);
+            dfs(root1.right, root2.right);
+        }
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 3, 2, 5});
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{2, 1, 3, null, 4, null, 7});
         TreeNode result1 = mergeTrees(tst1, tst2);
         TreeNode result2 = mergeTrees_bfs(tst1, tst2);
+        TreeNode result3 = mergeTrees_dfs(tst1, tst2);
         TreeUtils.printTree(result1);
         TreeUtils.printTree(result2);
+        TreeUtils.printTree(result3);
     }
 }
