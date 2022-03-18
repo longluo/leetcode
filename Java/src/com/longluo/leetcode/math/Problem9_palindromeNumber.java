@@ -80,9 +80,28 @@ public class Problem9_palindromeNumber {
         return true;
     }
 
+    public static boolean isPalindrome_best(int x) {
+        if (x < 0 || (x != 0 && x % 10 == 0)) {
+            return false;
+        }
+
+        int revisited = 0;
+        while (x > revisited) {
+            revisited = revisited * 10 + x % 10;
+            x /= 10;
+        }
+
+        return x == revisited || x == revisited / 10;
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + isPalindrome(10));
         System.out.println("true ?= " + isPalindrome(121));
         System.out.println("false ?= " + isPalindrome(-121));
+
+        System.out.println("true ?= " + isPalindrome_math(121));
+
+        System.out.println("true ?= " + isPalindrome_best(121));
+        System.out.println("true ?= " + isPalindrome_best(1221));
     }
 }
