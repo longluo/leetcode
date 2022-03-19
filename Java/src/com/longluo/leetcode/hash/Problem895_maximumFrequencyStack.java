@@ -79,6 +79,64 @@ public class Problem895_maximumFrequencyStack {
         }
     }
 
+    class FreqStack_map {
+        Map<Integer, Integer> freqMap;
+        int maxFreq = 0;
+
+        public FreqStack_map() {
+            freqMap = new HashMap<>();
+            maxFreq = 0;
+        }
+
+        public void push(int val) {
+            int freq = freqMap.getOrDefault(val, 0) + 1;
+            freqMap.put(val, freq);
+            if (freq > maxFreq) {
+                maxFreq = freq;
+            }
+        }
+
+        public int pop() {
+            int ret = freqMap.get(maxFreq);
+            freqMap.put(ret, freqMap.get(ret) - 1);
+            maxFreq--;
+            return ret;
+        }
+    }
+
+    class FreqStack_better {
+        Map<Integer, Integer> freqMap;
+        Map<Integer, LinkedList<Integer>> groupFreqMap;
+        int maxFreq = 0;
+
+        public FreqStack_better() {
+            freqMap = new HashMap<>();
+            groupFreqMap = new HashMap<>();
+        }
+
+        public void push(int val) {
+            int freq = freqMap.getOrDefault(val, 0) + 1;
+            freqMap.put(val, freq);
+            if (freq > maxFreq) {
+                maxFreq = freq;
+            }
+
+            groupFreqMap.putIfAbsent(freq, new LinkedList<>());
+            groupFreqMap.get(freq).push(val);
+        }
+
+        public int pop() {
+            int res = groupFreqMap.get(maxFreq).pop();
+            freqMap.put(res, freqMap.get(res) - 1);
+            if (groupFreqMap.get(maxFreq).isEmpty()) {
+                groupFreqMap.remove(maxFreq);
+                maxFreq--;
+            }
+
+            return res;
+        }
+    }
+
 /**
  * Your FreqStack object will be instantiated and called as such:
  * FreqStack obj = new FreqStack();
