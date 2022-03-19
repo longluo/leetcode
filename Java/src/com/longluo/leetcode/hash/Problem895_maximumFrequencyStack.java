@@ -43,7 +43,7 @@ import java.util.function.Function;
  */
 public class Problem895_maximumFrequencyStack {
 
-    class FreqStack {
+    static class FreqStack {
         Map<Integer, Integer> freqMap;
         Map<Integer, Stack<Integer>> groupFreqMap;
         int maxFreq = 0;
@@ -137,10 +137,24 @@ public class Problem895_maximumFrequencyStack {
         }
     }
 
-/**
- * Your FreqStack object will be instantiated and called as such:
- * FreqStack obj = new FreqStack();
- * obj.push(val);
- * int param_2 = obj.pop();
- */
+    /**
+     * Your FreqStack object will be instantiated and called as such:
+     * FreqStack obj = new FreqStack();
+     * obj.push(val);
+     * int param_2 = obj.pop();
+     */
+
+    public static void main(String[] args) {
+        FreqStack fs = new FreqStack();
+        fs.push(5);
+        fs.push(7);
+        fs.push(5);
+        fs.push(7);
+        fs.push(4);
+        fs.push(5);
+        fs.pop();
+        fs.pop();
+        fs.pop();
+        fs.pop();
+    }
 }
