@@ -43,11 +43,32 @@ public class Problem69_sqrtx {
         return 0;
     }
 
+    public static int mySqrt_newton(int x) {
+        if (x == 0) {
+            return 0;
+        }
+
+        double C = x;
+        double x0 = x;
+        while (true) {
+            double xi = 0.5 * (x0 + C / x0);
+            if (Math.abs(x0 - xi) < 1e-7) {
+                break;
+            }
+            x0 = xi;
+        }
+
+        return (int) x0;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + mySqrt(0));
         System.out.println("1 ?= " + mySqrt(1));
         System.out.println("2 ?= " + mySqrt(4));
         System.out.println("2 ?= " + mySqrt(8));
+
         System.out.println("46340 ?= " + mySqrt(2147483647));
+
+        System.out.println("2 ?= " + mySqrt_newton(8));
     }
 }
