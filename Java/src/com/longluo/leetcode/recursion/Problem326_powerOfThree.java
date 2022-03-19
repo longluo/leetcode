@@ -1,5 +1,8 @@
 package com.longluo.leetcode.recursion;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 326. 3的幂
  * <p>
@@ -29,6 +32,8 @@ package com.longluo.leetcode.recursion;
  * 你能不使用循环或者递归来完成本题吗？
  * <p>
  * https://leetcode-cn.com/problems/power-of-three/
+ * <p>
+ * https://leetcode.com/problems/power-of-three/
  */
 public class Problem326_powerOfThree {
 
@@ -50,6 +55,9 @@ public class Problem326_powerOfThree {
         return true;
     }
 
+    /**
+     * Recursive
+     */
     public static boolean isPowerOfThree_rec(int n) {
         if (n <= 0) {
             return false;
@@ -66,6 +74,29 @@ public class Problem326_powerOfThree {
         }
     }
 
+    public static boolean isPowerOfThree_fast(int n) {
+        return n > 0 && 1162261467 % n == 0;
+    }
+
+    public static boolean isPowerOfThree_table(int n) {
+        if (n <= 0) {
+            return false;
+        }
+
+        int[] nums = {1, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683, 59049, 177147, 531441, 1594323, 4782969, 14348907, 43046721, 129140163, 387420489, 1162261467};
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == n) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static int powerOfThree(int n) {
+        return (int) Math.pow(3, n);
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + isPowerOfThree(0));
         System.out.println("true ?= " + isPowerOfThree(1));
@@ -76,5 +107,11 @@ public class Problem326_powerOfThree {
         System.out.println("false ?= " + isPowerOfThree(45));
         System.out.println("true ?= " + isPowerOfThree_rec(3));
         System.out.println("false ?= " + isPowerOfThree_rec(45));
+
+        for (int i = 0; i < 10000; i++) {
+            if (powerOfThree(i) < Integer.MAX_VALUE) {
+                System.out.print(powerOfThree(i) + ", ");
+            }
+        }
     }
 }
