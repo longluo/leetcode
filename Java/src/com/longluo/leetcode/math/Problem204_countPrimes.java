@@ -68,10 +68,35 @@ public class Problem204_countPrimes {
                 cells[j * i] = false;
             }
         }
-        
+
         for (int i = 2; i < n; i++) {
             if (cells[i]) {
                 count++;
+            }
+        }
+
+        return count;
+    }
+
+    public static int countPrimes_sieve_better(int n) {
+        if (n <= 1) {
+            return 0;
+        }
+
+        int count = 0;
+        int[] cells = new int[n];
+        Arrays.fill(cells, 1);
+        for (int i = 2; i < n; i++) {
+            if (cells[i] == 1) {
+                continue;
+            }
+
+            if (cells[i] == 1) {
+                count++;
+            }
+
+            for (int j = 2; j * i < n; j++) {
+                cells[j * i] = 0;
             }
         }
 
