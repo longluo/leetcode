@@ -27,6 +27,8 @@ package com.longluo.leetcode.math;
  * 输出: 701
  * <p>
  * https://leetcode-cn.com/problems/excel-sheet-column-number/
+ * <p>
+ * https://leetcode.com/problems/excel-sheet-column-number/
  */
 public class Problem171_excelSheetColumnNumber {
 
@@ -48,6 +50,17 @@ public class Problem171_excelSheetColumnNumber {
         return ans;
     }
 
+    public static int titleToNumber_base26(String columnTitle) {
+        int len = columnTitle.length();
+        int ans = 0;
+        for (int i = 0; i < len; i++) {
+            int num = columnTitle.charAt(i) - 'A' + 1;
+            ans = ans * 26 + num;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + titleToNumber("A"));
         System.out.println("2 ?= " + titleToNumber("B"));
@@ -56,5 +69,6 @@ public class Problem171_excelSheetColumnNumber {
         System.out.println("27 ?= " + titleToNumber("AA"));
         System.out.println("28 ?= " + titleToNumber("AB"));
         System.out.println("701 ?= " + titleToNumber("ZY"));
+        System.out.println("701 ?= " + titleToNumber_base26("ZY"));
     }
 }
