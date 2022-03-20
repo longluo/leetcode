@@ -1,6 +1,8 @@
 package com.longluo.leetcode.math;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 204. 计数质数
@@ -101,6 +103,25 @@ public class Problem204_countPrimes {
         return count;
     }
 
+    public static int countPrimes_linear(int n) {
+        List<Integer> primes = new ArrayList<Integer>();
+        int[] isPrime = new int[n];
+        Arrays.fill(isPrime, 1);
+        for (int i = 2; i < n; ++i) {
+            if (isPrime[i] == 1) {
+                primes.add(i);
+            }
+            for (int j = 0; j < primes.size() && i * primes.get(j) < n; ++j) {
+                isPrime[i * primes.get(j)] = 0;
+                if (i % primes.get(j) == 0) {
+                    break;
+                }
+            }
+        }
+
+        return primes.size();
+    }
+
     public static int countPrimes_bf(int n) {
         if (n <= 1) {
             return 0;
@@ -146,7 +167,9 @@ public class Problem204_countPrimes {
         System.out.println("4 ?= " + countPrimes_bf(10));
         System.out.println("4 ?= " + countPrimes_sieve(10));
 
-        System.out.println("4 ?= " + countPrimes_sieve(30));
+        System.out.println("4 ?= " + countPrimes_sieve_better(10));
+        System.out.println("4 ?= " + countPrimes_linear(10));
+
 
 //        for (int i = 2; i < 5000000; i++) {
 //            if (isPrimeNumber(i)) {
