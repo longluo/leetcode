@@ -35,11 +35,12 @@ import java.util.*;
 public class Problem1007_minimumDominoRotationsForEqualRow {
 
     public static int minDominoRotations(int[] tops, int[] bottoms) {
-        int ans = -1;
-        if (check(tops[0], tops, bottoms) > 0) {
-
+        int ans = check(tops[0], tops, bottoms);
+        if (ans > 0 || tops[0] == bottoms[0]) {
+            return ans;
+        } else {
+            return check(bottoms[0], tops, bottoms);
         }
-        return ans;
     }
 
     public static int check(int anchor, int[] A, int[] B) {
