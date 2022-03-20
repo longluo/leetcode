@@ -88,15 +88,13 @@ public class Problem204_countPrimes {
         Arrays.fill(cells, 1);
         for (int i = 2; i < n; i++) {
             if (cells[i] == 1) {
-                continue;
-            }
-
-            if (cells[i] == 1) {
                 count++;
-            }
 
-            for (int j = 2; j * i < n; j++) {
-                cells[j * i] = 0;
+                if ((long) i * i < n) {
+                    for (int j = i * i; j < n; j += i) {
+                        cells[j] = 0;
+                    }
+                }
             }
         }
 
