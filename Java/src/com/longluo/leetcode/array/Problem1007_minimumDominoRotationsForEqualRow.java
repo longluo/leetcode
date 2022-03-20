@@ -35,56 +35,55 @@ import java.util.*;
 public class Problem1007_minimumDominoRotationsForEqualRow {
 
     public static int minDominoRotations(int[] tops, int[] bottoms) {
-        if (tops == null || tops.length <= 1) {
-            return 0;
-        }
 
-        int len = tops.length;
-        boolean flag = true;
-        int topVal = tops[0];
-        int bottomVal = bottoms[0];
-        int topCnt = 0;
-        for (int j = 1; j < len; j++) {
-            if (tops[j] == topVal) {
+        return -1;
+    }
+
+    public static int check(int anchor, int[] A, int[] B) {
+        int len = A.length;
+        boolean canRotote = true;
+        int cnt = 0;
+        for (int i = 0; i < len; i++) {
+            if (A[i] == anchor) {
                 continue;
-            } else if (bottoms[j] == topVal) {
-                topCnt++;
-            } else if (tops[j] != topVal && bottoms[j] != topVal) {
-                flag = false;
+            }
+
+            if (B[i] == anchor) {
+                cnt++;
+            }
+
+            if (A[i] != anchor && B[i] != anchor) {
+                canRotote = false;
                 break;
             }
         }
 
-        if (!flag) {
-            topCnt = -1;
-        }
-
-        flag = true;
-        int bottomCnt = 0;
-        for (int j = 1; j < len; j++) {
-            if (bottoms[j] == bottomVal) {
-                continue;
-            } else if (tops[j] == bottomVal) {
-                bottomCnt++;
-            } else if (tops[j] != bottomVal && bottoms[j] != bottomVal) {
-                flag = false;
-                break;
-            }
-        }
-
-        if (!flag) {
-            bottomCnt = -1;
-        }
-
-        if (topCnt >= 0 && bottomCnt >= 0) {
-            return Math.min(topCnt, bottomCnt);
-        } else if (topCnt >= 0 && bottomCnt < 0) {
-            return topCnt;
-        } else if (topCnt < 0 && bottomCnt >= 0) {
-            return bottomCnt;
+        if (canRotote) {
+            return cnt;
         }
 
         return -1;
+    }
+
+    public static int minDominoRotations_better(int[] tops, int[] bottoms) {
+        int len = tops.length;
+        Map<Integer, Integer> topMap = new HashMap<>();
+        Map<Integer, Integer> bottomMap = new HashMap<>();
+
+        for (int i = 0; i < len; i++) {
+            topMap.put(tops[i], topMap.getOrDefault(tops[i], 0) + 1);
+            bottomMap.put(bottoms[i], bottomMap.getOrDefault(bottoms[i], 0) + 1);
+        }
+
+        int ans = -1;
+        for (int i = 1; i <= 6; i++) {
+            int total = topMap.getOrDefault(i, 0) + bottomMap.getOrDefault(i, 0);
+            if (total >= len) {
+                ans = Math.min(check(i, tops, bottoms), check(i, bottoms, tops));
+            }
+        }
+
+        return ans;
     }
 
     public static int minDominoRotations_greedy(int[] tops, int[] bottoms) {
@@ -145,6 +144,11 @@ public class Problem1007_minimumDominoRotationsForEqualRow {
     public static void main(String[] args) {
         System.out.println("2 ?= " + minDominoRotations(new int[]{2, 1, 2, 4, 2, 2}, new int[]{5, 2, 6, 2, 3, 2}));
         System.out.println("-1 ?= " + minDominoRotations(new int[]{3, 5, 1, 2, 3}, new int[]{3, 6, 3, 3, 4}));
+
+        System.out.println("0 ?= " + minDominoRotations_better(new int[]{3, 3}, new int[]{2, 5}));
+        System.out.println("1 ?= " + minDominoRotations_better(new int[]{1, 2, 1, 1, 1, 2, 2, 2}, new int[]{2, 1, 2, 2, 2, 2, 2, 2}));
+        System.out.println("2 ?= " + minDominoRotations_better(new int[]{2, 1, 2, 4, 2, 2}, new int[]{5, 2, 6, 2, 3, 2}));
+        System.out.println("-1 ?= " + minDominoRotations_better(new int[]{3, 5, 1, 2, 3}, new int[]{3, 6, 3, 3, 4}));
 
         System.out.println("0 ?= " + minDominoRotations_greedy(new int[]{3, 3}, new int[]{2, 5}));
         System.out.println("1 ?= " + minDominoRotations_greedy(new int[]{1, 2, 1, 1, 1, 2, 2, 2}, new int[]{2, 1, 2, 2, 2, 2, 2, 2}));
