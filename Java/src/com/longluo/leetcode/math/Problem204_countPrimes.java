@@ -51,13 +51,40 @@ public class Problem204_countPrimes {
         return count;
     }
 
+    public static int countPrimes_sieve(int n) {
+        if (n <= 1) {
+            return 0;
+        }
+
+        int count = 0;
+        boolean[] cells = new boolean[n];
+        Arrays.fill(cells, true);
+        for (int i = 2; i < n; i++) {
+            if (!cells[i]) {
+                continue;
+            }
+
+            for (int j = 2; j * i < n; j++) {
+                cells[j * i] = false;
+            }
+        }
+        
+        for (int i = 2; i < n; i++) {
+            if (cells[i]) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     public static int countPrimes_bf(int n) {
         if (n <= 1) {
             return 0;
         }
 
         int ans = 0;
-        for (int i = 2; i <= n; i++) {
+        for (int i = 2; i < n; i++) {
             if (isPrimeNumber(i)) {
                 ans++;
             }
@@ -87,11 +114,16 @@ public class Problem204_countPrimes {
 //        System.out.println("true ?= " + isPrimeNumber(3));
 //        System.out.println("false ?= " + isPrimeNumber(10));
 
+        System.out.println("0 ?= " + countPrimes_bf(2));
+
         System.out.println("4 ?= " + countPrimes(10));
         System.out.println("0 ?= " + countPrimes(0));
         System.out.println("0 ?= " + countPrimes(1));
 
         System.out.println("4 ?= " + countPrimes_bf(10));
+        System.out.println("4 ?= " + countPrimes_sieve(10));
+
+        System.out.println("4 ?= " + countPrimes_sieve(30));
 
 //        for (int i = 2; i < 5000000; i++) {
 //            if (isPrimeNumber(i)) {
