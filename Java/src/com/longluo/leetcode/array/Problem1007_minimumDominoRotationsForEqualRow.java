@@ -35,34 +35,32 @@ import java.util.*;
 public class Problem1007_minimumDominoRotationsForEqualRow {
 
     public static int minDominoRotations(int[] tops, int[] bottoms) {
+        int ans = -1;
+        if (check(tops[0], tops, bottoms) > 0) {
 
-        return -1;
+        }
+        return ans;
     }
 
     public static int check(int anchor, int[] A, int[] B) {
         int len = A.length;
-        boolean canRotote = true;
-        int cnt = 0;
+        int rotateA = 0;
+        int rotateB = 0;
         for (int i = 0; i < len; i++) {
-            if (A[i] == anchor) {
-                continue;
-            }
-
-            if (B[i] == anchor) {
-                cnt++;
-            }
-
             if (A[i] != anchor && B[i] != anchor) {
-                canRotote = false;
-                break;
+                return -1;
+            }
+
+            if (A[i] != anchor) {
+                rotateA++;
+            }
+
+            if (B[i] != anchor) {
+                rotateB++;
             }
         }
 
-        if (canRotote) {
-            return cnt;
-        }
-
-        return -1;
+        return Math.min(rotateA, rotateB);
     }
 
     public static int minDominoRotations_better(int[] tops, int[] bottoms) {
@@ -79,7 +77,7 @@ public class Problem1007_minimumDominoRotationsForEqualRow {
         for (int i = 1; i <= 6; i++) {
             int total = topMap.getOrDefault(i, 0) + bottomMap.getOrDefault(i, 0);
             if (total >= len) {
-                ans = Math.min(check(i, tops, bottoms), check(i, bottoms, tops));
+                ans = check(i, tops, bottoms);
             }
         }
 
