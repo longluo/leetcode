@@ -1,5 +1,6 @@
 package com.longluo.leetcode.hash;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,10 +38,6 @@ public class Problem242_validAnagram {
             return false;
         }
 
-        if (sLen > 1 && s.equals(t)) {
-            return false;
-        }
-
         Map<Character, Integer> sMap = new HashMap<>();
         Map<Character, Integer> tMap = new HashMap<>();
         for (int i = 0; i < sLen; i++) {
@@ -59,10 +56,55 @@ public class Problem242_validAnagram {
         return true;
     }
 
+    public static boolean isAnagram_arr(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        int len = s.length();
+        int[] sCnt = new int[26];
+        int[] tCnt = new int[26];
+        for (int i = 0; i < len; i++) {
+            sCnt[s.charAt(i) - 'a']++;
+            tCnt[t.charAt(i) - 'a']++;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (sCnt[i] != tCnt[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean isAnagram_sort(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+        return Arrays.equals(sArr, tArr);
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + isAnagram("a", "a"));
         System.out.println("false ?= " + isAnagram("a", "b"));
         System.out.println("true ?= " + isAnagram("anagram", "nagaram"));
         System.out.println("false ?= " + isAnagram("rat", "car"));
+
+        System.out.println("true ?= " + isAnagram_arr("a", "a"));
+        System.out.println("false ?= " + isAnagram_arr("a", "b"));
+        System.out.println("true ?= " + isAnagram_arr("anagram", "nagaram"));
+        System.out.println("false ?= " + isAnagram_arr("rat", "car"));
+
+        System.out.println("true ?= " + isAnagram_sort("a", "a"));
+        System.out.println("false ?= " + isAnagram_sort("a", "b"));
+        System.out.println("false ?= " + isAnagram_sort("abc", "abc"));
+        System.out.println("true ?= " + isAnagram_sort("anagram", "nagaram"));
+        System.out.println("false ?= " + isAnagram_sort("rat", "car"));
     }
 }
