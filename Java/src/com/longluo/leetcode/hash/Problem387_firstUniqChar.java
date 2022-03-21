@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * 387. 字符串中的第一个唯一字符
+ * <p>
  * 给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
  * <p>
  * 示例：
@@ -14,6 +15,8 @@ import java.util.*;
  * 返回 2
  * <p>
  * 提示：你可以假定该字符串只包含小写字母。
+ * <p>
+ * https://leetcode-cn.com/problems/first-unique-character-in-a-string/
  */
 public class Problem387_firstUniqChar {
 
@@ -32,6 +35,15 @@ public class Problem387_firstUniqChar {
                 return i;
             }
         }
+
+        return -1;
+    }
+
+    public static int firstUniqChar_cnt(String s) {
+        if (s == null || s.length() == 0) {
+            return -1;
+        }
+
 
         return -1;
     }
