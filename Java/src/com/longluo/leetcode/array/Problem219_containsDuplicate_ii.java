@@ -29,6 +29,8 @@ import java.util.Set;
  * 0 <= k <= 10^5
  * <p>
  * https://leetcode-cn.com/problems/contains-duplicate-ii/
+ * <p>
+ * https://leetcode.com/problems/contains-duplicate-ii/
  */
 public class Problem219_containsDuplicate_ii {
 
@@ -100,6 +102,24 @@ public class Problem219_containsDuplicate_ii {
                 }
 
                 set.add(nums[right]);
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean containsNearbyDuplicate_win_better(int[] nums, int k) {
+        int len = nums.length;
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < len; i++) {
+            if (i > k) {
+                set.remove(nums[i - k - 1]);
+            }
+
+            if (set.contains(nums[i])) {
+                return true;
+            } else {
+                set.add(nums[i]);
             }
         }
 
