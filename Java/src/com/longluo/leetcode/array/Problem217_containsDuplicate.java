@@ -1,7 +1,6 @@
 package com.longluo.leetcode.array;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 217. 存在重复元素
@@ -22,6 +21,8 @@ import java.util.Map;
  * 输出: true
  * <p>
  * https://leetcode-cn.com/problems/contains-duplicate/
+ * <p>
+ * https://leetcode.com/problems/contains-duplicate/
  */
 public class Problem217_containsDuplicate {
 
@@ -42,9 +43,53 @@ public class Problem217_containsDuplicate {
         return false;
     }
 
+    /**
+     * Set
+     */
+    public static boolean containsDuplicate_set(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return false;
+        }
+
+        Set<Integer> set = new HashSet<>();
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            if (!set.add(nums[i])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Sort
+     */
+    public static boolean containsDuplicate_sort(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return false;
+        }
+
+        Arrays.sort(nums);
+        int len = nums.length;
+        for (int i = 1; i < len; i++) {
+            if (nums[i] == nums[i - 1]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + containsDuplicate(new int[]{1, 2, 3, 1}));
         System.out.println("false ?= " + containsDuplicate(new int[]{1, 2, 3, 4}));
         System.out.println("true ?= " + containsDuplicate(new int[]{1, 1, 1, 3, 3, 4, 3, 2, 4, 2}));
+
+        System.out.println("true ?= " + containsDuplicate_set(new int[]{1, 2, 3, 1}));
+        System.out.println("false ?= " + containsDuplicate_set(new int[]{1, 2, 3, 4}));
+
+        System.out.println("true ?= " + containsDuplicate_sort(new int[]{1, 2, 3, 1}));
+        System.out.println("false ?= " + containsDuplicate_sort(new int[]{1, 2, 3, 4}));
     }
 }
