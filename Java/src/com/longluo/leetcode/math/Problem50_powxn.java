@@ -24,9 +24,14 @@ package com.longluo.leetcode.math;
  * -10^4 <= xn <= 10^4
  * <p>
  * https://leetcode-cn.com/problems/powx-n/
+ * <p>
+ * https://leetcode.com/problems/powx-n/
  */
 public class Problem50_powxn {
 
+    /**
+     * Brute Force
+     */
     public static double myPow(double x, int n) {
         if (n == 0 || x == 1) {
             return 1;
@@ -53,7 +58,9 @@ public class Problem50_powxn {
         return ans;
     }
 
-    //
+    /**
+     * Fast Power
+     */
     public static double myPow_quick(double x, int n) {
         if (n == 0) {
             return 1.0;
@@ -77,20 +84,10 @@ public class Problem50_powxn {
         }
     }
 
-    public static double myPow_2(double x, int n) {
-        long N = n;
-        return N >= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
-    }
-
-    public static double quickMul(double x, long N) {
-        if (N == 0) {
-            return 1.0;
-        }
-        double y = quickMul(x, N / 2);
-        return N % 2 == 0 ? y * y : y * y * x;
-    }
-
-    public static double myPow_3(double x, int n) {
+    /**
+     * Binary
+     */
+    public static double myPow_iter(double x, int n) {
         long N = n;
         return N >= 0 ? quickMul_iter(x, N) : 1.0 / quickMul_iter(x, -N);
     }
@@ -110,9 +107,30 @@ public class Problem50_powxn {
         return ans;
     }
 
+    public static double myPow_iter_shift(double x, int n) {
+        long N = n;
+        return N >= 0 ? quickMul_iter(x, N) : 1.0 / quickMul_iter(x, -N);
+    }
+
+    public static double binaryPower(double x, long N) {
+        double res = x;
+        while (N > 0) {
+            if ((N & 1) == 1) {
+                res = res * x;
+            }
+
+            x *= x;
+            N = N >> 1;
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("1024.00000 ?= " + myPow(2.00000, 10));
         System.out.println("9.26100 ?= " + myPow(2.10000, 3));
-        System.out.println("0.25000 ?= " + myPow(2.00000, -2));
+        System.out.println("9.26100 ?= " + myPow_quick(2.10000, 3));
+        System.out.println("9.26100 ?= " + myPow_iter(2.10000, 3));
+        System.out.println("9.26100 ?= " + myPow_iter_shift(2.10000, 3));
     }
 }
