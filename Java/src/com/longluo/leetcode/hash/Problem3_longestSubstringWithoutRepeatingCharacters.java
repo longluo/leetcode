@@ -51,7 +51,6 @@ public class Problem3_longestSubstringWithoutRepeatingCharacters {
             }
 
             ans = Math.max(ans, right - left);
-
             set.remove(s.charAt(left));
             left++;
         }
