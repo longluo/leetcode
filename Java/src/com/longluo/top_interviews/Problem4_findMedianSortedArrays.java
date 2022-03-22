@@ -38,6 +38,8 @@ package com.longluo.top_interviews;
  * 进阶：你能设计一个时间复杂度为 O(log (m+n)) 的算法解决此问题吗？
  * <p>
  * https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
+ * <p>
+ * https://leetcode.com/problems/median-of-two-sorted-arrays/
  */
 public class Problem4_findMedianSortedArrays {
 
