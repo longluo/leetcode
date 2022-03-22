@@ -26,6 +26,9 @@ package com.longluo.top_interviews;
  */
 public class Problem29_divideTwoIntegers {
 
+    /**
+     * use long
+     */
     public static int divide(int dividend, int divisor) {
         if (dividend == 0) {
             return 0;
@@ -63,13 +66,24 @@ public class Problem29_divideTwoIntegers {
         return (int) ans;
     }
 
-    // only use 32
-    public static int divide_1(int dividend, int divisor) {
+
+    /**
+     * use int
+     */
+    public static int divide_int(int dividend, int divisor) {
         if (dividend == 0) {
             return 0;
         }
 
-        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+        if (divisor == 1) {
+            return dividend;
+        }
+
+        if (divisor == -1) {
+            if (dividend > Integer.MIN_VALUE) {
+                return -dividend;
+            }
+
             return Integer.MAX_VALUE;
         }
 
@@ -98,41 +112,56 @@ public class Problem29_divideTwoIntegers {
         return ans;
     }
 
-    // fast
-    public static int divide_2(int dividend, int divisor) {
+    /**
+     *  fast
+     */
+    public static int divide_fast(int dividend, int divisor) {
         if (dividend == 0) {
             return 0;
         }
 
-        if (dividend == -2147483648 && divisor == -1) {
-            return 2147483647;
+        if (divisor == 1) {
+            return dividend;
+        }
+
+        if (divisor == -1) {
+            if (dividend > Integer.MIN_VALUE) {
+                return -dividend;
+            }
+
+            return Integer.MAX_VALUE;
         }
 
         int ans = 0;
-        boolean isNegative = true;
-        if (dividend > 0 && divisor > 0) {
-            dividend = -dividend;
-            isNegative = false;
-        } else if (dividend > 0 && divisor < 0) {
-            dividend = -dividend;
-            divisor = -divisor;
-        } else if (dividend < 0 && divisor < 0) {
-            isNegative = false;
-            divisor = -divisor;
+        int sign = 1;
+        if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0)) {
+            sign = -1;
         }
 
-        while (dividend + divisor <= 0) {
-            dividend += divisor;
-            ans++;
-        }
-
-        if (isNegative) {
-            ans = -ans;
-        }
-
-        return ans;
+        dividend = dividend > 0 ? dividend : -dividend;
+        divisor = divisor > 0 ? divisor : -divisor;
+        ans = fastDiv(dividend, divisor);
+        return sign > 0 ? ans : -ans;
     }
 
+    public static int fastDiv(int a, int b) {
+        if (a < b) {
+            return 0;
+        }
+
+        int count = 1;
+        int tb = b;
+        while ((tb + tb) <= a) {
+            count <<= 1;
+            tb <<= 1;
+        }
+
+        return count + fastDiv(a - tb, b);
+    }
+
+    /**
+     * quickAdd
+     */
     public static boolean quickAdd(int y, int z, int x) {
         // x 和 y 是负数，z 是正数
         // 需要判断 z * y >= x 是否成立
@@ -156,21 +185,28 @@ public class Problem29_divideTwoIntegers {
             // 不能使用除法
             z >>= 1;
         }
+
         return true;
     }
 
     public static void main(String[] args) {
         int val = Math.abs(-2147483648);
         System.out.println("val = " + val);
+
+        System.out.println("3 ?= " + divide_fast(10, 3));
+        System.out.println("3 ?= " + divide_fast(2147483647, 2));
+
         System.out.println("2147483648 ?= " + Math.abs(-2147483648));
+
         System.out.println("3 ?= " + divide(10, 3));
         System.out.println("-2 ?= " + divide(7, -3));
         System.out.println("1 ?= " + divide(1, 1));
         System.out.println("-1 ?= " + divide(-1, 1));
-        System.out.println("-1 ?= " + divide_1(-1, 1));
+        System.out.println("-1 ?= " + divide_int(-1, 1));
         System.out.println("2147483647 ?= " + divide(-2147483648, -1));
         System.out.println("-2147483648 ?= " + divide(-2147483648, 1));
         System.out.println("-1073741824 ?= " + divide(-2147483648, 2));
+
         quickAdd(-3, 3, -10);
         quickAdd(-3, 4, -10);
         quickAdd(-3, 2, -2);
