@@ -119,6 +119,44 @@ public class Problem8_stringToInteger_atoi {
         return (int) ans;
     }
 
+    public static int myAtoi_str(String s) {
+        if (s == null || s.length() <= 0) {
+            return 0;
+        }
+
+        s = s.trim();
+        boolean isNegative = false;
+        long ans = 0;
+        int len = s.length();
+        int idx = 0;
+        if (idx < len && (s.charAt(idx) == '+' || s.charAt(idx) == '-')) {
+            isNegative = s.charAt(idx) == '-';
+            idx++;
+        }
+
+        while (idx < len) {
+            char ch = s.charAt(idx);
+            if (!Character.isDigit(ch)) {
+                break;
+            }
+
+            if (ans > Integer.MAX_VALUE) {
+                break;
+            }
+            ans = 10 * ans + ch - '0';
+            idx++;
+        }
+
+        ans = isNegative ? -ans : ans;
+        if (ans > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        } else if (ans < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+
+        return (int) ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("-42  ?= " + myAtoi("+1"));
         System.out.println("2147483647  ?= " + myAtoi("9223372036854775808"));
@@ -127,5 +165,7 @@ public class Problem8_stringToInteger_atoi {
         System.out.println("42  ?= " + myAtoi("42"));
         System.out.println("4193  ?= " + myAtoi("4193 with words"));
         System.out.println("0  ?= " + myAtoi("words and 987"));
+
+        System.out.println("-42  ?= " + myAtoi_str("   -42"));
     }
 }
