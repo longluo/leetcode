@@ -28,6 +28,8 @@ import java.util.List;
  * 1 <= n <= 10^4
  * <p>
  * https://leetcode-cn.com/problems/fizz-buzz/
+ * <p>
+ * https://leetcode.com/problems/fizz-buzz/
  */
 public class Problem412_fizzBuzz {
 
