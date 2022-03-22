@@ -132,25 +132,32 @@ public class Problem29_divideTwoIntegers {
             return Integer.MAX_VALUE;
         }
 
-        int ans = 0;
+        long ans = 0;
         int sign = 1;
         if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0)) {
             sign = -1;
         }
 
-        dividend = dividend > 0 ? dividend : -dividend;
-        divisor = divisor > 0 ? divisor : -divisor;
-        ans = fastDiv(dividend, divisor);
-        return sign > 0 ? ans : -ans;
+        long tdividend = dividend;
+        long tdivisor = divisor;
+
+        tdividend = tdividend > 0 ? tdividend : -tdividend;
+        tdivisor = tdivisor > 0 ? tdivisor : -tdivisor;
+        ans = fastDiv(tdividend, tdivisor);
+        if (sign > 0 && ans > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        return sign > 0 ? (int)ans : (int)-ans;
     }
 
-    public static int fastDiv(int a, int b) {
+    public static long fastDiv(long a, long b) {
         if (a < b) {
             return 0;
         }
 
         int count = 1;
-        int tb = b;
+        long tb = b;
         while ((tb + tb) <= a) {
             count <<= 1;
             tb <<= 1;
