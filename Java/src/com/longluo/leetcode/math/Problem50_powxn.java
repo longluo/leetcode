@@ -113,7 +113,7 @@ public class Problem50_powxn {
     }
 
     public static double binaryPower(double x, long N) {
-        double res = x;
+        double res = 1.0;
         while (N > 0) {
             if ((N & 1) == 1) {
                 res = res * x;
@@ -127,6 +127,9 @@ public class Problem50_powxn {
     }
 
     public static void main(String[] args) {
+        System.out.println("128.00000 ?= " + binaryPower(2.00000, 7));
+        System.out.println("128.00000 ?= " + quickMul_iter(2.00000, 7));
+        System.out.println("128.00000 ?= " + quickMul(2.00000, 7));
         System.out.println("1024.00000 ?= " + myPow(2.00000, 10));
         System.out.println("9.26100 ?= " + myPow(2.10000, 3));
         System.out.println("9.26100 ?= " + myPow_quick(2.10000, 3));
