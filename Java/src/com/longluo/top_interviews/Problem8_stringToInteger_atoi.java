@@ -76,19 +76,20 @@ public class Problem8_stringToInteger_atoi {
         }
 
         int len = s.length();
-        long ans = 0;
-        boolean isNegative = false;
+        int sign = 1;
+        int ans = 0;
         int idx = 0;
 
         while (idx < len && s.charAt(idx) == ' ') {
             idx++;
         }
 
-        if (idx < len && s.charAt(idx) == '+') {
-            isNegative = false;
-            idx++;
-        } else if (idx < len && s.charAt(idx) == '-') {
-            isNegative = true;
+        if (idx == len) {
+            return 0;
+        }
+
+        if (s.charAt(idx) == '+' || s.charAt(idx) == '-') {
+            sign = s.charAt(idx) == '-' ? -1 : 1;
             idx++;
         }
 
@@ -98,25 +99,19 @@ public class Problem8_stringToInteger_atoi {
                 break;
             }
 
-            if (ans > Integer.MAX_VALUE) {
-                break;
+            if (ans > Integer.MAX_VALUE / 10 || (ans == Integer.MAX_VALUE / 10 && (ch - '0') > Integer.MAX_VALUE % 10)) {
+                return Integer.MAX_VALUE;
             }
 
-            ans = 10 * ans + ch - '0';
+            if (ans < Integer.MIN_VALUE / 10 || (ans == Integer.MIN_VALUE / 10 && (ch - '0') > -(Integer.MIN_VALUE % 10))) {
+                return Integer.MIN_VALUE;
+            }
+
+            ans = 10 * ans + sign * (ch - '0');
             idx++;
         }
 
-        if (isNegative) {
-            ans = -ans;
-        }
-
-        if (ans > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        } else if (ans < Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        }
-
-        return (int) ans;
+        return ans;
     }
 
     public static int myAtoi_str(String s) {
@@ -159,6 +154,7 @@ public class Problem8_stringToInteger_atoi {
 
     public static void main(String[] args) {
         System.out.println("-42  ?= " + myAtoi("+1"));
+        System.out.println("2147483647  ?= " + myAtoi("2147483648"));
         System.out.println("2147483647  ?= " + myAtoi("9223372036854775808"));
         System.out.println("-42  ?= " + myAtoi("   -42"));
         System.out.println("3  ?= " + myAtoi("3.14159"));
