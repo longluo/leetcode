@@ -34,10 +34,6 @@ package com.longluo.leetcode.greedy;
 public class Problem991_brokenCalculator {
 
     public static int brokenCalc(int startValue, int target) {
-        if (startValue >= target) {
-            return startValue - target;
-        }
-
         int ans = 0;
         while (startValue < target) {
             if (target % 2 == 0) {
