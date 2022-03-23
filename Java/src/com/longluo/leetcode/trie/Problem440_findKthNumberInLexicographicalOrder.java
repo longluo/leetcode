@@ -34,12 +34,7 @@ public class Problem440_findKthNumberInLexicographicalOrder {
             numStrs[i] = "" + i;
         }
 
-        Arrays.sort(numStrs, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
-            }
-        });
+        Arrays.sort(numStrs);
 
         return Integer.parseInt(numStrs[k]);
     }
