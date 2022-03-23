@@ -74,6 +74,18 @@ public class Problem88_mergeSortedArray {
         }
     }
 
+    public static void merge_sort(int[] nums1, int m, int[] nums2, int n) {
+        if (nums2 == null || nums2.length <= 0) {
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            nums1[m + i] = nums2[i];
+        }
+
+        Arrays.sort(nums1);
+    }
+
     public static void main(String[] args) {
         int[] tstNums1 = {1, 2, 3, 0, 0, 0};
         merge(tstNums1, 3, new int[]{2, 5, 6}, 3);
