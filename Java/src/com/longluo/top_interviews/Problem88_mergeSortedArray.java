@@ -75,15 +75,43 @@ public class Problem88_mergeSortedArray {
     }
 
     public static void merge_sort(int[] nums1, int m, int[] nums2, int n) {
-        if (nums2 == null || nums2.length <= 0) {
-            return;
-        }
-
         for (int i = 0; i < n; i++) {
             nums1[m + i] = nums2[i];
         }
 
         Arrays.sort(nums1);
+    }
+
+    public static void merge_tp(int[] nums1, int m, int[] nums2, int n) {
+        int p = m - 1;
+        int q = n - 1;
+        int idx = m + n - 1;
+        int cur = 0;
+        while (p >= 0 || q >= 0) {
+            if (p < 0) {
+                cur = nums2[q--];
+            } else if (q < 0) {
+                cur = nums1[p--];
+            } else if (nums1[p] < nums2[q]) {
+                cur = nums2[q--];
+            } else {
+                cur = nums1[p--];
+            }
+
+            nums1[idx--] = cur;
+        }
+    }
+
+    public static void merge_tp_best(int[] nums1, int m, int[] nums2, int n) {
+        int idx = m + n - 1;
+        m--;
+        n--;
+        while (n >= 0) {
+            while (m >= 0 && nums1[m] >= nums2[n]) {
+                nums1[idx--] = nums1[m--];
+            }
+            nums1[idx--] = nums2[n--];
+        }
     }
 
     public static void main(String[] args) {
