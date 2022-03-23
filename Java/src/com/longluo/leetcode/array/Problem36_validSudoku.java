@@ -102,6 +102,44 @@ public class Problem36_validSudoku {
         return true;
     }
 
+    public static boolean isValidSudoku_better(char[][] board) {
+        Map<Integer, Set<Integer>> rowMap = new HashMap<>();
+        Map<Integer, Set<Integer>> colMap = new HashMap<>();
+        Map<Integer, Set<Integer>> subMap = new HashMap<>();
+
+        for (int i = 0; i < 9; i++) {
+            rowMap.put(i, new HashSet<>());
+            colMap.put(i, new HashSet<>());
+            subMap.put(i, new HashSet<>());
+        }
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char ch = board[i][j];
+                if (ch != '.') {
+                    int num = ch - '0';
+                    Set<Integer> rowSet = rowMap.get(i);
+                    if (!rowSet.add(num)) {
+                        return false;
+                    }
+
+                    Set<Integer> colSet = colMap.get(j);
+                    if (!colSet.add(num)) {
+                        return false;
+                    }
+
+                    int subIdx = 3 * (i / 3) + j / 3;
+                    Set<Integer> subSet = subMap.get(subIdx);
+                    if (!subSet.add(num)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + isValidSudoku(new char[][]
                 {{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
@@ -116,6 +154,30 @@ public class Problem36_validSudoku {
 
 
         System.out.println("false ?= " + isValidSudoku(new char[][]{
+                {'.', '.', '4', '.', '.', '.', '6', '3', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                {'5', '.', '.', '.', '.', '.', '.', '9', '.'},
+                {'.', '.', '.', '5', '6', '.', '.', '.', '.'},
+                {'4', '.', '3', '.', '.', '.', '.', '.', '1'},
+                {'.', '.', '.', '7', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', '5', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                {'.', '.', '.', '.', '.', '.', '.', '.', '.'}
+        }));
+
+        System.out.println("true ?= " + isValidSudoku_better(new char[][]
+                {{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+                        {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+                        {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+                        {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+                        {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+                        {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+                        {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+                        {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+                        {'.', '.', '.', '.', '8', '.', '.', '7', '9'}}));
+
+
+        System.out.println("false ?= " + isValidSudoku_better(new char[][]{
                 {'.', '.', '4', '.', '.', '.', '6', '3', '.'},
                 {'.', '.', '.', '.', '.', '.', '.', '.', '.'},
                 {'5', '.', '.', '.', '.', '.', '.', '9', '.'},
