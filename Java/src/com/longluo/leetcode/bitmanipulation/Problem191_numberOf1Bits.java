@@ -52,6 +52,16 @@ public class Problem191_numberOf1Bits {
         return cnt;
     }
 
+    public static int hammingWeight_log(int n) {
+        int cnt = 0;
+        while (n != 0) {
+            n = n & (n - 1);
+            cnt++;
+        }
+
+        return cnt;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 " + Integer.toBinaryString(1 << 1));
         System.out.println("2 " + Integer.toBinaryString(1 << 2));
@@ -62,5 +72,13 @@ public class Problem191_numberOf1Bits {
         System.out.println("2 " + Integer.toBinaryString(1 >> 2));
         System.out.println("31 " + Integer.toBinaryString(1 >> 31));
         System.out.println("32 " + Integer.toBinaryString(1 >> 32));
+
+        System.out.println("0 ?= " + Integer.toBinaryString(0));
+        System.out.println("1 ?= " + Integer.toBinaryString(1));
+        System.out.println("-1 ?= " + Integer.toBinaryString(-1));
+
+        System.out.println("3 ?= " + hammingWeight(11));
+        System.out.println("2 ?= " + hammingWeight_log(0b00000000000000000000000000000011));
+        System.out.println("3 ?= " + hammingWeight_log(0b10000000000000000000000000000011));
     }
 }
