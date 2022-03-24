@@ -1,6 +1,8 @@
 package com.longluo.leetcode.array;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 268. Missing Number
@@ -41,6 +43,22 @@ public class Problem268_missingNumber {
         Arrays.sort(nums);
         for (int i = 0; i < len; i++) {
             if (nums[i] != i) {
+                return i;
+            }
+        }
+
+        return len;
+    }
+
+    public static int missingNumber_set(int[] nums) {
+        int len = nums.length;
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < len; i++) {
+            set.add(nums[i]);
+        }
+
+        for (int i = 0; i <= len; i++) {
+            if (set.add(i)) {
                 return i;
             }
         }
