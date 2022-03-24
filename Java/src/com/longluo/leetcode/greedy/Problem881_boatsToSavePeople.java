@@ -66,15 +66,32 @@ public class Problem881_boatsToSavePeople {
         return ans;
     }
 
+    public static int numRescueBoats(int[] people, int limit) {
+        int len = people.length;
+        Arrays.sort(people);
+        int left = 0;
+        int right = len - 1;
+        int ans = 0;
+        while (left <= right) {
+            if (people[left] + people[right] <= limit) {
+                left++;
+            }
+            right--;
+            ans += 1;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + numRescueBoats_bf(new int[]{1, 2}, 3));
         System.out.println("3 ?= " + numRescueBoats_bf(new int[]{3, 2, 2, 1}, 3));
         System.out.println("4 ?= " + numRescueBoats_bf(new int[]{3, 5, 3, 4}, 5));
         System.out.println("2 ?= " + numRescueBoats_bf(new int[]{5, 1, 4, 2}, 6));
 
-//        System.out.println("1 ?= " + numRescueBoats(new int[]{1, 2}, 3));
-//        System.out.println("3 ?= " + numRescueBoats(new int[]{3, 2, 2, 1}, 3));
-//        System.out.println("4 ?= " + numRescueBoats(new int[]{3, 5, 3, 4}, 5));
-//        System.out.println("2 ?= " + numRescueBoats(new int[]{5, 1, 4, 2}, 6));
+        System.out.println("1 ?= " + numRescueBoats(new int[]{1, 2}, 3));
+        System.out.println("3 ?= " + numRescueBoats(new int[]{3, 2, 2, 1}, 3));
+        System.out.println("4 ?= " + numRescueBoats(new int[]{3, 5, 3, 4}, 5));
+        System.out.println("2 ?= " + numRescueBoats(new int[]{5, 1, 4, 2}, 6));
     }
 }
