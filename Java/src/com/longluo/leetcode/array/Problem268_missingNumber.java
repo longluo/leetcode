@@ -66,6 +66,31 @@ public class Problem268_missingNumber {
         return len;
     }
 
+    public static int missingNumber_xor(int[] nums) {
+        int xor = 0;
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            xor ^= nums[i];
+        }
+
+        for (int i = 0; i <= len; i++) {
+            xor ^= i;
+        }
+
+        return xor;
+    }
+
+    public static int missingNumber_sum(int[] nums) {
+        int len = nums.length;
+        int sum = len * (len + 1) / 2;
+        int arraySum = 0;
+        for (int x : nums) {
+            arraySum += x;
+        }
+
+        return sum - arraySum;
+    }
+
     public static void main(String[] args) {
 
     }
