@@ -51,6 +51,21 @@ public class Problem1780_checkPowersOfThree {
         return (int) Math.pow(3, n);
     }
 
+    public static boolean checkPowersOfThree_rec(int n) {
+        return n < 2 || (n % 3 != 2 && checkPowersOfThree_rec(n / 3));
+    }
+
+    public static boolean checkPowersOfThree_base3(int n) {
+        while (n > 0) {
+            if (n % 3 == 2) {
+                return false;
+            }
+            n /= 3;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + checkPowersOfThree(1));
         System.out.println("false ?= " + checkPowersOfThree(2));
@@ -58,6 +73,10 @@ public class Problem1780_checkPowersOfThree {
         System.out.println("true ?= " + checkPowersOfThree(12));
         System.out.println("false ?= " + checkPowersOfThree(21));
         System.out.println("true ?= " + checkPowersOfThree(91));
+
+        System.out.println("true ?= " + checkPowersOfThree_rec(1));
+        System.out.println("false ?= " + checkPowersOfThree_rec(21));
+        System.out.println("true ?= " + checkPowersOfThree_rec(91));
 
         for (int i = 0; i < 60; i++) {
             if (powerOfThree(i) <= 10000000) {
