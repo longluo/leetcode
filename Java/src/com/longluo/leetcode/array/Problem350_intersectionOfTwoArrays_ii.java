@@ -33,16 +33,17 @@ import java.util.*;
 public class Problem350_intersectionOfTwoArrays_ii {
 
     public static int[] intersect_sort(int[] nums1, int[] nums2) {
-        List<Integer> ans = new ArrayList<>();
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         int len1 = nums1.length;
         int len2 = nums2.length;
+        int[] ans = new int[Math.min(len1, len2)];
+        int idx = 0;
         int p = 0;
         int q = 0;
         while (p < len1 && q < len2) {
             if (nums1[p] == nums2[q]) {
-                ans.add(nums1[p]);
+                ans[idx++] = nums1[p];
                 p++;
                 q++;
             } else if (nums1[p] < nums2[q]) {
@@ -52,15 +53,13 @@ public class Problem350_intersectionOfTwoArrays_ii {
             }
         }
 
-        int[] res = new int[ans.size()];
-        for (int i = 0; i < ans.size(); i++) {
-            res[i] = ans.get(i);
-        }
-
-        return res;
+        return Arrays.copyOfRange(ans, 0, idx);
     }
 
     public static int[] intersect_sort_hash(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return intersect_sort_hash(nums2, nums1);
+        }
         List<Integer> ans = new ArrayList<>();
         int len1 = nums1.length;
         int len2 = nums2.length;
