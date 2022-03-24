@@ -32,7 +32,7 @@ import java.util.*;
  */
 public class Problem350_intersectionOfTwoArrays_ii {
 
-    public static int[] intersect(int[] nums1, int[] nums2) {
+    public static int[] intersect_sort(int[] nums1, int[] nums2) {
         List<Integer> ans = new ArrayList<>();
         Arrays.sort(nums1);
         Arrays.sort(nums2);
@@ -49,6 +49,35 @@ public class Problem350_intersectionOfTwoArrays_ii {
                 p++;
             } else {
                 q++;
+            }
+        }
+
+        int[] res = new int[ans.size()];
+        for (int i = 0; i < ans.size(); i++) {
+            res[i] = ans.get(i);
+        }
+
+        return res;
+    }
+
+    public static int[] intersect_sort_hash(int[] nums1, int[] nums2) {
+        List<Integer> ans = new ArrayList<>();
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        Map<Integer, Integer> numFreq = new HashMap<>();
+        for (int i = 0; i < len1; i++) {
+            numFreq.put(nums1[i], numFreq.getOrDefault(nums1[i], 0) + 1);
+        }
+
+        for (int i = 0; i < len2; i++) {
+            if (numFreq.containsKey(nums2[i])) {
+                ans.add(nums2[i]);
+                int freq = numFreq.get(nums2[i]);
+                if (freq > 1) {
+                    numFreq.put(nums2[i], freq - 1);
+                } else {
+                    numFreq.remove(nums2[i]);
+                }
             }
         }
 
