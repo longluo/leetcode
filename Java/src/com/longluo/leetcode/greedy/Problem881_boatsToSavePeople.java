@@ -34,9 +34,6 @@ public class Problem881_boatsToSavePeople {
 
     public static int numRescueBoats_bf(int[] people, int limit) {
         int len = people.length;
-        if (len < 2) {
-            return 1;
-        }
         Arrays.sort(people);
         int ans = 0;
         int idx = 0;
