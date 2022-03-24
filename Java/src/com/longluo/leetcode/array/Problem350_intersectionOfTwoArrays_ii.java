@@ -60,7 +60,6 @@ public class Problem350_intersectionOfTwoArrays_ii {
         if (nums1.length > nums2.length) {
             return intersect_sort_hash(nums2, nums1);
         }
-        List<Integer> ans = new ArrayList<>();
         int len1 = nums1.length;
         int len2 = nums2.length;
         Map<Integer, Integer> numFreq = new HashMap<>();
@@ -68,9 +67,11 @@ public class Problem350_intersectionOfTwoArrays_ii {
             numFreq.put(nums1[i], numFreq.getOrDefault(nums1[i], 0) + 1);
         }
 
+        int[] ans = new int[len1];
+        int idx = 0;
         for (int i = 0; i < len2; i++) {
             if (numFreq.containsKey(nums2[i])) {
-                ans.add(nums2[i]);
+                ans[idx++] = nums2[i];
                 int freq = numFreq.get(nums2[i]);
                 if (freq > 1) {
                     numFreq.put(nums2[i], freq - 1);
@@ -80,12 +81,7 @@ public class Problem350_intersectionOfTwoArrays_ii {
             }
         }
 
-        int[] res = new int[ans.size()];
-        for (int i = 0; i < ans.size(); i++) {
-            res[i] = ans.get(i);
-        }
-
-        return res;
+        return Arrays.copyOfRange(ans, 0, idx);
     }
 
     public static void main(String[] args) {
