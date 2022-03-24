@@ -32,25 +32,49 @@ import java.util.Arrays;
  */
 public class Problem881_boatsToSavePeople {
 
-    public static int numRescueBoats(int[] people, int limit) {
-        if (people == null || people.length == 0) {
-            return 0;
+    public static int numRescueBoats_bf(int[] people, int limit) {
+        int len = people.length;
+        if (len < 2) {
+            return 1;
         }
-
-        int n = people.length;
         Arrays.sort(people);
         int ans = 0;
-        for (int i = n - 1; i >= 0; i--) {
+        int idx = 0;
+        int right = len - 1;
+        while (idx < len) {
+            while (idx < len && people[idx] == 0) {
+                idx++;
+            }
 
+            while (right > idx && people[right] > 0 && people[idx] + people[right] > limit) {
+                right--;
+            }
 
+            if (right > idx && people[idx] + people[right] <= limit) {
+                people[idx] = 0;
+                people[right] = 0;
+                idx++;
+                right--;
+                ans++;
+            } else if (idx < len) {
+                people[idx] = 0;
+                idx++;
+                ans++;
+            }
         }
 
         return ans;
     }
 
     public static void main(String[] args) {
-        System.out.println("1 ?= " + numRescueBoats(new int[]{1, 2}, 3));
-        System.out.println("3 ?= " + numRescueBoats(new int[]{3, 2, 2, 1}, 3));
-        System.out.println("4 ?= " + numRescueBoats(new int[]{3, 5, 3, 4}, 5));
+        System.out.println("1 ?= " + numRescueBoats_bf(new int[]{1, 2}, 3));
+        System.out.println("3 ?= " + numRescueBoats_bf(new int[]{3, 2, 2, 1}, 3));
+        System.out.println("4 ?= " + numRescueBoats_bf(new int[]{3, 5, 3, 4}, 5));
+        System.out.println("2 ?= " + numRescueBoats_bf(new int[]{5, 1, 4, 2}, 6));
+
+//        System.out.println("1 ?= " + numRescueBoats(new int[]{1, 2}, 3));
+//        System.out.println("3 ?= " + numRescueBoats(new int[]{3, 2, 2, 1}, 3));
+//        System.out.println("4 ?= " + numRescueBoats(new int[]{3, 5, 3, 4}, 5));
+//        System.out.println("2 ?= " + numRescueBoats(new int[]{5, 1, 4, 2}, 6));
     }
 }
