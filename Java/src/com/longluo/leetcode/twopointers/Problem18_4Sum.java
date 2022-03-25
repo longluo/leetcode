@@ -28,8 +28,10 @@ import java.util.*;
  * -10^9 <= target <= 10^9
  * <p>
  * https://leetcode-cn.com/problems/4sum/
+ * <p>
+ * https://leetcode.com/problems/4sum/
  */
-public class Problem18_fourSum {
+public class Problem18_4Sum {
 
     public static List<List<Integer>> fourSum(int[] nums, int target) {
         if (nums == null || nums.length < 4) {
