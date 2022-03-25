@@ -14,11 +14,11 @@ public class Problem39_combinationSum {
             return ans;
         }
 
-        backtrack(ans, new ArrayList<>(), candidates, target);
+        backtrack(ans, new ArrayList<>(), candidates, 0, target);
         return ans;
     }
 
-    public static void backtrack(List<List<Integer>> res, List<Integer> list, int[] candidates, int remain) {
+    public static void backtrack(List<List<Integer>> res, List<Integer> list, int[] candidates, int begin, int remain) {
         if (remain < 0) {
             return;
         }
@@ -29,10 +29,10 @@ public class Problem39_combinationSum {
         }
 
         int len = candidates.length;
-        for (int i = 0; i < len; i++) {
+        for (int i = begin; i < len; i++) {
             int num = candidates[i];
             list.add(num);
-            backtrack(res, list, candidates, remain - num);
+            backtrack(res, list, candidates, i, remain - num);
             list.remove(list.size() - 1);
         }
     }
