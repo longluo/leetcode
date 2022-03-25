@@ -1,5 +1,7 @@
 package com.longluo.leetcode.stack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -79,6 +81,31 @@ public class Problem682_baseballGame {
         int ans = 0;
         while (!stk.empty()) {
             ans += stk.pop();
+        }
+
+        return ans;
+    }
+
+    public static int calPoints_list(String[] ops) {
+        List<Integer> scoreList = new ArrayList<>();
+        int len = ops.length;
+        for (int i = 0; i < len; i++) {
+            String str = ops[i];
+            if (str.equals("+")) {
+                int size = scoreList.size();
+                scoreList.add(scoreList.get(size - 1) + scoreList.get(size - 2));
+            } else if (str.equals("C")) {
+                scoreList.remove(scoreList.size() - 1);
+            } else if (str.equals("D")) {
+                scoreList.add(2 * scoreList.get(scoreList.size() - 1));
+            } else {
+                scoreList.add(Integer.parseInt(str));
+            }
+        }
+
+        int ans = 0;
+        for (int i = 0; i < scoreList.size(); i++) {
+            ans += scoreList.get(i);
         }
 
         return ans;
