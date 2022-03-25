@@ -86,8 +86,53 @@ public class Problem1029_twoCityScheduling {
         return sum;
     }
 
+    public static int twoCitySchedCost_dp(int[][] costs) {
+        int n = costs.length / 2;
+        int[][] dp = new int[n + 1][n + 1];
+        for (int i = 1; i <= n; i++) {
+            dp[i][0] = dp[i - 1][0] + costs[i - 1][0];
+            dp[0][i] = dp[0][i - 1] + costs[i - 1][1];
+        }
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                dp[i][j] = Math.min(dp[i - 1][j] + costs[i + j - 1][0], dp[i][j - 1] + costs[i + j - 1][1]);
+            }
+        }
+
+        return dp[n][n];
+    }
+
+    public static int twoCitySchedCost_rec(int[][] costs) {
+        int n = costs.length / 2;
+        int[][] dp = new int[2 * n][2 * n];
+        return helper(dp, costs, 0, 0);
+    }
+
+    public static int helper(int[][] dp, int[][] costs, int idx, int cityA) {
+        if (idx == costs.length) {
+            return 0;
+        }
+
+        if (dp[idx][cityA] > 0) {
+            return dp[idx][cityA];
+        }
+
+        int n = costs.length / 2;
+        // n persons arrived to second city
+        if (idx - cityA == n) {
+            return dp[idx][cityA] = costs[idx][0] + helper(dp, costs, idx + 1, cityA + 1);
+        } else if (cityA == n) { // n persons arrived to first city
+            return dp[idx][cityA] = costs[idx][1] + helper(dp, costs, idx + 1, cityA);
+        } else {
+            return dp[idx][cityA] = Math.min(costs[idx][1] + helper(dp, costs, idx + 1, cityA), costs[idx][0] + helper(dp, costs, idx + 1, cityA + 1));
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("110 ?= " + twoCitySchedCost(new int[][]{{10, 20}, {30, 200}, {400, 50}, {30, 20}}));
         System.out.println("110 ?= " + twoCitySchedCost_opt(new int[][]{{10, 20}, {30, 200}, {400, 50}, {30, 20}}));
+        System.out.println("110 ?= " + twoCitySchedCost_dp(new int[][]{{10, 20}, {30, 200}, {400, 50}, {30, 20}}));
+        System.out.println("110 ?= " + twoCitySchedCost_rec(new int[][]{{10, 20}, {30, 200}, {400, 50}, {30, 20}}));
     }
 }
