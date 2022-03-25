@@ -86,6 +86,36 @@ public class Problem682_baseballGame {
         return ans;
     }
 
+    public static int calPoints_stack(String[] ops) {
+        Stack<Integer> stk = new Stack<>();
+        int len = ops.length;
+        int points = 0;
+        for (int i = 0; i < len; i++) {
+            String str = ops[i];
+            if (str.equals("+")) {
+                int scoreA = stk.pop();
+                int scoreB = stk.pop();
+                stk.push(scoreB);
+                stk.push(scoreA);
+                stk.push(scoreA + scoreB);
+                points += scoreA + scoreB;
+            } else if (str.equals("C")) {
+                points -= stk.peek();
+                stk.pop();
+            } else if (str.equals("D")) {
+                int score = 2 * stk.peek();
+                points += score;
+                stk.push(score);
+            } else {
+                int score = Integer.parseInt(str);
+                stk.push(score);
+                points += score;
+            }
+        }
+
+        return points;
+    }
+
     public static int calPoints_list(String[] ops) {
         List<Integer> scoreList = new ArrayList<>();
         int len = ops.length;
