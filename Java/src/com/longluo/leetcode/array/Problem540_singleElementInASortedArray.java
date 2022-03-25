@@ -40,9 +40,42 @@ public class Problem540_singleElementInASortedArray {
         return nums[0];
     }
 
+    public static int singleNonDuplicate_opt(int[] nums) {
+        int len = nums.length;
+        for (int i = 0; i < len - 1; i += 2) {
+            if (nums[i + 1] != nums[i]) {
+                return nums[i];
+            }
+        }
+
+        return nums[len - 1];
+    }
+
+    public static int singleNonDuplicate_bit(int[] nums) {
+        int len = nums.length;
+        int xor = 0;
+        for (int i = 0; i < len; i++) {
+            xor = xor ^ nums[i];
+        }
+
+        return xor;
+    }
+
+    public static int singleNonDuplicate_bs(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums[0];
+        }
+
+        int len = nums.length;
+
+
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + singleNonDuplicate(new int[]{1, 1, 2}));
         System.out.println("2 ?= " + singleNonDuplicate(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
-        System.out.println("10 ?= " + singleNonDuplicate(new int[]{3, 3, 7, 7, 10, 11, 11}));
+        System.out.println("2 ?= " + singleNonDuplicate_bit(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
+        System.out.println("10 ?= " + singleNonDuplicate_bs(new int[]{3, 3, 7, 7, 10, 11, 11}));
     }
 }
