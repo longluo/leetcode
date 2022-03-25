@@ -111,6 +111,40 @@ public class Problem682_baseballGame {
         return ans;
     }
 
+    public static int calPoints_list_opt(String[] ops) {
+        List<Integer> scoreList = new ArrayList<>();
+        int len = ops.length;
+        int points = 0;
+        for (int i = 0; i < len; i++) {
+            String str = ops[i];
+            switch (str) {
+                case "+":
+                    int size = scoreList.size();
+                    int curPoint = scoreList.get(size - 1) + scoreList.get(size - 2);
+                    points += curPoint;
+                    scoreList.add(curPoint);
+                    break;
+
+                case "C":
+                    points -= scoreList.get(scoreList.size() - 1);
+                    scoreList.remove(scoreList.size() - 1);
+                    break;
+
+                case "D":
+                    scoreList.add(2 * scoreList.get(scoreList.size() - 1));
+                    points += scoreList.get(scoreList.size() - 1);
+                    break;
+
+                default:
+                    scoreList.add(Integer.parseInt(str));
+                    points += Integer.parseInt(str);
+                    break;
+            }
+        }
+
+        return points;
+    }
+
     public static void main(String[] args) {
 
     }
