@@ -40,7 +40,33 @@ public class Problem75_sortColors {
         Arrays.sort(nums);
     }
 
+    public static void sortColors_CntSort(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+
+        int len = nums.length;
+        int[] cnt = new int[3];
+        for (int i = 0; i < len; i++) {
+            cnt[nums[i]]++;
+        }
+
+        int idx = 0;
+        int color = 0;
+        while (idx < len) {
+            while (cnt[color] > 0) {
+                nums[idx++] = color;
+                cnt[color]--;
+            }
+
+            if (cnt[color] == 0) {
+                color++;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         sortColors_bf(new int[]{2, 0, 2, 1, 1, 0});
+        sortColors_CntSort(new int[]{2, 0, 2, 1, 1, 0});
     }
 }
