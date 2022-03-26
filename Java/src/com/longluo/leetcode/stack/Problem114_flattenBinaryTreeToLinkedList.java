@@ -91,6 +91,30 @@ public class Problem114_flattenBinaryTreeToLinkedList {
         }
     }
 
+    /**
+     * Recursive
+     */
+    public static void flatten_rec(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        flatten_rec(root.left);
+
+        flatten_rec(root.right);
+
+        TreeNode temp = root.right;
+        root.right = root.left;
+        root.left = null;
+
+        // find the rightest node.
+        while (root.right != null) {
+            root = root.right;
+        }
+
+        root.right = temp;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 2, 5, 3, 4, null, 6});
         flatten_stack(tst1);
