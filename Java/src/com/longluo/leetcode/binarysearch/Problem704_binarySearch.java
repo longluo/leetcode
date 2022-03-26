@@ -40,7 +40,26 @@ public class Problem704_binarySearch {
         return -1;
     }
 
-    public static void main(String[] args) {
+    public static int search_bs(int[] nums, int target) {
+        int len = nums.length;
+        int low = 0;
+        int high = len - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] < target) {
+                low = mid + 1;
+            } else if (nums[mid] > target) {
+                high = mid - 1;
+            } else {
+                return mid;
+            }
+        }
 
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("4 ?= " + search_bs(new int[]{-1, 0, 3, 5, 9, 12}, 9));
+        System.out.println(" " + (0 + 5 >> 1) + " " + (0 + 5 / 2));
     }
 }
