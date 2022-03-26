@@ -58,8 +58,29 @@ public class Problem704_binarySearch {
         return -1;
     }
 
+    public static int search_bs_rec(int[] nums, int target) {
+        int len = nums.length;
+        return binarySearch(nums, target, 0, len - 1);
+    }
+
+    public static int binarySearch(int[] nums, int target, int low, int high) {
+        if (low > high) {
+            return -1;
+        }
+
+        int mid = low + (high - low) / 2;
+        if (nums[mid] > target) {
+            return binarySearch(nums, target, low, mid - 1);
+        } else if (nums[mid] < target) {
+            return binarySearch(nums, target, mid + 1, high);
+        } else {
+            return mid;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + search_bs(new int[]{-1, 0, 3, 5, 9, 12}, 9));
+        System.out.println("4 ?= " + search_bs_rec(new int[]{-1, 0, 3, 5, 9, 12}, 9));
         System.out.println(" " + (0 + 5 >> 1) + " " + (0 + 5 / 2));
     }
 }
