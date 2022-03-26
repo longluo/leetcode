@@ -62,6 +62,21 @@ public class Problem152_maximumProductSubarray {
         return ans;
     }
 
+    public static int maxProduct_dp_opt(int[] nums) {
+        int len = nums.length;
+        int ans = nums[0];
+        int maxVal = nums[0];
+        int minVal = nums[0];
+        for (int i = 1; i < len; i++) {
+            int temp = maxVal;
+            maxVal = Math.max(maxVal * nums[i], Math.max(nums[i], minVal * nums[i]));
+            minVal = Math.min(minVal * nums[i], Math.min(nums[i], temp * nums[i]));
+            ans = Math.max(ans, maxVal);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("-2 ?= " + maxProduct_bf(new int[]{-2}));
         System.out.println("6 ?= " + maxProduct_bf(new int[]{2, 3, -2, 4}));
@@ -74,5 +89,6 @@ public class Problem152_maximumProductSubarray {
         System.out.println("24 ?= " + maxProduct_dp(new int[]{-2, 3, -4}));
         System.out.println("0 ?= " + maxProduct_dp(new int[]{-2, 0, -1}));
         System.out.println("24 ?= " + maxProduct_dp(new int[]{2, -5, -2, -4, 3}));
+        System.out.println("24 ?= " + maxProduct_dp_opt(new int[]{2, -5, -2, -4, 3}));
     }
 }
