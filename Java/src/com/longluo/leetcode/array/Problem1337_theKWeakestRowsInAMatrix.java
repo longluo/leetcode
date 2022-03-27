@@ -1,9 +1,6 @@
 package com.longluo.leetcode.array;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * 1337. 矩阵中战斗力最弱的K行
@@ -94,7 +91,49 @@ public class Problem1337_theKWeakestRowsInAMatrix {
         return ans;
     }
 
-    public static void main(String[] args) {
+    public static int[] kWeakestRows_sort(int[][] mat, int k) {
+        int row = mat.length;
+        int[][] cnt = new int[row][2];
+        for (int i = 0; i < row; i++) {
+            cnt[i][0] = i;
+            cnt[i][1] = binaryCount(mat[i]);
+        }
 
+        Arrays.sort(cnt, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[1] == o2[1]) {
+                    return o1[0] - o2[0];
+                }
+                return o1[1] - o2[1];
+            }
+        });
+
+        int[] ans = new int[k];
+        for (int i = 0; i < k; i++) {
+            ans[i] = cnt[i][0];
+        }
+
+        return ans;
+    }
+
+    public static int binaryCount(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            int mid = (right - left) / 2 + left;
+            if (nums[mid] == 0) {
+                right = mid - 1;
+            } else {
+                left = mid;
+            }
+        }
+
+        return right;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(binaryCount(new int[]{1, 1, 0, 0, 0}));
+        System.out.println(binaryCount(new int[]{1, 1, 1, 1, 0}));
     }
 }
