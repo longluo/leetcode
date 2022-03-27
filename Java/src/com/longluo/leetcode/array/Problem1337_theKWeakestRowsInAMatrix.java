@@ -99,15 +99,7 @@ public class Problem1337_theKWeakestRowsInAMatrix {
             cnt[i][1] = binaryCount(mat[i]);
         }
 
-        Arrays.sort(cnt, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[1] == o2[1]) {
-                    return o1[0] - o2[0];
-                }
-                return o1[1] - o2[1];
-            }
-        });
+        Arrays.sort(cnt, (o1, o2) -> o1[1] == o2[1] ? o1[0] - o2[0] : o1[1] - o2[1]);
 
         int[] ans = new int[k];
         for (int i = 0; i < k; i++) {
@@ -119,13 +111,13 @@ public class Problem1337_theKWeakestRowsInAMatrix {
 
     public static int binaryCount(int[] nums) {
         int left = 0;
-        int right = nums.length - 1;
+        int right = nums.length;
         while (left < right) {
             int mid = (right - left) / 2 + left;
             if (nums[mid] == 0) {
-                right = mid - 1;
+                right = mid;
             } else {
-                left = mid;
+                left = mid + 1;
             }
         }
 
@@ -135,5 +127,7 @@ public class Problem1337_theKWeakestRowsInAMatrix {
     public static void main(String[] args) {
         System.out.println(binaryCount(new int[]{1, 1, 0, 0, 0}));
         System.out.println(binaryCount(new int[]{1, 1, 1, 1, 0}));
+        System.out.println(binaryCount(new int[]{1, 1, 1, 1, 1}));
+        kWeakestRows_sort(new int[][]{{1, 1, 1, 1, 1}, {1, 0, 0, 0, 0}, {1, 1, 0, 0, 0}, {1, 1, 1, 1, 0}, {1, 1, 1, 1, 1}}, 3);
     }
 }
