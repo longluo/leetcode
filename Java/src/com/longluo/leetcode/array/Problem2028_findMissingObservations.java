@@ -56,14 +56,11 @@ public class Problem2028_findMissingObservations {
             return new int[0];
         }
 
-        int mid = sum / n;
-        int mod = sum % n;
+        int q = sum / n;
+        int r = sum % n;
         int[] res = new int[n];
         for (int i = 0; i < n; i++) {
-            res[i] = mid;
-        }
-        for (int i = 0; i < mod; i++) {
-            res[i]++;
+            res[i] = i < r ? q + 1 : q;
         }
 
         return res;
