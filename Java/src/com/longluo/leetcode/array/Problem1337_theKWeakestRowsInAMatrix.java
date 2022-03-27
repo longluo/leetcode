@@ -124,6 +124,30 @@ public class Problem1337_theKWeakestRowsInAMatrix {
         return right;
     }
 
+    public static int[] kWeakestRows_pq(int[][] mat, int k) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[1] == o2[1]) {
+                    return o1[0] - o2[0];
+                }
+                return o1[1] - o2[1];
+            }
+        });
+
+        int row = mat.length;
+        int[] ans = new int[k];
+        for (int i = 0; i < row; i++) {
+            pq.add(new int[]{i, binaryCount(mat[i])});
+        }
+
+        for (int i = 0; i < k; i++) {
+            ans[i] = pq.poll()[0];
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println(binaryCount(new int[]{1, 1, 0, 0, 0}));
         System.out.println(binaryCount(new int[]{1, 1, 1, 1, 0}));
