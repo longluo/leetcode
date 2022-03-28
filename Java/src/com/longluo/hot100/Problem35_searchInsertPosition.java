@@ -29,7 +29,7 @@ package com.longluo.hot100;
  */
 public class Problem35_searchInsertPosition {
 
-    public static int searchInsert(int[] nums, int target) {
+    public static int searchInsert_bf(int[] nums, int target) {
         int len = nums.length;
         for (int i = 0; i < len; i++) {
             if (nums[0] > target) {
@@ -49,7 +49,33 @@ public class Problem35_searchInsertPosition {
         return -1;
     }
 
-    public static void main(String[] args) {
+    public static int searchInsert_bs(int[] nums, int target) {
+        int len = nums.length;
+        if (nums[0] > target) {
+            return 0;
+        } else if (nums[len - 1] < target) {
+            return len;
+        }
 
+        int left = 0;
+        int right = len;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid;
+            }
+        }
+
+        return left;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("2 ?= " + searchInsert_bf(new int[]{1, 3, 5, 6}, 5));
+        System.out.println("2 ?= " + searchInsert_bs(new int[]{1, 3, 5, 6}, 5));
     }
 }
