@@ -77,17 +77,42 @@ public class Problem167_twoSum_ii {
     }
 
     public static int[] twoSum_bs(int[] numbers, int target) {
+        int[] ans = new int[2];
+        int len = numbers.length;
+        for (int i = 0; i < len - 1; i++) {
+            int ret = binarySearch(numbers, i + 1, len - 1, target - numbers[i]);
+            if (ret > 0) {
+                ans[0] = i + 1;
+                ans[1] = ret + 1;
+                return ans;
+            }
+        }
 
-        return new int[]{1, 1};
+        return ans;
     }
 
-    public static int binarySearch(int[] nums, int left, int right) {
+    public static int binarySearch(int[] nums, int left, int right, int target) {
+        if (left > right) {
+            return -1;
+        }
 
-        return -1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            }
+        }
+
+        return nums[left] == target ? left : -1;
     }
 
     public static void main(String[] args) {
         twoSum_bf(new int[]{2, 7, 11, 15}, 9);
         twoSum_tp(new int[]{2, 7, 11, 15}, 9);
+        twoSum_bs(new int[]{2, 7, 11, 15}, 9);
     }
 }
