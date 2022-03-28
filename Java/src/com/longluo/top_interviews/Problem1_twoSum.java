@@ -35,7 +35,7 @@ import java.util.Map;
  */
 public class Problem1_twoSum {
 
-    public static int[] twoSum(int[] nums, int target) {
+    public static int[] twoSum_bf(int[] nums, int target) {
         int[] ans = new int[2];
         int n = nums.length;
         for (int i = 0; i < n - 1; i++) {
@@ -51,7 +51,7 @@ public class Problem1_twoSum {
         return ans;
     }
 
-    public static int[] twoSum_n(int[] nums, int target) {
+    public static int[] twoSum_hash(int[] nums, int target) {
         int[] ans = new int[2];
         int n = nums.length;
         Map<Integer, Integer> map = new HashMap<>();
