@@ -56,6 +56,23 @@ public class Problem509_fib {
         return fib2(n - 1) + fib2(n - 2);
     }
 
+    public static int fib_dp(int n) {
+        if (n <= 1) {
+            return n;
+        }
+
+        int p = 0;
+        int q = 1;
+        int r = 1;
+        for (int i = 2; i <= n; i++) {
+            r = p + q;
+            p = q;
+            q = r;
+        }
+
+        return r;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + fib(0));
         System.out.println("1 ?= " + fib(1));
