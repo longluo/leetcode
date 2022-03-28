@@ -61,6 +61,31 @@ public class Problem69_sqrtx {
         return (int) x0;
     }
 
+    public static int mySqrt_bs(int x) {
+        if (x <= 1) {
+            return x;
+        }
+
+        int left = 1;
+        int right = x / 2;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            long product = (long) mid * mid;
+            long bigger = (long) (mid + 1) * (mid + 1);
+            if (bigger < x) {
+                left = mid + 1;
+            } else if (product > x) {
+                right = mid;
+            } else if (product <= x && x < bigger) {
+                return mid;
+            } else if (bigger == x) {
+                return mid + 1;
+            }
+        }
+
+        return left;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + mySqrt(0));
         System.out.println("1 ?= " + mySqrt(1));
@@ -68,7 +93,10 @@ public class Problem69_sqrtx {
         System.out.println("2 ?= " + mySqrt(8));
 
         System.out.println("46340 ?= " + mySqrt(2147483647));
-
         System.out.println("2 ?= " + mySqrt_newton(8));
+
+        System.out.println("2 ?= " + mySqrt_bs(8));
+        System.out.println("6 ?= " + mySqrt_bs(36));
+        System.out.println("46340 ?= " + mySqrt_bs(2147483647));
     }
 }
