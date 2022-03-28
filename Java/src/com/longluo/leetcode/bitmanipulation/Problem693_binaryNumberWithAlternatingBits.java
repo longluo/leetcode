@@ -39,6 +39,34 @@ public class Problem693_binaryNumberWithAlternatingBits {
         return true;
     }
 
+    public static boolean hasAlternatingBits_str(int n) {
+        String str = Integer.toBinaryString(n);
+        if (str.contains("00") || str.contains("11")) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean hasAlternatingBits_table(int n) {
+        int[] nums = {1, 2, 5, 10, 21, 42, 85, 170, 341, 682, 1365, 2730, 5461, 10922,
+                21845, 43690, 87381, 174762, 349525, 699050, 1398101, 2796202, 5592405,
+                11184810, 22369621, 44739242, 89478485, 178956970, 357913941, 715827882,
+                1431655765};
+        for (int i = 0; i < nums.length; i++) {
+            if (n == nums[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean hasAlternatingBits_bit(int n) {
+        n = n ^ (n >> 1);
+        return (n & (long) (n + 1)) == 0;
+    }
+
     public static void main(String[] args) {
         System.out.println(hasAlternatingBits(1));
         System.out.println(hasAlternatingBits(4));
