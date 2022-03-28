@@ -67,11 +67,27 @@ public class Problem693_binaryNumberWithAlternatingBits {
         return (n & (long) (n + 1)) == 0;
     }
 
+    public static boolean hasAlternatingBits_simu(int n) {
+        int prev = 2;
+        while (n != 0) {
+            int cur = n % 2;
+            if (cur == prev) {
+                return false;
+            }
+            prev = cur;
+            n /= 2;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println(hasAlternatingBits(1));
         System.out.println(hasAlternatingBits(4));
         System.out.println(hasAlternatingBits(5));
         System.out.println(hasAlternatingBits(7));
         System.out.println(hasAlternatingBits(11));
+
+        System.out.println(hasAlternatingBits_simu(5));
+        System.out.println(hasAlternatingBits_simu(7));
     }
 }
