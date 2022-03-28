@@ -32,11 +32,48 @@ package com.longluo.leetcode.binarysearch;
  */
 public class Problem81_searchInRotatedSortedArray_ii {
 
-    public boolean search(int[] nums, int target) {
+    public static boolean search_bf(int[] nums, int target) {
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == target) {
+                return true;
+            }
+        }
+
         return false;
     }
 
-    public static void main(String[] args) {
+    public static boolean search_binary(int[] nums, int target) {
+        int len = nums.length;
+        int left = 0;
+        int right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (nums[mid] < nums[right]) {
+                if (nums[mid] <= target && target <= nums[right]) {
+                    left = mid;
+                } else {
+                    right = mid - 1;
+                }
+            } else if (nums[mid] > nums[right]) {
+                if (nums[left] <= target && nums[mid] >= target) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+            } else if (nums[mid] == nums[right]) {
+                if (nums[mid] == target) {
+                    return true;
+                }
+                right = right - 1;
+            }
+        }
 
+        return nums[right] == target;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("true ?= " + search_binary(new int[]{1, 0, 1, 1, 1}, 0));
+        System.out.println("true ?= " + search_binary(new int[]{2, 2, 2, 3, 2, 2, 2}, 3));
     }
 }
