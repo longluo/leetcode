@@ -33,6 +33,7 @@ import java.util.*;
  */
 public class Problem18_4Sum {
 
+    // BF
     public static List<List<Integer>> fourSum(int[] nums, int target) {
         if (nums == null || nums.length < 4) {
             return new ArrayList<>();
@@ -56,6 +57,7 @@ public class Problem18_4Sum {
         return new ArrayList<>(ans);
     }
 
+    // Two Pointers
     public static List<List<Integer>> fourSum_tp(int[] nums, int target) {
         if (nums == null || nums.length < 4) {
             return new ArrayList<>();
