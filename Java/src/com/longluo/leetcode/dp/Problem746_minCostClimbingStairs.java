@@ -24,19 +24,35 @@ package com.longluo.leetcode.dp;
  */
 public class Problem746_minCostClimbingStairs {
 
-    public static int minCostClimbingStairs(int[] cost) {
-        int length = cost.length;
-        int[] dp = new int[length + 1];
-        dp[0] = dp[1] = 0;
-        for (int i = 2; i <= length; i++) {
+    public static int minCostClimbingStairs_dp(int[] cost) {
+        int len = cost.length;
+        int[] dp = new int[len + 1];
+        dp[0] = 0;
+        dp[1] = 0;
+        for (int i = 2; i <= len; i++) {
             dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
         }
 
-        return dp[length];
+        return dp[len];
+    }
+
+    public static int minCostClimbingStairs_dp_opt(int[] cost) {
+        int length = cost.length;
+        int p = 0;
+        int q = 0;
+        int r = 0;
+        for (int i = 2; i <= length; i++) {
+            r = Math.min(p + cost[i - 2], q + cost[i - 1]);
+            p = q;
+            q = r;
+        }
+
+        return r;
     }
 
     public static void main(String[] args) {
-        System.out.println("15 ?= " + minCostClimbingStairs(new int[]{10, 15, 20}));
-        System.out.println("6 ?= " + minCostClimbingStairs(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}));
+        System.out.println("15 ?= " + minCostClimbingStairs_dp(new int[]{10, 15, 20}));
+        System.out.println("6 ?= " + minCostClimbingStairs_dp(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}));
+        System.out.println("6 ?= " + minCostClimbingStairs_dp_opt(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}));
     }
 }
