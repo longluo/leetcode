@@ -64,12 +64,26 @@ public class Problem189_rotateArray {
         System.arraycopy(arr, 0, nums, 0, len);
     }
 
-    // Two Pointers
-    public static void rotate_tp(int[] nums, int k) {
+    // Reverse
+    public static void rotate_reverse(int[] nums, int k) {
+        k = k % nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
 
+    public static void reverse(int[] nums, int left, int right) {
+        while (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
     }
 
     public static void main(String[] args) {
         rotate_bf(new int[]{1, 2, 3, 4, 5, 6, 7}, 3);
+        rotate_reverse(new int[]{1, 2, 3, 4, 5, 6, 7}, 3);
     }
 }
