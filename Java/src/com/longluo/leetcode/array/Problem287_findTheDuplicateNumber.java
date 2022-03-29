@@ -74,39 +74,58 @@ public class Problem287_findTheDuplicateNumber {
     }
 
     public static int findDuplicate_bit(int[] nums) {
-        int xor = 0;
-        int len = nums.length;
-        for (int i = 0; i < len; i++) {
-            xor = xor ^ nums[i];
+        int n = nums.length;
+        int ans = 0;
+        int bit_max = 31;
+        while (((n - 1) >> bit_max) == 0) {
+            bit_max -= 1;
         }
 
-        for (int i = 0; i < len; i++) {
-            xor = xor ^ nums[i];
+        for (int bit = 0; bit <= bit_max; ++bit) {
+            int x = 0, y = 0;
+            for (int i = 0; i < n; ++i) {
+                if ((nums[i] & (1 << bit)) != 0) {
+                    x += 1;
+                }
+                if (i >= 1 && ((i & (1 << bit)) != 0)) {
+                    y += 1;
+                }
+            }
+            if (x > y) {
+                ans |= 1 << bit;
+            }
         }
 
-        return xor;
+        return ans;
     }
 
     public static int findDuplicate_bs(int[] nums) {
         int len = nums.length;
-        int low = 0;
+        int low = 1;
         int high = len - 1;
-        Arrays.sort(nums);
         while (low < high) {
-            int mid = low + (high - low) >> 1;
-            if (nums[mid] - nums[low] > (mid - low)) {
+            int mid = low + (high - low) / 2;
+            int cnt = 0;
+            for (int i = 0; i < len; i++) {
+                if (nums[i] <= mid) {
+                    cnt++;
+                }
+            }
+
+            if (cnt <= mid) {
                 low = mid + 1;
-            } else if (nums[high] - nums[mid] == high - mid) {
+            } else {
                 high = mid;
             }
         }
 
-        return nums[low];
+        return low;
     }
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + findDuplicate_bf(new int[]{1, 3, 4, 2, 2}));
         System.out.println("2 ?= " + findDuplicate_bit(new int[]{1, 3, 4, 2, 2}));
         System.out.println("2 ?= " + findDuplicate_bs(new int[]{1, 3, 4, 2, 2}));
+        System.out.println("3 ?= " + findDuplicate_bs(new int[]{3, 1, 3, 4, 2}));
     }
 }
