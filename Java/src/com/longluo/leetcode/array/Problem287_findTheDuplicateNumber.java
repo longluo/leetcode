@@ -36,8 +36,17 @@ import java.util.Set;
  */
 public class Problem287_findTheDuplicateNumber {
 
-    public static int findDuplicate(int[] nums) {
-        return nums.length;
+    public static int findDuplicate_bf(int[] nums) {
+        int len = nums.length;
+        int[] cnt = new int[len + 1];
+        for (int i = 0; i < len; i++) {
+            cnt[nums[i]]++;
+            if (cnt[nums[i]] > 1) {
+                return nums[i];
+            }
+        }
+
+        return len;
     }
 
     public static int findDuplicate_set(int[] nums) {
@@ -64,7 +73,40 @@ public class Problem287_findTheDuplicateNumber {
         return len;
     }
 
-    public static void main(String[] args) {
+    public static int findDuplicate_bit(int[] nums) {
+        int xor = 0;
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            xor = xor ^ nums[i];
+        }
 
+        for (int i = 0; i < len; i++) {
+            xor = xor ^ nums[i];
+        }
+
+        return xor;
+    }
+
+    public static int findDuplicate_bs(int[] nums) {
+        int len = nums.length;
+        int low = 0;
+        int high = len - 1;
+        Arrays.sort(nums);
+        while (low < high) {
+            int mid = low + (high - low) >> 1;
+            if (nums[mid] - nums[low] > (mid - low)) {
+                low = mid + 1;
+            } else if (nums[high] - nums[mid] == high - mid) {
+                high = mid;
+            }
+        }
+
+        return nums[low];
+    }
+
+    public static void main(String[] args) {
+        System.out.println("2 ?= " + findDuplicate_bf(new int[]{1, 3, 4, 2, 2}));
+        System.out.println("2 ?= " + findDuplicate_bit(new int[]{1, 3, 4, 2, 2}));
+        System.out.println("2 ?= " + findDuplicate_bs(new int[]{1, 3, 4, 2, 2}));
     }
 }
