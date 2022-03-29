@@ -72,9 +72,41 @@ public class Problem33_searchInRotatedSortedArray {
         return -1;
     }
 
+    public static int search_binary_2(int[] nums, int target) {
+        int len = nums.length;
+        int left = 0;
+        int right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (nums[mid] < nums[right]) {
+                if (target >= nums[left] && target <= nums[right]) {
+                    left = mid;
+                } else {
+                    right = mid - 1;
+                }
+            } else if (nums[mid] >= nums[right]) {
+                if (target >= nums[left] && target <= nums[mid - 1]) {
+                    right = mid - 1;
+                } else {
+                    left = mid;
+                }
+            }
+        }
+
+        if (nums[left] == target) {
+            return left;
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + search_binary(new int[]{5, 1, 3}, 5));
         System.out.println("4 ?= " + search_binary(new int[]{4, 5, 6, 7, 0, 1, 2}, 0));
         System.out.println("-1 ?= " + search_binary(new int[]{4, 5, 6, 7, 0, 1, 2}, 3));
+
+        System.out.println("0 ?= " + search_binary_2(new int[]{5, 1, 3}, 5));
+        System.out.println("4 ?= " + search_binary_2(new int[]{4, 5, 6, 7, 0, 1, 2}, 0));
+        System.out.println("-1 ?= " + search_binary_2(new int[]{4, 5, 6, 7, 0, 1, 2}, 3));
     }
 }
