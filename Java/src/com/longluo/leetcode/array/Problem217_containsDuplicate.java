@@ -26,6 +26,9 @@ import java.util.*;
  */
 public class Problem217_containsDuplicate {
 
+    /**
+     * HashMap
+     */
     public static boolean containsDuplicate(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return false;
