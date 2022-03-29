@@ -122,10 +122,28 @@ public class Problem287_findTheDuplicateNumber {
         return low;
     }
 
+    public static int findDuplicate_fastSlow(int[] nums) {
+        int slow = 0;
+        int fast = 0;
+        do {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        } while (slow != fast);
+
+        slow = 0;
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+
+        return slow;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + findDuplicate_bf(new int[]{1, 3, 4, 2, 2}));
         System.out.println("2 ?= " + findDuplicate_bit(new int[]{1, 3, 4, 2, 2}));
         System.out.println("2 ?= " + findDuplicate_bs(new int[]{1, 3, 4, 2, 2}));
         System.out.println("3 ?= " + findDuplicate_bs(new int[]{3, 1, 3, 4, 2}));
+        System.out.println("3 ?= " + findDuplicate_fastSlow(new int[]{3, 1, 3, 4, 2}));
     }
 }
