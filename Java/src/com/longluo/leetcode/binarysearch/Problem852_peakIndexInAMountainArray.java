@@ -41,7 +41,7 @@ package com.longluo.leetcode.binarysearch;
  */
 public class Problem852_peakIndexInAMountainArray {
 
-    public static int peakIndexInMountainArray(int[] arr) {
+    public static int peakIndexInMountainArray_bf(int[] arr) {
         int len = arr.length;
         for (int i = 1; i < len - 1; i++) {
             if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
@@ -53,34 +53,52 @@ public class Problem852_peakIndexInAMountainArray {
     }
 
     public static int peakIndexInMountainArray_bs(int[] arr) {
-        int begin = 0;
-        int end = arr.length - 1;
-        while (begin < end) {
-            int mid = begin + (end - begin) / 2;
+        int len = arr.length;
+        int left = 0;
+        int right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
             if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) {
                 return mid;
             } else if (arr[mid] > arr[mid - 1] && arr[mid] < arr[mid + 1]) {
-                begin = mid;
-            } else if (arr[mid] < arr[mid - 1] && arr[mid] > arr[mid + 1]) {
-                end = mid;
+                left = mid;
+            } else if (arr[mid] > arr[mid + 1] && arr[mid] < arr[mid - 1]) {
+                right = mid;
             }
         }
 
-        return 0;
+        return left;
+    }
+
+    public static int peakIndexInMountainArray_bs_opt(int[] arr) {
+        int len = arr.length;
+        int left = 0;
+        int right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] > arr[mid + 1]) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return left;
     }
 
     public static void main(String[] args) {
-        System.out.println("1 ?= " + peakIndexInMountainArray(new int[]{0, 1, 0}));
+        System.out.println("1 ?= " + peakIndexInMountainArray_bf(new int[]{0, 1, 0}));
+        System.out.println("1 ?= " + peakIndexInMountainArray_bs_opt(new int[]{0, 1, 0}));
         System.out.println("1 ?= " + peakIndexInMountainArray_bs(new int[]{0, 1, 0}));
-        System.out.println("1 ?= " + peakIndexInMountainArray(new int[]{0, 2, 1, 0}));
+        System.out.println("1 ?= " + peakIndexInMountainArray_bf(new int[]{0, 2, 1, 0}));
         System.out.println("1 ?= " + peakIndexInMountainArray_bs(new int[]{0, 2, 1, 0}));
-        System.out.println("1 ?= " + peakIndexInMountainArray(new int[]{0, 10, 5, 2}));
+        System.out.println("1 ?= " + peakIndexInMountainArray_bf(new int[]{0, 10, 5, 2}));
         System.out.println("1 ?= " + peakIndexInMountainArray_bs(new int[]{0, 10, 5, 2}));
-        System.out.println("2 ?= " + peakIndexInMountainArray(new int[]{3, 4, 5, 1}));
+        System.out.println("2 ?= " + peakIndexInMountainArray_bf(new int[]{3, 4, 5, 1}));
         System.out.println("2 ?= " + peakIndexInMountainArray_bs(new int[]{3, 4, 5, 1}));
-        System.out.println("2 ?= " + peakIndexInMountainArray(new int[]{24, 69, 100, 99, 79, 78, 67, 36, 26, 19}));
+        System.out.println("2 ?= " + peakIndexInMountainArray_bf(new int[]{24, 69, 100, 99, 79, 78, 67, 36, 26, 19}));
         System.out.println("2 ?= " + peakIndexInMountainArray_bs(new int[]{24, 69, 100, 99, 79, 78, 67, 36, 26, 19}));
-        System.out.println("5 ?= " + peakIndexInMountainArray(new int[]{18, 29, 38, 59, 98, 100, 99, 98, 90}));
+        System.out.println("5 ?= " + peakIndexInMountainArray_bf(new int[]{18, 29, 38, 59, 98, 100, 99, 98, 90}));
         System.out.println("5 ?= " + peakIndexInMountainArray_bs(new int[]{18, 29, 38, 59, 98, 100, 99, 98, 90}));
     }
 }
