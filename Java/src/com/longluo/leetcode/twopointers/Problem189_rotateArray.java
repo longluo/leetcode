@@ -55,6 +55,15 @@ public class Problem189_rotateArray {
         System.arraycopy(array, 0, nums, 0, len);
     }
 
+    public static void rotate_bf_opt(int[] nums, int k) {
+        int len = nums.length;
+        int[] arr = new int[len];
+        for (int i = 0; i < len; i++) {
+            arr[(i + k) % len] = nums[i];
+        }
+        System.arraycopy(arr, 0, nums, 0, len);
+    }
+
     // Two Pointers
     public static void rotate_tp(int[] nums, int k) {
 
