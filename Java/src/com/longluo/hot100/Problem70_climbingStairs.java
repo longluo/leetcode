@@ -29,7 +29,7 @@ package com.longluo.hot100;
 public class Problem70_climbingStairs {
 
     public static int climbStairs(int n) {
-        if (n == 1 || n == 2) {
+        if (n <= 2) {
             return n;
         }
 
@@ -43,12 +43,31 @@ public class Problem70_climbingStairs {
         return num[n - 1];
     }
 
-    public static int climbStairs_fastest(int n) {
+    public static int climbStairs_dp(int n) {
+        if (n <= 2) {
+            return n;
+        }
+
+        int p = 1;
+        int q = 2;
+        int r = p + q;
+        for (int i = 3; i <= n; i++) {
+            r = p + q;
+            p = q;
+            q = r;
+        }
+
+        return r;
+    }
+
+    public static int climbStairs_math(int n) {
         double ans = (Math.pow((1 + Math.sqrt(5)) / 2, n + 1) - Math.pow((1 - Math.sqrt(5)) / 2, n + 1)) / Math.sqrt(5);
         return (int) ans;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("8 ?= " + climbStairs(5));
+        System.out.println("8 ?= " + climbStairs_dp(5));
+        System.out.println("8 ?= " + climbStairs_math(5));
     }
 }
