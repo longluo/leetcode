@@ -26,7 +26,24 @@ package com.longluo.leetcode.binarysearch;
  */
 public class Problem74_searchA2DMatrix {
 
-    public static boolean searchMatrix(int[][] matrix, int target) {
+    // BF
+    public static boolean searchMatrix_bf(int[][] matrix, int target) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == target) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // BF Opt
+    public static boolean searchMatrix_bf_opt(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
         }
@@ -51,7 +68,8 @@ public class Problem74_searchA2DMatrix {
         return false;
     }
 
-    public static boolean searchMatrix_1(int[][] matrix, int target) {
+    // Row Scan + Column BinarySearch
+    public static boolean searchMatrix_bs(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
         }
@@ -74,39 +92,6 @@ public class Problem74_searchA2DMatrix {
         return false;
     }
 
-    public static boolean searchMatrix_2(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return false;
-        }
-
-        int row = matrix.length;
-        int col = matrix[0].length;
-
-        if (matrix[0][0] > target || matrix[row - 1][col - 1] < target) {
-            return false;
-        }
-
-        int low = 0;
-        int high = row - 1;
-        while (low <= high) {
-            int mid = (low + high) >> 1;
-            if (matrix[mid][0] > target) {
-                high = mid - 1;
-            } else if (matrix[mid][col - 1] < target) {
-                low = mid + 1;
-            } else if (matrix[mid][0] <= target && matrix[mid][col - 1] >= target) {
-                low = mid;
-                break;
-            }
-        }
-
-        if (binarySearch(matrix[low], target) != -1) {
-            return true;
-        }
-
-        return false;
-    }
-
     public static int binarySearch(int[] arr, int target) {
         int start = 0;
         int end = arr.length - 1;
@@ -124,11 +109,8 @@ public class Problem74_searchA2DMatrix {
         return -1;
     }
 
-    public static boolean searchMatrix_3(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return false;
-        }
-
+    // 2 Binary Search: Row and Column
+    public static boolean searchMatrix_two_bs(int[][] matrix, int target) {
         int row = matrix.length;
         int col = matrix[0].length;
 
@@ -136,15 +118,86 @@ public class Problem74_searchA2DMatrix {
             return false;
         }
 
-        int i = 0;
-        int j = col - 1;
+        int rowIdx = binarySearchColumn(matrix, target);
+        return binarySearchRow(matrix[rowIdx], target);
+    }
 
-        while (i < row && j >= 0) {
-            if (target > matrix[i][j]) {
-                i++;
-            } else if (target < matrix[i][j]) {
-                j--;
+    public static int binarySearchColumn(int[][] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (arr[mid][0] <= target) {
+                left = mid;
             } else {
+                right = mid - 1;
+            }
+        }
+
+        return left;
+    }
+
+    public static boolean binarySearchRow(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] > target) {
+                right = mid - 1;
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                return true;
+            }
+        }
+
+        return arr[left] == target;
+    }
+
+    // 1 Binary Search: from top left to bottom right
+    public static boolean searchMatrix_one_bs(int[][] matrix, int target) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        if (matrix[0][0] > target || matrix[row - 1][col - 1] < target) {
+            return false;
+        }
+
+        int left = 0;
+        int right = row * col - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (matrix[mid / col][mid % col] == target) {
+                return true;
+            } else if (matrix[mid / col][mid % col] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return false;
+    }
+
+    // 2D Coordinate Axis
+    public static boolean searchMatrix_2d_axis(int[][] matrix, int target) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        if (matrix[0][0] > target || matrix[row - 1][col - 1] < target) {
+            return false;
+        }
+
+        int i = row - 1;
+        int j = 0;
+
+        while (i >= 0 && j < col) {
+            int num = matrix[i][j];
+            if (num > target) {
+                i--;
+            } else if (num < target) {
+                j++;
+            } else if (num == target) {
                 return true;
             }
         }
@@ -153,15 +206,15 @@ public class Problem74_searchA2DMatrix {
     }
 
     public static void main(String[] args) {
-        System.out.println("true ?= " + searchMatrix(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3));
-        System.out.println("true ?= " + searchMatrix_1(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3));
-        System.out.println("false ?= " + searchMatrix(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
-        System.out.println("false ?= " + searchMatrix_1(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
-        System.out.println("false ?= " + searchMatrix_2(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
-        System.out.println("true ?= " + searchMatrix_2(new int[][]{{0, 0, 1, 3, 4, 6, 8, 8}, {11, 12, 14, 16, 18, 18, 19, 19}, {68, 69, 71, 72, 72, 72, 74, 76}}, 76));
-        System.out.println("true ?= " + searchMatrix_2(new int[][]{{-8, -8, -7, -7, -6, -5, -3, -2}, {0, 0, 1, 3, 4, 6, 8, 8}, {11, 12, 14, 16, 18, 18, 19, 19}, {22, 23, 25, 27, 28, 30, 30, 31}, {34, 35, 37, 39, 40, 42, 43, 45}, {48, 50, 51, 51, 53, 54, 55, 57}, {58, 60, 62, 62, 62, 63, 63, 65}, {68, 69, 71, 72, 72, 72, 74, 76}}, 76));
-        System.out.println("true ?= " + searchMatrix(new int[][]{{1}}, 1));
-        System.out.println("true ?= " + searchMatrix_1(new int[][]{{1}}, 1));
-        System.out.println("true ?= " + searchMatrix_3(new int[][]{{1}}, 1));
+        System.out.println("true ?= " + searchMatrix_bf(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3));
+        System.out.println("true ?= " + searchMatrix_bs(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3));
+        System.out.println("false ?= " + searchMatrix_bf(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
+        System.out.println("false ?= " + searchMatrix_bs(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
+        System.out.println("false ?= " + searchMatrix_2d_axis(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 13));
+        System.out.println("true ?= " + searchMatrix_one_bs(new int[][]{{0, 0, 1, 3, 4, 6, 8, 8}, {11, 12, 14, 16, 18, 18, 19, 19}, {68, 69, 71, 72, 72, 72, 74, 76}}, 76));
+        System.out.println("true ?= " + searchMatrix_one_bs(new int[][]{{-8, -8, -7, -7, -6, -5, -3, -2}, {0, 0, 1, 3, 4, 6, 8, 8}, {11, 12, 14, 16, 18, 18, 19, 19}, {22, 23, 25, 27, 28, 30, 30, 31}, {34, 35, 37, 39, 40, 42, 43, 45}, {48, 50, 51, 51, 53, 54, 55, 57}, {58, 60, 62, 62, 62, 63, 63, 65}, {68, 69, 71, 72, 72, 72, 74, 76}}, 76));
+        System.out.println("true ?= " + searchMatrix_bf(new int[][]{{1}}, 1));
+        System.out.println("true ?= " + searchMatrix_bs(new int[][]{{1}}, 1));
+        System.out.println("true ?= " + searchMatrix_one_bs(new int[][]{{1}}, 1));
     }
 }
