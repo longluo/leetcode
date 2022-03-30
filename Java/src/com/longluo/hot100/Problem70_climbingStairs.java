@@ -28,6 +28,7 @@ package com.longluo.hot100;
  */
 public class Problem70_climbingStairs {
 
+    // Use DP O(n) o(n)
     public static int climbStairs(int n) {
         if (n <= 2) {
             return n;
@@ -43,6 +44,7 @@ public class Problem70_climbingStairs {
         return num[n - 1];
     }
 
+    // Use DP O(n) o(1)
     public static int climbStairs_dp(int n) {
         if (n <= 2) {
             return n;
@@ -60,6 +62,7 @@ public class Problem70_climbingStairs {
         return r;
     }
 
+    // Use Math O(1)
     public static int climbStairs_math(int n) {
         double ans = (Math.pow((1 + Math.sqrt(5)) / 2, n + 1) - Math.pow((1 - Math.sqrt(5)) / 2, n + 1)) / Math.sqrt(5);
         return (int) ans;

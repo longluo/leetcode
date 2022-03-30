@@ -1,5 +1,8 @@
 package com.longluo.leetcode.dp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 740. 删除并获得点数
  * <p>
@@ -31,12 +34,37 @@ package com.longluo.leetcode.dp;
  */
 public class Problem740_deleteAndEarn {
 
+    // Use Hash O(n) O(n)
+    public static int deleteAndEarn_hash(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+        int maxVal = 0;
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + num);
+            maxVal = Math.max(maxVal, num);
+        }
+
+        int[] dp = new int[maxVal + 1];
+        dp[0] = 0;
+        dp[1] = map.getOrDefault(1, 0);
+        for (int i = 2; i <= maxVal; i++) {
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + map.getOrDefault(i, 0));
+        }
+
+        return dp[maxVal];
+    }
+
+    // Use DP O(n) O(n) O(n)
     public static int deleteAndEarn(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
 
-        if (nums.length == 1) {
+        int len = nums.length;
+        if (len == 1) {
             return nums[0];
         }
 
@@ -53,14 +81,15 @@ public class Problem740_deleteAndEarn {
         int[] dp = new int[maxVal + 1];
         dp[0] = 0;
         dp[1] = sums[1];
-        for (int i = 2; i < maxVal + 1; i++) {
+        for (int i = 2; i <= maxVal; i++) {
             dp[i] = Math.max(dp[i - 1], dp[i - 2] + i * sums[i]);
         }
 
         return dp[maxVal];
     }
 
-    public static int deleteAndEarn_2(int[] nums) {
+    // DP like Rob in Problem 198 O(n) O(n)
+    public static int deleteAndEarn_dp_opt(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         } else if (nums.length == 1) {
@@ -68,8 +97,8 @@ public class Problem740_deleteAndEarn {
         }
 
         int maxVal = 0;
-        for (int i = 0; i < nums.length; i++) {
-            maxVal = Math.max(nums[i], maxVal);
+        for (int num : nums) {
+            maxVal = Math.max(maxVal, num);
         }
 
         int[] sums = new int[maxVal + 1];
@@ -94,14 +123,14 @@ public class Problem740_deleteAndEarn {
 
     public static void main(String[] args) {
         System.out.println("0 ?= " + deleteAndEarn(new int[]{0}));
-        System.out.println("0 ?= " + deleteAndEarn_2(new int[]{0}));
+        System.out.println("0 ?= " + deleteAndEarn_dp_opt(new int[]{0}));
         System.out.println("1 ?= " + deleteAndEarn(new int[]{1}));
-        System.out.println("1 ?= " + deleteAndEarn_2(new int[]{1}));
+        System.out.println("1 ?= " + deleteAndEarn_dp_opt(new int[]{1}));
         System.out.println("6 ?= " + deleteAndEarn(new int[]{3, 4, 2}));
-        System.out.println("6 ?= " + deleteAndEarn_2(new int[]{3, 4, 2}));
+        System.out.println("6 ?= " + deleteAndEarn_dp_opt(new int[]{3, 4, 2}));
         System.out.println("9 ?= " + deleteAndEarn(new int[]{2, 2, 3, 3, 3, 4}));
-        System.out.println("9 ?= " + deleteAndEarn_2(new int[]{2, 2, 3, 3, 3, 4}));
+        System.out.println("9 ?= " + deleteAndEarn_dp_opt(new int[]{2, 2, 3, 3, 3, 4}));
         System.out.println("4 ?= " + deleteAndEarn(new int[]{3, 1}));
-        System.out.println("4 ?= " + deleteAndEarn_2(new int[]{3, 1}));
+        System.out.println("4 ?= " + deleteAndEarn_dp_opt(new int[]{3, 1}));
     }
 }
