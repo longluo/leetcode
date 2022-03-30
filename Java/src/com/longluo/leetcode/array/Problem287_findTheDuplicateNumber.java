@@ -36,6 +36,19 @@ import java.util.Set;
  */
 public class Problem287_findTheDuplicateNumber {
 
+    public static int findDuplicate_2loops(int[] nums) {
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (nums[i] == nums[j]) {
+                    return nums[i];
+                }
+            }
+        }
+
+        return len;
+    }
+
     public static int findDuplicate_bf(int[] nums) {
         int len = nums.length;
         int[] cnt = new int[len + 1];
