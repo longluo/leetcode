@@ -36,6 +36,7 @@ import java.util.Set;
  */
 public class Problem287_findTheDuplicateNumber {
 
+    // 2 Loops
     public static int findDuplicate_2loops(int[] nums) {
         int len = nums.length;
         for (int i = 0; i < len; i++) {
@@ -49,7 +50,8 @@ public class Problem287_findTheDuplicateNumber {
         return len;
     }
 
-    public static int findDuplicate_bf(int[] nums) {
+    // Count
+    public static int findDuplicate_count(int[] nums) {
         int len = nums.length;
         int[] cnt = new int[len + 1];
         for (int i = 0; i < len; i++) {
@@ -62,6 +64,7 @@ public class Problem287_findTheDuplicateNumber {
         return len;
     }
 
+    // Set
     public static int findDuplicate_set(int[] nums) {
         Set<Integer> set = new HashSet<>();
         int len = nums.length;
@@ -74,6 +77,21 @@ public class Problem287_findTheDuplicateNumber {
         return len;
     }
 
+    // Visited
+    public static int findDuplicate_mark(int[] nums) {
+        int len = nums.length;
+        for (int num : nums) {
+            int idx = Math.abs(num);
+            if (nums[idx] < 0) {
+                return idx;
+            }
+            nums[idx] = -nums[idx];
+        }
+
+        return len;
+    }
+
+    // Sort
     public static int findDuplicate_sort(int[] nums) {
         Arrays.sort(nums);
         int len = nums.length;
@@ -86,6 +104,50 @@ public class Problem287_findTheDuplicateNumber {
         return len;
     }
 
+    // Index Sort
+    public static int findDuplicate_index_sort(int[] nums) {
+        int len = nums.length;
+        for (int i = 0; i < len; ) {
+            int num = nums[i];
+            if (num == i + 1) {
+                i++;
+            } else if (nums[i] == nums[nums[i] - 1]) {
+                return nums[i];
+            } else {
+                int temp = nums[i];
+                nums[i] = nums[num - 1];
+                nums[num - 1] = temp;
+            }
+        }
+
+        return len;
+    }
+
+    // Binary Search
+    public static int findDuplicate_bs(int[] nums) {
+        int len = nums.length;
+        int low = 1;
+        int high = len - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            int cnt = 0;
+            for (int i = 0; i < len; i++) {
+                if (nums[i] <= mid) {
+                    cnt++;
+                }
+            }
+
+            if (cnt <= mid) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+
+        return low;
+    }
+
+    // Bit
     public static int findDuplicate_bit(int[] nums) {
         int n = nums.length;
         int ans = 0;
@@ -112,29 +174,7 @@ public class Problem287_findTheDuplicateNumber {
         return ans;
     }
 
-    public static int findDuplicate_bs(int[] nums) {
-        int len = nums.length;
-        int low = 1;
-        int high = len - 1;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            int cnt = 0;
-            for (int i = 0; i < len; i++) {
-                if (nums[i] <= mid) {
-                    cnt++;
-                }
-            }
-
-            if (cnt <= mid) {
-                low = mid + 1;
-            } else {
-                high = mid;
-            }
-        }
-
-        return low;
-    }
-
+    // Slow Fast Pointers
     public static int findDuplicate_fastSlow(int[] nums) {
         int slow = 0;
         int fast = 0;
@@ -153,10 +193,12 @@ public class Problem287_findTheDuplicateNumber {
     }
 
     public static void main(String[] args) {
-        System.out.println("2 ?= " + findDuplicate_bf(new int[]{1, 3, 4, 2, 2}));
-        System.out.println("2 ?= " + findDuplicate_bit(new int[]{1, 3, 4, 2, 2}));
-        System.out.println("2 ?= " + findDuplicate_bs(new int[]{1, 3, 4, 2, 2}));
+        System.out.println("2 ?= " + findDuplicate_count(new int[]{1, 3, 4, 2, 2}));
+        System.out.println("2 ?= " + findDuplicate_set(new int[]{1, 3, 4, 2, 2}));
+        System.out.println("2 ?= " + findDuplicate_sort(new int[]{1, 3, 4, 2, 2}));
+        System.out.println("2 ?= " + findDuplicate_index_sort(new int[]{1, 3, 4, 2, 2}));
         System.out.println("3 ?= " + findDuplicate_bs(new int[]{3, 1, 3, 4, 2}));
+        System.out.println("2 ?= " + findDuplicate_bit(new int[]{1, 3, 4, 2, 2}));
         System.out.println("3 ?= " + findDuplicate_fastSlow(new int[]{3, 1, 3, 4, 2}));
     }
 }
