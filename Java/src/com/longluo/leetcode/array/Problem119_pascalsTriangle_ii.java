@@ -1,6 +1,7 @@
 package com.longluo.leetcode.array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,23 +19,66 @@ import java.util.List;
  */
 public class Problem119_pascalsTriangle_ii {
 
-    public static List<Integer> getRow(int rowIndex) {
-        List<List<Integer>> ans = new ArrayList<>();
-
+    // Use BF O(n^2) O(n^2)
+    public static List<Integer> getRow_bf(int rowIndex) {
+        List<List<Integer>> pascals = new ArrayList<>();
         for (int i = 0; i <= rowIndex; i++) {
-            List<Integer> oneRow = new ArrayList<>();
+            List<Integer> row = new ArrayList<>();
             for (int j = 0; j <= i; j++) {
                 if (j == 0 || j == i) {
-                    oneRow.add(1);
+                    row.add(1);
                 } else {
-                    oneRow.add(ans.get(i - 1).get(j - 1) + ans.get(i - 1).get(j));
+                    row.add(pascals.get(i - 1).get(j - 1) + pascals.get(i - 1).get(j));
                 }
             }
 
-            ans.add(oneRow);
+            pascals.add(row);
         }
 
-        return ans.get(rowIndex);
+        return pascals.get(rowIndex);
+    }
+
+    // Use DP O(n^2) O(n)
+    public static List<Integer> getRow_dp(int rowIndex) {
+        List<Integer> pre = new ArrayList<>();
+        for (int i = 0; i <= rowIndex; i++) {
+            List<Integer> cur = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    cur.add(1);
+                } else {
+                    cur.add(pre.get(j - 1) + pre.get(j));
+                }
+            }
+
+            pre = cur;
+        }
+
+        return pre;
+    }
+
+    // DP Opt O(n^2) O(1)
+    public static List<Integer> getRow_dp_opt(int rowIndex) {
+        List<Integer> row = new ArrayList<>();
+        row.add(1);
+        for (int i = 1; i <= rowIndex; i++) {
+            row.add(0);
+            for (int j = i; j > 0; --j) {
+                row.set(j, row.get(j) + row.get(j - 1));
+            }
+        }
+
+        return row;
+    }
+
+    // Math O(n) O(1)
+    public static List<Integer> getRow_math(int rowIndex) {
+        List<Integer> row = new ArrayList<>();
+        row.add(1);
+        for (int i = 1; i <= rowIndex; ++i) {
+            row.add((int) ((long) row.get(i - 1) * (rowIndex - i + 1) / i));
+        }
+        return row;
     }
 
     public static void main(String[] args) {
