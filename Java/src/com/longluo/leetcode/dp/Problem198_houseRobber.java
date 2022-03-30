@@ -27,35 +27,33 @@ package com.longluo.leetcode.dp;
  */
 public class Problem198_houseRobber {
 
+    // Use DP
     public static int rob(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        } else if (nums.length == 1) {
+        int len = nums.length;
+        if (len <= 1) {
             return nums[0];
         }
 
-        int n = nums.length;
-        int[] dp = new int[n];
+        int[] dp = new int[len];
         dp[0] = nums[0];
         dp[1] = Math.max(nums[0], nums[1]);
-        for (int i = 2; i < n; i++) {
-            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
+        for (int i = 2; i < len; i++) {
+            dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
         }
 
-        return dp[n - 1];
+        return dp[len - 1];
     }
 
-    public static int rob_2(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        } else if (nums.length == 1) {
+    // Dp opt space
+    public static int rob_dp(int[] nums) {
+        int len = nums.length;
+        if (len <= 1) {
             return nums[0];
         }
 
-        int n = nums.length;
         int first = nums[0];
         int second = Math.max(nums[0], nums[1]);
-        for (int i = 2; i < n; i++) {
+        for (int i = 2; i < len; i++) {
             int temp = second;
             second = Math.max(second, first + nums[i]);
             first = temp;
@@ -68,7 +66,7 @@ public class Problem198_houseRobber {
         System.out.println("4 ?= " + rob(new int[]{1, 2, 3, 1}));
         System.out.println("12 ?= " + rob(new int[]{2, 7, 9, 3, 1}));
 
-        System.out.println("4 ?= " + rob_2(new int[]{1, 2, 3, 1}));
-        System.out.println("12 ?= " + rob_2(new int[]{2, 7, 9, 3, 1}));
+        System.out.println("4 ?= " + rob_dp(new int[]{1, 2, 3, 1}));
+        System.out.println("12 ?= " + rob_dp(new int[]{2, 7, 9, 3, 1}));
     }
 }
