@@ -55,12 +55,7 @@ public class Problem56_mergeIntervals {
 
         ans.add(new int[]{left, right});
 
-        int[][] res = new int[ans.size()][2];
-        for (int i = 0; i < ans.size(); i++) {
-            res[i] = ans.get(i);
-        }
-
-        return res;
+        return ans.toArray(new int[ans.size()][2]);
     }
 
     public static void main(String[] args) {
