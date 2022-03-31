@@ -19,6 +19,7 @@ package com.longluo.leetcode.twopointers;
  */
 public class Problem344_reverseString {
 
+    // Two Pointers O(n) O(1)
     public static void reverseString(char[] s) {
         if (s == null || s.length <= 1) {
             return;
@@ -36,19 +37,21 @@ public class Problem344_reverseString {
         }
     }
 
-    public static void reverseString_bl(char[] s) {
+    // Two Pointers Opt O(n) O(1)
+    public static void reverseString_tp_opt(char[] s) {
         if (s == null || s.length <= 1) {
             return;
         }
 
         int n = s.length;
-        for (int i = 0; i < n / 2; i++) {
-            char temp = s[i];
-            s[i] = s[n - 1 - i];
-            s[n - 1 - i] = temp;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
         }
     }
 
+    // User Recursive O(n) O(n / 2)
     public static void reverseString_rec(char[] s) {
         reverse(s, 0, s.length - 1);
     }
@@ -66,7 +69,7 @@ public class Problem344_reverseString {
     }
 
     public static void main(String[] args) {
-//        System.out.println(" " + reverseString(new char[]{'h', 'e', 'l', 'l', 'o'}););
-//        System.out.println(" " + reverseString(new char[]{'H', 'a', 'n', 'n', 'a', 'h'}););
+        reverseString_tp_opt(new char[]{'h', 'e', 'l', 'l', 'o'});
+        reverseString_rec(new char[]{'H', 'a', 'n', 'n', 'a', 'h'});
     }
 }
