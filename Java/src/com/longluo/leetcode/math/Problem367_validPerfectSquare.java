@@ -73,6 +73,22 @@ public class Problem367_validPerfectSquare {
     }
 
     // Binary Search O(logn) O(1)
+    public static boolean isPerfectSquare_bs_2(int num) {
+        int left = 1;
+        int right = (num + 1) / 2;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            long square = (long) mid * mid;
+            if (square <= num) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return left * left == num;
+    }
+
     public static boolean isPerfectSquare_bs(int num) {
         if (num < 0) {
             return false;
