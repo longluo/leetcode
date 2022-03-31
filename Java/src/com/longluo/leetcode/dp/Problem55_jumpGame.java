@@ -28,10 +28,6 @@ public class Problem55_jumpGame {
     // BF O(n^2) O(n）
     public static boolean canJump_bf(int[] nums) {
         int len = nums.length;
-        if (len <= 1) {
-            return true;
-        }
-
         boolean[] visited = new boolean[len];
         visited[0] = true;
         for (int i = 0; i < len; i++) {
@@ -49,10 +45,6 @@ public class Problem55_jumpGame {
     // Greedy O(n) O(1)
     public static boolean canJump_greedy(int[] nums) {
         int len = nums.length;
-        if (len <= 1) {
-            return true;
-        }
-
         int maxIdx = 0;
         for (int i = 0; i < len; i++) {
             int steps = nums[i];
