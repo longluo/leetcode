@@ -70,7 +70,7 @@ public class Problem1385_findTheDistanceValue {
         return ans;
     }
 
-    // Two Pointers O(n^2) O(1)
+    // Two Pointers O(mn) O(1)
     public static int findTheDistanceValue_tp(int[] arr1, int[] arr2, int d) {
         int ans = 0;
         for (int num1 : arr1) {
