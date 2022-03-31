@@ -25,6 +25,7 @@ package com.longluo.top_interviews;
  */
 public class Problem69_sqrtx {
 
+    // BF O(n) O(1)
     public static int mySqrt(int x) {
         if (x == 0 || x == 1) {
             return x;
@@ -43,6 +44,16 @@ public class Problem69_sqrtx {
         return 0;
     }
 
+    // Exp O(1) O(1)
+    public static int mySqrt_exp(int x) {
+        if (x == 0) {
+            return 0;
+        }
+        int ans = (int) Math.exp(0.5 * Math.log(x));
+        return (long) (ans + 1) * (ans + 1) <= x ? ans + 1 : ans;
+    }
+
+    // Newton's Method O(logx) O(1)
     public static int mySqrt_newton(int x) {
         if (x == 0) {
             return 0;
@@ -61,6 +72,7 @@ public class Problem69_sqrtx {
         return (int) x0;
     }
 
+    // Binary Search O(nlogn) O(1)
     public static int mySqrt_bs(int x) {
         if (x <= 1) {
             return x;
@@ -86,6 +98,7 @@ public class Problem69_sqrtx {
         return left;
     }
 
+    // Binary Search O(logx) O(1)
     public static int mySqrt_bs_opt(int x) {
         if (x <= 1) {
             return x;
