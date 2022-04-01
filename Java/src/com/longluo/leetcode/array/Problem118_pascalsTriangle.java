@@ -21,10 +21,13 @@ import java.util.List;
  * ]
  * <p>
  * https://leetcode-cn.com/problems/pascals-triangle/
+ * <p>
+ * https://leetcode.com/problems/pascals-triangle/
  */
 public class Problem118_pascalsTriangle {
 
-    public static List<List<Integer>> generate(int numRows) {
+    // BF DP time: O(n^2) space: O(n^2)
+    public static List<List<Integer>> generate_bf(int numRows) {
         List<List<Integer>> ans = new ArrayList<>();
         if (numRows <= 0) {
             return ans;
@@ -61,7 +64,8 @@ public class Problem118_pascalsTriangle {
         return ans;
     }
 
-    public static List<List<Integer>> generate_2(int numRows) {
+    // DP time: O(n^2) space: O(n^2)
+    public static List<List<Integer>> generate_dp(int numRows) {
         List<List<Integer>> ans = new ArrayList<>();
         for (int i = 0; i < numRows; i++) {
             List<Integer> oneRow = new ArrayList<>();
@@ -80,11 +84,11 @@ public class Problem118_pascalsTriangle {
     }
 
     public static void main(String[] args) {
-        generate(1);
-        generate(2);
-        generate(5);
-        generate_2(1);
-        generate_2(2);
-        generate_2(5);
+        generate_bf(1);
+        generate_bf(2);
+        generate_bf(5);
+        generate_dp(1);
+        generate_dp(2);
+        generate_dp(5);
     }
 }
