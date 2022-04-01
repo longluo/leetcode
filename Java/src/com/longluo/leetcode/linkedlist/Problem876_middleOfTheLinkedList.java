@@ -28,7 +28,8 @@ import com.longluo.datastructure.LinkedListNodeUtils;
  */
 public class Problem876_middleOfTheLinkedList {
 
-    public static ListNode middleNode1(ListNode head) {
+    // BF time: O(n) space: O(n)
+    public static ListNode middleNode_bf_store(ListNode head) {
         ListNode[] arr = new ListNode[100];
         int n = 0;
         while (head != null) {
@@ -39,7 +40,8 @@ public class Problem876_middleOfTheLinkedList {
         return arr[n / 2];
     }
 
-    public static ListNode middleNode2(ListNode head) {
+    // BF time: O(2*n) space: O(n)
+    public static ListNode middleNode_bf_scan(ListNode head) {
         int n = 0;
         ListNode cur = head;
         while (cur != null) {
@@ -57,7 +59,8 @@ public class Problem876_middleOfTheLinkedList {
         return cur;
     }
 
-    public static ListNode middleNode3(ListNode head) {
+    // Two Pointers time: O(2*n) space: O(1)
+    public static ListNode middleNode_tp(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -75,18 +78,18 @@ public class Problem876_middleOfTheLinkedList {
 
     public static void main(String[] args) {
         ListNode test1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
-        System.out.println("[3,4,5] ?= " + LinkedListNodeUtils.printLinkedList(middleNode1(test1)));
-        System.out.println("[3,4,5] ?= " + LinkedListNodeUtils.printLinkedList(middleNode2(test1)));
-        System.out.println("[3,4,5] ?= " + LinkedListNodeUtils.printLinkedList(middleNode3(test1)));
+        System.out.println("[3,4,5] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_bf_store(test1)));
+        System.out.println("[3,4,5] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_bf_scan(test1)));
+        System.out.println("[3,4,5] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_tp(test1)));
 
         ListNode test2 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5, 6});
-        System.out.println("[4,5,6] ?= " + LinkedListNodeUtils.printLinkedList(middleNode1(test2)));
-        System.out.println("[4,5,6] ?= " + LinkedListNodeUtils.printLinkedList(middleNode2(test2)));
-        System.out.println("[4,5,6] ?= " + LinkedListNodeUtils.printLinkedList(middleNode3(test2)));
+        System.out.println("[4,5,6] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_bf_store(test2)));
+        System.out.println("[4,5,6] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_bf_scan(test2)));
+        System.out.println("[4,5,6] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_tp(test2)));
 
         ListNode test3 = LinkedListNodeUtils.constructListNode(new int[]{1});
-        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(middleNode1(test3)));
-        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(middleNode2(test3)));
-        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(middleNode3(test3)));
+        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_bf_store(test3)));
+        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_bf_scan(test3)));
+        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(middleNode_tp(test3)));
     }
 }
