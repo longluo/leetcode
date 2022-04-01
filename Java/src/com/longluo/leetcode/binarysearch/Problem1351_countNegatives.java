@@ -102,8 +102,57 @@ public class Problem1351_countNegatives {
         return ans;
     }
 
+    // BS time: O(mlogn) space: O(1)
+    public static int countNegatives_bs(int[][] grid) {
+        int ans = 0;
+        int row = grid.length;
+        int col = grid[0].length;
+        if (grid[0][0] < 0) {
+            return row * col;
+        } else if (grid[row - 1][col - 1] >= 0) {
+            return 0;
+        }
 
+        for (int i = 0; i < row; i++) {
+            if (grid[i][col - 1] >= 0) {
+                continue;
+            }
 
+            if (grid[i][0] < 0) {
+                ans += col;
+                continue;
+            }
+
+            ans += col - binarySearchRow(grid[i]);
+        }
+
+        return ans;
+    }
+
+    public static int binarySearchRow(int[] arr) {
+        int len = arr.length;
+        if (arr[len - 1] >= 0) {
+            return -1;
+        } else if (arr[0] < 0) {
+            return 0;
+        }
+
+        int left = 0;
+        int right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] >= 0) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return left;
+    }
+
+    // TODO: 2022/4/1  
+    
     public static void main(String[] args) {
 
     }
