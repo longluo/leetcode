@@ -24,6 +24,7 @@ package com.longluo.leetcode.dp;
  */
 public class Problem746_minCostClimbingStairs {
 
+    // DP time: O(n) space: O(n)
     public static int minCostClimbingStairs_dp(int[] cost) {
         int len = cost.length;
         int[] dp = new int[len + 1];
@@ -36,6 +37,7 @@ public class Problem746_minCostClimbingStairs {
         return dp[len];
     }
 
+    // DP time: O(n) space: O(1)
     public static int minCostClimbingStairs_dp_opt(int[] cost) {
         int length = cost.length;
         int p = 0;
@@ -48,6 +50,19 @@ public class Problem746_minCostClimbingStairs {
         }
 
         return r;
+    }
+
+    // DP Method 2 time: O(n) space: O(1)
+    public static int minCostClimbingStairs_dp2(int[] cost) {
+        int len = cost.length;
+        int[] dp = new int[len];
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        for (int i = 2; i < len; i++) {
+            dp[i] = Math.min(dp[i - 1], dp[i - 2]) + cost[i];
+        }
+
+        return Math.min(dp[len - 1], dp[len - 2]);
     }
 
     public static void main(String[] args) {
