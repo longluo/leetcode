@@ -38,7 +38,7 @@ import java.util.Map;
  */
 public class Problem1790_areAlmostEqual {
 
-    // HashMap time: O(n) space: O(n)
+    // HashMap time: O(2*n) space: O(n)
     public static boolean areAlmostEqual_hash(String s1, String s2) {
         if (s1.equals(s2)) {
             return true;
@@ -67,9 +67,71 @@ public class Problem1790_areAlmostEqual {
         return cnt >= 0;
     }
 
+    // Count time: O(2*n) space: O(26) = O(1)
+    public static boolean areAlmostEqual_cnt(String s1, String s2) {
+        if (s1.equals(s2)) {
+            return true;
+        }
+
+        int[] cnt1 = new int[26];
+        int[] cnt2 = new int[26];
+        for (int i = 0; i < s1.length(); i++) {
+            cnt1[s1.charAt(i) - 'a']++;
+            cnt2[s2.charAt(i) - 'a']++;
+        }
+
+        int swap = 2;
+        for (int i = 0; i < s1.length(); i++) {
+            char ch1 = s1.charAt(i);
+            char ch2 = s2.charAt(i);
+            if (cnt1[ch1 - 'a'] != cnt2[ch1 - 'a'] || cnt1[ch2 - 'a'] != cnt2[ch2 - 'a']) {
+                return false;
+            }
+            if (ch1 != ch2) {
+                swap--;
+            }
+        }
+
+        return swap >= 0;
+    }
+
+    // Record Chars time: O(n) space: O(1)
+    public static boolean areAlmostEqual_record(String s1, String s2) {
+        if (s1.equals(s2)) {
+            return true;
+        }
+
+        char[] diffChars = new char[2];
+        int swap = 0;
+        for (int i = 0; i < s1.length(); i++) {
+            if (s1.charAt(i) == s2.charAt(i)) {
+                continue;
+            }
+
+            if (swap == 0) {
+                swap++;
+                diffChars[0] = s1.charAt(i);
+                diffChars[1] = s2.charAt(i);
+            } else if (swap == 1) {
+                swap++;
+                if (s1.charAt(i) != diffChars[1] || s2.charAt(i) != diffChars[0]) {
+                    return false;
+                }
+            } else if (swap >= 2) {
+                return false;
+            }
+        }
+
+        return swap == 0 || swap == 2;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + areAlmostEqual_hash("bank", "kanb"));
         System.out.println("false ?= " + areAlmostEqual_hash("aa", "ac"));
         System.out.println("false ?= " + areAlmostEqual_hash("abca", "abcc"));
+
+        System.out.println("false ?= " + areAlmostEqual_cnt("aa", "ac"));
+        System.out.println("false ?= " + areAlmostEqual_record("aa", "ac"));
+        System.out.println("false ?= " + areAlmostEqual_record("qgqeg", "gqgeq"));
     }
 }
