@@ -25,17 +25,20 @@ package com.longluo.leetcode.geometry;
  */
 public class Problem1232_checkIfItIsAStraightLine {
 
+    // BF y = kx + m time: O(n) space: O(1)
     public static boolean checkStraightLine(int[][] coordinates) {
         if (coordinates == null || coordinates.length < 2) {
             return false;
         }
 
-        if (coordinates.length == 2) {
+        int len = coordinates.length;
+        if (len == 2) {
             return true;
         }
 
+        // Judge is Horizontal
         if (coordinates[0][0] == coordinates[1][0]) {
-            for (int i = 2; i < coordinates.length; i++) {
+            for (int i = 2; i < len; i++) {
                 if (coordinates[i][0] != coordinates[0][0]) {
                     return false;
                 }
@@ -44,8 +47,9 @@ public class Problem1232_checkIfItIsAStraightLine {
             return true;
         }
 
+        // Judge is Vertical
         if (coordinates[0][1] == coordinates[1][1]) {
-            for (int i = 2; i < coordinates.length; i++) {
+            for (int i = 2; i < len; i++) {
                 if (coordinates[i][1] != coordinates[0][1]) {
                     return false;
                 }
@@ -57,11 +61,34 @@ public class Problem1232_checkIfItIsAStraightLine {
         int deltaY = coordinates[1][1] - coordinates[0][1];
         int deltaX = coordinates[1][0] - coordinates[0][0];
 
+        // y = kx + m
         float k = (float) deltaY / deltaX;
         float m = coordinates[0][1] - k * coordinates[0][0];
 
-        for (int i = 2; i < coordinates.length; i++) {
+        for (int i = 2; i < len; i++) {
             if ((coordinates[i][0] * k + m) != coordinates[i][1]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Geometry Set P0 as the origin time: O(n) space: O(1)
+    public static boolean checkStraightLine_opt(int[][] coordinates) {
+        int len = coordinates.length;
+        int deltaX = coordinates[0][0];
+        int deltaY = coordinates[0][1];
+        for (int i = 1; i < len; i++) {
+            coordinates[i][0] -= deltaX;
+            coordinates[i][1] -= deltaY;
+        }
+
+        // y = kx, as y - kx = 0, ax + by = 0
+        int A = -coordinates[1][1];
+        int B = coordinates[1][0];
+        for (int i = 2; i < len; i++) {
+            if (A * coordinates[i][0] + B * coordinates[i][1] != 0) {
                 return false;
             }
         }
@@ -72,5 +99,6 @@ public class Problem1232_checkIfItIsAStraightLine {
     public static void main(String[] args) {
         System.out.println("true ?= " + checkStraightLine(new int[][]{{2, 1}, {4, 2}, {6, 3}}));
         System.out.println("true ?= " + checkStraightLine(new int[][]{{0, 0}, {0, 1}, {0, -1}}));
+        System.out.println("true ?= " + checkStraightLine_opt(new int[][]{{1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 6}, {6, 7}}));
     }
 }
