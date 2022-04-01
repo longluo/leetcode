@@ -52,8 +52,39 @@ public class Problem1539_kthMissingPositiveNumber {
         return j;
     }
 
+    // BF Opt O(n) O(1)
+    public static int findKthPositive_bf_opt(int[] arr, int k) {
+        int len = arr.length;
+        int idx = 0;
+        int cnt = 0;
+        for (int i = 1; i < len + k; i++) {
+            if (idx < len && arr[idx] == i) {
+                idx++;
+            } else {
+                cnt++;
+                if (cnt == k) {
+                    return i;
+                }
+            }
+        }
+
+        return len + k;
+    }
+
+    // BS O(logn) O(1)
+    public static int findKthPositive_bs(int[] arr, int k) {
+        int len = arr.length;
+        int left = 1;
+        int right = len + k;
+
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("9 ?= " + findKthPositive_bf(new int[]{2, 3, 4, 7, 11}, 5));
         System.out.println("6 ?= " + findKthPositive_bf(new int[]{1, 2, 3, 4}, 2));
+
+        System.out.println("9 ?= " + findKthPositive_bf_opt(new int[]{2, 3, 4, 7, 11}, 5));
+        System.out.println("6 ?= " + findKthPositive_bf_opt(new int[]{1, 2, 3, 4}, 2));
     }
 }
