@@ -59,6 +59,21 @@ public class Problem441_arrangeCoins {
         return val / 2;
     }
 
+    // Bit Manipulation Time: O(16) = O(1) Space: O(1)
+    public static int arrangeCoins_bit(int n) {
+        int mask = 1 << 15;
+        long ans = 0;
+        while (mask > 0) {
+            ans |= mask;
+            if (ans * (ans + 1) / 2 > n) {
+                ans ^= mask;
+            }
+            mask >>= 1;
+        }
+
+        return (int) ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + arrangeCoins_bf(1));
         System.out.println("2 ?= " + arrangeCoins_bf(3));
@@ -68,6 +83,11 @@ public class Problem441_arrangeCoins {
         System.out.println("2 ?= " + arrangeCoins_bs(3));
         System.out.println("3 ?= " + arrangeCoins_bs(8));
         System.out.println("65535 ?= " + arrangeCoins_bs(2147483647));
+
+        System.out.println("1 ?= " + arrangeCoins_bit(1));
+        System.out.println("2 ?= " + arrangeCoins_bit(3));
+        System.out.println("3 ?= " + arrangeCoins_bit(8));
+        System.out.println("65535 ?= " + arrangeCoins_bit(2147483647));
 
         System.out.println((Integer.MAX_VALUE + 1) / 2);
     }
