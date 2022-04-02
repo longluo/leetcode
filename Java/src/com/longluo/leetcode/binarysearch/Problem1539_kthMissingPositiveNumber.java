@@ -28,14 +28,20 @@ public class Problem1539_kthMissingPositiveNumber {
 
     // BF O(n) O(1)
     public static int findKthPositive_bf(int[] arr, int k) {
+        int len = arr.length;
+        if (arr[len - 1] < len + k) {
+            return len + k;
+        } else if (arr[0] > k) {
+            return k;
+        }
         int i = 0;
         int j = 1;
-        while (i < arr.length) {
+        while (i < len) {
             if (arr[i] == j) {
                 i++;
                 j++;
             }
-            while (i < arr.length && arr[i] > j) {
+            while (i < len && arr[i] > j) {
                 if (k == 1) {
                     return j;
                 }
@@ -55,6 +61,11 @@ public class Problem1539_kthMissingPositiveNumber {
     // BF Opt O(n) O(1)
     public static int findKthPositive_bf_opt(int[] arr, int k) {
         int len = arr.length;
+        if (arr[len - 1] < len + k) {
+            return len + k;
+        } else if (arr[0] > k) {
+            return k;
+        }
         int idx = 0;
         int cnt = 0;
         for (int i = 1; i < len + k; i++) {
@@ -71,13 +82,34 @@ public class Problem1539_kthMissingPositiveNumber {
         return len + k;
     }
 
-    // BS O(logn) O(1)
-    public static int findKthPositive_bs(int[] arr, int k) {
-        int len = arr.length;
-        int left = 1;
-        int right = len + k;
+    // Count the array element less than k O(n) O(1)
+    public static int findKthPositive_simple(int[] arr, int k) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] <= k) {
+                k++;
+            }
+        }
 
-        return 0;
+        return k;
+    }
+
+    // BS time: O(logn) space: O(1)
+    public static int findKthPositive_bs(int[] arr, int k) {
+        if (arr[arr.length - 1] < arr.length + k) {
+            return arr.length + k;
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] - mid >= k + 1) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return k + left;
     }
 
     public static void main(String[] args) {
@@ -86,5 +118,8 @@ public class Problem1539_kthMissingPositiveNumber {
 
         System.out.println("9 ?= " + findKthPositive_bf_opt(new int[]{2, 3, 4, 7, 11}, 5));
         System.out.println("6 ?= " + findKthPositive_bf_opt(new int[]{1, 2, 3, 4}, 2));
+
+        System.out.println("9 ?= " + findKthPositive_bs(new int[]{2, 3, 4, 7, 11}, 5));
+        System.out.println("6 ?= " + findKthPositive_bs(new int[]{1, 2, 3, 4}, 2));
     }
 }
