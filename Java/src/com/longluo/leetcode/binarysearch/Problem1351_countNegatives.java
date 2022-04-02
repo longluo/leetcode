@@ -151,7 +151,8 @@ public class Problem1351_countNegatives {
         return left;
     }
 
-    // TODO: 2022/4/1  
+    // TODO: 2022/4/1
+    // 对角线二分搜索
     
     public static void main(String[] args) {
 
