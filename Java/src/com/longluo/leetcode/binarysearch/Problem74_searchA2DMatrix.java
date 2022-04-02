@@ -25,8 +25,7 @@ package com.longluo.leetcode.binarysearch;
  * https://leetcode-cn.com/problems/search-a-2d-matrix/
  */
 public class Problem74_searchA2DMatrix {
-
-    // BF
+    // BF O(m*n) O(1)
     public static boolean searchMatrix_bf(int[][] matrix, int target) {
         int row = matrix.length;
         int col = matrix[0].length;
@@ -42,7 +41,7 @@ public class Problem74_searchA2DMatrix {
         return false;
     }
 
-    // BF Opt
+    // BF Opt O(m*n) O(1)
     public static boolean searchMatrix_bf_opt(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
@@ -68,7 +67,7 @@ public class Problem74_searchA2DMatrix {
         return false;
     }
 
-    // Row Scan + Column BinarySearch
+    // Row Scan + Column BinarySearch O(m * logn) O(1)
     public static boolean searchMatrix_bs(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
@@ -109,7 +108,7 @@ public class Problem74_searchA2DMatrix {
         return -1;
     }
 
-    // 2 Binary Search: Row and Column
+    // 2 Binary Search: Row and Column O(log(m*n)) O(1)
     public static boolean searchMatrix_two_bs(int[][] matrix, int target) {
         int row = matrix.length;
         int col = matrix[0].length;
@@ -154,7 +153,7 @@ public class Problem74_searchA2DMatrix {
         return arr[left] == target;
     }
 
-    // 1 Binary Search: from top left to bottom right
+    // 1 Binary Search: from top left to bottom right O(log(m*n) O(1)
     public static boolean searchMatrix_one_bs(int[][] matrix, int target) {
         int row = matrix.length;
         int col = matrix[0].length;
@@ -179,7 +178,7 @@ public class Problem74_searchA2DMatrix {
         return false;
     }
 
-    // 2D Coordinate Axis
+    // 2D Coordinate Axis O(m + n) O(1)
     public static boolean searchMatrix_2d_axis(int[][] matrix, int target) {
         int row = matrix.length;
         int col = matrix[0].length;
