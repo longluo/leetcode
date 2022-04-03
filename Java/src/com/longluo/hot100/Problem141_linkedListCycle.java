@@ -2,7 +2,8 @@ package com.longluo.hot100;
 
 import com.longluo.datastructure.ListNode;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 141. Linked List Cycle
@@ -37,6 +38,7 @@ import java.util.*;
  */
 public class Problem141_linkedListCycle {
 
+    // HashSet time: O(n) space: O(n)
     public static boolean hasCycle(ListNode head) {
         if (head == null || head.next == null) {
             return false;
@@ -54,6 +56,7 @@ public class Problem141_linkedListCycle {
         return false;
     }
 
+    // Two Pointers time: O(n) space: O(1)
     public static boolean hasCycle_fast(ListNode head) {
         if (head == null || head.next == null) {
             return false;
