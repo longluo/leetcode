@@ -62,14 +62,17 @@ public class Problem141_linkedListCycle {
             return false;
         }
 
-        ListNode fast = head.next;
         ListNode slow = head;
-        while (fast != slow) {
+        ListNode fast = head;
+        while (true) {
             if (fast == null || fast.next == null) {
                 return false;
             }
             slow = slow.next;
             fast = fast.next.next;
+            if (slow == fast) {
+                break;
+            }
         }
 
         return true;
