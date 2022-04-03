@@ -1,6 +1,8 @@
 # LeetCode 热题 HOT 100
 
-[LeetCode 热题 HOT 100](https://leetcode-cn.com/problem-list/ex0k24j/)
+[Top 100 Liked Questions](https://leetcode.com/problem-list/top-100-liked-questions)
+
+[LeetCode 热题 HOT 100](https://leetcode-cn.com/problem-list/2cktkvj/)
 
 [LeetCode 热题 HOT 100](http://www.longluo.me/blog/2021/08/15/Leetcode-Tencent-Interview-Problems/)
 
