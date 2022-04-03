@@ -28,6 +28,7 @@ import java.util.*;
  */
 public class Problem290_wordPattern {
 
+    // Hash + Regex time: O(n) space: O(n)
     public static boolean wordPattern(String pattern, String s) {
         Map<Character, String> wordMap = new HashMap<>();
         String[] words = s.split("\\ ");
@@ -54,10 +55,50 @@ public class Problem290_wordPattern {
         return true;
     }
 
+    // BF + Hash time: O(n) space: O(n)
+    public static boolean wordPattern_hash(String pattern, String s) {
+        int p = 0;
+        int q = 0;
+        Map<Character, String> map = new HashMap<>();
+        int start = 0;
+        while (p < pattern.length() && q < s.length()) {
+            start = q;
+            while (q < s.length() && s.charAt(q) != ' ') {
+                q++;
+            }
+
+            char ch = pattern.charAt(p);
+            String word = s.substring(start, q);
+            if (!map.containsKey(ch)) {
+                if (map.containsValue(word)) {
+                    return false;
+                }
+                map.put(pattern.charAt(p), word);
+            } else {
+                if (!map.get(ch).equals(word)) {
+                    return false;
+                }
+            }
+
+            p++;
+            q++;
+        }
+
+        if (p < pattern.length() || q < s.length()) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + wordPattern("abba", "dog cat cat dog"));
         System.out.println("false ?= " + wordPattern("abba", "dog cat cat fish"));
         System.out.println("false ?= " + wordPattern("aaaa", "dog cat cat dog"));
         System.out.println("false ?= " + wordPattern("abba", "dog dog dog dog"));
+
+        System.out.println("true ?= " + wordPattern_hash("abba", "dog cat cat dog"));
+        System.out.println("false ?= " + wordPattern_hash("abba", "dog dog dog dog"));
+        System.out.println("false ?= " + wordPattern_hash("aaa", "aa aa aa aa"));
     }
 }
