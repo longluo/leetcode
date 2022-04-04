@@ -39,7 +39,8 @@ import java.util.Set;
  */
 public class Problem19_removeNthNodeFromEndOfList {
 
-    public static ListNode removeNthFromEnd(ListNode head, int n) {
+    // BF + List time: O(n) space: O(n)
+    public static ListNode removeNthFromEnd_bf(ListNode head, int n) {
         if (head.next == null && n == 1) {
             return null;
         }
@@ -66,11 +67,39 @@ public class Problem19_removeNthNodeFromEndOfList {
         return head;
     }
 
+    // Slow Fast Two Pointers time: O(n) space: O(1)
+    public static ListNode removeNthFromEnd_fastslow(ListNode head, int n) {
+        if (head.next == null && n == 1) {
+            return null;
+        }
+
+        ListNode dummyNode = new ListNode(-1);
+        ListNode preNode = dummyNode;
+        dummyNode.next = head;
+
+        ListNode fast = head;
+        for (int i = 1; i < n; i++) {
+            fast = fast.next;
+        }
+
+        ListNode slow = head;
+        while (fast.next != null) {
+            fast = fast.next;
+            preNode = preNode.next;
+            slow = slow.next;
+        }
+
+        preNode.next = slow.next;
+
+        return dummyNode.next;
+    }
+
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
-        removeNthFromEnd(tst1, 2);
+        removeNthFromEnd_fastslow(tst1, 2);
+//        removeNthFromEnd_bf(tst1, 2);
 
         ListNode tst2 = LinkedListNodeUtils.constructListNode(new int[]{1, 2});
-        removeNthFromEnd(tst2, 1);
+        removeNthFromEnd_bf(tst2, 1);
     }
 }
