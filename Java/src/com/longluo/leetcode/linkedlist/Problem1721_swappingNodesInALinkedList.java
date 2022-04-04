@@ -111,13 +111,13 @@ public class Problem1721_swappingNodesInALinkedList {
             left.next = right;
             right.next = tempNode;
         } else if (left == preRight) {
-            left.next = right.next;
             preLeft.next = right;
+            left.next = right.next;
             right.next = left;
         } else {
             preLeft.next = right;
-            left.next = right.next;
             preRight.next = left;
+            left.next = right.next;
             right.next = tempNode;
         }
 
