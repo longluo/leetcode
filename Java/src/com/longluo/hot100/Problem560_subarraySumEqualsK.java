@@ -1,5 +1,8 @@
 package com.longluo.hot100;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 560. 和为 K 的子数组
  * <p>
@@ -39,7 +42,7 @@ public class Problem560_subarraySumEqualsK {
         return ans;
     }
 
-    // PrefixSum time: O(n) space: O(2*n)
+    // PrefixSum time: O(n^2) space: O(2*n)
     public static int subarraySum_prefixSum(int[] nums, int k) {
         int ans = 0;
         int len = nums.length;
@@ -59,8 +62,27 @@ public class Problem560_subarraySumEqualsK {
         return ans;
     }
 
+    // PrefixSum + Hash time: O(n) space: O(2*n)
+    public static int subarraySum_prefixSum_hash(int[] nums, int k) {
+        int ans = 0;
+        int len = nums.length;
+        int[] prefixSums = new int[len + 1];
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        for (int i = 0; i < len; i++) {
+            prefixSums[i + 1] = prefixSums[i] + nums[i];
+            if (map.containsKey(prefixSums[i + 1] - k)) {
+                ans += map.get(prefixSums[i + 1] - k);
+            }
+            map.put(prefixSums[i + 1], map.getOrDefault(prefixSums[i + 1], 0) + 1);
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
         subarraySum_prefixSum(new int[]{1, 1, 1}, 2);
+        subarraySum_prefixSum_hash(new int[]{1, 1, 1}, 2);
+        subarraySum_prefixSum_hash(new int[]{1}, 0);
     }
 }
