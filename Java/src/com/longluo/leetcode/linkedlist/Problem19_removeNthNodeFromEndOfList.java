@@ -3,10 +3,7 @@ package com.longluo.leetcode.linkedlist;
 import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 19. Remove Nth Node From End of List
@@ -67,6 +64,31 @@ public class Problem19_removeNthNodeFromEndOfList {
         return head;
     }
 
+    // Stack time: O(2 * n) space: O(n)
+    public static ListNode removeNthFromEnd_stack(ListNode head, int n) {
+        if (head.next == null && n == 1) {
+            return null;
+        }
+
+        Stack<ListNode> stack = new Stack<>();
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+        ListNode pNode = dummyNode;
+        while (pNode != null) {
+            stack.push(pNode);
+            pNode = pNode.next;
+        }
+
+        while (n > 0) {
+            stack.pop();
+            n--;
+        }
+
+        pNode = stack.peek();
+        pNode.next = pNode.next.next;
+        return dummyNode.next;
+    }
+
     // Slow Fast Two Pointers time: O(n) space: O(1)
     public static ListNode removeNthFromEnd_fastslow(ListNode head, int n) {
         if (head.next == null && n == 1) {
@@ -96,6 +118,7 @@ public class Problem19_removeNthNodeFromEndOfList {
 
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
+        removeNthFromEnd_stack(tst1, 2);
         removeNthFromEnd_fastslow(tst1, 2);
 //        removeNthFromEnd_bf(tst1, 2);
 
