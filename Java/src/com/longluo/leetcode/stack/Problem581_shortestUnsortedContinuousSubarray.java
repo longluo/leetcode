@@ -1,5 +1,7 @@
 package com.longluo.leetcode.stack;
 
+import java.util.Arrays;
+
 /**
  * 581. 最短无序连续子数组
  * <p>
@@ -29,51 +31,111 @@ package com.longluo.leetcode.stack;
  */
 public class Problem581_shortestUnsortedContinuousSubarray {
 
-    public static int findUnsortedSubarray(int[] nums) {
-        if (nums == null || nums.length <= 1) {
+    // BF Bad Not AC
+    public static int findUnsortedSubarray_bf(int[] nums) {
+        int len = nums.length;
+        if (len <= 1) {
             return 0;
         }
 
-        int n = nums.length;
-        if (nums.length == 2) {
-            if (nums[0] > nums[1]) {
-                return n;
+        int left = 1;
+        int right = len - 1;
+        int insertLeft = 0;
+        int insertRight = 0;
+        int ans = len;
+        while (left < right) {
+            while (left < right && nums[left] >= nums[left - 1]) {
+                left++;
+            }
+
+            insertLeft = left - 1;
+            while (insertLeft >= 0 && nums[insertLeft] > nums[left]) {
+                insertLeft--;
+            }
+            insertLeft++;
+
+            while (left < right - 1 && nums[right - 1] <= nums[right]) {
+                right--;
+            }
+
+            insertRight = right;
+            while (insertRight < len && nums[insertRight] < nums[right]) {
+                insertRight++;
+            }
+
+            insertRight--;
+
+            if (insertLeft < insertRight) {
+                ans = Math.min(ans, insertRight - insertLeft + 1);
+            }
+        }
+
+        return insertLeft == 0 ? 0 : ans;
+    }
+
+    // Sort time: O(nlogn) space: O(n)
+    public static int findUnsortedSubarray_sort(int[] nums) {
+        if (isSorted(nums)) {
+            return 0;
+        }
+
+        int len = nums.length;
+        int left = 0;
+        int right = len - 1;
+        int[] sortedArray = new int[len];
+        System.arraycopy(nums, 0, sortedArray, 0, len);
+        Arrays.sort(sortedArray);
+
+        while (nums[left] == sortedArray[left]) {
+            left++;
+        }
+
+        while (nums[right] == sortedArray[right]) {
+            right--;
+        }
+
+        return right - left + 1;
+    }
+
+    public static boolean isSorted(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < nums[i - 1]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Best time: O(n) space: O(1)
+    public static int findUnsortedSubarray_(int[] nums) {
+        int len = nums.length;
+        int max = nums[0];
+        int min = nums[len - 1];
+        int left = 0;
+        int right = -1;
+        for (int i = 0; i < len; i++) {
+            if (nums[i] >= max) {
+                max = nums[i];
             } else {
-                return 0;
+                right = i;
+            }
+
+            if (nums[len - i - 1] <= min) {
+                min = nums[len - i - 1];
+            } else {
+                left = len - i - 1;
             }
         }
 
-        int ans = 0;
-        int begin = 0;
-        int end = 0;
-        for (int i = 1; i < n - 1; i++) {
-            if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
-                begin = i;
-                break;
-            }
-        }
-
-        for (int i = n - 2; i >= 1; i--) {
-            if (nums[i] < nums[i - 1] && nums[i] < nums[i + 1]) {
-                end = i;
-                break;
-            }
-        }
-
-        if (end - begin < 1) {
-            return 0;
-        } else {
-            ans = end - begin + 1;
-        }
-
-        return ans;
+        return right - left + 1;
     }
 
     public static void main(String[] args) {
-        System.out.println("0 ?= " + findUnsortedSubarray(new int[]{1}));
-        System.out.println("2 ?= " + findUnsortedSubarray(new int[]{2, 1}));
-        System.out.println("5 ?= " + findUnsortedSubarray(new int[]{5, 4, 3, 2, 1}));
-        System.out.println("5 ?= " + findUnsortedSubarray(new int[]{2, 6, 4, 8, 10, 9, 15}));
-        System.out.println("0 ?= " + findUnsortedSubarray(new int[]{1, 2, 3, 4}));
+        System.out.println("0 ?= " + findUnsortedSubarray_bf(new int[]{1}));
+        System.out.println("2 ?= " + findUnsortedSubarray_bf(new int[]{2, 1}));
+        System.out.println("5 ?= " + findUnsortedSubarray_bf(new int[]{5, 4, 3, 2, 1}));
+        System.out.println("5 ?= " + findUnsortedSubarray_bf(new int[]{2, 6, 4, 8, 10, 9, 15}));
+        System.out.println("0 ?= " + findUnsortedSubarray_bf(new int[]{1, 2, 3, 4}));
     }
 }
