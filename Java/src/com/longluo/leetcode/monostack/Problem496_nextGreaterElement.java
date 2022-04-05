@@ -1,4 +1,4 @@
-package com.longluo.leetcode.stack;
+package com.longluo.leetcode.monostack;
 
 import java.util.Arrays;
 import java.util.HashMap;

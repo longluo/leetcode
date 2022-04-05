@@ -27,8 +27,10 @@ import java.util.List;
  * nums 中的所有整数 互不相同
  * <p>
  * https://leetcode-cn.com/problems/permutations/
+ * <p>
+ * https://leetcode.com/problems/permutations/
  */
-public class Problem46_permute {
+public class Problem46_permutations {
 
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();

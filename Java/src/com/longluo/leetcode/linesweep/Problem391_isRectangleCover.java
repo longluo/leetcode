@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.leetcode.linesweep;
 
 import java.util.HashMap;
 import java.util.Map;
