@@ -2,6 +2,8 @@
 
 https://leetcode.com/discuss/general-discussion/1868912/my-leetcode-solutions-all-in-one
 
+***By Frank Luo***
+
 My Leetcode Solutions are here, and this post will update frequently.
 
 All code are in [Github](https://github.com/longluo/leetcode).
@@ -11,7 +13,7 @@ All code are in [Github](https://github.com/longluo/leetcode).
 |	   Leetcode Problems      |   Difficulty   |      Solutions      |
 |      :-----               |   :----:   |      :----      |
 | [2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) | Easy | [Java Linkedlist Iteration and Recusion Solution](https://leetcode.com/problems/add-two-numbers/discuss/1867007/java-linkedlist-iteration-and-recusion-solution) |
-| [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) | Easy | [Java HashSet + Sliding Window Solution](https://leetcode.com/problems/longest-substring-without-repeating-characters/discuss/1869971/Java-HashSet-%2B-Sliding-Window-Solution) |
+| [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) | Easy | [Java HashSet + Sliding Window Solution](https://leetcode.com/problems/longest-substring-without-repeating-characters/discuss/1869971/java-using-hashset-and-sliding-window) |
 | [11. Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | Medium | [2 Approaches: BF and Two Pointers with Image Explaination and Code Commented](https://leetcode.com/problems/container-with-most-water/discuss/1915231/java-2-approaches-bf-and-two-pointers-with-image-explaination-code-commented) |
 | [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | Easy | [The illustration of the Recursive Algorithm, For Beginners with Easy Detailed Explanation](https://leetcode.com/problems/merge-two-sorted-lists/discuss/1857613/the-illustration-of-the-recursive-algorithm-for-beginners-easy-detailed-explanation) | 
 | [31. Next Permutation](https://leetcode.com/problems/next-permutation/) | Medium | [Two Pointers Solution with Detailed Explanation and Code Commented](https://leetcode.com/problems/next-permutation/discuss/1908463/Java-Two-Pointers-Solution-with-Detailed-Explanation-or-Code-Commented) |
@@ -27,13 +29,13 @@ All code are in [Github](https://github.com/longluo/leetcode).
 | [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | Easy | [Java Simple Two Pointers Solutions](https://leetcode.com/problems/valid-palindrome/discuss/1873749/java-simple-brute-forcetwo-pointers-solutions) |
 | [136. Single Number](https://leetcode.com/problems/single-number) | Easy | [5 Lines Code / The XOR operator Cheatsheet / Bitwise Operation / with Easy Detailed Explanation](https://leetcode.com/problems/single-number/discuss/1854878/5-lines-code-the-xor-operator-cheatsheet-bitwise-operation-with-easy-detailed-explanation) |
 | Binary and N-ary Tree Traversal: [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) | Easy | [Tree Traversals All In One: PreOrder, InOrder and PostOrder](https://leetcode.com/problems/binary-tree-inorder-traversal/discuss/1860290/tree-traversals-preorder-inorder-and-postorder-algorithms-all-in-one) |
-| [171. Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/) | Easy | [Base Conversion 2 Solutions: Left to Right and Right to Left](https://leetcode.com/problems/excel-sheet-column-number/discuss/1865439/2-solutions-base-conversion-left-to-right-and-right-to-left) |
+| [171. Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/) | Easy | [2 Solutions: Base Conversion From Left to Right and From Right to Left](https://leetcode.com/problems/excel-sheet-column-number/discuss/1865439/2-solutions-base-conversion-left-to-right-and-right-to-left) |
 | [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii) | Easy | [3 Solutions with Brute Force, HashMap and Sliding Window](https://leetcode.com/problems/contains-duplicate-ii/discuss/1868785/Java-3-Solutions-with-Brute-Force-HashMap-and-Sliding-Window) |
-| [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/) | Easy | [3 Solutions HashMap + Sort + Count](https://leetcode.com/problems/valid-anagram/discuss/1870094/Java-3-Solutions-HashMap-%2B-Sort-%2B-Count-or-Count-is-the-Fastest) |
+| [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/) | Easy | [3 Solutions: HashMap, Sort and Count Count is the Fastest](https://leetcode.com/problems/valid-anagram/discuss/1870094/java-3-solutions-hashmap-sort-count-count-is-the-fastest) |
 | [268. Missing Number](https://leetcode.com/problems/missing-number/) | Easy | [4 Solutions: Sort + Hash + XOR + Sum](https://leetcode.com/problems/missing-number/discuss/1878226/4-Solutions%3A-Sort-%2B-Hash-%2B-XOR-%2B-Sum) |
 | [287. Find the Duplicate Number](https://leetcode.com/problems/coin-change/) | Medium | [9 Approaches Count + Hash + Sort + Binary Search + Bit + Fast Slow Pointers](https://leetcode.com/problems/find-the-duplicate-number/discuss/1892921/java-9-approaches-count-hash-sort-binary-search-bit-fast-slow-pointers) |
 | [316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters) | Medium | [The Detailed Explanation with 3-steps to Understand the Stack Solution Easy](https://leetcode.com/problems/remove-duplicate-letters/discuss/1859616/the-detailed-explanation-with-3-steps-to-understand-the-stack-solution-easy) |
-| [344. Reverse String](https://leetcode.com/problems/reverse-string) | Easy | [Two Pointers and Recursive Solutions](https://leetcode.com/problems/reverse-string/discuss/1857951/java-two-pointers-and-recursive-solution-typical-recursive) |
+| [344. Reverse String](https://leetcode.com/problems/reverse-string) | Easy | [2 Approaches: Two Pointers and Recursion](https://leetcode.com/problems/reverse-string/discuss/1901760/java-2-approaches-two-pointers-and-recursive-explained) |
 | [350. Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/) | Easy | [2 Solutions: Sort with Two Pointers and HashMap](https://leetcode.com/problems/intersection-of-two-arrays-ii/discuss/1878726/java-2-solutions-sort-two-pointers-with-hashmap) |
 | [372. Super Pow](https://leetcode-cn.com/problems/super-pow/) | Medium | [Java Fast Power Algorithm](https://leetcode.com/problems/super-pow/discuss/1873389/Java-Fast-Power-Algorithm) |
 | [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number) | Easy | [9 Fibonacci Algorithms: the Most Complete Solutions All In One with Image Explanation](https://leetcode.com/problems/fibonacci-number/discuss/1854398/9-fibonacci-algorithms-the-most-complete-solutions-all-in-one-graphical-easy-to-understand) |
