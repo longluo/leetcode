@@ -44,8 +44,43 @@ public class Problem796_rotateString {
         return false;
     }
 
+    // SubStr time: O(n) space: O(n)
+    public static boolean rotateString_substr(String A, String B) {
+        return A.length() == B.length() && (A + A).contains(B);
+    }
+
+    // Simulate time: O(n^2) space: O(1)
+    public static boolean rotateString_simu(String A, String B) {
+        if (A.equals(B)) {
+            return true;
+        }
+        int lenA = A.length();
+        int lenB = B.length();
+        if (lenA != lenB) {
+            return false;
+        }
+
+        for (int i = 0; i < lenA; i++) {
+            boolean flag = true;
+            for (int j = 0; j < lenB; j++) {
+                if (A.charAt((i + j) % lenA) != B.charAt(j)) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + rotateString_bf("abcde", "cdeab"));
+        System.out.println("true ?= " + rotateString_simu("abcde", "cdeab"));
         System.out.println("true ?= " + rotateString_bf("bbbacddceeb", "ceebbbbacdd"));
+        System.out.println("true ?= " + rotateString_substr("bbbacddceeb", "ceebbbbacdd"));
     }
 }
