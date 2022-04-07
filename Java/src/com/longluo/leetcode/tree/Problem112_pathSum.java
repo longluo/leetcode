@@ -34,35 +34,29 @@ import java.util.Queue;
  */
 public class Problem112_pathSum {
 
+    // DFS time: O(n) space: O(n)
     public static boolean hasPathSum(TreeNode root, int targetSum) {
         if (root == null) {
             return false;
         }
-
         return dfs(root, targetSum);
     }
 
     public static boolean dfs(TreeNode root, int targetSum) {
         if (root == null) {
-            if (targetSum == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return targetSum == 0;
         }
 
         if (root.left == null && root.right == null) {
-            if (targetSum - root.val == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return targetSum == root.val;
         }
 
-        return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+        return  (root.left != null && dfs(root.left, targetSum - root.val))
+                || (root.right != null && dfs(root.right, targetSum - root.val));
     }
 
-    public static boolean hasPathSum_2(TreeNode root, int targetSum) {
+    // Recursion time: O(n) space: O(n)
+    public static boolean hasPathSum_rec(TreeNode root, int targetSum) {
         if (root == null) {
             return false;
         }
@@ -71,9 +65,11 @@ public class Problem112_pathSum {
             return root.val == targetSum;
         }
 
-        return hasPathSum_2(root.left, targetSum - root.val) || hasPathSum_2(root.right, targetSum - root.val);
+        return hasPathSum_rec(root.left, targetSum - root.val)
+                || hasPathSum_rec(root.right, targetSum - root.val);
     }
 
+    // BFS time: O(n) space: O(n)
     public static boolean hasPathSum_bfs(TreeNode root, int targetSum) {
         if (root == null) {
             return false;
@@ -92,7 +88,7 @@ public class Problem112_pathSum {
                         return true;
                     }
                 }
-                
+
                 if (node.left != null) {
                     queue.offer(node.left);
                     sum.offer(value - node.left.val);
@@ -109,24 +105,24 @@ public class Problem112_pathSum {
     }
 
     public static void main(String[] args) {
+        TreeNode tst3 = TreeUtils.constructTree(new Integer[]{1, 2});
+        System.out.println("false ?= " + hasPathSum(tst3, 0));
+        System.out.println("false ?= " + hasPathSum_rec(tst3, 0));
+        System.out.println("false ?= " + hasPathSum_bfs(tst3, 0));
+
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1});
         System.out.println("true ?= " + hasPathSum(tst1, 22));
-        System.out.println("true ?= " + hasPathSum_2(tst1, 22));
+        System.out.println("true ?= " + hasPathSum_rec(tst1, 22));
         System.out.println("true ?= " + hasPathSum_bfs(tst1, 22));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{1, 2, 3});
         System.out.println("false ?= " + hasPathSum(tst2, 5));
-        System.out.println("false ?= " + hasPathSum_2(tst2, 5));
+        System.out.println("false ?= " + hasPathSum_rec(tst2, 5));
         System.out.println("false ?= " + hasPathSum_bfs(tst2, 5));
-
-        TreeNode tst3 = TreeUtils.constructTree(new Integer[]{1, 2});
-        System.out.println("false ?= " + hasPathSum(tst3, 0));
-        System.out.println("false ?= " + hasPathSum_2(tst3, 0));
-        System.out.println("false ?= " + hasPathSum_bfs(tst3, 0));
 
         TreeNode tst4 = TreeUtils.constructTree(new Integer[]{});
         System.out.println("false ?= " + hasPathSum(tst4, 0));
-        System.out.println("false ?= " + hasPathSum_2(tst4, 0));
+        System.out.println("false ?= " + hasPathSum_rec(tst4, 0));
         System.out.println("false ?= " + hasPathSum_bfs(tst4, 0));
     }
 }
