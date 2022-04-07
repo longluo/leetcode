@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * 1046. 最后一块石头的重量
+ * <p>
  * 有一堆石头，每块石头的重量都是正整数。
  * 每一回合，从中选出两块 最重的 石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x <= y。那么粉碎的可能结果如下：
  * 如果 x == y，那么两块石头都会被完全粉碎；
@@ -22,9 +23,32 @@ import java.util.*;
  * 提示：
  * 1 <= stones.length <= 30
  * 1 <= stones[i] <= 1000
+ * <p>
+ * https://leetcode-cn.com/problems/last-stone-weight/
  */
 public class Problem1046_lastStoneWeight {
 
+    // BF time: O(nlogn) space: O(logn)
+    public static int lastStoneWeight_bf(int[] stones) {
+        int len = stones.length;
+        if (len <= 1) {
+            return stones[0];
+        }
+
+        while (true) {
+            Arrays.sort(stones);
+            if (stones[len - 1] > 0 && stones[len - 2] > 0) {
+                stones[len - 2] = stones[len - 1] - stones[len - 2];
+                stones[len - 1] = 0;
+            } else if (stones[len - 2] == 0) {
+                break;
+            }
+        }
+
+        return stones[len - 1];
+    }
+
+    // LinkedList time: O(nlogn) space: O(logn)
     public static int lastStoneWeight(int[] stones) {
         if (stones.length <= 1) {
             return stones[0];
@@ -37,7 +61,7 @@ public class Problem1046_lastStoneWeight {
 
         while (res.size() > 1) {
             Collections.sort(res, Collections.reverseOrder());
-            if (res.get(0) == res.get(1)) {
+            if (res.get(0).equals(res.get(1))) {
                 if (res.size() == 2) {
                     return 0;
                 }
@@ -52,6 +76,7 @@ public class Problem1046_lastStoneWeight {
         return res.get(0);
     }
 
+    // Max Heap time: O(nlogn) space: O(n)
     public static int lastStoneWeight2(int[] stones) {
         PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
             @Override
@@ -77,6 +102,7 @@ public class Problem1046_lastStoneWeight {
     }
 
     public static void main(String[] args) {
+        System.out.println("1 ?= " + lastStoneWeight_bf(new int[]{2, 7, 4, 1, 8, 1}));
         System.out.println("1 ?= " + lastStoneWeight(new int[]{2, 7, 4, 1, 8, 1}));
         System.out.println("2 ?= " + lastStoneWeight(new int[]{1, 3}));
         System.out.println("0 ?= " + lastStoneWeight(new int[]{2, 2}));
