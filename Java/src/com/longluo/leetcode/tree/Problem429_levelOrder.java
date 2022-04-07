@@ -30,6 +30,7 @@ import java.util.Queue;
  */
 public class Problem429_levelOrder {
 
+    // BFS time: O(n) space: O(n)
     public static List<List<Integer>> levelOrder(Node root) {
         List<List<Integer>> ans = new ArrayList<>();
         if (root == null) {
