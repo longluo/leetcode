@@ -32,7 +32,7 @@ package com.longluo.studyplan.programming_skills;
  * <p>
  * https://leetcode-cn.com/problems/matrix-diagonal-sum/
  */
-public class Problem1572_MatrixDiagonalSum {
+public class Problem1572_matrixDiagonalSum {
 
     // BF time: O(n^2) space: O(1)
     public static int diagonalSum_bf(int[][] mat) {
