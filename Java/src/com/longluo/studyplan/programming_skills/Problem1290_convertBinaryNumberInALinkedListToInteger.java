@@ -1,4 +1,4 @@
-package com.longluo.programming_skills;
+package com.longluo.studyplan.programming_skills;
 
 import com.longluo.datastructure.ListNode;
 
