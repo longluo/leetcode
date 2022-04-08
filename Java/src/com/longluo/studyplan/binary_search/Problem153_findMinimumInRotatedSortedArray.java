@@ -1,4 +1,4 @@
-package com.longluo.leetcode.binarysearch;
+package com.longluo.studyplan.binary_search;
 
 /**
  * 153. 寻找旋转排序数组中的最小值
@@ -35,7 +35,7 @@ package com.longluo.leetcode.binarysearch;
  * <p>
  * https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/
  */
-public class Problem153_findMin {
+public class Problem153_findMinimumInRotatedSortedArray {
 
     // BF time: O(n) space: O(1)
     public static int findMin_bf(int[] nums) {

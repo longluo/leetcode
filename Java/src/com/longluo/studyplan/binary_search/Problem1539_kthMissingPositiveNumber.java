@@ -1,4 +1,4 @@
-package com.longluo.leetcode.binarysearch;
+package com.longluo.studyplan.binary_search;
 
 /**
  * 1539. 第 k 个缺失的正整数
@@ -26,7 +26,7 @@ package com.longluo.leetcode.binarysearch;
  */
 public class Problem1539_kthMissingPositiveNumber {
 
-    // BF O(n) O(1)
+    // BF time: O(n) space: O(1)
     public static int findKthPositive_bf(int[] arr, int k) {
         int len = arr.length;
         if (arr[len - 1] < len + k) {
@@ -58,7 +58,7 @@ public class Problem1539_kthMissingPositiveNumber {
         return j;
     }
 
-    // BF Opt O(n) O(1)
+    // BF Opt time: O(n) space: O(1)
     public static int findKthPositive_bf_opt(int[] arr, int k) {
         int len = arr.length;
         if (arr[len - 1] < len + k) {

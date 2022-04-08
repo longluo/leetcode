@@ -1,4 +1,4 @@
-package com.longluo.leetcode.binarysearch;
+package com.longluo.studyplan.binary_search;
 
 /**
  * 33. 搜索旋转排序数组
