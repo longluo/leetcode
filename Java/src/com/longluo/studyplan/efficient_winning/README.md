@@ -1,6 +1,8 @@
 # [Leetcode 高效制胜](https://leetcode-cn.com/study-plan/efficient-winning/?progress=9dtyjf2)
 
-|   [Leetcode 高效制胜](https://leetcode-cn.com/study-plan/efficient-winning/?progress=9dtyjf2)     |   题目     |    难度     |          Solution          |   
+-------------------
+
+|       |   题目     |    难度     |          Solution          |   
 |    :-----     |    :----:    |  :----:      |     :----:        |   
 |   Day 1       | [1. 两数之和](https://leetcode-cn.com/problems/two-sum/) | 简单 | [Java](./Day01_1.java) |  
 |   Day 1       | [167. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/) | 简单 | [Java](Day01_167.java) |

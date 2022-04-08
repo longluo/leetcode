@@ -1,7 +1,8 @@
 # [美团校园招聘笔试真题 (Meituan)](https://leetcode-cn.com/study-plan/meituan/?progress=9d3e19m)
 
+--------------------
 
-|   [美团](https://leetcode-cn.com/study-plan/meituan/?progress=9d3e19m)     |   题目     |    难度     |          Solution          |    题解   |
+|   美团    |   题目     |    难度     |          Solution          |    题解   |
 |    :-----     |    :----:    |  :----:      |     :----:        |     :----:        |   
 |   Day 1       | [meituan-001. 小美的用户名](https://leetcode-cn.com/problems/BaR9fy/) | 简单 | [Java](./day1/username/Solution.java) |  [题解](https://leetcode-cn.com/problems/BaR9fy/solution/javabao-li-fa-zi-fu-chuan-jin-xing-chu-l-pofz/) |
 |   Day 1       | [meituan-002. 小美的仓库整理](https://leetcode-cn.com/problems/TJZLyC/) | 中等 | [Java](./day1/storemanager/Solution.java) | [题解](https://leetcode-cn.com/problems/TJZLyC/solution/java-cong-bao-li-dao-you-hua-by-longluo-xwj2/) |
