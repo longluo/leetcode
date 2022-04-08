@@ -1,4 +1,4 @@
-package com.longluo.leetcode.stack;
+package com.longluo.studyplan.programming_skills;
 
 import java.util.Stack;
 

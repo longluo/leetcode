@@ -1,4 +1,4 @@
-package com.longluo.leetcode.hash;
+package com.longluo.studyplan.programming_skills;
 
 import java.util.Arrays;
 import java.util.HashMap;

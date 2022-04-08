@@ -1,4 +1,4 @@
-package com.longluo.leetcode.tree;
+package com.longluo.studyplan.programming_skills;
 
 import com.longluo.datastructure.Node;
 

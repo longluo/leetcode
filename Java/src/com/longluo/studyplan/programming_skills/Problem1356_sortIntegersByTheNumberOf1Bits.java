@@ -1,7 +1,6 @@
 package com.longluo.studyplan.programming_skills;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * 1356. 根据数字二进制下 1 的数目排序
@@ -42,7 +41,7 @@ import java.util.Comparator;
  * <p>
  * https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/
  */
-public class Problem1356_SortIntegersByTheNumberOf1Bits {
+public class Problem1356_sortIntegersByTheNumberOf1Bits {
 
     // BF Count Bits time: O(nlogn) space: O(n)
     public static int[] sortByBits_bf(int[] arr) {

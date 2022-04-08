@@ -34,7 +34,7 @@ import java.util.Map;
  * <p>
  * https://leetcode-cn.com/problems/verifying-an-alien-dictionary/
  */
-public class Problem953_VerifyingAnAlienDictionary {
+public class Problem953_verifyingAnAlienDictionary {
 
     // BF time: O(2*n + nlogn) space: O(2*n)
     public static boolean isAlienSorted(String[] words, String order) {

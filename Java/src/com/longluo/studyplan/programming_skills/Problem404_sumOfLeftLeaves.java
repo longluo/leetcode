@@ -88,6 +88,7 @@ public class Problem404_sumOfLeftLeaves {
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{-9, -3, 2, null, 4, 4, 0, -6, null, -5});
         System.out.println("-11 ?= " + sumOfLeftLeaves_bfs(tst1));
+        System.out.println("-11 ?= " + sumOfLeftLeaves_dfs(tst1));
         System.out.println("-11 ?= " + sumOfLeftLeaves_rec(tst1));
     }
 }

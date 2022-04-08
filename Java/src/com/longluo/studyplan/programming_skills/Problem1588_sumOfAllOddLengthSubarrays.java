@@ -37,7 +37,7 @@ package com.longluo.studyplan.programming_skills;
  * <p>
  * https://leetcode-cn.com/problems/sum-of-all-odd-length-subarrays/
  */
-public class Problem1588_SumOfAllOddLengthSubarrays {
+public class Problem1588_sumOfAllOddLengthSubarrays {
 
     // BF time: O(n^2) space: O(1)
     public static int sumOddLengthSubarrays_bf(int[] arr) {
