@@ -33,6 +33,7 @@ import java.util.Stack;
  */
 public class Problem589_nAryTreePreorderTraversal {
 
+    // Recursive time: O(n) space: O(n)
     public List<Integer> preorder(Node root) {
         List<Integer> ans = new ArrayList<>();
         if (root == null) {
@@ -55,6 +56,7 @@ public class Problem589_nAryTreePreorderTraversal {
         }
     }
 
+    // Iteration time: O(n) space: O(n)
     public List<Integer> preorder_iter(Node root) {
         List<Integer> ans = new ArrayList<>();
         if (root == null) {
