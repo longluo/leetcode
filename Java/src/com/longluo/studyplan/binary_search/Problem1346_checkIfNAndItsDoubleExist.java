@@ -1,4 +1,4 @@
-package com.longluo.leetcode.binarysearch;
+package com.longluo.studyplan.binary_search;
 
 import java.util.Arrays;
 import java.util.HashSet;
