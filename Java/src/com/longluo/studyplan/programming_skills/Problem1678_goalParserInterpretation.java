@@ -1,7 +1,8 @@
-package com.longluo.leetcode.string;
+package com.longluo.studyplan.programming_skills;
 
 /**
  * 1678. 设计 Goal 解析器
+ * <p>
  * 请你设计一个可以解释字符串 command 的 Goal 解析器 。command 由 "G"、"()" 和/或 "(al)" 按某种顺序组成。
  * Goal 解析器会将 "G" 解释为字符串 "G"、"()" 解释为字符串 "o" ，"(al)" 解释为字符串 "al" 。
  * 然后，按原顺序将经解释得到的字符串连接成一个字符串。
@@ -27,9 +28,12 @@ package com.longluo.leetcode.string;
  * 提示：
  * 1 <= command.length <= 100
  * command 由 "G"、"()" 和/或 "(al)" 按某种顺序组成
+ * <p>
+ * https://leetcode-cn.com/problems/goal-parser-interpretation/
  */
-public class Problem1678_interpret {
+public class Problem1678_goalParserInterpretation {
 
+    // Simulate time: O(n) space: O(n)
     public static String interpret(String command) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < command.length(); i++) {
@@ -47,9 +51,42 @@ public class Problem1678_interpret {
         return sb.toString();
     }
 
+    // BF time: O(n) space: O(n)
+    public static String interpret_bf(String command) {
+        int len = command.length();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; ) {
+            char ch = command.charAt(i);
+            if (ch == 'G') {
+                sb.append(ch);
+                i++;
+            } else if (ch == '(' && command.charAt(i + 1) == ')') {
+                sb.append('o');
+                i += 2;
+            } else if (ch == '(' && command.charAt(i + 1) == 'a') {
+                sb.append("al");
+                i += 4;
+            }
+        }
+
+        return sb.toString();
+    }
+
+    // Regex time: O(n) space: O(n)
+    public static String interpret_regex(String command) {
+        command = command.replace("()", "o");
+        command = command.replace("(al)", "al");
+        return command;
+    }
+
     public static void main(String[] args) {
         System.out.println("Goal ?= " + interpret("G()(al)"));
         System.out.println("Gooooal ?= " + interpret("G()()()()(al)"));
         System.out.println("alGalooG ?= " + interpret("(al)G(al)()()G"));
+
+        System.out.println("Goal ?= " + interpret_bf("G()(al)"));
+        System.out.println("Gooooal ?= " + interpret_bf("G()()()()(al)"));
+        System.out.println("alGalooG ?= " + interpret_bf("(al)G(al)()()G"));
+        System.out.println("alGalooG ?= " + interpret_regex("(al)G(al)()()G"));
     }
 }
