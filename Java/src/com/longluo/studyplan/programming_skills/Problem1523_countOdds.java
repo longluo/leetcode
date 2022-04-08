@@ -1,4 +1,4 @@
-package com.longluo.leetcode.math;
+package com.longluo.studyplan.programming_skills;
 
 /**
  * 1523. 在区间范围内统计奇数数目
@@ -22,6 +22,8 @@ package com.longluo.leetcode.math;
  */
 public class Problem1523_countOdds {
 
+    // BF time: O(n) space: O(1)
+    // TimeOut
     public static int countOdds_bf_ot(int low, int high) {
         int ans = 0;
         for (int i = low; i <= high; i++) {
@@ -33,6 +35,7 @@ public class Problem1523_countOdds {
         return ans;
     }
 
+    // BF Optimize time: O(n / 2) space: O(1)
     public static int countOdds_bf_opt(int low, int high) {
         int ans = 0;
         if (low % 2 == 0) {
@@ -46,6 +49,7 @@ public class Problem1523_countOdds {
         return ans;
     }
 
+    // Math time: O(1) space: O(1)
     public static int countOdds_math(int low, int high) {
         if (low % 2 == 0) {
             low++;
