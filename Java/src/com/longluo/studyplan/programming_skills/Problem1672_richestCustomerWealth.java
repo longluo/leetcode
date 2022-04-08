@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.studyplan.programming_skills;
 
 /**
  * 1672. 最富有客户的资产总量
@@ -38,6 +38,7 @@ package com.longluo.leetcode.array;
  */
 public class Problem1672_richestCustomerWealth {
 
+    // BF time: O(m*n) space: O(1)
     public static int maximumWealth(int[][] accounts) {
         if (accounts == null || accounts.length == 0 || accounts[0].length == 0) {
             return 0;
@@ -53,7 +54,7 @@ public class Problem1672_richestCustomerWealth {
                 sum += accounts[i][j];
             }
 
-            max = Math.max(sum, max);
+            max = Math.max(max, sum);
         }
 
         return max;
