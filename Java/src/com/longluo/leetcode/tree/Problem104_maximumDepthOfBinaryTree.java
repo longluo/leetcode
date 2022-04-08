@@ -26,6 +26,7 @@ import java.util.Queue;
  */
 public class Problem104_maximumDepthOfBinaryTree {
 
+    // Recursive time: O(n) space: O(n)
     public static int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;
@@ -34,6 +35,7 @@ public class Problem104_maximumDepthOfBinaryTree {
         }
     }
 
+    // DFS time: O(n) space: O(n)
     public static int maxDepth_dfs(TreeNode root) {
         return dfs(root, 0);
     }
@@ -49,6 +51,7 @@ public class Problem104_maximumDepthOfBinaryTree {
         return Math.max(leftDepth, rightDepth);
     }
 
+    // BFS time: O(n) space: O(n)
     public static int maxDepth_bfs(TreeNode root) {
         if (root == null) {
             return 0;
