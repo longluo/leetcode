@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.studyplan.efficient_winning;
 
 /**
  * 53. 最大子序和
@@ -142,3 +142,4 @@ public class Problem53_maximumSubarray {
         System.out.println("-1 ?= " + maxSubArray_On(new int[]{-1, -2}));
     }
 }
+
