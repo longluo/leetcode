@@ -28,28 +28,43 @@ package com.longluo.leetcode.math;
  * 0 <= nums[i] <= 100
  * <p>
  * https://leetcode-cn.com/problems/next-permutation/
+ * <p>
+ * https://leetcode.com/problems/next-permutation/
  */
 public class Problem31_nextPermutation {
 
-    public static void nextPermutation(int[] nums) {
+    // Two Pointers time: O(n) space: O(1)
+    public static void nextPermutation_tp(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return;
         }
 
         int len = nums.length;
         int left = len - 2;
+        /**
+         * from right to left, search for the first one which is smaller than the right digit.
+         */
         while (left >= 0 && nums[left] >= nums[left + 1]) {
             left--;
         }
 
+        /**
+         *  If the one exists, search a one which is larger than it from right to left.
+         */
         if (left >= 0) {
             int right = nums.length - 1;
             while (right >= 0 && nums[left] >= nums[right]) {
                 right--;
             }
+            /**
+             * swap them.
+             */
             swap(nums, left, right);
         }
 
+        /**
+         *  flip the right to make the number smaller.
+         */
         reverse(nums, left + 1);
     }
 
@@ -70,8 +85,9 @@ public class Problem31_nextPermutation {
     }
 
     public static void main(String[] args) {
-        nextPermutation(new int[]{1});
-        nextPermutation(new int[]{1, 2, 3});
-        nextPermutation(new int[]{3, 2, 1});
+        nextPermutation_tp(new int[]{1});
+        nextPermutation_tp(new int[]{1, 2, 3});
+        nextPermutation_tp(new int[]{3, 2, 1});
+        nextPermutation_tp(new int[]{1, 3, 2});
     }
 }
