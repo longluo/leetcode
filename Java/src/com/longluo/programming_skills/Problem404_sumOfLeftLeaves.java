@@ -72,6 +72,19 @@ public class Problem404_sumOfLeftLeaves {
         return ans;
     }
 
+    // DFS time: O(n) space: O(n)
+    public static int sumOfLeftLeaves_dfs(TreeNode root) {
+        return root != null ? dfs(root) : 0;
+    }
+
+    public static int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return dfs(root.left) + dfs(root.right) + (root.left != null && root.left.left == null && root.left.right == null ? root.left.val : 0);
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{-9, -3, 2, null, 4, 4, 0, -6, null, -5});
         System.out.println("-11 ?= " + sumOfLeftLeaves_bfs(tst1));
