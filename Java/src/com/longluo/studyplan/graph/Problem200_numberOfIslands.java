@@ -1,4 +1,4 @@
-package com.longluo.leetcode.graph;
+package com.longluo.studyplan.graph;
 
 import java.util.LinkedList;
 import java.util.Queue;
