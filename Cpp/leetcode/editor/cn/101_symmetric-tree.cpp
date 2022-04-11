@@ -53,6 +53,7 @@ using namespace std;
  */
 class Solution {
 public:
+    // Recursion
     bool isSymmetric(TreeNode *root) {
         return isSymmetric(root, root);
     }
