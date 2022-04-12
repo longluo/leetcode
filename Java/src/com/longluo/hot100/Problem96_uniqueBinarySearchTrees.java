@@ -20,7 +20,7 @@ package com.longluo.hot100;
  */
 public class Problem96_uniqueBinarySearchTrees {
 
-    // DP Math time: O(n) space: O(n)
+    // DP Math time: O(n^2) space: O(n)
     public static int numTrees(int n) {
         if (n == 1) {
             return 1;

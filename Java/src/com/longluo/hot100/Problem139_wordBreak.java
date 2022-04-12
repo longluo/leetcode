@@ -34,7 +34,7 @@ import java.util.*;
  */
 public class Problem139_wordBreak {
 
-    // DP time: O(n) space: O(n)
+    // DP time: O(n^2) space: O(n)
     public static boolean wordBreak_dp(String s, List<String> wordDict) {
         int len = s.length();
         boolean[] dp = new boolean[len + 1];
