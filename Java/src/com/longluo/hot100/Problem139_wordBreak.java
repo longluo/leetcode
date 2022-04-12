@@ -34,15 +34,32 @@ import java.util.*;
  */
 public class Problem139_wordBreak {
 
-    // BF
-    public static boolean wordBreak_bf(String s, List<String> wordDict) {
-        Set<String> wordset = new HashSet<>(wordDict);
-        int idx = 0;
+    // DP time: O(n) space: O(n)
+    public static boolean wordBreak_dp(String s, List<String> wordDict) {
+        int len = s.length();
+        boolean[] dp = new boolean[len + 1];
+        for (String word : wordDict) {
+            if (s.startsWith(word)) {
+                dp[word.length()] = true;
+            }
+        }
 
-        return false;
+        for (int i = 0; i < len; i++) {
+            if (dp[i]) {
+                for (String word : wordDict) {
+                    if (s.startsWith(word, i)) {
+                        dp[i + word.length()] = true;
+                    }
+                }
+            }
+        }
+
+        return dp[len];
     }
 
     public static void main(String[] args) {
-
+        System.out.println("true ?= " + wordBreak_dp("leetcode", Arrays.asList(new String[]{"leet", "code"})));
+        System.out.println("true ?= " + wordBreak_dp("applepenapple", Arrays.asList(new String[]{"apple", "pen"})));
+        System.out.println("false ?= " + wordBreak_dp("catsandog", Arrays.asList(new String[]{"cats", "dog", "sand", "and", "cat"})));
     }
 }
