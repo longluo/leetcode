@@ -24,6 +24,8 @@ import java.util.Arrays;
  */
 public class Problem611_validTriangleNumber {
 
+    // BF Sort time: O(n^3) space: O(1)
+    // AC
     public static int triangleNumber(int[] nums) {
         if (nums == null || nums.length <= 2) {
             return 0;
