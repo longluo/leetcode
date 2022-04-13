@@ -1,6 +1,8 @@
 package com.longluo.studyplan.efficient_winning;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 167. 两数之和 II - 输入有序数组
@@ -154,11 +156,28 @@ public class Problem167_twoSum_ii_InputArrayIsSorted {
         return new int[0];
     }
 
+    // Hash time: O(n) space: O(n)
+    public static int[] twoSum_hash(int[] numbers, int target) {
+        int len = numbers.length;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            if (map.containsKey(target - numbers[i])) {
+                return new int[]{map.get(target - numbers[i]), i + 1};
+            }
+
+            map.putIfAbsent(numbers[i], i + 1);
+        }
+
+        return new int[0];
+    }
+
     public static void main(String[] args) {
         System.out.println(Arrays.toString(twoSum_bf(new int[]{2, 7, 11, 15}, 9)));
         System.out.println(Arrays.toString(twoSum_tp(new int[]{2, 7, 11, 15}, 9)));
         System.out.println(Arrays.toString(twoSum_tp_opt(new int[]{2, 7, 11, 15}, 9)));
         System.out.println(Arrays.toString(twoSum_bs(new int[]{2, 7, 11, 15}, 9)));
         System.out.println(Arrays.toString(twoSum_bs_opt(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println(Arrays.toString(twoSum_hash(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println(Arrays.toString(twoSum_hash(new int[]{2, 3, 4}, 6)));
     }
 }
