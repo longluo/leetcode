@@ -28,7 +28,7 @@ package com.longluo.studyplan.algorithms;
  * <p>
  * https://leetcode-cn.com/problems/first-bad-version/
  */
-public class Day01_BinarySearch_278 {
+public class Problem278_firstBadVersion {
 
     public boolean isBadVersion(int version) {
         return false;
