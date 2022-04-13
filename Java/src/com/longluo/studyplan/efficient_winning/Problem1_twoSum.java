@@ -35,25 +35,39 @@ import java.util.Map;
  * <p>
  * https://leetcode-cn.com/problems/two-sum/
  */
-public class Problem1_TwoSum {
+public class Problem1_twoSum {
 
-    public static int[] twoSum(int[] nums, int target) {
-        int[] ans = new int[2];
+    // BF time: O(n^2) space: O(1)
+    public static int[] twoSum_bf(int[] nums, int target) {
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+
+        return new int[0];
+    }
+
+    // Hash time: O(n) space: O(1)
+    public static int[] twoSum_hash(int[] nums, int target) {
         int n = nums.length;
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
             if (map.containsKey(target - nums[i])) {
-                ans[0] = map.get(target - nums[i]);
-                ans[1] = i;
-                return ans;
+                return new int[]{map.get(target - nums[i]), i};
             }
+
             map.putIfAbsent(nums[i], i);
         }
 
-        return ans;
+        return new int[0];
     }
 
     public static void main(String[] args) {
-        System.out.println(" " + Arrays.toString(twoSum(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println("[0, 1] ?= " + Arrays.toString(twoSum_bf(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println("[0, 1] ?= " + Arrays.toString(twoSum_hash(new int[]{2, 7, 11, 15}, 9)));
     }
 }
