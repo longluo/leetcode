@@ -2,6 +2,7 @@ package com.longluo.studyplan.programming_skills;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,6 +36,7 @@ import java.util.List;
  */
 public class Problem66_plusOne {
 
+    //
     public static int[] plusOne(int[] digits) {
         int n = digits.length;
         List<Integer> res = new ArrayList<>();
@@ -61,7 +63,39 @@ public class Problem66_plusOne {
         return ans;
     }
 
+    // Simulate time: O(n) space: O(1)
+    public static int[] plusOne_simu(int[] digits) {
+        int len = digits.length;
+        List<Integer> ans = new ArrayList<>();
+        int carry = 0;
+        int p = len - 1;
+        while (p >= 0) {
+            if (p == len - 1) {
+                carry += digits[p] + 1;
+            } else {
+                carry += digits[p];
+            }
+
+            ans.add(carry % 10);
+            carry /= 10;
+            p--;
+        }
+
+        if (carry > 0) {
+            ans.add(carry);
+        }
+
+        Collections.reverse(ans);
+        int[] res = new int[ans.size()];
+        for (int i = 0; i < ans.size(); i++) {
+            res[i] = ans.get(i);
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1, 2, 4] ?= " + Arrays.toString(plusOne(new int[]{1, 2, 3})));
+        System.out.println("[1, 2, 4] ?= " + Arrays.toString(plusOne_simu(new int[]{1, 2, 3})));
     }
 }
