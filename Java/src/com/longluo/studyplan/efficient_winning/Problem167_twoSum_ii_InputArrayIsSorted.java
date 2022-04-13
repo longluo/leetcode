@@ -1,4 +1,6 @@
-package com.longluo.leetcode.array;
+package com.longluo.studyplan.efficient_winning;
+
+import java.util.Arrays;
 
 /**
  * 167. 两数之和 II - 输入有序数组
@@ -34,24 +36,24 @@ package com.longluo.leetcode.array;
  * <p>
  * https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
  */
-public class Problem167_twoSum_ii {
+public class Problem167_twoSum_ii_InputArrayIsSorted {
 
+    // BF time: O(n^2) space: O(1)
+    // TimeOut
     public static int[] twoSum_bf(int[] numbers, int target) {
-        int[] res = new int[2];
-        int n = numbers.length;
-        for (int i = 0; i < n; i++) {
-            res[0] = i + 1;
-            for (int j = i + 1; j < n; j++) {
-                if (numbers[j] == target - numbers[i]) {
-                    res[1] = j + 1;
-                    return res;
+        int len = numbers.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (numbers[i] + numbers[j] == target) {
+                    return new int[]{i + 1, j + 1};
                 }
             }
         }
 
-        return res;
+        return new int[0];
     }
 
+    // Two Pointers time: O(n) space: O(1)
     public static int[] twoSum_tp(int[] numbers, int target) {
         int[] ans = new int[2];
         int len = numbers.length;
@@ -76,6 +78,27 @@ public class Problem167_twoSum_ii {
         return ans;
     }
 
+    public static int[] twoSum_tp_opt(int[] numbers, int target) {
+        int[] ans = new int[2];
+        int len = numbers.length;
+        int left = 0;
+        int right = len - 1;
+        while (left < right) {
+            if (numbers[left] + numbers[right] > target) {
+                right--;
+            } else if (numbers[left] + numbers[right] < target) {
+                left++;
+            } else {
+                ans[0] = left + 1;
+                ans[1] = right + 1;
+                return ans;
+            }
+        }
+
+        return ans;
+    }
+
+    // Binary Search time: O(logn) space: O(1)
     public static int[] twoSum_bs(int[] numbers, int target) {
         int[] ans = new int[2];
         int len = numbers.length;
@@ -110,9 +133,32 @@ public class Problem167_twoSum_ii {
         return nums[left] == target ? left : -1;
     }
 
+    // Binary Search time: O(logn) space: O(1)
+    public static int[] twoSum_bs_opt(int[] numbers, int target) {
+        int len = numbers.length;
+        for (int i = 0; i < len - 1; i++) {
+            int left = i + 1;
+            int right = len - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (numbers[mid] == target - numbers[i]) {
+                    return new int[]{i + 1, mid + 1};
+                } else if (numbers[mid] > target - numbers[i]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+        }
+
+        return new int[0];
+    }
+
     public static void main(String[] args) {
-        twoSum_bf(new int[]{2, 7, 11, 15}, 9);
-        twoSum_tp(new int[]{2, 7, 11, 15}, 9);
-        twoSum_bs(new int[]{2, 7, 11, 15}, 9);
+        System.out.println(Arrays.toString(twoSum_bf(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println(Arrays.toString(twoSum_tp(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println(Arrays.toString(twoSum_tp_opt(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println(Arrays.toString(twoSum_bs(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println(Arrays.toString(twoSum_bs_opt(new int[]{2, 7, 11, 15}, 9)));
     }
 }
