@@ -1,4 +1,4 @@
-package com.longluo.leetcode.stringmatching;
+package com.longluo.studyplan.programming_skills;
 
 /**
  * 459. 重复的子字符串
@@ -24,19 +24,50 @@ package com.longluo.leetcode.stringmatching;
  */
 public class Problem459_repeatedSubstringPattern {
 
-    public static boolean repeatedSubstringPattern(String s) {
-        if (s == null || s.length() == 0) {
-            return true;
+    // Substring time: O(n) space: O(n)
+    public static boolean repeatedSubstringPattern_bf(String s) {
+        if (s == null || s.length() <= 1) {
+            return false;
         }
 
-        int n = s.length();
-        for (int i = 1; i < n; i++) {
-            if (n % i != 0) {
+        int len = s.length();
+        for (int i = 1; i <= len / 2; i++) {
+            if (len % i != 0) {
+                continue;
+            }
+
+            String subStr = s.substring(0, i);
+            boolean flag = true;
+            for (int j = i; j < len; j += i) {
+                String str = s.substring(j, j + i);
+                if (!str.equals(subStr)) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // BF Cycle check time: O(n^2) space: O(1)
+    public static boolean repeatedSubstringPattern(String s) {
+        if (s == null || s.length() <= 1) {
+            return false;
+        }
+
+        int len = s.length();
+        for (int i = 1; i < len; i++) {
+            if (len % i != 0) {
                 continue;
             }
 
             boolean flag = true;
-            int cycle = n / i;
+            int cycle = len / i;
             for (int j = 0; j < cycle; j++) {
                 for (int k = 0; k < i; k++) {
                     if (s.charAt(i * j + k) != s.charAt(k)) {
@@ -58,50 +89,16 @@ public class Problem459_repeatedSubstringPattern {
         return false;
     }
 
-    public static boolean repeatedSubstringPattern_1(String s) {
-        if (s == null || s.length() == 0) {
-            return true;
+    public static boolean repeatedSubstringPattern_opt(String s) {
+        if (s == null || s.length() <= 1) {
+            return false;
         }
 
-        int n = s.length();
-        for (int i = 1; i < n; i++) {
-            if (n % i != 0) {
-                continue;
-            }
-
-            boolean flag = true;
-            int cycle = n / i;
-            for (int j = 1; j < cycle; j++) {
-                for (int k = 0; k < i; k++) {
-                    if (s.charAt(i * j + k) != s.charAt(k)) {
-                        flag = false;
-                        break;
-                    }
-                }
-
-                if (!flag) {
-                    break;
-                }
-            }
-
-            if (flag) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public static boolean repeatedSubstringPattern_2(String s) {
-        if (s == null || s.length() == 0) {
-            return true;
-        }
-
-        int n = s.length();
-        for (int i = 1; i <= n / 2; i++) {
-            if (n % i == 0) {
+        int len = s.length();
+        for (int i = 1; i <= len / 2; i++) {
+            if (len % i == 0) {
                 boolean match = true;
-                for (int j = i; j < n; j++) {
+                for (int j = i; j < len; j++) {
                     if (s.charAt(j) != s.charAt(j - i)) {
                         match = false;
                         break;
@@ -117,13 +114,15 @@ public class Problem459_repeatedSubstringPattern {
         return false;
     }
 
+    // TODO: 2022/4/13 KMP
+    
     public static void main(String[] args) {
+        System.out.println("true ?= " + repeatedSubstringPattern_bf("abab"));
+
         System.out.println("false ?= " + repeatedSubstringPattern("a"));
         System.out.println("true ?= " + repeatedSubstringPattern("bb"));
         System.out.println("true ?= " + repeatedSubstringPattern("abab"));
         System.out.println("false ?= " + repeatedSubstringPattern("aba"));
-        System.out.println("false ?= " + repeatedSubstringPattern_1("aba"));
         System.out.println("true ?= " + repeatedSubstringPattern("abcabcabcabc"));
-        System.out.println("true ?= " + repeatedSubstringPattern_1("abcabcabcabc"));
     }
 }
