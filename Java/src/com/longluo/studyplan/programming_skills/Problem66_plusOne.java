@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.studyplan.programming_skills;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +30,8 @@ import java.util.List;
  * 0 <= digits[i] <= 9
  * <p>
  * https://leetcode-cn.com/problems/plus-one/
+ * <p>
+ * https://leetcode.com/problems/plus-one/
  */
 public class Problem66_plusOne {
 
