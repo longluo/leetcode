@@ -37,6 +37,7 @@ import java.util.List;
  */
 public class Problem989_addToArrayFormOfInteger {
 
+    // BF time: O(max(n, logk)) space: O(1)
     public static List<Integer> addToArrayForm(int[] num, int k) {
         List<Integer> ans = new ArrayList<>();
         int len = num.length;
@@ -55,12 +56,9 @@ public class Problem989_addToArrayFormOfInteger {
             ans.add(carry);
         }
 
-        List<Integer> res = new ArrayList<>();
-        for (int i = ans.size() - 1; i >= 0; i--) {
-            res.add(ans.get(i));
-        }
+        Collections.reverse(ans);
 
-        return res;
+        return ans;
     }
 
     public static void main(String[] args) {
