@@ -94,8 +94,42 @@ public class Problem66_plusOne {
         return res;
     }
 
+    // Check if there were 9 time: O(n) space: O(1)
+    public static int[] plusOne_opt(int[] digits) {
+        int len = digits.length;
+        for (int i = len - 1; i >= 0; i--) {
+            if (digits[i] == 9) {
+                digits[i] = 0;
+            } else {
+                digits[i]++;
+                return digits;
+            }
+        }
+
+        int[] ans = new int[len + 1];
+        ans[0] = 1;
+        return ans;
+    }
+
+    // Best 9 time: O(n) space: O(1)
+    public static int[] plusOne_best(int[] digits) {
+        int len = digits.length;
+        for (int i = len - 1; i >= 0; i--) {
+            digits[i] = (digits[i] + 1) % 10;
+            if (digits[i] != 0) {
+                return digits;
+            }
+        }
+
+        int[] ans = new int[len + 1];
+        ans[0] = 1;
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1, 2, 4] ?= " + Arrays.toString(plusOne(new int[]{1, 2, 3})));
         System.out.println("[1, 2, 4] ?= " + Arrays.toString(plusOne_simu(new int[]{1, 2, 3})));
+        System.out.println("[1, 2, 4] ?= " + Arrays.toString(plusOne_opt(new int[]{1, 2, 3})));
+        System.out.println("[1, 2, 4] ?= " + Arrays.toString(plusOne_best(new int[]{1, 2, 3})));
     }
 }
