@@ -81,7 +81,6 @@ public class Problem167_twoSum_ii_InputArrayIsSorted {
     }
 
     public static int[] twoSum_tp_opt(int[] numbers, int target) {
-        int[] ans = new int[2];
         int len = numbers.length;
         int left = 0;
         int right = len - 1;
@@ -91,13 +90,11 @@ public class Problem167_twoSum_ii_InputArrayIsSorted {
             } else if (numbers[left] + numbers[right] < target) {
                 left++;
             } else {
-                ans[0] = left + 1;
-                ans[1] = right + 1;
-                return ans;
+                return new int[]{left + 1, right + 1};
             }
         }
 
-        return ans;
+        return new int[]{-1, -1};
     }
 
     // Binary Search time: O(logn) space: O(1)
