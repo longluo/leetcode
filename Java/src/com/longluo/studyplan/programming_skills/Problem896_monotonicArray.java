@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.studyplan.programming_skills;
 
 /**
  * 896. 单调数列
@@ -35,6 +35,7 @@ package com.longluo.leetcode.array;
  */
 public class Problem896_monotonicArray {
 
+    // BF 两次判断 time: O(2 * n) space: O(1)
     public static boolean isMonotonic(int[] A) {
         if (A == null || A.length == 0) {
             return true;
@@ -61,23 +62,8 @@ public class Problem896_monotonicArray {
         return true;
     }
 
-    public static boolean isMonotonic_2(int[] A) {
-        boolean isInc = true;
-        boolean isDec = true;
-        for (int i = 1; i < A.length; i++) {
-            if (A[i] < A[i - 1]) {
-                isInc = false;
-            }
-
-            if (A[i] > A[i - 1]) {
-                isDec = false;
-            }
-        }
-
-        return isInc || isDec;
-    }
-
-    public static boolean isMonotonic_3(int[] A) {
+    // 子函数 time: O(2 * n) space: O(1)
+    public static boolean isMonotonic_fun(int[] A) {
         return isSorted(A, true) || isSorted(A, false);
     }
 
@@ -97,21 +83,35 @@ public class Problem896_monotonicArray {
         return true;
     }
 
+    // Best 一次遍历 time: O(n) space: O(1)
+    public static boolean isMonotonic_best(int[] A) {
+        boolean isInc = true;
+        boolean isDec = true;
+        for (int i = 1; i < A.length; i++) {
+            if (A[i] < A[i - 1]) {
+                isInc = false;
+            }
+
+            if (A[i] > A[i - 1]) {
+                isDec = false;
+            }
+        }
+
+        return isInc || isDec;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + isMonotonic(new int[]{1, 2, 2, 3}));
-        System.out.println("true ?= " + isMonotonic_2(new int[]{1, 2, 2, 3}));
-        System.out.println("true ?= " + isMonotonic_3(new int[]{1, 2, 2, 3}));
+        System.out.println("true ?= " + isMonotonic_fun(new int[]{1, 2, 2, 3}));
+        System.out.println("true ?= " + isMonotonic_best(new int[]{1, 2, 2, 3}));
         System.out.println("true ?= " + isMonotonic(new int[]{6, 5, 4, 4}));
-        System.out.println("true ?= " + isMonotonic_2(new int[]{6, 5, 4, 4}));
-        System.out.println("true ?= " + isMonotonic_3(new int[]{6, 5, 4, 4}));
+        System.out.println("true ?= " + isMonotonic_fun(new int[]{6, 5, 4, 4}));
+        System.out.println("true ?= " + isMonotonic_best(new int[]{6, 5, 4, 4}));
         System.out.println("false ?= " + isMonotonic(new int[]{1, 3, 2}));
-        System.out.println("false ?= " + isMonotonic_2(new int[]{1, 3, 2}));
-        System.out.println("false ?= " + isMonotonic_3(new int[]{1, 3, 2}));
-        System.out.println("true ?= " + isMonotonic(new int[]{1, 2, 4, 5}));
-        System.out.println("true ?= " + isMonotonic_2(new int[]{1, 2, 4, 5}));
-        System.out.println("true ?= " + isMonotonic_3(new int[]{1, 2, 4, 5}));
+        System.out.println("false ?= " + isMonotonic_fun(new int[]{1, 3, 2}));
+        System.out.println("false ?= " + isMonotonic_best(new int[]{1, 3, 2}));
         System.out.println("true ?= " + isMonotonic(new int[]{1, 1, 1}));
-        System.out.println("true ?= " + isMonotonic_2(new int[]{1, 1, 1}));
-        System.out.println("true ?= " + isMonotonic_3(new int[]{1, 1, 1}));
+        System.out.println("true ?= " + isMonotonic_fun(new int[]{1, 1, 1}));
+        System.out.println("true ?= " + isMonotonic_best(new int[]{1, 1, 1}));
     }
 }
