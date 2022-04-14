@@ -55,6 +55,17 @@ public:
 
         return -1;
     }
+
+    // BF Search time: O(n) space: O(1)
+    int search_bf(vector<int> &nums, int target) {
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == target) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
