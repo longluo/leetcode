@@ -56,35 +56,69 @@ public class Solution {
         }
     }
 
-    public static String checkNameValid(String name) {
+    // Use API time: O(n) space: O(1)
+    public static String checkNameValid_api(String name) {
         if (name == null || name.length() <= 1) {
             return "Wrong";
         }
 
-        int n = name.length();
-        for (int i = 0; i < n; i++) {
-            if (!Character.isLetter(name.charAt(0)) || name.length() <= 1) {
-                return "Wrong";
-            }
+        if (!Character.isLetter(name.charAt(0))) {
+            return "Wrong";
+        }
 
-            int letterNum = 0;
-            int digitNum = 0;
-            for (Character ch : name.toCharArray()) {
-                if (Character.isDigit(ch)) {
-                    digitNum++;
-                } else if (Character.isLetter(ch)) {
-                    letterNum++;
-                } else {
-                    return "Wrong";
-                }
-            }
-            if (letterNum > 0 && digitNum > 0) {
-                return "Accept";
+        int letterNum = 0;
+        int digitNum = 0;
+        for (Character ch : name.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                digitNum++;
+            } else if (Character.isLetter(ch)) {
+                letterNum++;
             } else {
                 return "Wrong";
             }
         }
 
-        return "Wrong";
+        if (letterNum > 0 && digitNum > 0) {
+            return "Accept";
+        } else {
+            return "Wrong";
+        }
+    }
+
+    // Use ASC II Code check
+    public static String checkNameValid(String name) {
+        if (name == null || name.length() <= 1) {
+            return "Wrong";
+        }
+
+        if (!isCharLetter(name.charAt(0))) {
+            return "Wrong";
+        }
+
+        int letterNum = 0;
+        int digitNum = 0;
+        for (char ch : name.toCharArray()) {
+            if (ch >= '0' && ch <= '9') {
+                digitNum++;
+            } else if (isCharLetter(ch)) {
+                letterNum++;
+            } else {
+                return "Wrong";
+            }
+        }
+
+        if (letterNum > 0 && digitNum > 0) {
+            return "Accept";
+        } else {
+            return "Wrong";
+        }
+    }
+
+    public static boolean isCharLetter(char ch) {
+        if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+            return true;
+        }
+
+        return false;
     }
 }
