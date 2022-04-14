@@ -46,7 +46,7 @@ class Solution {
 public:
     // BF time: O(n^2) space: O(n)
     // TimeOut
-    vector<int> dailyTemperatures(vector<int> &temperatures) {
+    vector<int> dailyTemperatures_bf(vector<int> &temperatures) {
         int len = temperatures.size();
         vector<int> ans(len, 0);
         for (int i = 0; i < len; i++) {
@@ -60,6 +60,23 @@ public:
 
         return ans;
     }
+
+    // 单调栈 time: O(n) space: O(n)
+    vector<int> dailyTemperatures(vector<int> &temperatures) {
+        int len = temperatures.size();
+        vector<int> ans(len, 0);
+        stack<int> stk;
+        for (int i = 0; i < len; i++) {
+            while (!stk.empty() && temperatures[stk.top()] < temperatures[i]) {
+                ans[stk.top()] = i - stk.top();
+                stk.pop();
+            }
+
+            stk.push(i);
+        }
+
+        return ans;
+    }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -67,5 +84,6 @@ public:
 int main() {
     Solution s;
     vector<int> data{73, 74, 75, 71, 69, 72, 76, 73};
+    s.dailyTemperatures_bf(data);
     s.dailyTemperatures(data);
 }
