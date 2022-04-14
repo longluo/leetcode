@@ -61,29 +61,29 @@ using namespace std;
  */
 class Solution {
 public:
-    // Iteration time: O(m + n) space: O(max(m, n))
+    // Cpp Iteration time: O(m + n) space: O(max(m, n))
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        if (l1 == NULL) {
+        if (l1 == nullptr) {
             return l2;
-        } else if (l2 == NULL) {
+        } else if (l2 == nullptr) {
             return l1;
         }
 
         auto *dummyNode = new ListNode(0);
         ListNode *head = dummyNode;
         int carry = 0;
-        while (l1 != NULL || l2 != NULL) {
-            carry += l1 != NULL ? l1->val : 0;
-            carry += l2 != NULL ? l2->val : 0;
+        while (l1 != nullptr || l2 != nullptr) {
+            carry += l1 != nullptr ? l1->val : 0;
+            carry += l2 != nullptr ? l2->val : 0;
             auto *node = new ListNode(carry % 10);
             carry /= 10;
             head->next = node;
             head = head->next;
 
-            if (l1 != NULL) {
+            if (l1 != nullptr) {
                 l1 = l1->next;
             }
-            if (l2 != NULL) {
+            if (l2 != nullptr) {
                 l2 = l2->next;
             }
         }
@@ -95,28 +95,34 @@ public:
         return dummyNode->next;
     }
 
-    // Recursion
+    // Recursion time: O(m + n) space: O(max(m, n))
     ListNode *addTwoNumbers_rec(ListNode *l1, ListNode *l2) {
-        if (l1 == NULL) {
+        if (l1 == nullptr) {
             return l2;
-        } else if (l2 == NULL) {
+        } else if (l2 == nullptr) {
             return l1;
         }
 
-        int carry = 0;
-        if (l1 != NULL) {
+        return addTwoNumbers(l1, l2, 0);
+    }
+
+    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2, int carry) {
+        if (l1 == nullptr && l2 == nullptr && carry == 0) {
+            return nullptr;
+        }
+
+        if (l1 != nullptr) {
             carry += l1->val;
             l1 = l1->next;
         }
 
-        if (l2 != NULL) {
+        if (l2 != nullptr) {
             carry += l2->val;
             l2 = l2->next;
         }
 
         ListNode *node = new ListNode(carry % 10);
-        carry /= 10;
-
+        node->next = addTwoNumbers(l1, l2, carry / 10);
         return node;
     }
 };
