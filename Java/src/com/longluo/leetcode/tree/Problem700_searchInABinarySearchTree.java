@@ -30,6 +30,7 @@ import java.util.Queue;
  */
 public class Problem700_searchInABinarySearchTree {
 
+    // Recursion time: O(n) space: O(1)
     public TreeNode searchBST(TreeNode root, int val) {
         if (root == null || root.val == val) {
             return root;
@@ -42,6 +43,7 @@ public class Problem700_searchInABinarySearchTree {
         }
     }
 
+    // BFS time: O(n) space: O(1)
     public TreeNode searchBST_bfs(TreeNode root, int val) {
         if (root == null) {
             return null;
@@ -65,7 +67,8 @@ public class Problem700_searchInABinarySearchTree {
         return null;
     }
 
-    public TreeNode searchBST_2(TreeNode root, int val) {
+    // Iteration time: O(n) space: O(1)
+    public TreeNode searchBST_iteration(TreeNode root, int val) {
         if (root == null || root.val == val) {
             return root;
         }
