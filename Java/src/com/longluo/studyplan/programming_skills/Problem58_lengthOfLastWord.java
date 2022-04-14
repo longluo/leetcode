@@ -1,4 +1,4 @@
-package com.longluo.leetcode.string;
+package com.longluo.studyplan.programming_skills;
 
 /**
  * 58. 最后一个单词的长度
@@ -27,7 +27,8 @@ package com.longluo.leetcode.string;
  */
 public class Problem58_lengthOfLastWord {
 
-    public static int lengthOfLastWord(String s) {
+    // BF + Regex time: O(n) space: O(n)
+    public static int lengthOfLastWord_regex(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
@@ -36,32 +37,28 @@ public class Problem58_lengthOfLastWord {
         return arrays[arrays.length - 1].length();
     }
 
-    public static int lengthOfLastWord_1(String s) {
+    // Reverse Scan time: O(n) space: O(1)
+    public static int lengthOfLastWord(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
-        int n = s.length();
-        int ans = 0;
-        int idx = n - 1;
-        while (idx >= 0) {
-            while (idx >= 0 && s.charAt(idx) == ' ') {
-                idx--;
-            }
 
-            while (idx >= 0 && s.charAt(idx) != ' ') {
-                idx--;
-                ans++;
-            }
-
-            break;
+        int right = s.length() - 1;
+        while (right >= 0 && s.charAt(right) == ' ') {
+            right--;
         }
 
-        return ans;
+        int left = right;
+        while (left >= 0 && s.charAt(left) != ' ') {
+            left--;
+        }
+
+        return right - left;
     }
 
     public static void main(String[] args) {
+        System.out.println("5 ?= " + lengthOfLastWord_regex("Hello World"));
         System.out.println("5 ?= " + lengthOfLastWord("Hello World"));
-        System.out.println("5 ?= " + lengthOfLastWord_1("Hello World"));
-        System.out.println("1 ?= " + lengthOfLastWord_1("a"));
+        System.out.println("1 ?= " + lengthOfLastWord("a"));
     }
 }
