@@ -1,6 +1,8 @@
 package com.longluo.studyplan.programming_skills;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 43. 字符串相乘
@@ -25,7 +27,7 @@ import java.math.BigInteger;
  */
 public class Problem43_multiplyStrings {
 
-    // BigInteger time: O(m + n) space: O(1)
+    // BigInteger time: O(m * n) space: O(m + n)
     public static String multiply_big(String num1, String num2) {
         BigInteger numA = new BigInteger(num1);
         BigInteger numB = new BigInteger(num2);
@@ -33,8 +35,56 @@ public class Problem43_multiplyStrings {
         return ans.toString();
     }
 
+    // Simulate time: O(m * n) space: O(m + n)
+    public static String multiply_simu(String num1, String num2) {
+        int lenA = num1.length();
+        int lenB = num2.length();
+        if (lenA == 0 || lenB == 0) {
+            return "0";
+        }
+
+        int[] res = new int[lenA + lenB];
+        int p = 0;
+        int q = 0;
+        for (int i = lenA - 1; i >= 0; i--) {
+            int carry = 0;
+            int numA = num1.charAt(i) - '0';
+            q = 0;
+            for (int j = lenB - 1; j >= 0; j--) {
+                int numB = num2.charAt(j) - '0';
+                int sum = numA * numB + res[p + q] + carry;
+                res[p + q] = sum % 10;
+                carry = sum / 10;
+                q++;
+            }
+
+            if (carry > 0) {
+                res[p + q] += carry;
+            }
+            p++;
+        }
+
+        int len = res.length - 1;
+        while (len >= 0 && res[len] == 0) {
+            len--;
+        }
+
+        if (len == -1) {
+            return "0";
+        }
+
+        StringBuilder sb = new StringBuilder(len);
+        while (len >= 0) {
+            sb.append(res[len]);
+            len--;
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("56088 ?= " + multiply_big("123", "456"));
-
+        System.out.println("56088 ?= " + multiply_simu("123", "456"));
+        System.out.println("0 ?= " + multiply_simu("0", "0"));
     }
 }
