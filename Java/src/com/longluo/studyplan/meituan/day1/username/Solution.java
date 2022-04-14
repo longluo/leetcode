@@ -42,7 +42,20 @@ import java.util.Scanner;
  */
 public class Solution {
 
-    private static final String regex = "^([a-zA-Z])([a-zA-Z0-9]*)([0-9]+)([a-zA-Z0-9]*)$";
+    // Regex Solution
+    public static void main_regex(String[] args) {
+        // 定义正则表达式
+        String regex = "^([a-zA-Z])([a-zA-Z0-9]*)([0-9]+)([a-zA-Z0-9]*)$";
+        Scanner sc = new Scanner(System.in);
+        // 循环次数
+        int t = sc.nextInt();
+        sc.nextLine();
+        while (t-- > 0) {
+            String s = sc.nextLine();
+            // 检查并输出
+            System.out.println(s.matches(regex) ? "Accept" : "Wrong");
+        }
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
