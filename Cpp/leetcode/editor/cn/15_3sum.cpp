@@ -47,7 +47,7 @@ using namespace std;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    //
+    // Two Pointers time: O(n^2) space: O(1)
     vector<vector<int>> threeSum(vector<int> &nums) {
         if (nums.size() < 3) {
             return {};
@@ -75,13 +75,11 @@ public:
                     left++;
                 } else {
                     res.push_back({nums[i], nums[left], nums[right]});
-
                     left++;
                     right--;
                     while (left < right && nums[left] == nums[left - 1]) {
                         left++;
                     }
-
                     while (left < right && nums[right] == nums[right + 1]) {
                         right--;
                     }
