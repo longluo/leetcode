@@ -1,4 +1,4 @@
-package com.longluo.leetcode.linkedlist;
+package com.longluo.studyplan.data_structure;
 
 import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
@@ -49,53 +49,45 @@ import java.util.*;
  * 进阶：你能否设计一个时间复杂度 O(n) 、仅用 O(1) 内存的解决方案？
  * <p>
  * https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
+ * <p>
+ * https://leetcode.com/problems/intersection-of-two-linked-lists/
  */
 public class Problem160_intersectionOfTwoLinkedLists {
 
+    // Two Pointers time: O(m + n) space: O(1)
     public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
             return null;
         }
 
-        ListNode pHeadA = headA;
-        ListNode pHeadB = headB;
-
-        while (pHeadA != pHeadB) {
-            if (pHeadA == null) {
-                pHeadA = headB;
-            } else {
-                pHeadA = pHeadA.next;
-            }
-
-            if (pHeadB == null) {
-                pHeadB = headA;
-            } else {
-                pHeadB = pHeadB.next;
-            }
+        ListNode pA = headA;
+        ListNode pB = headB;
+        while (pA != pB) {
+            pA = pA != null ? pA.next : headB;
+            pB = pB != null ? pB.next : headA;
         }
 
-        return pHeadA;
+        return pA;
     }
 
-    public static ListNode getIntersectionNode_2(ListNode headA, ListNode headB) {
+    // Hash time: O(m + n) space: O(m)
+    public static ListNode getIntersectionNode_hash(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
             return null;
         }
 
-        Set<ListNode> nodeSet = new HashSet<>();
-        ListNode temp = headA;
-        while (temp != null) {
-            nodeSet.add(temp);
-            temp = temp.next;
+        Set<ListNode> seen = new HashSet<>();
+        while (headA != null) {
+            seen.add(headA);
+            headA = headA.next;
         }
 
-        temp = headB;
-        while (temp != null) {
-            if (nodeSet.contains(temp)) {
-                return temp;
+        while (headB != null) {
+            if (seen.contains(headB)) {
+                return headB;
             }
 
-            temp = temp.next;
+            headB = headB.next;
         }
 
         return null;
@@ -105,5 +97,6 @@ public class Problem160_intersectionOfTwoLinkedLists {
         ListNode tstNode1 = LinkedListNodeUtils.constructListNode(new int[]{4, 1, 8, 4, 5});
         ListNode tstNode2 = LinkedListNodeUtils.constructListNode(new int[]{5, 0, 1, 8, 4, 5});
         System.out.println("8 ?= " + getIntersectionNode(tstNode1, tstNode2).val);
+        System.out.println("8 ?= " + getIntersectionNode_hash(tstNode1, tstNode2).val);
     }
 }
