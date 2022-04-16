@@ -88,8 +88,41 @@ public class Problem538_convertBSTToGreaterTree {
         inOrder(root.right, list);
     }
 
+    // Recursion time: O(n) space: O(1)
+    public static TreeNode convertBST_recur(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        postOrder(root);
+        return root;
+    }
+
+    static int sum = 0;
+
+    public static void postOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        postOrder(root.right);
+        sum += root.val;
+        root.val = sum;
+        postOrder(root.left);
+    }
+
+    public static int sumOfBST(TreeNode root, int target) {
+        if (root == null) {
+            return 0;
+        }
+
+        int result = root.val;
+        result += sumOfBST(root.right, target);
+        return result;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{4, 1, 6, 0, 2, 5, 7, null, null, null, 3, null, null, null, 8});
-        convertBST_bf(tst1);
+//        convertBST_bf(tst1);
+        convertBST_recur(tst1);
     }
 }
