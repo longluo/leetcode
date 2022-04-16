@@ -3,6 +3,9 @@ package com.longluo.leetcode.linkedlist;
 import com.longluo.datastructure.ListNode;
 import com.longluo.datastructure.LinkedListNodeUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 92. 反转链表 II
  * <p>
@@ -27,6 +30,7 @@ import com.longluo.datastructure.LinkedListNodeUtils;
  */
 public class Problem92_reverseLinkedListBetween {
 
+    //
     public static ListNode reverseBetween(ListNode head, int left, int right) {
         if (head == null || head.next == null || left == right) {
             return head;
@@ -41,7 +45,7 @@ public class Problem92_reverseLinkedListBetween {
             step--;
             curr = curr.next;
         }
-        ListNode leftStart = curr;
+        ListNode preLeft = curr;
         ListNode leftNode = curr.next;
         curr.next = null;
         step = right - left;
@@ -51,15 +55,15 @@ public class Problem92_reverseLinkedListBetween {
             curr = curr.next;
         }
         ListNode rightNode = curr;
-        ListNode rightStartNode = null;
+        ListNode preRight = null;
         if (curr.next != null) {
-            rightStartNode = curr.next;
+            preRight = curr.next;
         }
         rightNode.next = null;
         reverseLinkedList(leftNode);
-        leftStart.next = rightNode;
-        if (rightStartNode != null) {
-            leftNode.next = rightStartNode;
+        preLeft.next = rightNode;
+        if (preRight != null) {
+            leftNode.next = preRight;
         }
         return dummyNode.next;
     }
