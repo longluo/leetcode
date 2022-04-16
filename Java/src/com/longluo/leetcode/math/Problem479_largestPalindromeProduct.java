@@ -74,10 +74,40 @@ public class Problem479_largestPalindromeProduct {
         return true;
     }
 
+    // Math time: O(10^2n) space: O(1)
+    public static int largestPalindrome_best(int n) {
+        if (n == 1) {
+            return 9;
+        }
+
+        int ans = 0;
+        int max = (int) Math.pow(10, n) - 1;
+        for (int i = max; ans == 0; i--) {
+            long num = i;
+
+            for (int j = i; j > 0; j /= 10) {
+                num = 10 * num + j % 10;
+            }
+
+            for (long x = max; x * x >= num; x--) {
+                if (num % x == 0) {
+                    ans = (int) (num % 1337);
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("9 ?= " + largestPalindrome(1));
         System.out.println("987 ?= " + largestPalindrome(2));
+        System.out.println("123 ?= " + largestPalindrome(3));
         System.out.println("677 ?= " + largestPalindrome(5));
         System.out.println("1218 ?= " + largestPalindrome(6));
+
+        System.out.println("987 ?= " + largestPalindrome_best(2));
+        System.out.println("123 ?= " + largestPalindrome_best(3));
     }
 }
