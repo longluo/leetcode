@@ -110,14 +110,16 @@ public class Problem538_convertBSTToGreaterTree {
         postOrder(root.left);
     }
 
-    public static int sumOfBST(TreeNode root, int target) {
-        if (root == null) {
-            return 0;
+    // Recursive time: O(n) space: O(n)
+    public static TreeNode convertBST_recur_opt(TreeNode root) {
+        if (root != null) {
+            convertBST_recur_opt(root.right);
+            sum += root.val;
+            root.val = sum;
+            convertBST_recur_opt(root.left);
         }
 
-        int result = root.val;
-        result += sumOfBST(root.right, target);
-        return result;
+        return root;
     }
 
     public static void main(String[] args) {
