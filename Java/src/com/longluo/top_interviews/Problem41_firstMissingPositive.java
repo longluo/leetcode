@@ -1,5 +1,9 @@
 package com.longluo.top_interviews;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 41. 缺失的第一个正数
  * <p>
@@ -50,7 +54,28 @@ public class Problem41_firstMissingPositive {
         return ans;
     }
 
+    // HashSet time: O(n) space: O(n)
+    public static int firstMissingPositive_hash(int[] nums) {
+        int ans = 1;
+        Set<Integer> seen = new HashSet<>();
+        for (int x : nums) {
+            if (x > 0) {
+                seen.add(x);
+            }
+        }
+
+        for (int i = 1; i > 0; i++) {
+            if (!seen.contains(i)) {
+                ans = i;
+                break;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + firstMissingPositive_bf(new int[]{3, 4, -1, 1}));
+        System.out.println("2 ?= " + firstMissingPositive_hash(new int[]{3, 4, -1, 1}));
     }
 }
