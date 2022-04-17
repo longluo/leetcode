@@ -33,7 +33,7 @@ import java.util.*;
  */
 public class Problem819_mostCommonWord {
 
-    // HashMap + HashSet + PQ time: O(n) space: O(n)
+    // HashMap + HashSet + PQ time: O(m + n) space: O(m + n)
     public static String mostCommonWord(String paragraph, String[] banned) {
         Map<String, Integer> freq = new HashMap<>();
         Set<String> bannedSet = new HashSet<>();
@@ -81,8 +81,49 @@ public class Problem819_mostCommonWord {
         return "";
     }
 
+    // HashMap + HashSet time: O(m + n) space: O(m + n)
+    public static String mostCommonWord_better(String paragraph, String[] banned) {
+        Set<String> bannedSet = new HashSet<>();
+        for (String word : banned) {
+            bannedSet.add(word);
+        }
+
+        Map<String, Integer> freqMap = new HashMap<>();
+        int len = paragraph.length();
+        int maxFreq = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i <= len; i++) {
+            if (i < len && Character.isLetter(paragraph.charAt(i))) {
+                sb.append(Character.toLowerCase(paragraph.charAt(i)));
+            } else if (sb.length() > 0) {
+                String word = sb.toString();
+                if (!bannedSet.contains(word)) {
+                    int freq = freqMap.getOrDefault(word, 0) + 1;
+                    freqMap.put(word, freq);
+                    maxFreq = Math.max(maxFreq, freq);
+                }
+
+                sb.setLength(0);
+            }
+        }
+
+        String mostCommonWord = "";
+        for (Map.Entry<String, Integer> entry : freqMap.entrySet()) {
+            String word = entry.getKey();
+            int freq = entry.getValue();
+            if (freq == maxFreq) {
+                mostCommonWord = word;
+                break;
+            }
+        }
+
+        return mostCommonWord;
+    }
+
     public static void main(String[] args) {
         System.out.println("a ?= " + mostCommonWord("a.", new String[]{}));
+        System.out.println("a ?= " + mostCommonWord_better("a.", new String[]{}));
         System.out.println("ball ?= " + mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", new String[]{"hit"}));
+        System.out.println("ball ?= " + mostCommonWord_better("Bob hit a ball, the hit BALL flew far after it was hit.", new String[]{"hit"}));
     }
 }
