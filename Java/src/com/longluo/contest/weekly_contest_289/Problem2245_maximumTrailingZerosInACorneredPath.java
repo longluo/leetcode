@@ -52,49 +52,36 @@ public class Problem2245_maximumTrailingZerosInACorneredPath {
 
         int row = grid.length;
         int col = grid[0].length;
-        int ans = 0;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
+        int[][] rowCnts2 = new int[row + 1][col + 1];
+        int[][] colCnts2 = new int[row + 1][col + 1];
+        int[][] rowCnts5 = new int[row + 1][col + 1];
+        int[][] colCnts5 = new int[row + 1][col + 1];
+        for (int i = 1; i <= row; i++) {
+            for (int j = 1; j <= col; j++) {
                 int value = grid[i][j];
-                if (value % 2 != 0 && value % 5 != 0) {
-                    grid[i][j] = 0;
-                    continue;
-                }
+                int two = getFactor(value, 2);
+                int five = getFactor(value, 5);
+                rowCnts2[i][j] = rowCnts2[i][j - 1] + two;
+                rowCnts5[i][j] = rowCnts5[i][j - 1] + five;
 
-                if (grid[i][j] > 0) {
-                    for (int dir = 0; dir < 4; dir++) {
-                        int zeroNum = bfs(grid, new boolean[row][col], i, j, dir);
-                        ans = Math.max(ans, zeroNum);
-                    }
-                }
+                colCnts2[i][j] = colCnts2[i - 1][j] + two;
+                colCnts5[i][j] = colCnts5[i - 1][j] + five;
             }
         }
 
-        return ans;
-    }
-
-    public static int bfs(int[][] grid, boolean[][] visited, int x, int y, int direction) {
-        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // hori + verti
-        int row = grid.length;
-        int col = grid[0].length;
-        int cntTwo = getFactor(grid[x][y], 2);
-        int cntFive = getFactor(grid[x][y], 5);
-        boolean isCorner = false;
         int ans = 0;
-        visited[x][y] = true;
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{x, y});
-        while (!queue.isEmpty()) {
-            int[] pos = queue.poll();
-            int nextX = pos[0] + dirs[direction][0];
-            int nextY = pos[1] + dirs[direction][1];
-            if (nextX >= 0 && nextX < row && nextY >= 0 && nextY < col
-                    && !visited[nextX][nextY]) {
-                queue.offer(new int[]{nextX, nextY});
-                cntTwo += getFactor(grid[nextX][nextY], 2);
-                cntFive += getFactor(grid[nextX][nextY], 5);
-                ans += Math.min(cntTwo, cntFive);
-                visited[nextX][nextY] = true;
+        for (int i = 1; i <= row; i++) {
+            for (int j = 1; j <= col; j++) {
+                ans = Math.max(ans, Math.min(rowCnts2[i][j] + colCnts2[i - 1][j],
+                        rowCnts5[i][j] + colCnts5[i - 1][j]));
+                ans = Math.max(ans, Math.min(rowCnts2[i][j] + colCnts2[row][j] - colCnts2[i][j],
+                        rowCnts5[i][j] + colCnts5[row][j] - colCnts5[i][j]));
+                // 从右边出发，到上边结束
+                ans = Math.max(ans, Math.min(rowCnts2[i][col] - rowCnts2[i][j] + colCnts2[i][j],
+                        rowCnts5[i][col] - rowCnts5[i][j] + colCnts5[i][j]));
+                // 从右边出发，到下边结束
+                ans = Math.max(ans, Math.min(rowCnts2[i][col] - rowCnts2[i][j] + colCnts2[row][j] - colCnts2[i - 1][j],
+                        rowCnts5[i][col] - rowCnts5[i][j] + colCnts5[row][j] - colCnts5[i - 1][j]));
             }
         }
 
@@ -103,8 +90,8 @@ public class Problem2245_maximumTrailingZerosInACorneredPath {
 
     public static int getFactor(int num, int factor) {
         int ans = 0;
-        while (num > 0) {
-            ans += num / factor;
+        while (num % factor == 0) {
+            ans++;
             num /= factor;
         }
         return ans;
