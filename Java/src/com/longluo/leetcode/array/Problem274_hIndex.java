@@ -22,21 +22,22 @@ package com.longluo.leetcode.array;
  */
 public class Problem274_hIndex {
 
+    // BF time: O(n^2) space: O(1)
     public static int hIndex(int[] citations) {
         if (citations == null || citations.length == 0) {
             return 0;
         }
 
-        int n = citations.length;
+        int len = citations.length;
         int ans = 0;
-        for (int i = 1; i <= n; i++) {
-            int value = 0;
-            for (int j = 0; j < n; j++) {
+        for (int i = 1; i <= len; i++) {
+            int cnt = 0;
+            for (int j = 0; j < len; j++) {
                 if (citations[j] >= i) {
-                    value++;
+                    cnt++;
                 }
             }
-            if (value >= i) {
+            if (cnt >= i) {
                 ans = Math.max(ans, i);
             }
         }
@@ -44,27 +45,28 @@ public class Problem274_hIndex {
         return ans;
     }
 
+    //
     public static int hIndex_count(int[] citations) {
-        int n = citations.length;
-        int h = 0;
-        int[] counter = new int[n + 1];
-        for (int i = 0; i < n; i++) {
-            if (citations[i] > n) {
-                counter[n]++;
+        int len = citations.length;
+        int hIndex = 0;
+        int[] counter = new int[len + 1];
+        for (int i = 0; i < len; i++) {
+            if (citations[i] > len) {
+                counter[len]++;
             } else {
                 counter[citations[i]]++;
             }
         }
 
         int total = 0;
-        for (int i = n; i >= 0; i--) {
+        for (int i = len; i >= 0; i--) {
             total += counter[i];
             if (total >= i) {
                 return i;
             }
         }
 
-        return h;
+        return hIndex;
     }
 
     public static void main(String[] args) {
