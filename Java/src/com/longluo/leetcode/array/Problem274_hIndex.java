@@ -1,5 +1,7 @@
 package com.longluo.leetcode.array;
 
+import java.util.Arrays;
+
 /**
  * 274. H 指数
  * <p>
@@ -45,10 +47,23 @@ public class Problem274_hIndex {
         return ans;
     }
 
-    //
+    // Sort time: O(n) space: O(n)
+    public static int hIndex_sort(int[] citations) {
+        Arrays.sort(citations);
+        int hIndex = 0;
+        int idx = citations.length - 1;
+        // > not >= because hIndex will +1
+        while (idx >= 0 && citations[idx] > hIndex) {
+            idx--;
+            hIndex++;
+        }
+
+        return hIndex;
+    }
+
+    // Count time: O(n) space: O(n)
     public static int hIndex_count(int[] citations) {
         int len = citations.length;
-        int hIndex = 0;
         int[] counter = new int[len + 1];
         for (int i = 0; i < len; i++) {
             if (citations[i] > len) {
@@ -66,11 +81,12 @@ public class Problem274_hIndex {
             }
         }
 
-        return hIndex;
+        return 0;
     }
 
     public static void main(String[] args) {
         System.out.println("3 ?= " + hIndex(new int[]{3, 0, 6, 1, 5}));
+        System.out.println("3 ?= " + hIndex_sort(new int[]{3, 0, 6, 1, 5}));
         System.out.println("3 ?= " + hIndex_count(new int[]{3, 0, 6, 1, 5}));
         System.out.println("1 ?= " + hIndex(new int[]{1}));
         System.out.println("1 ?= " + hIndex_count(new int[]{1}));
