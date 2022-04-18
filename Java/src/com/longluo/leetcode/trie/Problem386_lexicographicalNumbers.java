@@ -42,9 +42,35 @@ public class Problem386_lexicographicalNumbers {
         return ans;
     }
 
+    // BF String time: O( 2 * n) space: O(1)
+    public static List<Integer> lexicalOrder_dfs(int n) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 1; i <= 9; i++) {
+            dfs(i, ans, n);
+        }
+
+        return ans;
+    }
+
+    public static void dfs(int num, List<Integer> list, int max) {
+        if (num > max) {
+            return;
+        }
+
+        list.add(num);
+        for (int i = 0; i <= 9; i++) {
+            dfs(10 * num + i, list, max);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(lexicalOrder_bf(1));
         System.out.println(lexicalOrder_bf(2));
-        System.out.println(lexicalOrder_bf(10));
+        System.out.println(lexicalOrder_bf(12));
+        System.out.println(lexicalOrder_bf(101));
+
+        System.out.println(lexicalOrder_dfs(2));
+        System.out.println(lexicalOrder_dfs(12));
+        System.out.println(lexicalOrder_dfs(101));
     }
 }
