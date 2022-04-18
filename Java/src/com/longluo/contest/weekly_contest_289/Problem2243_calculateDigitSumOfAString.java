@@ -65,7 +65,27 @@ public class Problem2243_calculateDigitSumOfAString {
         return sb.toString();
     }
 
+    // Recursion time: O(n) space: O(n)
+    public static String digitSum_rec(String s, int k) {
+        if (s.length() <= k) {
+            return s;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i += k) {
+            int sum = 0;
+            for (int j = i; j < i + k && j < s.length(); j++) {
+                sum += s.charAt(j) - '0';
+            }
+
+            sb.append(sum);
+        }
+
+        return digitSum_rec(sb.toString(), k);
+    }
+
     public static void main(String[] args) {
-        digitSum("11111222223", 3);
+        System.out.println(digitSum("11111222223", 3));
+        System.out.println(digitSum_rec("11111222223", 3));
     }
 }
