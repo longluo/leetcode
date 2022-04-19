@@ -4,7 +4,9 @@ import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 199. 二叉树的右视图
@@ -55,8 +57,39 @@ public class Problem199_binaryTreeRightSideView {
         dfs(root.left, depth + 1, numList);
     }
 
+    // BFS time: O(n) space: O(n)
+    public static List<Integer> rightSideView_bfs(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        if (root == null) {
+            return ans;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = size - 1; i >= 0; i--) {
+                TreeNode node = queue.poll();
+                if (i == size - 1) {
+                    ans.add(node.val);
+                }
+
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 2, 3, null, 5, null, 4});
         System.out.println("[1, 3, 4] ?= " + rightSideView_dfs(tst1));
+        System.out.println("[1, 3, 4] ?= " + rightSideView_bfs(tst1));
     }
 }
