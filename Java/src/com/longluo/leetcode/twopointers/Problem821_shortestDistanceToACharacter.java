@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class Problem821_shortestDistanceToACharacter {
 
-    // BF time: O(n^2) space: O(n)
+    // BF time: O(n*k) space: O(k)
     public static int[] shortestToChar(String s, char c) {
         int len = s.length();
         List<Integer> indexes = new ArrayList<>();
@@ -44,19 +44,28 @@ public class Problem821_shortestDistanceToACharacter {
         }
 
         int[] ans = new int[len];
-        int size = indexes.size();
+        int k = indexes.size();
         for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == c) {
+                ans[i] = 0;
+                continue;
+            }
+
             int min = len;
-            for (int j = 0; j < size; j++) {
+            for (int j = 0; j < k; j++) {
                 if (i <= indexes.get(0)) {
                     min = Math.abs(i - indexes.get(0));
                     break;
-                } else if (i >= indexes.get(size - 1)) {
-                    min = Math.abs(i - indexes.get(size - 1));
+                } else if (i >= indexes.get(k - 1)) {
+                    min = Math.abs(i - indexes.get(k - 1));
                     break;
                 }
 
-                min = Math.min(min, Math.abs(i - indexes.get(j)));
+                int dist = Math.abs(i - indexes.get(j));
+                min = Math.min(min, dist);
+                if (indexes.get(j) - i >= dist) {
+                    break;
+                }
             }
 
             ans[i] = min;
@@ -115,6 +124,45 @@ public class Problem821_shortestDistanceToACharacter {
             }
 
             ans[i] = Math.min(ans[i], idx - i);
+        }
+
+        return ans;
+    }
+
+    // Center time: O(n * k) space: O(1)
+    public static int[] shortestToChar_center(String s, char c) {
+        int len = s.length();
+        int[] ans = new int[len];
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == c) {
+                ans[i] = 0;
+                continue;
+            }
+
+            int left = i;
+            int right = i;
+            int dist = len;
+            while (left >= 0 || right < len) {
+                if (s.charAt(left) == c) {
+                    dist = i - left;
+                    break;
+                }
+
+                if (s.charAt(right) == c) {
+                    dist = right - i;
+                    break;
+                }
+
+                if (left > 0) {
+                    left--;
+                }
+
+                if (right < len - 1) {
+                    right++;
+                }
+            }
+
+            ans[i] = dist;
         }
 
         return ans;
