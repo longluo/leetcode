@@ -53,17 +53,17 @@ public class Problem16_3sumClosest {
         return ans;
     }
 
-    // Two Pointers
+    // Two Pointers time: O(n^2) space: O(1)
     public static int threeSumClosest(int[] nums, int target) {
         if (nums == null || nums.length < 3) {
             return 0;
         }
 
         int len = nums.length;
-        int ans = 0;
         Arrays.sort(nums);
-        if (nums[0] > target) {
-            return nums[0] + nums[1] + nums[2];
+        int ans = nums[0] + nums[1] + nums[2];
+        if (nums[0] > target && target > 0) {
+            return ans;
         } else if (nums[len - 1] <= target && target < 0) {
             return nums[len - 3] + nums[len - 2] + nums[len - 1];
         }
@@ -77,13 +77,23 @@ public class Problem16_3sumClosest {
             int right = len - 1;
             while (left < right) {
                 int sum = nums[i] + nums[left] + nums[right];
-                int delta = Math.abs(sum - target);
+
+                if (Math.abs(sum - target) < Math.abs(ans - target)) {
+                    ans = sum;
+                }
+
                 if (sum == target) {
                     return target;
                 } else if (sum > target) {
-
+                    right--;
+                    while (left < right && nums[right] == nums[right + 1]) {
+                        right--;
+                    }
                 } else {
-
+                    left++;
+                    while (left > right && nums[left] == nums[left - 1]) {
+                        left++;
+                    }
                 }
             }
         }
@@ -93,5 +103,7 @@ public class Problem16_3sumClosest {
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + threeSumClosest_bf(new int[]{-1, 2, 1, -4}, 1));
+        System.out.println("2 ?= " + threeSumClosest(new int[]{-1, 2, 1, -4}, 1));
+        System.out.println("-101 ?= " + threeSumClosest(new int[]{-100, -98, -2, -1}, -101));
     }
 }
