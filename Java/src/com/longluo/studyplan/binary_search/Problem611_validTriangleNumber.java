@@ -138,11 +138,37 @@ public class Problem611_validTriangleNumber {
         return nums[left] < target ? left : -1;
     }
 
+    // Two Pointers time: O(n^2) space: O(logn)
+    public static int triangleNumber_tp(int[] nums) {
+        if (nums == null || nums.length <= 2) {
+            return 0;
+        }
+
+        Arrays.sort(nums);
+        int ans = 0;
+        int len = nums.length;
+        for (int i = len - 1; i >= 2; i--) {
+            int left = 0;
+            int right = i - 1;
+            while (left < right) {
+                if (nums[left] + nums[right] > nums[i]) {
+                    ans += right - left;
+                    right--;
+                } else {
+                    left++;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + triangleNumber_bf(new int[]{7, 0, 0, 0}));
         System.out.println("10 ?= " + triangleNumber_bf(new int[]{24, 3, 82, 22, 35, 84, 19}));
         System.out.println("3 ?= " + triangleNumber_bf(new int[]{2, 2, 3, 4}));
         System.out.println("3 ?= " + triangleNumber_sort(new int[]{2, 2, 3, 4}));
         System.out.println("3 ?= " + triangleNumber_bs(new int[]{2, 2, 3, 4}));
+        System.out.println("3 ?= " + triangleNumber_tp(new int[]{2, 2, 3, 4}));
     }
 }
