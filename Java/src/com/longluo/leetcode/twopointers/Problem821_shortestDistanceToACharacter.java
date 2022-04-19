@@ -97,10 +97,34 @@ public class Problem821_shortestDistanceToACharacter {
         return ans;
     }
 
+    // Reverse Scan time: O(n) space: O(n)
+    public static int[] shortestToChar_scan(String s, char c) {
+        int len = s.length();
+        int[] ans = new int[len];
+        for (int i = 0, idx = -len; i < len; i++) {
+            if (s.charAt(i) == c) {
+                idx = i;
+            }
+
+            ans[i] = i - idx;
+        }
+
+        for (int i = len - 1, idx = 2 * len; i >= 0; i--) {
+            if (s.charAt(i) == c) {
+                idx = i;
+            }
+
+            ans[i] = Math.min(ans[i], idx - i);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] ?= " + Arrays.toString(shortestToChar("loveleetcode", 'e')));
         System.out.println("[3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] ?= " + Arrays.toString(shortestToChar_tp("loveleetcode", 'e')));
         System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar("aaab", 'b')));
         System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar_tp("aaab", 'b')));
+        System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar_scan("aaab", 'b')));
     }
 }
