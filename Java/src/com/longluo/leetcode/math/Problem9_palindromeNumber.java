@@ -34,6 +34,7 @@ import java.util.List;
  */
 public class Problem9_palindromeNumber {
 
+    // BF + String time: O(logx) space: O(1)
     public static boolean isPalindrome(int x) {
         if (x < 0) {
             return false;
@@ -55,21 +56,22 @@ public class Problem9_palindromeNumber {
         return true;
     }
 
+    // Math time: O(logx) space: O(1)
     public static boolean isPalindrome_math(int x) {
         if (x < 0) {
             return false;
         }
 
-        List<Integer> list = new ArrayList<>();
+        List<Integer> digitList = new ArrayList<>();
         while (x > 0) {
-            list.add(x % 10);
+            digitList.add(x % 10);
             x /= 10;
         }
 
         int left = 0;
-        int right = list.size() - 1;
+        int right = digitList.size() - 1;
         while (left < right) {
-            if (list.get(left) != list.get(right)) {
+            if (digitList.get(left) != digitList.get(right)) {
                 return false;
             }
 
@@ -80,6 +82,7 @@ public class Problem9_palindromeNumber {
         return true;
     }
 
+    // Best time: O(logx) space: O(1)
     public static boolean isPalindrome_best(int x) {
         if (x < 0 || (x != 0 && x % 10 == 0)) {
             return false;
