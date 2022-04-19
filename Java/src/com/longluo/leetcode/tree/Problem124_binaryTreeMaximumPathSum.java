@@ -1,6 +1,7 @@
 package com.longluo.leetcode.tree;
 
 import com.longluo.datastructure.TreeNode;
+import com.longluo.datastructure.TreeUtils;
 
 /**
  * 124. 二叉树中的最大路径和
@@ -28,6 +29,31 @@ import com.longluo.datastructure.TreeNode;
  */
 public class Problem124_binaryTreeMaximumPathSum {
 
+    // DFS time: O(n) space: O(n)
+    static int maxAns = Integer.MIN_VALUE;
+
+    public static int maxPathSum_dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        dfs(root);
+        return maxAns;
+    }
+
+    public static int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int left = Math.max(dfs(root.left), 0);
+        int right = Math.max(dfs(root.right), 0);
+        int sum = left + right + root.val;
+        maxAns = Math.max(maxAns, sum);
+        return Math.max(left, right);
+    }
+
+    // Recursion time: O(n) space: O(n)
     static int maxSum = Integer.MIN_VALUE;
 
     public static int maxPathSum(TreeNode root) {
@@ -48,6 +74,8 @@ public class Problem124_binaryTreeMaximumPathSum {
     }
 
     public static void main(String[] args) {
-
+        TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 2, 3});
+        System.out.println("6 ?= " + maxPathSum(tst1));
+        System.out.println("6 ?= " + maxPathSum_dfs(tst1));
     }
 }
