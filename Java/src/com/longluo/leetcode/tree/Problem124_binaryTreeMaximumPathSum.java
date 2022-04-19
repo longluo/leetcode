@@ -50,7 +50,7 @@ public class Problem124_binaryTreeMaximumPathSum {
         int right = Math.max(dfs(root.right), 0);
         int sum = left + right + root.val;
         maxAns = Math.max(maxAns, sum);
-        return Math.max(left, right);
+        return root.val + Math.max(left, right);
     }
 
     // Recursion time: O(n) space: O(n)
@@ -70,7 +70,7 @@ public class Problem124_binaryTreeMaximumPathSum {
         int rightGain = Math.max(maxGain(root.right), 0);
         int sum = leftGain + rightGain + root.val;
         maxSum = Math.max(maxSum, sum);
-        return Math.max(leftGain, rightGain);
+        return root.val + Math.max(leftGain, rightGain);
     }
 
     public static void main(String[] args) {
