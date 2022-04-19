@@ -1,6 +1,5 @@
-package com.longluo.leetcode.math;
+package com.longluo.studyplan.cmbchina;
 
-import java.util.Arrays;
 
 /**
  * 7. 整数反转
@@ -31,6 +30,25 @@ import java.util.Arrays;
  * https://leetcode-cn.com/problems/reverse-integer/
  */
 public class Problem7_reverseInteger {
+
+    // String + Long time: O(n) space: O(1)
+    public static int reverse_str(int x) {
+        if (x == 0) {
+            return 0;
+        }
+
+        boolean sign = x < 0;
+        long num = x;
+        num = sign ? -num : num;
+        String str = String.valueOf(num);
+        StringBuilder sb = new StringBuilder(str);
+        long ans = Long.parseLong(sb.reverse().toString());
+        ans = sign ? -ans : ans;
+        if (ans > Integer.MAX_VALUE || ans < Integer.MIN_VALUE) {
+            return 0;
+        }
+        return (int) ans;
+    }
 
     public static int reverse(int x) {
         boolean flag = false;
@@ -71,6 +89,7 @@ public class Problem7_reverseInteger {
     }
 
     public static void main(String[] args) {
+        System.out.println("0 ?= " + reverse_str(-2147483648));
         System.out.println("321 ?= " + reverse(123));
         System.out.println("-321 ?= " + reverse(-123));
         System.out.println("21 ?= " + reverse(120));
