@@ -51,16 +51,29 @@ using namespace std;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
+    // time: O(logx) space: O(1)
     bool isPalindrome(int x) {
-        return true;
+        if (x < 0 || (x != 0 && x % 10 == 0)) {
+            return false;
+        }
+
+        int rev = 0;
+        while (x > rev) {
+            rev = 10 * rev + x % 10;
+            x /= 10;
+        }
+
+        return x == rev || x == rev / 10;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 int main() {
     Solution s;
-    vector<int> data{7, 1, 5, 3, 6, 4};
-    //vector<int> ans = s.twoSum(data,11);
-    //cout << ans[0]<<ans[1]<<endl;
-    cout << "Hello LeetCode" << endl;
+    cout << s.isPalindrome(0) << endl;
+    cout << s.isPalindrome(100) << endl;
+    cout << s.isPalindrome(-121) << endl;
+    cout << s.isPalindrome(121) << endl;
+    cout << s.isPalindrome(12321) << endl;
+    cout << s.isPalindrome(1221) << endl;
 }
