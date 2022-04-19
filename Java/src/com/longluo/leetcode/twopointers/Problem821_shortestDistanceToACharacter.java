@@ -174,5 +174,6 @@ public class Problem821_shortestDistanceToACharacter {
         System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar("aaab", 'b')));
         System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar_tp("aaab", 'b')));
         System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar_scan("aaab", 'b')));
+        System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar_center("aaab", 'b')));
     }
 }
