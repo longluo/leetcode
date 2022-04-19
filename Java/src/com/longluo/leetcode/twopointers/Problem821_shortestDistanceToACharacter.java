@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class Problem821_shortestDistanceToACharacter {
 
-    // BF time: O(n) space: O(n)
+    // BF time: O(n^2) space: O(n)
     public static int[] shortestToChar(String s, char c) {
         int len = s.length();
         List<Integer> indexes = new ArrayList<>();
@@ -65,8 +65,42 @@ public class Problem821_shortestDistanceToACharacter {
         return ans;
     }
 
+    // Two Pointers time: O(n) space: O(n)
+    public static int[] shortestToChar_tp(String s, char c) {
+        int len = s.length();
+        int[] ans = new int[len];
+        int p = 0;
+        int q = 0;
+        while (p < len && q < len) {
+            while (q < len && s.charAt(q) != c) {
+                q++;
+            }
+
+            if (s.charAt(p) == c) {
+                ans[p] = 0;
+
+                if (p > q) {
+                    int mid = (p + q) / 2 + 1;
+                    while (mid < p) {
+                        ans[mid] = p - mid;
+                        mid++;
+                    }
+                    q = p;
+                }
+            } else {
+                ans[p] = Math.abs(q - p);
+            }
+
+            p++;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] ?= " + Arrays.toString(shortestToChar("loveleetcode", 'e')));
+        System.out.println("[3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] ?= " + Arrays.toString(shortestToChar_tp("loveleetcode", 'e')));
         System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar("aaab", 'b')));
+        System.out.println("[3, 2, 1, 0] ?= " + Arrays.toString(shortestToChar_tp("aaab", 'b')));
     }
 }
