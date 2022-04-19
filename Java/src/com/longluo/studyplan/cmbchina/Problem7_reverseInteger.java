@@ -50,30 +50,27 @@ public class Problem7_reverseInteger {
         return (int) ans;
     }
 
+    // BF time: O(logn) space: O(1)
     public static int reverse(int x) {
-        boolean flag = false;
-        if (x < 0) {
-            flag = true;
-            x = -x;
+        if (x == Integer.MIN_VALUE || x == 0) {
+            return 0;
         }
 
+        boolean sign = x < 0;
+        x = sign ? -x : x;
         int ans = 0;
         while (x > 0) {
-            int temp = x % 10;
             if (ans > Integer.MAX_VALUE / 10) {
                 return 0;
             }
-            ans = ans * 10 + temp;
+            ans = ans * 10 + x % 10;
             x /= 10;
         }
 
-        if (flag) {
-            ans = -ans;
-        }
-
-        return ans;
+        return sign ? -ans : ans;
     }
 
+    // BF Opt time: O(logn) space: O(1)
     public static int reverse_opt(int x) {
         int rev = 0;
         while (x != 0) {
@@ -90,6 +87,7 @@ public class Problem7_reverseInteger {
 
     public static void main(String[] args) {
         System.out.println("0 ?= " + reverse_str(-2147483648));
+        System.out.println("0 ?= " + reverse(-2147483648));
         System.out.println("321 ?= " + reverse(123));
         System.out.println("-321 ?= " + reverse(-123));
         System.out.println("21 ?= " + reverse(120));
