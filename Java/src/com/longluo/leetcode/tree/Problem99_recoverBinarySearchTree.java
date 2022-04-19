@@ -71,6 +71,14 @@ public class Problem99_recoverBinarySearchTree {
         inOrder(root.right, list);
     }
 
+    public static void recoverTree_dfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+
+    }
+
     public static void main(String[] args) {
 
     }
