@@ -51,53 +51,54 @@ import java.util.Arrays;
  * https://leetcode-cn.com/problems/find-the-distance-value-between-two-arrays/
  */
 public class Problem1385_findTheDistanceValue {
-    // bf O(mn) O(1)
+
+    // BF time: O(m * n) space: O(1)
     public static int findTheDistanceValue_bf(int[] arr1, int[] arr2, int d) {
         int ans = 0;
-        for (int num1 : arr1) {
-            boolean isValid = true;
-            for (int num2 : arr2) {
-                if (Math.abs(num1 - num2) <= d) {
-                    isValid = false;
-                }
+        for (int x : arr1) {
+            boolean flag = true;
+            for (int y : arr2) {
+
+                flag &= Math.abs(x - y) > d;
+
+//                if (Math.abs(x - y) <= d) {
+//                    flag = false;
+//                }
             }
 
-            if (isValid) {
-                ans++;
-            }
+//            ans = flag ? ans + 1 : ans;
+            ans += flag ? 1 : 0;
         }
 
         return ans;
     }
 
-    // Two Pointers O(mn) O(1)
+    // Two Pointers  time: O(m * n) space: O(1)
     public static int findTheDistanceValue_tp(int[] arr1, int[] arr2, int d) {
         int ans = 0;
-        for (int num1 : arr1) {
-            int left = num1 - d;
-            int right = num1 + d;
-            boolean isValid = true;
-            for (int num2 : arr2) {
-                if (num2 >= left && num2 <= right) {
-                    isValid = false;
+        for (int x : arr1) {
+            int left = x - d;
+            int right = x + d;
+            boolean flag = true;
+            for (int y : arr2) {
+                if (y >= left && y <= right) {
+                    flag = false;
                 }
             }
 
-            if (isValid) {
-                ans++;
-            }
+            ans += flag ? 1 : 0;
         }
 
         return ans;
     }
 
-    // BS O((m+n)logn) O(1)
+    // BS time: O((m+n)logn) space: O(1)
     public static int findTheDistanceValue_bs(int[] arr1, int[] arr2, int d) {
         Arrays.sort(arr2);
         int ans = 0;
-        for (int num1 : arr1) {
-            int low = num1 - d;
-            int high = num1 + d;
+        for (int x : arr1) {
+            int low = x - d;
+            int high = x + d;
             if (!binarySearch(arr2, low, high)) {
                 ans++;
             }
@@ -124,6 +125,7 @@ public class Problem1385_findTheDistanceValue {
     }
 
     public static void main(String[] args) {
+        System.out.println("2 ?= " + findTheDistanceValue_bf(new int[]{1, 4, 2, 3}, new int[]{-4, -3, 6, 10, 20, 30}, 3));
         System.out.println("2 ?= " + findTheDistanceValue_bs(new int[]{4, 5, 8}, new int[]{10, 9, 1, 8}, 2));
     }
 }
