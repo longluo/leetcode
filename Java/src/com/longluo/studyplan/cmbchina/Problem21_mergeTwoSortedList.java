@@ -1,4 +1,4 @@
-package com.longluo.leetcode.linkedlist;
+package com.longluo.studyplan.cmbchina;
 
 import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
@@ -33,6 +33,7 @@ import com.longluo.datastructure.ListNode;
  */
 public class Problem21_mergeTwoSortedList {
 
+    // Iteration time: O(n) space: O(1)
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode dummyNode = new ListNode(-1);
         ListNode pNode = dummyNode;
@@ -65,6 +66,7 @@ public class Problem21_mergeTwoSortedList {
         return dummyNode.next;
     }
 
+    // Recursion time: O(n) space: O(n)
     public static ListNode mergeTwoLists_rec(ListNode list1, ListNode list2) {
         if (list1 == null) {
             return list2;
