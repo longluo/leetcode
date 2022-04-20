@@ -15,11 +15,11 @@ import java.util.Queue;
  * <p>
  * 示例 1：
  * 输入：
- *   3
- *  / \
+ * 3
+ * / \
  * 9  20
- *   / \
- *  15  7
+ * / \
+ * 15  7
  * 输出：[3, 14.5, 11]
  * 解释：
  * 第 0 层的平均值是 3 ,  第1层是 14.5 , 第2层是 11 。因此返回 [3, 14.5, 11] 。
@@ -31,6 +31,7 @@ import java.util.Queue;
  */
 public class Problem637_averageOfLevelsInBinaryTree {
 
+    // BFS time: O(n) space: O(n)
     public static List<Double> averageOfLevels(TreeNode root) {
         List<Double> ans = new ArrayList<>();
         if (root == null) {
@@ -59,6 +60,7 @@ public class Problem637_averageOfLevelsInBinaryTree {
         return ans;
     }
 
+    // DFS time: O(n) space: O(n)
     public static List<Double> averageOfLevels_dfs(TreeNode root) {
         List<Double> averages = new ArrayList<>();
         List<Integer> counts = new ArrayList<>();
