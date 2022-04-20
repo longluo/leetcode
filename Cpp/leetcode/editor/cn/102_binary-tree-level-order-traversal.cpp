@@ -56,7 +56,7 @@ using namespace std;
  */
 class Solution {
 public:
-    // BFS
+    // BFS time: O(n) space: O(n)
     vector<vector<int>> levelOrder(TreeNode *root) {
         if (root == NULL) {
             return vector<vector<int>>();
