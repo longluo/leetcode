@@ -1,6 +1,6 @@
 package com.longluo.studyplan.ke;
 
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 20. 有效的括号
@@ -69,10 +69,40 @@ public class Problem20_validParentheses {
         return true;
     }
 
+    // HashMap time: O(n) space: O(n)
+    public static boolean isValid_map(String s) {
+        int n = s.length();
+        if (n % 2 == 1) {
+            return false;
+        }
+
+        Map<Character, Character> pairs = new HashMap<>() {{
+            put(')', '(');
+            put(']', '[');
+            put('}', '{');
+        }};
+
+        Deque<Character> stack = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            if (pairs.containsKey(ch)) {
+                if (stack.isEmpty() || stack.peek() != pairs.get(ch)) {
+                    return false;
+                }
+                stack.pop();
+            } else {
+                stack.push(ch);
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + isValid("()"));
         System.out.println("true ?= " + isValid("()[]{}"));
         System.out.println("false ?= " + isValid("(]"));
         System.out.println("false ?= " + isValid("([}}])"));
+        System.out.println("false ?= " + isValid_map("([}}])"));
     }
 }
