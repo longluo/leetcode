@@ -38,6 +38,7 @@ using namespace std;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
+    // DFS time: O(n) space: O(1)
     vector<int> lexicalOrder(int n) {
         vector<int> ans(n);
         int number = 1;
