@@ -1,11 +1,9 @@
 package com.longluo.leetcode.tree;
 
 import com.longluo.datastructure.Node;
+import kotlin.Pair;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 559. N 叉树的最大深度
@@ -30,6 +28,80 @@ import java.util.Queue;
  */
 public class Problem559_maximumDepthOfNAryTree {
 
+    // Recursion time: O(n) space: O(n)
+    public static int maxDepth_rec(Node root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int ans = 0;
+        for (Node child : root.children) {
+            ans = Math.max(ans, maxDepth_rec(child));
+        }
+
+        return ans + 1;
+    }
+
+    // DFS time: O(n) space: O(n)
+    static class Pair {
+        Node node;
+        int depth;
+
+        Pair(Node node, int depth) {
+            this.node = node;
+            this.depth = depth;
+        }
+    }
+
+    public static int maxDepth_dfs_opt(Node root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int ans = 0;
+        Stack<Pair> stack = new Stack<>();
+        stack.push(new Pair(root, 1));
+        while (!stack.empty()) {
+            Pair top = stack.pop();
+            Node node = top.node;
+            int depth = top.depth;
+            for (Node childNode : node.children) {
+                stack.push(new Pair(childNode, depth + 1));
+            }
+
+            ans = Math.max(ans, depth);
+        }
+
+        return ans;
+    }
+
+    // BFS time: O(n) space: O(n)
+    public static int maxDepth_bfs_opt(Node root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int ans = 0;
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            ans++;
+            int size = queue.size();
+            while (size > 0) {
+                Node node = queue.poll();
+                for (Node child : node.children) {
+                    queue.offer(child);
+                }
+                size--;
+            }
+        }
+
+        return ans;
+    }
+
+    // -----------------------------------------------------------------------------------------------
+
+    // Recursion time: O(n) space: O(n)
     public static int maxDepth(Node root) {
         if (root == null) {
             return 0;
