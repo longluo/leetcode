@@ -39,16 +39,19 @@ package com.longluo.leetcode.array;
  */
 public class Problem1816_truncateSentence {
 
-    public static String truncateSentence(String s, int k) {
-        String[] array = s.split("\\s+");
+    // Regex time: O(n) space: O(n)
+    public static String truncateSentence_regex(String s, int k) {
+        String[] words = s.split("\\s+");
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < k; i++) {
-            sb.append(array[i]).append(" ");
+            sb.append(words[i]).append(" ");
         }
 
-        return sb.toString().trim();
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
     }
 
+    // Simulate time: O(n) space: O(n)
     public static String truncateSentence_bf(String s, int k) {
         StringBuilder sb = new StringBuilder();
         int len = s.length();
@@ -76,12 +79,7 @@ public class Problem1816_truncateSentence {
             }
 
             if (cnt == k) {
-                if (i == len) {
-                    end = len - 1;
-                } else {
-                    end = i;
-                }
-
+                end = i;
                 break;
             }
 
@@ -93,6 +91,7 @@ public class Problem1816_truncateSentence {
         return s.substring(0, end);
     }
 
+    // Best time: O(n) space: O(1)
     public static String truncateSentence_best(String s, int k) {
         int len = s.length();
         int cnt = 0;
@@ -111,6 +110,7 @@ public class Problem1816_truncateSentence {
     }
 
     public static void main(String[] args) {
+        System.out.println("Hello how are you ?= " + truncateSentence_regex("Hello how are you Contestant", 4));
         System.out.println("Hello how are you ?= " + truncateSentence_bf("Hello how are you Contestant", 4));
         System.out.println("What is the solution ?= " + truncateSentence_bf("What is the solution to this problem", 4));
         System.out.println("What is the solution ?= " + truncateSentence_fast("What is the solution to this problem", 4));
