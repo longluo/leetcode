@@ -35,6 +35,7 @@ package com.longluo.leetcode.string;
  */
 public class Problem859_buddyStrings {
 
+    // BF time: O(n) space: O(C) = O(26) = O(1)
     public static boolean buddyStrings(String s, String goal) {
         if (s == null || goal == null || s.length() <= 1 || goal.length() <= 1
                 || s.length() != goal.length()) {
@@ -47,8 +48,9 @@ public class Problem859_buddyStrings {
         if (s.equals(goal)) {
             int[] count = new int[26];
             for (int i = 0; i < len; i++) {
-                count[s.charAt(i) - 'a']++;
-                if (count[s.charAt(i) - 'a'] > 1) {
+                int idx = s.charAt(i) - 'a';
+                count[idx]++;
+                if (count[idx] > 1) {
                     return true;
                 }
             }
@@ -67,7 +69,7 @@ public class Problem859_buddyStrings {
             }
         }
 
-        if (first != second && first >= 0 && second >= 0 && s.charAt(first) == goal.charAt(second) && s.charAt(second) == goal.charAt(first)) {
+        if (first != second && second >= 0 && s.charAt(first) == goal.charAt(second) && s.charAt(second) == goal.charAt(first)) {
             return true;
         }
 
