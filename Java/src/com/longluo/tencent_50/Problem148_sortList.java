@@ -5,6 +5,7 @@ import com.longluo.datastructure.ListNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -35,31 +36,60 @@ import java.util.List;
  */
 public class Problem148_sortList {
 
-    public static ListNode sortList(ListNode head) {
+    // BF + List time: O(n) space: O(n)
+    public static ListNode sortList_bf(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
         ListNode pNode = head;
-        List<Integer> list = new ArrayList<>();
+        List<Integer> nodeList = new ArrayList<>();
         while (pNode != null) {
-            list.add(pNode.val);
+            nodeList.add(pNode.val);
             pNode = pNode.next;
         }
 
-        Collections.sort(list);
+        Collections.sort(nodeList);
         ListNode dummyNode = new ListNode(-1);
-        dummyNode.next = new ListNode(list.get(0));
         pNode = dummyNode;
-        for (int i = 1; i < list.size(); i++) {
-            dummyNode = dummyNode.next;
-            dummyNode.next = new ListNode(list.get(i));
+        for (int i = 0; i < nodeList.size(); i++) {
+            pNode.next = new ListNode(nodeList.get(i));
+            pNode = pNode.next;
         }
 
-        return pNode.next;
+        return dummyNode.next;
     }
 
-    public static ListNode sortList_fast(ListNode head) {
+    // BF + List Opt time: O(n) space: O(n)
+    public static ListNode sortList_bf_opt(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode currNode = head;
+        List<ListNode> nodeList = new ArrayList<>();
+        while (currNode != null) {
+            nodeList.add(currNode);
+            currNode = currNode.next;
+        }
+
+        nodeList.sort((o1, o2) -> o1.val - o2.val);
+
+        int len = nodeList.size();
+        ListNode dummyNode = new ListNode(-1);
+        ListNode preNode = dummyNode;
+        for (int i = 0; i < len; i++) {
+            currNode = nodeList.get(i);
+            preNode.next = currNode;
+            currNode.next = null;
+            preNode = currNode;
+        }
+
+        return dummyNode.next;
+    }
+
+    // Merge time: (nlogn) space: O(logn)
+    public static ListNode sortList_merge(ListNode head) {
         return sortList_merge(head, null);
     }
 
@@ -76,8 +106,8 @@ public class Problem148_sortList {
         ListNode fast = head;
         ListNode slow = head;
         while (fast != tail) {
-            fast = fast.next;
             slow = slow.next;
+            fast = fast.next;
             if (fast != tail) {
                 fast = fast.next;
             }
@@ -92,31 +122,25 @@ public class Problem148_sortList {
 
     public static ListNode mergeList(ListNode node1, ListNode node2) {
         ListNode dummyNode = new ListNode(0);
-        ListNode head = dummyNode;
+        ListNode pNode = dummyNode;
         ListNode temp1 = node1;
         ListNode temp2 = node2;
         while (temp1 != null && temp2 != null) {
             if (temp1.val <= temp2.val) {
-                head.next = temp1;
+                pNode.next = temp1;
                 temp1 = temp1.next;
             } else {
-                head.next = temp2;
+                pNode.next = temp2;
                 temp2 = temp2.next;
             }
 
-            head = head.next;
+            pNode = pNode.next;
         }
 
-        while (temp1 != null) {
-            head.next = temp1;
-            temp1 = temp1.next;
-            head = head.next;
-        }
-
-        while (temp2 != null) {
-            head.next = temp2;
-            temp2 = temp2.next;
-            head = head.next;
+        if (temp1 != null) {
+            pNode.next = temp1;
+        } else if (temp2 != null) {
+            pNode.next = temp2;
         }
 
         return dummyNode.next;
@@ -124,6 +148,8 @@ public class Problem148_sortList {
 
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{4, 2, 1, 3});
-        System.out.println(LinkedListNodeUtils.printLinkedList(sortList_fast(tst1)));
+        System.out.println(LinkedListNodeUtils.printLinkedList(sortList_merge(tst1)));
+        System.out.println(LinkedListNodeUtils.printLinkedList(sortList_bf(tst1)));
+        System.out.println(LinkedListNodeUtils.printLinkedList(sortList_bf_opt(tst1)));
     }
 }
