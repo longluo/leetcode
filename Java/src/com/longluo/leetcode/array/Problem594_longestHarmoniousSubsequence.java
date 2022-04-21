@@ -43,18 +43,18 @@ public class Problem594_longestHarmoniousSubsequence {
             int cntMax = 0;
             for (int j = 0; j < len; j++) {
                 if (nums[j] >= nums[i] && nums[j] <= nums[i] + 1) {
-                    minDiff = Math.max(minDiff, nums[j] - nums[i]);
+                    minDiff += nums[j] - nums[i];
                     cntMin++;
                 }
 
                 if (nums[j] >= nums[i] - 1 && nums[j] <= nums[i]) {
-                    maxDiff = Math.max(maxDiff, nums[j] - nums[i]);
+                    maxDiff += nums[j] - nums[i];
                     cntMax++;
                 }
             }
 
-            cntMin = minDiff == 1 ? cntMin : 0;
-            cntMax = maxDiff == 1 ? cntMax : 0;
+            cntMin = minDiff >= 1 ? cntMin : 0;
+            cntMax = maxDiff >= 1 ? cntMax : 0;
             ans = Math.max(ans, Math.max(cntMin, cntMax));
         }
 
