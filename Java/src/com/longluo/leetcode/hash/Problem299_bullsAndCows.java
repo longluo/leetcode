@@ -103,10 +103,42 @@ public class Problem299_bullsAndCows {
         return bulls + "A" + cows + "B";
     }
 
+    // Opt
+    public static String getHint_opt(String secret, String guess) {
+        int bulls = 0;
+        int cows = 0;
+        int[] cnt = new int[10];
+        for (int i = 0; i < secret.length(); i++) {
+            int s = secret.charAt(i) - '0';
+            int g = guess.charAt(i) - '0';
+            if (s == g) {
+                bulls++;
+            } else {
+                //当前数小于 0, 说明之前在 guess 中出现过, 和 secret 当前的数匹配
+                if (cnt[s] < 0) {
+                    cows++;
+                }
+                //当前数大于 0, 说明之前在 secret 中出现过, 和 guess 当前的数匹配
+                if (cnt[g] > 0) {
+                    cows++;
+                }
+                //secret 中的数, 计数加 1
+                cnt[s]++;
+                //guess 中的数, 计数减 1
+                cnt[g]--;
+            }
+        }
+
+        return bulls + "A" + cows + "B";
+    }
+
     public static void main(String[] args) {
         System.out.println("1A3B ?= " + getHint("1807", "7810"));
         System.out.println("1A1B ?= " + getHint("1123", "0111"));
         System.out.println("0A0B ?= " + getHint("1", "0"));
         System.out.println("1A0B ?= " + getHint("1", "1"));
+        System.out.println("1A3B ?= " + getHint_opt("1807", "7810"));
+        System.out.println("1A1B ?= " + getHint_opt("1123", "0111"));
+        System.out.println("1A0B ?= " + getHint_opt("1", "1"));
     }
 }
