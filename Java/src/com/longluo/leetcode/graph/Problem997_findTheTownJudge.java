@@ -43,6 +43,31 @@ package com.longluo.leetcode.graph;
  */
 public class Problem997_findTheTownJudge {
 
+    // BF
+    public static int findJudge_bf(int N, int[][] trust) {
+        if (N <= 0) {
+            return -1;
+        } else if (N == 1) {
+            return 1;
+        }
+
+        // [0]: In  [1]: Out
+        int[][] count = new int[N][2];
+        for (int[] item : trust) {
+            count[item[0] - 1][1]++;
+            count[item[1] - 1][0]++;
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (count[i][0] == N - 1 && count[i][1] == 0) {
+                return i + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    // Graph
     public static int findJudge(int N, int[][] trust) {
         if (N <= 0) {
             return -1;
@@ -67,8 +92,8 @@ public class Problem997_findTheTownJudge {
     }
 
     public static void main(String[] args) {
-        System.out.println("2 ?= " + findJudge(2, new int[][]{{1, 2}}));
-        System.out.println("1 ?= " + findJudge(1, new int[][]{{}}));
+        System.out.println("2 ?= " + findJudge_bf(2, new int[][]{{1, 2}}));
+        System.out.println("1 ?= " + findJudge_bf(1, new int[][]{{}}));
         System.out.println("3 ?= " + findJudge(3, new int[][]{{1, 3}, {2, 3}}));
         System.out.println("-1 ?= " + findJudge(3, new int[][]{{1, 2}, {2, 3}}));
         System.out.println("-1 ?= " + findJudge(3, new int[][]{{1, 3}, {2, 3}, {3, 1}}));
