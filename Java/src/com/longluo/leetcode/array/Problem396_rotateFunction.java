@@ -78,7 +78,7 @@ public class Problem396_rotateFunction {
         return ans;
     }
 
-    // DP time: O(n) space: O(1)
+    // DP Opt time: O(n) space: O(1)
     public static int maxRotateFunction_dp_opt(int[] nums) {
         int len = nums.length;
         if (len <= 1) {
@@ -102,10 +102,39 @@ public class Problem396_rotateFunction {
         return ans;
     }
 
+    // Prefix Sum + Win Opt time: O(n) space: O(1)
+    public static int maxRotateFunction_prefix_win(int[] nums) {
+        int len = nums.length;
+        if (len <= 1) {
+            return 0;
+        }
+
+        int[] sum = new int[2 * len + 1];
+        for (int i = 1; i <= 2 * len; i++) {
+            sum[i] = sum[i - 1] + nums[(i - 1) % len];
+        }
+
+        int ans = 0;
+        for (int i = 0; i < len; i++) {
+            ans += i * nums[i];
+        }
+
+        int curr = ans;
+        for (int i = len + 1; i < 2 * len; i++) {
+            curr += nums[(i - 1) % len] * (len - 1);
+            curr -= sum[i - 1] - sum[i - len];
+            ans = Math.max(ans, curr);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("26 ?= " + maxRotateFunction(new int[]{4, 3, 2, 6}));
         System.out.println("26 ?= " + maxRotateFunction_dp(new int[]{4, 3, 2, 6}));
         System.out.println("26 ?= " + maxRotateFunction_dp_opt(new int[]{4, 3, 2, 6}));
         System.out.println("330 ?= " + maxRotateFunction_dp_opt(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
+        System.out.println("26 ?= " + maxRotateFunction_prefix_win(new int[]{4, 3, 2, 6}));
+        System.out.println("330 ?= " + maxRotateFunction_prefix_win(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
     }
 }
