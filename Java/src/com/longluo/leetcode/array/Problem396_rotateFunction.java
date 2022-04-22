@@ -46,7 +46,8 @@ public class Problem396_rotateFunction {
         for (int i = 0; i < len; i++) {
             int sum = 0;
             for (int j = 0; j < len; j++) {
-                sum += j * nums[(j + len - i) % len];
+//                sum += j * nums[(j + len - i) % len];
+                sum += j * nums[(i + j) % len];
             }
 
             ans = Math.max(ans, sum);
