@@ -1,8 +1,10 @@
-# The Leetcode Solutions 
+# The LeetCode Solutions 
 
-## [Leetcode Problems List](./Leetcode.md)
+## [LeetCode Problems List](https://github.com/longluo/leetcode/wiki/LeetCode-Problems-List)
 
-## [算法解题模板](https://github.com/longluo/leetcode/wiki/%E7%AE%97%E6%B3%95%E8%A7%A3%E9%A2%98%E6%A8%A1%E6%9D%BF)
+## [LeetCode Top 100 Liked Questions](https://github.com/longluo/leetcode/wiki/LeetCode-Top-100-Liked-Questions)
+
+## [Python Algorithms Cheatsheet](https://github.com/longluo/leetcode/wiki/Python-Algorithms-Cheatsheet)
 
 ## [Java Code](./Java/src/com/longluo/leetcode/README.md)
 
