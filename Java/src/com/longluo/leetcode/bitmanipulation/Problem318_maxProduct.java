@@ -1,5 +1,9 @@
 package com.longluo.leetcode.bitmanipulation;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * 318. 最大单词长度乘积
  * <p>
@@ -30,30 +34,32 @@ package com.longluo.leetcode.bitmanipulation;
  */
 public class Problem318_maxProduct {
 
+    // BF time: O(L + 26 * n^2) space: O(n)
     public static int maxProduct(String[] words) {
         if (words == null || words.length <= 1) {
             return 0;
         }
 
-        int n = words.length;
-        boolean[][] array = new boolean[n][26];
-        for (int i = 0; i < n; i++) {
+        int len = words.length;
+        boolean[][] cnt = new boolean[len][26];
+        for (int i = 0; i < len; i++) {
             String word = words[i];
             for (char ch : word.toCharArray()) {
-                array[i][ch - 'a'] = true;
+                cnt[i][ch - 'a'] = true;
             }
         }
 
         int ans = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
                 boolean flag = true;
                 for (int k = 0; k < 26; k++) {
-                    if (array[i][k] && array[j][k]) {
+                    if (cnt[i][k] && cnt[j][k]) {
                         flag = false;
                         break;
                     }
                 }
+
                 if (flag) {
                     ans = Math.max(ans, words[i].length() * words[j].length());
                 }
@@ -63,7 +69,72 @@ public class Problem318_maxProduct {
         return ans;
     }
 
-    public static void main(String[] args) {
+    // Bit time: O(L + 26 * n^2) space: O(n)
+    public static int maxProduct_bit(String[] words) {
+        if (words == null || words.length <= 1) {
+            return 0;
+        }
 
+        int len = words.length;
+        int[] masks = new int[len];
+        for (int i = 0; i < len; i++) {
+            String word = words[i];
+            int wordLen = word.length();
+            for (int j = 0; j < wordLen; j++) {
+                masks[i] |= 1 << (word.charAt(j) - 'a');
+            }
+        }
+
+        int ans = 0;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if ((masks[i] & masks[j]) == 0) {
+                    ans = Math.max(ans, words[i].length() * words[j].length());
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    // Bit Opt time: O(L + 26 * n^2) space: O(n)
+    public static int maxProduct_bit_opt(String[] words) {
+        if (words == null || words.length <= 1) {
+            return 0;
+        }
+
+        int len = words.length;
+        Map<Integer, Integer> maskMap = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            String word = words[i];
+            int wordLen = word.length();
+            int mask = 0;
+            for (int j = 0; j < wordLen; j++) {
+                mask |= 1 << (word.charAt(j) - 'a');
+            }
+            if (wordLen > maskMap.getOrDefault(mask, 0)) {
+                maskMap.put(mask, wordLen);
+            }
+        }
+
+        int ans = 0;
+        Set<Integer> maskSet = maskMap.keySet();
+        for (int mask1 : maskSet) {
+            int len1 = maskMap.get(mask1);
+            for (int mask2 : maskSet) {
+                if ((mask1 & mask2) == 0) {
+                    int len2 = maskMap.get(mask2);
+                    ans = Math.max(ans, len1 * len2);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("16 ?= " + maxProduct(new String[]{"abcw", "baz", "foo", "bar", "xtfn", "abcdef"}));
+        System.out.println("16 ?= " + maxProduct_bit(new String[]{"abcw", "baz", "foo", "bar", "xtfn", "abcdef"}));
+        System.out.println("16 ?= " + maxProduct_bit_opt(new String[]{"abcw", "baz", "foo", "bar", "xtfn", "abcdef"}));
     }
 }
