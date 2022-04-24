@@ -35,7 +35,7 @@ package com.longluo.leetcode.bitmanipulation;
  */
 public class Problem868_binaryGap {
 
-    // Bit Shift time: O(32) = O(1) space: O(1)
+    // Bit Shift time: O(logn) space: O(1)
     public static int binaryGap(int n) {
         if (n <= 1 || (n & (n - 1)) == 0) {
             return 0;
