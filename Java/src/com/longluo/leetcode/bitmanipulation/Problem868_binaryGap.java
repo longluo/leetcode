@@ -57,10 +57,29 @@ public class Problem868_binaryGap {
         return ans;
     }
 
+    // Bit Shift Opt time: O(logn) space: O(1)
+    public static int binaryGap_opt(int n) {
+        int ans = 0;
+        int last = -1;
+        for (int i = 0; n != 0; i++) {
+            if ((n & 0x01) == 1) {
+                if (last >= 0) {
+                    ans = Math.max(ans, i - last);
+                }
+                last = i;
+            }
+
+            n = n >> 1;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + binaryGap(1));
         System.out.println("2 ?= " + binaryGap(5));
         System.out.println("0 ?= " + binaryGap(8));
         System.out.println("2 ?= " + binaryGap(22));
+        System.out.println("2 ?= " + binaryGap_opt(22));
     }
 }
