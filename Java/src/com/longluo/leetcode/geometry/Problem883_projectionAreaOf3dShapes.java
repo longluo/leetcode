@@ -31,7 +31,7 @@ package com.longluo.leetcode.geometry;
  */
 public class Problem883_projectionAreaOf3dShapes {
 
-    // BF time: O(n) space: O(1)
+    // Simulate time: O(n^2) space: O(1)
     public static int projectionArea(int[][] grid) {
         int len = grid.length;
 
@@ -39,28 +39,48 @@ public class Problem883_projectionAreaOf3dShapes {
         int sumXZ = 0;
         int sumYZ = 0;
 
-        int[] maxZ = new int[len];
         for (int i = 0; i < len; i++) {
-            int maxXZ = grid[i][0];
+            int xzHeight = 0;
+            int yzHeight = 0;
             for (int j = 0; j < len; j++) {
                 sumXY += grid[i][j] > 0 ? 1 : 0;
-                maxXZ = Math.max(maxXZ, grid[i][j]);
-                maxZ[j] = Math.max(maxZ[j], grid[i][j]);
+                xzHeight = Math.max(xzHeight, grid[j][i]);
+                yzHeight = Math.max(yzHeight, grid[i][j]);
             }
 
-            sumXZ += maxXZ;
-        }
-
-        for (int x : maxZ) {
-            sumYZ += x;
+            sumXZ += xzHeight;
+            sumYZ += yzHeight;
         }
 
         return sumXY + sumXZ + sumYZ;
+    }
+
+    // Math time: O(n^2) space: O(1)
+    public static int projectionArea_math(int[][] grid) {
+        int n = grid.length;
+        int xyArea = 0;
+        int yzArea = 0;
+        int zxArea = 0;
+        for (int i = 0; i < n; i++) {
+            int yzHeight = 0;
+            int zxHeight = 0;
+            for (int j = 0; j < n; j++) {
+                xyArea += grid[i][j] > 0 ? 1 : 0;
+                yzHeight = Math.max(yzHeight, grid[j][i]);
+                zxHeight = Math.max(zxHeight, grid[i][j]);
+            }
+
+            yzArea += yzHeight;
+            zxArea += zxHeight;
+        }
+
+        return xyArea + yzArea + zxArea;
     }
 
     public static void main(String[] args) {
         System.out.println("5 ?= " + projectionArea(new int[][]{{2}}));
         System.out.println("8 ?= " + projectionArea(new int[][]{{1, 0}, {0, 2}}));
         System.out.println("17 ?= " + projectionArea(new int[][]{{1, 2}, {3, 4}}));
+        System.out.println("17 ?= " + projectionArea_math(new int[][]{{1, 2}, {3, 4}}));
     }
 }
