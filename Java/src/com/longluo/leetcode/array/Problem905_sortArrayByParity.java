@@ -49,8 +49,29 @@ public class Problem905_sortArrayByParity {
         return ans;
     }
 
-    // Two Pointers time: O(n) space: O(1)
+    // Two Pointers time: O(n) space: O(n)
     public static int[] sortArrayByParity_tp(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+
+        int len = nums.length;
+        int[] ans = new int[len];
+        int left = 0;
+        int right = len - 1;
+        for (int x : nums) {
+            if (x % 2 == 0) {
+                ans[left++] = x;
+            } else {
+                ans[right--] = x;
+            }
+        }
+
+        return ans;
+    }
+
+    // Two Pointers time: O(n) space: O(1)
+    public static int[] sortArrayByParity(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums;
         }
@@ -71,6 +92,8 @@ public class Problem905_sortArrayByParity {
                 int temp = nums[p];
                 nums[p] = nums[q];
                 nums[q] = temp;
+                p++;
+                q--;
             }
         }
 
@@ -80,5 +103,6 @@ public class Problem905_sortArrayByParity {
     public static void main(String[] args) {
         System.out.println("[2, 4, 3, 1] ?= " + Arrays.toString(sortArrayByParity_bf(new int[]{3, 1, 2, 4})));
         System.out.println("[4, 2, 1, 3] ?= " + Arrays.toString(sortArrayByParity_tp(new int[]{3, 1, 2, 4})));
+        System.out.println("[4, 2, 1, 3] ?= " + Arrays.toString(sortArrayByParity(new int[]{3, 1, 2, 4})));
     }
 }
