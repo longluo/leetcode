@@ -67,6 +67,8 @@ public class Problem458_poorPigs {
     }
 
     public static void main(String[] args) {
+        System.out.println(Math.ceil(Math.log(1000) / Math.log(2)));
+
         System.out.println("2 ?= " + poorPigs(4, 15, 15));
         System.out.println("2 ?= " + poorPigs(4, 15, 30));
         System.out.println("2 ?= " + poorPigs(8, 15, 40));
