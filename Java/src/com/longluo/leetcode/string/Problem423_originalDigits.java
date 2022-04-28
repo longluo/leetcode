@@ -25,6 +25,7 @@ import java.util.Map;
  */
 public class Problem423_originalDigits {
 
+    // time: O(n) space: O(n)
     public static String originalDigits(String s) {
         Map<Character, Integer> map = new HashMap<Character, Integer>();
         for (int i = 0; i < s.length(); ++i) {
@@ -53,6 +54,7 @@ public class Problem423_originalDigits {
                 ans.append((char) (i + '0'));
             }
         }
+
         return ans.toString();
     }
 
