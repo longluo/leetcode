@@ -24,33 +24,24 @@ package com.longluo.leetcode.dfs;
  */
 public class Problem419_countBattleships {
 
+    // BF time: O(m * n * max(m, n) space: O(m * n)
     public static int countBattleships(char[][] board) {
-        if (board == null || board[0].length == 0) {
-            return 0;
-        }
-
         int ans = 0;
         int m = board.length;
         int n = board[0].length;
         boolean[][] visited = new boolean[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (!visited[i][j]) {
+                if (!visited[i][j] && board[i][j] == 'X') {
                     visited[i][j] = true;
-                    if (board[i][j] == '.') {
-                        continue;
-                    } else if (board[i][j] == 'X') {
-                        ans++;
-                        int k = i;
-                        while (k + 1 < m && board[k + 1][j] == 'X') {
-                            visited[k + 1][j] = true;
-                            k++;
-                        }
-                        k = j;
-                        while (k + 1 < n && board[i][k + 1] == 'X') {
-                            visited[i][k + 1] = true;
-                            k++;
-                        }
+                    ans++;
+
+                    for (int k = i + 1; k < m && board[k][j] == 'X'; k++) {
+                        visited[k][j] = true;
+                    }
+
+                    for (int k = j + 1; k < n && board[i][k] == 'X'; k++) {
+                        visited[i][k] = true;
                     }
                 }
             }
@@ -59,13 +50,100 @@ public class Problem419_countBattleships {
         return ans;
     }
 
-    public static void dfs(char[][] board, char[][] visited, int m, int n) {
+    // BF time: O(m * n * max(m, n)) space: O(1)
+    public static int countBattleships_better(char[][] board) {
+        if (board == null || board.length == 0 || board[0].length == 0) {
+            return 0;
+        }
 
+        int ans = 0;
+        int m = board.length;
+        int n = board[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == 'X') {
+                    ans++;
+                    board[i][j] = '.';
+                    for (int k = i + 1; k < m && board[k][j] == 'X'; k++) {
+                        board[k][j] = '.';
+                    }
+                    for (int k = j + 1; k < n && board[i][k] == 'X'; k++) {
+                        board[i][k] = '.';
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    // BF time: O(m * n) space: O(1)
+    public static int countBattleships_best(char[][] board) {
+        int ans = 0;
+        int row = board.length;
+        int col = board[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (board[i][j] == 'X') {
+                    ans++;
+                    if (i > 0 && board[i - 1][j] == 'X') {
+                        continue;
+                    }
+
+                    if (j > 0 && board[i][j - 1] == 'X') {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    public static int countBattleships_dfs(char[][] board) {
+        if (board == null || board.length == 0 || board[0].length == 0) {
+            return 0;
+        }
+
+        int ans = 0;
+        int row = board.length;
+        int col = board[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (board[i][j] == 'X') {
+                    ans++;
+                    dfs(board, i, j);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    public static void dfs(char[][] board, int x, int y) {
+        int[] dx = {0, 1};
+        int[] dy = {1, 0};
+
+        board[x][y] = '.';
+
+        for (int dir = 0; dir < 2; dir++) {
+            int nX = x + dx[dir];
+            int nY = y + dy[dir];
+
+            if (nX >= 0 && nX < board.length && nY >= 0 && nY < board[0].length && board[nX][nY] == 'X') {
+                dfs(board, nX, nY);
+            }
+        }
     }
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + countBattleships(new char[][]{{'X', '.', '.', 'X'}, {'.', '.', '.', 'X'}, {
                 '.', '.', '.', 'X'}}));
+        System.out.println("2 ?= " + countBattleships_better(new char[][]{{'X', '.', '.', 'X'}, {'.', '.', '.', 'X'}, {
+                '.', '.', '.', 'X'}}));
         System.out.println("0 ?= " + countBattleships(new char[][]{{'.'}}));
+        System.out.println("0 ?= " + countBattleships_better(new char[][]{{'.'}}));
+        System.out.println("5 ?= " + countBattleships_better(new char[][]{{'.', 'X', '.', '.', 'X'}, {'.', 'X', '.', '.', 'X'},
+                {'.', '.', '.', '.', 'X'}, {'X', '.', 'X', 'X', '.'}, {'X', '.', '.', '.', 'X'}}));
     }
 }
