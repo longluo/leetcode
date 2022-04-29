@@ -1,6 +1,8 @@
 package com.longluo.leetcode.stack;
 
+import java.util.Arrays;
 import java.util.Stack;
+import java.util.stream.Stream;
 
 /**
  * 42. 接雨水
@@ -25,30 +27,67 @@ import java.util.Stack;
  */
 public class Problem42_trappingRainWater {
 
-    public static int trap(int[] height) {
+    // Row time: O(max * n) space: O(1)
+    // TimeOut
+    public static int trap_row(int[] height) {
         if (height == null || height.length <= 2) {
             return 0;
         }
+
         int ans = 0;
         int len = height.length;
-        for (int i = 1; i < len - 1; i++) {
-            int maxRight = 0;
-            int maxLeft = 0;
-            for (int j = i; j < len; j++) {
-                maxRight = Math.max(maxRight, height[j]);
-            }
+        int maxHeight = 0;
 
-            for (int k = i; k >= 0; k--) {
-                maxLeft = Math.max(maxLeft, height[k]);
-            }
+        for (int x : height) {
+            maxHeight = Math.max(maxHeight, x);
+        }
 
-            ans += (Math.min(maxLeft, maxRight) - height[i]);
+        for (int i = 1; i <= maxHeight; i++) {
+            boolean flag = false;
+            int water = 0;
+            for (int j = 0; j < len; j++) {
+                if (flag && height[j] < i) {
+                    water++;
+                }
+
+                if (height[j] >= i) {
+                    ans += water;
+                    water = 0;
+                    flag = true;
+                }
+            }
         }
 
         return ans;
     }
 
-    public static int trap_dy(int[] height) {
+    // Col time: O(n^2) space: O(1)
+    public static int trap_col(int[] height) {
+        if (height == null || height.length <= 2) {
+            return 0;
+        }
+
+        int ans = 0;
+        int len = height.length;
+        for (int i = 1; i < len - 1; i++) {
+            int maxRight = 0;
+            int maxLeft = 0;
+            for (int right = i; right < len; right++) {
+                maxRight = Math.max(maxRight, height[right]);
+            }
+
+            for (int left = i; left >= 0; left--) {
+                maxLeft = Math.max(maxLeft, height[left]);
+            }
+
+            ans += Math.min(maxLeft, maxRight) - height[i];
+        }
+
+        return ans;
+    }
+
+    // DP time: O(n) space: O(n)
+    public static int trap_dp(int[] height) {
         if (height == null || height.length <= 2) {
             return 0;
         }
@@ -57,35 +96,46 @@ public class Problem42_trappingRainWater {
         int len = height.length;
         int[] leftMax = new int[len];
         int[] rightMax = new int[len];
-        leftMax[0] = height[0];
-        for (int i = 1; i < len; i++) {
-            leftMax[i] = Math.max(height[i], leftMax[i - 1]);
-        }
-        rightMax[len - 1] = height[len - 1];
-        for (int i = len - 2; i >= 0; i--) {
-            rightMax[i] = Math.max(height[i], rightMax[i + 1]);
-        }
         for (int i = 1; i < len - 1; i++) {
-            ans += Math.min(leftMax[i], rightMax[i]) - height[i];
+            leftMax[i] = Math.max(leftMax[i - 1], height[i - 1]);
+        }
+
+        for (int i = len - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], height[i + 1]);
+        }
+
+        for (int i = 1; i < len - 1; i++) {
+            int min = Math.min(leftMax[i], rightMax[i]);
+            ans += min > height[i] ? min - height[i] : 0;
         }
 
         return ans;
     }
 
-    public static int trap_dp(int[] height) {
-        int ans = 0;
-
-
-        return ans;
-    }
-
+    // Two Pointers time: O(n) space: O(n)
     public static int trap_tp(int[] height) {
-        int ans = 0;
+        if (height == null || height.length <= 2) {
+            return 0;
+        }
 
+        int len = height.length;
+        int ans = 0;
+        int leftMax = height[0];
+        int[] rightMax = new int[len];
+        for (int i = len - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], height[i + 1]);
+        }
+
+        for (int i = 1; i < len - 1; i++) {
+            leftMax = Math.max(leftMax, height[i]);
+            int min = Math.min(leftMax, rightMax[i]);
+            ans += min > height[i] ? min - height[i] : 0;
+        }
 
         return ans;
     }
 
+    //
     public static int trap_st(int[] height) {
         int ans = 0;
         Stack<Integer> stack = new Stack<>();
@@ -94,8 +144,12 @@ public class Problem42_trappingRainWater {
     }
 
     public static void main(String[] args) {
-        System.out.println("6 ?= " + trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
-        System.out.println("9 ?= " + trap(new int[]{4, 2, 0, 3, 2, 5}));
-        System.out.println("9 ?= " + trap_dy(new int[]{4, 2, 0, 3, 2, 5}));
+        System.out.println("6 ?= " + trap_row(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println("6 ?= " + trap_col(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println("6 ?= " + trap_dp(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println("6 ?= " + trap_tp(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println("9 ?= " + trap_col(new int[]{4, 2, 0, 3, 2, 5}));
+        System.out.println("9 ?= " + trap_dp(new int[]{4, 2, 0, 3, 2, 5}));
+        System.out.println("9 ?= " + trap_tp(new int[]{4, 2, 0, 3, 2, 5}));
     }
 }
