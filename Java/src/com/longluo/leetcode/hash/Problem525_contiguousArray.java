@@ -26,30 +26,21 @@ import java.util.Map;
  */
 public class Problem525_contiguousArray {
 
+    // BF time: O(n^2) space: O(1)
     public static int findMaxLength(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return 0;
         }
 
         int ans = 0;
-        int n = nums.length;
-        int zeroNum = 0;
-        int oneNum = 0;
-        for (int i = 0; i < n; i++) {
-            zeroNum = 0;
-            oneNum = 0;
-            if (nums[i] == 0) {
-                zeroNum++;
-            } else {
-                oneNum++;
-            }
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            int zeroNum = nums[i] == 0 ? 1 : 0;
+            int oneNum = nums[i] == 1 ? 1 : 0;
 
-            for (int j = i + 1; j < n; j++) {
-                if (nums[j] == 0) {
-                    zeroNum++;
-                } else {
-                    oneNum++;
-                }
+            for (int j = i + 1; j < len; j++) {
+                zeroNum += nums[j] == 0 ? 1 : 0;
+                oneNum += nums[j] == 1 ? 1 : 0;
 
                 if (zeroNum == oneNum) {
                     ans = Math.max(ans, 2 * zeroNum);
@@ -60,6 +51,7 @@ public class Problem525_contiguousArray {
         return ans;
     }
 
+    //
     public static int findMaxLength_hash(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return 0;
