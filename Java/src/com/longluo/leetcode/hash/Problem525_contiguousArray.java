@@ -35,15 +35,14 @@ public class Problem525_contiguousArray {
         int ans = 0;
         int len = nums.length;
         for (int i = 0; i < len; i++) {
-            int zeroNum = nums[i] == 0 ? 1 : 0;
-            int oneNum = nums[i] == 1 ? 1 : 0;
+            int zeroCnt = 0;
+            int oneCnt = 0;
+            for (int j = i; j < len; j++) {
+                zeroCnt += nums[j] == 0 ? 1 : 0;
+                oneCnt += nums[j] == 1 ? 1 : 0;
 
-            for (int j = i + 1; j < len; j++) {
-                zeroNum += nums[j] == 0 ? 1 : 0;
-                oneNum += nums[j] == 1 ? 1 : 0;
-
-                if (zeroNum == oneNum) {
-                    ans = Math.max(ans, 2 * zeroNum);
+                if (zeroCnt == oneCnt) {
+                    ans = Math.max(ans, 2 * zeroCnt);
                 }
             }
         }
@@ -51,28 +50,29 @@ public class Problem525_contiguousArray {
         return ans;
     }
 
-    //
+    // PrefixSum + HashMap time: O(n) space: O(n)
     public static int findMaxLength_hash(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return 0;
         }
 
         int ans = 0;
-        int n = nums.length;
-        Map<Integer, Integer> map = new HashMap<>();
+        int len = nums.length;
+        Map<Integer, Integer> prefixMap = new HashMap<>();
         int sum = 0;
-        map.put(0, -1);
-        for (int i = 0; i < n; i++) {
+        prefixMap.put(0, -1);
+        for (int i = 0; i < len; i++) {
             if (nums[i] == 1) {
                 sum++;
             } else {
                 sum--;
             }
-            if (map.containsKey(sum)) {
-                int prevIndex = map.get(sum);
+
+            if (prefixMap.containsKey(sum)) {
+                int prevIndex = prefixMap.get(sum);
                 ans = Math.max(ans, i - prevIndex);
             } else {
-                map.put(sum, i);
+                prefixMap.put(sum, i);
             }
         }
 
