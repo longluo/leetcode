@@ -1,8 +1,6 @@
 package com.longluo.leetcode.stack;
 
-import java.util.Arrays;
 import java.util.Stack;
-import java.util.stream.Stream;
 
 /**
  * 42. 接雨水
@@ -135,10 +133,57 @@ public class Problem42_trappingRainWater {
         return ans;
     }
 
-    //
-    public static int trap_st(int[] height) {
+    // Two Pointers time: O(n) space: O(1)
+    public static int trap_tp_opt(int[] height) {
+        if (height == null || height.length <= 2) {
+            return 0;
+        }
+
+        int len = height.length;
         int ans = 0;
-        Stack<Integer> stack = new Stack<>();
+        int left = 0;
+        int right = len - 1;
+        int leftMax = height[0];
+        int rightMax = height[right];
+        while (left < right) {
+            if (height[left] < height[right]) {
+                leftMax = Math.max(leftMax, height[left]);
+                ans += leftMax - height[left];
+                left++;
+            } else {
+                rightMax = Math.max(rightMax, height[right]);
+                ans += rightMax - height[right];
+                right--;
+            }
+        }
+
+        return ans;
+    }
+
+    // Stack time: O(n) space: O(n)
+    public static int trap_stack(int[] height) {
+        int ans = 0;
+        int len = height.length;
+        Stack<Integer> stk = new Stack<>();
+        int idx = 0;
+        while (idx < len) {
+            while (!stk.empty() && height[stk.peek()] < height[idx]) {
+                int lastIdx = stk.pop();
+                while (!stk.empty() && height[stk.peek()] == height[lastIdx]) {
+                    stk.pop();
+                }
+                if (stk.empty()) {
+                    break;
+                }
+                int stackTop = stk.peek();
+                int dis = idx - stackTop - 1;
+                int min = Math.min(height[idx], height[stackTop]);
+                ans += dis * (min - height[lastIdx]);
+            }
+
+            stk.push(idx);
+            idx++;
+        }
 
         return ans;
     }
@@ -148,8 +193,13 @@ public class Problem42_trappingRainWater {
         System.out.println("6 ?= " + trap_col(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
         System.out.println("6 ?= " + trap_dp(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
         System.out.println("6 ?= " + trap_tp(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println("6 ?= " + trap_tp_opt(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println("6 ?= " + trap_stack(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
         System.out.println("9 ?= " + trap_col(new int[]{4, 2, 0, 3, 2, 5}));
         System.out.println("9 ?= " + trap_dp(new int[]{4, 2, 0, 3, 2, 5}));
         System.out.println("9 ?= " + trap_tp(new int[]{4, 2, 0, 3, 2, 5}));
+        System.out.println("9 ?= " + trap_tp_opt(new int[]{4, 2, 0, 3, 2, 5}));
+        System.out.println("9 ?= " + trap_stack(new int[]{4, 2, 0, 3, 2, 5}));
+        System.out.println("2 ?= " + trap_stack(new int[]{2, 0, 2}));
     }
 }
