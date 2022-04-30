@@ -38,36 +38,29 @@ import java.util.Random;
  */
 public class Problem519_randomFlipMatrix {
 
+    // BF time: O(m*n) space: O(mn)
     static class Solution {
         int[][] matrix;
         int row;
         int col;
-        int sum;
-        int rowIdx;
-        int colIdx;
-        Random random;
+        int total;
+        Random random = new Random();
 
         public Solution(int m, int n) {
             matrix = new int[m][n];
             row = m;
             col = n;
-            sum = row * col;
-            random = new Random();
+            total = row * col;
         }
 
         public int[] flip() {
-            int temp = random.nextInt(sum);
-            rowIdx = temp / col;
-            colIdx = temp % col;
-            while (matrix[rowIdx][colIdx] == 1) {
-                temp = random.nextInt(sum);
-                rowIdx = temp / col;
-                colIdx = temp % col;
+            int rand = random.nextInt(total);
+            while (matrix[rand / col][rand % col] == 1) {
+                rand = random.nextInt(total);
             }
 
-            matrix[rowIdx][colIdx] = 1;
-
-            return new int[]{rowIdx, colIdx};
+            matrix[rand / col][rand % col] = 1;
+            return new int[]{rand / col, rand % col};
         }
 
         public void reset() {
@@ -85,8 +78,9 @@ public class Problem519_randomFlipMatrix {
      * int[] param_1 = obj.flip();
      * obj.reset();
      */
-
     public static void main(String[] args) {
-
+        Solution sol1 = new Solution(3, 1);
+        sol1.flip();
+        sol1.reset();
     }
 }
