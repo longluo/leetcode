@@ -55,7 +55,7 @@ public class Problem384_shuffleAnArray {
         }
 
         public int[] shuffle() {
-            int[] shuffled  = new int[len];
+            int[] shuffled = new int[len];
             List<Integer> numsList = new ArrayList<>();
             for (int x : original) {
                 numsList.add(x);
@@ -71,11 +71,46 @@ public class Problem384_shuffleAnArray {
         }
     }
 
+    // Knuth
+    static class Solution_Knuth {
+        int len;
+        int[] original;
+        Random random = new Random();
+
+        public Solution_Knuth(int[] nums) {
+            this.len = nums.length;
+            original = new int[len];
+            System.arraycopy(nums, 0, original, 0, len);
+        }
+
+        public int[] reset() {
+            return original;
+        }
+
+        public int[] shuffle() {
+            int[] shuffled = new int[len];
+            System.arraycopy(original, 0, shuffled, 0, len);
+            for (int i = len - 1; i >= 0; i--) {
+                int idx = random.nextInt(i + 1);
+                int temp = shuffled[i];
+                shuffled[i] = shuffled[idx];
+                shuffled[idx] = temp;
+            }
+
+            return shuffled;
+        }
+    }
+
     public static void main(String[] args) {
         Solution sol = new Solution(new int[]{1, 2, 3, 4});
         System.out.println(Arrays.toString(sol.shuffle()));
         System.out.println(Arrays.toString(sol.reset()));
         System.out.println(Arrays.toString(sol.shuffle()));
+
+        Solution_Knuth sol2 = new Solution_Knuth(new int[]{1, 2, 3, 4});
+        System.out.println(Arrays.toString(sol2.shuffle()));
+        System.out.println(Arrays.toString(sol2.reset()));
+        System.out.println(Arrays.toString(sol2.shuffle()));
     }
 }
 /**
