@@ -18,7 +18,8 @@ package com.longluo.studyplan.binary_search;
  */
 public class Problem209_minimumSizeSubarraySum {
 
-    public static int minSubArrayLen(int target, int[] nums) {
+    // BF time: O(n^2) space: O(1)
+    public static int minSubArrayLen_bf(int target, int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
@@ -26,12 +27,8 @@ public class Problem209_minimumSizeSubarraySum {
         int len = nums.length;
         int ans = Integer.MAX_VALUE;
         for (int i = 0; i < len; i++) {
-            int sum = nums[i];
-            if (sum >= target) {
-                return 1;
-            }
-
-            for (int j = i + 1; j < len; j++) {
+            int sum = 0;
+            for (int j = i; j < len; j++) {
                 sum += nums[j];
                 if (sum >= target) {
                     ans = Math.min(ans, j - i + 1);
@@ -43,6 +40,32 @@ public class Problem209_minimumSizeSubarraySum {
         return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 
+    // Sliding Window time: O(n) space: O(1)
+    public static int minSubArrayLen_sw(int target, int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int len = nums.length;
+        int ans = Integer.MAX_VALUE;
+        int sum = 0;
+        int left = 0;
+        int right = 0;
+        while (right < len) {
+            sum += nums[right];
+            while (sum >= target) {
+                ans = Math.min(ans, right - left + 1);
+                sum -= nums[left];
+                left++;
+            }
+
+            right++;
+        }
+
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+
+    // PrefixSum + Sliding Window time: O(n) space: O(n)
     public static int minSubArrayLen_prefix(int target, int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
@@ -57,12 +80,12 @@ public class Problem209_minimumSizeSubarraySum {
 
         int left = 0;
         int right = 1;
-        while (left < right && right <= len) {
+        while (right <= len) {
             int sum = prefixSums[right] - prefixSums[left];
             if (sum >= target) {
                 ans = Math.min(ans, right - left);
                 left++;
-            } else if (sum < target) {
+            } else {
                 right++;
             }
         }
@@ -70,7 +93,8 @@ public class Problem209_minimumSizeSubarraySum {
         return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 
-    public static int minSubArrayLen_bs(int target, int[] nums) {
+    // PrefixSum + Binary Search time: O(nlogn) space: O(n)
+    public static int minSubArrayLen_prefix_bs(int target, int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
@@ -83,13 +107,8 @@ public class Problem209_minimumSizeSubarraySum {
         }
 
         for (int i = 1; i <= len; i++) {
-            int value = target + prefixSums[i - 1];
-            int upperBound = binarySearch(prefixSums, i, value);
-//            int upperBound = Arrays.binarySearch(prefixSums, value);
-            if (upperBound == -1) {
-                continue;
-            }
-            if (upperBound <= len) {
+            int upperBound = binarySearch(prefixSums, i, len, target + prefixSums[i - 1]);
+            if (upperBound != -1) {
                 ans = Math.min(ans, upperBound - i + 1);
             }
         }
@@ -97,61 +116,74 @@ public class Problem209_minimumSizeSubarraySum {
         return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 
-    public static int binarySearch(int[] nums, int start, int target) {
-        int len = nums.length;
-        if (start > len || nums[len - 1] < target) {
+    public static int binarySearch(int[] nums, int left, int right, int target) {
+        if (nums[right] < target) {
             return -1;
         }
 
-        if (nums[start] > target) {
-            return start;
-        }
-
-        int end = len - 1;
-        while (start < end) {
-            int mid = start + (end - start) / 2;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
             if (nums[mid] >= target) {
-                end = mid;
+                right = mid;
             } else if (nums[mid] < target) {
-                start = mid + 1;
+                left = mid + 1;
             }
         }
 
-        return end;
+        return nums[left] >= target ? left : -1;
     }
 
-    public static int minSubArrayLen_sw(int target, int[] nums) {
+    // Binary Search time: O(nlogn) space: O(1)
+    public static int minSubArrayLen_bs(int target, int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
 
         int len = nums.length;
-        int ans = Integer.MAX_VALUE;
-        int start = 0;
-        int end = 0;
-        int sum = 0;
-        while (end < len) {
-            sum += nums[end];
-            while (sum >= target) {
-                ans = Math.min(ans, end - start + 1);
-                sum -= nums[start];
-                start++;
+        int left = 0;
+        int right = len;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int maxSum = getMaxSum(nums, mid);
+            if (mid == len && maxSum < target) {
+                return 0;
             }
-
-            end++;
+            if (maxSum >= target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
         }
 
-        return ans == Integer.MAX_VALUE ? 0 : ans;
+        return left <= len ? left : 0;
+    }
+
+    public static int getMaxSum(int[] nums, int segLen) {
+        int sum = 0;
+        for (int i = 0; i < segLen; i++) {
+            sum += nums[i];
+        }
+
+        int ans = sum;
+        for (int i = segLen; i < nums.length; i++) {
+            sum += nums[i];
+            sum -= nums[i - segLen];
+            ans = Math.max(ans, sum);
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
-        System.out.println("2 ?= " + minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
+        System.out.println("2 ?= " + minSubArrayLen_bf(7, new int[]{2, 3, 1, 2, 4, 3}));
         System.out.println("2 ?= " + minSubArrayLen_prefix(7, new int[]{2, 3, 1, 2, 4, 3}));
-        System.out.println("2 ?= " + minSubArrayLen_bs(7, new int[]{2, 3, 1, 2, 4, 3}));
+        System.out.println("2 ?= " + minSubArrayLen_prefix_bs(7, new int[]{2, 3, 1, 2, 4, 3}));
         System.out.println("2 ?= " + minSubArrayLen_sw(7, new int[]{2, 3, 1, 2, 4, 3}));
         System.out.println("5 ?= " + minSubArrayLen_prefix(15, new int[]{1, 2, 3, 4, 5}));
         System.out.println("2 ?= " + minSubArrayLen_prefix(15, new int[]{5, 1, 3, 5, 10, 7, 4, 9, 2, 8}));
-        System.out.println("1 ?= " + minSubArrayLen(4, new int[]{1, 4, 4}));
-        System.out.println("0 ?= " + minSubArrayLen(11, new int[]{1, 1, 1, 1, 1, 1, 1, 1}));
+        System.out.println("1 ?= " + minSubArrayLen_sw(4, new int[]{1, 4, 4}));
+        System.out.println("0 ?= " + minSubArrayLen_sw(11, new int[]{1, 1, 1, 1, 1, 1, 1, 1}));
+        System.out.println("2 ?= " + minSubArrayLen_bs(7, new int[]{2, 3, 1, 2, 4, 3}));
+        System.out.println("0 ?= " + minSubArrayLen_bs(11, new int[]{1, 1, 1, 1, 1, 1, 1, 1}));
     }
 }
