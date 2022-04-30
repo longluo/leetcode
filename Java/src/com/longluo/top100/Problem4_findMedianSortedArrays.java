@@ -121,9 +121,11 @@ public class Problem4_findMedianSortedArrays {
         }
     }
 
-    public static double findMedianSortedArrays_1(int[] nums1, int[] nums2) {
+    // Merge time: O(m + n) space: O(1)
+    public static double findMedianSortedArrays_merge(int[] nums1, int[] nums2) {
         int m = nums1.length;
         int n = nums2.length;
+
         if (m == 0) {
             if (n % 2 == 0) {
                 return (nums2[n / 2 - 1] + nums2[n / 2]) / 2.0;
@@ -131,6 +133,7 @@ public class Problem4_findMedianSortedArrays {
                 return nums2[n / 2];
             }
         }
+
         if (n == 0) {
             if (m % 2 == 0) {
                 return (nums1[m / 2 - 1] + nums1[m / 2]) / 2.0;
@@ -140,16 +143,25 @@ public class Problem4_findMedianSortedArrays {
         }
 
         int len = m + n;
-        int left = -1;
-        int right = -1;
-        int aIdx = 0;
-        int bIdx = 0;
+        int p = 0;
+        int q = 0;
+        int left = 0;
+        int right = 0;
         for (int i = 0; i <= len / 2; i++) {
             left = right;
-            if (aIdx < m && (bIdx >= n || nums1[aIdx] < nums2[bIdx])) {
-                right = nums1[aIdx++];
-            } else {
-                right = nums2[bIdx++];
+
+            if (p == m && q < n) {
+                right = nums2[q];
+                q++;
+            } else if (q == n && p < m) {
+                right = nums1[p];
+                p++;
+            } else if (p < m && nums1[p] <= nums2[q]) {
+                right = nums1[p];
+                p++;
+            } else if (q < n && nums1[p] > nums2[q]) {
+                right = nums2[q];
+                q++;
             }
         }
 
@@ -213,7 +225,10 @@ public class Problem4_findMedianSortedArrays {
         System.out.println("0.00000 ?= " + findMedianSortedArrays_bf(new int[]{0, 0}, new int[]{0, 0}));
         System.out.println("2.00000 ?= " + findMedianSortedArrays_bf(new int[]{2}, new int[]{}));
         System.out.println("0.00000 ?= " + findMedianSortedArrays_bf(new int[]{0, 0, 0, 0, 0}, new int[]{-1, 0, 0, 0, 0, 0, 1}));
-        System.out.println("0.0 ?= " + findMedianSortedArrays_1(new int[]{0, 0}, new int[]{0, 0}));
-        System.out.println("2.0 ?= " + findMedianSortedArrays_1(new int[]{2}, new int[]{}));
+
+        System.out.println("2.0 ?= " + findMedianSortedArrays_merge(new int[]{2}, new int[]{}));
+        System.out.println("0.0 ?= " + findMedianSortedArrays_merge(new int[]{0, 0}, new int[]{0, 0}));
+        System.out.println("2.5 ?= " + findMedianSortedArrays_merge(new int[]{1, 2}, new int[]{3, 4}));
+
     }
 }
