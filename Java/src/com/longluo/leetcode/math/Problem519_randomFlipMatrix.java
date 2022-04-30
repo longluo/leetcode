@@ -1,5 +1,7 @@
 package com.longluo.leetcode.math;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -72,6 +74,36 @@ public class Problem519_randomFlipMatrix {
         }
     }
 
+    // Hash
+    static class Solution_hash {
+        int row;
+        int col;
+        int total;
+        Map<Integer, Integer> map;
+        Random random = new Random();
+
+        public Solution_hash(int m, int n) {
+            row = m;
+            col = n;
+            map = new HashMap<>();
+            total = row * col;
+        }
+
+        public int[] flip() {
+            int x = random.nextInt(total);
+            total--;
+            int idx = map.getOrDefault(x, x);
+            map.put(x, map.getOrDefault(total, total));
+            return new int[]{idx / col, idx % col};
+        }
+
+        public void reset() {
+            map.clear();
+            total = row * col;
+        }
+    }
+
+
     /**
      * Your Solution object will be instantiated and called as such:
      * Solution obj = new Solution(m, n);
@@ -82,5 +114,12 @@ public class Problem519_randomFlipMatrix {
         Solution sol1 = new Solution(3, 1);
         sol1.flip();
         sol1.reset();
+
+        Solution_hash sol2 = new Solution_hash(3, 1);
+        sol2.flip();
+        sol2.flip();
+        sol2.flip();
+        sol2.reset();
+        sol2.flip();
     }
 }
