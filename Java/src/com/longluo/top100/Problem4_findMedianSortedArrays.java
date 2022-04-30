@@ -41,18 +41,18 @@ package com.longluo.top100;
  */
 public class Problem4_findMedianSortedArrays {
 
-    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+    // BF time: O(m + n) space: O(m + n)
+    public static double findMedianSortedArrays_bf(int[] nums1, int[] nums2) {
         int m = nums1.length;
         int n = nums2.length;
-        int[] nums = new int[m + n];
+
         if (m == 0) {
             if (n % 2 == 0) {
                 return (nums2[n / 2 - 1] + nums2[n / 2]) / 2.0;
             } else {
                 return nums2[n / 2];
             }
-        }
-        if (n == 0) {
+        } else if (n == 0) {
             if (m % 2 == 0) {
                 return (nums1[m / 2 - 1] + nums1[m / 2]) / 2.0;
             } else {
@@ -60,34 +60,64 @@ public class Problem4_findMedianSortedArrays {
             }
         }
 
-        int count = 0;
-        int i = 0;
-        int j = 0;
-        while (count != (m + n)) {
-            if (i == m) {
-                while (j != n) {
-                    nums[count++] = nums2[j++];
-                }
-                break;
-            }
-            if (j == n) {
-                while (i != m) {
-                    nums[count++] = nums1[i++];
-                }
-                break;
-            }
-
-            if (nums1[i] < nums2[j]) {
-                nums[count++] = nums1[i++];
-            } else {
-                nums[count++] = nums2[j++];
+        int[] nums = new int[m + n];
+        int total = m + n;
+        for (int i = 0, j = 0, cnt = 0; cnt < total; ) {
+            if (i == m && j < n) {
+                nums[cnt++] = nums2[j++];
+            } else if (j == n && i < m) {
+                nums[cnt++] = nums1[i++];
+            } else if (i < m && nums1[i] <= nums2[j]) {
+                nums[cnt++] = nums1[i++];
+            } else if (i < m && nums1[i] > nums2[j]) {
+                nums[cnt++] = nums2[j++];
             }
         }
 
-        if (count % 2 == 0) {
-            return (nums[count / 2 - 1] + nums[count / 2]) / 2.0;
+        if (total % 2 == 0) {
+            return (nums[total / 2 - 1] + nums[total / 2]) / 2.0;
         } else {
-            return nums[count / 2];
+            return nums[total / 2];
+        }
+    }
+
+    // BF Opt time: O(m + n) space: O(m + n)
+    public static double findMedianSortedArrays_bf_opt(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+
+        if (m == 0) {
+            if (n % 2 == 0) {
+                return (nums2[n / 2 - 1] + nums2[n / 2]) / 2.0;
+            } else {
+                return nums2[n / 2];
+            }
+        } else if (n == 0) {
+            if (m % 2 == 0) {
+                return (nums1[m / 2 - 1] + nums1[m / 2]) / 2.0;
+            } else {
+                return nums1[m / 2];
+            }
+        }
+
+        int[] nums = new int[m + n];
+        int total = m + n;
+        for (int i = 0, j = 0, cnt = 0; cnt <= total / 2; ) {
+            if (i == m && j < n) {
+                nums[cnt++] = nums2[j++];
+            } else if (j == n && i < m) {
+                nums[cnt++] = nums1[i++];
+            } else if (i < m && nums1[i] <= nums2[j]) {
+                nums[cnt++] = nums1[i++];
+            } else if (i < m && nums1[i] > nums2[j]) {
+                nums[cnt++] = nums2[j++];
+            }
+        }
+
+        if (total % 2 == 0) {
+            return (nums[total / 2 - 1] + nums[total / 2]) / 2.0;
+        } else {
+            return nums[total / 2];
         }
     }
 
@@ -177,12 +207,12 @@ public class Problem4_findMedianSortedArrays {
     }
 
     public static void main(String[] args) {
-        System.out.println("1.00000 ?= " + findMedianSortedArrays(new int[]{}, new int[]{1}));
-        System.out.println("2.00000 ?= " + findMedianSortedArrays(new int[]{1, 3}, new int[]{2}));
-        System.out.println("2.50000 ?= " + findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}));
-        System.out.println("0.00000 ?= " + findMedianSortedArrays(new int[]{0, 0}, new int[]{0, 0}));
-        System.out.println("2.00000 ?= " + findMedianSortedArrays(new int[]{2}, new int[]{}));
-        System.out.println("0.00000 ?= " + findMedianSortedArrays(new int[]{0, 0, 0, 0, 0}, new int[]{-1, 0, 0, 0, 0, 0, 1}));
+        System.out.println("1.00000 ?= " + findMedianSortedArrays_bf(new int[]{}, new int[]{1}));
+        System.out.println("2.00000 ?= " + findMedianSortedArrays_bf(new int[]{1, 3}, new int[]{2}));
+        System.out.println("2.50000 ?= " + findMedianSortedArrays_bf(new int[]{1, 2}, new int[]{3, 4}));
+        System.out.println("0.00000 ?= " + findMedianSortedArrays_bf(new int[]{0, 0}, new int[]{0, 0}));
+        System.out.println("2.00000 ?= " + findMedianSortedArrays_bf(new int[]{2}, new int[]{}));
+        System.out.println("0.00000 ?= " + findMedianSortedArrays_bf(new int[]{0, 0, 0, 0, 0}, new int[]{-1, 0, 0, 0, 0, 0, 1}));
         System.out.println("0.0 ?= " + findMedianSortedArrays_1(new int[]{0, 0}, new int[]{0, 0}));
         System.out.println("2.0 ?= " + findMedianSortedArrays_1(new int[]{2}, new int[]{}));
     }
