@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top100;
 
 /**
  * 494. 目标和
@@ -32,16 +32,20 @@ package com.longluo.leetcode.dp;
  */
 public class Problem494_targetSum {
 
-    public static int findTargetSumWays(int[] nums, int target) {
+    // DP
+    public static int findTargetSumWays_dp(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
 
-        int n = nums.length;
-        int[][] dp = new int[n + 1][target + 1];
+        int len = nums.length;
+        int[][] dp = new int[len + 1][target];
+        for (int i = 0; i <= len; i++) {
+            dp[i][0] = 1;
+        }
 
 
-        return dp[n][target];
+        return 0;
     }
 
     public static int ans = 0;
@@ -75,21 +79,35 @@ public class Problem494_targetSum {
         dfs(nums, idx, remain + nums[idx]);
     }
 
+    // Backtracking time: O(2^n) space: O(n)
+    static int count = 0;
+
     public static int findTargetSumWays_backtrack(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
-            return 0;
+        count = 0;
+        backtrack(nums, 0, target);
+        return count;
+    }
+
+    public static void backtrack(int[] nums, int idx, int remain) {
+        if (idx == nums.length && remain == 0) {
+            count++;
+            return;
         }
 
-        int ans = 0;
+        if (idx >= nums.length) {
+            return;
+        }
 
-
-        return ans;
+        backtrack(nums, idx + 1, remain + nums[idx]);
+        backtrack(nums, idx + 1, remain - nums[idx]);
     }
 
     public static void main(String[] args) {
-        System.out.println("5 ?= " + findTargetSumWays(new int[]{1, 1, 1, 1, 1}, 3));
+        System.out.println("5 ?= " + findTargetSumWays_dp(new int[]{1, 1, 1, 1, 1}, 3));
         System.out.println("5 ?= " + findTargetSumWays_dfs(new int[]{1, 1, 1, 1, 1}, 3));
-        System.out.println("1 ?= " + findTargetSumWays(new int[]{1}, 1));
+        System.out.println("5 ?= " + findTargetSumWays_backtrack(new int[]{1, 1, 1, 1, 1}, 3));
+        System.out.println("1 ?= " + findTargetSumWays_dp(new int[]{1}, 1));
         System.out.println("1 ?= " + findTargetSumWays_dfs(new int[]{1}, 1));
+        System.out.println("1 ?= " + findTargetSumWays_backtrack(new int[]{1}, 1));
     }
 }
