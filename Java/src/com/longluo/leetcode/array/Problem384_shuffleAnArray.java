@@ -1,6 +1,8 @@
 package com.longluo.leetcode.array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -36,35 +38,36 @@ import java.util.Random;
  */
 public class Problem384_shuffleAnArray {
 
+    // BF time: O(n) space: O(n)
     static class Solution {
-
         int len;
-        int[] src;
+        int[] original;
+        Random random = new Random();
 
         public Solution(int[] nums) {
-            len = nums.length;
-            src = new int[len];
-            System.arraycopy(nums, 0, src, 0, len);
+            this.len = nums.length;
+            original = new int[len];
+            System.arraycopy(nums, 0, original, 0, len);
         }
 
         public int[] reset() {
-            return src;
+            return original;
         }
 
         public int[] shuffle() {
-            int[] res = new int[len];
-            int seed = len - 1;
-            Random random = new Random();
-            int idx = 0;
-            while (idx < len) {
-                seed = random.nextInt(len);
-                while (res[seed] == 0) {
-                    res[seed] = src[idx];
-                    idx++;
-                }
+            int[] shuffled  = new int[len];
+            List<Integer> numsList = new ArrayList<>();
+            for (int x : original) {
+                numsList.add(x);
             }
 
-            return res;
+            for (int i = 0; i < len; i++) {
+                int idx = random.nextInt(numsList.size());
+                shuffled[i] = numsList.get(idx);
+                numsList.remove(idx);
+            }
+
+            return shuffled;
         }
     }
 
