@@ -25,7 +25,8 @@ import java.util.Arrays;
  */
 public class Problem128_longestConsecutiveSequence {
 
-    // BF
+    // BF time: O(n^2) space: O(logn)
+    // Timeout
     public static int longestConsecutive_bf(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums.length;
@@ -35,15 +36,12 @@ public class Problem128_longestConsecutiveSequence {
         int ans = 1;
         int len = nums.length;
         for (int i = 0; i < len; i++) {
-            int start = nums[i];
+            int last = nums[i];
             for (int j = i + 1; j < len; j++) {
-                if (nums[j] == nums[j - 1]) {
-                    continue;
-                }
-                if (nums[j] == start + 1) {
+                if (nums[j] == last + 1) {
                     ans = Math.max(ans, nums[j] - nums[i] + 1);
-                    start = nums[j];
-                } else {
+                    last = nums[j];
+                } else if (nums[j] > last + 1) {
                     break;
                 }
             }
@@ -58,6 +56,5 @@ public class Problem128_longestConsecutiveSequence {
         System.out.println("3 ?= " + longestConsecutive_bf(new int[]{1, 2, 0, 1}));
         System.out.println("4 ?= " + longestConsecutive_bf(new int[]{100, 4, 200, 1, 3, 2}));
         System.out.println("9 ?= " + longestConsecutive_bf(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}));
-
     }
 }
