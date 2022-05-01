@@ -272,12 +272,12 @@ public class Problem18_4Sum {
 
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
-        dfs(nums, ans, new ArrayList<>(), 0, 0, target);
+        dfs(nums, ans, new ArrayList<>(), 0, target);
         return ans;
     }
 
-    public static void dfs(int[] nums, List<List<Integer>> res, List<Integer> list, int start, int sum, int target) {
-        if (list.size() == 4 && target == sum) {
+    public static void dfs(int[] nums, List<List<Integer>> res, List<Integer> list, int start, int target) {
+        if (list.size() == 4 && target == 0) {
             res.add(new ArrayList<>(list));
             return;
         }
@@ -297,16 +297,16 @@ public class Problem18_4Sum {
                 continue;
             }
 
-            if (i < len - 1 && sum + nums[i] + (long) (3 - list.size()) * nums[i + 1] > target) {
+            if (i < len - 1 && nums[i] + (long) (3 - list.size()) * nums[i + 1] > target) {
                 return;
             }
 
-            if (i < len - 1 && sum + nums[i] + (long) (3 - list.size()) * nums[len - 1] < target) {
+            if (i < len - 1 && nums[i] + (long) (3 - list.size()) * nums[len - 1] < target) {
                 continue;
             }
 
             list.add(nums[i]);
-            dfs(nums, res, list, i + 1, sum + nums[i], target);
+            dfs(nums, res, list, i + 1, target - nums[i]);
             list.remove(list.size() - 1);
         }
     }
