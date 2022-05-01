@@ -282,7 +282,7 @@ public class Problem18_4Sum {
             return;
         }
 
-        if (list.size() > 4) {
+        if (list.size() >= 4) {
             return;
         }
 
