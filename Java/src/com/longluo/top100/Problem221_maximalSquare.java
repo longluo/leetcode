@@ -27,25 +27,41 @@ package com.longluo.top100;
  */
 public class Problem221_maximalSquare {
 
-    // BF
+    // BF time: O(m^2 * n^2) space: O(1)
+    // Timeout
     public static int maximalSquare_bf(char[][] matrix) {
         int row = matrix.length;
         int col = matrix[0].length;
-        int max = 0;
-        for (int i = 0; i < row; ) {
-            for (int j = 0; j < col; ) {
-                if (matrix[i][j] == 0) {
-                    j++;
-                    continue;
-                } else {
+        int ans = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == '1') {
+                   for (int len = 1; i + len <= row && j + len <= col; len++) {
+                       boolean isSquare = true;
+                       for (int m = 0; i + m < row && m < len; m++) {
+                           for (int n = 0; j + n < col && n < len; n++) {
+                               if (matrix[i + m][j + n] == '0') {
+                                   isSquare = false;
+                                   break;
+                               }
+                           }
+                       }
+
+                       if (isSquare) {
+                           ans = Math.max(ans, len * len);
+                       }
+                   }
                 }
             }
         }
 
-        return 0;
+        return ans;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("0 ?= " + maximalSquare_bf(new char[][]{{'0'}}));
+        System.out.println("1 ?= " + maximalSquare_bf(new char[][]{{'1'}}));
+        System.out.println("1 ?= " + maximalSquare_bf(new char[][]{{'0', '1'}, {'1', '0'}}));
+        System.out.println("4 ?= " + maximalSquare_bf(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '0', '1', '0'}}));
     }
 }
