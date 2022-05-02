@@ -30,88 +30,70 @@ package com.longluo.leetcode.math;
  */
 public class Problem390_eliminationGame {
 
-    public static int lastRemaining(int n) {
-        if (n <= 1) {
-            return 1;
+    // BF time: O(nlogn) space: O(n)
+    // Memory Out
+    public static int lastRemaining_bf(int n) {
+        if (n <= 2) {
+            return n;
         }
 
         int[] nums = new int[n];
-        boolean flag = true;
-        int cnt = 0;
-        int ans = -1;
-        int remain = n;
-        while (remain > 1) {
-            if (flag) {
-                int idx = 0;
-                while (nums[idx] != 0) {
-                    idx++;
-                }
-                nums[idx] = -1;
-                remain--;
-                if (remain == 1) {
-                    break;
-                }
-                for (int i = idx + 1; i < n; i++) {
-                    if (nums[i] == 0) {
-                        cnt++;
-                        if (cnt == 2) {
-                            nums[i] = -1;
-                            remain--;
-                            cnt = 0;
-                        }
-                    }
-                }
-                flag = !flag;
-            } else {
-                int idx = n - 1;
-                while (nums[idx] != 0) {
-                    idx--;
-                }
-                nums[idx] = -1;
-                remain--;
-                if (remain == 1) {
-                    break;
-                }
-                cnt = 0;
-                for (int i = idx - 1; i >= 0; i--) {
-                    if (nums[i] == 0) {
-                        cnt++;
-                        if (cnt == 2) {
-                            nums[i] = -1;
-                            remain--;
-                            cnt = 0;
-                        }
-                    }
-                }
-                flag = !flag;
-            }
-        }
-
         for (int i = 0; i < n; i++) {
-            if (nums[i] == 0) {
-                ans = i + 1;
+            nums[i] = i + 1;
+        }
+
+        int remain = n;
+        boolean leftToRight = true;
+        while (remain > 1) {
+            boolean delete = true;
+            if (leftToRight) {
+                for (int j = 0; j < n; j++) {
+                    if (nums[j] > 0) {
+                        nums[j] = delete ? 0 : nums[j];
+                        delete = !delete;
+                    }
+                }
+            } else {
+                for (int j = n - 1; j >= 0; j--) {
+                    if (nums[j] > 0) {
+                        nums[j] = delete ? 0 : nums[j];
+                        delete = !delete;
+                    }
+                }
+            }
+
+            leftToRight = !leftToRight;
+            remain >>= 1;
+        }
+
+        for (int x : nums) {
+            if (x > 0) {
+                return x;
             }
         }
 
-        return ans;
+        return n;
     }
 
     public static void main(String[] args) {
-        System.out.println("1 ?= " + lastRemaining(1));
-        System.out.println("2 ?= " + lastRemaining(2));
-        System.out.println("2 ?= " + lastRemaining(3));
-        System.out.println("2 ?= " + lastRemaining(4));
-        System.out.println("2 ?= " + lastRemaining(5));
-        System.out.println("4 ?= " + lastRemaining(6));
-        System.out.println("4 ?= " + lastRemaining(7));
-        System.out.println("6 ?= " + lastRemaining(8));
-        System.out.println("6 ?= " + lastRemaining(9));
-        System.out.println("8 ?= " + lastRemaining(10));
-        System.out.println("8 ?= " + lastRemaining(11));
-        System.out.println("8 ?= " + lastRemaining(12));
-        System.out.println("8 ?= " + lastRemaining(13));
-        System.out.println("8 ?= " + lastRemaining(14));
-        System.out.println("8 ?= " + lastRemaining(15));
-        System.out.println("14 ?= " + lastRemaining(16));
+        System.out.println(Math.log(9) / Math.log(2));
+
+        System.out.println("1 ?= " + lastRemaining_bf(1));
+        System.out.println("2 ?= " + lastRemaining_bf(2));
+        System.out.println("2 ?= " + lastRemaining_bf(3));
+        System.out.println("2 ?= " + lastRemaining_bf(4));
+        System.out.println("2 ?= " + lastRemaining_bf(5));
+        System.out.println("4 ?= " + lastRemaining_bf(6));
+        System.out.println("4 ?= " + lastRemaining_bf(7));
+        System.out.println("6 ?= " + lastRemaining_bf(8));
+        System.out.println("6 ?= " + lastRemaining_bf(9));
+        System.out.println("8 ?= " + lastRemaining_bf(10));
+        System.out.println("8 ?= " + lastRemaining_bf(11));
+        System.out.println("8 ?= " + lastRemaining_bf(12));
+        System.out.println("8 ?= " + lastRemaining_bf(13));
+        System.out.println("8 ?= " + lastRemaining_bf(14));
+        System.out.println("8 ?= " + lastRemaining_bf(15));
+        System.out.println("6 ?= " + lastRemaining_bf(16));
+        
     }
 }
