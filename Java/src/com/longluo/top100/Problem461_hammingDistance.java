@@ -38,8 +38,21 @@ public class Problem461_hammingDistance {
         return ans;
     }
 
+    // XOR time: O(32) space: O(1)
+    public static int hammingDistance_xor(int x, int y) {
+        int ans = 0;
+        int res = x ^ y;
+        for (int i = 0; i < 32; i++) {
+            ans += res & 0x01;
+            res >>= 1;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + hammingDistance_bf(3, 1));
         System.out.println("2 ?= " + hammingDistance_bf(1, 4));
+        System.out.println("2 ?= " + hammingDistance_xor(1, 4));
     }
 }
