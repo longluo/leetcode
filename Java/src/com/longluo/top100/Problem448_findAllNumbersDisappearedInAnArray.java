@@ -1,7 +1,6 @@
 package com.longluo.top100;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 448. 找到所有数组中消失的数字
@@ -49,8 +48,57 @@ public class Problem448_findAllNumbersDisappearedInAnArray {
         return ans;
     }
 
+    // HashSet time: O(n) space: O(n)
+    public static List<Integer> findDisappearedNumbers_set(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        int len = nums.length;
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            set.add(x);
+        }
+
+        for (int i = 1; i <= len; i++) {
+            if (!set.contains(i)) {
+                ans.add(i);
+            }
+        }
+
+        return ans;
+    }
+
+    // Sort + Two Pointers time: O(nlogn) space: O(logn)
+    public static List<Integer> findDisappearedNumbers_sort(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        Arrays.sort(nums);
+        int len = nums.length;
+        int p = 0;
+        int q = 1;
+        while (p < len) {
+            while (nums[p] > q) {
+                ans.add(q);
+                q++;
+            }
+
+            if (nums[p] == q) {
+                q++;
+            }
+
+            p++;
+        }
+
+        while (q <= len) {
+            ans.add(q);
+            q++;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + findDisappearedNumbers_bf(new int[]{1}));
         System.out.println("2 ?= " + findDisappearedNumbers_bf(new int[]{1, 1}));
+        System.out.println("2 ?= " + findDisappearedNumbers_sort(new int[]{1, 1}));
+        System.out.println("[5, 6] ?= " + findDisappearedNumbers_sort(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
+        System.out.println("2 ?= " + findDisappearedNumbers_set(new int[]{1, 1}));
     }
 }
