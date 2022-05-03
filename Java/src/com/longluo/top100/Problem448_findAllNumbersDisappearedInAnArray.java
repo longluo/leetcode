@@ -94,11 +94,39 @@ public class Problem448_findAllNumbersDisappearedInAnArray {
         return ans;
     }
 
+    // Hash  time: O(n) space: O(1)
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == i + 1) {
+                continue;
+            }
+
+            while (nums[i] <= len && nums[nums[i] - 1] != nums[i]) {
+                int temp = nums[i];
+                nums[i] = nums[temp - 1];
+                nums[temp - 1] = temp;
+            }
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] != i + 1) {
+                ans.add(i + 1);
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + findDisappearedNumbers_bf(new int[]{1}));
         System.out.println("2 ?= " + findDisappearedNumbers_bf(new int[]{1, 1}));
         System.out.println("2 ?= " + findDisappearedNumbers_sort(new int[]{1, 1}));
         System.out.println("[5, 6] ?= " + findDisappearedNumbers_sort(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
         System.out.println("2 ?= " + findDisappearedNumbers_set(new int[]{1, 1}));
+
+        System.out.println("[5, 6] ?= " + findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
+        System.out.println("[2] ?= " + findDisappearedNumbers(new int[]{1, 1}));
     }
 }
