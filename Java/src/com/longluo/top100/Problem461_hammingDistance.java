@@ -50,9 +50,15 @@ public class Problem461_hammingDistance {
         return ans;
     }
 
+    // API time: O(1) space: O(1)
+    public static int hammingDistance_api(int x, int y) {
+        return Integer.bitCount(x ^ y);
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + hammingDistance_bf(3, 1));
         System.out.println("2 ?= " + hammingDistance_bf(1, 4));
         System.out.println("2 ?= " + hammingDistance_xor(1, 4));
+        System.out.println("2 ?= " + hammingDistance_api(1, 4));
     }
 }
