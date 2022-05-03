@@ -55,10 +55,9 @@ public class Problem207_courseSchedule {
             }
         }
 
-        int idx = 0;
         while (!queue.isEmpty()) {
             Integer currId = queue.poll();
-            idx++;
+            numCourses--;
             for (int[] pre : prerequisites) {
                 if (pre[1] == currId) {
                     indegree[pre[0]]--;
@@ -69,7 +68,7 @@ public class Problem207_courseSchedule {
             }
         }
 
-        return idx == numCourses;
+        return numCourses == 0;
     }
 
     public static void main(String[] args) {
