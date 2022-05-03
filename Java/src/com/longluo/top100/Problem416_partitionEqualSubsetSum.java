@@ -26,37 +26,50 @@ import java.util.List;
  */
 public class Problem416_partitionEqualSubsetSum {
 
-    //
-    public static boolean canPartition(int[] nums) {
-        int sum = 0;
-        for (int num : nums) {
-            sum += num;
+    // Backtracking time: O(2^n) space: O(n)
+    // TimeOut
+    public static boolean canPartition_bt(int[] nums) {
+        int len = nums.length;
+        if (len < 2) {
+            return false;
         }
+
+        int sum = 0;
+        for (int x : nums) {
+            sum += x;
+        }
+
         if (sum % 2 == 1) {
             return false;
         }
 
-        List<Integer> res = new ArrayList<>();
-        return res.size() > 0;
+        return backtrack(nums, new ArrayList<>(), 0, sum / 2);
     }
 
-    public static void backtrack(int[] nums, List<Integer> list, int idx, int remain) {
-        if (remain <= 0) {
-            return;
+    public static boolean backtrack(int[] nums, List<Integer> list, int idx, int remain) {
+        if (remain == 0) {
+            return true;
         }
 
+        boolean flag = false;
         for (int i = idx; i < nums.length; i++) {
             if (nums[i] > remain) {
+                continue;
+            }
+
+            list.add(nums[i]);
+            flag = backtrack(nums, list, i + 1, remain - nums[i]);
+            if (flag) {
                 break;
             }
-            list.add(nums[i]);
-            backtrack(nums, list, idx + 1, remain - nums[i]);
             list.remove(list.size() - 1);
         }
+
+        return flag;
     }
 
     public static void main(String[] args) {
-        canPartition(new int[]{1, 5, 11, 5});
-        canPartition(new int[]{1, 2, 3, 5});
+        System.out.println("true ?= " + canPartition_bt(new int[]{1, 5, 11, 5}));
+        System.out.println("false ?= " + canPartition_bt(new int[]{1, 2, 3, 5}));
     }
 }
