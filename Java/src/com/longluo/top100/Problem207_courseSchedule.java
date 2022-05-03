@@ -1,5 +1,10 @@
 package com.longluo.top100;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 207. 课程表
  * <p>
@@ -32,17 +37,43 @@ package com.longluo.top100;
  */
 public class Problem207_courseSchedule {
 
+    // Topo Sorting time: O(v+e) space: O(v)
     public static boolean canFinish(int numCourses, int[][] prerequisites) {
         if (prerequisites == null || prerequisites.length == 0 || prerequisites[0].length == 0) {
-            return false;
+            return true;
         }
 
+        int[] indegree = new int[numCourses];
+        for (int[] pre : prerequisites) {
+            indegree[pre[0]]++;
+        }
 
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) {
+                queue.offer(i);
+            }
+        }
 
-        return false;
+        int idx = 0;
+        while (!queue.isEmpty()) {
+            Integer currId = queue.poll();
+            idx++;
+            for (int[] pre : prerequisites) {
+                if (pre[1] == currId) {
+                    indegree[pre[0]]--;
+                    if (indegree[pre[0]] == 0) {
+                        queue.offer(pre[0]);
+                    }
+                }
+            }
+        }
+
+        return idx == numCourses;
     }
 
     public static void main(String[] args) {
+        System.out.println("true ?= " + canFinish(1, new int[][]{{}}));
         System.out.println("true ?= " + canFinish(2, new int[][]{{1, 0}}));
         System.out.println("false ?= " + canFinish(2, new int[][]{{1, 0}, {0, 1}}));
     }
