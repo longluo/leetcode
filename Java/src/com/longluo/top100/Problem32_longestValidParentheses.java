@@ -114,7 +114,7 @@ public class Problem32_longestValidParentheses {
         return max;
     }
 
-    // DP
+    // DP time: O(n) space: O(n)
     public static int longestValidParentheses_dp(String s) {
         if (s == null || s.length() <= 1) {
             return 0;
@@ -166,7 +166,7 @@ public class Problem32_longestValidParentheses {
         return max;
     }
 
-    // Best
+    // Best time: O(n) space: O(1)
     public static int longestValidParentheses_best(String s) {
         if (s == null || s.length() <= 1) {
             return 0;
@@ -201,10 +201,10 @@ public class Problem32_longestValidParentheses {
             }
 
             if (left == right) {
-                max = Math.max(max, 2 * left);
+                max = Math.max(max, 2 * right);
             }
 
-            if (right > left) {
+            if (left > right) {
                 left = right = 0;
             }
         }
