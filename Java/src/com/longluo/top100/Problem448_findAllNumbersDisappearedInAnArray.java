@@ -103,7 +103,7 @@ public class Problem448_findAllNumbersDisappearedInAnArray {
                 continue;
             }
 
-            while (nums[i] <= len && nums[nums[i] - 1] != nums[i]) {
+            while (nums[nums[i] - 1] != nums[i]) {
                 int temp = nums[i];
                 nums[i] = nums[temp - 1];
                 nums[temp - 1] = temp;
@@ -119,6 +119,42 @@ public class Problem448_findAllNumbersDisappearedInAnArray {
         return ans;
     }
 
+    // Revert time: O(n) space: O(1)
+    public static List<Integer> findDisappearedNumbers_revert(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        int len = nums.length;
+        for (int num : nums) {
+            int x = Math.abs(num) - 1;
+            nums[x] = -Math.abs(nums[x]);
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > 0) {
+                ans.add(i + 1);
+            }
+        }
+
+        return ans;
+    }
+
+    // Best time: O(n) space: O(1)
+    public static List<Integer> findDisappearedNumbers_best(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        int len = nums.length;
+        for (int num : nums) {
+            int x = (num - 1) % len;
+            nums[x] += len;
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] <= len) {
+                ans.add(i + 1);
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + findDisappearedNumbers_bf(new int[]{1}));
         System.out.println("2 ?= " + findDisappearedNumbers_bf(new int[]{1, 1}));
@@ -126,7 +162,12 @@ public class Problem448_findAllNumbersDisappearedInAnArray {
         System.out.println("[5, 6] ?= " + findDisappearedNumbers_sort(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
         System.out.println("2 ?= " + findDisappearedNumbers_set(new int[]{1, 1}));
 
-        System.out.println("[5, 6] ?= " + findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
         System.out.println("[2] ?= " + findDisappearedNumbers(new int[]{1, 1}));
+        System.out.println("[5, 6] ?= " + findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
+
+        System.out.println("[5, 6] ?= " + findDisappearedNumbers_revert(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
+
+        System.out.println("[2] ?= " + findDisappearedNumbers_best(new int[]{1, 1}));
+        System.out.println("[5, 6] ?= " + findDisappearedNumbers_best(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
     }
 }
