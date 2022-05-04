@@ -2,6 +2,7 @@ package com.longluo.top100;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * 32. 最长有效括号
@@ -119,33 +120,110 @@ public class Problem32_longestValidParentheses {
             return 0;
         }
 
+        int max = 0;
         int len = s.length();
-        int ans = 0;
-        int[][] dp = new int[len][2];
-        for (int i = 0; i < len; i++) {
-            if (s.charAt(i) == ')') {
-                continue;
-            }
-
-            for (int j = len; j >= i + 2; j--) {
-                if ((j - i) % 2 == 1) {
-                    continue;
+        int[] dp = new int[len];
+        for (int i = 1; i < len; i++) {
+            char ch = s.charAt(i);
+            if (ch == ')') {
+                if (s.charAt(i - 1) == '(') {
+                    dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+                } else if (i - dp[i - 1] > 0 && s.charAt(i - dp[i - 1] - 1) == '(') {
+                    dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
                 }
-                String subStr = s.substring(i, j);
-                if (checkValid(subStr)) {
-                    ans = Math.max(ans, j - i);
+
+                max = Math.max(max, dp[i]);
+            }
+        }
+
+        return max;
+    }
+
+    // Stack  time: O(n) space: O(n)
+    public static int longestValidParentheses_stack(String s) {
+        if (s == null || s.length() <= 1) {
+            return 0;
+        }
+
+        int max = 0;
+        int len = s.length();
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+                if (stack.empty()) {
+                    stack.push(i);
+                } else {
+                    max = Math.max(max, i - stack.peek());
                 }
             }
         }
 
-        return ans;
+        return max;
     }
 
+    // Best
+    public static int longestValidParentheses_best(String s) {
+        if (s == null || s.length() <= 1) {
+            return 0;
+        }
+
+        int len = s.length();
+        int max = 0;
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+
+            if (left == right) {
+                max = Math.max(max, 2 * left);
+            }
+
+            if (right > left) {
+                left = right = 0;
+            }
+        }
+
+        left = right = 0;
+        for (int i = len - 1; i >= 0; i--) {
+            if (s.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+
+            if (left == right) {
+                max = Math.max(max, 2 * left);
+            }
+
+            if (right > left) {
+                left = right = 0;
+            }
+        }
+
+        return max;
+    }
 
     public static void main(String[] args) {
         System.out.println("0 ?= " + longestValidParentheses_bf(""));
         System.out.println("2 ?= " + longestValidParentheses_bf("(()"));
         System.out.println("4 ?= " + longestValidParentheses_bf(")()())"));
         System.out.println("4 ?= " + longestValidParentheses_bf_opt(")()())"));
+
+        System.out.println("4 ?= " + longestValidParentheses_dp(")()())"));
+
+        System.out.println("2 ?= " + longestValidParentheses_stack("(()"));
+        System.out.println("4 ?= " + longestValidParentheses_stack(")()())"));
+
+        System.out.println("2 ?= " + longestValidParentheses_best("(()"));
+        System.out.println("4 ?= " + longestValidParentheses_best(")()())"));
     }
 }
