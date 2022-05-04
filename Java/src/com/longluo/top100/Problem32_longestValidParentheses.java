@@ -185,9 +185,7 @@ public class Problem32_longestValidParentheses {
 
             if (left == right) {
                 max = Math.max(max, 2 * left);
-            }
-
-            if (right > left) {
+            } else if (right > left) {
                 left = right = 0;
             }
         }
@@ -202,9 +200,7 @@ public class Problem32_longestValidParentheses {
 
             if (left == right) {
                 max = Math.max(max, 2 * right);
-            }
-
-            if (left > right) {
+            } else if (left > right) {
                 left = right = 0;
             }
         }
@@ -219,6 +215,8 @@ public class Problem32_longestValidParentheses {
         System.out.println("4 ?= " + longestValidParentheses_bf_opt(")()())"));
 
         System.out.println("4 ?= " + longestValidParentheses_dp(")()())"));
+        System.out.println("2 ?= " + longestValidParentheses_dp("(()"));
+        System.out.println("4 ?= " + longestValidParentheses_dp("(())"));
 
         System.out.println("2 ?= " + longestValidParentheses_stack("(()"));
         System.out.println("4 ?= " + longestValidParentheses_stack(")()())"));
