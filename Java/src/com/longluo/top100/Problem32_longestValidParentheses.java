@@ -77,9 +77,75 @@ public class Problem32_longestValidParentheses {
         return stk.isEmpty();
     }
 
+    // BF Opt time: O(n^2) space: O(n)
+    // AC
+    public static int longestValidParentheses_bf_opt(String s) {
+        if (s == null || s.length() <= 1) {
+            return 0;
+        }
+
+        int len = s.length();
+        int max = 0;
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == ')') {
+                continue;
+            }
+
+            int count = 0;
+
+            for (int j = i; j < len; j++) {
+                if (s.charAt(j) == '(') {
+                    count++;
+                } else {
+                    count--;
+                }
+
+                if (count < 0) {
+                    break;
+                }
+
+                if (count == 0) {
+                    max = Math.max(max, j - i + 1);
+                }
+            }
+        }
+
+        return max;
+    }
+
+    // DP
+    public static int longestValidParentheses_dp(String s) {
+        if (s == null || s.length() <= 1) {
+            return 0;
+        }
+
+        int len = s.length();
+        int ans = 0;
+        int[][] dp = new int[len][2];
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == ')') {
+                continue;
+            }
+
+            for (int j = len; j >= i + 2; j--) {
+                if ((j - i) % 2 == 1) {
+                    continue;
+                }
+                String subStr = s.substring(i, j);
+                if (checkValid(subStr)) {
+                    ans = Math.max(ans, j - i);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + longestValidParentheses_bf(""));
         System.out.println("2 ?= " + longestValidParentheses_bf("(()"));
         System.out.println("4 ?= " + longestValidParentheses_bf(")()())"));
+        System.out.println("4 ?= " + longestValidParentheses_bf_opt(")()())"));
     }
 }
