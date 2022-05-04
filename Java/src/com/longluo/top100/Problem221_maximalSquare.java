@@ -36,21 +36,78 @@ public class Problem221_maximalSquare {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (matrix[i][j] == '1') {
-                   for (int len = 1; i + len <= row && j + len <= col; len++) {
-                       boolean isSquare = true;
-                       for (int m = 0; i + m < row && m < len; m++) {
-                           for (int n = 0; j + n < col && n < len; n++) {
-                               if (matrix[i + m][j + n] == '0') {
-                                   isSquare = false;
-                                   break;
-                               }
-                           }
-                       }
+                    for (int len = 1; i + len <= row && j + len <= col; len++) {
+                        boolean isSquare = true;
+                        for (int m = 0; m < len; m++) {
+                            for (int n = 0; n < len; n++) {
+                                if (matrix[i + m][j + n] == '0') {
+                                    isSquare = false;
+                                    break;
+                                }
+                            }
+                        }
 
-                       if (isSquare) {
-                           ans = Math.max(ans, len * len);
-                       }
-                   }
+                        if (isSquare) {
+                            ans = Math.max(ans, len * len);
+                        }
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    // BF Opt time: O(m * n * min(m, n)) space: O(1)
+    // AC
+    public static int maximalSquare_bf_opt(char[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int ans = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == '1') {
+                    boolean isSquare = true;
+                    for (int len = 1; i + len <= row && j + len <= col; len++) {
+                        for (int k = 0; k < len; k++) {
+                            if (matrix[i + len - 1][j + k] == '0') {
+                                isSquare = false;
+                                break;
+                            }
+                        }
+
+                        if (!isSquare) {
+                            break;
+                        }
+
+                        for (int k = 0; k < len; k++) {
+                            if (matrix[i + k][j + len - 1] == '0') {
+                                isSquare = false;
+                                break;
+                            }
+                        }
+
+                        if (isSquare) {
+                            ans = Math.max(ans, len * len);
+                        }
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    // DP time: O(m * n) space: O(m * n)
+    public static int maximalSquare_dp(char[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int[][] dp = new int[row][col];
+        int ans = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == '1') {
+
                 }
             }
         }
@@ -63,5 +120,9 @@ public class Problem221_maximalSquare {
         System.out.println("1 ?= " + maximalSquare_bf(new char[][]{{'1'}}));
         System.out.println("1 ?= " + maximalSquare_bf(new char[][]{{'0', '1'}, {'1', '0'}}));
         System.out.println("4 ?= " + maximalSquare_bf(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '0', '1', '0'}}));
+
+        System.out.println("1 ?= " + maximalSquare_bf_opt(new char[][]{{'0', '1'}, {'1', '0'}}));
+        System.out.println("4 ?= " + maximalSquare_bf_opt(new char[][]{{'1', '1'}, {'1', '1'}}));
+        System.out.println("4 ?= " + maximalSquare_bf_opt(new char[][]{{'1', '0', '1', '0'}, {'1', '0', '1', '1'}, {'1', '0', '1', '1'}, {'1', '1', '1', '1'}}));
     }
 }
