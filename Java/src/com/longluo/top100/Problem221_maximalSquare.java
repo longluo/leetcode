@@ -141,19 +141,25 @@ public class Problem221_maximalSquare {
     public static int maximalSquare_dp(char[][] matrix) {
         int row = matrix.length;
         int col = matrix[0].length;
+
+        int maxSide = 0;
+
         int[][] dp = new int[row][col];
-        int ans = 0;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (matrix[i][j] == '1') {
-                    if (i > 1 && j > 1) {
-
+                    if (i > 0 && j > 0) {
+                        dp[i][j] = Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1])) + 1;
+                    } else {
+                        dp[i][j] = 1;
                     }
                 }
+
+                maxSide = Math.max(maxSide, dp[i][j]);
             }
         }
 
-        return ans;
+        return maxSide * maxSide;
     }
 
     public static void main(String[] args) {
@@ -172,5 +178,6 @@ public class Problem221_maximalSquare {
         System.out.println("1 ?= " + maximalSquare_dp(new char[][]{{'0', '1'}, {'1', '0'}}));
         System.out.println("4 ?= " + maximalSquare_dp(new char[][]{{'1', '1'}, {'1', '1'}}));
         System.out.println("4 ?= " + maximalSquare_dp(new char[][]{{'1', '0', '1', '0'}, {'1', '0', '1', '1'}, {'1', '0', '1', '1'}, {'1', '1', '1', '1'}}));
+        System.out.println("4 ?= " + maximalSquare_dp(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '0', '1', '0'}}));
     }
 }
