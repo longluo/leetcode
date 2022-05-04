@@ -58,7 +58,7 @@ public class Problem221_maximalSquare {
         return ans;
     }
 
-    // BF Opt time: O(m * n * min(m, n)) space: O(1)
+    // BF Opt time: O(m * n * min(m, n)^3) space: O(1)
     // AC
     public static int maximalSquare_bf_opt(char[][] matrix) {
         int row = matrix.length;
@@ -98,6 +98,45 @@ public class Problem221_maximalSquare {
         return ans;
     }
 
+    // BF Opt V2 time: O(m * n * min(m, n)^2) space: O(1)
+    // AC
+    public static int maximalSquare_bf_v2(char[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int maxSide = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == '1') {
+                    maxSide = Math.max(maxSide, 1);
+                    int currMaxSide = Math.min(row - i, col - j);
+
+                    for (int len = 1; len < currMaxSide; len++) {
+                        boolean isSquare = true;
+
+                        if (matrix[i + len][j + len] == '0') {
+                            break;
+                        }
+
+                        for (int k = 0; k < len; k++) {
+                            if (matrix[i + len][j + k] == '0' || matrix[i + k][j + len] == '0') {
+                                isSquare = false;
+                                break;
+                            }
+                        }
+
+                        if (isSquare) {
+                            maxSide = Math.max(maxSide, len + 1);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return maxSide * maxSide;
+    }
+
     // DP time: O(m * n) space: O(m * n)
     public static int maximalSquare_dp(char[][] matrix) {
         int row = matrix.length;
@@ -107,7 +146,9 @@ public class Problem221_maximalSquare {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (matrix[i][j] == '1') {
+                    if (i > 1 && j > 1) {
 
+                    }
                 }
             }
         }
@@ -124,5 +165,12 @@ public class Problem221_maximalSquare {
         System.out.println("1 ?= " + maximalSquare_bf_opt(new char[][]{{'0', '1'}, {'1', '0'}}));
         System.out.println("4 ?= " + maximalSquare_bf_opt(new char[][]{{'1', '1'}, {'1', '1'}}));
         System.out.println("4 ?= " + maximalSquare_bf_opt(new char[][]{{'1', '0', '1', '0'}, {'1', '0', '1', '1'}, {'1', '0', '1', '1'}, {'1', '1', '1', '1'}}));
+
+        System.out.println("4 ?= " + maximalSquare_bf_v2(new char[][]{{'1', '1'}, {'1', '1'}}));
+        System.out.println("4 ?= " + maximalSquare_bf_v2(new char[][]{{'1', '0', '1', '0'}, {'1', '0', '1', '1'}, {'1', '0', '1', '1'}, {'1', '1', '1', '1'}}));
+
+        System.out.println("1 ?= " + maximalSquare_dp(new char[][]{{'0', '1'}, {'1', '0'}}));
+        System.out.println("4 ?= " + maximalSquare_dp(new char[][]{{'1', '1'}, {'1', '1'}}));
+        System.out.println("4 ?= " + maximalSquare_dp(new char[][]{{'1', '0', '1', '0'}, {'1', '0', '1', '1'}, {'1', '0', '1', '1'}, {'1', '1', '1', '1'}}));
     }
 }
