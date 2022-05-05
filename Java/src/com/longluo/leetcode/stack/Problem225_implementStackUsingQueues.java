@@ -128,11 +128,10 @@ public class Problem225_implementStackUsingQueues {
         }
 
         public void push(int x) {
+            int len = queue.size();
             queue.offer(x);
-            int cnt = queue.size();
-            while (cnt > 1) {
+            for (int i = 0; i < len; i++) {
                 queue.offer(queue.poll());
-                cnt--;
             }
         }
 
@@ -170,11 +169,11 @@ public class Problem225_implementStackUsingQueues {
         myStack.pop(); // return 1
         myStack.empty(); // 返回 False
 
-
         MyStack_OneQueue myStk1 = new MyStack_OneQueue();
         myStk1.push(1);
         myStk1.push(2);
         myStk1.push(3);
+        myStk1.push(4);
         myStk1.top(); // 返回 3
         myStk1.pop(); // return 3
         myStk1.push(4);
