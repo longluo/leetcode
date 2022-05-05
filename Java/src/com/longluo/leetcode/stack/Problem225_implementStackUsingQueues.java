@@ -45,50 +45,41 @@ import java.util.Queue;
  */
 public class Problem225_implementStackUsingQueues {
 
-    class MyStack {
+    // Main Queue
+    // push: O(n * 2) = O(n)
+    // pop: O(1)
+    // top: O(1)
+    // empty: O(1)
+    static class MyStack {
         Queue<Integer> queue1;
         Queue<Integer> queue2;
 
-        /**
-         * Initialize your data structure here.
-         */
         public MyStack() {
             queue1 = new LinkedList<>();
             queue2 = new LinkedList<>();
         }
 
-        /**
-         * Push element x onto stack.
-         */
         public void push(int x) {
-            queue2.offer(x);
             while (!queue1.isEmpty()) {
-                queue2.offer(queue1.poll());
+                queue2.add(queue1.poll());
             }
-            Queue<Integer> temp = queue1;
-            queue1 = queue2;
-            queue2 = temp;
+
+            queue1.add(x);
+            while (!queue2.isEmpty()) {
+                queue1.add(queue2.poll());
+            }
         }
 
-        /**
-         * Removes the element on top of the stack and returns that element.
-         */
         public int pop() {
             return queue1.poll();
         }
 
-        /**
-         * Get the top element.
-         */
         public int top() {
             return queue1.peek();
         }
 
-        /**
-         * Returns whether the stack is empty.
-         */
         public boolean empty() {
-            return queue1.isEmpty();
+            return queue1.isEmpty() && queue2.isEmpty();
         }
     }
 
@@ -101,6 +92,16 @@ public class Problem225_implementStackUsingQueues {
      * boolean param_4 = obj.empty();
      */
     public static void main(String[] args) {
-
+        MyStack myStack = new MyStack();
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
+        myStack.top(); // 返回 3
+        myStack.pop(); // return 3
+        myStack.push(4);
+        myStack.pop(); // 返回 4
+        myStack.pop(); // return 2;
+        myStack.pop(); // return 1
+        myStack.empty(); // 返回 False
     }
 }
