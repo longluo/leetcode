@@ -118,6 +118,37 @@ public class Problem225_implementStackUsingQueues {
         }
     }
 
+
+    // MyStack
+    static class MyStack_OneQueue {
+        Queue<Integer> queue;
+
+        public MyStack_OneQueue() {
+            queue = new LinkedList<>();
+        }
+
+        public void push(int x) {
+            queue.offer(x);
+            int cnt = queue.size();
+            while (cnt > 1) {
+                queue.offer(queue.poll());
+                cnt--;
+            }
+        }
+
+        public int pop() {
+            return queue.poll();
+        }
+
+        public int top() {
+            return queue.peek();
+        }
+
+        public boolean empty() {
+            return queue.isEmpty();
+        }
+    }
+
     /**
      * Your MyStack object will be instantiated and called as such:
      * MyStack obj = new MyStack();
@@ -138,5 +169,18 @@ public class Problem225_implementStackUsingQueues {
         myStack.pop(); // return 2;
         myStack.pop(); // return 1
         myStack.empty(); // 返回 False
+
+
+        MyStack_OneQueue myStk1 = new MyStack_OneQueue();
+        myStk1.push(1);
+        myStk1.push(2);
+        myStk1.push(3);
+        myStk1.top(); // 返回 3
+        myStk1.pop(); // return 3
+        myStk1.push(4);
+        myStk1.pop(); // 返回 4
+        myStk1.pop(); // return 2;
+        myStk1.pop(); // return 1
+        myStk1.empty(); // 返回 False
     }
 }
