@@ -45,7 +45,8 @@ import java.util.Stack;
  */
 public class Problem232_implementQueueUsingStacks {
 
-    class MyQueue {
+    // Two Stack
+    static class MyQueue {
         Stack<Integer> stack1;
         Stack<Integer> stack2;
 
@@ -55,14 +56,10 @@ public class Problem232_implementQueueUsingStacks {
         }
 
         public void push(int x) {
-            if (stack1.empty()) {
-                stack1.push(x);
-                return;
-            }
-
             while (!stack1.empty()) {
                 stack2.push(stack1.pop());
             }
+
             stack2.push(x);
             while (!stack2.empty()) {
                 stack1.push(stack2.pop());
@@ -78,7 +75,7 @@ public class Problem232_implementQueueUsingStacks {
         }
 
         public boolean empty() {
-            return stack1.empty() && stack2.empty();
+            return stack1.empty();
         }
     }
 
@@ -91,6 +88,11 @@ public class Problem232_implementQueueUsingStacks {
      * boolean param_4 = obj.empty();
      */
     public static void main(String[] args) {
-
+        MyQueue myQueue = new MyQueue();
+        myQueue.push(1); // queue is: [1]
+        myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)
+        System.out.println(myQueue.peek()); // return 1
+        System.out.println(myQueue.pop()); // return 1, queue is [2]
+        System.out.println(myQueue.empty()); // return false
     }
 }
