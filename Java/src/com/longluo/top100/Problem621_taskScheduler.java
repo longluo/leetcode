@@ -28,7 +28,7 @@ import java.util.*;
  */
 public class Problem621_taskScheduler {
 
-    // BF
+    // Greedy
     public static int leastInterval_greedy(char[] tasks, int n) {
         if (tasks == null || tasks.length <= 1 || n == 0) {
             return tasks.length;
@@ -108,6 +108,28 @@ public class Problem621_taskScheduler {
         return Math.max(ans, tasks.length);
     }
 
+    // Math Set O(n + 26) space: O(26)
+    public static int leastInterval_math_set(char[] tasks, int n) {
+        Map<Character, Integer> freqMap = new HashMap<>();
+        int maxTimes = 0;
+        for (char task : tasks) {
+            int times = freqMap.getOrDefault(task, 0) + 1;
+            freqMap.put(task, times);
+            maxTimes = Math.max(maxTimes, times);
+        }
+
+        int maxCount = 0;
+        for (Map.Entry<Character, Integer> entry : freqMap.entrySet()) {
+            int value = entry.getValue();
+            if (value == maxTimes) {
+                maxCount++;
+            }
+        }
+
+        int ans = (maxTimes - 1) * (n + 1) + maxCount;
+        return Math.max(ans, tasks.length);
+    }
+
     public static void main(String[] args) {
         System.out.println("8 ?= " + leastInterval_greedy(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 2));
         System.out.println("16 ?= " + leastInterval_greedy(new char[]{'A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'}, 2));
@@ -116,5 +138,7 @@ public class Problem621_taskScheduler {
 
         System.out.println("8 ?= " + leastInterval_math(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 2));
         System.out.println("6 ?= " + leastInterval_math(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 0));
+
+        System.out.println("6 ?= " + leastInterval_math_set(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 0));
     }
 }
