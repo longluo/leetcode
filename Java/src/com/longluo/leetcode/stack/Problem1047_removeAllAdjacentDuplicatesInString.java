@@ -4,6 +4,7 @@ import java.util.Stack;
 
 /**
  * 1047. 删除字符串中的所有相邻重复项
+ * <p>
  * 给出由小写字母组成的字符串 S，重复项删除操作会选择两个相邻且相同的字母，并删除它们。
  * 在 S 上反复执行重复项删除操作，直到无法继续删除。
  * 在完成所有重复项删除操作后返回最终的字符串。答案保证唯一。
@@ -18,23 +19,44 @@ import java.util.Stack;
  * 提示：
  * 1 <= S.length <= 20000
  * S 仅由小写英文字母组成。
+ * <p>
+ * https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/
  */
-public class Problem1074_removeDuplicates {
+public class Problem1047_removeAllAdjacentDuplicatesInString {
 
-    public static String removeDuplicates(String S) {
-        if (S == null || S.length() <= 1) {
-            return S;
+    // BF time: O(n) space: O(n)
+    public static String removeDuplicates_bf(String s) {
+        if (s == null || s.length() <= 1) {
+            return s;
         }
 
-        int n = S.length();
-        Stack<Character> st = new Stack<>();
-        StringBuilder sb = new StringBuilder(n);
+        int len = s.length();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            if (sb.length() > 0 && sb.charAt(sb.length() - 1) == s.charAt(i)) {
+                sb.deleteCharAt(sb.length() - 1);
+            } else {
+                sb.append(s.charAt(i));
+            }
+        }
 
-        for (int i = n - 1; i >= 0; i--) {
-            if (!st.empty() && st.peek() == S.charAt(i)) {
+        return sb.toString();
+    }
+
+    // Stack time: O(n) space: O(n)
+    public static String removeDuplicates(String s) {
+        if (s == null || s.length() <= 1) {
+            return s;
+        }
+
+        int len = s.length();
+        Stack<Character> st = new Stack<>();
+
+        for (int i = len - 1; i >= 0; i--) {
+            if (!st.empty() && st.peek() == s.charAt(i)) {
                 st.pop();
             } else {
-                st.push(S.charAt(i));
+                st.push(s.charAt(i));
             }
         }
 
@@ -42,6 +64,7 @@ public class Problem1074_removeDuplicates {
             return "";
         }
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < st.capacity(); i++) {
             if (!st.empty()) {
                 sb.append(st.pop());
@@ -51,33 +74,15 @@ public class Problem1074_removeDuplicates {
         return sb.toString();
     }
 
-    public static String removeDuplicates_2(String S) {
-        if (S == null || S.length() <= 1) {
-            return S;
-        }
-
-        int n = S.length();
-        StringBuilder sb = new StringBuilder(n);
-        for (int i = 0; i < n; i++) {
-            if (sb.length() > 0 && sb.charAt(sb.length() - 1) == S.charAt(i)) {
-                sb.deleteCharAt(sb.length() - 1);
-            } else {
-                sb.append(S.charAt(i));
-            }
-        }
-
-        return sb.toString();
-    }
-
     public static void main(String[] args) {
+        System.out.println("ca ?= " + removeDuplicates_bf("abbaca"));
+        System.out.println("c ?= " + removeDuplicates_bf("c"));
+        System.out.println(" ?= " + removeDuplicates_bf("aa"));
+        System.out.println("ab ?= " + removeDuplicates_bf("ab"));
+
         System.out.println("ca ?= " + removeDuplicates("abbaca"));
         System.out.println("c ?= " + removeDuplicates("c"));
         System.out.println(" ?= " + removeDuplicates("aa"));
         System.out.println("ab ?= " + removeDuplicates("ab"));
-
-        System.out.println("ca ?= " + removeDuplicates_2("abbaca"));
-        System.out.println("c ?= " + removeDuplicates_2("c"));
-        System.out.println(" ?= " + removeDuplicates_2("aa"));
-        System.out.println("ab ?= " + removeDuplicates_2("ab"));
     }
 }
