@@ -81,7 +81,7 @@
 | 253 | [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii) |Medium| 没权限  |  |
 | 279 | [Perfect Squares](https://leetcode.com/problems/perfect-squares/) |Medium| [Java](./Problem279_perfectSquares.java) |  |
 | 283 | [Move Zeroes](https://leetcode.com/problems/move-zeroes/)| Easy | [Java](./Problem283_moveZeroes.java) |  |
-| 287 | [Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | Hard | [Java](./Problem287_findTheDuplicateNumber.java) |  |
+| 287 | [Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) |Medium| [Java](./Problem287_findTheDuplicateNumber.java) | [9 Approaches: Count, Hash, Sort, Binary Search, Bit, Fast Slow Pointers](http://www.longluo.me/blog/2022/02/18/Leetcode-find-the-duplicate-number/) |
 | 297 | [Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | Hard | [Java](./Problem297_serializeAndDeserializeBinaryTree.java)  |  |
 | 300 | [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) |Medium| [Java](./Problem300_longestIncreasingSubsequence.java) |  |
 | 301 | [Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/) |Hard| [Java](./Problem301_removeInvalidParentheses.java) |  |
@@ -110,7 +110,7 @@
 | 621 | [Task Scheduler](https://leetcode.com/problems/task-scheduler) |Medium| [Java](./Problem621_taskScheduler.java) |  |
 | 647 | [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings) |Medium| [Java](./Problem647_palindromicSubstrings.java) |  |
 | 739 | [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) |Medium| [Java](./Problem739_dailyTemperatures.java) |  |
-| 763 | [Partition Labels](https://leetcode.com/problems/partition-labels/) |Medium| [Java](./Problem763_partitionLabels.java) |  |
+| 763 | [Partition Labels](https://leetcode.com/problems/partition-labels/) |Medium| [Java](./Problem763_partitionLabels.java) | [Illustration of the Max Position of the Char in the Partition with Easy Detailed Explanation](http://www.longluo.me/blog/2022/03/21/Leetcode-Partition-Labels) |
 
 欢迎光临[Top 100 Liked Questions](http://www.longluo.me/blog/2021/09/30/Leetcode-top-100-liked-questions/)
 
