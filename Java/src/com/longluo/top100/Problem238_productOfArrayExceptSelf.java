@@ -68,15 +68,38 @@ public class Problem238_productOfArrayExceptSelf {
         }
 
         int[] ans = new int[len];
-        ans[0] = right[1];
-        ans[len - 1] = left[len - 1];
-        for (int i = 1; i < len - 1; i++) {
+        for (int i = 0; i < len; i++) {
             ans[i] = left[i] * right[i + 1];
         }
 
         return ans;
     }
 
+    // Prefix Opt time: O(n) space: O(1)
+    public static int[] productExceptSelf_prefix_opt(int[] nums) {
+        int len = nums.length;
+        int[] ans = new int[len];
+
+        int[] left = new int[len];
+        int[] right = new int[len];
+
+        left[0] = 1;
+        // Left[i] = nums[0] * nums[1] ... nums[i - 1]
+        for (int i = 1; i < len; i++) {
+            left[i] = nums[i - 1] * left[i - 1];
+        }
+        right[len - 1] = 1;
+        // right[i] = nums[len - 1] * nums[len - 2] ... nums[i + 1]
+        for (int i = len - 2; i >= 0; i--) {
+            right[i] = nums[i + 1] * right[i + 1];
+        }
+
+        for (int i = 0; i < len; i++) {
+            ans[i] = left[i] * right[i];
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
         System.out.println("[24,12,8,6] ?= " + Arrays.toString(productExceptSelf_bf(new int[]{1, 2, 3, 4})));
@@ -85,5 +108,7 @@ public class Problem238_productOfArrayExceptSelf {
         System.out.println("[12,16,24,48,24] ?= " + Arrays.toString(productExceptSelf_prefix(new int[]{4, 3, 2, 1, 2})));
         System.out.println("[24,12,8,6] ?= " + Arrays.toString(productExceptSelf_prefix(new int[]{1, 2, 3, 4})));
         System.out.println("[0,0,9,0,0] ?= " + Arrays.toString(productExceptSelf_prefix(new int[]{-1, 1, 0, -3, 3})));
+
+        System.out.println("[0,0,9,0,0] ?= " + Arrays.toString(productExceptSelf_prefix_opt(new int[]{-1, 1, 0, -3, 3})));
     }
 }
