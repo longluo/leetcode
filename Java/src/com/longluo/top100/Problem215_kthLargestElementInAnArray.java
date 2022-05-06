@@ -35,10 +35,27 @@ public class Problem215_kthLargestElementInAnArray {
         return nums[len - k];
     }
 
+    // PQ time: O(nlogn) space: O(n)
+    public static int findKthLargest_pq(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> o2 - o1);
 
+        for (int x : nums) {
+            pq.offer(x);
+        }
+
+        int ans = 0;
+        while (k > 0 && !pq.isEmpty()) {
+            ans = pq.poll();
+            k--;
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
         System.out.println("5 ?= " + findKthLargest(new int[]{3, 2, 1, 5, 6, 4}, 2));
+        System.out.println("5 ?= " + findKthLargest_pq(new int[]{3, 2, 1, 5, 6, 4}, 2));
         System.out.println("4 ?= " + findKthLargest(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
+        System.out.println("4 ?= " + findKthLargest_pq(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
     }
 }
