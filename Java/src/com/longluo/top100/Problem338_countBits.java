@@ -53,26 +53,10 @@ public class Problem338_countBits {
         return ans;
     }
 
-    // Odd Even time: O(n) space: O(n)
-    public static int[] countBits_oddeven(int num) {
-        if (num < 1) {
-            return new int[]{0};
-        }
-        int[] res = new int[num + 1];
-        res[1] = 1;
-        for (int i = 2; i <= num; i++) {
-            if (i % 2 == 0) {
-                res[i] = res[i / 2];
-            } else {
-                res[i] = res[i / 2] + 1;
-            }
-        }
-
-        return res;
-    }
-
-    // DP
-    public static int[] countBits_oddeven_opt(int num) {
+    // DP  time: O(n) space: O(1)
+    // Odd Even Number
+    // The Right Bit
+    public static int[] countBits_dp_low(int num) {
         int[] res = new int[num + 1];
         for (int i = 1; i <= num; i++) {
             if (i % 2 == 0) {
@@ -85,6 +69,50 @@ public class Problem338_countBits {
         return res;
     }
 
+    // DP highbit time: O(n) space: O(1)
+    // The High Bit
+    // 8-15中的每个数的比特位的个数比对应的0-7多一个1
+    // 最高bit为1
+    public static int[] countBits_dp_high(int num) {
+        int[] bits = new int[num + 1];
+        int highBit = 1;
+        for (int i = 1; i <= num; i++) {
+            if ((i & (i - 1)) == 0) {
+                highBit = i;
+            }
+
+            bits[i] = bits[i - highBit] + 1;
+        }
+
+        return bits;
+    }
+
+    // 8-15中的每个数的比特位的个数比对应的0-7多一个1
+    // DP time: O(n) space: O(1)
+    public static int[] countBits_dp_high_easy(int num) {
+        int[] bits = new int[num + 1];
+        int offset = 1;
+        for (int i = 1; i <= num; i++) {
+            if (offset * 2 == i) {
+                offset = offset << 1;
+            }
+
+            bits[i] = bits[i - offset] + 1;
+        }
+
+        return bits;
+    }
+
+    // DP Set time: O(n) space: O(1)
+    // i & (i - 1) 消掉二进制位中最右边的1
+    public static int[] countBits_dp_set(int num) {
+        int[] bits = new int[num + 1];
+        for (int i = 1; i <= num; i++) {
+            bits[i] = bits[i & (i - 1)] + 1;
+        }
+
+        return bits;
+    }
 
     public static void main(String[] args) {
         System.out.println("[0] ?= " + Arrays.toString(countBits(0)));
@@ -93,8 +121,16 @@ public class Problem338_countBits {
         System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits(5)));
 
         System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits_api(5)));
-        System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits_oddeven(5)));
-        System.out.println("[0,1,1,2,1,2,2,3,1] ?= " + Arrays.toString(countBits_oddeven(8)));
-        System.out.println("[0,1,1,2,1,2,2,3,1] ?= " + Arrays.toString(countBits_oddeven_opt(8)));
+
+        System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits_dp_low(5)));
+        System.out.println("[0,1,1,2,1,2,2,3,1] ?= " + Arrays.toString(countBits_dp_low(8)));
+
+        System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits_dp_high(5)));
+        System.out.println("[0,1,1,2,1,2,2] ?= " + Arrays.toString(countBits_dp_high(6)));
+
+        System.out.println("[0,1,1,2,1,2,2] ?= " + Arrays.toString(countBits_dp_high_easy(6)));
+        System.out.println("[0,1,1,2,1,2,2,3,1] ?= " + Arrays.toString(countBits_dp_high_easy(8)));
+
+        System.out.println("[0,1,1,2,1,2,2] ?= " + Arrays.toString(countBits_dp_set(6)));
     }
 }
