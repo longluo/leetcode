@@ -35,8 +35,8 @@ package com.longluo.leetcode.stack;
  */
 public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
 
-    // BF
-    public static String removeDuplicates_bf(String s, int k) {
+    // BF Recursion
+    public static String removeDuplicates(String s, int k) {
         int len = s.length();
         if (len < k) {
             return s;
@@ -76,7 +76,7 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
             }
         }
 
-        return  check(sb.toString(), k) ?  removeDuplicates_bf(sb.toString(), k) : sb.toString();
+        return check(sb.toString(), k) ? removeDuplicates(sb.toString(), k) : sb.toString();
     }
 
     public static boolean check(String s, int k) {
@@ -86,16 +86,16 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         }
 
         for (int i = 1; i < len; i++) {
-            char ch = s.charAt(i);
-            if (ch == s.charAt(i - 1)) {
-                int j = i;
-                k--;
-                while (j < len && k > 0 && s.charAt(j) == ch) {
-                    k--;
-                    j++;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                boolean flag = true;
+                for (int j = i - 1; j < len && j < i + k; j++) {
+                    if (s.charAt(j) != s.charAt(i)) {
+                        flag = false;
+                        break;
+                    }
                 }
 
-                if (k == 0) {
+                if (flag) {
                     return true;
                 }
             }
@@ -104,8 +104,41 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         return false;
     }
 
+    // Stack time: O(n*k) space: O(n)
+    // TimeOut
+    public static String removeDuplicates_stack(String s, int k) {
+        int len = s.length();
+        if (len < k) {
+            return s;
+        }
+
+        int[] cnt = new int[26];
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            sb.append(ch);
+            cnt[ch - 'a']++;
+            if (sb.length() >= k && ch == sb.charAt(sb.length() - 1) && cnt[ch - 'a'] >= k) {
+                boolean flag = true;
+                for (int j = sb.length() - k; j < sb.length(); j++) {
+                    if (sb.charAt(j) != ch) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    sb.delete(sb.length() - k, sb.length());
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
-        System.out.println("abcd ?= " + removeDuplicates_bf("abcd", 2));
-        System.out.println("aa ?= " + removeDuplicates_bf("deeedbbcccbdaa", 3));
+        System.out.println("abcd ?= " + removeDuplicates("abcd", 2));
+        System.out.println("aa ?= " + removeDuplicates("deeedbbcccbdaa", 3));
+
+        System.out.println("abcd ?= " + removeDuplicates_stack("abcd", 2));
+        System.out.println("aa ?= " + removeDuplicates_stack("deeedbbcccbdaa", 3));
     }
 }
