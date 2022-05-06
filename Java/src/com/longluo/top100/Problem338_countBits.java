@@ -24,7 +24,7 @@ import java.util.Arrays;
  */
 public class Problem338_countBits {
 
-    // BF time: O(nlogn) space: O(n)
+    // BF time: O(nlogn) space: O(1)
     public static int[] countBits(int num) {
         int[] ans = new int[num + 1];
 
@@ -37,6 +37,17 @@ public class Problem338_countBits {
             }
 
             ans[i] = count;
+        }
+
+        return ans;
+    }
+
+    // API time: O(n) space: O(1)
+    public static int[] countBits_api(int num) {
+        int[] ans = new int[num + 1];
+
+        for (int i = 0; i <= num; i++) {
+            ans[i] = Integer.bitCount(i);
         }
 
         return ans;
@@ -60,13 +71,30 @@ public class Problem338_countBits {
         return res;
     }
 
+    // DP
+    public static int[] countBits_oddeven_opt(int num) {
+        int[] res = new int[num + 1];
+        for (int i = 1; i <= num; i++) {
+            if (i % 2 == 0) {
+                res[i] = res[i / 2];
+            } else {
+                res[i] = res[i / 2] + 1;
+            }
+        }
+
+        return res;
+    }
+
+
     public static void main(String[] args) {
         System.out.println("[0] ?= " + Arrays.toString(countBits(0)));
         System.out.println("[0,1] ?= " + Arrays.toString(countBits(1)));
         System.out.println("[0,1,1] ?= " + Arrays.toString(countBits(2)));
         System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits(5)));
 
+        System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits_api(5)));
         System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits_oddeven(5)));
         System.out.println("[0,1,1,2,1,2,2,3,1] ?= " + Arrays.toString(countBits_oddeven(8)));
+        System.out.println("[0,1,1,2,1,2,2,3,1] ?= " + Arrays.toString(countBits_oddeven_opt(8)));
     }
 }
