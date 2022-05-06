@@ -81,6 +81,10 @@ public class Problem200_numberOfIslands {
         }
     }
 
+    // TODO: 2022/5/6 DFS
+
+    // TODO: 2022/5/6 并查集
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + numIslands_bfs(new char[][]{{'1', '1', '1', '1', '0'}, {'1', '1', '0', '1', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '0', '0', '0'}}));
     }
