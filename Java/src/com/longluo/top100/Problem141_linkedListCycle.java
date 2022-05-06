@@ -1,5 +1,6 @@
 package com.longluo.top100;
 
+import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
 
 import java.util.HashSet;
@@ -99,8 +100,8 @@ public class Problem141_linkedListCycle {
         return true;
     }
 
-
     public static void main(String[] args) {
-
+        ListNode node1 = LinkedListNodeUtils.constructListNode(new int[]{3, 2, 0, -4});
+        System.out.println("true ?= " + hasCycle(node1));
     }
 }
