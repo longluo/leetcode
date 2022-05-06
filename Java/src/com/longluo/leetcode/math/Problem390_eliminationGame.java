@@ -1,5 +1,8 @@
 package com.longluo.leetcode.math;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 390. 消除游戏
  * <p>
@@ -75,6 +78,53 @@ public class Problem390_eliminationGame {
         return n;
     }
 
+    // BF Opt time: O(nlogn) space: O(n)
+    // Time Out
+    public static int lastRemaining_bf_opt(int n) {
+        if (n <= 2) {
+            return n;
+        }
+
+        List<Integer> numList = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            numList.add(i + 1);
+        }
+
+        int opIdx = 0;
+        while (true) {
+            if (opIdx % 2 == 0) {
+                for (int i = 0; i < numList.size(); i++) {
+                    if (numList.size() == 1) {
+                        return numList.get(0);
+                    }
+
+                    numList.remove(i);
+                }
+            } else {
+                for (int i = numList.size() - 1; i >= 0; i -= 2) {
+                    if (numList.size() == 1) {
+                        return numList.get(0);
+                    }
+
+                    numList.remove(i);
+                }
+            }
+
+            opIdx++;
+        }
+    }
+
+    // Sequence
+    public static int lastRemaining_seq(int n) {
+        if (n <= 2) {
+            return n;
+        }
+
+        int ans = 1;
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println(Math.log(9) / Math.log(2));
 
@@ -94,6 +144,8 @@ public class Problem390_eliminationGame {
         System.out.println("8 ?= " + lastRemaining_bf(14));
         System.out.println("8 ?= " + lastRemaining_bf(15));
         System.out.println("6 ?= " + lastRemaining_bf(16));
-        
+
+        System.out.println("2 ?= " + lastRemaining_bf_opt(5));
+        System.out.println("4 ?= " + lastRemaining_bf_opt(6));
     }
 }
