@@ -53,7 +53,36 @@ public class Problem347_topKFrequentElements {
         return ans;
     }
 
+    // HashMap + Heap time: O(nlogn) space: O(n)
+    public static int[] topKFrequent_pq(int[] nums, int k) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int x : nums) {
+            freqMap.put(x, freqMap.getOrDefault(x, 0) + 1);
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o2[1] - o1[1];
+            }
+        });
+
+        for (int x : freqMap.keySet()) {
+            pq.offer(new int[]{x, freqMap.get(x)});
+        }
+
+        int[] ans = new int[k];
+        while (k > 0 && !pq.isEmpty()) {
+            int[] curr = pq.poll();
+            ans[k - 1] = curr[0];
+            k--;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1, 2] ?= " + Arrays.toString(topKFrequent_hash(new int[]{1, 1, 1, 2, 2, 3}, 2)));
+        System.out.println("[1, 2] ?= " + Arrays.toString(topKFrequent_pq(new int[]{1, 1, 1, 2, 2, 3}, 2)));
     }
 }
