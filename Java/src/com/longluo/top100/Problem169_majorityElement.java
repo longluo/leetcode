@@ -1,4 +1,4 @@
-package com.longluo.leetcode.divideandconquer;
+package com.longluo.top100;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,6 +18,11 @@ import java.util.Map;
  * 输入：[2,2,1,1,1,2,2]
  * 输出：2
  * <p>
+ * 提示：
+ * n == nums.length
+ * 1 <= n <= 5 * 10^4
+ * -10^9 <= nums[i] <= 10^9
+ * <p>
  * 进阶：
  * 尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。
  * <p>
@@ -25,7 +30,8 @@ import java.util.Map;
  */
 public class Problem169_majorityElement {
 
-    public static int majorityElement(int[] nums) {
+    // Sort time: O(nlogn) space: O(logn)
+    public static int majorityElement_sort(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
@@ -40,6 +46,7 @@ public class Problem169_majorityElement {
         return nums[n / 2];
     }
 
+    // HashMap time: O(n) space: O(n)
     public static int majorityElement_hash(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
@@ -63,6 +70,7 @@ public class Problem169_majorityElement {
         return 0;
     }
 
+    // Vote time: O(n) space: O(1)
     public static int majorityElement_vote(int[] nums) {
         int vote = 0;
         int target = 0;
@@ -81,11 +89,12 @@ public class Problem169_majorityElement {
     }
 
     public static void main(String[] args) {
-        System.out.println("3 ?= " + majorityElement(new int[]{3, 2, 3}));
-        System.out.println("2 ?= " + majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
+        System.out.println("3 ?= " + majorityElement_sort(new int[]{3, 2, 3}));
+        System.out.println("2 ?= " + majorityElement_sort(new int[]{2, 2, 1, 1, 1, 2, 2}));
 
         System.out.println("3 ?= " + majorityElement_hash(new int[]{3, 2, 3}));
         System.out.println("2 ?= " + majorityElement_hash(new int[]{2, 2, 1, 1, 1, 2, 2}));
+
         System.out.println("2 ?= " + majorityElement_vote(new int[]{2, 2, 1, 1, 1, 2, 2}));
     }
 }
