@@ -1,4 +1,4 @@
-package com.longluo.leetcode.heap;
+package com.longluo.top100;
 
 import java.util.*;
 
@@ -15,22 +15,27 @@ import java.util.*;
  * 输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
  * 输出: 4
  * <p>
- * 说明:
- * 你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
+ * <p>
+ * 提示：
+ * 1 <= k <= nums.length <= 10^4
+ * -10^4 <= nums[i] <= 10^4
  * <p>
  * https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
  */
 public class Problem215_kthLargestElementInAnArray {
 
+    // Sort time: O(nlogn) space: O(logn)
     public static int findKthLargest(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
 
+        int len = nums.length;
         Arrays.sort(nums);
-
-        return nums[nums.length - k];
+        return nums[len - k];
     }
+
+
 
     public static void main(String[] args) {
         System.out.println("5 ?= " + findKthLargest(new int[]{3, 2, 1, 5, 6, 4}, 2));
