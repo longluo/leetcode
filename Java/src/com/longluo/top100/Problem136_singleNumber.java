@@ -1,4 +1,4 @@
-package com.longluo.leetcode.bitmanipulation;
+package com.longluo.top100;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public class Problem136_singleNumber {
 
-    // XOR
+    // XOR time: O(n) space: O(1)
     public static int singleNumber(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums[0];
@@ -44,6 +44,7 @@ public class Problem136_singleNumber {
         return ans;
     }
 
+    // HashMap time: O(n) space: O(n)
     public static int singleNumber_map(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums[0];
@@ -63,7 +64,7 @@ public class Problem136_singleNumber {
         return 0;
     }
 
-    // Sort
+    // Sort time: O(nlogn) space: O(logn)
     public static int singleNumber_sort(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums[0];
@@ -73,7 +74,7 @@ public class Problem136_singleNumber {
         int n = nums.length;
         Arrays.sort(nums);
         for (int i = 0; i < n; i++) {
-            if (i == 0 && i < n - 1 && nums[i] != nums[i + 1]) {
+            if (i == 0 && nums[i] != nums[i + 1]) {
                 ans = nums[i];
                 break;
             } else if (i == n - 1 && nums[i] != nums[i - 1]) {
@@ -81,29 +82,6 @@ public class Problem136_singleNumber {
                 break;
             } else if (i > 0 && nums[i] != nums[i - 1] && nums[i] != nums[i + 1]) {
                 ans = nums[i];
-                break;
-            }
-        }
-
-        return ans;
-    }
-
-    // HashMap
-    public static int singleNumber_hash(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return nums[0];
-        }
-
-        Map<Integer, Integer> freq = new HashMap<>();
-        int n = nums.length;
-        for (int i = 0; i < n; i++) {
-            freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
-        }
-
-        int ans = 0;
-        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
-            if (entry.getValue() == 1) {
-                ans = entry.getKey();
                 break;
             }
         }
