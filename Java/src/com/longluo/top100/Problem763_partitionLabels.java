@@ -1,4 +1,4 @@
-package com.longluo.leetcode.hash;
+package com.longluo.top100;
 
 import java.util.*;
 
@@ -24,6 +24,7 @@ import java.util.*;
  */
 public class Problem763_partitionLabels {
 
+    // HashMap + Greedy time: O(n) space: O(26)=O(1)
     public static List<Integer> partitionLabels(String s) {
         List<Integer> ans = new ArrayList<>();
         if (s.length() <= 1) {
@@ -44,7 +45,6 @@ public class Problem763_partitionLabels {
 
         int index = 0;
         int[] partSection = new int[2];
-
         while (index < len) {
             while (index >= partSection[0] && index <= partSection[1]) {
                 char ch = s.charAt(index);
@@ -62,8 +62,35 @@ public class Problem763_partitionLabels {
         return ans;
     }
 
+    // Greedy + Two Pointers time: O(n) space: O(26)=O(1)
+    public static List<Integer> partitionLabels_cnt(String s) {
+        int len = s.length();
+        int[] count = new int[26];
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            count[ch - 'a'] = i;
+        }
+
+        List<Integer> ans = new ArrayList<>();
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            right = Math.max(right, count[ch - 'a']);
+            if (i == right) {
+                ans.add(right - left + 1);
+                left = right + 1;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[10] ?= " + partitionLabels("eccbbbbdec"));
         System.out.println("[9, 7, 8] ?= " + partitionLabels("ababcbacadefegdehijhklij"));
+
+        System.out.println("[10] ?= " + partitionLabels_cnt("eccbbbbdec"));
+        System.out.println("[9, 7, 8] ?= " + partitionLabels_cnt("ababcbacadefegdehijhklij"));
     }
 }
