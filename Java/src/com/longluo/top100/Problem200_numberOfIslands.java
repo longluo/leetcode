@@ -1,4 +1,4 @@
-package com.longluo.studyplan.graph;
+package com.longluo.top100;
 
 import java.util.LinkedList;
 import java.util.Queue;
