@@ -81,27 +81,43 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
 
     public static boolean check(String s, int k) {
         int len = s.length();
-        if (len < k) {
-            return false;
-        }
-
+        int count = 1;
         for (int i = 1; i < len; i++) {
             if (s.charAt(i) == s.charAt(i - 1)) {
-                boolean flag = true;
-                for (int j = i - 1; j < len && j < i + k; j++) {
-                    if (s.charAt(j) != s.charAt(i)) {
-                        flag = false;
-                        break;
-                    }
-                }
+                count++;
+            } else {
+                count = 1;
+            }
 
-                if (flag) {
-                    return true;
-                }
+            if (count == k) {
+                return true;
             }
         }
 
         return false;
+    }
+
+    //
+    public static String removeDuplicates_rec(String s, int k) {
+        int len = s.length();
+        StringBuilder sb = new StringBuilder(len);
+        int count = 1;
+        sb.append(s.charAt(0));
+        for (int i = 1; i < len; i++) {
+            char ch = s.charAt(i);
+            sb.append(ch);
+            if (ch != s.charAt(i - 1)) {
+                count = 1;
+            } else {
+                count++;
+            }
+
+            if (count == k) {
+                sb.delete(sb.length() - k, sb.length());
+            }
+        }
+
+        return check(sb.toString(), k) ? removeDuplicates_rec(sb.toString(), k) : sb.toString();
     }
 
     // Stack time: O(n*k) space: O(n)
@@ -159,6 +175,8 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
     public static void main(String[] args) {
         System.out.println("abcd ?= " + removeDuplicates("abcd", 2));
         System.out.println("aa ?= " + removeDuplicates("deeedbbcccbdaa", 3));
+
+        System.out.println("aa ?= " + removeDuplicates_rec("deeedbbcccbdaa", 3));
 
         System.out.println("abcd ?= " + removeDuplicates_stack("abcd", 2));
         System.out.println("aa ?= " + removeDuplicates_stack("deeedbbcccbdaa", 3));
