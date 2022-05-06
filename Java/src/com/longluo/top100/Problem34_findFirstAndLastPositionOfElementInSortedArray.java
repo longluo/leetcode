@@ -1,4 +1,6 @@
-package com.longluo.leetcode.binarysearch;
+package com.longluo.top100;
+
+import java.util.Arrays;
 
 /**
  * 34. 在排序数组中查找元素的第一个和最后一个位置
@@ -34,15 +36,8 @@ public class Problem34_findFirstAndLastPositionOfElementInSortedArray {
     // BF time: O(n) space: O(1)
     public static int[] searchRange_bf(int[] nums, int target) {
         int[] ans = {-1, -1};
-        if (nums == null || nums.length <= 0) {
-            return ans;
-        }
-
-        if (nums.length == 1) {
-            return nums[0] == target ? new int[]{0, 0} : ans;
-        }
-
-        for (int i = 0; i < nums.length; i++) {
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
             if (nums[i] == target && ans[0] == -1) {
                 ans[0] = i;
             } else if (nums[i] > target && ans[0] >= 0) {
@@ -51,8 +46,8 @@ public class Problem34_findFirstAndLastPositionOfElementInSortedArray {
             }
         }
 
-        if (ans[0] >= 0 && ans[1] == -1) {
-            ans[1] = nums.length - 1;
+        if (ans[0] >= 0) {
+            ans[1] = len - 1;
         }
 
         return ans;
@@ -61,12 +56,9 @@ public class Problem34_findFirstAndLastPositionOfElementInSortedArray {
     // BS time: O(logn) space: O(1)
     public static int[] searchRange_bs(int[] nums, int target) {
         int[] ans = {-1, -1};
+
         if (nums == null || nums.length <= 0) {
             return ans;
-        }
-
-        if (nums.length == 1) {
-            return nums[0] == target ? new int[]{0, 0} : ans;
         }
 
         ans[0] = binarySearchLeft(nums, target);
@@ -114,7 +106,9 @@ public class Problem34_findFirstAndLastPositionOfElementInSortedArray {
     }
 
     public static void main(String[] args) {
+        System.out.println(Arrays.toString(searchRange_bf(new int[]{2}, 2)));
         searchRange_bf(new int[]{2, 2}, 2);
+
         searchRange_bs(new int[]{2}, 2);
         searchRange_bs(new int[]{2, 2}, 2);
         searchRange_bs(new int[]{5, 7, 7, 8, 8, 10}, 8);
