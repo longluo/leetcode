@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top100;
 
 /**
  * 283. 移动零
