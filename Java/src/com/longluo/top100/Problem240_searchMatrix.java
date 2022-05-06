@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top100;
 
 /**
  * 240. 搜索二维矩阵 II
