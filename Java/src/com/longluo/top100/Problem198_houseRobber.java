@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top100;
 
 /**
  * 198. 打家劫舍
@@ -27,7 +27,7 @@ package com.longluo.leetcode.dp;
  */
 public class Problem198_houseRobber {
 
-    // Use DP O(n) O(n)
+    // DP time: O(n)  space: O(n)
     public static int rob(int[] nums) {
         int len = nums.length;
         if (len <= 1) {
@@ -44,7 +44,7 @@ public class Problem198_houseRobber {
         return dp[len - 1];
     }
 
-    // Dp opt O(n) O(1)
+    // DP opt time: O(n) space: O(1)
     public static int rob_dp(int[] nums) {
         int len = nums.length;
         if (len <= 1) {
