@@ -1,4 +1,4 @@
-package com.longluo.studyplan.binary_search;
+package com.longluo.top100;
 
 /**
  * 33. 搜索旋转排序数组
@@ -104,6 +104,8 @@ public class Problem33_searchInRotatedSortedArray {
     }
 
     public static void main(String[] args) {
+        System.out.println("0 ?= " + search_bf(new int[]{5, 1, 3}, 5));
+
         System.out.println("0 ?= " + search_binary(new int[]{5, 1, 3}, 5));
         System.out.println("4 ?= " + search_binary(new int[]{4, 5, 6, 7, 0, 1, 2}, 0));
         System.out.println("-1 ?= " + search_binary(new int[]{4, 5, 6, 7, 0, 1, 2}, 3));
