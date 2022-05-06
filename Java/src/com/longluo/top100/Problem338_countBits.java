@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top100;
 
 import java.util.Arrays;
 
@@ -24,21 +24,37 @@ import java.util.Arrays;
  */
 public class Problem338_countBits {
 
+    // BF time: O(nlogn) space: O(n)
     public static int[] countBits(int num) {
-        if (num == 0) {
-            return new int[]{0};
-        }
+        int[] ans = new int[num + 1];
 
-        int[] res = new int[num + 1];
         for (int i = 0; i <= num; i++) {
             int count = 0;
-            int j = i;
-            while (j > 0) {
-                count += j & 1;
-                j = j >> 1;
+            int temp = i;
+            while (temp > 0) {
+                count += temp & 1;
+                temp = temp >> 1;
             }
 
-            res[i] = count;
+            ans[i] = count;
+        }
+
+        return ans;
+    }
+
+    // Odd Even time: O(n) space: O(n)
+    public static int[] countBits_oddeven(int num) {
+        if (num < 1) {
+            return new int[]{0};
+        }
+        int[] res = new int[num + 1];
+        res[1] = 1;
+        for (int i = 2; i <= num; i++) {
+            if (i % 2 == 0) {
+                res[i] = res[i / 2];
+            } else {
+                res[i] = res[i / 2] + 1;
+            }
         }
 
         return res;
@@ -49,5 +65,8 @@ public class Problem338_countBits {
         System.out.println("[0,1] ?= " + Arrays.toString(countBits(1)));
         System.out.println("[0,1,1] ?= " + Arrays.toString(countBits(2)));
         System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits(5)));
+
+        System.out.println("[0,1,1,2,1,2] ?= " + Arrays.toString(countBits_oddeven(5)));
+        System.out.println("[0,1,1,2,1,2,2,3,1] ?= " + Arrays.toString(countBits_oddeven(8)));
     }
 }
