@@ -24,7 +24,7 @@ import java.util.Stack;
  */
 public class Problem1047_removeAllAdjacentDuplicatesInString {
 
-    // BF time: O(n) space: O(n)
+    // StringBuilder time: O(n) space: O(n)
     public static String removeDuplicates_bf(String s) {
         if (s == null || s.length() <= 1) {
             return s;
@@ -50,25 +50,18 @@ public class Problem1047_removeAllAdjacentDuplicatesInString {
         }
 
         int len = s.length();
-        Stack<Character> st = new Stack<>();
-
+        Stack<Character> stk = new Stack<>();
         for (int i = len - 1; i >= 0; i--) {
-            if (!st.empty() && st.peek() == s.charAt(i)) {
-                st.pop();
+            if (!stk.empty() && stk.peek() == s.charAt(i)) {
+                stk.pop();
             } else {
-                st.push(s.charAt(i));
+                stk.push(s.charAt(i));
             }
-        }
-
-        if (st.empty()) {
-            return "";
         }
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < st.capacity(); i++) {
-            if (!st.empty()) {
-                sb.append(st.pop());
-            }
+        while (!stk.empty()) {
+            sb.append(stk.pop());
         }
 
         return sb.toString();
