@@ -1,6 +1,8 @@
 package com.longluo.top100;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * 239. 滑动窗口最大值
@@ -52,8 +54,40 @@ public class Problem239_slidingWindowMaximum {
         return ans;
     }
 
+    // SlidingWin + PQ time: O(n) space: O(k)
+    // TimeOut
+    public static int[] maxSlidingWindow_slidingwin(int[] nums, int k) {
+        int len = nums.length;
+        int[] ans = new int[len - k + 1];
+        int left = 0;
+        int right = k;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
+        for (int i = left; i < right; i++) {
+            pq.offer(nums[i]);
+        }
+        while (left <= right - k && right < len) {
+            ans[left] = pq.peek();
+            pq.offer(nums[right]);
+            pq.remove(nums[left]);
+            left++;
+            right++;
+        }
+
+        ans[left] = pq.peek();
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1] ?= " + Arrays.toString(maxSlidingWindow_bf(new int[]{1}, 1)));
         System.out.println("[3,3,5,5,6,7] ?= " + Arrays.toString(maxSlidingWindow_bf(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
+
+        System.out.println("[3,3] ?= " + Arrays.toString(maxSlidingWindow_slidingwin(new int[]{1, 3, -1, -3}, 3)));
+        System.out.println("[3,3,5,5,6,7] ?= " + Arrays.toString(maxSlidingWindow_slidingwin(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
     }
 }
