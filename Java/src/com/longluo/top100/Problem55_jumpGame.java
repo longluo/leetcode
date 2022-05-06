@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top100;
 
 /**
  * 55. 跳跃游戏
@@ -60,8 +60,9 @@ public class Problem55_jumpGame {
     }
 
     public static void main(String[] args) {
-        canJump_greedy(new int[]{2, 3, 1, 1, 4});
-        canJump_greedy(new int[]{2, 0});
-        canJump_greedy(new int[]{3, 2, 1, 0, 4});
+        System.out.println("true ?= " + canJump_bf(new int[]{2, 3, 1, 1, 4}));
+        System.out.println("true ?= " + canJump_greedy(new int[]{2, 3, 1, 1, 4}));
+        System.out.println("true ?= " + canJump_greedy(new int[]{2, 0}));
+        System.out.println("false ?= " + canJump_greedy(new int[]{3, 2, 1, 0, 4}));
     }
 }
