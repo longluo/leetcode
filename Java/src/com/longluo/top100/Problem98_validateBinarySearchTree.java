@@ -3,8 +3,7 @@ package com.longluo.top100;
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 98. 验证二叉搜索树
@@ -74,17 +73,47 @@ public class Problem98_validateBinarySearchTree {
         dfs(root.right, list);
     }
 
+    // Iteration time: O(n) space: O(n)
+    public static boolean isValidBST_iter(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return true;
+        }
+
+        List<Integer> numList = new ArrayList<>();
+        Deque<TreeNode> stk = new ArrayDeque<>();
+        while (root != null || !stk.isEmpty()) {
+            while (root != null) {
+                stk.push(root);
+                root = root.left;
+            }
+
+            root = stk.pop();
+
+            if (numList.size() > 0 && root.val <= numList.get(numList.size() - 1)) {
+                return false;
+            }
+
+            numList.add(root.val);
+            root = root.right;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{2, 1, 3});
         System.out.println("true ?= " + isValidBST(tst1));
         System.out.println("true ?= " + isValidBST_dfs(tst1));
+        System.out.println("true ?= " + isValidBST_iter(tst1));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{5, 1, 4, null, null, 3, 6});
         System.out.println("false ?= " + isValidBST(tst2));
         System.out.println("false ?= " + isValidBST_dfs(tst2));
+        System.out.println("false ?= " + isValidBST_iter(tst2));
 
         TreeNode tst3 = TreeUtils.constructTree(new Integer[]{5, 4, 6, null, null, 3, 7});
         System.out.println("false ?= " + isValidBST(tst3));
         System.out.println("false ?= " + isValidBST_dfs(tst3));
+        System.out.println("false ?= " + isValidBST_iter(tst3));
     }
 }
