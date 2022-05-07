@@ -1,4 +1,4 @@
-package com.longluo.leetcode.tree;
+package com.longluo.top100;
 
 import com.longluo.datastructure.TreeNode;
 
@@ -30,22 +30,25 @@ import java.util.Queue;
  * 谷歌：我们90％的工程师使用您编写的软件(Homebrew)，但是您却无法在面试时在白板上写出翻转二叉树这道题，这太糟糕了。
  * <p>
  * https://leetcode-cn.com/problems/invert-binary-tree/
+ * <p>
+ * https://leetcode.com/problems/invert-binary-tree/
  */
 public class Problem226_invertBinaryTree {
 
+    // Recursion time: O(n) space: O(n)
     public static TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return root;
         }
 
-        TreeNode temp = root.right;
-        root.right = root.left;
-        root.left = temp;
-        invertTree(root.left);
-        invertTree(root.right);
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+        root.left = right;
+        root.right = left;
         return root;
     }
 
+    // BFS time: O(n) space: O(n)
     public static TreeNode invertTree_bfs(TreeNode root) {
         if (root == null) {
             return null;
