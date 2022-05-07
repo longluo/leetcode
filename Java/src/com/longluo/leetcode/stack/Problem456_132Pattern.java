@@ -166,6 +166,8 @@ public class Problem456_132Pattern {
         return false;
     }
 
+    // TODO: 2022/5/7
+
     public static void main(String[] args) {
         System.out.println("false ?= " + find132pattern_bf(new int[]{1, 2, 3, 4}));
 
