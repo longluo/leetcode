@@ -1,7 +1,5 @@
 package com.longluo.leetcode.stack;
 
-import com.longluo.datastructure.TreeNode;
-
 import java.util.*;
 
 /**
@@ -59,7 +57,7 @@ public class Problem456_132Pattern {
 
     // BF time: O(n^2) space: O(1)
     // TimeOut
-    public static boolean find132pattern_bf_opt(int[] nums) {
+    public static boolean find132pattern_enumj(int[] nums) {
         int len = nums.length;
         if (len < 3) {
             return false;
@@ -92,8 +90,27 @@ public class Problem456_132Pattern {
         return false;
     }
 
-    // TODO: 2022/5/7 N^2 solutions 
-    
+    // time: O(n^2) space: O(1)
+    // fix the j: find a element: min < nums[k] < nums[j]
+    public static boolean find132pattern_fixi(int[] nums) {
+        int len = nums.length;
+        if (len < 3) {
+            return false;
+        }
+
+        int min_i = nums[0];
+        for (int j = 1; j < len - 1; j++) {
+            min_i = Math.min(min_i, nums[j]);
+            for (int k = len - 1; k > j; k--) {
+                if (nums[k] < nums[j] && nums[k] > min_i) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     // Find the Peak time: O(n) space: O(n)
     public static boolean find132pattern_map(int[] nums) {
         int len = nums.length;
@@ -152,9 +169,11 @@ public class Problem456_132Pattern {
     public static void main(String[] args) {
         System.out.println("false ?= " + find132pattern_bf(new int[]{1, 2, 3, 4}));
 
-        System.out.println("true ?= " + find132pattern_bf_opt(new int[]{3, 5, 0, 3, 4}));
-        System.out.println("false ?= " + find132pattern_bf_opt(new int[]{1, 2, 3, 4}));
-        System.out.println("true ?= " + find132pattern_bf_opt(new int[]{3, 1, 4, 2}));
+        System.out.println("true ?= " + find132pattern_enumj(new int[]{3, 5, 0, 3, 4}));
+        System.out.println("false ?= " + find132pattern_enumj(new int[]{1, 2, 3, 4}));
+        System.out.println("true ?= " + find132pattern_enumj(new int[]{3, 1, 4, 2}));
+
+        System.out.println("true ?= " + find132pattern_fixi(new int[]{3, 1, 4, 2}));
 
         System.out.println("true ?= " + find132pattern_map(new int[]{3, 1, 4, 2}));
 
