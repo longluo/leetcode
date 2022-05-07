@@ -1,4 +1,4 @@
-package com.longluo.leetcode.tree;
+package com.longluo.top100;
 
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
@@ -21,9 +21,12 @@ import com.longluo.datastructure.TreeUtils;
  * 注意：两结点之间的路径长度是以它们之间边的数目表示。
  * <p>
  * https://leetcode-cn.com/problems/diameter-of-binary-tree/
+ * <p>
+ * https://leetcode.com/problems/diameter-of-binary-tree/
  */
 public class Problem543_diameterOfBinaryTree {
 
+    // DFS time: O(n) space: O(n)
     static int ans = 0;
 
     public static int diameterOfBinaryTree(TreeNode root) {
