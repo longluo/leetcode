@@ -1,7 +1,6 @@
-package com.longluo.leetcode.backtracking;
+package com.longluo.top100;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,6 +31,7 @@ import java.util.List;
  */
 public class Problem46_permutations {
 
+    // Backtrack time: O(2^n) space: O(n)
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
         boolean[] visited = new boolean[nums.length];
