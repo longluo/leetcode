@@ -100,6 +100,31 @@ public class Problem98_validateBinarySearchTree {
         return true;
     }
 
+    // Iteration Opt time: O(n) space: O(n)
+    public static boolean isValidBST_iter_opt(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return true;
+        }
+
+        Deque<TreeNode> stk = new ArrayDeque<>();
+        long pre = Long.MIN_VALUE;
+        while (root != null || !stk.isEmpty()) {
+            while (root != null) {
+                stk.push(root);
+                root = root.left;
+            }
+
+            root = stk.pop();
+            if (root.val <= pre) {
+                return false;
+            }
+            pre = root.val;
+            root = root.right;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{2, 1, 3});
         System.out.println("true ?= " + isValidBST(tst1));
@@ -110,6 +135,7 @@ public class Problem98_validateBinarySearchTree {
         System.out.println("false ?= " + isValidBST(tst2));
         System.out.println("false ?= " + isValidBST_dfs(tst2));
         System.out.println("false ?= " + isValidBST_iter(tst2));
+        System.out.println("false ?= " + isValidBST_iter_opt(tst2));
 
         TreeNode tst3 = TreeUtils.constructTree(new Integer[]{5, 4, 6, null, null, 3, 7});
         System.out.println("false ?= " + isValidBST(tst3));
