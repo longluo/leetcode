@@ -188,7 +188,7 @@ public class Problem617_mergeTwoBinaryTrees {
         return root1;
     }
 
-    // DFS
+    // DFS time:O(min(m,n)) space: O(min(m,n))
     public static TreeNode mergeTrees_dfs(TreeNode root1, TreeNode root2) {
         if (root1 == null) {
             return root2;
