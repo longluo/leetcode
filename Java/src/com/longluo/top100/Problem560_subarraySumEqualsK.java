@@ -99,8 +99,10 @@ public class Problem560_subarraySumEqualsK {
     }
 
     public static void main(String[] args) {
+        subarraySum_bf(new int[]{1, 1, 1}, 2);
         subarraySum_prefixSum(new int[]{1, 1, 1}, 2);
         subarraySum_prefixSum_hash(new int[]{1, 1, 1}, 2);
         subarraySum_prefixSum_hash(new int[]{1}, 0);
+        subarraySum_prefixSum_hash_opt(new int[]{1}, 0);
     }
 }
