@@ -92,6 +92,8 @@ public class Problem456_132Pattern {
         return false;
     }
 
+    // TODO: 2022/5/7 N^2 solutions 
+    
     // Find the Peak time: O(n) space: O(n)
     public static boolean find132pattern_map(int[] nums) {
         int len = nums.length;
