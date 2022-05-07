@@ -72,7 +72,9 @@ public class Problem17_letterCombinationsOfAPhoneNumber {
         }
     }
 
+    // TODO: 2022/5/7  
+    
     public static void main(String[] args) {
-        System.out.println(" ?= " + letterCombinations("23"));
+        System.out.println("[ad, ae, af, bd, be, bf, cd, ce, cf] ?= " + letterCombinations("23"));
     }
 }
