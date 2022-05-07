@@ -95,7 +95,8 @@ public class Problem24_swapNodesInPairs {
 
     public static void main(String[] args) {
         ListNode tstNode1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4});
-//        swapPairs_node(tstNode1);
+        swapPairs_bf(tstNode1);
+        swapPairs_node(tstNode1);
         swapPairs_rec(tstNode1);
     }
 }
