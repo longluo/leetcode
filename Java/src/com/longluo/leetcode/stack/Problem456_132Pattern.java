@@ -1,7 +1,8 @@
 package com.longluo.leetcode.stack;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import com.longluo.datastructure.TreeNode;
+
+import java.util.*;
 
 /**
  * 456. 132 模式
@@ -91,7 +92,38 @@ public class Problem456_132Pattern {
         return false;
     }
 
-    // Stack
+    // Find the Peak time: O(n) space: O(n)
+    public static boolean find132pattern_map(int[] nums) {
+        int len = nums.length;
+        if (len < 3) {
+            return false;
+        }
+
+        TreeMap<Integer, Integer> rightMap = new TreeMap<>();
+        for (int i = 2; i < len; i++) {
+            rightMap.put(nums[i], rightMap.getOrDefault(nums[i], 0) + 1);
+        }
+
+        int leftMin = nums[0];
+        for (int j = 1; j < len - 1; j++) {
+            if (leftMin < nums[j]) {
+                Integer numK = rightMap.ceilingKey(leftMin + 1);
+                if (numK != null && numK < nums[j]) {
+                    return true;
+                }
+            }
+
+            leftMin = Math.min(leftMin, nums[j]);
+            rightMap.put(nums[j + 1], rightMap.get(nums[j + 1]) - 1);
+            if (rightMap.get(nums[j + 1]) == 0) {
+                rightMap.remove(nums[j + 1]);
+            }
+        }
+
+        return false;
+    }
+
+    // Stack time: O(n) space: O(n)
     public static boolean find132pattern_stack(int[] nums) {
         int len = nums.length;
         if (len < 3) {
@@ -99,30 +131,18 @@ public class Problem456_132Pattern {
         }
 
         Deque<Integer> stk = new ArrayDeque<>();
-        for (int i = 0; i < len; i++) {
-            if (stk.isEmpty()) {
-                stk.push(nums[i]);
-            } else if (nums[i] < stk.peek()) {
-                while (!stk.isEmpty() && nums[i] < stk.peek()) {
-                    stk.pop();
-                }
-                stk.push(nums[i]);
-            } else if (nums[i] > stk.peek()) {
-
+        int k = -1;
+        for (int i = len - 1; i >= 0; i--) {
+            if (k > -1 && nums[k] > nums[i]) {
+                return true;
             }
 
-            if (stk.size() > 1 && nums[i] < stk.peek()) {
-                int numA = stk.pop();
-                int numB = stk.peek();
-                if (nums[i] > numB) {
-                    return true;
-                }
-                stk.push(numA);
+            while (!stk.isEmpty() && nums[i] > nums[stk.peek()]) {
+                k = stk.pop();
             }
 
-            return false;
+            stk.push(i);
         }
-
 
         return false;
     }
@@ -133,6 +153,8 @@ public class Problem456_132Pattern {
         System.out.println("true ?= " + find132pattern_bf_opt(new int[]{3, 5, 0, 3, 4}));
         System.out.println("false ?= " + find132pattern_bf_opt(new int[]{1, 2, 3, 4}));
         System.out.println("true ?= " + find132pattern_bf_opt(new int[]{3, 1, 4, 2}));
+
+        System.out.println("true ?= " + find132pattern_map(new int[]{3, 1, 4, 2}));
 
         System.out.println("false ?= " + find132pattern_stack(new int[]{1, 2, 3, 4}));
         System.out.println("true ?= " + find132pattern_stack(new int[]{3, 1, 4, 2}));
