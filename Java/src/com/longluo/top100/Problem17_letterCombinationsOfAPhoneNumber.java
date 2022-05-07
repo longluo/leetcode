@@ -35,8 +35,10 @@ import java.util.Map;
  */
 public class Problem17_letterCombinationsOfAPhoneNumber {
 
+    // Backtrack time: O(3^m * 4^n) space: O(m+n)
     public static List<String> letterCombinations(String digits) {
         List<String> ans = new ArrayList<>();
+
         if (digits == null || digits.length() == 0) {
             return ans;
         }
@@ -51,11 +53,11 @@ public class Problem17_letterCombinationsOfAPhoneNumber {
         map.put(8, "tuv");
         map.put(9, "wxyz");
 
-        backtrace(ans, new StringBuilder(), digits, map, 0);
+        backtrack(ans, new StringBuilder(), digits, map, 0);
         return ans;
     }
 
-    public static void backtrace(List<String> res, StringBuilder sb, String digits, Map<Integer, String> map, int idx) {
+    public static void backtrack(List<String> res, StringBuilder sb, String digits, Map<Integer, String> map, int idx) {
         if (idx == digits.length()) {
             res.add(sb.toString());
             return;
@@ -65,7 +67,7 @@ public class Problem17_letterCombinationsOfAPhoneNumber {
         String numStr = map.get(number);
         for (int i = 0; i < numStr.length(); i++) {
             sb.append(numStr.charAt(i));
-            backtrace(res, sb, digits, map, idx + 1);
+            backtrack(res, sb, digits, map, idx + 1);
             sb.deleteCharAt(sb.length() - 1);
         }
     }
