@@ -1,4 +1,4 @@
-package com.longluo.leetcode.backtracking;
+package com.longluo.top100;
 
 import com.longluo.datastructure.ArrayUtils;
 
@@ -28,26 +28,27 @@ import java.util.List;
  */
 public class Problem78_subsets {
 
+    // Backtrack time: O(2^n) space: O(n)
     public static List<List<Integer>> subsets(int[] nums) {
         if (nums == null || nums.length == 0) {
             return new ArrayList<>();
         }
 
         List<List<Integer>> ans = new ArrayList<>();
-        backtrace(ans, new ArrayList<>(), nums, 0);
+        backtrack(ans, new ArrayList<>(), nums, 0);
         return ans;
     }
 
-    public static void backtrace(List<List<Integer>> ans, List<Integer> oneList, int[] numbers, int index) {
+    public static void backtrack(List<List<Integer>> ans, List<Integer> oneList, int[] numbers, int index) {
         if (index == numbers.length) {
             ans.add(new ArrayList<>(oneList));
             return;
         }
 
         oneList.add(numbers[index]);
-        backtrace(ans, oneList, numbers, index + 1);
+        backtrack(ans, oneList, numbers, index + 1);
         oneList.remove(oneList.size() - 1);
-        backtrace(ans, oneList, numbers, index + 1);
+        backtrack(ans, oneList, numbers, index + 1);
     }
 
     public static void main(String[] args) {
