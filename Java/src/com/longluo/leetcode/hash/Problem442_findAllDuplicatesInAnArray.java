@@ -87,6 +87,19 @@ public class Problem442_findAllDuplicatesInAnArray {
         return ans;
     }
 
+    public static List<Integer> findDuplicates_abs(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        for (int x : nums) {
+            int idx = Math.abs(x) - 1;
+            if (nums[idx] < 0) {
+                ans.add(idx + 1);
+            }
+            nums[idx] = -nums[idx];
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + findDuplicates(new int[]{1, 1, 2}));
     }
