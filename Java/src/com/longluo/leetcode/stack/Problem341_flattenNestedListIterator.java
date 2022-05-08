@@ -1,8 +1,6 @@
 package com.longluo.leetcode.stack;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * 341. 扁平化嵌套列表迭代器
@@ -54,14 +52,15 @@ public class Problem341_flattenNestedListIterator {
         public List<NestedInteger> getList();
     }
 
+    // DFS
     public class NestedIterator implements Iterator<Integer> {
         List<Integer> numList;
-        int idx;
+        Iterator<Integer> curIterator;
 
         public NestedIterator(List<NestedInteger> nestedList) {
             numList = new ArrayList<>();
-            idx = 0;
             dfs(nestedList);
+            curIterator = numList.iterator();
         }
 
         private void dfs(List<NestedInteger> nestedList) {
@@ -69,8 +68,7 @@ public class Problem341_flattenNestedListIterator {
                 return;
             }
 
-            for (int i = idx; i < nestedList.size(); i++) {
-                NestedInteger nested = nestedList.get(i);
+            for (NestedInteger nested : nestedList) {
                 if (nested.isInteger()) {
                     numList.add(nested.getInteger());
                 } else {
@@ -81,13 +79,46 @@ public class Problem341_flattenNestedListIterator {
 
         @Override
         public Integer next() {
-            return numList.get(idx++);
+            return curIterator.next();
         }
 
         @Override
         public boolean hasNext() {
-            if (idx < numList.size()) {
-                return true;
+            return curIterator.hasNext();
+        }
+    }
+
+    public class NestedIterator_stack implements Iterator<Integer> {
+        Deque<Iterator<NestedInteger>> stk;
+
+        public NestedIterator_stack(List<NestedInteger> nestedList) {
+            stk = new ArrayDeque<>();
+            stk.push(nestedList.iterator());
+        }
+
+        @Override
+        public Integer next() {
+            return stk.peek().next().getInteger();
+        }
+
+        @Override
+        public boolean hasNext() {
+            while (!stk.isEmpty()) {
+                Iterator<NestedInteger> iterator = stk.peek();
+                if (!iterator.hasNext()) {
+                    stk.pop();
+                    continue;
+                }
+
+                NestedInteger nested = iterator.next();
+                if (nested.isInteger()) {
+                    List<NestedInteger> list = new ArrayList<>();
+                    list.add(nested);
+                    stk.push(list.iterator());
+                    return true;
+                }
+
+                stk.push(nested.getList().iterator());
             }
 
             return false;
