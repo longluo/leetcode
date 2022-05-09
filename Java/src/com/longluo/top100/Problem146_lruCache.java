@@ -93,6 +93,31 @@ public class Problem146_lruCache {
         }
     }
 
+    // LinkedHashMap
+    static class LRUCache_LinkedHashMap extends LinkedHashMap {
+        private int capacity = 0;
+
+        public LRUCache_LinkedHashMap(int capacity) {
+            super(capacity, 0.75f, true);
+            this.capacity = capacity;
+        }
+
+        // time: O(1)
+        public void put(int key, int value) {
+            super.put(key, value);
+        }
+
+        // time: O(1)
+        public int get(int key) {
+            return (int) super.getOrDefault(key, -1);
+        }
+
+        @Override
+        protected boolean removeEldestEntry(Map.Entry eldest) {
+            return size() > capacity;
+        }
+    }
+
     /**
      * Your LRUCache object will be instantiated and called as such:
      * LRUCache obj = new LRUCache(capacity);
