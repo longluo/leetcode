@@ -1,4 +1,4 @@
-package com.longluo.leetcode.tree;
+package com.longluo.top100;
 
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
@@ -42,6 +42,7 @@ import java.util.Stack;
  */
 public class Problem94_binaryTreeInorderTraversal {
 
+    // Recursion time: O(n) space: O(n)
     public static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
         inorder(root, ans);
@@ -58,6 +59,7 @@ public class Problem94_binaryTreeInorderTraversal {
         inorderTraversal(root.right);
     }
 
+    // Iteration time: O(n) space: O(n)
     public static List<Integer> inorderTraversal_iter(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {
