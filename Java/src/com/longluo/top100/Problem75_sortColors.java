@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top100;
 
 import java.util.Arrays;
 
@@ -32,6 +32,7 @@ import java.util.Arrays;
  */
 public class Problem75_sortColors {
 
+    // Sort time: O(nlogn) space: O(logn)
     public static void sortColors_bf(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return;
@@ -40,6 +41,7 @@ public class Problem75_sortColors {
         Arrays.sort(nums);
     }
 
+    // Count Sort time: O(n) space: O(1)
     public static void sortColors_CntSort(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return;
