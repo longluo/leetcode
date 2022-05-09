@@ -80,7 +80,7 @@ public class Problem146_lruCache {
             }
         }
 
-        // time: O(1)
+        // time: O(n)
         public V get(K key) {
             V v = map.get(key);
             if (v != null) {
@@ -90,6 +90,53 @@ public class Problem146_lruCache {
             }
 
             return null;
+        }
+    }
+
+    // HashMap + LinkedList
+    // AC
+    static class LRUCache_LinkedList_int {
+        Map<Integer, Integer> map;
+        LinkedList<Integer> list;
+        private int capacity = 0;
+
+        public LRUCache_LinkedList_int(int capacity) {
+            this.capacity = capacity;
+            map = new HashMap<>();
+            list = new LinkedList<>();
+        }
+
+        // time: O(n)
+        public void put(int key, int value) {
+            Integer V = map.get(key);
+            if (V != null) {
+                list.remove((Integer) key);
+                list.addLast(key);
+                map.put(key, value);
+                return;
+            }
+
+            if (list.size() < capacity) {
+                list.addLast(key);
+                map.put(key, value);
+            } else {
+                Integer firstKey = list.removeFirst();
+                map.remove(firstKey);
+                list.addLast(key);
+                map.put(key, value);
+            }
+        }
+
+        // time: O(n)
+        public int get(int key) {
+            Integer V = map.get(key);
+            if (V != null) {
+                list.remove((Integer) key);
+                list.addLast(key);
+                return V;
+            }
+
+            return -1;
         }
     }
 
@@ -118,6 +165,121 @@ public class Problem146_lruCache {
         }
     }
 
+    // DeList
+    static class LRUCache_DeList {
+        int capacity = 0;
+        Map<Integer, ListNode> map;
+        ListNode head;
+        ListNode tail;
+
+        public LRUCache_DeList(int capacity) {
+            this.capacity = capacity;
+            map = new HashMap<>();
+        }
+
+        // time: O(1)
+        public void put(int key, int value) {
+            ListNode node = map.get(key);
+            if (node != null) {
+                node.value = value;
+                moveNodeToTail(node);
+            } else {
+                ListNode newNode = new ListNode(key, value);
+                if (map.size() == capacity) {
+                    ListNode delNode = removeHead();
+                    map.remove(delNode.key);
+                }
+
+                addLast(newNode);
+                map.put(key, newNode);
+            }
+        }
+
+        // time: O(1)
+        public int get(int key) {
+            ListNode node = map.get(key);
+            if (node != null) {
+                moveNodeToTail(node);
+                return node.value;
+            }
+
+            return -1;
+        }
+
+        public void addLast(ListNode node) {
+            if (node == null) {
+                return;
+            }
+
+            if (head == null) {
+                head = node;
+                tail = node;
+            } else {
+                tail.next = node;
+                node.pre = tail;
+                tail = node;
+            }
+        }
+
+        public void moveNodeToTail(ListNode node) {
+            if (tail == node) {
+                return;
+            }
+
+            if (head == node) {
+                head = node.next;
+                head.pre = null;
+            } else {
+                node.pre.next = node.next;
+                node.next.pre = node.pre;
+            }
+
+            node.pre = tail;
+            node.next = null;
+            tail.next = node;
+            tail = node;
+        }
+
+        public ListNode removeHead() {
+            if (head == null) {
+                return null;
+            }
+
+            ListNode res = head;
+            if (head == tail) {
+                head = null;
+                tail = null;
+            } else {
+                head = res.next;
+                head.pre = null;
+                res.next = null;
+            }
+
+            return res;
+        }
+    }
+
+    static class ListNode {
+        int key;
+        int value;
+        ListNode pre;
+        ListNode next;
+
+        public ListNode(int key, int value) {
+            this.key = key;
+            this.value = value;
+            this.pre = null;
+            this.next = null;
+        }
+
+        public ListNode(int key, int value, ListNode pre, ListNode next) {
+            this.key = key;
+            this.value = value;
+            this.pre = pre;
+            this.next = next;
+        }
+    }
+
     /**
      * Your LRUCache object will be instantiated and called as such:
      * LRUCache obj = new LRUCache(capacity);
@@ -127,5 +289,11 @@ public class Problem146_lruCache {
     public static void main(String[] args) {
         LRUCache_LinkedList tst1 = new LRUCache_LinkedList(2);
         tst1.put(1, 2);
+
+        LRUCache_DeList tst3 = new LRUCache_DeList(2);
+        tst3.put(1, 1);
+        tst3.put(2, 2);
+        tst3.get(1);
+        tst3.put(3, 3);
     }
 }
