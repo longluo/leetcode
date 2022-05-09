@@ -72,9 +72,35 @@ public class Problem17_letterCombinationsOfAPhoneNumber {
         }
     }
 
-    // TODO: 2022/5/7  
-    
+    // BF time: O() space: O()
+    public static List<String> letterCombinations_bf(String digits) {
+        List<String> res = new ArrayList<>();
+        if (digits == null || digits.length() == 0) {
+            return res;
+        }
+
+        String[] letters = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        res.add("");
+        for (char digit : digits.toCharArray()) {
+            String curLetters = letters[digit - '2'];
+            List<String> newRes = new ArrayList<>();
+
+            for (String item : res) {
+                for (char curDigit : curLetters.toCharArray()) {
+                    newRes.add(item + curDigit);
+                }
+            }
+
+            res = newRes;
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
+        System.out.println("[a, b, c] ?= " + letterCombinations_bf("2"));
+        System.out.println("[ad, ae, af, bd, be, bf, cd, ce, cf] ?= " + letterCombinations_bf("23"));
+
         System.out.println("[ad, ae, af, bd, be, bf, cd, ce, cf] ?= " + letterCombinations("23"));
     }
 }
