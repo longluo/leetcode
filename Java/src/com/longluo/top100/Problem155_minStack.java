@@ -1,9 +1,6 @@
 package com.longluo.top100;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 155. 最小栈
@@ -39,40 +36,125 @@ import java.util.Stack;
  */
 public class Problem155_minStack {
 
+    // time: O(nlogn) space: O(2n)
     static class MinStack {
-
-        Stack<Integer> stack;
-        List<Integer> list;
+        Deque<Integer> stack;
+        List<Integer> numList;
 
         public MinStack() {
-            stack = new Stack<>();
-            list = new ArrayList<>();
+            stack = new ArrayDeque<>();
+            numList = new ArrayList<>();
         }
 
+        // time: O(nlogn)
         public void push(int val) {
             stack.push(val);
-            list.add(val);
-            Collections.sort(list);
+            numList.add(val);
+            Collections.sort(numList);
         }
 
+        // time: O(n)
         public void pop() {
-            int val = stack.peek();
-            stack.pop();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).intValue() == val) {
-                    list.remove(i);
+            int val = stack.pop();
+            for (int i = 0; i < numList.size(); i++) {
+                if (numList.get(i) == val) {
+                    numList.remove(i);
                     break;
                 }
             }
-            Collections.sort(list);
+
+            Collections.sort(numList);
         }
 
+        // time: O(1)
         public int top() {
             return stack.peek();
         }
 
+        // time: O(1)
         public int getMin() {
-            return list.get(0);
+            return numList.get(0);
+        }
+    }
+
+    // Two Stacks
+    static class MinStack_2Stack {
+        Stack<Integer> numStack;
+        Stack<Integer> minStack;
+
+        // time: O(1)
+        public MinStack_2Stack() {
+            numStack = new Stack<>();
+            minStack = new Stack<>();
+        }
+
+        // time: O(1)
+        public void push(int val) {
+            numStack.push(val);
+            if (!minStack.empty()) {
+                int top = minStack.peek();
+                if (val < top) {
+                    minStack.push(val);
+                }
+            } else {
+                minStack.push(val);
+            }
+        }
+
+        // time: O(1)
+        public void pop() {
+            int pop = numStack.pop();
+            if (pop == minStack.peek()) {
+                minStack.pop();
+            }
+        }
+
+        // time: O(1)
+        public int top() {
+            return numStack.peek();
+        }
+
+        // time: O(1)
+        public int getMin() {
+            return minStack.peek();
+        }
+    }
+
+    // One Stack min
+    static class MinStack_min {
+        Stack<Integer> stack;
+        int min = Integer.MAX_VALUE;
+
+        // time: O(1)
+        public MinStack_min() {
+            stack = new Stack<>();
+        }
+
+        // time: O(1)
+        public void push(int val) {
+            if (val <= min) {
+                stack.push(min);
+                min = val;
+            }
+
+            stack.push(val);
+        }
+
+        // time: O(1)
+        public void pop() {
+            if (stack.pop() == min) {
+                min = stack.pop();
+            }
+        }
+
+        // time: O(1)
+        public int top() {
+            return stack.peek();
+        }
+
+        // time: O(1)
+        public int getMin() {
+            return min;
         }
     }
 
@@ -84,38 +166,11 @@ public class Problem155_minStack {
      * int param_3 = obj.top();
      * int param_4 = obj.getMin();
      */
-
-    static class MinStack_min {
-
-        Stack<Integer> numStack;
-        Stack<Integer> minStack;
-
-        public MinStack_min() {
-            numStack = new Stack<>();
-            minStack = new Stack<>();
-            minStack.push(Integer.MAX_VALUE);
-        }
-
-        public void push(int val) {
-            numStack.push(val);
-            minStack.push(Math.min(numStack.peek(), minStack.peek()));
-        }
-
-        public void pop() {
-            numStack.pop();
-            minStack.pop();
-        }
-
-        public int top() {
-            return numStack.peek();
-        }
-
-        public int getMin() {
-            return minStack.peek();
-        }
-    }
-
     public static void main(String[] args) {
-
+        MinStack obj = new MinStack();
+        obj.push(5);
+        obj.pop();
+        int param_3 = obj.top();
+        int param_4 = obj.getMin();
     }
 }
