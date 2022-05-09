@@ -114,7 +114,7 @@ public class Problem114_flattenBinaryTreeToLinkedList {
     }
 
     // Recursion time: O(n) space: O(n)
-    // TODO: 2022/5/9 Not Understand 
+    // TODO: 2022/5/9 Not Understand
     public static void flatten_iter(TreeNode root) {
         while (root != null) {
             if (root.left == null) {
