@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top100;
 
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
@@ -43,6 +43,7 @@ import java.util.Map;
  */
 public class Problem337_houseRobber_iii {
 
+    // Recursion time: O() space: O()
     public static int rob(TreeNode root) {
         if (root == null) {
             return 0;
@@ -52,11 +53,11 @@ public class Problem337_houseRobber_iii {
             return root.val;
         }
 
-        if (root.left == null && root.right != null) {
+        if (root.left == null) {
             return Math.max(root.val + rob(root.right.left) + rob(root.right.right), rob(root.right));
         }
 
-        if (root.left != null && root.right == null) {
+        if (root.right == null) {
             return Math.max(root.val + rob(root.left.left) + rob(root.left.right), rob(root.left));
         }
 
