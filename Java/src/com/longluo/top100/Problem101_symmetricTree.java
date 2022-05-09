@@ -1,4 +1,4 @@
-package com.longluo.leetcode.tree;
+package com.longluo.top100;
 
 import com.longluo.datastructure.TreeNode;
 
@@ -30,6 +30,7 @@ import java.util.Queue;
  */
 public class Problem101_symmetricTree {
 
+    // BFS time: O(n) space: O(n)
     public static boolean isSymmetric_bfs(TreeNode root) {
         if (root == null || (root.left == null && root.right == null)) {
             return true;
@@ -71,6 +72,7 @@ public class Problem101_symmetricTree {
         return true;
     }
 
+    // Recursion time: O(n) space: O(n)
     public static boolean isSymmetric_rec(TreeNode root) {
         if (root == null) {
             return true;
@@ -80,12 +82,12 @@ public class Problem101_symmetricTree {
     }
 
     public static boolean checkSymmetric(TreeNode left, TreeNode right) {
-        if ((left != null && right == null) || (left == null && right != null)) {
-            return false;
-        }
-
         if (left == null && right == null) {
             return true;
+        }
+
+        if ((left != null && right == null) || (left == null && right != null)) {
+            return false;
         }
 
         if (left.val != right.val) {
