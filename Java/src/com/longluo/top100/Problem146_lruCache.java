@@ -1,6 +1,8 @@
-package com.longluo.leetcode.design;
+package com.longluo.top100;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -45,25 +47,49 @@ import java.util.Map;
  */
 public class Problem146_lruCache {
 
-    class LRUCache extends LinkedHashMap<Integer, Integer> {
+    // HashMap + LinkedList
+    static class LRUCache_LinkedList<K, V> {
+        Map<K, V> map;
+        LinkedList<K> list;
         private int capacity = 0;
 
-        public LRUCache(int capacity) {
-            super(capacity, 0.75F, true);
+        public LRUCache_LinkedList(int capacity) {
             this.capacity = capacity;
+            map = new HashMap<>();
+            list = new LinkedList<>();
         }
 
-        public int get(int key) {
-            return super.getOrDefault(key, -1);
+        // time: O(n)
+        public void put(K key, V value) {
+            V V = map.get(key);
+            if (V != null) {
+                list.remove(key);
+                list.addLast(key);
+                map.put(key, value);
+                return;
+            }
+
+            if (list.size() < capacity) {
+                list.addLast(key);
+                map.put(key, value);
+            } else {
+                K firstKey = list.removeFirst();
+                map.remove(firstKey);
+                list.addLast(key);
+                map.put(key, value);
+            }
         }
 
-        public void put(int key, int value) {
-            super.put(key, value);
-        }
+        // time: O(1)
+        public V get(K key) {
+            V v = map.get(key);
+            if (v != null) {
+                list.remove(key);
+                list.addLast(key);
+                return v;
+            }
 
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
-            return size() > capacity;
+            return null;
         }
     }
 
@@ -74,6 +100,7 @@ public class Problem146_lruCache {
      * obj.put(key,value);
      */
     public static void main(String[] args) {
-
+        LRUCache_LinkedList tst1 = new LRUCache_LinkedList(2);
+        tst1.put(1, 2);
     }
 }
