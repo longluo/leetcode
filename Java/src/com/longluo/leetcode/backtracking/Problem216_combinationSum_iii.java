@@ -44,11 +44,16 @@ public class Problem216_combinationSum_iii {
 
     // Backtrack time: O(9!/k!) space: O(9)
     public static List<List<Integer>> combinationSum3(int k, int n) {
-        if (n < 3 || n > 45 || k > n) {
-            return new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+
+        if (k <= 0 || n <= 0 || k > n) {
+            return ans;
         }
 
-        List<List<Integer>> ans = new ArrayList<>();
+        if (n > (19 - k) * k / 2) {
+            return ans;
+        }
+
         backtrack(ans, new ArrayList<>(), 1, k, n);
         return ans;
     }
