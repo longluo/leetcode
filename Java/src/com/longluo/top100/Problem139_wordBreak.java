@@ -1,6 +1,7 @@
 package com.longluo.top100;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 139. 单词拆分
@@ -57,9 +58,80 @@ public class Problem139_wordBreak {
         return dp[len];
     }
 
+    // Trie Done
+    public static boolean wordBreak_trie(String s, List<String> wordDict) {
+        Trie root = new Trie();
+        for (String word : wordDict) {
+            root.insert(word);
+        }
+
+        return root.search(s, 0);
+    }
+
+    static class Trie {
+        public boolean isEnd;
+        public Trie next[];
+
+        boolean[] failed = new boolean[301];
+
+        public Trie() {
+            isEnd = false;
+            next = new Trie[26];
+        }
+
+        public void insert(String word) {
+            Trie node = this;
+            for (char ch : word.toCharArray()) {
+                int idx = ch - 'a';
+                if (node.next[idx] == null) {
+                    node.next[idx] = new Trie();
+                }
+
+                node = node.next[idx];
+            }
+
+            node.isEnd = true;
+        }
+
+        public boolean search(String s, int start) {
+            if (failed[start]) {
+                return false;
+            }
+
+            if (start >= s.length()) {
+                return true;
+            }
+
+            Trie root = this;
+            Trie pNode = root;
+            int len = s.length();
+            for (int i = start; i < len; i++) {
+                int idx = s.charAt(i) - 'a';
+                if (pNode.next[idx] == null) {
+                    return false;
+                }
+
+                pNode = pNode.next[idx];
+                if (pNode.isEnd) {
+                    if (search(s, i + 1)) {
+                        return true;
+                    }
+
+                    failed[i + 1] = true;
+                }
+            }
+
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + wordBreak_dp("leetcode", Arrays.asList(new String[]{"leet", "code"})));
         System.out.println("true ?= " + wordBreak_dp("applepenapple", Arrays.asList(new String[]{"apple", "pen"})));
         System.out.println("false ?= " + wordBreak_dp("catsandog", Arrays.asList(new String[]{"cats", "dog", "sand", "and", "cat"})));
+
+        System.out.println("false ?= " + wordBreak_trie("aaaa", Arrays.asList(new String[]{"aaa"})));
+        System.out.println("true ?= " + wordBreak_trie("leetcode", Arrays.asList(new String[]{"leet", "code"})));
+        System.out.println("false ?= " + wordBreak_trie("catsandog", Arrays.asList(new String[]{"cats", "dog", "sand", "and", "cat"})));
     }
 }
