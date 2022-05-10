@@ -99,14 +99,64 @@ public class Problem1044_longestDupSubstring {
         return ans;
     }
 
+    // Binary Search time: O(n^2logn) space: O(n)
+    // TimeOut
+    public static String longestDupSubstring_bs(String s) {
+        int len = s.length();
+        int[] cnt = new int[26];
+        for (char ch : s.toCharArray()) {
+            cnt[ch - 'a']++;
+        }
+
+        String ans = "";
+        int maxLen = 0;
+
+        for (int i = 0; i < len; i++) {
+            if (cnt[s.charAt(i) - 'a'] < 2) {
+                continue;
+            }
+
+            int ret = binarySearch(s, i, maxLen + 1, len - 1 - i);
+            if (ret > maxLen) {
+                maxLen = ret;
+                ans = s.substring(i, i + maxLen);
+            }
+        }
+
+        return ans;
+    }
+
+    public static int binarySearch(String s, int idx, int left, int right) {
+        int ans = 0;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            String subStr = s.substring(idx, idx + mid);
+            String rightSubStr = s.substring(idx + 1);
+            if (rightSubStr.contains(subStr)) {
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("a ?= " + longestDupSubstring_bf("aa"));
-        System.out.println("a ?= " + longestDupSubstring_bf_opt("aa"));
-        System.out.println("ana ?= " + longestDupSubstring_bf("banana"));
-        System.out.println("ana ?= " + longestDupSubstring_bf_opt("banana"));
         System.out.println(" ?= " + longestDupSubstring_bf("abcd"));
-        System.out.println("ma ?= " + longestDupSubstring_bf_opt("mymadmay"));
+        System.out.println("ana ?= " + longestDupSubstring_bf("banana"));
         System.out.println("ma ?= " + longestDupSubstring_bf("nnpxouomcofdjuujloanjimymadkuepightrfodmauhrsy"));
+
+        System.out.println("a ?= " + longestDupSubstring_bf_opt("aa"));
+        System.out.println("ana ?= " + longestDupSubstring_bf_opt("banana"));
+        System.out.println("ma ?= " + longestDupSubstring_bf_opt("mymadmay"));
         System.out.println("ma ?= " + longestDupSubstring_bf_opt("nnpxouomcofdjuujloanjimymadkuepightrfodmauhrsy"));
+
+        System.out.println("ana ?= " + longestDupSubstring_bs("banana"));
+        System.out.println("ma ?= " + longestDupSubstring_bs("mymadmay"));
+        System.out.println("ma ?= " + longestDupSubstring_bs("nnpxouomcofdjuujloanjimymadkuepightrfodmauhrsy"));
     }
 }
