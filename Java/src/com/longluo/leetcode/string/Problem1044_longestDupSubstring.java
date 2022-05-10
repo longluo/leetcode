@@ -1,7 +1,9 @@
 package com.longluo.leetcode.string;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 1044. 最长重复子串
@@ -144,6 +146,86 @@ public class Problem1044_longestDupSubstring {
         return ans;
     }
 
+    // Hash TimeOut
+    public static String longestDupSubstring_hash(String s) {
+        String ans = "";
+        int len = s.length();
+        int left = 0;
+        int right = len - 1;
+        while (left <= right) {
+            int mid = left + (right - left + 1) / 2;
+            String ret = search(s, mid);
+            if (ret.length() > 0) {
+                left = mid + 1;
+                ans = ret;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
+    }
+
+    public static String search(String s, int len) {
+        Set<Integer> seen = new HashSet<>();
+        for (int i = 0; i <= s.length() - len; i++) {
+            String subStr = s.substring(i, i + len);
+            int hash = subStr.hashCode();
+            if (seen.contains(hash) && s.indexOf(subStr) != i) {
+                return subStr;
+            }
+
+            seen.add(hash);
+        }
+
+        return "";
+    }
+
+    // BS + Hash time: O(nlogn) space: O(n)
+    public static String longestDupSubstring_bs_hash(String s) {
+        String ans = "";
+        int len = s.length();
+        int left = 0;
+        int right = len - 1;
+        while (left <= right) {
+            int mid = left + (right - left + 1) / 2;
+            String ret = searchWin(s, mid);
+            if (ret.length() > 0) {
+                left = mid + 1;
+                ans = ret;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
+    }
+
+    public static String searchWin(String s, int len) {
+        int PRIME = 31;
+        Set<Long> seen = new HashSet<>();
+        long hash = 0;
+        long power = 1;
+        for (int i = 0; i < len; i++) {
+            hash = PRIME * hash + s.charAt(i);
+            power *= PRIME;
+        }
+
+        seen.add(hash);
+
+        for (int i = len; i < s.length(); i++) {
+            hash = PRIME * hash + s.charAt(i) - power * s.charAt(i - len);
+            String subStr = s.substring(i - len + 1, i + 1);
+            if (seen.contains(hash) && s.indexOf(subStr) != i) {
+                return subStr;
+            }
+
+            seen.add(hash);
+        }
+
+        return "";
+    }
+
     public static void main(String[] args) {
         System.out.println("a ?= " + longestDupSubstring_bf("aa"));
         System.out.println(" ?= " + longestDupSubstring_bf("abcd"));
@@ -158,5 +240,12 @@ public class Problem1044_longestDupSubstring {
         System.out.println("ana ?= " + longestDupSubstring_bs("banana"));
         System.out.println("ma ?= " + longestDupSubstring_bs("mymadmay"));
         System.out.println("ma ?= " + longestDupSubstring_bs("nnpxouomcofdjuujloanjimymadkuepightrfodmauhrsy"));
+
+        System.out.println("a ?= " + longestDupSubstring_hash("aa"));
+        System.out.println("ana ?= " + longestDupSubstring_hash("banana"));
+        System.out.println("ma ?= " + longestDupSubstring_hash("nnpxouomcofdjuujloanjimymadkuepightrfodmauhrsy"));
+
+        System.out.println("a ?= " + longestDupSubstring_bs_hash("aa"));
+        System.out.println("ana ?= " + longestDupSubstring_bs_hash("banana"));
     }
 }
