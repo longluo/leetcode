@@ -31,16 +31,18 @@ import java.util.Map;
  */
 public class Problem242_validAnagram {
 
+    // HashMap time: O(n) space: O(S) = O(26)
     public static boolean isAnagram(String s, String t) {
-        int sLen = s.length();
-        int tLen = t.length();
-        if (sLen != tLen) {
+        if (s.length() != t.length()) {
             return false;
         }
 
+        int len = s.length();
+
         Map<Character, Integer> sMap = new HashMap<>();
         Map<Character, Integer> tMap = new HashMap<>();
-        for (int i = 0; i < sLen; i++) {
+
+        for (int i = 0; i < len; i++) {
             sMap.put(s.charAt(i), sMap.getOrDefault(s.charAt(i), 0) + 1);
             tMap.put(t.charAt(i), tMap.getOrDefault(t.charAt(i), 0) + 1);
         }
@@ -48,7 +50,7 @@ public class Problem242_validAnagram {
         for (Map.Entry<Character, Integer> entry : sMap.entrySet()) {
             char ch = entry.getKey();
             int cnt = entry.getValue();
-            if (!tMap.containsKey(ch) || (cnt != tMap.get(ch))) {
+            if (!tMap.containsKey(ch) || cnt != tMap.get(ch)) {
                 return false;
             }
         }
@@ -56,6 +58,7 @@ public class Problem242_validAnagram {
         return true;
     }
 
+    // Count time: O(n) space: O(S) = O(26)
     public static boolean isAnagram_arr(String s, String t) {
         if (s.length() != t.length()) {
             return false;
@@ -78,6 +81,29 @@ public class Problem242_validAnagram {
         return true;
     }
 
+    // Count Opt time: O(n) space: O(S) = O(26)
+    public static boolean isAnagram_cnt(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        int len = s.length();
+        int[] cnt = new int[26];
+        for (int i = 0; i < len; i++) {
+            cnt[s.charAt(i) - 'a']++;
+            cnt[t.charAt(i) - 'a']--;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (cnt[i] < 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Sort time: O(nlogn) space: O(n)
     public static boolean isAnagram_sort(String s, String t) {
         if (s.length() != t.length()) {
             return false;
@@ -100,6 +126,8 @@ public class Problem242_validAnagram {
         System.out.println("false ?= " + isAnagram_arr("a", "b"));
         System.out.println("true ?= " + isAnagram_arr("anagram", "nagaram"));
         System.out.println("false ?= " + isAnagram_arr("rat", "car"));
+
+        System.out.println("false ?= " + isAnagram_cnt("rat", "car"));
 
         System.out.println("true ?= " + isAnagram_sort("a", "a"));
         System.out.println("false ?= " + isAnagram_sort("a", "b"));
