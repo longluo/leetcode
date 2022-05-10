@@ -216,7 +216,7 @@ public class Problem146_lruCache {
                 tail = node;
             } else {
                 tail.next = node;
-                node.pre = tail;
+                node.prev = tail;
                 tail = node;
             }
         }
@@ -228,13 +228,13 @@ public class Problem146_lruCache {
 
             if (head == node) {
                 head = node.next;
-                head.pre = null;
+                head.prev = null;
             } else {
-                node.pre.next = node.next;
-                node.next.pre = node.pre;
+                node.prev.next = node.next;
+                node.next.prev = node.prev;
             }
 
-            node.pre = tail;
+            node.prev = tail;
             node.next = null;
             tail.next = node;
             tail = node;
@@ -251,7 +251,7 @@ public class Problem146_lruCache {
                 tail = null;
             } else {
                 head = res.next;
-                head.pre = null;
+                head.prev = null;
                 res.next = null;
             }
 
@@ -262,21 +262,115 @@ public class Problem146_lruCache {
     static class ListNode {
         int key;
         int value;
-        ListNode pre;
+        ListNode prev;
         ListNode next;
 
         public ListNode(int key, int value) {
             this.key = key;
             this.value = value;
-            this.pre = null;
+            this.prev = null;
             this.next = null;
         }
 
         public ListNode(int key, int value, ListNode pre, ListNode next) {
             this.key = key;
             this.value = value;
-            this.pre = pre;
+            this.prev = pre;
             this.next = next;
+        }
+    }
+
+    // DeList
+    class LRUCache {
+
+        class ListNode {
+            int key;
+            int value;
+            ListNode prev;
+            ListNode next;
+
+            public ListNode(int key, int value) {
+                this.key = key;
+                this.value = value;
+                this.prev = null;
+                this.next = null;
+            }
+
+            public ListNode(int key, int value, ListNode pre, ListNode next) {
+                this.key = key;
+                this.value = value;
+                this.prev = pre;
+                this.next = next;
+            }
+        }
+
+
+        int capacity = 0;
+        Map<Integer, ListNode> map;
+        ListNode dummyHead;
+        ListNode dummyTail;
+
+        public LRUCache(int capacity) {
+            this.capacity = capacity;
+            map = new HashMap<>();
+            dummyHead = new ListNode(-1, -1);
+            dummyTail = new ListNode(-1, -1);
+            dummyHead.next = dummyTail;
+            dummyTail.prev = dummyHead;
+        }
+
+        // time: O(1)
+        public void put(int key, int value) {
+            ListNode node = map.get(key);
+            if (node != null) {
+                node.value = value;
+                moveNodeToHead(node);
+            } else {
+                ListNode newNode = new ListNode(key, value);
+                if (map.size() == capacity) {
+                    ListNode delNode = removeTail();
+                    map.remove(delNode.key);
+                }
+
+                addToHead(newNode);
+                map.put(key, newNode);
+            }
+        }
+
+        // time: O(1)
+        public int get(int key) {
+            ListNode node = map.get(key);
+            if (node != null) {
+                moveNodeToHead(node);
+                return node.value;
+            }
+
+            return -1;
+        }
+
+        public void moveNodeToHead(ListNode node) {
+            removeFromList(node);
+            addToHead(node);
+        }
+
+        public void addToHead(ListNode node) {
+            node.prev = dummyHead;
+            node.next = dummyHead.next;
+            dummyHead.next.prev = node;
+            dummyHead.next = node;
+        }
+
+        public void removeFromList(ListNode node) {
+            ListNode tempPre = node.prev;
+            ListNode tempNext = node.next;
+            tempPre.next = tempNext;
+            tempNext.prev = tempPre;
+        }
+
+        public ListNode removeTail() {
+            ListNode tail = dummyTail.prev;
+            removeFromList(tail);
+            return tail;
         }
     }
 
