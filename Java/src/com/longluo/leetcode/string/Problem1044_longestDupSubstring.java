@@ -25,7 +25,9 @@ import java.util.Map;
  */
 public class Problem1044_longestDupSubstring {
 
-    public static String longestDupSubstring(String s) {
+    // BF time: O(n^4) space: O(n)
+    // Timeout
+    public static String longestDupSubstring_bf(String s) {
         if (s == null || s.length() <= 1) {
             return "";
         }
@@ -34,6 +36,7 @@ public class Problem1044_longestDupSubstring {
         for (char ch : s.toCharArray()) {
             freq.put(ch, freq.getOrDefault(ch, 0) + 1);
         }
+
         StringBuilder sb = new StringBuilder();
         int len = s.length();
         int maxLen = 0;
@@ -53,8 +56,42 @@ public class Problem1044_longestDupSubstring {
                             ans = sb.toString();
                         }
                         maxLen = Math.max(maxLen, sb.length());
-                        break;
                     }
+
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    // BF Opt time: O(n^3) space: O(n)
+    // Timeout
+    public static String longestDupSubstring_bf_opt(String s) {
+        int len = s.length();
+        int[] cnt = new int[26];
+        for (char ch : s.toCharArray()) {
+            cnt[ch - 'a']++;
+        }
+
+        int maxLen = 0;
+        String ans = "";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len - 1; i++) {
+            char ch = s.charAt(i);
+            if (cnt[ch - 'a'] <= 1) {
+                continue;
+            }
+
+            for (int segLen = len - i; segLen > maxLen; segLen--) {
+                sb.delete(0, sb.length());
+                sb.append(s, i, i + segLen);
+                String str = s.substring(i + 1, len);
+                if (str.contains(sb.toString()) && sb.length() > maxLen) {
+                    ans = sb.toString();
+                    maxLen = Math.max(maxLen, sb.length());
+                    break;
                 }
             }
         }
@@ -63,10 +100,13 @@ public class Problem1044_longestDupSubstring {
     }
 
     public static void main(String[] args) {
-        System.out.println("a ?= " + longestDupSubstring("aa"));
-        System.out.println("ana ?= " + longestDupSubstring("banana"));
-        System.out.println(" ?= " + longestDupSubstring("abcd"));
-        System.out.println("ma ?= " + longestDupSubstring("mymadmay"));
-        System.out.println("ma ?= " + longestDupSubstring("nnpxouomcofdjuujloanjimymadkuepightrfodmauhrsy"));
+        System.out.println("a ?= " + longestDupSubstring_bf("aa"));
+        System.out.println("a ?= " + longestDupSubstring_bf_opt("aa"));
+        System.out.println("ana ?= " + longestDupSubstring_bf("banana"));
+        System.out.println("ana ?= " + longestDupSubstring_bf_opt("banana"));
+        System.out.println(" ?= " + longestDupSubstring_bf("abcd"));
+        System.out.println("ma ?= " + longestDupSubstring_bf_opt("mymadmay"));
+        System.out.println("ma ?= " + longestDupSubstring_bf("nnpxouomcofdjuujloanjimymadkuepightrfodmauhrsy"));
+        System.out.println("ma ?= " + longestDupSubstring_bf_opt("nnpxouomcofdjuujloanjimymadkuepightrfodmauhrsy"));
     }
 }
