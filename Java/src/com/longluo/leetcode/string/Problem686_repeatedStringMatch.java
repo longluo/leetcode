@@ -35,12 +35,13 @@ import java.util.Map;
  */
 public class Problem686_repeatedStringMatch {
 
-    public static int repeatedStringMatch(String a, String b) {
+    // HashMap
+    public static int repeatedStringMatch_hashmap(String a, String b) {
         if (a.equals(b) || a.contains(b)) {
             return 1;
         }
 
-        int ans = -1;
+        int min = 1;
         Map<Character, Integer> mapA = new HashMap<>();
         Map<Character, Integer> mapB = new HashMap<>();
         for (char ch : a.toCharArray()) {
@@ -49,30 +50,61 @@ public class Problem686_repeatedStringMatch {
         for (char ch : b.toCharArray()) {
             mapB.put(ch, mapB.getOrDefault(ch, 0) + 1);
         }
-        if (mapB.size() > mapA.size()) {
-            return -1;
-        }
-        for (Character ch : mapB.keySet()) {
+
+        for (char ch : mapB.keySet()) {
             if (!mapA.containsKey(ch)) {
                 return -1;
             } else {
-                int num = mapB.get(ch).intValue() / mapA.get(ch).intValue();
-                ans = Math.max(ans, num);
+                int times = mapB.get(ch) / mapA.get(ch);
+                min = Math.max(min, times);
             }
         }
 
-        String res = "";
-        if (a.length() > b.length()) {
-            ans = 2;
+        StringBuilder res = new StringBuilder(a);
+        for (int i = 2; i <= min + 1; i++) {
+            res.append(a);
+            if (res.toString().contains(b)) {
+                return i;
+            }
         }
-        for (int i = 0; i < ans + 1; i++) {
-            res += a;
-            if (res.contains(b)) {
-                if (i == ans) {
-                    return ans + 1;
-                } else {
-                    return ans;
-                }
+
+        return -1;
+    }
+
+    //
+    public static int repeatedStringMatch_cnt(String a, String b) {
+        if (a.equals(b) || a.contains(b)) {
+            return 1;
+        }
+
+        int[] cntA = new int[26];
+        int[] cntB = new int[26];
+
+        for (char ch : a.toCharArray()) {
+            cntA[ch - 'a']++;
+        }
+        for (char ch : b.toCharArray()) {
+            cntB[ch - 'a']++;
+        }
+
+        int min = 1;
+
+        for (int i = 0; i < 26; i++) {
+            if (cntB[i] > 0 && cntA[i] == 0) {
+                return -1;
+            }
+
+            if (cntA[i] > 0) {
+                int times = cntB[i] / cntA[i];
+                min = Math.max(min, times);
+            }
+        }
+
+        StringBuilder res = new StringBuilder(a);
+        for (int i = 2; i <= min + 1; i++) {
+            res.append(a);
+            if (res.toString().contains(b)) {
+                return i;
             }
         }
 
@@ -80,10 +112,12 @@ public class Problem686_repeatedStringMatch {
     }
 
     public static void main(String[] args) {
-        System.out.println("2 ?= " + repeatedStringMatch("a", "aa"));
-        System.out.println("1 ?= " + repeatedStringMatch("a", "a"));
-        System.out.println("3 ?= " + repeatedStringMatch("abcd", "cdabcdab"));
-        System.out.println("-1 ?= " + repeatedStringMatch("abc", "wxyz"));
-        System.out.println("2 ?= " + repeatedStringMatch("abababaaba", "aabaaba"));
+        System.out.println("2 ?= " + repeatedStringMatch_hashmap("abababaaba", "aabaaba"));
+        System.out.println("2 ?= " + repeatedStringMatch_cnt("abababaaba", "aabaaba"));
+
+        System.out.println("2 ?= " + repeatedStringMatch_cnt("a", "aa"));
+        System.out.println("1 ?= " + repeatedStringMatch_cnt("a", "a"));
+        System.out.println("3 ?= " + repeatedStringMatch_cnt("abcd", "cdabcdab"));
+        System.out.println("-1 ?= " + repeatedStringMatch_cnt("abc", "wxyz"));
     }
 }
