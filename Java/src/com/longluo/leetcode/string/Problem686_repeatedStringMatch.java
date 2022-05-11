@@ -94,10 +94,10 @@ public class Problem686_repeatedStringMatch {
             }
         }
 
-        int minRepeatTimes = Math.max(1, b.length() / a.length() + 1);
+        int min = Math.max(1, b.length() / a.length() + 1);
 
         StringBuilder res = new StringBuilder(a);
-        for (int i = 2; i <= minRepeatTimes + 1; i++) {
+        for (int i = 2; i <= min + 1; i++) {
             res.append(a);
             if (res.toString().contains(b)) {
                 return i;
@@ -126,13 +126,65 @@ public class Problem686_repeatedStringMatch {
         return -1;
     }
 
+    // HashCode time: O(n + m) space: O(n + m)
+    public static int repeatedStringMatch_hash(String a, String b) {
+        if (a.equals(b) || a.contains(b)) {
+            return 1;
+        }
+
+        int lenA = a.length();
+        int lenB = b.length();
+
+        StringBuilder sb = new StringBuilder(a);
+        int ans = 1;
+        while (sb.length() < b.length()) {
+            ans++;
+            sb.append(a);
+        }
+
+        int lenS = sb.length();
+        sb.append(a);
+        for (int i = 0; i < lenA; i++) {
+            if (i + lenB <= sb.length() && sb.substring(i, i + lenB).hashCode() == b.hashCode()) {
+                return i + lenB <= lenS ? ans : ans + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    //
+    public static int repeatedStringMatch_kmp(String a, String b) {
+        if (a.equals(b) || a.contains(b)) {
+            return 1;
+        }
+
+        int minRepeatTimes = Math.max(1, b.length() / a.length() + 1);
+
+        StringBuilder res = new StringBuilder(a);
+        for (int i = 2; i <= minRepeatTimes + 1; i++) {
+            res.append(a);
+            if (res.toString().contains(b)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + repeatedStringMatch_hashmap("abababaaba", "aabaaba"));
         System.out.println("3 ?= " + repeatedStringMatch_cnt("abcd", "cdabcdab"));
+        System.out.println("3 ?= " + repeatedStringMatch_cnt_opt("abcd", "cdabcdab"));
 
         System.out.println("2 ?= " + repeatedStringMatch_cnt("a", "aa"));
         System.out.println("1 ?= " + repeatedStringMatch_cnt("a", "a"));
         System.out.println("3 ?= " + repeatedStringMatch_cnt("abcd", "cdabcdab"));
         System.out.println("-1 ?= " + repeatedStringMatch_cnt("abc", "wxyz"));
+
+        System.out.println("3 ?= " + repeatedStringMatch_hash("abcd", "cdabcdab"));
+        System.out.println("4 ?= " + repeatedStringMatch_hash("abc", "cabcabca"));
+        System.out.println("4 ?= " + repeatedStringMatch_hash("bb", "bbbbbbb"));
     }
 }
