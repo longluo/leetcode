@@ -1,4 +1,4 @@
-package com.longluo.leetcode.hash;
+package com.longluo.top100;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,12 +34,12 @@ import java.util.Map;
  */
 public class Problem438_findAllAnagramsInAString {
 
-    public static List<Integer> findAnagrams(String s, String p) {
+    // HashMap + SlidingWin time: O(n) space: O(n)
+    public static List<Integer> findAnagrams_win(String s, String p) {
         List<Integer> ans = new ArrayList<>();
-
-        int patLen = p.length();
-        int srcLen = s.length();
-        if (patLen > srcLen) {
+        int pLen = p.length();
+        int sLen = s.length();
+        if (pLen > sLen) {
             return ans;
         }
 
@@ -49,7 +49,9 @@ public class Problem438_findAllAnagramsInAString {
         }
 
         int left = 0;
-        int right = left + patLen;
+        int right = left + pLen;
+
+        // Sliding Window
         Map<Character, Integer> winMap = new HashMap<>();
         for (int i = left; i < right; i++) {
             char ch = s.charAt(i);
@@ -60,15 +62,15 @@ public class Problem438_findAllAnagramsInAString {
             ans.add(left);
         }
 
-        while (right < srcLen) {
+        while (right < sLen) {
             char chRight = s.charAt(right);
             winMap.put(chRight, winMap.getOrDefault(chRight, 0) + 1);
             char chLeft = s.charAt(left);
-            if (winMap.get(chLeft) == 1) {
+            winMap.put(chLeft, winMap.get(chLeft) - 1);
+            if (winMap.get(chLeft) == 0) {
                 winMap.remove(chLeft);
-            } else {
-                winMap.put(chLeft, winMap.get(chLeft) - 1);
             }
+
             left++;
             right++;
             if (patMap.equals(winMap)) {
@@ -79,9 +81,66 @@ public class Problem438_findAllAnagramsInAString {
         return ans;
     }
 
+    // Count + SlidingWin time: O(26 * n) space: O(26)
+    public static List<Integer> findAnagrams_cnt(String s, String p) {
+        List<Integer> ans = new ArrayList<>();
+        int pLen = p.length();
+        int sLen = s.length();
+        if (pLen > sLen) {
+            return ans;
+        }
+
+        int[] pCnt = new int[26];
+        for (char ch : p.toCharArray()) {
+            pCnt[ch - 'a']++;
+        }
+
+        int left = 0;
+        int right = left + pLen;
+
+        // Sliding Window
+        int[] winCnt = new int[26];
+        for (int i = left; i < right; i++) {
+            winCnt[s.charAt(i) - 'a']++;
+        }
+
+        while (right <= sLen) {
+            if (check(pCnt, winCnt)) {
+                ans.add(left);
+            }
+
+            if (right >= sLen) {
+                break;
+            }
+
+            char chRight = s.charAt(right);
+            char chLeft = s.charAt(left);
+
+            winCnt[chRight - 'a']++;
+            winCnt[chLeft - 'a']--;
+
+            left++;
+            right++;
+        }
+
+        return ans;
+    }
+
+    public static boolean check(int[] pCnt, int[] wCnt) {
+        for (int i = 0; i < 26; i++) {
+            if (pCnt[i] != wCnt[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
     public static void main(String[] args) {
-        System.out.println("[0, 6] ?= " + findAnagrams("cbaebabacd", "abc"));
-        System.out.println("[0, 1, 2] ?= " + findAnagrams("abab", "ab"));
-        System.out.println("[0, 1, 2] ?= " + findAnagrams("aaaaaaaaaa", "aaaaaaaaaaaaa"));
+        System.out.println("[0, 6] ?= " + findAnagrams_win("cbaebabacd", "abc"));
+        System.out.println("[0, 1, 2] ?= " + findAnagrams_win("abab", "ab"));
+
+        System.out.println("[0, 1, 2] ?= " + findAnagrams_cnt("abab", "ab"));
     }
 }
