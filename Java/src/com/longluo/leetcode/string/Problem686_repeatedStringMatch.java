@@ -126,7 +126,6 @@ public class Problem686_repeatedStringMatch {
         return -1;
     }
 
-
     public static void main(String[] args) {
         System.out.println("2 ?= " + repeatedStringMatch_hashmap("abababaaba", "aabaaba"));
         System.out.println("3 ?= " + repeatedStringMatch_cnt("abcd", "cdabcdab"));
