@@ -1,5 +1,7 @@
 package com.longluo.algorithm;
 
+import java.util.Arrays;
+
 /**
  * KMP Algorithm
  */
@@ -106,10 +108,59 @@ public class KMP {
         return next;
     }
 
+
+    public static int[] getNext(String needle) {
+        int len = needle.length();
+
+        //  定义好next数组
+        int[] next = new int[len];
+
+        for (int right = 1, left = 0; right < len; right++) {
+            // 定义好两个指针right与left
+            // 在for循环中初始化指针right为1，left=0,开始计算next数组，right始终在left指针的后面
+            while (left > 0 && needle.charAt(left) != needle.charAt(right)) {
+                // 如果不相等就让left指针回退，到0时就停止回退
+                left = next[left - 1]; //进行回退操作；
+            }
+
+            if (needle.charAt(left) == needle.charAt(right)) {
+                left++;
+            }
+
+            next[right] = left;   // 这是从 1 开始的
+        }
+
+        return next;
+    }
+
+    public static int[] getNext_carl(String needle) {
+        int len = needle.length();
+        int j = 0;
+        int[] next = new int[len];
+        next[0] = 0;
+        for (int i = 1; i < len; i++) {
+            while (j > 0 && needle.charAt(i) != needle.charAt(j)) { // j要保证大于0，因为下面有取j-1作为数组下标的操作
+                j = next[j - 1]; // 注意这里，是要找前一位的对应的回退位置了
+            }
+
+            if (needle.charAt(i) == needle.charAt(j)) {
+                j++;
+            }
+
+            next[i] = j;
+        }
+
+        return next;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + Search_BruteForce("ababababca", "abababca"));
         System.out.println("2 ?= " + ViolentMatch("ababababca", "abababca"));
 
         System.out.println("2 ?= " + KMP("ababababca", "abababca"));
+
+        System.out.println("[] ?= " + Arrays.toString(buildNextArray("abcabf")));
+        System.out.println("[] ?= " + Arrays.toString(getNext("abcabf")));
+        System.out.println("[] ?= " + Arrays.toString(getNext_carl("abcabf")));
     }
 }
