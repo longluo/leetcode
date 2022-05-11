@@ -127,8 +127,58 @@ public class Problem438_findAllAnagramsInAString {
         return true;
     }
 
+    // SlidingWin time: O() space: O()
+    public static List<Integer> findAnagrams(String s, String p) {
+        List<Integer> ans = new ArrayList<>();
+        int pLen = p.length();
+        int sLen = s.length();
+        if (pLen > sLen) {
+            return ans;
+        }
 
+        int[] count = new int[26];
 
+        for (int i = 0; i < pLen; i++) {
+            count[s.charAt(i) - 'a']++;
+            count[p.charAt(i) - 'a']--;
+        }
+
+        // different chars
+        int diff = 0;
+        for (int x : count) {
+            if (x != 0) {
+                diff++;
+            }
+        }
+
+        if (diff == 0) {
+            ans.add(0);
+        }
+
+        for (int i = 0; i < sLen - pLen; i++) {
+            char leftCh = s.charAt(i);
+            if (count[leftCh - 'a'] == 1) {
+                diff--; // s has leftCh, p not, diff--
+            } else if (count[leftCh - 'a'] == 0) {
+                diff++; // both s and p has leftCh, means move right, will not equal
+            }
+            count[leftCh - 'a']--;
+
+            char rightCh = s.charAt(i + pLen);
+            if (count[rightCh - 'a'] == -1) {
+                diff--; // p hash rightCh, s not, that means win will equal
+            } else if (count[rightCh - 'a'] == 0) {
+                diff++; // both s and p has rightCh, means move right, will not equal
+            }
+            count[rightCh - 'a']++;
+
+            if (diff == 0) {
+                ans.add(i + 1);
+            }
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
         System.out.println("[0, 6] ?= " + findAnagrams_win("cbaebabacd", "abc"));
@@ -136,5 +186,7 @@ public class Problem438_findAllAnagramsInAString {
 
         System.out.println("[0, 6] ?= " + findAnagrams_cnt("cbaebabacd", "abc"));
         System.out.println("[0, 1, 2] ?= " + findAnagrams_cnt("abab", "ab"));
+
+        System.out.println("[0, 1, 2] ?= " + findAnagrams("abab", "ab"));
     }
 }
