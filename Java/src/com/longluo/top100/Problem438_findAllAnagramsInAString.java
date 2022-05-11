@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class Problem438_findAllAnagramsInAString {
 
-    // HashMap + SlidingWin time: O(n) space: O(n)
+    // HashMap + SlidingWin time: O(m+(n−m)×Σ) space: O(2*Σ)
     public static List<Integer> findAnagrams_win(String s, String p) {
         List<Integer> ans = new ArrayList<>();
         int pLen = p.length();
@@ -63,13 +63,14 @@ public class Problem438_findAllAnagramsInAString {
         }
 
         while (right < sLen) {
-            char chRight = s.charAt(right);
-            winMap.put(chRight, winMap.getOrDefault(chRight, 0) + 1);
             char chLeft = s.charAt(left);
             winMap.put(chLeft, winMap.get(chLeft) - 1);
             if (winMap.get(chLeft) == 0) {
                 winMap.remove(chLeft);
             }
+
+            char chRight = s.charAt(right);
+            winMap.put(chRight, winMap.getOrDefault(chRight, 0) + 1);
 
             left++;
             right++;
@@ -81,7 +82,7 @@ public class Problem438_findAllAnagramsInAString {
         return ans;
     }
 
-    // Count + SlidingWin time: O(26 * n) space: O(26)
+    // Count + SlidingWin time: O(m+(n−m)×Σ) space: O(Σ)
     public static List<Integer> findAnagrams_cnt(String s, String p) {
         List<Integer> ans = new ArrayList<>();
         int pLen = p.length();
@@ -91,36 +92,26 @@ public class Problem438_findAllAnagramsInAString {
         }
 
         int[] pCnt = new int[26];
-        for (char ch : p.toCharArray()) {
-            pCnt[ch - 'a']++;
-        }
-
-        int left = 0;
-        int right = left + pLen;
-
         // Sliding Window
-        int[] winCnt = new int[26];
-        for (int i = left; i < right; i++) {
-            winCnt[s.charAt(i) - 'a']++;
+        int[] wCnt = new int[26];
+
+        for (int i = 0; i < pLen; i++) {
+            pCnt[p.charAt(i) - 'a']++;
+            wCnt[s.charAt(i) - 'a']++;
         }
 
-        while (right <= sLen) {
-            if (check(pCnt, winCnt)) {
-                ans.add(left);
+        if (check(pCnt, wCnt)) {
+            ans.add(0);
+        }
+
+        for (int i = 0; i < sLen - pLen; i++) {
+            // minus left
+            wCnt[s.charAt(i) - 'a']--;
+            // plus right
+            wCnt[s.charAt(i + pLen) - 'a']++;
+            if (check(pCnt, wCnt)) {
+                ans.add(i + 1);
             }
-
-            if (right >= sLen) {
-                break;
-            }
-
-            char chRight = s.charAt(right);
-            char chLeft = s.charAt(left);
-
-            winCnt[chRight - 'a']++;
-            winCnt[chLeft - 'a']--;
-
-            left++;
-            right++;
         }
 
         return ans;
@@ -137,10 +128,13 @@ public class Problem438_findAllAnagramsInAString {
     }
 
 
+
+
     public static void main(String[] args) {
         System.out.println("[0, 6] ?= " + findAnagrams_win("cbaebabacd", "abc"));
         System.out.println("[0, 1, 2] ?= " + findAnagrams_win("abab", "ab"));
 
+        System.out.println("[0, 6] ?= " + findAnagrams_cnt("cbaebabacd", "abc"));
         System.out.println("[0, 1, 2] ?= " + findAnagrams_cnt("abab", "ab"));
     }
 }
