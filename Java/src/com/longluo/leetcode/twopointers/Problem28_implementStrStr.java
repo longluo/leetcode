@@ -30,7 +30,7 @@ package com.longluo.leetcode.twopointers;
  */
 public class Problem28_implementStrStr {
 
-    // BF
+    // BF time: O(n*m) space: O(1)
     public static int strStr_bf(String haystack, String needle) {
         if (needle == null || needle.length() == 0) {
             return 0;
@@ -57,30 +57,6 @@ public class Problem28_implementStrStr {
         }
 
         return ans;
-    }
-
-    //
-    public static int strStr_2(String haystack, String needle) {
-        if (needle == null || needle.length() == 0) {
-            return 0;
-        }
-
-        int m = haystack.length();
-        int n = needle.length();
-        for (int i = 0; i + n <= m; i++) {
-            boolean isEqual = true;
-            for (int j = 0; j < n; j++) {
-                if (haystack.charAt(i + j) != needle.charAt(j)) {
-                    isEqual = false;
-                    break;
-                }
-            }
-            if (isEqual) {
-                return i;
-            }
-        }
-
-        return -1;
     }
 
     // KMP Standard
@@ -154,6 +130,52 @@ public class Problem28_implementStrStr {
 
             if (j == pLen) {
                 return i - pLen + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    // 前缀表不需要减一的实现方式
+    public int strStr_ref(String haystack, String needle) {
+        // 当needle是空字符串时，返回0
+        if (needle == null || needle.length() == 0) {
+            return 0;
+        }
+
+        int patLen = needle.length();
+
+        int[] next = new int[patLen];
+
+        // 定义好next数组
+        for (int right = 1, left = 0; right < patLen; right++) {
+            // 定义好两个指针right与left
+            // 在for循环中初始化指针right为1，left=0，开始计算next数组，right始终在left指针的后面
+            // 用while 而不是if，因为需要逐步回退到0
+            while (left > 0 && needle.charAt(left) != needle.charAt(right)) {
+                // 如果不相等就让left指针回退，到0时就停止回退
+                left = next[left - 1]; //进行回退操作；
+            }
+
+            if (needle.charAt(left) == needle.charAt(right)) {
+                left++;
+            }
+
+            // 这是从 1 开始的
+            next[right] = left;
+        }
+
+        // 循环结束的时候，next数组就已经计算完毕了
+
+        for (int i = 0, j = 0; i < haystack.length(); i++) {
+            while (j > 0 && haystack.charAt(i) != needle.charAt(j)) {
+                j = next[j - 1];
+            }
+            if (haystack.charAt(i) == needle.charAt(j)) {
+                j++;
+            }
+            if (j == patLen) {
+                return i - patLen + 1;
             }
         }
 
