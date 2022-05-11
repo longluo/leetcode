@@ -54,7 +54,7 @@ public class Problem239_slidingWindowMaximum {
         return ans;
     }
 
-    // SlidingWin + PQ time: O(n) space: O(k)
+    // SlidingWin + PQ time: O(nlogk) space: O(k)
     // TimeOut
     public static int[] maxSlidingWindow_slidingwin(int[] nums, int k) {
         int len = nums.length;
@@ -82,6 +82,9 @@ public class Problem239_slidingWindowMaximum {
 
         return ans;
     }
+
+    // TODO: 2022/5/11
+    // https://leetcode.cn/problems/sliding-window-maximum/solution/hua-dong-chuang-kou-zui-da-zhi-by-leetco-ki6m/
 
     public static void main(String[] args) {
         System.out.println("[1] ?= " + Arrays.toString(maxSlidingWindow_bf(new int[]{1}, 1)));
