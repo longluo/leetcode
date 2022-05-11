@@ -32,51 +32,49 @@ package com.longluo.top100;
  */
 public class Problem494_targetSum {
 
-    // DP
+    // DP time: O(n) space: O(n)
+    // TODO: 2022/5/11  
     public static int findTargetSumWays_dp(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
+        int sum = 0;
+        for (int x : nums) {
+            sum += x;
+        }
+
+        if (target > sum) {
             return 0;
         }
 
         int len = nums.length;
-        int[][] dp = new int[len + 1][target];
-        for (int i = 0; i <= len; i++) {
-            dp[i][0] = 1;
+        int range = 2 * sum + 1;
+        int[][] dp = new int[len][range];
+
+        dp[0][sum - nums[0]] += 1;
+        dp[0][sum + nums[0]] += 1;
+
+        for (int i = 0; i < len; i++) {
+
         }
 
-
-        return 0;
+        return dp[len][target];
     }
 
-    public static int ans = 0;
-
+    // DFS time: O(2^n) space: O(n)
     public static int findTargetSumWays_dfs(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
+        return dfs(nums, 0, 0, target);
+    }
+
+    public static int dfs(int[] nums, int index, int current, int target) {
+        if (current == target && index == nums.length) {
+            return 1;
+        }
+
+        if (index > nums.length) {
             return 0;
         }
-        ans = 0;
-        dfs(nums, -1, target);
-        return ans;
-    }
 
-    public static void dfs(int[] nums, int index, int remain) {
-        if (remain == 0 && index == (nums.length - 1)) {
-            ans++;
-            return;
-        }
-
-        if (index == nums.length - 1 && remain != 0) {
-            return;
-        }
-
-        if (index > nums.length - 1) {
-            return;
-        }
-
-        int idx = index + 1;
-
-        dfs(nums, idx, remain - nums[idx]);
-        dfs(nums, idx, remain + nums[idx]);
+        int plus = dfs(nums, index + 1, current + nums[index], target);
+        int minus = dfs(nums, index + 1, current - nums[index], target);
+        return plus + minus;
     }
 
     // Backtracking time: O(2^n) space: O(n)
@@ -89,12 +87,8 @@ public class Problem494_targetSum {
     }
 
     public static void backtrack(int[] nums, int idx, int remain) {
-        if (idx == nums.length && remain == 0) {
-            count++;
-            return;
-        }
-
-        if (idx >= nums.length) {
+        if (idx == nums.length) {
+            count += remain == 0 ? 1 : 0;
             return;
         }
 
