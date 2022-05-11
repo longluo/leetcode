@@ -30,7 +30,8 @@ package com.longluo.leetcode.twopointers;
  */
 public class Problem28_implementStrStr {
 
-    public static int strStr(String haystack, String needle) {
+    // BF
+    public static int strStr_bf(String haystack, String needle) {
         if (needle == null || needle.length() == 0) {
             return 0;
         }
@@ -58,6 +59,7 @@ public class Problem28_implementStrStr {
         return ans;
     }
 
+    //
     public static int strStr_2(String haystack, String needle) {
         if (needle == null || needle.length() == 0) {
             return 0;
@@ -81,13 +83,15 @@ public class Problem28_implementStrStr {
         return -1;
     }
 
-    public static int strStr_kmp(String haystack, String needle) {
+    // KMP Standard
+    public static int strStr(String haystack, String needle) {
         if (needle == null || needle.length() == 0) {
             return 0;
         }
 
         int n = haystack.length();
         int m = needle.length();
+
         int[] pi = new int[m];
         for (int i = 1, j = 0; i < m; i++) {
             while (j > 0 && needle.charAt(i) != needle.charAt(j)) {
@@ -98,6 +102,7 @@ public class Problem28_implementStrStr {
             }
             pi[i] = j;
         }
+
         for (int i = 0, j = 0; i < n; i++) {
             while (j > 0 && haystack.charAt(i) != needle.charAt(j)) {
                 j = pi[j - 1];
@@ -113,11 +118,55 @@ public class Problem28_implementStrStr {
         return -1;
     }
 
+    // KMP Mine time: O(n+m) space: O(m)
+    public static int strStr_kmp(String haystack, String needle) {
+        if (needle == null || needle.length() == 0) {
+            return 0;
+        }
+
+        int sLen = haystack.length();
+        int pLen = needle.length();
+
+        int[] next = new int[pLen];
+
+        // build next array
+        for (int right = 1, left = 0; right < pLen; right++) {
+
+            while (left > 0 && needle.charAt(left) != needle.charAt(right)) {
+                left = next[left - 1];
+            }
+
+            if (needle.charAt(left) == needle.charAt(right)) {
+                left++;
+            }
+
+            next[right] = left;
+        }
+
+        for (int i = 0, j = 0; i < sLen; i++) {
+            while (j > 0 && haystack.charAt(i) != needle.charAt(j)) {
+                j = next[j - 1];
+            }
+
+            if (haystack.charAt(i) == needle.charAt(j)) {
+                j++;
+            }
+
+            if (j == pLen) {
+                return i - pLen + 1;
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
-        System.out.println("2 ?= " + strStr("hello", "ll"));
+        System.out.println("2 ?= " + strStr_bf("hello", "ll"));
         System.out.println("-1 ?= " + strStr("aaaaa", "bba"));
         System.out.println("0 ?= " + strStr("", ""));
         System.out.println("0 ?= " + strStr("a", "a"));
+
         System.out.println("4 ?= " + strStr("mississippi", "issip"));
+        System.out.println("4 ?= " + strStr_kmp("mississippi", "issip"));
     }
 }
