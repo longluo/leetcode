@@ -1,4 +1,4 @@
-package com.longluo.leetcode.string;
+package com.longluo.top100;
 
 import java.util.*;
 
@@ -29,7 +29,7 @@ import java.util.*;
  */
 public class Problem49_groupAnagrams {
 
-    // Hash time: O(n^2) space: O(n)
+    // Count time: O(n^2) space: O(n)
     public static List<List<String>> groupAnagrams_hash(String[] strs) {
         List<List<String>> ans = new ArrayList<>();
         if (strs == null || strs.length == 0) {
@@ -80,6 +80,28 @@ public class Problem49_groupAnagrams {
 
         return true;
     }
+
+    public static boolean checkAnagram_opt(String strA, String strB) {
+        if (strA.length() != strB.length()) {
+            return false;
+        }
+
+        int[] count = new int[26];
+        for (int i = 0; i < strA.length(); i++) {
+            count[strA.charAt(i) - 'a']++;
+            count[strB.charAt(i) - 'a']--;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // TODO: 2022/5/11
 
     public static void main(String[] args) {
         System.out.println(" ?= " + groupAnagrams_hash(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
