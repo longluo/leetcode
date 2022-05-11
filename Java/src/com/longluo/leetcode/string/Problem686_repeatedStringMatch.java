@@ -35,7 +35,7 @@ import java.util.Map;
  */
 public class Problem686_repeatedStringMatch {
 
-    // HashMap
+    // HashMap time: O(n + m) space: O(26)
     public static int repeatedStringMatch_hashmap(String a, String b) {
         if (a.equals(b) || a.contains(b)) {
             return 1;
@@ -71,7 +71,7 @@ public class Problem686_repeatedStringMatch {
         return -1;
     }
 
-    //
+    // Count time: O(m + n) space: O(n)
     public static int repeatedStringMatch_cnt(String a, String b) {
         if (a.equals(b) || a.contains(b)) {
             return 1;
@@ -83,25 +83,21 @@ public class Problem686_repeatedStringMatch {
         for (char ch : a.toCharArray()) {
             cntA[ch - 'a']++;
         }
+
         for (char ch : b.toCharArray()) {
             cntB[ch - 'a']++;
         }
-
-        int min = 1;
 
         for (int i = 0; i < 26; i++) {
             if (cntB[i] > 0 && cntA[i] == 0) {
                 return -1;
             }
-
-            if (cntA[i] > 0) {
-                int times = cntB[i] / cntA[i];
-                min = Math.max(min, times);
-            }
         }
 
+        int minRepeatTimes = Math.max(1, b.length() / a.length() + 1);
+
         StringBuilder res = new StringBuilder(a);
-        for (int i = 2; i <= min + 1; i++) {
+        for (int i = 2; i <= minRepeatTimes + 1; i++) {
             res.append(a);
             if (res.toString().contains(b)) {
                 return i;
@@ -111,9 +107,29 @@ public class Problem686_repeatedStringMatch {
         return -1;
     }
 
+    // Count Opt time: O(n) space: O(n)
+    public static int repeatedStringMatch_cnt_opt(String a, String b) {
+        if (a.equals(b) || a.contains(b)) {
+            return 1;
+        }
+
+        int minRepeatTimes = Math.max(1, b.length() / a.length() + 1);
+
+        StringBuilder res = new StringBuilder(a);
+        for (int i = 2; i <= minRepeatTimes + 1; i++) {
+            res.append(a);
+            if (res.toString().contains(b)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + repeatedStringMatch_hashmap("abababaaba", "aabaaba"));
-        System.out.println("2 ?= " + repeatedStringMatch_cnt("abababaaba", "aabaaba"));
+        System.out.println("3 ?= " + repeatedStringMatch_cnt("abcd", "cdabcdab"));
 
         System.out.println("2 ?= " + repeatedStringMatch_cnt("a", "aa"));
         System.out.println("1 ?= " + repeatedStringMatch_cnt("a", "a"));
