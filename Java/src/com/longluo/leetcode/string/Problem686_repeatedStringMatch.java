@@ -153,25 +153,94 @@ public class Problem686_repeatedStringMatch {
         return -1;
     }
 
-    //
-    public static int repeatedStringMatch_kmp(String a, String b) {
+    // Rabin-Karp hash time: O(n + m) space: O(1)
+    // TODO: 2022/5/11 Rabin-Karp
+    public static int repeatedStringMatch_selfhash(String a, String b) {
         if (a.equals(b) || a.contains(b)) {
             return 1;
         }
 
-        int minRepeatTimes = Math.max(1, b.length() / a.length() + 1);
+        int lenA = a.length();
+        int lenB = b.length();
 
-        StringBuilder res = new StringBuilder(a);
-        for (int i = 2; i <= minRepeatTimes + 1; i++) {
-            res.append(a);
-            if (res.toString().contains(b)) {
-                return i;
+        StringBuilder sb = new StringBuilder(a);
+        int ans = 1;
+        while (sb.length() < b.length()) {
+            ans++;
+            sb.append(a);
+        }
+
+        int lenS = sb.length();
+        sb.append(a);
+        for (int i = 0; i < lenA; i++) {
+            if (i + lenB <= sb.length() && sb.substring(i, i + lenB).hashCode() == b.hashCode()) {
+                return i + lenB <= lenS ? ans : ans + 1;
             }
         }
 
         return -1;
     }
 
+    // KMP time: O(n+m) space: O(m)
+    public static int repeatedStringMatch_kmp(String a, String b) {
+        if (a.equals(b) || a.contains(b)) {
+            return 1;
+        }
+
+        int lenA = a.length();
+        int lenB = b.length();
+        int idx = strStr(a, b);
+        if (idx == -1) {
+            return -1;
+        }
+
+        if (lenA - idx >= lenB) {
+            return 1;
+        }
+
+        return (lenB - (lenA - idx) - 1) / lenA + 2;
+    }
+
+    public static int strStr(String haystack, String needle) {
+        if (needle == null || needle.length() == 0) {
+            return 0;
+        }
+
+        int sLen = haystack.length();
+        int pLen = needle.length();
+
+        int[] next = new int[pLen];
+
+        // build next array
+        for (int right = 1, left = 0; right < pLen; right++) {
+
+            while (left > 0 && needle.charAt(left) != needle.charAt(right)) {
+                left = next[left - 1];
+            }
+
+            if (needle.charAt(left) == needle.charAt(right)) {
+                left++;
+            }
+
+            next[right] = left;
+        }
+
+        for (int i = 0, j = 0; i - j < sLen; i++) {
+            while (j > 0 && haystack.charAt(i % sLen) != needle.charAt(j)) {
+                j = next[j - 1];
+            }
+
+            if (haystack.charAt(i % sLen) == needle.charAt(j)) {
+                j++;
+            }
+
+            if (j == pLen) {
+                return i - pLen + 1;
+            }
+        }
+
+        return -1;
+    }
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + repeatedStringMatch_hashmap("abababaaba", "aabaaba"));
@@ -186,5 +255,7 @@ public class Problem686_repeatedStringMatch {
         System.out.println("3 ?= " + repeatedStringMatch_hash("abcd", "cdabcdab"));
         System.out.println("4 ?= " + repeatedStringMatch_hash("abc", "cabcabca"));
         System.out.println("4 ?= " + repeatedStringMatch_hash("bb", "bbbbbbb"));
+
+        System.out.println("3 ?= " + repeatedStringMatch_kmp("abcd", "cdabcdab"));
     }
 }
