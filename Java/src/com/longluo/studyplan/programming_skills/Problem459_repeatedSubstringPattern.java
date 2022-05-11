@@ -89,6 +89,7 @@ public class Problem459_repeatedSubstringPattern {
         return false;
     }
 
+    // Opt time: O(n) space: O(n)
     public static boolean repeatedSubstringPattern_opt(String s) {
         if (s == null || s.length() <= 1) {
             return false;
@@ -114,8 +115,55 @@ public class Problem459_repeatedSubstringPattern {
         return false;
     }
 
-    // TODO: 2022/4/13 KMP
-    
+    // KMP
+    // TODO: 2022/5/11  
+    public static boolean repeatedSubstringPattern_kmp(String s) {
+        int len = s.length();
+        if (len <= 1) {
+            return false;
+        }
+        
+        return false;
+    }
+
+    public static int kmp(String src, String pat) {
+        if (pat == null || pat.length() == 0) {
+            return 0;
+        }
+
+        int sLen = src.length();
+        int pLen = pat.length();
+
+        int[] next = new int[pLen];
+        for (int right = 1, left = 0; right < pLen; right++) {
+            while (left > 0 && pat.charAt(left) != pat.charAt(right)) {
+                left = next[left - 1];
+            }
+
+            if (pat.charAt(left) == pat.charAt(right)) {
+                left++;
+            }
+
+            next[right] = left;
+        }
+
+        for (int i = 0, j = 0; i < sLen; i++) {
+            while (j > 0 && src.charAt(i) != pat.charAt(j)) {
+                j = next[j - 1];
+            }
+
+            if (src.charAt(i) == pat.charAt(j)) {
+                j++;
+            }
+
+            if (j == pLen) {
+                return i - pLen + 1;
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + repeatedSubstringPattern_bf("abab"));
 
@@ -124,5 +172,9 @@ public class Problem459_repeatedSubstringPattern {
         System.out.println("true ?= " + repeatedSubstringPattern("abab"));
         System.out.println("false ?= " + repeatedSubstringPattern("aba"));
         System.out.println("true ?= " + repeatedSubstringPattern("abcabcabcabc"));
+
+        System.out.println("false ?= " + repeatedSubstringPattern("aba"));
+        System.out.println("true ?= " + repeatedSubstringPattern_kmp("abcabcabcabc"));
+        System.out.println("true ?= " + repeatedSubstringPattern_kmp("babbabbabbabbab"));
     }
 }
