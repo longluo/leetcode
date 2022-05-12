@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top100;
 
 /**
  * 152. 乘积最大子数组
@@ -26,6 +26,7 @@ package com.longluo.leetcode.dp;
  */
 public class Problem152_maximumProductSubarray {
 
+    // BF time: O(n^2) space: O(1)
     public static int maxProduct_bf(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums[0];
@@ -44,6 +45,7 @@ public class Problem152_maximumProductSubarray {
         return max;
     }
 
+    // DP time: O(n) space: O(n)
     public static int maxProduct_dp(int[] nums) {
         int len = nums.length;
         int[] maxDp = new int[len];
@@ -62,6 +64,7 @@ public class Problem152_maximumProductSubarray {
         return ans;
     }
 
+    // DP Opt space time: O(n) space: O(1)
     public static int maxProduct_dp_opt(int[] nums) {
         int len = nums.length;
         int ans = nums[0];
@@ -77,6 +80,7 @@ public class Problem152_maximumProductSubarray {
         return ans;
     }
 
+    // Left -> Right & Right -> Left Count space time: O(n) space: O(1)
     public static int maxProduct_count(int[] nums) {
         if (nums.length == 0) {
             return 0;
