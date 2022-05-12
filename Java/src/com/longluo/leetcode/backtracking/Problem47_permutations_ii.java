@@ -26,11 +26,19 @@ import java.util.*;
  */
 public class Problem47_permutations_ii {
 
+    // Backtracking time: O(n×n!) space: O(2*n)=O(n)
     public static List<List<Integer>> permuteUnique(int[] nums) {
-        Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
-        boolean[] visited = new boolean[nums.length];
-        backtrack(ans, new ArrayList<>(), nums, visited, 0);
+        int len = nums.length;
+        if (len == 0) {
+            return ans;
+        }
+
+        // Sort is for pruning
+        Arrays.sort(nums);
+
+        boolean[] vis = new boolean[len];
+        backtrack(ans, new ArrayList<>(), nums, vis, 0);
         return ans;
     }
 
@@ -41,16 +49,21 @@ public class Problem47_permutations_ii {
         }
 
         for (int i = 0; i < nums.length; i++) {
+            // every number choose once.
             if (visited[i]) {
                 continue;
             }
 
+            // pruning:
+            // i > 0 because i - 1 >=0
+            // nums[i] == nums[i - 1] avoid duplicates
+            // visited[i-1]=false is in tree level pruning
             if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) {
                 continue;
             }
 
-            path.add(nums[i]);
             visited[i] = true;
+            path.add(nums[i]);
             backtrack(res, path, nums, visited, len + 1);
             visited[i] = false;
             path.remove(path.size() - 1);
