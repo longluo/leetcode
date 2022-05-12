@@ -31,11 +31,16 @@ import java.util.List;
  */
 public class Problem46_permutations {
 
-    // Backtrack time: O(2^n) space: O(n)
+    // Backtrack time: O(n×n!) space: O(n)
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
-        boolean[] visited = new boolean[nums.length];
-        backtrack(ans, new ArrayList<>(), nums, visited, 0);
+        int len = nums.length;
+        if (len == 0) {
+            return ans;
+        }
+
+        boolean[] vis = new boolean[len];
+        backtrack(ans, new ArrayList<>(), nums, vis, 0);
         return ans;
     }
 
@@ -46,12 +51,13 @@ public class Problem46_permutations {
         }
 
         for (int i = 0; i < nums.length; i++) {
+            // avoid duplicate
             if (!visited[i]) {
                 visited[i] = true;
                 list.add(nums[i]);
                 backtrack(res, list, nums, visited, idx + 1);
-                list.remove(list.size() - 1);
                 visited[i] = false;
+                list.remove(list.size() - 1);
             }
         }
     }
