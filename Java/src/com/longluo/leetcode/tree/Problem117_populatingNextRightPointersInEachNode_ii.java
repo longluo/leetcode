@@ -60,7 +60,7 @@ public class Problem117_populatingNextRightPointersInEachNode_ii {
         }
     }
 
-    // BFS time: O(n^2) space: O(n)
+    // BFS time: O(n) space: O(n)
     public static Node connect_bfs(Node root) {
         if (root == null) {
             return root;
@@ -90,6 +90,39 @@ public class Problem117_populatingNextRightPointersInEachNode_ii {
 
         return root;
     }
+
+    // BFS Space Opt time: O(n) space: O(n)
+    public static Node connect_bfs_opt(Node root) {
+        if (root == null) {
+            return root;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int levelCount = queue.size();
+            Node prev = null;
+            for (int i = 0; i < levelCount; i++) {
+                Node curNode = queue.poll();
+
+                if (prev != null) {
+                    prev.next = curNode;
+                }
+
+                prev = curNode;
+
+                if (curNode.left != null) {
+                    queue.add(curNode.left);
+                }
+                if (curNode.right != null) {
+                    queue.add(curNode.right);
+                }
+            }
+        }
+
+        return root;
+    }
+
 
     public static void main(String[] args) {
 
