@@ -55,10 +55,39 @@ public class Interview_01_05_one_away_lcci {
         return true;
     }
 
+    // 前后缀相同 time: O(n) space: O(1)
+    public static boolean oneEditAway_prefix(String first, String second) {
+        int pLeft = 0;
+        int pRight = first.length() - 1;
+        int qLeft = 0;
+        int qRight = second.length() - 1;
+        while (pLeft <= pRight && qLeft <= qRight) {
+            if (first.charAt(pLeft) == second.charAt(qLeft)) {
+                pLeft++;
+                qLeft++;
+                continue;
+            }
+
+            if (first.charAt(pRight) == second.charAt(qRight)) {
+                pRight--;
+                qRight--;
+            } else {
+                break;
+            }
+        }
+
+        return pRight - pLeft + qRight - qLeft <= 0 && Math.abs(pLeft - qLeft) <= 1 && Math.abs(pRight - qRight) <= 1;
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + oneEditAway_tp("ab", "bc"));
         System.out.println("true ?= " + oneEditAway_tp("pale", "ple"));
         System.out.println("false ?= " + oneEditAway_tp("intention", "execution"));
         System.out.println("false ?= " + oneEditAway_tp("pales", "pal"));
+
+        System.out.println("false ?= " + oneEditAway_prefix("ab", "bc"));
+        System.out.println("false ?= " + oneEditAway_prefix("intention", "execution"));
+        System.out.println("true ?= " + oneEditAway_prefix("pale", "ple"));
+        System.out.println("false ?= " + oneEditAway_prefix("pales", "pal"));
     }
 }
