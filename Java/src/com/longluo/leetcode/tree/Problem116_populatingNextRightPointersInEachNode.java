@@ -90,6 +90,36 @@ public class Problem116_populatingNextRightPointersInEachNode {
         return root;
     }
 
+    // BFS Opt time: O(n) space: O(1)
+    public static Node connect_bfs_opt(Node root) {
+        if (root == null) {
+            return root;
+        }
+
+        // current level
+        Node curNode = root;
+
+        while (curNode != null) {
+            // next level process
+            Node dummyNode = new Node(0);
+            Node prev = dummyNode;
+
+            while (curNode != null) {
+                prev.next = curNode.left;
+                prev = curNode.left;
+
+                prev.next = curNode.right;
+                prev = curNode.right;
+
+                curNode = curNode.next;
+            }
+
+            curNode = dummyNode.next;
+        }
+
+        return root;
+    }
+
     public static void main(String[] args) {
 
     }
