@@ -22,36 +22,43 @@ package com.longluo.interview;
  */
 public class Interview_01_05_one_away_lcci {
 
-    public static boolean oneEditAway(String first, String second) {
-        if (first == null && second == null) {
-            return true;
-        } else if (first == null && second.length() <= 1) {
-            return true;
-        } else if (first.length() <= 1 && second == null) {
-            return true;
-        } else if (first.length() <= 1 && second.length() <= 1) {
-            return true;
-        }
-
-        if (Math.abs(first.length() - second.length()) >= 2) {
+    // Two Pointers time: O(n) space: O(1)
+    public static boolean oneEditAway_tp(String first, String second) {
+        int len1 = first.length();
+        int len2 = second.length();
+        if (Math.abs(len1 - len2) > 1) {
             return false;
         }
 
-        int len = Math.max(first.length(), second.length());
-        int index = -1;
-        for (int i = 0; i < len; i++) {
-            if (first.charAt(i) != second.charAt(i)) {
-                index = i;
-                break;
+        boolean flag = true;
+        for (int i = 0, j = 0; i < len1 || j < len2; i++, j++) {
+            if (i < len1 && j < len2 && first.charAt(i) == second.charAt(j)) {
+                continue;
+            }
+
+            if (flag) {
+                if (i + 1 < len1 && first.charAt(i + 1) == second.charAt(j)) {
+                    i++;
+                } else if (j + 1 < len2 && first.charAt(i) == second.charAt(j + 1)) {
+                    j++;
+                } else if (i + 1 < len1 && j + 1 < len2 && first.charAt(i + 1) == second.charAt(j + 1)) {
+                    i++;
+                    j++;
+                }
+
+                flag = false;
+            } else {
+                return false;
             }
         }
 
-
-        return false;
+        return true;
     }
 
     public static void main(String[] args) {
-        System.out.println("true ?= " + oneEditAway("pale", "ple"));
-        System.out.println("false ?= " + oneEditAway("pales", "pal"));
+        System.out.println("false ?= " + oneEditAway_tp("ab", "bc"));
+        System.out.println("true ?= " + oneEditAway_tp("pale", "ple"));
+        System.out.println("false ?= " + oneEditAway_tp("intention", "execution"));
+        System.out.println("false ?= " + oneEditAway_tp("pales", "pal"));
     }
 }
