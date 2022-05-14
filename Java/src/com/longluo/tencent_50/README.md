@@ -1,8 +1,4 @@
-# 腾讯精选练习 50 题
-
-[腾讯精选练习 50 题](https://leetcode-cn.com/problem-list/ex0k24j/)
-
-[腾讯精选练习 50 题](http://www.longluo.me/blog/2021/08/15/Leetcode-Tencent-Interview-Problems/)
+# [Leetcode 腾讯精选练习 50 题](https://leetcode-cn.com/problem-list/ex0k24j/)
 
 -------------------
 
@@ -17,5 +13,5 @@
 | [230. 二叉搜索树中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/) | Medium | [230. 二叉搜索树中第K小的元素]()  | [Java](./Problem230_kthSmallestElementInABst.java) |
 | [236. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) | Medium | [236. 二叉树的最近公共祖先]()  | [Java](./Problem236_lowestCommonAncestor.java) |
 
-欢迎光临[我的个人网站](http://www.longluo.me)
+欢迎光临[腾讯精选练习50题](http://www.longluo.me/blog/2021/08/15/Leetcode-Tencent-Interview-Problems/)
 

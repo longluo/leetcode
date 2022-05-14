@@ -47,14 +47,11 @@ public class Solution {
             orders[i][1] = scanner.nextInt();
         }
 
-        Queue<int[]> priorityQueue = new PriorityQueue<int[]>(new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[1] == o2[1]) {
-                    return o1[0] - o2[0];
-                }
-                return o2[1] - o1[1];
+        Queue<int[]> priorityQueue = new PriorityQueue<>((o1, o2) -> {
+            if (o1[1] == o2[1]) {
+                return o1[0] - o2[0];
             }
+            return o2[1] - o1[1];
         });
 
         for (int i = 0; i < orderTotal; i++) {

@@ -21,8 +21,7 @@
 | [剑指Offer 40. 最小的k个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/) | Easy | []()  | [Java](./Offer40_getLeastNumbers.java) |
 | [剑指Offer 52. 两个链表的第一个公共节点](https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/) | Easy | []()  | [Java](./Offer52_getIntersectionNode.java) |
 | [剑指Offer 53 - I. 在排序数组中查找数字 I](https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/) | Easy | []()  | [Java](./Offer53_search.java) |
-| [剑指Offer 55 - I. 二叉树的深度](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/) | Easy | [
-递归 + DFS + BFS 3种方法](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/solution/di-gui-dfs-bfs-3chong-fang-fa-by-longluo-so5i/)  | [Java](./Offer55_maxDepth.java) |
+| [剑指Offer 55 - I. 二叉树的深度](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/) | Easy | [递归 + DFS + BFS 3种方法](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/solution/di-gui-dfs-bfs-3chong-fang-fa-by-longluo-so5i/) | [Java](./Offer55_maxDepth.java) |
 | [剑指Offer 55 - II. 平衡二叉树](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/) | Easy | []()  | [Java](./Offer55_balancedTree.java) |
 | [剑指Offer 57. 和为s的两个数字](https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/) | Easy | [](https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/solution/yi-ti-4jie-bao-li-er-fen-ha-xi-shuang-zh-sj0l/)  | [Java](./Offer57_twoSum.java) |
 | [剑指Offer 58 - I. 翻转单词顺序](https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/) | Easy | []()  | [Java](./Offer58_reverseWords.java) |

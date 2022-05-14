@@ -1,4 +1,4 @@
-# [编程能力(Programming Skills)](https://leetcode-cn.com/study-plan/programming-skills/?progress=7s4dkw7)
+# [编程能力 1(Programming Skills I)](https://leetcode-cn.com/study-plan/programming-skills/?progress=7s4dkw7)
 
 -------------------
 
@@ -24,6 +24,25 @@
 | Day 11                       | [242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)                                      | Easy | [Java](./Problem242_validAnagram.java)                                | []() | 
 | Day 12(Class & Object)       | [1603. 设计停车系统](https://leetcode-cn.com/problems/design-parking-system/)                                 | Easy | [Java](./Problem1603_designParkingSystem.java)                        | []() | 
 | Day 12                       | [303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)                    | Easy | [Java](./Problem303_rangeSumQuery_Immutable.java)                    | []() | 
+
+
+# [编程能力 2(Programming Skills II)](https://leetcode-cn.com/study-plan/programming-skills/?progress=ls1hqii)
+
+-------------------
+
+|                              |                                               题目                                                           |  难度  |             Source Code          |          题解          |
+|   :-----------------------:  |    :----------------------------------------------------------------------------------------------------     | :---: |  :-------------------------------------------------------------: | :----: |
+| Day 1                        | [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array/)                                           | Easy | [Java](./Problem896_monotonicArray.java)                          | []() | 
+| Day 2                        | [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)                                      | Easy | [Java](../leetcode/tree/Problem110_balancedBinaryTree.java)     | []() | 
+| Day 2                        | [459. 重复的子字符串](https://leetcode-cn.com/problems/repeated-substring-pattern/)                           | Easy | [Java](./Problem459_repeatedSubstringPattern.java)                | []() | 
+| Day 3                        | [66. 加一](https://leetcode-cn.com/problems/plus-one/)                                                      | Easy | [Java](./Problem66_plusOne.java)                                  | []() | 
+| Day 4                        | [1367. 二叉树中的列表](https://leetcode-cn.com/problems/linked-list-in-binary-tree/)                         | Medium | [Java](./Problem1367_linkedListInBinaryTree.java)               | []() | 
+| Day 4                        | [43. 字符串相乘](https://leetcode-cn.com/problems/multiply-strings/)                                        | Medium | [Java](./Problem43_multiplyStrings.java)                         | []() | 
+| Day 5                        | [67. 二进制求和](https://leetcode-cn.com/problems/add-binary/)                                               | Easy | [Java](./Problem67_addBinary.java)                                | []() | 
+| Day 5                        | [989. 数组形式的整数加法](https://leetcode-cn.com/problems/add-to-array-form-of-integer/)                     | Easy | [Java](./Problem989_addToArrayFormOfInteger.java)                 | []() | 
+| Day 6                        | [58. 最后一个单词的长度](https://leetcode-cn.com/problems/length-of-last-word/)                               | Easy | [Java](./Problem58_lengthOfLastWord.java)                         | []() | 
+| Day 7                        | [48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/)                                               | Medium | [Java](./Problem48_rotateImage.java)                             | []() | 
+| Day 7                        | [1886. 判断矩阵经轮转后是否一致](https://leetcode-cn.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/) | Easy | [Java](./Problem58_lengthOfLastWord.java)                | []() | 
 
 
 欢迎光临[我的个人网站](http://www.longluo.me)
