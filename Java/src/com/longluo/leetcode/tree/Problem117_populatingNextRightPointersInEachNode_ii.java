@@ -123,6 +123,84 @@ public class Problem117_populatingNextRightPointersInEachNode_ii {
         return root;
     }
 
+    // BFS + LinkedList  time: O(n) space: O(1)
+    public Node connect_linkedlist(Node root) {
+        if (root == null) {
+            return root;
+        }
+
+        // the curNode as the linkedlist of each level
+        Node curNode = root;
+        while (curNode != null) {
+            // a dummyNode to travesal current Level
+            Node dummyNode = new Node(0);
+
+            // the prev Node of next level
+            Node prevNode = dummyNode;
+            while (curNode != null) {
+                if (curNode.left != null) {
+                    // linked the left child
+                    prevNode.next = curNode.left;
+                    // update prev as LinkedList
+                    prevNode = curNode.left;
+                }
+
+                if (curNode.right != null) {
+                    prevNode.next = curNode.right;
+                    prevNode = curNode.right;
+                }
+
+                // the next node of current level
+                curNode = curNode.next;
+            }
+
+            // after process the next level, process
+            curNode = dummyNode.next;
+        }
+
+        return root;
+    }
+
+    // Recursion time: O(n) space: O(1)
+    public Node connect(Node root) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return root;
+        }
+
+        if (root.left != null && root.right != null) {
+            root.left.next = root.right;
+            root.right.next = getNextHasChildrenNode(root);
+        }
+
+        if (root.left == null) {
+            root.right.next = getNextHasChildrenNode(root);
+        }
+
+        if (root.right == null) {
+            root.left.next = getNextHasChildrenNode(root);
+        }
+
+        // right should first
+        connect(root.right);
+        connect(root.left);
+
+        return root;
+    }
+
+    public static Node getNextHasChildrenNode(Node root) {
+        while (root.next != null) {
+            if (root.next.left != null) {
+                return root.next.left;
+            }
+            if (root.next.right != null) {
+                return root.next.right;
+            }
+
+            root = root.next;
+        }
+
+        return null;
+    }
 
     public static void main(String[] args) {
 
