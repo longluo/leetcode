@@ -124,7 +124,7 @@ public class Problem116_populatingNextRightPointersInEachNode {
         return root;
     }
 
-    // Recursion time: O(n) space: O(1)
+    // Recursion Opt time: O(n) space: O(1)
     public static Node connect(Node root) {
         if (root == null || (root.left == null && root.right == null)) {
             return root;
@@ -135,8 +135,8 @@ public class Problem116_populatingNextRightPointersInEachNode {
             root.right.next = root.next == null ? null : root.next.left;
         }
 
-        root.right = connect(root.right);
-        root.left = connect(root.left);
+        connect(root.left);
+        connect(root.right);
 
         return root;
     }
