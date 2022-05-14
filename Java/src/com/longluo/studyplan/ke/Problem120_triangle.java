@@ -34,30 +34,12 @@ import java.util.List;
  * 进阶：
  * 你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题吗？
  * <p>
- * https://leetcode-cn.com/problems/triangle/
+ * https://leetcode.cn/problems/triangle/
  */
 public class Problem120_triangle {
 
-    // BF time: O(n^2) space: O(1)
-    public static int minimumTotal_bf(List<List<Integer>> triangle) {
-        if (triangle == null || triangle.size() == 0) {
-            return 0;
-        }
-
-        int len = triangle.size();
-        if (len == 1) {
-            return triangle.get(0).get(0);
-        }
-
-        for (int i = 0; i < len; i++) {
-
-        }
-
-        return 0;
-    }
-
     /**
-     * DP time: O(n^2) space: O(1)
+     * DP time: O(n^2) space: O(n^2)
      * <p>
      * 2
      * 3 4
