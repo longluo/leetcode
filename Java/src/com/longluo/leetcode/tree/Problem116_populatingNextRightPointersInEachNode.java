@@ -105,17 +105,38 @@ public class Problem116_populatingNextRightPointersInEachNode {
             Node prev = dummyNode;
 
             while (curNode != null) {
-                prev.next = curNode.left;
-                prev = curNode.left;
+                if (curNode.left != null) {
+                    prev.next = curNode.left;
+                    prev = curNode.left;
+                }
 
-                prev.next = curNode.right;
-                prev = curNode.right;
+                if (curNode.right != null) {
+                    prev.next = curNode.right;
+                    prev = curNode.right;
+                }
 
                 curNode = curNode.next;
             }
 
             curNode = dummyNode.next;
         }
+
+        return root;
+    }
+
+    // Recursion time: O(n) space: O(1)
+    public static Node connect(Node root) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return root;
+        }
+
+        if (root.left != null && root.right != null) {
+            root.left.next = root.right;
+            root.right.next = root.next == null ? null : root.next.left;
+        }
+
+        root.right = connect(root.right);
+        root.left = connect(root.left);
 
         return root;
     }
