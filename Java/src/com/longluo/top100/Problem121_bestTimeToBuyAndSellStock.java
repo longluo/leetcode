@@ -2,7 +2,9 @@ package com.longluo.top100;
 
 /**
  * 121. Best Time to Buy and Sell Stock
+ * <p>
  * Easy
+ * <p>
  * You are given an array prices where prices[i] is the price of a given stock on the ith day.
  * You want to maximize your profit by choosing a single day to buy one stock and choosing a different day
  * in the future to sell that stock.
@@ -27,7 +29,9 @@ package com.longluo.top100;
  */
 public class Problem121_bestTimeToBuyAndSellStock {
 
-    public static int maxProfit(int[] prices) {
+    // BF time: O(n^2) space: O(1)
+    // TLE
+    public static int maxProfit_bf(int[] prices) {
         int len = prices.length;
         int maxProfit = 0;
         for (int i = 0; i < len - 1; i++) {
@@ -35,18 +39,7 @@ public class Problem121_bestTimeToBuyAndSellStock {
                 if (prices[j] <= prices[i]) {
                     continue;
                 }
-                maxProfit = Math.max(maxProfit, prices[j] - prices[i]);
-            }
-        }
 
-        return maxProfit;
-    }
-
-    public static int maxProfit_bf(int[] prices) {
-        int len = prices.length;
-        int maxProfit = 0;
-        for (int i = 0; i < len - 1; i++) {
-            for (int j = i + 1; j < len; j++) {
                 int profit = prices[j] - prices[i];
                 if (profit > maxProfit) {
                     maxProfit = profit;
@@ -57,7 +50,8 @@ public class Problem121_bestTimeToBuyAndSellStock {
         return maxProfit;
     }
 
-    public static int maxProfit_opt(int[] prices) {
+    // DP time: O(n) space: O(1)
+    public static int maxProfit(int[] prices) {
         int len = prices.length;
         int minPrice = prices[0];
         int maxProfit = 0;
@@ -70,10 +64,10 @@ public class Problem121_bestTimeToBuyAndSellStock {
     }
 
     public static void main(String[] args) {
+        System.out.println("5 ?= " + maxProfit_bf(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println("0 ?= " + maxProfit_bf(new int[]{7, 6, 4, 3, 1}));
+
         System.out.println("5 ?= " + maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
         System.out.println("0 ?= " + maxProfit(new int[]{7, 6, 4, 3, 1}));
-
-        System.out.println("5 ?= " + maxProfit_opt(new int[]{7, 1, 5, 3, 6, 4}));
-        System.out.println("0 ?= " + maxProfit_opt(new int[]{7, 6, 4, 3, 1}));
     }
 }
