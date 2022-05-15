@@ -1,4 +1,4 @@
-package com.longluo.studyplan.programming_skills;
+package com.longluo.top100;
 
 import com.longluo.datastructure.ArrayUtils;
 

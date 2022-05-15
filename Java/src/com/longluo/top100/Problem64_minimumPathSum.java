@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top100;
 
 /**
  * 64. 最小路径和

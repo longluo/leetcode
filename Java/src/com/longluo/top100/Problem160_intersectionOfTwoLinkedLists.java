@@ -1,4 +1,4 @@
-package com.longluo.studyplan.data_structure;
+package com.longluo.top100;
 
 import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;

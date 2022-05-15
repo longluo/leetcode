@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top100;
 
 import java.util.*;
 
@@ -29,14 +29,11 @@ public class Problem56_mergeIntervals {
 
     // Sort
     public static int[][] merge_sort(int[][] intervals) {
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[0] == o2[0]) {
-                    return o1[1] - o2[1];
-                }
-                return o1[0] - o2[0];
+        Arrays.sort(intervals, (o1, o2) -> {
+            if (o1[0] == o2[0]) {
+                return o1[1] - o2[1];
             }
+            return o1[0] - o2[0];
         });
 
         List<int[]> ans = new ArrayList<>();

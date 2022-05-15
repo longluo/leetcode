@@ -1,4 +1,4 @@
-package com.longluo.leetcode.stack;
+package com.longluo.top100;
 
 import java.util.Stack;
 

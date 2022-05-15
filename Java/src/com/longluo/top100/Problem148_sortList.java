@@ -1,4 +1,4 @@
-package com.longluo.tencent_50;
+package com.longluo.top100;
 
 import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
@@ -116,8 +116,7 @@ public class Problem148_sortList {
         ListNode mid = slow;
         ListNode node1 = sortList_merge(head, mid);
         ListNode node2 = sortList_merge(mid, tail);
-        ListNode pNode = mergeList(node1, node2);
-        return pNode;
+        return mergeList(node1, node2);
     }
 
     public static ListNode mergeList(ListNode node1, ListNode node2) {

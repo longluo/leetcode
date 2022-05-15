@@ -1,4 +1,4 @@
-package com.longluo.leetcode.tree;
+package com.longluo.top100;
 
 import com.longluo.datastructure.TreeNode;
 

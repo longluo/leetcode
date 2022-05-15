@@ -1,4 +1,4 @@
-package com.longluo.leetcode.bfs;
+package com.longluo.top100;
 
 import java.util.ArrayList;
 import java.util.HashSet;

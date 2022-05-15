@@ -1,4 +1,4 @@
-package com.longluo.studyplan.efficient_winning;
+package com.longluo.top100;
 
 /**
  * 53. 最大子序和
@@ -60,7 +60,7 @@ public class Problem53_maximumSubarray {
     }
 
     // DP time: O(n) space: O(n)
-    public static int maxSubArray_On(int[] nums) {
+    public static int maxSubArray_dp(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
@@ -137,15 +137,17 @@ public class Problem53_maximumSubarray {
     }
 
 
-
     public static void main(String[] args) {
         System.out.println("1 ?= " + maxSubArray(new int[]{1}));
         System.out.println("0 ?= " + maxSubArray(new int[]{0}));
         System.out.println("-1 ?= " + maxSubArray(new int[]{-1}));
         System.out.println("-1000 ?= " + maxSubArray(new int[]{-1000}));
         System.out.println("6 ?= " + maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
-        System.out.println("6 ?= " + maxSubArray_On(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
-        System.out.println("-1 ?= " + maxSubArray_On(new int[]{-1, -2}));
+
+        System.out.println("6 ?= " + maxSubArray_dp(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        System.out.println("-1 ?= " + maxSubArray_dp(new int[]{-1, -2}));
+
+        System.out.println("6 ?= " + maxSubArray_dp_opt(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
     }
 }
 

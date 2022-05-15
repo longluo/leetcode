@@ -1,4 +1,7 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top100;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 322. 零钱兑换
@@ -70,8 +73,77 @@ public class Problem322_coinChange {
         return count[rem - 1];
     }
 
+    //
+    public static int coinChange_dp(int[] coins, int amount) {
+        int len = coins.length;
+        int[] dp = new int[amount + 1];
+        dp[0] = 0;
+        for (int i = 0; i < len; i++) {
+            dp[coins[i]] = 1;
+        }
+
+        for (int i = 1; i <= amount; i++) {
+            if (dp[i] > 0) {
+                continue;
+            }
+
+            for (int j = 0; j < len; j++) {
+                int coin = coins[j];
+                if (i >= coin && dp[i - coin] > 0) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+
+        if (dp[amount] == 0) {
+            return -1;
+        }
+
+        return dp[amount];
+    }
+
+    /**
+     * BFS
+     */
+    public static int coinChange_bfs(int[] coins, int amount) {
+        if (amount < 1 || coins == null || coins.length < 1) {
+            return 0;
+        }
+
+        int cnt = 0;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(amount);
+
+
+        return 0;
+    }
+
+    public static int coinChange_rec(int[] coins, int amount) {
+        if (amount < 1 || coins == null || coins.length < 1) {
+            return 0;
+        }
+
+        return coinChange(coins, amount, 0);
+    }
+
+    public static int coinChange(int[] coins, int amount, int cnt) {
+        if (amount == 0) {
+            return cnt;
+        } else if (amount < 0) {
+            return -1;
+        }
+
+        for (int i = 0; i < coins.length; i++) {
+            coinChange(coins, amount - coins[i], cnt + 1);
+        }
+
+        return cnt;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + coinChange(new int[]{1, 2, 5}, 11));
+        System.out.println("3 ?= " + coinChange_dp(new int[]{1, 2, 5}, 11));
+        System.out.println("3 ?= " + coinChange_rec(new int[]{1, 2, 5}, 11));
         System.out.println("-1 ?= " + coinChange(new int[]{2}, 3));
         System.out.println("0 ?= " + coinChange(new int[]{1}, 0));
         System.out.println("1 ?= " + coinChange(new int[]{1}, 1));

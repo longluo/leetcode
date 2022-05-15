@@ -1,4 +1,7 @@
-package com.longluo.studyplan.binary_search;
+package com.longluo.top100;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 300. 最长递增子序列
@@ -31,6 +34,35 @@ package com.longluo.studyplan.binary_search;
  * https://leetcode-cn.com/problems/longest-increasing-subsequence/
  */
 public class Problem300_longestIncreasingSubsequence {
+
+    // BF time: O(n^2) space: O(1)
+    static int max = 1;
+    public static int lengthOfLIS_bf(int[] nums) {
+        int len = nums.length;
+        if (len <= 1) {
+            return len;
+        }
+        max = 1;
+        backtrack(nums, new ArrayList<>(), 0);
+        return max;
+    }
+
+    public static void backtrack(int[] nums, List<Integer> list, int start) {
+        if (start == nums.length) {
+            max = Math.max(max, list.size());
+            return;
+        }
+
+        for (int i = start; i < nums.length; i++) {
+            if (list.size() > 0 && nums[i] <= list.get(list.size() - 1)) {
+                continue;
+            }
+
+            list.add(nums[i]);
+            backtrack(nums, list, i + 1);
+            list.remove(list.size() - 1);
+        }
+    }
 
     // DP time: O(n^2) space: O(1)
     public static int lengthOfLIS_dp(int[] nums) {
@@ -73,6 +105,10 @@ public class Problem300_longestIncreasingSubsequence {
     }
 
     public static void main(String[] args) {
+        System.out.println("4 ?= " + lengthOfLIS_bf(new int[]{0, 1, 0, 3, 2, 3}));
+        System.out.println("4 ?= " + lengthOfLIS_bf(new int[]{10, 9, 2, 5, 3, 7, 101, 18}));
+        System.out.println("1 ?= " + lengthOfLIS_bf(new int[]{7, 7, 7, 7, 7, 7, 7}));
+
         System.out.println("4 ?= " + lengthOfLIS_dp(new int[]{0, 1, 0, 3, 2, 3}));
         System.out.println("4 ?= " + lengthOfLIS_dp(new int[]{10, 9, 2, 5, 3, 7, 101, 18}));
         System.out.println("1 ?= " + lengthOfLIS_bs(new int[]{7, 7, 7, 7, 7, 7, 7}));
