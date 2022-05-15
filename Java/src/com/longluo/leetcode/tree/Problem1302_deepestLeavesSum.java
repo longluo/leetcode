@@ -63,8 +63,38 @@ public class Problem1302_deepestLeavesSum {
         return sum;
     }
 
+    // DFS time: O(n) space: O(maxHeight)
+    public static int deepestLeavesSum_dfs(TreeNode root) {
+        int maxDepth = getMaxDepth(root);
+        return dfs(root, 1, maxDepth);
+    }
+
+    public static int getMaxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return Math.max(getMaxDepth(root.left), getMaxDepth(root.right)) + 1;
+    }
+
+    public static int dfs(TreeNode root, int curDepth, int maxDepth) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (curDepth == maxDepth) {
+            return root.val;
+        }
+
+        int left = dfs(root.left, curDepth + 1, maxDepth);
+        int right = dfs(root.right, curDepth + 1, maxDepth);
+
+        return left + right;
+    }
+
     public static void main(String[] args) {
-        TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1,2,3,4,5,null,6,7,null,null,null,null,8});
+        TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 2, 3, 4, 5, null, 6, 7, null, null, null, null, 8});
         System.out.println("15 ?= " + deepestLeavesSum_bfs(tst1));
+        System.out.println("15 ?= " + deepestLeavesSum_dfs(tst1));
     }
 }
