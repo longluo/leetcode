@@ -45,24 +45,24 @@ public:
         int len1 = num1.size();
         int len2 = num2.size();
 
-        int m = 1;
-        while (m < max(len1, len2)) {
-            m <<= 1;
+        int n = 1;
+        while (n < len1 + len2) {
+            n <<= 1;
         }
 
-        m <<= 1;
+        complex *a = new complex[n];
+        complex *b = new complex[n];
 
-        complex *a = new complex[m];
-        complex *b = new complex[m];
-
-        memset(a, 0, m * sizeof(complex));
-        memset(b, 0, m * sizeof(complex));
+        memset(a, 0, n * sizeof(complex));
+        memset(b, 0, n * sizeof(complex));
 
         int la = 0;
         for (int i = len1 - 1; i >= 0; i -= 5) {
             int tmp = 0;
             for (int j = i - 4; j <= i; ++j) {
-                if (j < 0) continue;
+                if (j < 0) {
+                    continue;
+                }
                 tmp = tmp * 10 + num1[j] - '0';
             }
 
@@ -80,18 +80,11 @@ public:
 
                 tmp = tmp * 10 + num2[j] - '0';
             }
+
             b[lb++] = complex(tmp, 0);
         }
 
-        int l = max(la, lb);
-        int n = 1;
-        while (n < l) {
-            n <<= 1;
-        }
-
-        n <<= 1;
-
-        long long *ans = new long long[n + 10];
+        long *ans = new long[n + 1];
 
         fft(a, n);
         fft(b, n);
@@ -106,7 +99,7 @@ public:
         ans[0] = 0;
         for (int i = 0; i < n; ++i) {
             ans[i + 1] = 0;
-            ans[i] += (long long) (a[i].x + 0.5);
+            ans[i] += (long) (a[i].x + 0.5);
             ans[i + 1] += ans[i] / 100000;
             ans[i] %= 100000;
         }
