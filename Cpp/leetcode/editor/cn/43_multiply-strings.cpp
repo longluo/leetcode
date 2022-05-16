@@ -159,11 +159,11 @@ public:
     // FFT
     void fft(complex *a, int n) {
         complex *w = new complex[n + 1];
-        int *rv = new int[n + 1];
+        int *rev = new int[n + 1];
         int bits = -1;
         int _bit = 0;
 
-        for (int i = 0; i < 30; ++i) {
+        for (int i = 0; i < 30; i++) {
             if (n & 1 << i) {
                 _bit = i;
             }
@@ -171,13 +171,13 @@ public:
 
         if (_bit != bits) {
             bits = _bit;
-            rv[0] = 0;
-            rv[1] = 1;
+            rev[0] = 0;
+            rev[1] = 1;
             for (int st = 1; st < bits; ++st) {
                 int k = 1 << st;
                 for (int i = 0; i < k; ++i) {
-                    rv[i + (1 << st)] = rv[i] << 1 | 1;
-                    rv[i] <<= 1;
+                    rev[i + (1 << st)] = rev[i] << 1 | 1;
+                    rev[i] <<= 1;
                 }
             }
 
@@ -187,7 +187,9 @@ public:
         }
 
         for (int i = 0; i < n; i++) {
-            if (rv[i] <= i) swap(a[i], a[rv[i]]);
+            if (rev[i] <= i) {
+                swap(a[i], a[rev[i]]);
+            }
         }
 
         for (int d = n >> 1, st = 2; d > 0; d >>= 1, st <<= 1) {
@@ -205,13 +207,13 @@ public:
         }
 
         delete[] w;
-        delete[] rv;
+        delete[] rev;
     }
 
     // IFFT
     void ifft(complex *a, int n) {
         complex *w = new complex[n + 1];
-        int *rv = new int[n + 1];
+        int *rev = new int[n + 1];
         int bits = -1;
         int _bit = 0;
 
@@ -221,13 +223,13 @@ public:
 
         if (_bit != bits) {
             bits = _bit;
-            rv[0] = 0;
-            rv[1] = 1;
+            rev[0] = 0;
+            rev[1] = 1;
             for (int st = 1; st < bits; ++st) {
                 int k = 1 << st;
                 for (int i = 0; i < k; ++i) {
-                    rv[i + (1 << st)] = rv[i] << 1 | 1;
-                    rv[i] <<= 1;
+                    rev[i + (1 << st)] = rev[i] << 1 | 1;
+                    rev[i] <<= 1;
                 }
             }
 
@@ -237,8 +239,8 @@ public:
         }
 
         for (int i = 0; i < n; i++) {
-            if (rv[i] <= i) {
-                swap(a[i], a[rv[i]]);
+            if (rev[i] <= i) {
+                swap(a[i], a[rev[i]]);
             }
         }
 
@@ -260,7 +262,7 @@ public:
         }
 
         delete[] w;
-        delete[] rv;
+        delete[] rev;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
