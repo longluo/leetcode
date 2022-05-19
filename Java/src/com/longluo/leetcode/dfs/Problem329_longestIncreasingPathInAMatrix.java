@@ -257,6 +257,73 @@ public class Problem329_longestIncreasingPathInAMatrix {
         return max;
     }
 
+    // Topo Sorting time: O(mnlog(mn)) space: O(mn)
+    public static int longestIncreasingPath_toposort(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        if (row == 1 && col == 1) {
+            return 1;
+        }
+
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int[][] outDegrees = new int[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                for (int[] dir : dirs) {
+                    int nextX = i + dir[0];
+                    int nextY = j + dir[1];
+
+                    if (nextX < 0 || nextX >= row || nextY < 0 || nextY >= col || matrix[nextX][nextY] <= matrix[i][j]) {
+                        continue;
+                    }
+
+                    // 只要旁边节点的值比它大，它的出度就加1
+                    outDegrees[i][j]++;
+                }
+            }
+        }
+
+        Queue<int[]> queue = new LinkedList<>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (outDegrees[i][j] == 0) {
+                    queue.offer(new int[]{i, j});
+                }
+            }
+        }
+
+        int max = 0;
+        while (!queue.isEmpty()) {
+            max++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int[] curPos = queue.poll();
+                int x = curPos[0];
+                int y = curPos[1];
+                for (int[] dir : dirs) {
+                    int prevX = x + dir[0];
+                    int prevY = y + dir[1];
+
+                    if (prevX < 0 || prevX >= row || prevY < 0 || prevY >= col) {
+                        continue;
+                    }
+
+                    if (matrix[prevX][prevY] >= matrix[x][y]) {
+                        continue;
+                    }
+
+                    if (--outDegrees[prevX][prevY] == 0) {
+                        queue.offer(new int[]{prevX, prevY});
+                    }
+                }
+            }
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + longestIncreasingPath_bfs(new int[][]{{1}}));
         System.out.println("4 ?= " + longestIncreasingPath_bfs(new int[][]{{9, 9, 4}, {6, 6, 8}, {2, 1, 1}}));
@@ -270,6 +337,9 @@ public class Problem329_longestIncreasingPathInAMatrix {
 
         System.out.println("4 ?= " + longestIncreasingPath_dp(new int[][]{{9, 9, 4}, {6, 6, 8}, {2, 1, 1}}));
         System.out.println("6 ?= " + longestIncreasingPath_dp(new int[][]{{7, 8, 9}, {9, 7, 6}, {7, 2, 3}}));
+
+        System.out.println("4 ?= " + longestIncreasingPath_toposort(new int[][]{{9, 9, 4}, {6, 6, 8}, {2, 1, 1}}));
+        System.out.println("6 ?= " + longestIncreasingPath_toposort(new int[][]{{7, 8, 9}, {9, 7, 6}, {7, 2, 3}}));
     }
 }
 
