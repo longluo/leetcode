@@ -36,7 +36,8 @@ import java.util.Queue;
  */
 public class Problem329_longestIncreasingPathInAMatrix {
 
-    // DFS time: O(m^2n^2) space: O(mn)
+    // BFS time: O(m^2n^2) space: O(mn)
+    // TLE
     public static int longestIncreasingPath_bfs(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return 0;
@@ -65,11 +66,8 @@ public class Problem329_longestIncreasingPathInAMatrix {
         int row = matrix.length;
         int col = matrix[0].length;
 
-        boolean[][] visited = new boolean[row][col];
-
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{x, y});
-        visited[x][y] = true;
 
         while (!queue.isEmpty()) {
             int size = queue.size();
@@ -82,7 +80,7 @@ public class Problem329_longestIncreasingPathInAMatrix {
                     int nextX = curPos[0] + dir[0];
                     int nextY = curPos[1] + dir[1];
 
-                    if (nextX < 0 || nextX >= row || nextY < 0 || nextY >= col || visited[nextX][nextY]) {
+                    if (nextX < 0 || nextX >= row || nextY < 0 || nextY >= col) {
                         continue;
                     }
 
@@ -90,7 +88,6 @@ public class Problem329_longestIncreasingPathInAMatrix {
                         continue;
                     }
 
-                    visited[nextX][nextY] = true;
                     queue.offer(new int[]{nextX, nextY});
                 }
             }
@@ -103,5 +100,12 @@ public class Problem329_longestIncreasingPathInAMatrix {
         System.out.println("1 ?= " + longestIncreasingPath_bfs(new int[][]{{1}}));
         System.out.println("4 ?= " + longestIncreasingPath_bfs(new int[][]{{9, 9, 4}, {6, 6, 8}, {2, 1, 1}}));
         System.out.println("4 ?= " + longestIncreasingPath_bfs(new int[][]{{3, 4, 5}, {3, 2, 6}, {2, 2, 1}}));
+        System.out.println("6 ?= " + longestIncreasingPath_bfs(new int[][]{{7, 8, 9}, {9, 7, 6}, {7, 2, 3}}));
     }
 }
+
+/*
+7 8 9
+9 7 6
+7 2 3
+*/
