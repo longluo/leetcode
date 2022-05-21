@@ -1,9 +1,6 @@
 package com.longluo.leetcode.hash;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 961. 在长度 2N 的数组中找出重复 N 次的元素
@@ -85,11 +82,26 @@ public class Problem961_NRepeatedElementInSize2NArray {
         return -1;
     }
 
+    // Random time: O(1) space: O(1)
+    public static int repeatedNTimes_random(int[] nums) {
+        int len = nums.length;
+        Random random = new Random();
+
+        while (true) {
+            int x = random.nextInt(len);
+            int y = random.nextInt(len);
+            if (x != y && nums[x] == nums[y]) {
+                return nums[x];
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + repeatedNTimes(new int[]{1, 2, 3, 3}));
         System.out.println("2 ?= " + repeatedNTimes(new int[]{2, 1, 2, 5, 3, 2}));
         System.out.println("5 ?= " + repeatedNTimes(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
         System.out.println("5 ?= " + repeatedNTimes_hash(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
         System.out.println("5 ?= " + repeatedNTimes_hashset(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
+        System.out.println("5 ?= " + repeatedNTimes_random(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
     }
 }
