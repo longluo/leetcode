@@ -1,7 +1,9 @@
 package com.longluo.leetcode.hash;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 961. 在长度 2N 的数组中找出重复 N 次的元素
@@ -71,10 +73,23 @@ public class Problem961_NRepeatedElementInSize2NArray {
         return ans;
     }
 
+    // HashSet time: O(n) space: O(n)
+    public static int repeatedNTimes_hashset(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            if (!set.add(x)) {
+                return x;
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + repeatedNTimes(new int[]{1, 2, 3, 3}));
         System.out.println("2 ?= " + repeatedNTimes(new int[]{2, 1, 2, 5, 3, 2}));
         System.out.println("5 ?= " + repeatedNTimes(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
         System.out.println("5 ?= " + repeatedNTimes_hash(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
+        System.out.println("5 ?= " + repeatedNTimes_hashset(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
     }
 }
