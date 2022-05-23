@@ -28,6 +28,7 @@ package com.longluo.leetcode.dp;
  */
 public class Problem474_onesAndZeroes {
 
+    // DP time: O(mnl + L) space: O(mnl)
     public static int findMaxForm(String[] strs, int m, int n) {
         if (strs == null || strs.length == 0) {
             return 0;
@@ -36,12 +37,12 @@ public class Problem474_onesAndZeroes {
         int len = strs.length;
         int[][][] dp = new int[len + 1][m + 1][n + 1];
         for (int i = 1; i <= len; i++) {
-            int[] temp = getOnesAndZeroes(strs[i - 1]);
+            int[] cnt = countOnesAndZeroes(strs[i - 1]);
             for (int j = 0; j <= m; j++) {
                 for (int k = 0; k <= n; k++) {
                     dp[i][j][k] = dp[i - 1][j][k];
-                    if (j >= temp[0] && k >= temp[1]) {
-                        dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j - temp[0]][k - temp[1]] + 1);
+                    if (j >= cnt[0] && k >= cnt[1]) {
+                        dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j - cnt[0]][k - cnt[1]] + 1);
                     }
                 }
             }
@@ -50,17 +51,17 @@ public class Problem474_onesAndZeroes {
         return dp[len][m][n];
     }
 
-    public static int[] getOnesAndZeroes(String str) {
-        int[] nums = new int[2];
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '0') {
-                nums[0]++;
+    public static int[] countOnesAndZeroes(String s) {
+        int[] cnt = new int[2];
+        for (char ch : s.toCharArray()) {
+            if (ch == '0') {
+                cnt[0]++;
             } else {
-                nums[1]++;
+                cnt[1]++;
             }
         }
 
-        return nums;
+        return cnt;
     }
 
     public static void main(String[] args) {
