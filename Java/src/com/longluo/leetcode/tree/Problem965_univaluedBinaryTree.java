@@ -28,27 +28,7 @@ import java.util.Queue;
  */
 public class Problem965_univaluedBinaryTree {
 
-    public static boolean isUnivalTree(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-
-        int val = root.val;
-        return dfs(root.left, val) && dfs(root.right, val);
-    }
-
-    public static boolean dfs(TreeNode root, int value) {
-        if (root == null) {
-            return true;
-        }
-
-        if (root.val != value) {
-            return false;
-        }
-
-        return dfs(root.left, value) && dfs(root.right, value);
-    }
-
+    // BFS time: O(n) space: O(n)
     public static boolean isUnivalTree_bfs(TreeNode root) {
         if (root == null) {
             return true;
@@ -75,7 +55,30 @@ public class Problem965_univaluedBinaryTree {
         return true;
     }
 
-    public static boolean isUnivalTree_rec(TreeNode root) {
+    // DFS time: O(n) space: O(n)
+    public static boolean isUnivalTree_dfs(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+
+        int val = root.val;
+        return dfs(root.left, val) && dfs(root.right, val);
+    }
+
+    public static boolean dfs(TreeNode root, int value) {
+        if (root == null) {
+            return true;
+        }
+
+        if (root.val != value) {
+            return false;
+        }
+
+        return dfs(root.left, value) && dfs(root.right, value);
+    }
+
+    // Recursion time: O(n) space: O(n)
+    public static boolean isUnivalTree(TreeNode root) {
         if (root == null) {
             return true;
         }
@@ -85,25 +88,25 @@ public class Problem965_univaluedBinaryTree {
         }
 
         if (root.left != null && root.right == null) {
-            return root.val == root.left.val && isUnivalTree_rec(root.left);
+            return root.val == root.left.val && isUnivalTree(root.left);
         }
 
         if (root.right != null && root.left == null) {
-            return root.val == root.right.val && isUnivalTree_rec(root.right);
+            return root.val == root.right.val && isUnivalTree(root.right);
         }
 
-        return root.val == root.left.val && root.val == root.right.val && isUnivalTree_rec(root.left) && isUnivalTree_rec(root.right);
+        return root.val == root.left.val && root.val == root.right.val && isUnivalTree(root.left) && isUnivalTree(root.right);
     }
 
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 1, 1, 1, 1, null, 1});
-        System.out.println("true ?= " + isUnivalTree(tst1));
+        System.out.println("true ?= " + isUnivalTree_dfs(tst1));
         System.out.println("true ?= " + isUnivalTree_bfs(tst1));
-        System.out.println("true ?= " + isUnivalTree_rec(tst1));
+        System.out.println("true ?= " + isUnivalTree(tst1));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{2, 2, 2, 5, 2});
-        System.out.println("false ?= " + isUnivalTree(tst2));
+        System.out.println("false ?= " + isUnivalTree_dfs(tst2));
         System.out.println("false ?= " + isUnivalTree_bfs(tst2));
-        System.out.println("false ?= " + isUnivalTree_rec(tst2));
+        System.out.println("false ?= " + isUnivalTree(tst2));
     }
 }
