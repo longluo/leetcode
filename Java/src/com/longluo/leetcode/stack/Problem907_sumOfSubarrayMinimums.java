@@ -46,7 +46,25 @@ public class Problem907_sumOfSubarrayMinimums {
         return ans;
     }
 
+    // BF Opt time: O(n^2) space: O(1)
+    // TLE
+    public static int sumSubarrayMins_bf_opt(int[] arr) {
+        int MOD = 1_000_000_007;
+        int len = arr.length;
+        int ans = 0;
+        for (int i = 0; i < len; i++) {
+            int min = arr[i];
+            for (int j = i; j < len; j++) {
+                min = Math.min(min, arr[j]);
+                ans = (ans + min) % MOD;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("17 ?= " + sumSubarrayMins_bf(new int[]{3, 1, 2, 4}));
+        System.out.println("17 ?= " + sumSubarrayMins_bf_opt(new int[]{3, 1, 2, 4}));
     }
 }
