@@ -30,7 +30,10 @@ import java.util.*;
  */
 public class Problem354_maxEnvelopes {
 
-    // BF time: O(n^2 + nlogn) space: O(logn)
+    // BF Backtrack time: O(2^n + nlogn) space: O(logn)
+
+    static int max = 1;
+
     public static int maxEnvelopes_bf(int[][] envelopes) {
         int len = envelopes.length;
         if (len <= 1) {
@@ -39,23 +42,35 @@ public class Problem354_maxEnvelopes {
 
         Arrays.sort(envelopes, (o1, o2) -> o1[0] == o2[0] ? o1[1] - o2[1] : o1[0] - o2[0]);
 
-        int ans = 1;
-        for (int i = 0; i < len; i++) {
-            int w = envelopes[i][0];
-            int h = envelopes[i][1];
-            int cnt = 1;
-            for (int j = i + 1; j < len; j++) {
-                if (envelopes[j][0] > w && envelopes[j][1] > h) {
-                    w = envelopes[j][0];
-                    h = envelopes[j][1];
-                    cnt++;
-                }
-            }
+        max = 1;
+        backtrack(envelopes, new ArrayList<>(), 0);
+        return max;
+    }
 
-            ans = Math.max(ans, cnt);
+    public static void backtrack(int[][] envelopes, List<Integer> path, int start) {
+        int len = envelopes.length;
+        max = Math.max(max, path.size());
+        if (start == len || path.size() == len) {
+            return;
         }
 
-        return ans;
+        for (int i = start; i < len; i++) {
+            int w = 0;
+            int h = 0;
+            if (path.size() > 0) {
+                int last = path.get(path.size() - 1);
+                w = envelopes[last][0];
+                h = envelopes[last][1];
+            }
+
+            if (envelopes[i][0] <= w || envelopes[i][1] <= h) {
+                continue;
+            }
+
+            path.add(i);
+            backtrack(envelopes, path, i + 1);
+            path.remove(path.size() - 1);
+        }
     }
 
     public static int maxEnvelopes(int[][] envelopes) {
@@ -116,6 +131,7 @@ public class Problem354_maxEnvelopes {
 
     public static void main(String[] args) {
         System.out.println("3 ?= " + maxEnvelopes_bf(new int[][]{{5, 4}, {6, 4}, {6, 7}, {2, 3}}));
+        System.out.println("2 ?= " + maxEnvelopes_bf(new int[][]{{10, 8}, {1, 12}, {6, 15}, {2, 18}}));
         System.out.println("5 ?= " + maxEnvelopes_bf(new int[][]{{2, 100}, {3, 200}, {4, 300}, {5, 500}, {5, 400}, {5, 250}, {6, 370}, {6, 360}, {7, 380}}));
 
         System.out.println("3 ?= " + maxEnvelopes(new int[][]{{5, 4}, {6, 4}, {6, 7}, {2, 3}}));
