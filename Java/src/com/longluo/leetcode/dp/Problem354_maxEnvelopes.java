@@ -99,6 +99,48 @@ public class Problem354_maxEnvelopes {
         return ans;
     }
 
+    // DP + BinarySearch time: O(nlogn) space: O(n)
+    public static int maxEnvelopes_bs(int[][] envelopes) {
+        int len = envelopes.length;
+        if (len < 2) {
+            return len;
+        }
+
+        Arrays.sort(envelopes, (o1, o2) -> o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0]);
+
+        int[] dp = new int[len];
+        Arrays.fill(dp, 1);
+
+        List<Integer> hList = new ArrayList<>();
+        hList.add(envelopes[0][1]);
+        for (int i = 1; i < len; i++) {
+            int h = envelopes[i][1];
+            if (h > hList.get(hList.size() - 1)) {
+                hList.add(h);
+            } else {
+                int idx = binarySearch(hList, h);
+                hList.set(idx, h);
+            }
+        }
+
+        return hList.size();
+    }
+
+    public static int binarySearch(List<Integer> list, int target) {
+        int low = 0;
+        int high = list.size() - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (list.get(mid) < target) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+
+        return low;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + maxEnvelopes_bf(new int[][]{{5, 4}, {6, 4}, {6, 7}, {2, 3}}));
         System.out.println("2 ?= " + maxEnvelopes_bf(new int[][]{{10, 8}, {1, 12}, {6, 15}, {2, 18}}));
@@ -108,5 +150,9 @@ public class Problem354_maxEnvelopes {
         System.out.println("5 ?= " + maxEnvelopes(new int[][]{{2, 100}, {3, 200}, {4, 300}, {5, 500}, {5, 400}, {5, 250}, {6, 370}, {6, 360}, {7, 380}}));
         System.out.println("3 ?= " + maxEnvelopes(new int[][]{{46, 89}, {50, 53}, {52, 68}, {72, 45}, {77, 81}}));
         System.out.println("5 ?= " + maxEnvelopes(new int[][]{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}));
+
+        System.out.println("5 ?= " + maxEnvelopes_bs(new int[][]{{2, 100}, {3, 200}, {4, 300}, {5, 500}, {5, 400}, {5, 250}, {6, 370}, {6, 360}, {7, 380}}));
+        System.out.println("3 ?= " + maxEnvelopes_bs(new int[][]{{46, 89}, {50, 53}, {52, 68}, {72, 45}, {77, 81}}));
+        System.out.println("5 ?= " + maxEnvelopes_bs(new int[][]{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}));
     }
 }
