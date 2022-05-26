@@ -39,6 +39,7 @@ package com.longluo.leetcode.bitmanipulation;
  */
 public class Problem191_numberOf1Bits {
 
+    // Cycle time: O(k) space: O(1)
     public static int hammingWeight(int n) {
         int cnt = 0;
         for (int i = 0; i < 32 && n != 0; i++) {
@@ -52,6 +53,7 @@ public class Problem191_numberOf1Bits {
         return cnt;
     }
 
+    // time: O(logn) space: O(1)
     public static int hammingWeight_log(int n) {
         int cnt = 0;
         while (n != 0) {
@@ -60,6 +62,36 @@ public class Problem191_numberOf1Bits {
         }
 
         return cnt;
+    }
+
+    public static int hammingWeight_api(int n) {
+        return Integer.bitCount(n);
+    }
+
+    public static int hammingWeight_divide(int n) {
+        n = (n & 0x55555555) + ((n >>> 1) & 0x55555555);
+        n = (n & 0x33333333) + ((n >>> 2) & 0x33333333);
+        n = (n & 0x0f0f0f0f) + ((n >>> 4) & 0x0f0f0f0f);
+        n = (n & 0x00ff00ff) + ((n >>> 8) & 0x00ff00ff);
+        n = (n & 0x0000ffff) + ((n >>> 16) & 0x0000ffff);
+        return n;
+    }
+
+    public static int hammingWeight_lowbit(int n) {
+        int ans = 0;
+        for (int i = n; i != 0; i -= lowbit(i)) {
+            ans++;
+        }
+
+        return ans;
+    }
+
+    public static int lowbit(int n) {
+        return n & -n;
+    }
+
+    public static int hammingWeight_rec(int n) {
+        return n == 0 ? 0 : 1 + hammingWeight_rec(n & (n - 1));
     }
 
     public static void main(String[] args) {
@@ -78,7 +110,13 @@ public class Problem191_numberOf1Bits {
         System.out.println("-1 ?= " + Integer.toBinaryString(-1));
 
         System.out.println("3 ?= " + hammingWeight(11));
+        System.out.println("3 ?= " + hammingWeight_api(11));
+        System.out.println("3 ?= " + hammingWeight_divide(11));
+        System.out.println("3 ?= " + hammingWeight_lowbit(11));
+        System.out.println("3 ?= " + hammingWeight_rec(11));
         System.out.println("2 ?= " + hammingWeight_log(0b00000000000000000000000000000011));
         System.out.println("3 ?= " + hammingWeight_log(0b10000000000000000000000000000011));
+
+        System.out.println("1 ?= " + hammingWeight_lowbit(0b100));
     }
 }
