@@ -36,6 +36,7 @@ package com.longluo.leetcode.bitmanipulation;
  */
 public class Problem1342_numberOfStepsToReduceANumberToZero {
 
+    // BF time: O(logn) space: O(1)
     public static int numberOfSteps(int num) {
         int ans = 0;
         while (num > 0) {
@@ -50,8 +51,17 @@ public class Problem1342_numberOfStepsToReduceANumberToZero {
         return ans;
     }
 
-    public static int numberOfSteps_math(int num) {
+    // Bit
+    public static int numberOfSteps_bit(int num) {
         int ans = 0;
+        while (num > 0) {
+            if ((num & 0x01) == 1) {
+                ans++;
+            }
+
+            num = num >> 1;
+            ans++;
+        }
 
         return ans;
     }
@@ -61,15 +71,11 @@ public class Problem1342_numberOfStepsToReduceANumberToZero {
         System.out.println("2 ?= " + numberOfSteps(2));
         System.out.println("3 ?= " + numberOfSteps(3));
         System.out.println("3 ?= " + numberOfSteps(4));
-        System.out.println("4 ?= " + numberOfSteps(5));
-        System.out.println("4 ?= " + numberOfSteps(6));
-        System.out.println("4 ?= " + numberOfSteps(7));
-        System.out.println("4 ?= " + numberOfSteps(8));
-        System.out.println("4 ?= " + numberOfSteps(9));
-        System.out.println("4 ?= " + numberOfSteps(10));
-        System.out.println("5 ?= " + numberOfSteps(11));
-        System.out.println("4 ?= " + numberOfSteps(12));
-        System.out.println("6 ?= " + numberOfSteps(14));
+
+        System.out.println("1 ?= " + numberOfSteps_bit(1));
+        System.out.println("2 ?= " + numberOfSteps_bit(2));
+        System.out.println("3 ?= " + numberOfSteps_bit(4));
+
         System.out.println("12 ?= " + numberOfSteps(123));
     }
 }
