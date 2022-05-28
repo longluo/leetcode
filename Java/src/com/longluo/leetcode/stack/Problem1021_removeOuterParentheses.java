@@ -97,12 +97,36 @@ public class Problem1021_removeOuterParentheses {
         return sb.toString();
     }
 
+    // Count Opt time: O(n) space: O(1)
+    public static String removeOuterParentheses_opt(String s) {
+        int len = s.length();
+        int level = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            if (ch == ')') {
+                level--;
+            }
+
+            if (level > 0) {
+                sb.append(ch);
+            }
+
+            if (ch == '(') {
+                level++;
+            }
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("()()() ?= " + removeOuterParentheses_stack("(()())(())"));
         System.out.println("()()()()(()) ?= " + removeOuterParentheses_stack("(()())(())(()(()))"));
         System.out.println(" ?= " + removeOuterParentheses_stack("()()"));
 
         System.out.println("()()() ?= " + removeOuterParentheses_cnt("(()())(())"));
+        System.out.println("()()() ?= " + removeOuterParentheses_opt("(()())(())"));
         System.out.println(" ?= " + removeOuterParentheses_cnt("()()"));
     }
 }
