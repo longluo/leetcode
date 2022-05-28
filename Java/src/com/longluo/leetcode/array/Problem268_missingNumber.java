@@ -38,6 +38,7 @@ import java.util.Set;
  */
 public class Problem268_missingNumber {
 
+    // Sort time: O(nlogn) space: O(logn)
     public static int missingNumber_sort(int[] nums) {
         int len = nums.length;
         Arrays.sort(nums);
@@ -50,6 +51,24 @@ public class Problem268_missingNumber {
         return len;
     }
 
+    // Count time: O(n) space: O(n)
+    public static int missingNumber_count(int[] nums) {
+        int len = nums.length;
+        boolean[] seen = new boolean[len + 1];
+        for (int x : nums) {
+            seen[x] = true;
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (!seen[nums[i]]) {
+                return nums[i];
+            }
+        }
+
+        return len;
+    }
+
+    // HashSet time: O(n) space: O(n)
     public static int missingNumber_set(int[] nums) {
         int len = nums.length;
         Set<Integer> set = new HashSet<>();
@@ -66,6 +85,7 @@ public class Problem268_missingNumber {
         return len;
     }
 
+    // XOR time: O(n) space: O(1)
     public static int missingNumber_xor(int[] nums) {
         int xor = 0;
         int len = nums.length;
@@ -80,7 +100,8 @@ public class Problem268_missingNumber {
         return xor;
     }
 
-    public static int missingNumber_sum(int[] nums) {
+    // Math time: O(n) space: O(1)
+    public static int missingNumber_math(int[] nums) {
         int len = nums.length;
         int sum = len * (len + 1) / 2;
         int arraySum = 0;
@@ -92,6 +113,10 @@ public class Problem268_missingNumber {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("2 ?= " + missingNumber_sort(new int[]{3, 0, 1}));
+        System.out.println("2 ?= " + missingNumber_set(new int[]{3, 0, 1}));
+        System.out.println("2 ?= " + missingNumber_count(new int[]{3, 0, 1}));
+        System.out.println("2 ?= " + missingNumber_math(new int[]{3, 0, 1}));
+        System.out.println("2 ?= " + missingNumber_xor(new int[]{3, 0, 1}));
     }
 }
