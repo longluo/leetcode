@@ -55,7 +55,7 @@ public class Problem1342_numberOfStepsToReduceANumberToZero {
     public static int numberOfSteps_bit(int num) {
         int ans = 0;
         while (num > 0) {
-            ans += num > 1 ? 1 : 0 + num & 0x01;
+            ans += (num > 1 ? 1 : 0) + (num & 0x01);
             num = num >> 1;
         }
 
