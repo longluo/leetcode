@@ -55,16 +55,15 @@ public class Problem1342_numberOfStepsToReduceANumberToZero {
     public static int numberOfSteps_bit(int num) {
         int ans = 0;
         while (num > 0) {
-            if ((num & 0x01) == 1) {
-                ans++;
-            }
-
+            ans += num > 1 ? 1 : 0 + num & 0x01;
             num = num >> 1;
-            ans++;
         }
 
         return ans;
     }
+
+    // TODO: 2022/5/28  Math
+    // https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-to-zero/solution/jiang-shu-zi-bian-cheng-0-de-cao-zuo-ci-ucaa4/
 
     public static void main(String[] args) {
         System.out.println("1 ?= " + numberOfSteps(1));
