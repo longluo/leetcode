@@ -1,6 +1,8 @@
 package com.longluo.contest.weekly_contest_295;
 
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
@@ -38,50 +40,32 @@ import java.util.Queue;
  */
 public class Problem2290_minimumObstacleRemovalToReachCorner {
 
+    // BFS time: O(mn) space: O(mn)
     public static int minimumObstacles(int[][] grid) {
         int row = grid.length;
         int col = grid[0].length;
-        if (row == 1 && col == 1) {
-            return 0;
-        }
 
-        if (bfs(grid, new boolean[row][col], new int[]{row - 1, col - 1}, 0, 0)) {
-            return 0;
-        }
-
-        int ans = 1;
-        int max = row + col - 3;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (grid[i][j] == 1) {
-
-                }
-            }
-        }
-
-        return ans;
-    }
-
-    public static boolean bfs(int[][] grid, boolean[][] visited, int[] target, int x, int y) {
         int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{x, y});
-        visited[x][y] = true;
+        int[][] dp = new int[row][col];
+
+        Queue<int[]> queue = new PriorityQueue<>((o1, o2) -> dp[o1[0]][o1[1]] - dp[o2[0]][o2[1]]);
+        queue.offer(new int[]{0, 0});
+
+        boolean[][] visited = new boolean[row][col];
+        visited[0][0] = true;
+
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 int[] pos = queue.poll();
-
-                if (pos[0] == target[0] && pos[1] == target[1]) {
-                    return true;
-                }
-
+                int x = pos[0];
+                int y = pos[1];
                 for (int[] dir : dirs) {
-                    int nextX = pos[0] + dir[0];
-                    int nextY = pos[1] + dir[1];
-                    if (nextX >= 0 && nextX < grid.length && nextY >= 0 && nextY < grid[0].length
-                            && grid[nextX][nextY] == 0 && !visited[nextX][nextY]) {
+                    int nextX = x + dir[0];
+                    int nextY = y + dir[1];
+                    if (nextX >= 0 && nextX < grid.length && nextY >= 0 && nextY < grid[0].length && !visited[nextX][nextY]) {
+                        dp[nextX][nextY] = dp[x][y] + grid[nextX][nextY];
                         queue.offer(new int[]{nextX, nextY});
                         visited[nextX][nextY] = true;
                     }
@@ -89,10 +73,10 @@ public class Problem2290_minimumObstacleRemovalToReachCorner {
             }
         }
 
-        return false;
+        return dp[row - 1][col - 1];
     }
 
     public static void main(String[] args) {
-
+        System.out.println("2 ?= " + minimumObstacles(new int[][]{{0, 1, 1}, {1, 1, 0}, {1, 1, 0}}));
     }
 }
