@@ -1,7 +1,5 @@
 package com.longluo.contest.weekly_contest_295;
 
-import java.text.DecimalFormat;
-
 /**
  * 6079. 价格减免
  * <p>
@@ -63,32 +61,56 @@ public class Problem2288_applyDiscountToPrices {
 
     public static boolean isLegal(String s) {
         int len = s.length();
-
-        if (s.charAt(0) != '$' || s.equals("$")) {
+        if (s.charAt(0) != '$') {
             return false;
         }
 
         for (int i = 1; i < len; i++) {
-            char ch = s.charAt(i);
-            if (ch < '0' || ch > '9') {
+            if (!Character.isDigit(s.charAt(i))) {
                 return false;
             }
         }
 
-        return true;
+        return len > 1;
     }
 
     public static String getPrice(String s, int discount) {
-        String[] array = s.split("\\$");
-        if (array.length > 2) {
-            return s;
+        long price = Long.parseLong(s.substring(1));
+        double dis = (double) (100 - discount) / 100 * price;
+        String ans = String.format("%.2f", dis);
+        return "$" + ans;
+    }
+
+    // Simulate Opt time: O(S) space: O(n)
+    public static String discountPrices_opt(String sentence, int discount) {
+        StringBuilder sb = new StringBuilder();
+        String[] words = sentence.split("\\s+");
+        int len = words.length;
+        for (int i = 0; i < len; i++) {
+            String word = words[i];
+            if (word.length() <= 1 || word.charAt(0) != '$') {
+                sb.append(word).append(" ");
+            } else if (word.charAt(0) == '$' && word.length() > 1) {
+                boolean isPrice = true;
+                for (int j = 1; j < word.length(); j++) {
+                    if (!Character.isDigit(word.charAt(j))) {
+                        isPrice = false;
+                        sb.append(word).append(" ");
+                        break;
+                    }
+                }
+
+                if (isPrice) {
+                    long price = Long.parseLong(word.substring(1));
+                    double dis = (double) (100 - discount) / 100 * price;
+                    sb.append("$").append(String.format("%.2f", dis)).append(" ");
+                }
+            }
         }
 
-        long price = Long.parseLong(array[1]);
-        double dis = (double) (100 - discount) / 100 * price;
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        String ans = decimalFormat.format(dis);
-        return "$" + ans;
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
     }
 
     public static void main(String[] args) {
@@ -96,5 +118,6 @@ public class Problem2288_applyDiscountToPrices {
         System.out.println("$2658129.12 5q $2113353.36 ?= " + discountPrices("$7383692 5q $5870426", 64));
         System.out.println("there are $0.50 $1.00 and 5$ candies in the shop ?= " + discountPrices("there are $1 $2 and 5$ candies in the shop", 50));
         System.out.println("1 2 $0.00 4 $0.00 $0.00 7 8$ $0.00 $10$ ?= " + discountPrices("1 2 $3 4 $5 $6 7 8$ $9 $10$", 100));
+        System.out.println("1 2 $0.00 4 $0.00 $0.00 7 8$ $0.00 $10$ ?= " + discountPrices_opt("1 2 $3 4 $5 $6 7 8$ $9 $10$", 100));
     }
 }
