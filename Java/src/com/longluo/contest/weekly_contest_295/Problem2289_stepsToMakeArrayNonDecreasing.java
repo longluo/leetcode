@@ -29,13 +29,25 @@ package com.longluo.contest.weekly_contest_295;
  */
 public class Problem2289_stepsToMakeArrayNonDecreasing {
 
+    // TODO: 2022/5/29  
     public static int totalSteps(int[] nums) {
         if (isAscendArray(nums)) {
             return 0;
         }
 
+        int len = nums.length;
         int ans = 0;
-
+        for (int i = 0; i < len - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                for (int j = i + 1; j < len; j++) {
+                    if (nums[j] < nums[i]) {
+                        ans = Math.max(ans, j - i);
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
 
         return ans;
     }
