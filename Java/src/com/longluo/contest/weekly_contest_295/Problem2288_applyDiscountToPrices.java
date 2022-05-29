@@ -90,7 +90,7 @@ public class Problem2288_applyDiscountToPrices {
             String word = words[i];
             if (word.length() <= 1 || word.charAt(0) != '$') {
                 sb.append(word).append(" ");
-            } else if (word.charAt(0) == '$' && word.length() > 1) {
+            } else if (word.charAt(0) == '$') {
                 boolean isPrice = true;
                 for (int j = 1; j < word.length(); j++) {
                     if (!Character.isDigit(word.charAt(j))) {
