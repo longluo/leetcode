@@ -54,20 +54,18 @@ public class Problem29_divideTwoIntegers {
             ans++;
         }
 
-        if (sign) {
-            ans = -ans;
-        }
+        ans = sign ? -ans : ans;
 
-        if (ans > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        }
-
-        return (int) ans;
+        return ans > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) ans;
     }
 
     // BF Opt Long time: O(x / y) space: O(1)
     // AC
     public static int divide_bf_64_opt(int dividend, int divisor) {
+        if (divisor == Integer.MIN_VALUE) {
+            return dividend == Integer.MIN_VALUE ? 1 : 0;
+        }
+
         if (dividend == Integer.MIN_VALUE) {
             if (divisor == 1) {
                 return dividend;
@@ -103,27 +101,23 @@ public class Problem29_divideTwoIntegers {
             ans++;
         }
 
-        if (sign) {
-            ans = -ans;
-        }
+        ans = sign ? -ans : ans;
 
-        if (ans > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        }
-
-        return (int) ans;
+        return ans > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) ans;
     }
 
     // BF 32 time: O(x / y) space: O(1)
     // AC
     public static int divide_32(int dividend, int divisor) {
+        if (divisor == Integer.MIN_VALUE) {
+            return dividend == Integer.MIN_VALUE ? 1 : 0;
+        }
+
         if (dividend == Integer.MIN_VALUE) {
             if (divisor == 1) {
                 return dividend;
             } else if (divisor == -1) {
                 return Integer.MAX_VALUE;
-            } else if (divisor == Integer.MIN_VALUE) {
-                return 1;
             }
         } else if (dividend == Integer.MAX_VALUE) {
             if (divisor == 1) {
@@ -155,103 +149,81 @@ public class Problem29_divideTwoIntegers {
         return sign ? -ans : ans;
     }
 
-    // fast
+    // BinarySearch + long time: O(logx) space: O(1)
     public static int divide_bs(int dividend, int divisor) {
-        if (dividend == 0) {
-            return 0;
+        long x = dividend;
+        long y = divisor;
+
+        boolean sign = false;
+
+        if ((x > 0 && y < 0) || (x < 0 && y > 0)) {
+            sign = true;
         }
 
-        if (divisor == Integer.MIN_VALUE) {
-            return dividend == Integer.MIN_VALUE ? 1 : 0;
+        if (x < 0) {
+            x = -x;
         }
 
-        if (dividend == Integer.MIN_VALUE) {
-            if (divisor == Integer.MIN_VALUE) {
-                return 1;
-            }
-            if (divisor == -1) {
-                return Integer.MAX_VALUE;
-            }
-            if (divisor == 1) {
-                return Integer.MIN_VALUE;
-            }
+        if (y < 0) {
+            y = -y;
         }
 
-        boolean isNegative = false;
-        if (dividend > 0) {
-            dividend = -dividend;
-            isNegative = !isNegative;
-        }
-        if (divisor > 0) {
-            divisor = -divisor;
-            isNegative = !isNegative;
-        }
-        int left = 1;
-        int right = Integer.MAX_VALUE;
-        int ans = 0;
-        while (left <= right) {
-            int mid = left + ((right - left) >> 1);
-            boolean check = quickAdd(dividend, divisor, mid);
-            if (check) {
-                ans = mid;
-                if (mid == Integer.MAX_VALUE) {
-                    break;
-                }
-                left = mid + 1;
+        long left = 0;
+        long right = x;
+
+        while (left < right) {
+            long mid = (left + right + 1) >> 1;
+            long result = quickAdd(y, mid);
+            if (result <= x) {
+                left = mid;
             } else {
                 right = mid - 1;
             }
         }
 
-        if (isNegative) {
-            ans = -ans;
+        long ans = sign ? -left : left;
+        if (ans > Integer.MAX_VALUE || ans < Integer.MIN_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        return (int) ans;
+    }
+
+    public static long quickAdd(long x, long y) {
+        long ans = 0;
+        while (y > 0) {
+            if ((y & 0x01) == 1) {
+                ans += x;
+            }
+
+            x += x;
+            y = y >> 1;
         }
 
         return ans;
     }
 
-    public static boolean quickAdd(int x, int y, int z) {
-        int result = 0;
-        int add = y;
-        // x < 0, y < 0, z > 0, find z * y >= x
-        while (z != 0) {
-            if ((z & 1) != 0) {
-                // result + add >= x
-                if (result < x - add) {
-                    return false;
-                }
-
-                result += add;
-            }
-            if (z != 1) {
-                if (add < x - add) {
-                    return false;
-                }
-
-                add += add;
-            }
-
-            z = z >> 1;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) {
-        int val = Math.abs(-2147483648);
+        int val = -2147483648;
+        System.out.println("val = " + val);
+        val = -val;
         System.out.println("val = " + val);
         System.out.println("2147483648 ?= " + Math.abs(-2147483648));
 
         System.out.println("-2 ?= " + divide_bf_64(7, -3));
         System.out.println("-2 ?= " + divide_bf_64_opt(7, -3));
 
+        System.out.println("1 ?= " + divide_32(-2147483648, -2147483648));
         System.out.println("3 ?= " + divide_32(10, 3));
         System.out.println("1 ?= " + divide_32(1, 1));
         System.out.println("-1 ?= " + divide_32(-1, 1));
-        System.out.println("-1 ?= " + divide_32(-1, 1));
+
+        System.out.println("1 ?= " + divide_bs(1, 1));
+        System.out.println("0 ?= " + divide_bs(1, 2));
+        System.out.println("3 ?= " + divide_bs(10, 3));
         System.out.println("2147483647 ?= " + divide_bs(-2147483648, -1));
         System.out.println("-2147483648 ?= " + divide_bs(-2147483648, 1));
         System.out.println("-1073741824 ?= " + divide_bs(-2147483648, 2));
-        System.out.println("3 ?= " + divide_bs(10, 3));
+
     }
 }
