@@ -114,39 +114,45 @@ public class Problem29_divideTwoIntegers {
         return (int) ans;
     }
 
-    // only use 32
+    // BF 32 time: O(x / y) space: O(1)
+    // AC
     public static int divide_32(int dividend, int divisor) {
-        if (dividend == 0) {
-            return 0;
-        }
-
-        if (dividend == Integer.MIN_VALUE && divisor == -1) {
-            return Integer.MAX_VALUE;
+        if (dividend == Integer.MIN_VALUE) {
+            if (divisor == 1) {
+                return dividend;
+            } else if (divisor == -1) {
+                return Integer.MAX_VALUE;
+            } else if (divisor == Integer.MIN_VALUE) {
+                return 1;
+            }
+        } else if (dividend == Integer.MAX_VALUE) {
+            if (divisor == 1) {
+                return dividend;
+            } else if (divisor == -1) {
+                return -dividend;
+            }
         }
 
         int ans = 0;
-        boolean isNegative = true;
+        boolean sign = true;
         if (dividend > 0 && divisor > 0) {
             dividend = -dividend;
-            isNegative = false;
+            sign = false;
         } else if (dividend > 0 && divisor < 0) {
             dividend = -dividend;
             divisor = -divisor;
         } else if (dividend < 0 && divisor < 0) {
-            isNegative = false;
+            sign = false;
             divisor = -divisor;
         }
 
+        // Minus
         while (dividend + divisor <= 0) {
             dividend += divisor;
             ans++;
         }
 
-        if (isNegative) {
-            ans = -ans;
-        }
-
-        return ans;
+        return sign ? -ans : ans;
     }
 
     // fast
@@ -235,8 +241,11 @@ public class Problem29_divideTwoIntegers {
         int val = Math.abs(-2147483648);
         System.out.println("val = " + val);
         System.out.println("2147483648 ?= " + Math.abs(-2147483648));
-        System.out.println("3 ?= " + divide_32(10, 3));
+
         System.out.println("-2 ?= " + divide_bf_64(7, -3));
+        System.out.println("-2 ?= " + divide_bf_64_opt(7, -3));
+
+        System.out.println("3 ?= " + divide_32(10, 3));
         System.out.println("1 ?= " + divide_32(1, 1));
         System.out.println("-1 ?= " + divide_32(-1, 1));
         System.out.println("-1 ?= " + divide_32(-1, 1));
