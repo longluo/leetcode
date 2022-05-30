@@ -65,6 +65,55 @@ public class Problem29_divideTwoIntegers {
         return (int) ans;
     }
 
+    // BF Opt Long time: O(x / y) space: O(1)
+    // AC
+    public static int divide_bf_64_opt(int dividend, int divisor) {
+        if (dividend == Integer.MIN_VALUE) {
+            if (divisor == 1) {
+                return dividend;
+            } else if (divisor == -1) {
+                return Integer.MAX_VALUE;
+            }
+        } else if (dividend == Integer.MAX_VALUE) {
+            if (divisor == 1) {
+                return dividend;
+            } else if (divisor == -1) {
+                return -dividend;
+            }
+        }
+
+        long dividendLong = dividend;
+        long divisorLong = divisor;
+
+        boolean sign = false;
+        if (dividendLong < 0 && divisorLong < 0) {
+            dividendLong = -dividendLong;
+            divisorLong = -divisorLong;
+        } else if (dividendLong < 0 && divisorLong > 0) {
+            sign = true;
+            dividendLong = -dividendLong;
+        } else if (dividendLong > 0 && divisorLong < 0) {
+            sign = true;
+            divisorLong = -divisorLong;
+        }
+
+        long ans = 0;
+        while (dividendLong >= divisorLong) {
+            dividendLong -= divisorLong;
+            ans++;
+        }
+
+        if (sign) {
+            ans = -ans;
+        }
+
+        if (ans > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        return (int) ans;
+    }
+
     // only use 32
     public static int divide_32(int dividend, int divisor) {
         if (dividend == 0) {
