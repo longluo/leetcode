@@ -26,7 +26,9 @@ package com.longluo.leetcode.bitmanipulation;
  */
 public class Problem29_divideTwoIntegers {
 
-    public static int divide(int dividend, int divisor) {
+    // BF + use Long time: O(x / y) space: O(1)
+    // TLE
+    public static int divide_bf_64(int dividend, int divisor) {
         if (dividend == 0) {
             return 0;
         }
@@ -34,15 +36,15 @@ public class Problem29_divideTwoIntegers {
         long dividendLong = dividend;
         long divisorLong = divisor;
 
-        boolean isNegative = false;
+        boolean sign = false;
         if (dividendLong < 0 && divisorLong < 0) {
             dividendLong = -dividendLong;
             divisorLong = -divisorLong;
         } else if (dividendLong < 0 && divisorLong > 0) {
-            isNegative = true;
+            sign = true;
             dividendLong = -dividendLong;
         } else if (dividendLong > 0 && divisorLong < 0) {
-            isNegative = true;
+            sign = true;
             divisorLong = -divisorLong;
         }
 
@@ -52,7 +54,7 @@ public class Problem29_divideTwoIntegers {
             ans++;
         }
 
-        if (isNegative) {
+        if (sign) {
             ans = -ans;
         }
 
@@ -64,13 +66,13 @@ public class Problem29_divideTwoIntegers {
     }
 
     // only use 32
-    public static int divide_1(int dividend, int divisor) {
+    public static int divide_32(int dividend, int divisor) {
         if (dividend == 0) {
             return 0;
         }
 
-        if (dividend == -2147483648 && divisor == -1) {
-            return 2147483647;
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
         }
 
         int ans = 0;
@@ -99,7 +101,7 @@ public class Problem29_divideTwoIntegers {
     }
 
     // fast
-    public static int divide_2(int dividend, int divisor) {
+    public static int divide_bs(int dividend, int divisor) {
         if (dividend == 0) {
             return 0;
         }
@@ -184,14 +186,14 @@ public class Problem29_divideTwoIntegers {
         int val = Math.abs(-2147483648);
         System.out.println("val = " + val);
         System.out.println("2147483648 ?= " + Math.abs(-2147483648));
-        System.out.println("3 ?= " + divide(10, 3));
-        System.out.println("-2 ?= " + divide(7, -3));
-        System.out.println("1 ?= " + divide(1, 1));
-        System.out.println("-1 ?= " + divide(-1, 1));
-        System.out.println("-1 ?= " + divide_1(-1, 1));
-        System.out.println("2147483647 ?= " + divide(-2147483648, -1));
-        System.out.println("-2147483648 ?= " + divide(-2147483648, 1));
-        System.out.println("-1073741824 ?= " + divide(-2147483648, 2));
-        System.out.println("3 ?= " + divide_2(10, 3));
+        System.out.println("3 ?= " + divide_32(10, 3));
+        System.out.println("-2 ?= " + divide_bf_64(7, -3));
+        System.out.println("1 ?= " + divide_32(1, 1));
+        System.out.println("-1 ?= " + divide_32(-1, 1));
+        System.out.println("-1 ?= " + divide_32(-1, 1));
+        System.out.println("2147483647 ?= " + divide_bs(-2147483648, -1));
+        System.out.println("-2147483648 ?= " + divide_bs(-2147483648, 1));
+        System.out.println("-1073741824 ?= " + divide_bs(-2147483648, 2));
+        System.out.println("3 ?= " + divide_bs(10, 3));
     }
 }
