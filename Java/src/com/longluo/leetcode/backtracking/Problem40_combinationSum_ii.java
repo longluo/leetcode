@@ -49,16 +49,12 @@ public class Problem40_combinationSum_ii {
 
         Arrays.sort(candidates);
 
-        int len = candidates.length;
-
-        boolean[] used = new boolean[len];
-
-        backtracking(ans, new ArrayList<>(), candidates, used, 0, target);
+        backtracking(ans, new ArrayList<>(), candidates, 0, target);
 
         return ans;
     }
 
-    public static void backtracking(List<List<Integer>> res, List<Integer> path, int[] nums, boolean[] used, int start, int remain) {
+    public static void backtracking(List<List<Integer>> res, List<Integer> path, int[] nums, int start, int remain) {
         if (remain < 0) {
             return;
         }
@@ -75,19 +71,13 @@ public class Problem40_combinationSum_ii {
                 return;
             }
 
-            if (used[i]) {
-                continue;
-            }
-
             if (i > start && nums[i] == nums[i - 1]) {
                 continue;
             }
 
             path.add(nums[i]);
-            used[i] = true;
-            backtracking(res, path, nums, used, i + 1, remain - nums[i]);
+            backtracking(res, path, nums, i + 1, remain - nums[i]);
             path.remove(path.size() - 1);
-            used[i] = false;
         }
     }
 
