@@ -41,7 +41,7 @@ package com.longluo.contest.weekly_contest_285;
  */
 public class Problem2210_countHillValley {
 
-    // TODO: 2022/6/2  
+    // TODO: 2022/6/2
     public static int countHillValley(int[] nums) {
 
         return 0;
