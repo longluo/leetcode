@@ -33,7 +33,7 @@ import java.util.Comparator;
  */
 public class Problem179_largestNumber {
 
-    // Sort time: O(nlogn) space: O(n)
+    // Sort time: O(nlognlogm) space: O(n)
     public static String largestNumber(int[] nums) {
         if (nums == null || nums.length == 0) {
             return "0";
@@ -60,8 +60,8 @@ public class Problem179_largestNumber {
             sb.append(numStrs[i]);
         }
 
-        while (sb.charAt(0) == '0' && sb.length() > 1) {
-            sb.deleteCharAt(0);
+        if (sb.charAt(0) == '0') {
+            return "0";
         }
 
         return sb.toString();
