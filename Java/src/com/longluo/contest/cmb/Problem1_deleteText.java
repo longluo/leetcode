@@ -3,9 +3,9 @@ package com.longluo.contest.cmb;
 /**
  *
  *
- * https://leetcode-cn.com/contest/cmbchina-2022spring/problems/fWcPGC/
+ * https://leetcode.cn/contest/cmbchina-2022spring/problems/fWcPGC/
  */
-public class Problem1 {
+public class Problem1_deleteText {
 
     public static String deleteText(String article, int index) {
         int len = article.length();
