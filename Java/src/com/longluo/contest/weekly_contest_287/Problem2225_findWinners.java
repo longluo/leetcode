@@ -3,7 +3,7 @@ package com.longluo.contest.weekly_contest_287;
 import java.util.*;
 
 /**
- * 5235. 找出输掉零场或一场比赛的玩家
+ * 2225. 找出输掉零场或一场比赛的玩家
  * <p>
  * 给你一个整数数组 matches 其中 matches[i] = [winneri, loseri] 表示在一场比赛中 winneri 击败了 loseri 。
  * <p>
@@ -34,7 +34,6 @@ import java.util.*;
  * 玩家 3 和 4 每个都输掉两场比赛。
  * 因此，answer[0] = [1,2,5,6] 和 answer[1] = [] 。
  * <p>
- * <p>
  * 提示：
  * 1 <= matches.length <= 10^5
  * matches[i].length == 2
@@ -42,10 +41,11 @@ import java.util.*;
  * winneri != loseri
  * 所有 matches[i] 互不相同
  * <p>
- * https://leetcode-cn.com/problems/find-players-with-zero-or-one-losses/
+ * https://leetcode.cn/problems/find-players-with-zero-or-one-losses/
  */
-public class Problem2 {
+public class Problem2225_findWinners {
 
+    // TODO: 2022/6/2  
     public static List<List<Integer>> findWinners(int[][] matches) {
         List<List<Integer>> ans = new ArrayList<>();
         int len = matches.length;
