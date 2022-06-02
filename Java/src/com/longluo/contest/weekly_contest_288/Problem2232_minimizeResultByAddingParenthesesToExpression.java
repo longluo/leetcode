@@ -40,6 +40,7 @@ package com.longluo.contest.weekly_contest_288;
  */
 public class Problem2232_minimizeResultByAddingParenthesesToExpression {
 
+    // TODO: 2022/6/2  
     public static String minimizeResult(String expression) {
 
         return "";
