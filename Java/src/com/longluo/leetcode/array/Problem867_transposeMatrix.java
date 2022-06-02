@@ -27,6 +27,7 @@ import com.longluo.datastructure.ArrayUtils;
  */
 public class Problem867_transposeMatrix {
 
+    // Simulate time: O(mn) space: O(1)
     public static int[][] transpose(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return matrix;
