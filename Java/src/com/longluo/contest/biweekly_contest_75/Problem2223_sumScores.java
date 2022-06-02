@@ -40,7 +40,7 @@ package com.longluo.contest.biweekly_contest_75;
  */
 public class Problem2223_sumScores {
 
-    // TODO: 2022/6/2  
+    // TODO: 2022/6/2
     public static long sumScores(String s) {
 
         return 0;
