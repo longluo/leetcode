@@ -42,12 +42,11 @@ import java.util.Arrays;
  * <p>
  * Follow up: Can you come up with an algorithm that runs in O(m + n) time?
  * <p>
- * https://leetcode-cn.com/problems/merge-sorted-array/
- * <p>
- * https://leetcode.com/problems/merge-sorted-array/
+ * https://leetcode.cn/problems/merge-sorted-array/
  */
 public class Problem88_mergeSortedArray {
 
+    // Two Pointers time: O(m+n) space: O(m+n)
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
         if (nums2 == null || nums2.length <= 0) {
             return;
@@ -74,6 +73,7 @@ public class Problem88_mergeSortedArray {
         }
     }
 
+    // Sort time: O(nlogm) space: O(logm)
     public static void merge_sort(int[] nums1, int m, int[] nums2, int n) {
         for (int i = 0; i < n; i++) {
             nums1[m + i] = nums2[i];
@@ -82,6 +82,7 @@ public class Problem88_mergeSortedArray {
         Arrays.sort(nums1);
     }
 
+    // Two Pointers time: O(m+n) space: O(1)
     public static void merge_tp(int[] nums1, int m, int[] nums2, int n) {
         int p = m - 1;
         int q = n - 1;
@@ -102,6 +103,7 @@ public class Problem88_mergeSortedArray {
         }
     }
 
+    // Two Pointers time: O(m+n) space: O(1)
     public static void merge_tp_best(int[] nums1, int m, int[] nums2, int n) {
         int idx = m + n - 1;
         m--;
@@ -117,6 +119,9 @@ public class Problem88_mergeSortedArray {
     public static void main(String[] args) {
         int[] tstNums1 = {1, 2, 3, 0, 0, 0};
         merge(tstNums1, 3, new int[]{2, 5, 6}, 3);
+        merge_sort(tstNums1, 3, new int[]{2, 5, 6}, 3);
+        merge_tp(tstNums1, 3, new int[]{2, 5, 6}, 3);
+        merge_tp_best(tstNums1, 3, new int[]{2, 5, 6}, 3);
         System.out.println("[1, 2, 2, 3, 5, 6] ?= " + Arrays.toString(tstNums1));
         int[] tstNums3 = {2, 0};
         merge(tstNums3, 1, new int[]{1}, 1);
