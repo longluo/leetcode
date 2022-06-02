@@ -27,12 +27,12 @@ import java.math.BigInteger;
  * <p>
  * 进阶：你可以设计并实现对数时间复杂度的算法来解决此问题吗？
  * <p>
- * https://leetcode-cn.com/problems/factorial-trailing-zeroes/
- * <p>
  * https://leetcode.com/problems/factorial-trailing-zeroes/
  */
 public class Problem172_factorialTrailingZeroes {
 
+    // BigInteger time: O() space: O(1)
+    // TLE
     public static int trailingZeroes_bf(int n) {
         BigInteger nFactorResult = BigInteger.ONE;
         for (int i = 2; i <= n; i++) {
@@ -48,9 +48,7 @@ public class Problem172_factorialTrailingZeroes {
         return ans;
     }
 
-    /**
-     * cnt 5
-     */
+    // Count 5 time: O(n) space: O(1)
     public static int trailingZeroes(int n) {
         int ans = 0;
         for (int i = 5; i <= n; i++) {
@@ -64,6 +62,7 @@ public class Problem172_factorialTrailingZeroes {
         return ans;
     }
 
+    // Count 5 Opt time: O(logn) space: O(1)
     public static int trailingZeroes_log(int n) {
         int ans = 0;
         while (n > 0) {
