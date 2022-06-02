@@ -25,14 +25,14 @@ package com.longluo.top_interviews;
  */
 public class Problem69_sqrtx {
 
-    // BF O(n) O(1)
+    // BF time: O(n) space: O(1)
     public static int mySqrt(int x) {
         if (x == 0 || x == 1) {
             return x;
         }
 
         for (int i = 0; i < x; i++) {
-            long sum = i * i;
+            long sum = (long) i * i;
             long bigger = (long) (i + 1) * (i + 1);
             if (sum == x) {
                 return i;
@@ -123,6 +123,8 @@ public class Problem69_sqrtx {
         System.out.println("1 ?= " + mySqrt(1));
         System.out.println("2 ?= " + mySqrt(4));
         System.out.println("2 ?= " + mySqrt(8));
+
+        System.out.println("2 ?= " + mySqrt_exp(8));
 
         System.out.println("46340 ?= " + mySqrt(2147483647));
         System.out.println("2 ?= " + mySqrt_newton(8));
