@@ -88,29 +88,29 @@
 | 163 | [Missing Ranges](https://leetcode.com/problems/missing-ranges) | Medium | [没权限] |  |
 | 166 | [Fraction to Recurring Decimal](https://leetcode.com/problems/fraction-to-recurring-decimal/) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc166.java) |  |
 | 169 | [Majority Element](https://leetcode.com/problems/majority-element/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc169.java) |  |
-| 171 | [Excel Sheet Column Number]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc171.java) |  |
-| 172 | [Factorial Trailing Zeroes]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc172.java) |  |
-| 179 | [Largest Number]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc179.java) |  |
+| 171 | [Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc171.java) |  |
+| 172 | [Factorial Trailing Zeroes](https://leetcode.com/problems/factorial-trailing-zeroes/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc172.java) |  |
+| 179 | [Largest Number](https://leetcode.com/problems/largest-number/) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc179.java) |  |
 | 189 | [Rotate Array]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc189.java) |  |
 | 190 | [Reverse Bits]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc190.java) |  |
 | 191 | [Number of 1 Bits]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc191.java) |  |
 | 198 | [House Robber](https://leetcode.com/problems/house-robber/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc198.java) |  |
 | 200 | [Number of Islands](https://leetcode.com/problems/number-of-islands/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc200.java) |  |
-| 202 | [Happy Number]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc202.java) |  |
-| 204 | [Count Primes]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc204.java) |  |
+| 202 | [Happy Number](https://leetcode.com/problems/happy-number/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc202.java) |  |
+| 204 | [Count Primes](https://leetcode.com/problems/count-primes/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc204.java) |  |
 | 206 | [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | Easy |[Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc206.java) |  |
 | 207 | [Course Schedule](https://leetcode.com/problems/course-schedule/) |Medium|[Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc207.java) |  |
 | 208 | [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc208.java) |  |
 | 210 | [Course Schedule II]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc210.java) |  |
 | 212 | [Word Search II]() | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc212.java) |  |
 | 215 | [Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc215.java) |  |
-| 217 | [Contains Duplicate]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc217.java) |  |
-| 218 | [The Skyline Problem]() | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc218.java) |  |
-| 227 | [Basic Calculator II]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc227.java) |  |
+| 217 | [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc217.java) |  |
+| 218 | [The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc218.java) |  |
+| 227 | [Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc227.java) |  |
 | 230 | [Kth Smallest Element in a BST]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc230.java) |  |
 | 234 | [Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc234.java) |  |
 | 236 | [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc236.java) |  |
-| 237 | [Delete Node in a Linked List]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc237.java) |  |
+| 237 | [Delete Node in a Linked List]( https://leetcode.com/problems/delete-node-in-a-linked-list/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc237.java) |  |
 | 238 | [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc238.java) |  |
 | 239 | [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc239.java) |  |
 | 240 | [Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc240.java) |  |
@@ -131,7 +131,7 @@
 | 315 | [Count of Smaller Numbers After Self]() | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc315.java) |  |
 | 322 | [Coin Change](https://leetcode.com/problems/coin-change/)|Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc322.java) |  |
 | 324 | [Wiggle Sort II]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc324.java) |  |
-| 326 | [Power of Three]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc326.java) |  |
+| 326 | [Power of Three](https://leetcode.com/problems/power-of-three/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc326.java) |  |
 | 328 | [Odd Even Linked List]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc328.java) |  |
 | 329 | [Longest Increasing Path in a Matrix]() | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc329.java) |  |
 | 334 | [Increasing Triplet Subsequence]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc334.java) |  |

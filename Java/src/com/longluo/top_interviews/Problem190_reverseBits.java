@@ -1,4 +1,4 @@
-package com.longluo.leetcode.divideandconquer;
+package com.longluo.top_interviews;
 
 /**
  * 190. Reverse Bits

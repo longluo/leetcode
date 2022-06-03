@@ -1,4 +1,4 @@
-package com.longluo.leetcode.math;
+package com.longluo.top_interviews;
 
 import java.util.ArrayList;
 import java.util.Arrays;

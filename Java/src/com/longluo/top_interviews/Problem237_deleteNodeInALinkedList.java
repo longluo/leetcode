@@ -1,4 +1,4 @@
-package com.longluo.leetcode.linkedlist;
+package com.longluo.top_interviews;
 
 import com.longluo.datastructure.ListNode;
 
@@ -37,12 +37,11 @@ import com.longluo.datastructure.ListNode;
  * 链表中每个节点的值都是唯一的
  * 需要删除的节点 node 是 链表中的一个有效节点 ，且 不是末尾节点
  * <p>
- * https://leetcode-cn.com/problems/delete-node-in-a-linked-list/
- * <p>
  * https://leetcode.com/problems/delete-node-in-a-linked-list/
  */
 public class Problem237_deleteNodeInALinkedList {
 
+    // TODO: 2022/6/3
     public static void deleteNode(ListNode node) {
         node.val = node.next.val;
         node.next = node.next.next;

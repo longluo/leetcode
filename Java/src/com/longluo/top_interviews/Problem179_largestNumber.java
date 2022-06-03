@@ -29,7 +29,7 @@ import java.util.Comparator;
  * 1 <= nums.length <= 100
  * 0 <= nums[i] <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/largest-number/
+ * https://leetcode.com/problems/largest-number/
  */
 public class Problem179_largestNumber {
 

@@ -1,4 +1,4 @@
-package com.longluo.leetcode.stack;
+package com.longluo.top_interviews;
 
 import java.util.Stack;
 
@@ -27,7 +27,7 @@ import java.util.Stack;
  * 表达式中的所有整数都是非负整数，且在范围 [0, 2^31 - 1]内
  * 题目数据保证答案是一个 32-bit 整数
  * <p>
- * https://leetcode-cn.com/problems/basic-calculator-ii/
+ * https://leetcode.com/problems/basic-calculator-ii/
  */
 public class Problem227_basicCalculator_ii {
 

@@ -1,6 +1,5 @@
 package com.longluo.top_interviews;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ import java.util.Map;
  * 1 <= n <= 200
  * -2^28 <= nums1[i], nums2[i], nums3[i], nums4[i] <= 2^28
  * <p>
- * https://leetcode-cn.com/problems/4sum-ii/
+ * https://leetcode.com/problems/4sum-ii/
  */
 public class Problem454_4sum_ii {
 
@@ -130,6 +129,7 @@ public class Problem454_4sum_ii {
     }
 
     public static void main(String[] args) {
+        System.out.println("2 ?= " + fourSumCount_bf(new int[]{1, 2}, new int[]{-2, -1}, new int[]{-1, 2}, new int[]{0, 2}));
         System.out.println("2 ?= " + fourSumCount_tp(new int[]{1, 2}, new int[]{-2, -1}, new int[]{-1, 2}, new int[]{0, 2}));
         System.out.println("2 ?= " + fourSumCount_hash_opt(new int[]{1, 2}, new int[]{-2, -1}, new int[]{-1, 2}, new int[]{0, 2}));
     }

@@ -1,7 +1,4 @@
-package com.longluo.leetcode.recursion;
-
-import java.util.HashSet;
-import java.util.Set;
+package com.longluo.top_interviews;
 
 /**
  * 326. 3的幂
@@ -30,8 +27,6 @@ import java.util.Set;
  * <p>
  * 进阶：
  * 你能不使用循环或者递归来完成本题吗？
- * <p>
- * https://leetcode-cn.com/problems/power-of-three/
  * <p>
  * https://leetcode.com/problems/power-of-three/
  */

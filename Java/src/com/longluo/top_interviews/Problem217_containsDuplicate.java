@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top_interviews;
 
 import java.util.*;
 
@@ -20,15 +20,11 @@ import java.util.*;
  * 输入: [1,1,1,3,3,4,3,2,4,2]
  * 输出: true
  * <p>
- * https://leetcode-cn.com/problems/contains-duplicate/
- * <p>
  * https://leetcode.com/problems/contains-duplicate/
  */
 public class Problem217_containsDuplicate {
 
-    /**
-     * HashMap
-     */
+    // HashMap time: O(n) space: O(n)
     public static boolean containsDuplicate(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return false;
@@ -47,7 +43,7 @@ public class Problem217_containsDuplicate {
     }
 
     /**
-     * Set
+     * Set time: O(n) space: O(n)
      */
     public static boolean containsDuplicate_set(int[] nums) {
         if (nums == null || nums.length <= 1) {
@@ -67,6 +63,8 @@ public class Problem217_containsDuplicate {
 
     /**
      * Sort
+     * 时间复杂度：O(NlogN)，其中 N 为数组的长度。需要对数组进行排序。
+     * 空间复杂度：O(logN)，其中 N 为数组的长度。注意我们在这里应当考虑递归调用栈的深度。
      */
     public static boolean containsDuplicate_sort(int[] nums) {
         if (nums == null || nums.length <= 1) {

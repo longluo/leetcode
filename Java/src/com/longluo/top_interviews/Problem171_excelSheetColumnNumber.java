@@ -1,4 +1,4 @@
-package com.longluo.leetcode.math;
+package com.longluo.top_interviews;
 
 /**
  * 171. Excel表列序号
@@ -25,8 +25,6 @@ package com.longluo.leetcode.math;
  * 示例 3:
  * 输入: "ZY"
  * 输出: 701
- * <p>
- * https://leetcode-cn.com/problems/excel-sheet-column-number/
  * <p>
  * https://leetcode.com/problems/excel-sheet-column-number/
  */
