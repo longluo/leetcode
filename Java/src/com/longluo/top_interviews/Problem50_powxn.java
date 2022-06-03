@@ -1,4 +1,4 @@
-package com.longluo.leetcode.math;
+package com.longluo.top_interviews;
 
 /**
  * 50. Pow(x, n)
@@ -21,17 +21,14 @@ package com.longluo.leetcode.math;
  * 提示：
  * -100.0 < x < 100.0
  * -2^31 <= n <= 2^31-1
- * -10^4 <= xn <= 10^4
- * <p>
- * https://leetcode-cn.com/problems/powx-n/
+ * -10^4 <= x^n <= 10^4
  * <p>
  * https://leetcode.com/problems/powx-n/
  */
 public class Problem50_powxn {
 
-    /**
-     * Brute Force
-     */
+    // BruteForce time: O(n) space: O(1)
+    // TLE
     public static double myPow(double x, int n) {
         if (n == 0 || x == 1) {
             return 1;
@@ -40,22 +37,18 @@ public class Problem50_powxn {
         }
 
         double ans = x;
-        boolean isNegative = false;
+        boolean sign = false;
         long nLong = n;
         if (nLong < 0) {
             nLong = -nLong;
-            isNegative = true;
+            sign = true;
         }
 
         for (int i = 1; i < nLong; i++) {
             ans = ans * x;
         }
 
-        if (isNegative) {
-            ans = 1 / ans;
-        }
-
-        return ans;
+        return sign ? 1 / ans : ans;
     }
 
     /**
