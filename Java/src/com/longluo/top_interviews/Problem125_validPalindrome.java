@@ -26,7 +26,7 @@ package com.longluo.top_interviews;
 public class Problem125_validPalindrome {
 
     // Two Pointers time: O(n) space: O(1)
-    public static boolean isPalindrome(String s) {
+    public static boolean isPalindrome_tp(String s) {
         if (s == null || s.length() <= 1) {
             return true;
         }
@@ -56,10 +56,39 @@ public class Problem125_validPalindrome {
         return true;
     }
 
+    // Recursion time: O(n) space: O(logn)
+    public static boolean isPalindrome(String s) {
+        if (s == null || s.length() <= 1) {
+            return true;
+        }
+
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right && !(Character.isDigit(s.charAt(left)) || Character.isAlphabetic(s.charAt(left)))) {
+            left++;
+        }
+
+        while (right > left && !(Character.isDigit(s.charAt(right)) || Character.isAlphabetic(s.charAt(right)))) {
+            right--;
+        }
+
+        if (left == right) {
+            return true;
+        }
+
+        return Character.toUpperCase(s.charAt(left)) == Character.toUpperCase(s.charAt(right)) && isPalindrome(s.substring(left + 1, right));
+    }
+
     public static void main(String[] args) {
+        System.out.println("true ?= " + isPalindrome_tp("A man, a plan, a canal: Panama"));
+        System.out.println("false ?= " + isPalindrome_tp("race a car"));
+
+        System.out.println("true ?= " + isPalindrome_tp("a."));
+        System.out.println("true ?= " + isPalindrome_tp(".,"));
+
+        System.out.println("false ?= " + isPalindrome("ab"));
         System.out.println("true ?= " + isPalindrome("A man, a plan, a canal: Panama"));
         System.out.println("false ?= " + isPalindrome("race a car"));
-        System.out.println("true ?= " + isPalindrome("a."));
-        System.out.println("true ?= " + isPalindrome(".,"));
     }
 }
