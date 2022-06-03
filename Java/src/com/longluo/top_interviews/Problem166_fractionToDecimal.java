@@ -1,4 +1,4 @@
-package com.longluo.leetcode.hash;
+package com.longluo.top_interviews;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -124,6 +124,87 @@ public class Problem166_fractionToDecimal {
         return res;
     }
 
+    public static String fractionToDecimal_opt(int _numerator, int _denominator) {
+        if (_numerator == 0) {
+            return "0";
+        } else if (_numerator == _denominator) {
+            return "1";
+        }
+
+        long numerator = _numerator;
+        long denominator = _denominator;
+
+        boolean isNegative = false;
+        if ((numerator > 0 && denominator < 0) || (numerator < 0 && denominator > 0)) {
+            isNegative = true;
+        }
+
+        if (numerator < 0) {
+            numerator = -numerator;
+        }
+
+        if (denominator < 0) {
+            denominator = -denominator;
+        }
+
+        if (numerator % denominator == 0) {
+            long res = numerator / denominator;
+            return isNegative ? String.valueOf(-res) : String.valueOf(res);
+        }
+
+        StringBuilder integerPart = new StringBuilder();
+        integerPart.append(numerator / denominator);
+
+        StringBuilder decimalPart = new StringBuilder();
+
+        Map<Long, Integer> map = new HashMap<>();
+        long remainder = numerator % denominator;
+        boolean isContainCycle = false;
+        int startIdx = 0;
+        while (remainder != 0) {
+            map.put(remainder, decimalPart.length());
+            remainder = remainder * 10;
+            while (remainder < denominator) {
+                remainder = remainder * 10;
+                decimalPart.append("0");
+            }
+            if (remainder % denominator == 0) {
+                decimalPart.append(remainder / denominator);
+                break;
+            }
+            long quotient = remainder / denominator;
+            decimalPart.append(quotient);
+            remainder = remainder % denominator;
+            if (map.containsKey(remainder)) {
+                isContainCycle = true;
+                startIdx = map.get(remainder);
+                break;
+            } else {
+                map.put(remainder, decimalPart.length());
+            }
+        }
+
+        String decimalStr;
+        if (isContainCycle) {
+            if (startIdx == 0) {
+                decimalStr = "(" + decimalPart.toString() + ")";
+            } else {
+                decimalStr = decimalPart.substring(0, startIdx) + "(" + decimalPart.substring(startIdx) + ")";
+            }
+        } else {
+            decimalStr = decimalPart.toString();
+        }
+
+        String res;
+        if (isNegative) {
+            res = "-" + integerPart.toString() + "." + decimalStr;
+        } else {
+            res = integerPart.toString() + "." + decimalStr;
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("0.5 ?= " + fractionToDecimal(1, 2));
         System.out.println("1 ?= " + fractionToDecimal(1, 1));
@@ -135,5 +216,7 @@ public class Problem166_fractionToDecimal {
         System.out.println("0.0000000004656612873077392578125 ?= " + fractionToDecimal(-1, -2147483648));
         System.out.println("2147483648 ?= " + fractionToDecimal(-2147483648, -1));
         System.out.println("-2147483648 ?= " + fractionToDecimal(-2147483648, 1));
+        System.out.println("-2147483648 ?= " + fractionToDecimal_opt(-2147483648, 1));
+        System.out.println("-0.(1) ?= " + fractionToDecimal_opt(-1, 9));
     }
 }
