@@ -51,9 +51,38 @@ public class Problem50_powxn {
         return sign ? 1 / ans : ans;
     }
 
-    /**
-     * Fast Power
-     */
+    // BruteForce Opt time: O(n) space: O(1)
+    // TLE
+    public static double myPow_bf(double x, int n) {
+        if (n == 0 || x == 1) {
+            return 1;
+        } else if (x == 0) {
+            return 0;
+        }
+
+        double ans = x;
+        boolean isMin = false;
+        if (n == Integer.MIN_VALUE) {
+            n = Integer.MAX_VALUE;
+            isMin = true;
+        }
+
+        boolean sign = false;
+        if (n < 0) {
+            n = Math.abs(n);
+            sign = true;
+        }
+
+        for (int i = 1; i < n; i++) {
+            ans = ans * x;
+        }
+
+        ans = isMin ? ans * x : ans;
+
+        return sign ? 1 / ans : ans;
+    }
+
+    // QuickPower time: O(logn) space: O(logn)
     public static double myPow_quick(double x, int n) {
         if (n == 0) {
             return 1.0;
@@ -77,9 +106,7 @@ public class Problem50_powxn {
         }
     }
 
-    /**
-     * Binary
-     */
+    // BinaryExp time: O(logn) space: O(l)
     public static double myPow_iter(double x, int n) {
         long N = n;
         return N >= 0 ? quickMul_iter(x, N) : 1.0 / quickMul_iter(x, -N);
@@ -124,6 +151,7 @@ public class Problem50_powxn {
         System.out.println("128.00000 ?= " + quickMul_iter(2.00000, 7));
         System.out.println("128.00000 ?= " + quickMul(2.00000, 7));
         System.out.println("1024.00000 ?= " + myPow(2.00000, 10));
+        System.out.println("1024.00000 ?= " + myPow_bf(2.00000, 10));
         System.out.println("9.26100 ?= " + myPow(2.10000, 3));
         System.out.println("9.26100 ?= " + myPow_quick(2.10000, 3));
         System.out.println("9.26100 ?= " + myPow_iter(2.10000, 3));
