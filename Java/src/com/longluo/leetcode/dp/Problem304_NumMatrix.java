@@ -2,6 +2,7 @@ package com.longluo.leetcode.dp;
 
 /**
  * 304. 二维区域和检索 - 矩阵不可变
+ * <p>
  * 给定一个二维矩阵，计算其子矩形范围内元素的总和，该子矩阵的左上角为 (row1, col1) ，右下角为 (row2, col2)。
  * <p>
  * Range Sum Query 2D
@@ -21,14 +22,20 @@ package com.longluo.leetcode.dp;
  * sumRegion(1, 1, 2, 2) -> 11
  * sumRegion(1, 2, 2, 4) -> 12
  * <p>
- * 说明:
+ * 提示：
+ * m == matrix.length
+ * n == matrix[i].length
+ * 1 <= m, n <= 200
+ * -10^5 <= matrix[i][j] <= 10^5
+ * 0 <= row1 <= row2 < m
+ * 0 <= col1 <= col2 < n
+ * 最多调用 10^4 次 sumRegion 方法
  * <p>
- * 你可以假设矩阵不可变。
- * 会多次调用 sumRegion 方法。
- * 你可以假设 row1 ≤ row2 且 col1 ≤ col2。
+ * https://leetcode.cn/problems/range-sum-query-2d-immutable/
  */
 public class Problem304_NumMatrix {
 
+    // BF time: O(mn) space: O(mn)
     static class NumMatrix {
         int[][] newMatrix;
 
@@ -36,6 +43,7 @@ public class Problem304_NumMatrix {
             if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
                 return;
             }
+
             int row = matrix.length;
             int col = matrix[0].length;
             newMatrix = new int[row][col];
@@ -56,13 +64,15 @@ public class Problem304_NumMatrix {
         }
     }
 
-    static class NumMatrix_1 {
+    // Row PrefixSums time: O(m) space: O(mn)
+    static class NumMatrix_prefixSums {
         int[][] sums;
 
-        public NumMatrix_1(int[][] matrix) {
+        public NumMatrix_prefixSums(int[][] matrix) {
             if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
                 return;
             }
+
             int row = matrix.length;
             int col = matrix[0].length;
             sums = new int[row][col + 1];
@@ -83,10 +93,11 @@ public class Problem304_NumMatrix {
         }
     }
 
-    static class NumMatrix_2 {
+    // TotalSums
+    static class NumMatrix_totalSum {
         int[][] sum;
 
-        public NumMatrix_2(int[][] matrix) {
+        public NumMatrix_totalSum(int[][] matrix) {
             if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
                 return;
             }
@@ -123,12 +134,12 @@ public class Problem304_NumMatrix {
         System.out.println("11 ?= " + numMatrix.sumRegion(1, 1, 2, 2));
         System.out.println("12 ?= " + numMatrix.sumRegion(1, 2, 2, 4));
 
-        Problem304_NumMatrix.NumMatrix_1 numMatrix_1 = new Problem304_NumMatrix.NumMatrix_1(testMatrix);
+        Problem304_NumMatrix.NumMatrix_prefixSums numMatrix_1 = new Problem304_NumMatrix.NumMatrix_prefixSums(testMatrix);
         System.out.println("8 ?= " + numMatrix_1.sumRegion(2, 1, 4, 3));
         System.out.println("11 ?= " + numMatrix_1.sumRegion(1, 1, 2, 2));
         System.out.println("12 ?= " + numMatrix_1.sumRegion(1, 2, 2, 4));
 
-        Problem304_NumMatrix.NumMatrix_2 numMatrix_2 = new Problem304_NumMatrix.NumMatrix_2(testMatrix);
+        Problem304_NumMatrix.NumMatrix_totalSum numMatrix_2 = new Problem304_NumMatrix.NumMatrix_totalSum(testMatrix);
         System.out.println("8 ?= " + numMatrix_2.sumRegion(2, 1, 4, 3));
         System.out.println("11 ?= " + numMatrix_2.sumRegion(1, 1, 2, 2));
         System.out.println("12 ?= " + numMatrix_2.sumRegion(1, 2, 2, 4));
