@@ -26,7 +26,7 @@ import java.util.Set;
  * 1 <= nums.length <= 5 * 10^5
  * -2^31 <= nums[i] <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/first-missing-positive/
+ * https://leetcode.com/problems/first-missing-positive/
  */
 public class Problem41_firstMissingPositive {
 

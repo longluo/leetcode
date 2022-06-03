@@ -1,4 +1,4 @@
-package com.longluo.leetcode.trie;
+package com.longluo.top_interviews;
 
 import java.util.*;
 

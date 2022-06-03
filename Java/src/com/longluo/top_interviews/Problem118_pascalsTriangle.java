@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top_interviews;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,6 @@ import java.util.List;
  * [1,3,3,1],
  * [1,4,6,4,1]
  * ]
- * <p>
- * https://leetcode-cn.com/problems/pascals-triangle/
  * <p>
  * https://leetcode.com/problems/pascals-triangle/
  */

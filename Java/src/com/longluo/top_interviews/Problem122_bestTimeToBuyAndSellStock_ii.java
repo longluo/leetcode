@@ -1,4 +1,4 @@
-package com.longluo.studyplan.stock;
+package com.longluo.top_interviews;
 
 /**
  * 122. 买卖股票的最佳时机 II
@@ -31,7 +31,7 @@ package com.longluo.studyplan.stock;
  * 1 <= prices.length <= 3 * 10^4
  * 0 <= prices[i] <= 10^4
  * <p>
- * https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/
+ * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
  */
 public class Problem122_bestTimeToBuyAndSellStock_ii {
 

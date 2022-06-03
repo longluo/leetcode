@@ -1,4 +1,4 @@
-package com.longluo.leetcode.string;
+package com.longluo.top_interviews;
 
 /**
  * 38. 外观数列
@@ -42,10 +42,11 @@ package com.longluo.leetcode.string;
  * 提示：
  * 1 <= n <= 30
  * <p>
- * https://leetcode-cn.com/problems/count-and-say/
+ * https://leetcode.com/problems/count-and-say/
  */
 public class Problem38_countAndSay {
 
+    //
     public static String countAndSay(int n) {
         if (n == 1) {
             return "1";

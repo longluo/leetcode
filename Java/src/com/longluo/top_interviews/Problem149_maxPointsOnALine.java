@@ -1,4 +1,4 @@
-package com.longluo.leetcode.geometry;
+package com.longluo.top_interviews;
 
 /**
  * 149. 直线上最多的点数
@@ -19,7 +19,7 @@ package com.longluo.leetcode.geometry;
  * -10^4 <= xi, yi <= 10^4
  * points 中的所有点 互不相同
  * <p>
- * https://leetcode-cn.com/problems/max-points-on-a-line/
+ * https://leetcode.com/problems/max-points-on-a-line/
  */
 public class Problem149_maxPointsOnALine {
 

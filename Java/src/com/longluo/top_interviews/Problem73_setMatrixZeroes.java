@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top_interviews;
 
 import com.longluo.datastructure.ArrayUtils;
 
@@ -26,7 +26,7 @@ import com.longluo.datastructure.ArrayUtils;
  * 1 <= m, n <= 200
  * -2^31 <= matrix[i][j] <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/set-matrix-zeroes/
+ * https://leetcode.com/problems/set-matrix-zeroes/
  */
 public class Problem73_setMatrixZeroes {
 

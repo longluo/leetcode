@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dp;
+package com.longluo.top_interviews;
 
 /**
  * 91. 解码方法
@@ -45,10 +45,11 @@ package com.longluo.leetcode.dp;
  * 1 <= s.length <= 100
  * s 只包含数字，并且可能包含前导零。
  * <p>
- * https://leetcode-cn.com/problems/decode-ways/
+ * https://leetcode.com/problems/decode-ways/
  */
 public class Problem91_decodeWays {
 
+    //
     public static int numDecodings(String s) {
         if (s == null || s.length() == 0) {
             return 0;

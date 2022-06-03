@@ -1,4 +1,4 @@
-package com.longluo.leetcode.tree;
+package com.longluo.top_interviews;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -37,7 +37,7 @@ import java.util.Queue;
  * 你只能使用常量级额外空间。
  * 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。
  * <p>
- * https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/
+ * https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
  */
 public class Problem116_populatingNextRightPointersInEachNode {
 

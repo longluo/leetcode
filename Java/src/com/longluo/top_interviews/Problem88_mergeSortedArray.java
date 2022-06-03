@@ -42,7 +42,7 @@ import java.util.Arrays;
  * <p>
  * Follow up: Can you come up with an algorithm that runs in O(m + n) time?
  * <p>
- * https://leetcode.cn/problems/merge-sorted-array/
+ * https://leetcode.com/problems/merge-sorted-array/
  */
 public class Problem88_mergeSortedArray {
 

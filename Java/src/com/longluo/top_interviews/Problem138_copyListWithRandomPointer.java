@@ -1,4 +1,4 @@
-package com.longluo.leetcode.hash;
+package com.longluo.top_interviews;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +38,7 @@ import java.util.Map;
  * -10000 <= Node.val <= 10000
  * Node.random 为空（null）或指向链表中的节点。
  * <p>
- * https://leetcode-cn.com/problems/copy-list-with-random-pointer/
+ * https://leetcode.com/problems/copy-list-with-random-pointer/
  */
 public class Problem138_copyListWithRandomPointer {
 

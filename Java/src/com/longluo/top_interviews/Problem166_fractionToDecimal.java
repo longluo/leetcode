@@ -35,7 +35,7 @@ import java.util.Map;
  * -2^31 <= numerator, denominator <= 2^31 - 1
  * denominator != 0
  * <p>
- * https://leetcode-cn.com/problems/fraction-to-recurring-decimal/
+ * https://leetcode.com/problems/fraction-to-recurring-decimal/
  */
 public class Problem166_fractionToDecimal {
 

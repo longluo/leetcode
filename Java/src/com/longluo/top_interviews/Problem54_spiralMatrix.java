@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top_interviews;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.List;
  * <p>
  * 1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
  * <p>
- * https://leetcode-cn.com/problems/spiral-matrix/
+ * https://leetcode.com/problems/spiral-matrix/
  */
 public class Problem54_spiralMatrix {
 
