@@ -1,4 +1,4 @@
-package com.longluo.leetcode.stack;
+package com.longluo.top_interviews;
 
 import java.util.*;
 
@@ -35,7 +35,7 @@ import java.util.*;
  * 1 <= nestedList.length <= 500
  * 嵌套列表中的整数值在范围 [-10^6, 10^6] 内
  * <p>
- * https://leetcode-cn.com/problems/flatten-nested-list-iterator/
+ * https://leetcode.com/problems/flatten-nested-list-iterator/
  */
 public class Problem341_flattenNestedListIterator {
 

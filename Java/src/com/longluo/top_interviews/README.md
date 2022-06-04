@@ -4,7 +4,7 @@
 
 | \# | Problems | Difficulty | Source Code | Solution |
 |-----|----------|------------|-------------|----------|
-| 001 | [Two_Sum](https://leetcode.com/problems/two-sum/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem1_twoSum.java) |  | |  |
+| 001 | [Two Sum](https://leetcode.com/problems/two-sum/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem1_twoSum.java) |  | |  |
 | 002 | [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem2_addTwoNumbers.java) |  | |  |
 | 003 | [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc3.java) |  | |  |
 | 004 | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays) | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc4.java) |  | |  |
@@ -93,7 +93,7 @@
 | 179 | [Largest Number](https://leetcode.com/problems/largest-number/) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc179.java) |  |
 | 189 | [Rotate Array]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc189.java) |  |
 | 190 | [Reverse Bits]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc190.java) |  |
-| 191 | [Number of 1 Bits]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc191.java) |  |
+| 191 | [Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem191_numberOf1Bits.java) |  |
 | 198 | [House Robber](https://leetcode.com/problems/house-robber/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc198.java) |  |
 | 200 | [Number of Islands](https://leetcode.com/problems/number-of-islands/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc200.java) |  |
 | 202 | [Happy Number](https://leetcode.com/problems/happy-number/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc202.java) |  |
@@ -117,9 +117,9 @@
 | 242 | [Valid Anagram]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc242.java) |  |
 | 251 | [Flatten 2D Vector](https://leetcode.com/problems/flatten-2d-vector) | Medium | [没权限]  |  |
 | 253 | [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii) | Medium | [没权限]  |  |
-| 268 | [Missing Number]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc268.java) |  |
-| 269 | [Alien Dictionary]() | Hard |[没权限]  |  |
-| 277 | [Find the Celebrity]() | Medium | [没权限]  |  |
+| 268 | [Missing Number](https://leetcode.com/problems/missing-number/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem268_missingNumber.java) |  |
+| 269 | [Alien Dictionary]() | Hard | [没权限] |  |
+| 277 | [Find the Celebrity]() | Medium | [没权限] |  |
 | 279 | [Perfect Squares](https://leetcode.com/problems/perfect-squares/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc279.java) |  |
 | 283 | [Move Zeroes](https://leetcode.com/problems/move-zeroes/)| Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc283.java) |  |
 | 285 | [Inorder Successor in BST](https://leetcode.com/problems/inorder-successor-in-bst) | Medium | [没权限] |  |
@@ -133,20 +133,20 @@
 | 324 | [Wiggle Sort II]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc324.java) |  |
 | 326 | [Power of Three](https://leetcode.com/problems/power-of-three/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem326_powerOfThree.java) |  |
 | 328 | [Odd Even Linked List]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc328.java) |  |
-| 329 | [Longest Increasing Path in a Matrix]() | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc329.java) |  |
+| 329 | [Longest Increasing Path in a Matrix]( https://leetcode.com/problems/longest-increasing-path-in-a-matrix/) | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc329.java) |  |
 | 334 | [Increasing Triplet Subsequence]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc334.java) |  |
 | 340 | [Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters) | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc340.java) |  |
-| 341 | [Flatten Nested List Iterator]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc341.java) |  |
-| 344 | [Reverse String]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc344.java) |  |
+| 341 | [Flatten Nested List Iterator](https://leetcode.com/problems/flatten-nested-list-iterator/) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem341_flattenNestedListIterator.java) |  |
+| 344 | [Reverse String](https://leetcode.com/problems/reverse-string/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc344.java) |  |
 | 347 | [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc347.java) |  |
 | 348 | [Design Tic-Tac-Toe](https://leetcode.com/problems/design-tic-tac-toe) | Medium | [没权限] |  |
-| 350 | [Intersection of Two Arrays II]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc350.java) |  |
-| 371 | [Sum of Two Integers]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc371.java) |  |
+| 350 | [Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc350.java) |  |
+| 371 | [Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc371.java) |  |
 | 378 | [Kth Smallest Element in a Sorted Matrix]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc378.java) |  |
 | 380 | [Insert Delete GetRandom O(1)]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc380.java) |  |
-| 384 | [Shuffle an Array]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc384.java) |  |
+| 384 | [Shuffle an Array](https://leetcode.com/problems/shuffle-an-array/) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem384_shuffleAnArray.java) |  |
 | 387 | [First Unique Character in a String]() | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc387.java) |  |
 | 395 | [Longest Substring with At Least K Repeating Characters]() | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc395.java) |  |
-| 412 | [Fizz Buzz](https://leetcode.com/problems/fizz-buzz) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/lc412.java) |  |
+| 412 | [Fizz Buzz](https://leetcode.com/problems/fizz-buzz) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem412_fizzBuzz.java) |  |
 | 454 | [4Sum II](https://leetcode.com/problems/4sum-ii) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem454_4sum_ii.java) |  |
 

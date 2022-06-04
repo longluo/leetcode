@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top_interviews;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +34,7 @@ import java.util.Random;
  * nums 中的所有元素都是 唯一的
  * 最多可以调用 5 * 10^4 次 reset 和 shuffle
  * <p>
- * https://leetcode-cn.com/problems/shuffle-an-array/
+ * https://leetcode.com/problems/shuffle-an-array/
  */
 public class Problem384_shuffleAnArray {
 

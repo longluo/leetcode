@@ -1,4 +1,4 @@
-package com.longluo.leetcode.bitmanipulation;
+package com.longluo.top_interviews;
 
 /**
  * 191. Number of 1 Bits

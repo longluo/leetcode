@@ -1,4 +1,4 @@
-package com.longluo.leetcode.dfs;
+package com.longluo.top_interviews;
 
 import java.util.*;
 
@@ -29,7 +29,7 @@ import java.util.*;
  * 1 <= m, n <= 200
  * 0 <= matrix[i][j] <= 2^31 - 1
  * <p>
- * https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/
+ * https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
  */
 public class Problem329_longestIncreasingPathInAMatrix {
 

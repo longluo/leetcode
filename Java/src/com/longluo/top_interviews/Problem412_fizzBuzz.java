@@ -1,4 +1,4 @@
-package com.longluo.leetcode.math;
+package com.longluo.top_interviews;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,6 @@ import java.util.List;
  * <p>
  * 提示：
  * 1 <= n <= 10^4
- * <p>
- * https://leetcode-cn.com/problems/fizz-buzz/
  * <p>
  * https://leetcode.com/problems/fizz-buzz/
  */
