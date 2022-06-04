@@ -1,4 +1,4 @@
-package com.longluo.leetcode.twopointers;
+package com.longluo.top_interviews;
 
 /**
  * 344. 反转字符串
@@ -15,7 +15,7 @@ package com.longluo.leetcode.twopointers;
  * 输入：["H","a","n","n","a","h"]
  * 输出：["h","a","n","n","a","H"]
  * <p>
- * https://leetcode-cn.com/problems/reverse-string/
+ * https://leetcode.com/problems/reverse-string/
  */
 public class Problem344_reverseString {
 
@@ -69,6 +69,7 @@ public class Problem344_reverseString {
     }
 
     public static void main(String[] args) {
+        reverseString(new char[]{'h', 'e', 'l', 'l', 'o'});
         reverseString_tp_opt(new char[]{'h', 'e', 'l', 'l', 'o'});
         reverseString_rec(new char[]{'H', 'a', 'n', 'n', 'a', 'h'});
     }
