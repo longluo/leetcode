@@ -90,9 +90,33 @@ public class Problem6092_replaceElementsInAnArray {
         return nums;
     }
 
+    // HashMap Opt time: O(n) space: O(n)
+    public static int[] arrayChange_map_opt(int[] nums, int[][] operations) {
+        int len = nums.length;
+        int m = operations.length;
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            map.put(nums[i], i);
+        }
+
+        for (int i = 0; i < m; i++) {
+            if (map.containsKey(operations[i][0])) {
+                map.put(operations[i][1], map.remove(operations[i][0]));
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            nums[entry.getValue()] = entry.getKey();
+        }
+
+        return nums;
+    }
+
     public static void main(String[] args) {
         System.out.println(" " + Arrays.toString(arrayChange_map(new int[]{1, 2}, new int[][]{{1, 3}, {2, 1}, {3, 2}})));
         System.out.println(" " + Arrays.toString(arrayChange(new int[]{1, 2, 4, 6}, new int[][]{{1, 3}, {4, 7}, {6, 1}})));
         System.out.println(" " + Arrays.toString(arrayChange_map(new int[]{1, 2, 4, 6}, new int[][]{{1, 3}, {4, 7}, {6, 1}})));
+        System.out.println(" " + Arrays.toString(arrayChange_map_opt(new int[]{1, 2, 4, 6}, new int[][]{{1, 3}, {4, 7}, {6, 1}})));
     }
 }
