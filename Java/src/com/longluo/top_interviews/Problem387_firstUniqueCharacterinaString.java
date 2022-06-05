@@ -22,16 +22,13 @@ public class Problem387_firstUniqueCharacterinaString {
 
     // HashMap time: O(n) space: O(n)
     public static int firstUniqChar(String s) {
-        Map<Character, Integer> map = new LinkedHashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            if (map.containsKey(s.charAt(i))) {
-                map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
-            } else {
-                map.put(s.charAt(i), 1);
-            }
+        int len = s.length();
+        Map<Character, Integer> map = new HashMap<>();
+        for (char ch : s.toCharArray()) {
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
         }
 
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < len; i++) {
             if (map.get(s.charAt(i)) == 1) {
                 return i;
             }
@@ -61,13 +58,33 @@ public class Problem387_firstUniqueCharacterinaString {
         return -1;
     }
 
+    // Count time: O(n) space: O(n)
+    public static int firstUniqChar_cnt(String s) {
+        int[] count = new int[26];
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            count[ch - 'a']++;
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (count[s.charAt(i) - 'a'] == 1) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("-1 ?= " + firstUniqChar(""));
 
         System.out.println("-1 ?= " + firstUniqChar_bf("aabb"));
+        System.out.println("-1 ?= " + firstUniqChar_cnt("aabb"));
 
         System.out.println("0 ?= " + firstUniqChar("leetcode"));
         System.out.println("0 ?= " + firstUniqChar_bf("leetcode"));
+        System.out.println("0 ?= " + firstUniqChar_cnt("leetcode"));
 
         System.out.println("2 ?= " + firstUniqChar("loveleetcode"));
         System.out.println("2 ?= " + firstUniqChar_bf("loveleetcode"));
