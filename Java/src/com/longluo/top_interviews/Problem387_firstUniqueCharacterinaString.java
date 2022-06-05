@@ -1,4 +1,4 @@
-package com.longluo.leetcode.hash;
+package com.longluo.top_interviews;
 
 import java.util.*;
 
@@ -16,10 +16,11 @@ import java.util.*;
  * <p>
  * 提示：你可以假定该字符串只包含小写字母。
  * <p>
- * https://leetcode-cn.com/problems/first-unique-character-in-a-string/
+ * https://leetcode.com/problems/first-unique-character-in-a-string/
  */
-public class Problem387_firstUniqChar {
+public class Problem387_firstUniqueCharacterinaString {
 
+    // HashMap time: O(n) space: O(n)
     public static int firstUniqChar(String s) {
         Map<Character, Integer> map = new LinkedHashMap<>();
         for (int i = 0; i < s.length(); i++) {
@@ -39,18 +40,36 @@ public class Problem387_firstUniqChar {
         return -1;
     }
 
-    public static int firstUniqChar_cnt(String s) {
-        if (s == null || s.length() == 0) {
-            return -1;
-        }
+    // BF time: O(n^2) space: O(1)
+    public static int firstUniqChar_bf(String s) {
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            boolean isExist = false;
+            for (int j = 0; j < len; j++) {
+                if (s.charAt(j) == ch && i != j) {
+                    isExist = true;
+                    break;
+                }
+            }
 
+            if (!isExist) {
+                return i;
+            }
+        }
 
         return -1;
     }
 
     public static void main(String[] args) {
         System.out.println("-1 ?= " + firstUniqChar(""));
+
+        System.out.println("-1 ?= " + firstUniqChar_bf("aabb"));
+
         System.out.println("0 ?= " + firstUniqChar("leetcode"));
+        System.out.println("0 ?= " + firstUniqChar_bf("leetcode"));
+
         System.out.println("2 ?= " + firstUniqChar("loveleetcode"));
+        System.out.println("2 ?= " + firstUniqChar_bf("loveleetcode"));
     }
 }
