@@ -110,7 +110,7 @@ public class Problem334_increasingTripletSubsequence {
         return false;
     }
 
-    //
+    // Greedy time: O(n) space: O(1)
     public static boolean increasingTriplet_greedy(int[] nums) {
         if (nums == null || nums.length < 3) {
             return false;
