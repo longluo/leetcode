@@ -25,7 +25,7 @@ import com.longluo.datastructure.TreeUtils;
  * [15,7]
  * ]
  * <p>
- * https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
+ * https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
  */
 public class Problem103_binaryTreeZigzagLevelOrderTraversal {
 
