@@ -53,6 +53,8 @@ public class Problem334_increasingTripletSubsequence {
         return false;
     }
 
+    // Simulate Opt time: O(n^3) space: O(1)
+    // TLE
     public static boolean increasingTriplet_better(int[] nums) {
         if (nums == null || nums.length < 3) {
             return false;
@@ -64,10 +66,12 @@ public class Problem334_increasingTripletSubsequence {
                 if (nums[j] <= nums[i]) {
                     continue;
                 }
+
                 for (int k = j + 1; k < len; k++) {
                     if (nums[k] <= nums[j]) {
                         continue;
                     }
+
                     if (nums[i] < nums[j] && nums[j] < nums[k]) {
                         return true;
                     }
@@ -78,6 +82,7 @@ public class Problem334_increasingTripletSubsequence {
         return false;
     }
 
+    // Two Pointers time: O(n) space: O(n)
     public static boolean increasingTriplet_tp(int[] nums) {
         if (nums == null || nums.length < 3) {
             return false;
@@ -105,6 +110,7 @@ public class Problem334_increasingTripletSubsequence {
         return false;
     }
 
+    //
     public static boolean increasingTriplet_greedy(int[] nums) {
         if (nums == null || nums.length < 3) {
             return false;
