@@ -1,4 +1,4 @@
-package com.longluo.leetcode.twopointers;
+package com.longluo.top_interviews;
 
 /**
  * 28. 实现 strStr()
@@ -26,7 +26,7 @@ package com.longluo.leetcode.twopointers;
  * 0 <= haystack.length, needle.length <= 5 * 10^4
  * haystack 和 needle 仅由小写英文字符组成
  * <p>
- * https://leetcode-cn.com/problems/implement-strstr/
+ * https://leetcode.com/problems/implement-strstr/
  */
 public class Problem28_implementStrStr {
 
