@@ -48,8 +48,6 @@ import java.util.*;
  * <p>
  * 进阶：你能否设计一个时间复杂度 O(n) 、仅用 O(1) 内存的解决方案？
  * <p>
- * https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
- * <p>
  * https://leetcode.com/problems/intersection-of-two-linked-lists/
  */
 public class Problem160_intersectionOfTwoLinkedLists {
