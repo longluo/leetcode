@@ -1,6 +1,4 @@
-package com.longluo.leetcode.greedy;
-
-import java.util.*;
+package com.longluo.top_interviews;
 
 /**
  * 334. 递增的三元子序列
@@ -30,10 +28,12 @@ import java.util.*;
  * <p>
  * 进阶：你能实现时间复杂度为 O(n) ，空间复杂度为 O(1) 的解决方案吗？
  * <p>
- * https://leetcode-cn.com/problems/increasing-triplet-subsequence/
+ * https://leetcode.com/problems/increasing-triplet-subsequence/
  */
 public class Problem334_increasingTripletSubsequence {
 
+    // Simulate time: O(n^3) space: O(1)
+    // TLE
     public static boolean increasingTriplet(int[] nums) {
         if (nums == null || nums.length < 3) {
             return false;
