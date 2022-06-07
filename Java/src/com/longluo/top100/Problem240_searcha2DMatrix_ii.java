@@ -25,9 +25,9 @@ package com.longluo.top100;
  * 每列的所有元素从上到下升序排列
  * -10^9 <= target <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/search-a-2d-matrix-ii/
+ * https://leetcode.com/problems/search-a-2d-matrix-ii/
  */
-public class Problem240_searchMatrix {
+public class Problem240_searcha2DMatrix_ii {
 
     // BF O(m*n) O(1)
     public static boolean searchMatrix_bf(int[][] matrix, int target) {

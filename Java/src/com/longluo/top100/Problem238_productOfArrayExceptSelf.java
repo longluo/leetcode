@@ -25,7 +25,7 @@ import java.util.Arrays;
  * <p>
  * 进阶：你可以在 O(1) 的额外空间复杂度内完成这个题目吗？（ 出于对空间复杂度分析的目的，输出数组不被视为额外空间。）
  * <p>
- * https://leetcode-cn.com/problems/product-of-array-except-self/
+ * https://leetcode.com/problems/product-of-array-except-self/
  */
 public class Problem238_productOfArrayExceptSelf {
 
