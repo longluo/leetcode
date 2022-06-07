@@ -1,5 +1,6 @@
 package com.longluo.top_interviews;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,15 +32,16 @@ import java.util.Map;
  * 只会存在一个有效答案
  * 进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？
  * <p>
- * https://leetcode-cn.com/problems/two-sum/
+ * https://leetcode.com/problems/two-sum/
  */
 public class Problem1_twoSum {
 
+    // Simulate time: O(n^2) space: O(1)
     public static int[] twoSum_bf(int[] nums, int target) {
         int[] ans = new int[2];
-        int n = nums.length;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
+        int len = nums.length;
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
                 if (nums[i] + nums[j] == target) {
                     ans[0] = i;
                     ans[1] = j;
@@ -51,6 +53,7 @@ public class Problem1_twoSum {
         return ans;
     }
 
+    // HashMap time: O(n) space: O(n)
     public static int[] twoSum_hash(int[] nums, int target) {
         int[] ans = new int[2];
         int n = nums.length;
@@ -61,6 +64,7 @@ public class Problem1_twoSum {
                 ans[1] = map.get(target - nums[i]);
                 return ans;
             }
+
             map.putIfAbsent(nums[i], i);
         }
 
@@ -68,6 +72,7 @@ public class Problem1_twoSum {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("[0, 1] ?= " + Arrays.toString(twoSum_bf(new int[]{2, 7, 11, 15}, 9)));
+        System.out.println("[0, 1] ?= " + Arrays.toString(twoSum_hash(new int[]{2, 7, 11, 15}, 9)));
     }
 }
