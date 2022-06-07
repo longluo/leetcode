@@ -67,7 +67,39 @@ public class Problem875_kokoEatingBananas {
         return ans;
     }
 
+    // TLE
+    // Worse than from small to big
+    public static int minEatingSpeed_bf(int[] piles, int h) {
+        int max = Integer.MIN_VALUE;
+        for (int pile : piles) {
+            max = Math.max(max, pile);
+        }
+
+        if (piles.length >= h) {
+            return max;
+        }
+
+        int ans = max;
+        for (int i = max; i > 0; i--) {
+            int cnt = 0;
+
+            for (int pile : piles) {
+                int mod = pile % i;
+                cnt += mod == 0 ? pile / i : pile / i + 1;
+            }
+
+            if (cnt <= h) {
+                ans = Math.min(ans, i);
+            } else {
+                break;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + minEatingSpeed(new int[]{3, 6, 7, 11}, 8));
+        System.out.println("4 ?= " + minEatingSpeed_bf(new int[]{3, 6, 7, 11}, 8));
     }
 }
