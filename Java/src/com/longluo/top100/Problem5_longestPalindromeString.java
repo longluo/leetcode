@@ -24,6 +24,7 @@ package com.longluo.top100;
  */
 public class Problem5_longestPalindromeString {
 
+    // BF time: O(n^3) space: O(n)
     public static String longestPalindrome(String s) {
         if (s == null || s.length() <= 1) {
             return s;
