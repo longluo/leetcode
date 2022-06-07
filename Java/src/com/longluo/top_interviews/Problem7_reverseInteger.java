@@ -1,5 +1,4 @@
-package com.longluo.studyplan.cmbchina;
-
+package com.longluo.top_interviews;
 
 /**
  * 7. 整数反转
@@ -27,7 +26,7 @@ package com.longluo.studyplan.cmbchina;
  * 提示：
  * -2^31 <= x <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/reverse-integer/
+ * https://leetcode.com/problems/reverse-integer/
  */
 public class Problem7_reverseInteger {
 
