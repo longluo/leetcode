@@ -98,8 +98,44 @@ public class Problem875_kokoEatingBananas {
         return ans;
     }
 
+    // BinarySearch time: O(nlogn) space: O(1)
+    public static int minEatingSpeed_bs(int[] piles, int h) {
+        int len = piles.length;
+
+        int max = Integer.MIN_VALUE;
+        for (int pile : piles) {
+            max = Math.max(max, pile);
+        }
+
+        if (len >= h) {
+            return max;
+        }
+
+        int left = 1;
+        int right = max;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            int cnt = 0;
+            for (int pile : piles) {
+                int mod = pile % mid;
+                cnt += mod == 0 ? pile / mid : pile / mid + 1;
+            }
+
+            if (cnt > h) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return left;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + minEatingSpeed(new int[]{3, 6, 7, 11}, 8));
         System.out.println("4 ?= " + minEatingSpeed_bf(new int[]{3, 6, 7, 11}, 8));
+
+        System.out.println("4 ?= " + minEatingSpeed_bs(new int[]{3, 6, 7, 11}, 8));
     }
 }
