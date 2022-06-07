@@ -35,7 +35,7 @@ import java.util.*;
  * ai != bi
  * 所有[ai, bi] 互不相同
  * <p>
- * https://leetcode-cn.com/problems/course-schedule-ii/
+ * https://leetcode.com/problems/course-schedule-ii/
  */
 public class Problem210_findOrder {
 

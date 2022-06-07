@@ -27,7 +27,7 @@ import java.util.List;
  * 0 <= n <= 10^4
  * -10^6 <= Node.val <= 10^6
  * <p>
- * https://leetcode-cn.com/problems/odd-even-linked-list/
+ * https://leetcode.com/problems/odd-even-linked-list/
  */
 public class Problem328_oddEvenLinkedList {
 
@@ -60,8 +60,28 @@ public class Problem328_oddEvenLinkedList {
         return head;
     }
 
+    // OK time: O(n) space: O(1)
+    public static ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode pNode = head;
+        ListNode pOdd = head;
+        ListNode pEven = head.next;
+
+        int len = 0;
+        while (pNode != null) {
+            len++;
+            pNode = pNode.next;
+        }
+
+        return head;
+    }
+
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
-        LinkedListNodeUtils.printLinkedList(oddEvenList_bf(tst1));
+        System.out.println(LinkedListNodeUtils.printLinkedList(oddEvenList_bf(tst1)));
+        System.out.println(LinkedListNodeUtils.printLinkedList(oddEvenList(tst1)));
     }
 }

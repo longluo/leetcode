@@ -37,7 +37,7 @@ package com.longluo.top100;
  * <p>
  * 进阶：你能设计一个时间复杂度为 O(log (m+n)) 的算法解决此问题吗？
  * <p>
- * https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
+ * https://leetcode.com/problems/median-of-two-sorted-arrays/
  */
 public class Problem4_findMedianSortedArrays {
 
@@ -212,17 +212,27 @@ public class Problem4_findMedianSortedArrays {
         }
     }
 
+    // Binary Search  time: O(log(m + n)) space: O(1)
     public static double findMedianSortedArrays_bs(int[] nums1, int[] nums2) {
         int m = nums1.length;
         int n = nums2.length;
-        int totalLen = m + n;
-        if (totalLen % 2 == 1) {
-            int midIdx = totalLen / 2;
+        int len = m + n;
+        int left = 0;
+
+        return 0;
+    }
+
+    public static double findMedianSortedArrays_bs_getk(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        int len = m + n;
+        if (len % 2 == 1) {
+            int midIdx = len / 2;
             double median = getKthElement(nums1, nums2, midIdx + 1);
             return median;
         } else {
-            int midIndex1 = totalLen / 2 - 1;
-            int midIndex2 = totalLen / 2;
+            int midIndex1 = len / 2 - 1;
+            int midIndex2 = len / 2;
             double median = (getKthElement(nums1, nums2, midIndex1 + 1) + getKthElement(nums1, nums2, midIndex2 + 1)) / 2.0;
             return median;
         }

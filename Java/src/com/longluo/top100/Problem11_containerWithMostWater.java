@@ -22,7 +22,7 @@ package com.longluo.top100;
  * 2 <= n <= 10^5
  * 0 <= height[i] <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/container-with-most-water/
+ * https://leetcode.com/problems/container-with-most-water/
  */
 public class Problem11_containerWithMostWater {
 

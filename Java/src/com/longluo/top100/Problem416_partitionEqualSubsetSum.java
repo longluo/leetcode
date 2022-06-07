@@ -68,6 +68,28 @@ public class Problem416_partitionEqualSubsetSum {
         return flag;
     }
 
+    // DP
+    public static boolean canPartition_dp(int[] nums) {
+        if (nums.length < 2) {
+            return false;
+        }
+
+        int len = nums.length;
+        int sum = 0;
+        for (int x : nums) {
+            sum += x;
+        }
+
+        if (sum % 2 == 1) {
+            return false;
+        }
+
+        int[] dp = new int[len];
+
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + canPartition_bt(new int[]{1, 5, 11, 5}));
         System.out.println("false ?= " + canPartition_bt(new int[]{1, 2, 3, 5}));

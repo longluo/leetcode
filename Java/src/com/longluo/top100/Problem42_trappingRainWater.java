@@ -23,7 +23,7 @@ import java.util.Stack;
  * 1 <= n <= 2 * 10^4
  * 0 <= height[i] <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/trapping-rain-water/
+ * https://leetcode.com/problems/trapping-rain-water/
  */
 public class Problem42_trappingRainWater {
 

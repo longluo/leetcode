@@ -40,7 +40,7 @@ import java.util.List;
 public class Problem39_combinationSum {
 
     // Backtrack
-    // time: O(S), 其中 SS 为所有可行解的长度之和
+    // time: O(S), 其中 S 为所有可行解的长度之和
     // space: O(target)
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> ans = new ArrayList<>();

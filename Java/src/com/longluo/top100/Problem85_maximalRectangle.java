@@ -31,12 +31,35 @@ package com.longluo.top100;
  * cols == matrix[0].length
  * 0 <= row, cols <= 200
  * matrix[i][j] 为 '0' 或 '1'
- *
- *
+ * <p>
+ * https://leetcode-cn.com/problems/maximal-rectangle/
  */
 public class Problem85_maximalRectangle {
 
-    public static int maximalRectangle(char[][] matrix) {
+    // BF
+    public static int maximalRectangle_bf(char[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int ans = 0;
+        int minSide = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == '1') {
+
+                    boolean isRectangle = true;
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    // DP
+    public static int maximalRectangle_dp(char[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return 0;
         }
@@ -94,10 +117,11 @@ public class Problem85_maximalRectangle {
     }
 
     public static void main(String[] args) {
-        System.out.println("0 ?= " + maximalRectangle(new char[][]{{}}));
-        System.out.println("0 ?= " + maximalRectangle(new char[][]{{'0'}}));
-        System.out.println("0 ?= " + maximalRectangle(new char[][]{{'0', '0'}}));
-        System.out.println("1 ?= " + maximalRectangle(new char[][]{{'1'}}));
-        System.out.println("6 ?= " + maximalRectangle(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '0', '1', '0'}}));
+        System.out.println("0 ?= " + maximalRectangle_bf(new char[][]{{}}));
+        System.out.println("0 ?= " + maximalRectangle_bf(new char[][]{{'0', '0'}}));
+
+        System.out.println("0 ?= " + maximalRectangle_dp(new char[][]{{'0'}}));
+        System.out.println("1 ?= " + maximalRectangle_dp(new char[][]{{'1'}}));
+        System.out.println("6 ?= " + maximalRectangle_dp(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '0', '1', '0'}}));
     }
 }

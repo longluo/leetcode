@@ -24,35 +24,7 @@ import java.util.List;
  */
 public class Problem22_generateParenthesis {
 
-    public static List<String> generateParenthesis(int n) {
-        if (n < 1) {
-            return new ArrayList<>();
-        }
-
-        List<String> ans = new ArrayList<>();
-        backtrace(ans, new StringBuilder(), 0, 0, n);
-        return ans;
-    }
-
-    public static void backtrace(List<String> ans, StringBuilder sb, int left, int right, int num) {
-        if (left == right && left == num) {
-            ans.add(sb.toString());
-            return;
-        }
-
-        if (left < right || left > num || right > num) {
-            return;
-        }
-
-        sb.append('(');
-        backtrace(ans, sb, left + 1, right, num);
-        sb.deleteCharAt(sb.length() - 1);
-
-        sb.append(')');
-        backtrace(ans, sb, left, right + 1, num);
-        sb.deleteCharAt(sb.length() - 1);
-    }
-
+    // BF time: O(2^n) space: O(2*n)
     public static List<String> generateParenthesis_bf(int n) {
         if (n < 1) {
             return new ArrayList<>();
@@ -89,6 +61,36 @@ public class Problem22_generateParenthesis {
             }
         }
         return balance == 0;
+    }
+
+    // Backtrack time: O() space: O(n)
+    public static List<String> generateParenthesis(int n) {
+        if (n < 1) {
+            return new ArrayList<>();
+        }
+
+        List<String> ans = new ArrayList<>();
+        backtrack(ans, new StringBuilder(), 0, 0, n);
+        return ans;
+    }
+
+    public static void backtrack(List<String> ans, StringBuilder sb, int left, int right, int num) {
+        if (left == right && left == num) {
+            ans.add(sb.toString());
+            return;
+        }
+
+        if (left < right || left > num || right > num) {
+            return;
+        }
+
+        sb.append('(');
+        backtrack(ans, sb, left + 1, right, num);
+        sb.deleteCharAt(sb.length() - 1);
+
+        sb.append(')');
+        backtrack(ans, sb, left, right + 1, num);
+        sb.deleteCharAt(sb.length() - 1);
     }
 
     public static void main(String[] args) {

@@ -1,7 +1,5 @@
 package com.longluo.top100;
 
-import com.longluo.datastructure.ArrayUtils;
-
 import java.util.*;
 
 /**
@@ -34,32 +32,39 @@ public class Problem621_taskScheduler {
             return tasks.length;
         }
 
-        int len = tasks.length;
         int min = 0;
-        int[][] count = new int[26][2];
-        for (int i = 0; i < 26; i++) {
-            count[i][0] = i;
-        }
-
+        Map<Character, Integer> map = new HashMap<>();
         for (char task : tasks) {
-            count[task - 'A'][1]++;
+            map.put(task, map.getOrDefault(task, 0) + 1);
         }
 
-        Arrays.sort(count, (o1, o2) -> o1[1] - o2[1]);
-        int idx = 0;
-        while (true) {
-            if (len == 0) {
-                break;
+        List<int[]> taskList = new ArrayList<>();
+        int taskCnt = 0;
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            taskList.add(new int[]{taskCnt, entry.getValue()});
+            taskCnt++;
+        }
+
+        Collections.sort(taskList, (o1, o2) -> o2[1] - o1[1]);
+
+        while (taskList.get(0)[1] > 0) {
+            int cd = 0;
+            while (cd <= n) {
+                if (taskList.size() < n + 1) {
+                    for (int i = 0; i < taskList.size(); i++) {
+                        taskList.get(i)[1]--;
+                    }
+                } else {
+                    if (taskList.get(cd)[1] > 0) {
+                        taskList.get(cd)[1]--;
+                    }
+                }
+
+                cd++;
+                min++;
             }
 
-            for (int i = 0; i < n; i++) {
-                count[i][1]--;
-                len--;
-                min++;
-                if (len == 0) {
-                    break;
-                }
-            }
+            Collections.sort(taskList, (o1, o2) -> o2[1] - o1[1]);
         }
 
         return min;
@@ -71,21 +76,8 @@ public class Problem621_taskScheduler {
             return tasks.length;
         }
 
-        int len = tasks.length;
-        int min = 0;
-        int[] count = new int[26];
-        for (char ch : tasks) {
-            count[ch - 'A']++;
-        }
 
-        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o2[1] - o1[1]);
-        for (int i = 0; i < 26; i++) {
-            if (count[i] > 0) {
-                pq.offer(new int[]{i, count[i]});
-            }
-        }
-
-        return min;
+        return 0;
     }
 
     // Math time: O(nlogn+n)=O(nlogn) space: O(n + logn)=O(n)

@@ -1,5 +1,7 @@
 package com.longluo.top100;
 
+import java.util.Stack;
+
 /**
  * 84. 柱状图中最大的矩形
  * <p>
@@ -48,6 +50,20 @@ public class Problem84_largestRectangleInHistogram {
                 ans = Math.max(ans, area);
             }
         }
+
+        return ans;
+    }
+
+    // Stack
+    public static int largestRectangleArea_stack(int[] heights) {
+        int len = heights.length;
+        if (len <= 1) {
+            return heights[0];
+        }
+
+        int ans = heights[0];
+        Stack<Integer> stk = new Stack<>();
+        
 
         return ans;
     }

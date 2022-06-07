@@ -67,6 +67,37 @@ public class Problem25_reverseNodesInKGroup {
         return head;
     }
 
+    //
+    public static ListNode reverseKGroup_swap(ListNode head, int k) {
+        if (head == null || head.next == null || k == 1) {
+            return head;
+        }
+
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+
+        ListNode preNode = dummyNode;
+        ListNode endNode = dummyNode;
+
+        while (endNode != null) {
+
+        }
+
+        return dummyNode.next;
+    }
+
+    public static ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode curr = head;
+        ListNode next = head.next;
+
+        while (curr != null) {
+
+        }
+
+        return pre;
+    }
+
     public static void main(String[] args) {
         ListNode node3 = LinkedListNodeUtils.constructListNode(new int[]{1, 2});
         System.out.println("[2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseKGroup_bf(node3, 2)));

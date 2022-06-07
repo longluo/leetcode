@@ -27,7 +27,7 @@ import java.util.Stack;
  * <p>
  * 进阶：如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化算法？
  * <p>
- * https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/
+ * https://leetcode.com/problems/kth-smallest-element-in-a-bst/
  */
 public class Problem230_kthSmallestElementInABst {
 
@@ -71,6 +71,8 @@ public class Problem230_kthSmallestElementInABst {
                 root = root.left;
             }
             root = stack.pop();
+            https:
+//leetcode-cn.com/problems/kth-smallest-element-in-a-bst/
             k--;
             if (k == 0) {
                 break;
