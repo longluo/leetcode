@@ -34,7 +34,7 @@ package com.longluo.top100;
  * word和prefix仅由小写英文字母组成
  * insert、search和startsWith调用次数总计不超过3 * 10^4次
  * <p>
- * https://leetcode-cn.com/problems/implement-trie-prefix-tree/
+ * https://leetcode.com/problems/implement-trie-prefix-tree/
  */
 public class Problem208_implementTriePrefixTree {
 

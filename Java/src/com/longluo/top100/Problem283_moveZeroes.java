@@ -20,7 +20,7 @@ package com.longluo.top100;
  * <p>
  * 进阶：你能尽量减少完成的操作次数吗？
  * <p>
- * https://leetcode-cn.com/problems/move-zeroes/
+ * https://leetcode.com/problems/move-zeroes/
  */
 public class Problem283_moveZeroes {
 

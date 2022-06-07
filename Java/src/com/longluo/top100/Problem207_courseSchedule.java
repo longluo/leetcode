@@ -1,7 +1,5 @@
 package com.longluo.top100;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -33,7 +31,7 @@ import java.util.Queue;
  * 0 <= ai, bi < numCourses
  * prerequisites[i] 中的所有课程对 互不相同
  * <p>
- * https://leetcode-cn.com/problems/course-schedule/
+ * https://leetcode.com/problems/course-schedule/
  */
 public class Problem207_courseSchedule {
 

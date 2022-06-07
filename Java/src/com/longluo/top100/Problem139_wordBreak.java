@@ -31,7 +31,7 @@ import java.util.List;
  * s 和 wordDict[i] 仅有小写英文字母组成
  * wordDict 中的所有字符串 互不相同
  * <p>
- * https://leetcode-cn.com/problems/word-break/
+ * https://leetcode.com/problems/word-break/
  */
 public class Problem139_wordBreak {
 

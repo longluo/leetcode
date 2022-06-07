@@ -22,7 +22,7 @@ package com.longluo.top100;
  * -10 <= nums[i] <= 10
  * nums 的任何前缀或后缀的乘积都 保证 是一个 32-位 整数
  * <p>
- * https://leetcode-cn.com/problems/maximum-product-subarray/
+ * https://leetcode.com/problems/maximum-product-subarray/
  */
 public class Problem152_maximumProductSubarray {
 

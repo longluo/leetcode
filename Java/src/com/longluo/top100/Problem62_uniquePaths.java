@@ -28,7 +28,7 @@ package com.longluo.top100;
  * 1 <= m, n <= 100
  * 题目数据保证答案小于等于 2 * 10^9
  * <p>
- * https://leetcode-cn.com/problems/unique-paths/
+ * https://leetcode.com/problems/unique-paths/
  */
 public class Problem62_uniquePaths {
 

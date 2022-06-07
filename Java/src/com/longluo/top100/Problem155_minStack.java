@@ -32,7 +32,7 @@ import java.util.*;
  * 提示：
  * pop、top 和 getMin 操作总是在 非空栈 上调用。
  * <p>
- * https://leetcode-cn.com/problems/min-stack/
+ * https://leetcode.com/problems/min-stack/
  */
 public class Problem155_minStack {
 

@@ -26,7 +26,7 @@ import java.util.Queue;
  * <p>
  * 进阶：你可以运用递归和迭代两种方法解决这个问题吗？
  * <p>
- * https://leetcode-cn.com/problems/symmetric-tree/
+ * https://leetcode.com/problems/symmetric-tree/
  */
 public class Problem101_symmetricTree {
 

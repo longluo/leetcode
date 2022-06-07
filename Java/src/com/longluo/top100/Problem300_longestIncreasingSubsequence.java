@@ -31,7 +31,7 @@ import java.util.List;
  * 你可以设计时间复杂度为 O(n2) 的解决方案吗？
  * 你能将算法的时间复杂度降低到 O(n log(n)) 吗?
  * <p>
- * https://leetcode-cn.com/problems/longest-increasing-subsequence/
+ * https://leetcode.com/problems/longest-increasing-subsequence/
  */
 public class Problem300_longestIncreasingSubsequence {
 

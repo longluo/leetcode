@@ -8,27 +8,30 @@ import java.util.List;
 
 /**
  * 234. Palindrome Linked List
+ * <p>
  * Easy
+ * <p>
  * Given the head of a singly linked list, return true if it is a palindrome.
- *
+ * <p>
  * Example 1:
  * Input: head = [1,2,2,1]
  * Output: true
- *
+ * <p>
  * Example 2:
  * Input: head = [1,2]
  * Output: false
-
+ * <p>
  * Constraints:
  * The number of nodes in the list is in the range [1, 10^5].
  * 0 <= Node.val <= 9
- *
+ * <p>
  * Follow up: Could you do it in O(n) time and O(1) space?
- *
+ * <p>
  * https://leetcode.com/problems/palindrome-linked-list/
  */
 public class Problem234_palindromeLinkedList {
 
+    //
     public static boolean isPalindrome(ListNode head) {
         if (head == null || head.next == null) {
             return true;

@@ -20,7 +20,7 @@ import java.util.*;
  * 1 <= k <= nums.length <= 10^4
  * -10^4 <= nums[i] <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
+ * https://leetcode.com/problems/kth-largest-element-in-an-array/
  */
 public class Problem215_kthLargestElementInAnArray {
 

@@ -28,7 +28,7 @@ import java.util.Arrays;
  * 你可以不使用代码库中的排序函数来解决这道题吗？
  * 你能想出一个仅使用常数空间的一趟扫描算法吗？
  * <p>
- * https://leetcode-cn.com/problems/sort-colors/
+ * https://leetcode.com/problems/sort-colors/
  */
 public class Problem75_sortColors {
 

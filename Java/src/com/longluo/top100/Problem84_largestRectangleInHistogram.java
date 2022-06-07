@@ -21,7 +21,7 @@ import java.util.Stack;
  * 1 <= heights.length <=10^5
  * 0 <= heights[i] <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/largest-rectangle-in-histogram/
+ * https://leetcode.com/problems/largest-rectangle-in-histogram/
  */
 public class Problem84_largestRectangleInHistogram {
 

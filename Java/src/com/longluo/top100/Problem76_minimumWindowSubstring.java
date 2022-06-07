@@ -32,7 +32,7 @@ import java.util.Map;
  * <p>
  * 进阶：你能设计一个在 o(n) 时间内解决此问题的算法吗？
  * <p>
- * https://leetcode-cn.com/problems/minimum-window-substring/
+ * https://leetcode.com/problems/minimum-window-substring/
  */
 public class Problem76_minimumWindowSubstring {
 

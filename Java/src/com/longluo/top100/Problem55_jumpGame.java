@@ -21,7 +21,7 @@ package com.longluo.top100;
  * 1 <= nums.length <= 3 * 10^4
  * 0 <= nums[i] <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/jump-game/
+ * https://leetcode.com/problems/jump-game/
  */
 public class Problem55_jumpGame {
 

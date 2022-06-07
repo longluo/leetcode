@@ -43,7 +43,7 @@ import java.util.Map;
  * 0 <= value <= 10^5
  * 最多调用 2 * 10^5 次 get 和 put
  * <p>
- * https://leetcode-cn.com/problems/lru-cache/
+ * https://leetcode.com/problems/lru-cache/
  */
 public class Problem146_lruCache {
 

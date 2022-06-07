@@ -24,7 +24,7 @@ import java.util.List;
  * -10 <= nums[i] <= 10
  * nums 中的所有元素 互不相同
  * <p>
- * https://leetcode-cn.com/problems/subsets/
+ * https://leetcode.com/problems/subsets/
  */
 public class Problem78_subsets {
 

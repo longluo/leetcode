@@ -23,7 +23,7 @@ import java.util.*;
  * intervals[i].length == 2
  * 0 <= starti <= endi <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/merge-intervals/
+ * https://leetcode.com/problems/merge-intervals/
  */
 public class Problem56_mergeIntervals {
 

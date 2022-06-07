@@ -26,7 +26,7 @@ import java.util.Map;
  * 进阶：
  * 尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。
  * <p>
- * https://leetcode-cn.com/problems/majority-element/
+ * https://leetcode.com/problems/majority-element/
  */
 public class Problem169_majorityElement {
 

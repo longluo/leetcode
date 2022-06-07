@@ -49,7 +49,7 @@ import com.longluo.datastructure.ArrayUtils;
  * 输入：matrix = [[1,2],[3,4]]
  * 输出：[[3,1],[4,2]]
  * <p>
- * https://leetcode-cn.com/problems/rotate-image/
+ * https://leetcode.com/problems/rotate-image/
  */
 public class Problem48_rotateImage {
 

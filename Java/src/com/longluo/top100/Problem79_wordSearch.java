@@ -29,7 +29,7 @@ package com.longluo.top100;
  * <p>
  * 进阶：你可以使用搜索剪枝的技术来优化解决方案，使其在 board 更大的情况下可以更快解决问题？
  * <p>
- * https://leetcode-cn.com/problems/word-search/
+ * https://leetcode.com/problems/word-search/
  */
 public class Problem79_wordSearch {
 

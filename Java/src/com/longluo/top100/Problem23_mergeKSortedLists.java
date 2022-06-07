@@ -1,6 +1,5 @@
 package com.longluo.top100;
 
-import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
 
 import java.util.ArrayList;

@@ -34,7 +34,7 @@ import com.longluo.datastructure.TreeNode;
  * 树中结点数在范围 [0, 10^4] 内
  * -1000 <= Node.val <= 1000
  * <p>
- * https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
+ * https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
  */
 public class Problem297_serializeAndDeserializeBinaryTree {
 

@@ -29,7 +29,7 @@ package com.longluo.top100;
  * <p>
  * 进阶：你可以设计一个时间复杂度为 O(log n) 的解决方案吗？
  * <p>
- * https://leetcode-cn.com/problems/search-in-rotated-sorted-array/
+ * https://leetcode.com/problems/search-in-rotated-sorted-array/
  */
 public class Problem33_searchInRotatedSortedArray {
 

@@ -33,7 +33,7 @@ import java.util.PriorityQueue;
  * -10^4 <= nums[i] <= 10^4
  * 1 <= k <= nums.length
  * <p>
- * https://leetcode-cn.com/problems/sliding-window-maximum/
+ * https://leetcode.com/problems/sliding-window-maximum/
  */
 public class Problem239_slidingWindowMaximum {
 

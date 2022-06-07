@@ -36,7 +36,7 @@ import java.util.*;
  * 1 <= s.length <= 10^4
  * s 仅由括号 '()[]{}' 组成
  * <p>
- * https://leetcode-cn.com/problems/valid-parentheses/
+ * https://leetcode.com/problems/valid-parentheses/
  */
 public class Problem20_validParentheses {
 

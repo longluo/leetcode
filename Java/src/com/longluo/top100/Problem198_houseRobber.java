@@ -23,7 +23,7 @@ package com.longluo.top100;
  * 1 <= nums.length <= 100
  * 0 <= nums[i] <= 400
  * <p>
- * https://leetcode-cn.com/problems/house-robber/
+ * https://leetcode.com/problems/house-robber/
  */
 public class Problem198_houseRobber {
 

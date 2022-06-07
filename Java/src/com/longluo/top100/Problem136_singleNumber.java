@@ -24,8 +24,6 @@ import java.util.Map;
  * -3 * 10^4 <= nums[i] <= 3 * 10^4
  * Each element in the array appears twice except for one element which appears only once.
  * <p>
- * https://leetcode-cn.com/problems/single-number/
- * <p>
  * https://leetcode.com/problems/single-number/
  */
 public class Problem136_singleNumber {

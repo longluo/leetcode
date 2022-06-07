@@ -25,7 +25,7 @@ import java.util.*;
  * 0 <= strs[i].length <= 100
  * strs[i] 仅包含小写字母
  * <p>
- * https://leetcode-cn.com/problems/group-anagrams/
+ * https://leetcode.com/problems/group-anagrams/
  */
 public class Problem49_groupAnagrams {
 

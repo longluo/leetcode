@@ -25,8 +25,6 @@ import java.util.List;
  * -10 <= nums[i] <= 10
  * nums 中的所有整数 互不相同
  * <p>
- * https://leetcode-cn.com/problems/permutations/
- * <p>
  * https://leetcode.com/problems/permutations/
  */
 public class Problem46_permutations {

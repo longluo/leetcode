@@ -20,7 +20,7 @@ import java.util.List;
  * 提示：
  * 1 <= n <= 8
  * <p>
- * https://leetcode-cn.com/problems/generate-parentheses/
+ * https://leetcode.com/problems/generate-parentheses/
  */
 public class Problem22_generateParenthesis {
 

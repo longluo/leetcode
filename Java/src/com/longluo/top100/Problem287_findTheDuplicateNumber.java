@@ -29,7 +29,7 @@ import java.util.Set;
  * 如何证明 nums 中至少存在一个重复的数字?
  * 你可以设计一个线性级时间复杂度 O(n) 的解决方案吗？
  * <p>
- * https://leetcode-cn.com/problems/find-the-duplicate-number/
+ * https://leetcode.com/problems/find-the-duplicate-number/
  */
 public class Problem287_findTheDuplicateNumber {
 

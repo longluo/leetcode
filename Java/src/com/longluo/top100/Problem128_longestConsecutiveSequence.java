@@ -21,7 +21,7 @@ import java.util.*;
  * 0 <= nums.length <= 10^5
  * -10^9 <= nums[i] <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/longest-consecutive-sequence/
+ * https://leetcode.com/problems/longest-consecutive-sequence/
  */
 public class Problem128_longestConsecutiveSequence {
 

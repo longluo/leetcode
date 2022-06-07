@@ -15,10 +15,11 @@ import com.longluo.datastructure.ListNode;
  * 进阶:
  * 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
  * <p>
- * https://leetcode-cn.com/problems/reverse-linked-list/
+ * https://leetcode.com/problems/reverse-linked-list/
  */
 public class Problem206_reverseLinkedList {
 
+    // TODO: 2022/6/7
     public static ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) {
             return head;

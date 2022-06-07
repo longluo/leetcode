@@ -29,7 +29,7 @@ import java.util.*;
  * 树中节点数目范围在[1, 10^4] 内
  * -2^31 <= Node.val <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/validate-binary-search-tree/
+ * https://leetcode.com/problems/validate-binary-search-tree/
  */
 public class Problem98_validateBinarySearchTree {
 

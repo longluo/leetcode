@@ -22,7 +22,7 @@ import java.util.Queue;
  * 15   7
  * 返回它的最大深度 3 。
  * <p>
- * https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
+ * https://leetcode.com/problems/maximum-depth-of-binary-tree/
  */
 public class Problem104_maximumDepthOfBinaryTree {
 

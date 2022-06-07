@@ -22,7 +22,7 @@ import java.util.*;
  * <p>
  * 进阶：你所设计算法的时间复杂度 必须 优于 O(n log n) ，其中 n 是数组大小。
  * <p>
- * https://leetcode-cn.com/problems/top-k-frequent-elements/
+ * https://leetcode.com/problems/top-k-frequent-elements/
  */
 public class Problem347_topKFrequentElements {
 

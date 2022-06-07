@@ -29,7 +29,7 @@ import java.util.Arrays;
  * nums 是一个非递减数组
  * -10^9 <= target <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+ * https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
  */
 public class Problem34_findFirstAndLastPositionOfElementInSortedArray {
 
