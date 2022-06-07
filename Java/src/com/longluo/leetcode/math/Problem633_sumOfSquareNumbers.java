@@ -29,11 +29,11 @@ package com.longluo.leetcode.math;
  * 提示：
  * 0 <= c <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/sum-of-square-numbers/
+ * https://leetcode.com/problems/sum-of-square-numbers/
  */
 public class Problem633_sumOfSquareNumbers {
 
-    // Math.sqrt time: O(sqrt(n)) space: O(1)
+    // API Math.sqrt time: O(sqrt(n)) space: O(1)
     public static boolean judgeSquareSum_sqrt(int c) {
         if (c < 0) {
             return false;
@@ -77,7 +77,7 @@ public class Problem633_sumOfSquareNumbers {
             return true;
         }
 
-        int rightMargin = (int) (Math.sqrt(0.5) * Math.sqrt(c));
+        int rightMargin = (int) Math.sqrt(c / 2);
         for (long i = 0; i <= rightMargin; i++) {
             double remain = Math.sqrt(c - i * i);
             if ((int) remain == remain) {
@@ -130,6 +130,27 @@ public class Problem633_sumOfSquareNumbers {
         return false;
     }
 
+    // Fermat Math time: O(sqrt(n)) space: O(1)
+    public static boolean judgeSquareSum_fermat(int c) {
+        for (int base = 2; base * base <= c; base++) {
+            if (c % base != 0) {
+                continue;
+            }
+
+            int exp = 0;
+            while (c % base == 0) {
+                c /= base;
+                exp++;
+            }
+
+            if (base % 4 == 3 && exp % 2 != 0) {
+                return false;
+            }
+        }
+
+        return c % 4 != 3;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + judgeSquareSum_sqrt(0));
         System.out.println("true ?= " + judgeSquareSum_sqrt_opt(8));
@@ -150,5 +171,9 @@ public class Problem633_sumOfSquareNumbers {
         System.out.println("false ?= " + judgeSquareSum_tp(999999999));
         System.out.println("false ?= " + judgeSquareSum_sqrt(2147482647));
         System.out.println("false ?= " + judgeSquareSum_tp(2147482647));
+
+        System.out.println("true ?= " + judgeSquareSum_fermat(8));
+        System.out.println("false ?= " + judgeSquareSum_fermat(150));
+        System.out.println("false ?= " + judgeSquareSum_fermat(2147482647));
     }
 }
