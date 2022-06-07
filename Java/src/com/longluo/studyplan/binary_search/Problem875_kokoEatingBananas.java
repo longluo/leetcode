@@ -132,10 +132,41 @@ public class Problem875_kokoEatingBananas {
         return left;
     }
 
+    // BinarySearch Opt time: O(nlogn) space: O(1)
+    // remove mod
+    public static int minEatingSpeed_bs_opt(int[] piles, int h) {
+        int max = 1;
+        for (int pile : piles) {
+            max = Math.max(max, pile);
+        }
+
+        int left = 1;
+        int right = max;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            int cnt = 0;
+
+            for (int pile : piles) {
+                cnt += (pile + mid - 1) / mid;
+            }
+
+            if (cnt > h) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return left;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + minEatingSpeed(new int[]{3, 6, 7, 11}, 8));
         System.out.println("4 ?= " + minEatingSpeed_bf(new int[]{3, 6, 7, 11}, 8));
 
         System.out.println("4 ?= " + minEatingSpeed_bs(new int[]{3, 6, 7, 11}, 8));
+        System.out.println("4 ?= " + minEatingSpeed_bs_opt(new int[]{3, 6, 7, 11}, 8));
     }
 }
