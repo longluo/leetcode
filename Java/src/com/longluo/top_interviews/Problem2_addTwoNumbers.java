@@ -28,10 +28,11 @@ import com.longluo.datastructure.ListNode;
  * 0 <= Node.val <= 9
  * 题目数据保证列表表示的数字不含前导零
  * <p>
- * https://leetcode-cn.com/problems/add-two-numbers/
+ * https://leetcode.com/problems/add-two-numbers/
  */
 public class Problem2_addTwoNumbers {
 
+    // Simulate time: O(m+n) space: O(m+n)
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode pNode1 = l1;
         ListNode pNode2 = l2;
@@ -88,6 +89,7 @@ public class Problem2_addTwoNumbers {
         return dummyNode.next;
     }
 
+    // Simulate Opt time: O(m+n) space: O(m+n)
     public static ListNode addTwoNumbers_opt(ListNode l1, ListNode l2) {
         ListNode dummyNode = new ListNode(-1);
         ListNode pNode = dummyNode;
