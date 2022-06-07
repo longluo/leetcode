@@ -33,10 +33,11 @@ package com.longluo.leetcode.bitmanipulation;
  * <p>
  * 进阶：你能够不使用循环/递归解决此问题吗？
  * <p>
- * https://leetcode-cn.com/problems/power-of-two/
+ * https://leetcode.com/problems/power-of-two/
  */
 public class Problem231_powerOfTwo {
 
+    // BF Iteration time: O(logn) space: O(1)
     public static boolean isPowerOfTwo(int n) {
         if (n <= 0) {
             return false;
@@ -52,6 +53,16 @@ public class Problem231_powerOfTwo {
         }
 
         return true;
+    }
+
+    // Bit time: O(1) space: O(1)
+    // n & (n - 1)
+    public static boolean isPowerOfTwo_fast(int n) {
+        if (n <= 0) {
+            return false;
+        }
+
+        return (n & (n - 1)) == 0;
     }
 
     public static void main(String[] args) {
