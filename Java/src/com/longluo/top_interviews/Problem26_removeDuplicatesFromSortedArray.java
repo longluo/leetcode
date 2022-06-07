@@ -1,4 +1,4 @@
-package com.longluo.leetcode.twopointers;
+package com.longluo.top_interviews;
 
 /**
  * 26. 删除有序数组中的重复项
@@ -35,7 +35,7 @@ package com.longluo.leetcode.twopointers;
  * -10^4 <= nums[i] <= 10^4
  * nums 已按升序排列
  * <p>
- * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
+ * https://leetcode.com/problems/remove-duplicates-from-sorted-array/
  */
 public class Problem26_removeDuplicatesFromSortedArray {
 

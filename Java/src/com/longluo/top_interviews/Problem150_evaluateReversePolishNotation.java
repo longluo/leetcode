@@ -1,4 +1,4 @@
-package com.longluo.studyplan.programming_skills;
+package com.longluo.top_interviews;
 
 import java.util.Stack;
 
@@ -46,7 +46,7 @@ import java.util.Stack;
  * 去掉括号后表达式无歧义，上式即便写成 1 2 + 3 4 + * 也可以依据次序计算出正确结果。
  * 适合用栈操作运算：遇到数字则入栈；遇到算符则取出栈顶两个数字进行计算，并将结果压入栈中
  * <p>
- * https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/
+ * https://leetcode.com/problems/evaluate-reverse-polish-notation/
  */
 public class Problem150_evaluateReversePolishNotation {
 

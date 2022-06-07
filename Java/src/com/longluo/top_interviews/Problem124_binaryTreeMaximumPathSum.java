@@ -1,4 +1,4 @@
-package com.longluo.leetcode.tree;
+package com.longluo.top_interviews;
 
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
@@ -25,7 +25,7 @@ import com.longluo.datastructure.TreeUtils;
  * 树中节点数目范围是 [1, 3 * 10^4]
  * -1000 <= Node.val <= 1000
  * <p>
- * https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/
+ * https://leetcode.com/problems/binary-tree-maximum-path-sum/
  */
 public class Problem124_binaryTreeMaximumPathSum {
 

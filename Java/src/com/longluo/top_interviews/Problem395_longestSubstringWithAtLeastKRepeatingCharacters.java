@@ -1,4 +1,4 @@
-package com.longluo.leetcode.string;
+package com.longluo.top_interviews;
 
 /**
  * 395. 至少有K个重复字符的最长子串
@@ -24,7 +24,7 @@ package com.longluo.leetcode.string;
  * s 仅由小写英文字母组成
  * 1 <= k <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/
+ * https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/
  */
 public class Problem395_longestSubstringWithAtLeastKRepeatingCharacters {
 

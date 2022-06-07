@@ -1,4 +1,4 @@
-package com.longluo.leetcode.design;
+package com.longluo.top_interviews;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 295. 数据流的中位数
+ * <p>
  * 中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
  * <p>
  * 例如，
@@ -27,8 +28,10 @@ import java.util.List;
  * 进阶:
  * 如果数据流中所有整数都在0到100范围内，你将如何优化你的算法？
  * 如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？
+ * <p>
+ * https://leetcode.com/problems/find-median-from-data-stream/
  */
-public class Problem295_medianFinder {
+public class Problem295_findMedianfromDataStream {
 
     class MedianFinder {
         List<Integer> list = new LinkedList<>();

@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.top_interviews;
 
 /**
  * 162. 寻找峰值
@@ -24,7 +24,7 @@ package com.longluo.leetcode.array;
  * -2^31 <= nums[i] <= 2^31 - 1
  * 对于所有有效的 i 都有 nums[i] != nums[i + 1]
  * <p>
- * https://leetcode-cn.com/problems/find-peak-element/
+ * https://leetcode.com/problems/find-peak-element/
  */
 public class Problem162_findPeakElement {
 

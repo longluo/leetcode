@@ -1,4 +1,4 @@
-package com.longluo.tencent_50;
+package com.longluo.top_interviews;
 
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
@@ -34,9 +34,9 @@ import java.util.List;
  * p != q
  * p 和 q 均存在于给定的二叉树中。
  * <p>
- * https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
+ * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
  */
-public class Problem236_lowestCommonAncestor {
+public class Problem236_lowestCommonAncestorofaBinaryTree {
 
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) {
