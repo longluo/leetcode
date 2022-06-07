@@ -1,4 +1,4 @@
-package com.longluo.studyplan.programming_skills;
+package com.longluo.top_interviews;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,13 +30,11 @@ import java.util.List;
  * 1 <= digits.length <= 100
  * 0 <= digits[i] <= 9
  * <p>
- * https://leetcode-cn.com/problems/plus-one/
- * <p>
  * https://leetcode.com/problems/plus-one/
  */
 public class Problem66_plusOne {
 
-    //
+    // BF time: O(n) space: O(n)
     public static int[] plusOne(int[] digits) {
         int n = digits.length;
         List<Integer> res = new ArrayList<>();
@@ -51,9 +49,11 @@ public class Problem66_plusOne {
             res.add(sum % 10);
             carry = sum / 10;
         }
+
         if (carry > 0) {
             res.add(carry);
         }
+
         int[] ans = new int[res.size()];
         int len = res.size();
         for (int i = 0; i < len; i++) {
