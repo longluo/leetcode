@@ -32,12 +32,13 @@ import java.util.Map;
  * -10^9 <= nums[i] <= 10^9
  * -10^9 <= target <= 10^9
  * 只会存在一个有效答案
+ * 进阶：你可以想出一个时间复杂度小于 O(n^2) 的算法吗？
  * <p>
- * https://leetcode-cn.com/problems/two-sum/
+ * https://leetcode.com/problems/two-sum/
  */
 public class Problem1_twoSum {
 
-    // BF time: O(n^2) space: O(1)
+    // Simulate time: O(n^2) space: O(1)
     public static int[] twoSum_bf(int[] nums, int target) {
         int len = nums.length;
         for (int i = 0; i < len; i++) {
