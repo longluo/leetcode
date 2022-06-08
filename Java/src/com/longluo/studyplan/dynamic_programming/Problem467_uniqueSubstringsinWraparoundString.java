@@ -77,6 +77,40 @@ public class Problem467_uniqueSubstringsinWraparoundString {
         return ans;
     }
 
+    // BF Opt time: O(n^2) space: O(n)
+    // TLE
+    public static int findSubstringInWraproundString_bf_opt(String p) {
+        int ans = 0;
+        int len = p.length();
+        Set<String> seen = new HashSet<>();
+        for (int i = 0; i < len; i++) {
+            StringBuilder sb = new StringBuilder();
+            int idx = -1;
+            for (int j = i; j < len; j++) {
+                sb.append(p.charAt(j));
+                if (seen.contains(sb.toString())) {
+                    continue;
+                }
+
+                if (j == i) {
+                    ans++;
+                    seen.add(sb.toString());
+                    continue;
+                }
+
+                idx = p.charAt(j) - p.charAt(j - 1) + 26;
+                if (idx % 26 != 1) {
+                    break;
+                }
+
+                ans++;
+                seen.add(sb.toString());
+            }
+        }
+
+        return ans;
+    }
+
     // DP time: O(n) space: O(26)
     public static int findSubstringInWraproundString_dp(String p) {
         int len = p.length();
@@ -106,6 +140,9 @@ public class Problem467_uniqueSubstringsinWraparoundString {
         System.out.println("2 ?= " + findSubstringInWraproundString_bf("cac"));
         System.out.println("6 ?= " + findSubstringInWraproundString_bf("zab"));
         System.out.println("3 ?= " + findSubstringInWraproundString_bf("abaab"));
+
+        System.out.println("6 ?= " + findSubstringInWraproundString_bf_opt("zab"));
+        System.out.println("3 ?= " + findSubstringInWraproundString_bf_opt("abaab"));
 
         System.out.println("6 ?= " + findSubstringInWraproundString_dp("zab"));
         System.out.println("3 ?= " + findSubstringInWraproundString_dp("abaab"));
