@@ -77,10 +77,37 @@ public class Problem467_uniqueSubstringsinWraparoundString {
         return ans;
     }
 
+    // DP time: O(n) space: O(26)
+    public static int findSubstringInWraproundString_dp(String p) {
+        int len = p.length();
+        int[] dp = new int[26];
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            char ch = p.charAt(i);
+            if (i > 0 && (p.charAt(i) - p.charAt(i - 1) + 26) % 26 == 1) {
+                count++;
+            } else {
+                count = 1;
+            }
+
+            dp[ch - 'a'] = Math.max(dp[ch - 'a'], count);
+        }
+
+        int ans = 0;
+        for (int x : dp) {
+            ans += x;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + findSubstringInWraproundString_bf("a"));
         System.out.println("2 ?= " + findSubstringInWraproundString_bf("cac"));
         System.out.println("6 ?= " + findSubstringInWraproundString_bf("zab"));
         System.out.println("3 ?= " + findSubstringInWraproundString_bf("abaab"));
+
+        System.out.println("6 ?= " + findSubstringInWraproundString_dp("zab"));
+        System.out.println("3 ?= " + findSubstringInWraproundString_dp("abaab"));
     }
 }
