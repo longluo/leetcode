@@ -60,7 +60,8 @@ package com.longluo.contest.weekly_contest_296;
  */
 public class Problem6093_designaTextEditor {
 
-    //
+    // BF String
+    // TLE
     static class TextEditor {
         String str;
         int strLen = 0;
@@ -119,6 +120,70 @@ public class Problem6093_designaTextEditor {
         }
     }
 
+    // StringBuilder
+    // AC
+    static class TextEditor_sb {
+        StringBuilder strBuilder;
+        int len = 0;
+        int cursor = 0;
+
+        public TextEditor_sb() {
+            strBuilder = new StringBuilder();
+            cursor = 0;
+            len = 0;
+        }
+
+        public void addText(String text) {
+            strBuilder.insert(cursor, text);
+            cursor += text.length();
+            len += text.length();
+        }
+
+        public int deleteText(int k) {
+            int ret = Math.min(cursor, k);
+
+            if (cursor <= k) {
+                strBuilder.delete(0, cursor);
+                len -= cursor;
+                cursor = 0;
+            } else {
+                strBuilder.delete(cursor - k, cursor);
+                cursor -= k;
+                len -= k;
+            }
+
+            return ret;
+        }
+
+        public String cursorLeft(int k) {
+            if (cursor > k) {
+                cursor -= k;
+                if (cursor > 10) {
+                    return strBuilder.substring(cursor - 10, cursor);
+                } else {
+                    return strBuilder.substring(0, cursor);
+                }
+            } else {
+                cursor = 0;
+                return "";
+            }
+        }
+
+        public String cursorRight(int k) {
+            if (len > cursor + k) {
+                cursor += k;
+            } else {
+                cursor = len;
+            }
+
+            if (cursor > 10) {
+                return strBuilder.substring(cursor - 10, cursor);
+            } else {
+                return strBuilder.substring(0, cursor);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         TextEditor textEditor = new TextEditor();
         textEditor.addText("leetcode"); // The current text is "leetcode|".
@@ -153,6 +218,7 @@ public class Problem6093_designaTextEditor {
         textEditor1.addText("kwwp");
         System.out.println(textEditor1.cursorLeft(6));
         System.out.println(textEditor1.deleteText(20));
-    }
 
+
+    }
 }
