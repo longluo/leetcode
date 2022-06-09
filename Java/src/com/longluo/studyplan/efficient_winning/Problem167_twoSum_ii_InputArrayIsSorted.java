@@ -36,7 +36,7 @@ import java.util.Map;
  * -1000 <= target <= 1000
  * 仅存在一个有效答案
  * <p>
- * https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
+ * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
  */
 public class Problem167_twoSum_ii_InputArrayIsSorted {
 
