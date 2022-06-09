@@ -111,6 +111,31 @@ public class Problem467_uniqueSubstringsinWraparoundString {
         return ans;
     }
 
+    // SlidingWin time: O(n) space: O(26)
+    public static int findSubstringInWraproundString_slidingwin(String p) {
+        int ans = 0;
+        int len = p.length();
+        int left = 0;
+        int[] count = new int[26];
+        for (int right = 1; right <= len; right++) {
+            if (right < len && (p.charAt(right) - p.charAt(right - 1) + 26) % 26 == 1) {
+                continue;
+            } else {
+                while (left < right) {
+                    char ch = p.charAt(left);
+                    int maxLen = count[ch - 'a'];
+                    if (right - left > maxLen) {
+                        ans += right - left - maxLen;
+                        count[ch - 'a'] = right - left;
+                    }
+                    left++;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     // DP time: O(n) space: O(26)
     public static int findSubstringInWraproundString_dp(String p) {
         int len = p.length();
@@ -143,6 +168,9 @@ public class Problem467_uniqueSubstringsinWraparoundString {
 
         System.out.println("6 ?= " + findSubstringInWraproundString_bf_opt("zab"));
         System.out.println("3 ?= " + findSubstringInWraproundString_bf_opt("abaab"));
+
+        System.out.println("6 ?= " + findSubstringInWraproundString_slidingwin("zab"));
+        System.out.println("3 ?= " + findSubstringInWraproundString_slidingwin("abaab"));
 
         System.out.println("6 ?= " + findSubstringInWraproundString_dp("zab"));
         System.out.println("3 ?= " + findSubstringInWraproundString_dp("abaab"));
