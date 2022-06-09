@@ -20,18 +20,19 @@ import java.util.Stack;
  * 1 <= S.length <= 20000
  * S 仅由小写英文字母组成。
  * <p>
- * https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/
+ * https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
  */
 public class Problem1047_removeAllAdjacentDuplicatesInString {
 
     // StringBuilder time: O(n) space: O(n)
+    // StringBuilder as Stack
     public static String removeDuplicates_bf(String s) {
         if (s == null || s.length() <= 1) {
             return s;
         }
 
         int len = s.length();
-        StringBuilder sb = new StringBuilder(len);
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < len; i++) {
             if (sb.length() > 0 && sb.charAt(sb.length() - 1) == s.charAt(i)) {
                 sb.deleteCharAt(sb.length() - 1);
