@@ -28,34 +28,32 @@ package com.longluo.top100;
  * 0 <= sum(nums[i]) <= 1000
  * -1000 <= target <= 100
  * <p>
- * https://leetcode-cn.com/problems/target-sum/
+ * https://leetcode.com/problems/target-sum/
  */
 public class Problem494_targetSum {
 
     // DP time: O(n) space: O(n)
-    // TODO: 2022/5/11  
     public static int findTargetSumWays_dp(int[] nums, int target) {
         int sum = 0;
         for (int x : nums) {
             sum += x;
         }
 
-        if (target > sum) {
+        int diff = sum - target;
+        if (diff < 0 || diff % 2 == 1) {
             return 0;
         }
 
-        int len = nums.length;
-        int range = 2 * sum + 1;
-        int[][] dp = new int[len][range];
-
-        dp[0][sum - nums[0]] += 1;
-        dp[0][sum + nums[0]] += 1;
-
-        for (int i = 0; i < len; i++) {
-
+        int neg = diff / 2;
+        int[] dp = new int[neg + 1];
+        dp[0] = 1;
+        for (int x : nums) {
+            for (int i = neg; i >= x; i--) {
+                dp[i] = dp[i] + dp[i - x];
+            }
         }
 
-        return dp[len][target];
+        return dp[neg];
     }
 
     // DFS time: O(2^n) space: O(n)
@@ -68,7 +66,7 @@ public class Problem494_targetSum {
             return 1;
         }
 
-        if (index > nums.length) {
+        if (index >= nums.length) {
             return 0;
         }
 
