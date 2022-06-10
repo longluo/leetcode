@@ -1,5 +1,7 @@
 package com.longluo.leetcode.stack;
 
+import java.util.Stack;
+
 /**
  * 1209. 删除字符串中的所有相邻重复项 II
  * <p>
@@ -177,20 +179,18 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
 
     // Stack Opt time: O(n) space: O(n)
     public static String removeDuplicates_stack_opt(String s, int k) {
-        if (s.length() < k) {
-            return s;
-        }
-
+        Stack<Integer> stk = new Stack<>();
         StringBuilder sb = new StringBuilder(s);
-        int count[] = new int[sb.length()];
         for (int i = 0; i < sb.length(); i++) {
             if (i == 0 || sb.charAt(i) != sb.charAt(i - 1)) {
-                count[i] = 1;
+                stk.push(1);
             } else {
-                count[i] = count[i - 1] + 1;
-                if (count[i] == k) {
+                int count = stk.pop() + 1;
+                if (count == k) {
                     sb.delete(i - k + 1, i + 1);
-                    i = i - k;
+                    i -= k;
+                } else {
+                    stk.push(count);
                 }
             }
         }
