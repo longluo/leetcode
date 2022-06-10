@@ -254,6 +254,29 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         return sb.reverse().toString();
     }
 
+    // Stack + Two Pointers time: O(n) space: O(n)
+    public static String removeDuplicates_stk_tp(String s, int k) {
+        Stack<Integer> cntStk = new Stack<>();
+        int len = s.length();
+        char[] array = s.toCharArray();
+        int j = 0;
+        for (int i = 0; i < len; i++, j++) {
+            array[j] = array[i];
+            if (j == 0 || array[j] != array[j - 1]) {
+                cntStk.push(1);
+            } else {
+                int count = cntStk.pop() + 1;
+                if (count == k) {
+                    j -= k;
+                } else {
+                    cntStk.push(count);
+                }
+            }
+        }
+
+        return new String(array, 0, j);
+    }
+
     public static void main(String[] args) {
         System.out.println("abcd ?= " + removeDuplicates("abcd", 2));
         System.out.println("aa ?= " + removeDuplicates("deeedbbcccbdaa", 3));
@@ -271,5 +294,7 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         System.out.println("aa ?= " + removeDuplicates_stack_opt("deeedbbcccbdaa", 3));
 
         System.out.println("aa ?= " + removeDuplicates_stk_build("deeedbbcccbdaa", 3));
+
+        System.out.println("aa ?= " + removeDuplicates_stk_tp("deeedbbcccbdaa", 3));
     }
 }
