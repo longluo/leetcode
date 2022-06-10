@@ -3,10 +3,10 @@
 
 -------------------
 
-| \# | Problems | Difficulty | Source Code | Solution |
-|-----|----------|------------|-------------|----------|
-| 001 | [Two Sum](https://leetcode.com/problems/two-sum/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem1_twoSum.java) |  |
-| 002 | [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top_interviews/Problem2_addTwoNumbers.java) |  |
+| No. | Problems | Difficulty | Source Code | Solution |
+|---- |----------|------------|-------------|----------|
+| 001 | [Two Sum](https://leetcode.com/problems/two-sum/) | Easy | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top100/Problem1_twoSum.java) |  |
+| 002 | [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) |Medium| [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top100/Problem2_addTwoNumbers.java) |  |
 | 003 | [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | Medium | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top100/Problem3_longestSubstringWithoutRepeatingCharacters.java) |  |
 | 004 | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays) | Hard | [Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top100/Problem3_longestSubstringWithoutRepeatingCharacters.java) |  |
 | 005 | [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) |Medium|[Java](https://github.com/longluo/leetcode/blob/master/Java/src/com/longluo/top100/Problem5_longestPalindromeString.java) |  |
