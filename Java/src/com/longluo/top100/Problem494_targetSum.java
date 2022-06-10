@@ -96,9 +96,11 @@ public class Problem494_targetSum {
 
     public static void main(String[] args) {
         System.out.println("5 ?= " + findTargetSumWays_dp(new int[]{1, 1, 1, 1, 1}, 3));
+        System.out.println("1 ?= " + findTargetSumWays_dp(new int[]{1}, 1));
+        System.out.println("0 ?= " + findTargetSumWays_dp(new int[]{100}, -200));
+
         System.out.println("5 ?= " + findTargetSumWays_dfs(new int[]{1, 1, 1, 1, 1}, 3));
         System.out.println("5 ?= " + findTargetSumWays_backtrack(new int[]{1, 1, 1, 1, 1}, 3));
-        System.out.println("1 ?= " + findTargetSumWays_dp(new int[]{1}, 1));
         System.out.println("1 ?= " + findTargetSumWays_dfs(new int[]{1}, 1));
         System.out.println("1 ?= " + findTargetSumWays_backtrack(new int[]{1}, 1));
     }
