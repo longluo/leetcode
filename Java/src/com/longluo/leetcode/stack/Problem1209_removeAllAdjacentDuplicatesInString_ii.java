@@ -31,11 +31,36 @@ package com.longluo.leetcode.stack;
  * 2 <= k <= 10^4
  * s 中只含有小写英文字母。
  * <p>
- * https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string-ii/
+ * https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
  */
 public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
 
-    // BF Recursion
+    // Recursion time: O(n^2) space: O(n)
+    // TLE
+    public static String removeDuplicates_rec(String s, int k) {
+        int len = s.length();
+        StringBuilder sb = new StringBuilder(len);
+        int count = 1;
+        sb.append(s.charAt(0));
+        for (int i = 1; i < len; i++) {
+            char ch = s.charAt(i);
+            sb.append(ch);
+            if (ch != s.charAt(i - 1)) {
+                count = 1;
+            } else {
+                count++;
+            }
+
+            if (count == k) {
+                sb.delete(sb.length() - k, sb.length());
+            }
+        }
+
+        return check(sb.toString(), k) ? removeDuplicates_rec(sb.toString(), k) : sb.toString();
+    }
+
+    // BF Recursion time: O(n^2) space: O(n)
+    // AC
     public static String removeDuplicates(String s, int k) {
         int len = s.length();
         if (len < k) {
@@ -97,27 +122,27 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         return false;
     }
 
-    //
-    public static String removeDuplicates_rec(String s, int k) {
-        int len = s.length();
-        StringBuilder sb = new StringBuilder(len);
-        int count = 1;
-        sb.append(s.charAt(0));
-        for (int i = 1; i < len; i++) {
-            char ch = s.charAt(i);
-            sb.append(ch);
-            if (ch != s.charAt(i - 1)) {
-                count = 1;
-            } else {
-                count++;
-            }
+    // BF + StringBuilder time: O(n^2 / k) space: O(1)
+    // TLE
+    public static String removeDuplicates_bf(String s, int k) {
+        StringBuilder sb = new StringBuilder(s);
+        int len = -1;
+        while (len != sb.length()) {
+            len = sb.length();
+            for (int i = 0, count = 1; i < sb.length(); i++) {
+                if (i == 0 || (i > 0 && sb.charAt(i) != sb.charAt(i - 1))) {
+                    count = 1;
+                } else {
+                    count++;
+                }
 
-            if (count == k) {
-                sb.delete(sb.length() - k, sb.length());
+                if (count == k) {
+                    sb.delete(i - k + 1, i + 1);
+                }
             }
         }
 
-        return check(sb.toString(), k) ? removeDuplicates_rec(sb.toString(), k) : sb.toString();
+        return sb.toString();
     }
 
     // Stack time: O(n*k) space: O(n)
@@ -150,6 +175,7 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         return sb.toString();
     }
 
+    // Stack Opt time: O(n) space: O(n)
     public static String removeDuplicates_stack_opt(String s, int k) {
         if (s.length() < k) {
             return s;
@@ -177,6 +203,8 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         System.out.println("aa ?= " + removeDuplicates("deeedbbcccbdaa", 3));
 
         System.out.println("aa ?= " + removeDuplicates_rec("deeedbbcccbdaa", 3));
+
+        System.out.println("aa ?= " + removeDuplicates_bf("deeedbbcccbdaa", 3));
 
         System.out.println("abcd ?= " + removeDuplicates_stack("abcd", 2));
         System.out.println("aa ?= " + removeDuplicates_stack("deeedbbcccbdaa", 3));
