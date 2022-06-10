@@ -198,6 +198,26 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         return sb.toString();
     }
 
+    // Memo time: O(n) space: O(n)
+    public static String removeDuplicates_memo(String s, int k) {
+        StringBuilder sb = new StringBuilder(s);
+        int len = s.length();
+        int[] count = new int[len];
+        for (int i = 0; i < sb.length(); i++) {
+            if (i == 0 || sb.charAt(i) != sb.charAt(i - 1)) {
+                count[i] = 1;
+            } else if (sb.charAt(i) == sb.charAt(i - 1)) {
+                count[i] = count[i - 1] + 1;
+                if (count[i] == k) {
+                    sb.delete(i - k + 1, i + 1);
+                    i = i - k;
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("abcd ?= " + removeDuplicates("abcd", 2));
         System.out.println("aa ?= " + removeDuplicates("deeedbbcccbdaa", 3));
@@ -205,6 +225,9 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         System.out.println("aa ?= " + removeDuplicates_rec("deeedbbcccbdaa", 3));
 
         System.out.println("aa ?= " + removeDuplicates_bf("deeedbbcccbdaa", 3));
+
+        System.out.println("abcd ?= " + removeDuplicates_memo("abcd", 2));
+        System.out.println("aa ?= " + removeDuplicates_memo("deeedbbcccbdaa", 3));
 
         System.out.println("abcd ?= " + removeDuplicates_stack("abcd", 2));
         System.out.println("aa ?= " + removeDuplicates_stack("deeedbbcccbdaa", 3));
