@@ -218,6 +218,42 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         return sb.toString();
     }
 
+    // Stack Build time: O(n) space: O(n)
+    static class Pair {
+        int cnt;
+        char ch;
+
+        Pair(int cnt, char ch) {
+            this.ch = ch;
+            this.cnt = cnt;
+        }
+    }
+
+    public static String removeDuplicates_stk_build(String s, int k) {
+        Stack<Pair> stk = new Stack<>();
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            if (stk.empty() || s.charAt(i) != stk.peek().ch) {
+                stk.push(new Pair(1, s.charAt(i)));
+            } else {
+                stk.peek().cnt++;
+                if (stk.peek().cnt == k) {
+                    stk.pop();
+                }
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while (!stk.empty()) {
+            Pair p = stk.pop();
+            for (int i = 0; i < p.cnt; i++) {
+                sb.append(p.ch);
+            }
+        }
+
+        return sb.reverse().toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("abcd ?= " + removeDuplicates("abcd", 2));
         System.out.println("aa ?= " + removeDuplicates("deeedbbcccbdaa", 3));
@@ -233,5 +269,7 @@ public class Problem1209_removeAllAdjacentDuplicatesInString_ii {
         System.out.println("aa ?= " + removeDuplicates_stack("deeedbbcccbdaa", 3));
 
         System.out.println("aa ?= " + removeDuplicates_stack_opt("deeedbbcccbdaa", 3));
+
+        System.out.println("aa ?= " + removeDuplicates_stk_build("deeedbbcccbdaa", 3));
     }
 }
