@@ -1,5 +1,8 @@
 package com.longluo.leetcode.slidingwindow;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 1658. 将 x 减到 0 的最小操作数
  * <p>
@@ -30,6 +33,35 @@ package com.longluo.leetcode.slidingwindow;
  * https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/
  */
 public class Problem1658_minOperations {
+
+    // PrefixSums + HashMap time: O(n) space: O(n)
+    public static int minOperations_hashmap(int[] nums, int x) {
+        int len = nums.length;
+        int target = -x;
+
+        for (int num : nums) {
+            target += num;
+        }
+
+        if (target == 0) {
+            return len;
+        }
+
+        int maxLen = -1;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1);
+        int sum = 0;
+        for (int i = 0; i < len; i++) {
+            sum += nums[i];
+            if (map.containsKey(sum - target)) {
+                maxLen = Math.max(maxLen, i - map.get(sum - target));
+            }
+
+            map.put(sum, i);
+        }
+
+        return maxLen == -1 ? -1 : len - maxLen;
+    }
 
     // SlidingWindow time: O(n) space: O(1)
     public static int minOperations(int[] nums, int x) {
@@ -72,5 +104,9 @@ public class Problem1658_minOperations {
         System.out.println("5 ?= " + minOperations(new int[]{10, 1, 1, 1, 1, 1}, 5));
         System.out.println("-1 ?= " + minOperations(new int[]{5, 6, 7, 8, 9}, 4));
         System.out.println("5 ?= " + minOperations(new int[]{3, 2, 20, 1, 1, 3}, 10));
+
+        System.out.println("1 ?= " + minOperations_hashmap(new int[]{5, 2, 3, 1, 1}, 5));
+        System.out.println("-1 ?= " + minOperations_hashmap(new int[]{5, 6, 7, 8, 9}, 4));
+        System.out.println("5 ?= " + minOperations_hashmap(new int[]{3, 2, 20, 1, 1, 3}, 10));
     }
 }
