@@ -69,7 +69,27 @@ public class Problem5259_calculateAmountPaidinTaxes {
         return tax;
     }
 
+    // Simulate Opt time: O(n) space: O(1)
+    public static double calculateTax_opt(int[][] brackets, int income) {
+        int len = brackets.length;
+        double tax = 0;
+        int prev = 0;
+        for (int i = 0; i < len; i++) {
+            int upper = brackets[i][0];
+            int percent = brackets[i][1];
+            int diff = Math.min(income, upper) - prev;
+            prev = upper;
+            tax += (double) diff * percent / 100;
+            if (income < upper) {
+                break;
+            }
+        }
+
+        return tax;
+    }
+
     public static void main(String[] args) {
         System.out.println("2.65000 ?= " + calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10));
+        System.out.println("2.65000 ?= " + calculateTax_opt(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10));
     }
 }
