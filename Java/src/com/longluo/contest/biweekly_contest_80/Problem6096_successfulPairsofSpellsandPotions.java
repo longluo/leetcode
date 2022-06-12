@@ -65,8 +65,48 @@ public class Problem6096_successfulPairsofSpellsandPotions {
         return res;
     }
 
+    // BinarySearch time: O((m+n)logm) space: O(n)
+    public static int[] successfulPairs_bs(int[] spells, int[] potions, long success) {
+        int n = spells.length;
+        int m = potions.length;
+
+        Arrays.sort(potions);
+
+        int[] res = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            int spell = spells[i];
+            int idx = binarySearch(potions, spell, success);
+            if (idx >= 0) {
+                res[i] = m - idx;
+            } else {
+                res[i] = 0;
+            }
+        }
+
+        return res;
+    }
+
+    public static int binarySearch(int[] array, int spell, long target) {
+        int left = 0;
+        int right = array.length - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if ((long)array[mid] * spell >= target) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return (long) array[left] * spell >= target ? left : -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("[4, 0, 3] ?= " + Arrays.toString(successfulPairs(new int[]{5, 1, 3}, new int[]{1, 2, 3, 4, 5}, 7)));
         System.out.println("[3, 0, 3] ?= " + Arrays.toString(successfulPairs(new int[]{15, 8, 19}, new int[]{38, 36, 23}, 328)));
+
+        System.out.println("[3, 0, 3] ?= " + Arrays.toString(successfulPairs_bs(new int[]{15, 8, 19}, new int[]{38, 36, 23}, 328)));
     }
 }
