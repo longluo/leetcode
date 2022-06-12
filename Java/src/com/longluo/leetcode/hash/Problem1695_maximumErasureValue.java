@@ -59,8 +59,34 @@ public class Problem1695_maximumErasureValue {
         return ans;
     }
 
+    // SlidingWin better time: O(n) space: O(n)
+    public static int maximumUniqueSubarray_win(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        int max = 0;
+        int sum = 0;
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (!set.contains(nums[i])) {
+                set.add(nums[i]);
+                sum += nums[i];
+                max = Math.max(max, sum);
+            } else {
+                while (nums[j] != nums[i]) {
+                    set.remove(nums[j]);
+                    sum -= nums[j];
+                    j++;
+                }
+                j++;
+            }
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println("17 ?= " + maximumUniqueSubarray(new int[]{4, 2, 4, 5, 6}));
         System.out.println("8 ?= " + maximumUniqueSubarray(new int[]{5, 2, 1, 2, 5, 2, 1, 2, 5}));
+
+        System.out.println("8 ?= " + maximumUniqueSubarray_win(new int[]{5, 2, 1, 2, 5, 2, 1, 2, 5}));
     }
 }
