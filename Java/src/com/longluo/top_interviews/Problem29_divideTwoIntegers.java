@@ -25,7 +25,7 @@ import java.util.List;
  * 除数不为 0。
  * 假设我们的环境只能存储 32 位有符号整数，其数值范围是[−2^31,  2^31 − 1]。本题中，如果除法结果溢出，则返回2^31 − 1。
  * <p>
- * https://leetcode-cn.com/problems/divide-two-integers/
+ * https://leetcode.com/problems/divide-two-integers/
  */
 public class Problem29_divideTwoIntegers {
 
