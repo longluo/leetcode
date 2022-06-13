@@ -85,10 +85,31 @@ public class Problem1051_heightChecker {
         return ans;
     }
 
+    // Count Sort Opt time: O(C) space: O(C)
+    public static int heightChecker_opt(int[] heights) {
+        int[] counts = new int[101];
+        for (int x : heights) {
+            counts[x]++;
+        }
+
+        int ans = 0;
+        for (int h = 1, i = 0; h < counts.length; h++) {
+            while (counts[h]-- > 0) {
+                if (heights[i++] != h) {
+                    ans++;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + heightChecker_sort(new int[]{1, 1, 4, 2, 1, 3}));
 
         System.out.println("3 ?= " + heightChecker(new int[]{1, 1, 4, 2, 1, 3}));
         System.out.println("4 ?= " + heightChecker(new int[]{2, 1, 2, 1, 1, 2, 2, 1}));
+
+        System.out.println("4 ?= " + heightChecker_opt(new int[]{2, 1, 2, 1, 1, 2, 2, 1}));
     }
 }
