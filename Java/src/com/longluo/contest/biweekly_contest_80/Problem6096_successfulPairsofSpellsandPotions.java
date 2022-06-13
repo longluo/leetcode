@@ -1,8 +1,6 @@
 package com.longluo.contest.biweekly_contest_80;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 6096. 咒语和药水的成功对数
@@ -88,19 +86,25 @@ public class Problem6096_successfulPairsofSpellsandPotions {
     }
 
     public static int binarySearch(int[] array, int spell, long target) {
+        if ((long) spell * array[0] >= target) {
+            return 0;
+        } else if ((long) spell * array[array.length - 1] < target) {
+            return -1;
+        }
+
         int left = 0;
         int right = array.length - 1;
 
         while (left < right) {
             int mid = left + (right - left) / 2;
-            if ((long)array[mid] * spell >= target) {
+            if ((long) array[mid] * spell >= target) {
                 right = mid;
             } else {
                 left = mid + 1;
             }
         }
 
-        return (long) array[left] * spell >= target ? left : -1;
+        return left;
     }
 
     public static void main(String[] args) {
