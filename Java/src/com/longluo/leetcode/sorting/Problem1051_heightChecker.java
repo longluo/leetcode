@@ -1,6 +1,5 @@
 package com.longluo.leetcode.sorting;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
