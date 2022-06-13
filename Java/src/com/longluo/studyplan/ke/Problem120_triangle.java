@@ -52,11 +52,6 @@ public class Problem120_triangle {
         }
 
         int len = triangle.size();
-        if (len == 1) {
-            return triangle.get(0).get(0);
-        }
-
-        int min = Integer.MAX_VALUE;
         int[][] dp = new int[len][len];
         dp[0][0] = triangle.get(0).get(0);
         for (int i = 1; i < len; i++) {
@@ -67,7 +62,8 @@ public class Problem120_triangle {
             }
         }
 
-        for (int i = 0; i < len; i++) {
+        int min = dp[len - 1][0];
+        for (int i = 1; i < len; i++) {
             min = Math.min(min, dp[len - 1][i]);
         }
 
