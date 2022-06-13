@@ -29,7 +29,7 @@ import java.util.List;
  * 提示：
  * 1 <= n <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/elimination-game/
+ * https://leetcode.com/problems/elimination-game/
  */
 public class Problem390_eliminationGame {
 
@@ -115,6 +115,7 @@ public class Problem390_eliminationGame {
     }
 
     // Sequence
+    // TODO: 2022/6/13  
     public static int lastRemaining_seq(int n) {
         if (n <= 2) {
             return n;
