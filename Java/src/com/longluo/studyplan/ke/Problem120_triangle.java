@@ -74,6 +74,25 @@ public class Problem120_triangle {
         return min;
     }
 
+    // DP Bottom-Up Space time: O(n^2) space: O(n)
+    public static int minimumTotal_dp_bottomup(List<List<Integer>> triangle) {
+        int len = triangle.size();
+
+        int[] dp = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            dp[i] = triangle.get(len - 1).get(i);
+        }
+
+        for (int i = len - 2; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
+            }
+        }
+
+        return dp[0];
+    }
+
     public static void main(String[] args) {
         List<List<Integer>> tst1 = new ArrayList<>();
         List<Integer> tst11 = new ArrayList<>();
@@ -99,5 +118,6 @@ public class Problem120_triangle {
         tst1.add(tst14);
 
         System.out.println(minimumTotal_dp(tst1));
+        System.out.println(minimumTotal_dp_bottomup(tst1));
     }
 }
