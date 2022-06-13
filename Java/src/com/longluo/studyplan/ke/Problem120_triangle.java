@@ -74,6 +74,30 @@ public class Problem120_triangle {
         return min;
     }
 
+    // DP Opt Space time: O(n^2) space: O(2*n)
+    public static int minimumTotal_dp_opt(List<List<Integer>> triangle) {
+        int len = triangle.size();
+        int[][] dp = new int[2][len];
+
+        dp[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < len; i++) {
+            int cur = i % 2;
+            dp[cur][0] = dp[(cur + 1) % 2][0] + triangle.get(i).get(0);
+            dp[cur][i] = dp[(cur + 1) % 2][i - 1] + triangle.get(i).get(i);
+
+            for (int j = 1; j < i; j++) {
+                dp[cur][j] = Math.min(dp[(cur + 1) % 2][j - 1], dp[(cur + 1) % 2][j]) + triangle.get(i).get(j);
+            }
+        }
+
+        int min = dp[(len + 1) % 2][0];
+        for (int i = 0; i < len; i++) {
+            min = Math.min(min, dp[(len + 1) % 2][i]);
+        }
+
+        return min;
+    }
+
     // DP Bottom-Up Space time: O(n^2) space: O(n)
     public static int minimumTotal_dp_bottomup(List<List<Integer>> triangle) {
         int len = triangle.size();
@@ -118,6 +142,7 @@ public class Problem120_triangle {
         tst1.add(tst14);
 
         System.out.println(minimumTotal_dp(tst1));
+        System.out.println(minimumTotal_dp_opt(tst1));
         System.out.println(minimumTotal_dp_bottomup(tst1));
     }
 }
