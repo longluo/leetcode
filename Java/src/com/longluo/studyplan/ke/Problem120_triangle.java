@@ -82,17 +82,43 @@ public class Problem120_triangle {
         dp[0][0] = triangle.get(0).get(0);
         for (int i = 1; i < len; i++) {
             int cur = i % 2;
-            dp[cur][0] = dp[(cur + 1) % 2][0] + triangle.get(i).get(0);
-            dp[cur][i] = dp[(cur + 1) % 2][i - 1] + triangle.get(i).get(i);
+            int prev = 1 - cur;
 
+            dp[cur][0] = dp[prev][0] + triangle.get(i).get(0);
+            dp[cur][i] = dp[prev][i - 1] + triangle.get(i).get(i);
             for (int j = 1; j < i; j++) {
-                dp[cur][j] = Math.min(dp[(cur + 1) % 2][j - 1], dp[(cur + 1) % 2][j]) + triangle.get(i).get(j);
+                dp[cur][j] = Math.min(dp[prev][j - 1], dp[prev][j]) + triangle.get(i).get(j);
             }
         }
 
-        int min = dp[(len + 1) % 2][0];
-        for (int i = 0; i < len; i++) {
+        int min = dp[(len - 1) % 2][0];
+        for (int i = 1; i < len; i++) {
             min = Math.min(min, dp[(len + 1) % 2][i]);
+        }
+
+        return min;
+    }
+
+    // DP Top-Down time: O(n^2) space: O(n)
+    public static int minimumTotal_dp_topdown(List<List<Integer>> triangle) {
+        int len = triangle.size();
+
+        int[] dp = new int[len];
+        dp[0] = triangle.get(0).get(0);
+
+        for (int i = 1; i < len; i++) {
+            dp[i] += dp[i - 1] + triangle.get(i).get(i);
+
+            for (int j = i - 1; j > 0; j--) {
+                dp[j] = Math.min(dp[j - 1], dp[j]) + triangle.get(i).get(j);
+            }
+
+            dp[0] += triangle.get(i).get(0);
+        }
+
+        int min = dp[0];
+        for (int i = 1; i < len; i++) {
+            min = Math.min(min, dp[i]);
         }
 
         return min;
@@ -143,6 +169,7 @@ public class Problem120_triangle {
 
         System.out.println(minimumTotal_dp(tst1));
         System.out.println(minimumTotal_dp_opt(tst1));
+        System.out.println(minimumTotal_dp_topdown(tst1));
         System.out.println(minimumTotal_dp_bottomup(tst1));
     }
 }
