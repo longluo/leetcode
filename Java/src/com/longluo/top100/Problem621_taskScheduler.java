@@ -63,11 +63,44 @@ public class Problem621_taskScheduler {
         return min;
     }
 
-    // PQ time: O() space: O(n)
+    // PQ time: O(nC) space: O(n)
     public static int leastInterval_pq(char[] tasks, int n) {
+        int[] counts = new int[26];
+        for (char task : tasks) {
+            counts[task - 'A']++;
+        }
 
+        PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        for (int x : counts) {
+            if (x > 0) {
+                pq.offer(x);
+            }
+        }
 
-        return 0;
+        int min = 0;
+        int cycle = n + 1;
+        while (!pq.isEmpty()) {
+            int count = 0;
+            Queue<Integer> queue = new LinkedList<>();
+            for (int i = 0; i < cycle; i++) {
+                if (!pq.isEmpty()) {
+                    queue.offer(pq.poll());
+                    count++;
+                }
+            }
+
+            while (!queue.isEmpty()) {
+                int freq = queue.poll();
+                freq--;
+                if (freq > 0) {
+                    pq.offer(freq);
+                }
+            }
+
+            min += pq.isEmpty() ? count : cycle;
+        }
+
+        return min;
     }
 
     // Math time: O(nlogn+n)=O(nlogn) space: O(n + logn)=O(n)
