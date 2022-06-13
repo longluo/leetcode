@@ -22,59 +22,49 @@ import java.util.*;
  * 任务的总个数为 [1, 10000]。
  * n的取值范围为 [0, 100]。
  * <p>
- * https://leetcode-cn.com/problems/task-scheduler/
+ * https://leetcode.com/problems/task-scheduler/
  */
 public class Problem621_taskScheduler {
 
-    // Greedy
+    // Simulate + Greedy time: O(tasks * C) space: O(C)
     public static int leastInterval_greedy(char[] tasks, int n) {
-        if (tasks == null || tasks.length <= 1 || n == 0) {
-            return tasks.length;
+        int len = tasks.length;
+        if (n == 0) {
+            return len;
         }
+
+        int[] cnt = new int[26];
+        for (char task : tasks) {
+            cnt[task - 'A']++;
+        }
+
+        Arrays.sort(cnt);
 
         int min = 0;
-        Map<Character, Integer> map = new HashMap<>();
-        for (char task : tasks) {
-            map.put(task, map.getOrDefault(task, 0) + 1);
-        }
-
-        List<int[]> taskList = new ArrayList<>();
-        int taskCnt = 0;
-        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            taskList.add(new int[]{taskCnt, entry.getValue()});
-            taskCnt++;
-        }
-
-        Collections.sort(taskList, (o1, o2) -> o2[1] - o1[1]);
-
-        while (taskList.get(0)[1] > 0) {
-            int cd = 0;
-            while (cd <= n) {
-                if (taskList.size() < n + 1) {
-                    for (int i = 0; i < taskList.size(); i++) {
-                        taskList.get(i)[1]--;
-                    }
-                } else {
-                    if (taskList.get(cd)[1] > 0) {
-                        taskList.get(cd)[1]--;
-                    }
+        int size = tasks.length;
+        while (size > 0) {
+            int roundTime = 0;
+            for (int i = 25; i >= 0; i--) {
+                if (cnt[i] > 0) {
+                    roundTime++;
+                    cnt[i]--;
+                    size--;
                 }
 
-                cd++;
-                min++;
+                if (roundTime > n) {
+                    break;
+                }
             }
 
-            Collections.sort(taskList, (o1, o2) -> o2[1] - o1[1]);
+            Arrays.sort(cnt);
+            min += size == 0 ? roundTime : Math.max(roundTime, n + 1);
         }
 
         return min;
     }
 
-    // PQ
+    // PQ time: O() space: O(n)
     public static int leastInterval_pq(char[] tasks, int n) {
-        if (tasks == null || tasks.length <= 1 || n == 0) {
-            return tasks.length;
-        }
 
 
         return 0;
@@ -127,6 +117,7 @@ public class Problem621_taskScheduler {
         System.out.println("16 ?= " + leastInterval_greedy(new char[]{'A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'}, 2));
 
         System.out.println("8 ?= " + leastInterval_pq(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 2));
+        System.out.println("16 ?= " + leastInterval_pq(new char[]{'A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'}, 2));
 
         System.out.println("8 ?= " + leastInterval_math(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 2));
         System.out.println("6 ?= " + leastInterval_math(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 0));
