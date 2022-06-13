@@ -46,13 +46,13 @@ import java.util.Arrays;
  */
 public class Problem1051_heightChecker {
 
-    // Sorting time: O(nlogn) space: O(logn)
-    public static int heightChecker(int[] heights) {
-        int[] array = heights.clone();
+    // Sorting time: O(nlogn) space: O(n)
+    public static int heightChecker_sort(int[] heights) {
+        int[] expected = heights.clone();
         int ans = 0;
-        Arrays.sort(array);
+        Arrays.sort(expected);
         for (int i = 0; i < heights.length; i++) {
-            if (array[i] != heights[i]) {
+            if (expected[i] != heights[i]) {
                 ans++;
             }
         }
@@ -60,7 +60,35 @@ public class Problem1051_heightChecker {
         return ans;
     }
 
+    // Count Sort time: O(n + C) space: O(C)
+    public static int heightChecker(int[] heights) {
+        int[] counts = new int[101];
+        for (int x : heights) {
+            counts[x]++;
+        }
+
+        int ans = 0;
+        for (int i = 0, h = 1; i < heights.length; i++) {
+            while (counts[h] == 0) {
+                h++;
+            }
+
+            if (counts[h] > 0) {
+                if (heights[i] != h) {
+                    ans++;
+                }
+
+                counts[h]--;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
+        System.out.println("3 ?= " + heightChecker_sort(new int[]{1, 1, 4, 2, 1, 3}));
+
         System.out.println("3 ?= " + heightChecker(new int[]{1, 1, 4, 2, 1, 3}));
+        System.out.println("4 ?= " + heightChecker(new int[]{2, 1, 2, 1, 1, 2, 2, 1}));
     }
 }
