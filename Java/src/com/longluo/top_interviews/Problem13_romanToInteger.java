@@ -142,17 +142,19 @@ public class Problem13_romanToInteger {
         put('M', 1000);
     }};
 
-    public static int romanToInt_2(String s) {
+    // HashMap time: O(n) space: O(C)
+    public static int romanToInt_hashmap(String s) {
         int ans = 0;
-        int n = s.length();
-        for (int i = 0; i < n; ++i) {
+        int len = s.length();
+        for (int i = 0; i < len; ++i) {
             int value = symbolValues.get(s.charAt(i));
-            if (i < n - 1 && value < symbolValues.get(s.charAt(i + 1))) {
+            if (i < len - 1 && value < symbolValues.get(s.charAt(i + 1))) {
                 ans -= value;
             } else {
                 ans += value;
             }
         }
+
         return ans;
     }
 
@@ -163,10 +165,10 @@ public class Problem13_romanToInteger {
         System.out.println("58 ?= " + romanToInt("LVIII"));
         System.out.println("1994 ?= " + romanToInt("MCMXCIV"));
 
-        System.out.println("3 ?= " + romanToInt_2("III"));
-        System.out.println("4 ?= " + romanToInt_2("IV"));
-        System.out.println("9 ?= " + romanToInt_2("IX"));
-        System.out.println("58 ?= " + romanToInt_2("LVIII"));
-        System.out.println("1994 ?= " + romanToInt_2("MCMXCIV"));
+        System.out.println("3 ?= " + romanToInt_hashmap("III"));
+        System.out.println("4 ?= " + romanToInt_hashmap("IV"));
+        System.out.println("9 ?= " + romanToInt_hashmap("IX"));
+        System.out.println("58 ?= " + romanToInt_hashmap("LVIII"));
+        System.out.println("1994 ?= " + romanToInt_hashmap("MCMXCIV"));
     }
 }
