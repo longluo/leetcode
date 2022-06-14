@@ -1,5 +1,10 @@
 package com.longluo.leetcode.bfs;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 /**
  * 1345. 跳跃游戏 IV
  * <p>
@@ -42,15 +47,33 @@ package com.longluo.leetcode.bfs;
  * -10^8 <= arr[i] <= 10^8
  * 通过次数9,078提交次数22,33
  * <p>
- * https://leetcode-cn.com/problems/jump-game-iv/
+ * https://leetcode.com/problems/jump-game-iv/
  */
 public class Problem1345_jumpGame_iv {
 
+    // TODO: 2022/6/14  
     public static int minJumps(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return 0;
+        }
 
+        int ans = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        int len = arr.length;
+        for (int i = 0; i < len; i++) {
+            map.put(i, arr[i]);
+        }
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{0, arr[0]});
+
+        return ans;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("0 ?= " + minJumps(new int[]{7}));
+        System.out.println("2 ?= " + minJumps(new int[]{6, 1, 9}));
+        System.out.println("1 ?= " + minJumps(new int[]{7, 6, 9, 6, 9, 6, 9, 7}));
+        System.out.println("3 ?= " + minJumps(new int[]{11, 22, 7, 7, 7, 7, 7, 7, 7, 22, 13}));
+        System.out.println("3 ?= " + minJumps(new int[]{100, -23, -23, 404, 100, 23, 23, 23, 3, 404}));
     }
 }
