@@ -54,23 +54,15 @@ public class Problem62_uniquePaths {
     }
 
     // Math time: O(m) space: O(1)
-    // Exceed Long Limit
+    // C_m + n - 2 (m-1)
     public static int uniquePaths_math(int m, int n) {
-        long numerator = 1;
-        for (int i = 1; i < m + n - 1; i++) {
-            numerator = numerator * i;
+        long ans = 1;
+        
+        for (int x = n, y = 1; y < m; ++x, ++y) {
+            ans = ans * x / y;
         }
 
-        long denominator = 1;
-        for (int i = 1; i < m; i++) {
-            denominator = denominator * i;
-        }
-
-        for (int i = 1; i < n; i++) {
-            denominator = denominator * i;
-        }
-
-        return (int)(numerator / denominator);
+        return (int) ans;
     }
 
     public static void main(String[] args) {
