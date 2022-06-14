@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class Problem204_countPrimes {
 
-    // BF time: O(n^2) space: O(1)
+    // BF time: O(n*sqrt(n)) space: O(1)
     // TLE
     public static int countPrimes_bf(int n) {
         if (n <= 1) {
@@ -56,7 +56,7 @@ public class Problem204_countPrimes {
         return n >= 2;
     }
 
-    // TODO: 2022/6/7
+    // 质数筛法 time: O(nloglogn) space: O(n)
     public static int countPrimes(int n) {
         if (n <= 1) {
             return 0;
@@ -65,17 +65,18 @@ public class Problem204_countPrimes {
         int count = 0;
         int[] isPrime = new int[n];
         Arrays.fill(isPrime, 1);
+
         for (int i = 2; i < n; i++) {
-            if (isPrime[i - 1] == 0) {
+            if (isPrime[i] == 0) {
                 continue;
             }
 
-            if (isPrime(i)) {
-                count++;
-            }
+            count++;
 
-            for (int j = 2; j * i < n; j++) {
-                isPrime[j * i - 1] = 0;
+            if ((long) i * i < n) {
+                for (int j = i * i; j < n; j += i) {
+                    isPrime[j] = 0;
+                }
             }
         }
 
@@ -152,11 +153,11 @@ public class Problem204_countPrimes {
     }
 
     public static void main(String[] args) {
-//        System.out.println("false ?= " + isPrimeNumber(0));
-//        System.out.println("false ?= " + isPrimeNumber(1));
-//        System.out.println("true ?= " + isPrimeNumber(2));
-//        System.out.println("true ?= " + isPrimeNumber(3));
-//        System.out.println("false ?= " + isPrimeNumber(10));
+        System.out.println("false ?= " + isPrime(0));
+        System.out.println("false ?= " + isPrime(1));
+        System.out.println("true ?= " + isPrime(2));
+        System.out.println("true ?= " + isPrime(3));
+        System.out.println("false ?= " + isPrime(10));
 
         System.out.println("0 ?= " + countPrimes_bf(2));
 
