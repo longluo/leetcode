@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * 204. 计数质数
+ * <p>
  * 统计所有小于非负整数n的质数的数量。
  * <p>
  * 示例 1：
@@ -28,6 +29,38 @@ import java.util.List;
  */
 public class Problem204_countPrimes {
 
+    // BF time: O(n^2) space: O(1)
+    // TLE
+    public static int countPrimes_bf(int n) {
+        if (n <= 1) {
+            return 0;
+        }
+
+        int ans = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrime(i)) {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
+    private static boolean isPrime(int n) {
+        if (n <= 1) {
+            return false;
+        }
+
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // TODO: 2022/6/7
     public static int countPrimes(int n) {
         if (n <= 1) {
             return 0;
@@ -41,7 +74,7 @@ public class Problem204_countPrimes {
                 continue;
             }
 
-            if (isPrimeNumber(i)) {
+            if (isPrime(i)) {
                 count++;
             }
 
@@ -120,35 +153,6 @@ public class Problem204_countPrimes {
         }
 
         return primes.size();
-    }
-
-    public static int countPrimes_bf(int n) {
-        if (n <= 1) {
-            return 0;
-        }
-
-        int ans = 0;
-        for (int i = 2; i < n; i++) {
-            if (isPrimeNumber(i)) {
-                ans++;
-            }
-        }
-
-        return ans;
-    }
-
-    private static boolean isPrimeNumber(int n) {
-        if (n <= 1) {
-            return false;
-        }
-
-        for (int i = 2; i * i <= n; i++) {
-            if (n % i == 0) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     public static void main(String[] args) {
