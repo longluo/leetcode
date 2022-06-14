@@ -57,20 +57,21 @@ import java.util.Map;
  * IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。
  * 关于罗马数字的详尽书写规则，可以参考 罗马数字 - Mathematics
  * <p>
- * https://leetcode-cn.com/problems/roman-to-integer/
- * <p>
  * https://leetcode.com/problems/roman-to-integer/
  */
 public class Problem13_romanToInteger {
 
+    // Simulate time: O(n) space: O(1)
     public static int romanToInt(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
+
         int ans = 0;
-        int n = s.length();
-        for (int i = 0; i < n; i++) {
-            switch (s.charAt(i)) {
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            switch (ch) {
                 case 'M':
                     ans += 1000;
                     break;
@@ -80,10 +81,10 @@ public class Problem13_romanToInteger {
                     break;
 
                 case 'C':
-                    if (i + 1 < n && s.charAt(i + 1) == 'M') {
+                    if (i + 1 < len && s.charAt(i + 1) == 'M') {
                         ans += 900;
                         i++;
-                    } else if ((i + 1 < n && s.charAt(i + 1) == 'D')) {
+                    } else if ((i + 1 < len && s.charAt(i + 1) == 'D')) {
                         ans += 400;
                         i++;
                     } else {
@@ -96,10 +97,10 @@ public class Problem13_romanToInteger {
                     break;
 
                 case 'X':
-                    if (i + 1 < n && s.charAt(i + 1) == 'C') {
+                    if (i + 1 < len && s.charAt(i + 1) == 'C') {
                         ans += 90;
                         i++;
-                    } else if ((i + 1 < n && s.charAt(i + 1) == 'L')) {
+                    } else if ((i + 1 < len && s.charAt(i + 1) == 'L')) {
                         ans += 40;
                         i++;
                     } else {
@@ -112,10 +113,10 @@ public class Problem13_romanToInteger {
                     break;
 
                 case 'I':
-                    if (i + 1 < n && s.charAt(i + 1) == 'V') {
+                    if (i + 1 < len && s.charAt(i + 1) == 'V') {
                         ans += 4;
                         i++;
-                    } else if ((i + 1 < n && s.charAt(i + 1) == 'X')) {
+                    } else if ((i + 1 < len && s.charAt(i + 1) == 'X')) {
                         ans += 9;
                         i++;
                     } else {
