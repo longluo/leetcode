@@ -1,6 +1,8 @@
 package com.longluo.leetcode.dp;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 1048. 最长字符串链
@@ -39,7 +41,7 @@ import java.util.Arrays;
  */
 public class Problem1048_longestStringChain {
 
-    // DP time: O() space: O(1)
+    // DP time: O(n^3) space: O(n)
     public static int longestStrChain_dp(String[] words) {
         int len = words.length;
 
@@ -84,10 +86,36 @@ public class Problem1048_longestStringChain {
         return p == len1;
     }
 
+    // HashMap time: O(nC) space: O(n)
+    public static int longestStrChain_hashmap(String[] words) {
+        Arrays.sort(words, (o1, o2) -> o1.length() - o2.length());
+
+        int max = 1;
+        Map<String, Integer> counts = new HashMap<>();
+
+        for (String word : words) {
+            counts.put(word, 1);
+
+            for (int i = 0; i < word.length(); i++) {
+                StringBuilder sb = new StringBuilder(word);
+                String next = sb.deleteCharAt(i).toString();
+                if (counts.containsKey(next) && counts.get(next) + 1 > counts.get(word)) {
+                    counts.put(word, counts.get(next) + 1);
+                }
+            }
+
+            max = Math.max(max, counts.get(word));
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + longestStrChain_dp(new String[]{"a", "b", "ab", "bac"}));
         System.out.println("2 ?= " + longestStrChain_dp(new String[]{"a", "b", "ba", "abc", "abd", "bdca"}));
         System.out.println("4 ?= " + longestStrChain_dp(new String[]{"a", "b", "ba", "bca", "bda", "bdca"}));
         System.out.println("8 ?= " + longestStrChain_dp(new String[]{"qyssedya", "pabouk", "mjwdrbqwp", "vylodpmwp", "nfyqeowa", "pu", "paboukc", "qssedya", "lopmw", "nfyqowa", "vlodpmw", "mwdrqwp", "opmw", "qsda", "neo", "qyssedhyac", "pmw", "lodpmw", "mjwdrqwp", "eo", "nfqwa", "pabuk", "nfyqwa", "qssdya", "qsdya", "qyssedhya", "pabu", "nqwa", "pabqoukc", "pbu", "mw", "vlodpmwp", "x", "xr"}));
+
+        System.out.println("8 ?= " + longestStrChain_hashmap(new String[]{"qyssedya", "pabouk", "mjwdrbqwp", "vylodpmwp", "nfyqeowa", "pu", "paboukc", "qssedya", "lopmw", "nfyqowa", "vlodpmw", "mwdrqwp", "opmw", "qsda", "neo", "qyssedhyac", "pmw", "lodpmw", "mjwdrqwp", "eo", "nfqwa", "pabuk", "nfyqwa", "qssdya", "qsdya", "qyssedhya", "pabu", "nqwa", "pabqoukc", "pbu", "mw", "vlodpmwp", "x", "xr"}));
     }
 }
