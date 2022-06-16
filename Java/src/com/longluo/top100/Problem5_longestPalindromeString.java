@@ -25,7 +25,7 @@ package com.longluo.top100;
 public class Problem5_longestPalindromeString {
 
     // BF time: O(n^3) space: O(n)
-    public static String longestPalindrome(String s) {
+    public static String longestPalindrome_bf(String s) {
         if (s == null || s.length() <= 1) {
             return s;
         }
@@ -59,8 +59,47 @@ public class Problem5_longestPalindromeString {
         return true;
     }
 
+    // DP time: O(n^2) space: O(n^2)
+    public static String longestPalindrome_dp(String s) {
+        int len = s.length();
+        if (len < 2) {
+            return s;
+        }
+
+        int maxLen = 1;
+        int left = 0;
+
+        boolean[][] dp = new boolean[len][len];
+
+        for (int i = 0; i < len; i++) {
+            dp[i][i] = true;
+        }
+
+        for (int j = 1; j < len; j++) {
+            for (int i = 0; i < j; i++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    if (j - i < 3) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+
+                if (dp[i][j] && j - i + 1 > maxLen) {
+                    maxLen = j - i + 1;
+                    left = i;
+                }
+            }
+        }
+
+        return s.substring(left, left + maxLen);
+    }
+
     public static void main(String[] args) {
-        System.out.println("bab ?= " + longestPalindrome("babad"));
-        System.out.println("bb ?= " + longestPalindrome("cbbd"));
+        System.out.println("bab ?= " + longestPalindrome_bf("babad"));
+        System.out.println("bb ?= " + longestPalindrome_bf("cbbd"));
+
+        System.out.println("bab ?= " + longestPalindrome_dp("babad"));
+        System.out.println("bb ?= " + longestPalindrome_dp("cbbd"));
     }
 }
