@@ -37,8 +37,9 @@ package com.longluo.contest.weekly_contest_298;
  * <p>
  * https://leetcode.cn/problems/sum-of-numbers-with-units-digit-k/
  */
-public class Problem5242_minimumNumbers {
+public class Problem5218_minimumNumbers {
 
+    // Simulate time: O(n) space: O(1)
     public static int minimumNumbers(int num, int k) {
         if (num == 0) {
             return 0;
