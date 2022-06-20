@@ -20,11 +20,12 @@ import java.util.Comparator;
  * 提示:
  * 1 <= k <= n <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/k-th-smallest-in-lexicographical-order/
+ * https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/
  */
 public class Problem440_findKthNumberInLexicographicalOrder {
 
-    public static int findKthNumber(int n, int k) {
+    // BF time: O(nlogn) space: O(n)
+    public static int findKthNumber_str(int n, int k) {
         if (n == 1) {
             return 1;
         }
@@ -40,7 +41,7 @@ public class Problem440_findKthNumberInLexicographicalOrder {
     }
 
     public static void main(String[] args) {
-        System.out.println("1 ?= " + findKthNumber(1, 1));
-        System.out.println("10 ?= " + findKthNumber(13, 2));
+        System.out.println("1 ?= " + findKthNumber_str(1, 1));
+        System.out.println("10 ?= " + findKthNumber_str(13, 2));
     }
 }
