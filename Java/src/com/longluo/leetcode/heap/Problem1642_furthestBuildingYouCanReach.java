@@ -44,16 +44,11 @@ import java.util.PriorityQueue;
  */
 public class Problem1642_furthestBuildingYouCanReach {
 
-    // PQ time: O(n) space: O(n)
+    // PQ time: O(nlogl) space: O(l)
     public static int furthestBuilding(int[] heights, int bricks, int ladders) {
         int len = heights.length;
 
-        PriorityQueue<Integer> gaps = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
-            }
-        });
+        PriorityQueue<Integer> gaps = new PriorityQueue<>((o1, o2) -> o1 - o2);
 
         int sum = 0;
         for (int i = 0; i < len - 1; i++) {
