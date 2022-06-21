@@ -65,20 +65,21 @@ public class Problem692_topKFrequentWords {
         return ans;
     }
 
-    public static List<String> topKFrequent_2(String[] words, int k) {
-        Map<String, Integer> cnt = new HashMap<>();
-        for (int i = 0; i < words.length; i++) {
-            cnt.put(words[i], cnt.getOrDefault(words[i], 0) + 1);
+    // PriorityQueue time: O(nlogn) space: O(n)
+    public static List<String> topKFrequent_pq(String[] words, int k) {
+        Map<String, Integer> countMap = new HashMap<>();
+        for (String word : words) {
+            countMap.put(word, countMap.getOrDefault(word, 0) + 1);
         }
 
         PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getValue() == o2.getValue() ? o2.getKey().compareTo(o1.getKey()) : o1.getValue() - o2.getValue();
+                return o1.getValue().equals(o2.getValue()) ? o2.getKey().compareTo(o1.getKey()) : o1.getValue() - o2.getValue();
             }
         });
 
-        for (Map.Entry<String, Integer> entry : cnt.entrySet()) {
+        for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
             pq.offer(entry);
             if (pq.size() > k) {
                 pq.poll();
@@ -95,8 +96,9 @@ public class Problem692_topKFrequentWords {
 
     public static void main(String[] args) {
         System.out.println("[i, love] ?= " + topKFrequent_hashmap(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
-        System.out.println("[i, love] ?= " + topKFrequent_2(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
         System.out.println("[the, is, sunny, day] ?= " + topKFrequent_hashmap(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
-        System.out.println("[the, is, sunny, day] ?= " + topKFrequent_2(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
+
+        System.out.println("[i, love] ?= " + topKFrequent_pq(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
+        System.out.println("[the, is, sunny, day] ?= " + topKFrequent_pq(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
     }
 }
