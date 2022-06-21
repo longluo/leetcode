@@ -21,8 +21,10 @@ import java.util.*;
  * 出现次数依次为 4, 3, 2 和 1 次。
  * <p>
  * 注意：
- * 假定 k 总为有效值， 1 ≤ k ≤ 集合元素数。
- * 输入的单词均由小写字母组成。
+ * 1 <= words.length <= 500
+ * 1 <= words[i] <= 10
+ * words[i] 由小写英文字母组成。
+ * k 的取值范围是 [1, 不同 words[i] 的数量]
  * <p>
  * 扩展练习：
  * 尝试以 O(n log k) 时间复杂度和 O(n) 空间复杂度解决。
@@ -31,39 +33,36 @@ import java.util.*;
  */
 public class Problem692_topKFrequentWords {
 
-    public static List<String> topKFrequent(String[] words, int k) {
-        List<String> res = new ArrayList<>();
+    // HashMap + Sort time: O(nlogn) space: O(n)
+    public static List<String> topKFrequent_hashmap(String[] words, int k) {
+        List<String> ans = new ArrayList<>();
         if (words == null || words.length == 0 || k <= 0) {
-            return res;
+            return ans;
         }
 
-        Map<String, Integer> wordMap = new HashMap<>();
-        int n = words.length;
-        for (int i = 0; i < n; i++) {
-            if (wordMap.containsKey(words[i])) {
-                wordMap.put(words[i], wordMap.get(words[i]) + 1);
-            } else {
-                wordMap.put(words[i], 1);
-            }
+        Map<String, Integer> freqMap = new HashMap<>();
+        for (String word : words) {
+            freqMap.put(word, freqMap.getOrDefault(word, 0) + 1);
         }
 
-        List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(wordMap.entrySet());
+        List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(freqMap.entrySet());
         list.sort((o1, o2) -> {
-            if (o1.getValue() == o2.getValue()) {
+            if (o1.getValue().equals(o2.getValue())) {
                 return o1.getKey().compareTo(o2.getKey());
             }
+
             return o2.getValue() - o1.getValue();
         });
 
         for (Map.Entry<String, Integer> entry : list) {
-            res.add(entry.getKey());
+            ans.add(entry.getKey());
             k--;
             if (k <= 0) {
-                return res;
+                return ans;
             }
         }
 
-        return res;
+        return ans;
     }
 
     public static List<String> topKFrequent_2(String[] words, int k) {
@@ -95,9 +94,9 @@ public class Problem692_topKFrequentWords {
     }
 
     public static void main(String[] args) {
-        System.out.println("[i, love] ?= " + topKFrequent(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
+        System.out.println("[i, love] ?= " + topKFrequent_hashmap(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
         System.out.println("[i, love] ?= " + topKFrequent_2(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
-        System.out.println("[the, is, sunny, day] ?= " + topKFrequent(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
+        System.out.println("[the, is, sunny, day] ?= " + topKFrequent_hashmap(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
         System.out.println("[the, is, sunny, day] ?= " + topKFrequent_2(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
     }
 }
