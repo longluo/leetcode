@@ -1,6 +1,5 @@
-package com.longluo.leetcode.heap;
+package com.longluo.leetcode.priorityqueue;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**

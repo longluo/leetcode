@@ -1,4 +1,4 @@
-package com.longluo.leetcode.heap;
+package com.longluo.leetcode.priorityqueue;
 
 import java.util.*;
 
@@ -27,7 +27,7 @@ import java.util.*;
  * 扩展练习：
  * 尝试以 O(n log k) 时间复杂度和 O(n) 空间复杂度解决。
  * <p>
- * https://leetcode-cn.com/problems/top-k-frequent-words/
+ * https://leetcode.com/problems/top-k-frequent-words/
  */
 public class Problem692_topKFrequentWords {
 
@@ -48,14 +48,11 @@ public class Problem692_topKFrequentWords {
         }
 
         List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(wordMap.entrySet());
-        list.sort(new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                if (o1.getValue() == o2.getValue()) {
-                    return o1.getKey().compareTo(o2.getKey());
-                }
-                return o2.getValue() - o1.getValue();
+        list.sort((o1, o2) -> {
+            if (o1.getValue() == o2.getValue()) {
+                return o1.getKey().compareTo(o2.getKey());
             }
+            return o2.getValue() - o1.getValue();
         });
 
         for (Map.Entry<String, Integer> entry : list) {
