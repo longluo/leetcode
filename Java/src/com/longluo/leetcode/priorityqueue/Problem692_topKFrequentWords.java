@@ -73,9 +73,7 @@ public class Problem692_topKFrequentWords {
             freqMap.put(word, freqMap.getOrDefault(word, 0) + 1);
         }
 
-        for (String word : freqMap.keySet()) {
-            ans.add(word);
-        }
+        ans.addAll(freqMap.keySet());
 
         Collections.sort(ans, (o1, o2) -> {
             if (freqMap.get(o1) == freqMap.get(o2)) {
@@ -95,15 +93,15 @@ public class Problem692_topKFrequentWords {
             countMap.put(word, countMap.getOrDefault(word, 0) + 1);
         }
 
-        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getValue().equals(o2.getValue()) ? o2.getKey().compareTo(o1.getKey()) : o1.getValue() - o2.getValue();
+        PriorityQueue<String> pq = new PriorityQueue<String>((word1, word2) -> {
+            if (countMap.get(word1) == countMap.get(word2)) {
+                return word2.compareTo(word1);
             }
+            return countMap.get(word1) - countMap.get(word2);
         });
 
-        for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
-            pq.offer(entry);
+        for (String word : countMap.keySet()) {
+            pq.offer(word);
             if (pq.size() > k) {
                 pq.poll();
             }
@@ -111,7 +109,7 @@ public class Problem692_topKFrequentWords {
 
         List<String> ans = new ArrayList<>();
         while (!pq.isEmpty()) {
-            ans.add(pq.poll().getKey());
+            ans.add(pq.poll());
         }
         Collections.reverse(ans);
         return ans;
