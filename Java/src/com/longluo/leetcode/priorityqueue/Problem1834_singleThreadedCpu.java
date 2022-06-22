@@ -1,6 +1,5 @@
 package com.longluo.leetcode.priorityqueue;
 
-import java.nio.channels.Pipe;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -55,6 +54,70 @@ import java.util.PriorityQueue;
  */
 public class Problem1834_singleThreadedCpu {
 
+    static class Job {
+        int id;
+        int enqueueTime;
+        int processTime;
+
+        Job(int id, int enqueueTime, int processTime) {
+            this.id = id;
+            this.enqueueTime = enqueueTime;
+            this.processTime = processTime;
+        }
+    }
+
+    // Priority Queue time: O(nlogn) space: O(n)
+    public static int[] getOrder_easy(int[][] tasks) {
+        int len = tasks.length;
+
+        Job[] jobs = new Job[len];
+        for (int i = 0; i < len; i++) {
+            jobs[i] = new Job(i, tasks[i][0], tasks[i][1]);
+        }
+
+        Arrays.sort(jobs, (job1, job2) -> {
+            if (job1.enqueueTime == job2.enqueueTime) {
+                return job1.processTime - job2.processTime;
+            }
+
+            return job1.enqueueTime - job2.enqueueTime;
+        });
+
+        PriorityQueue<Job> pq = new PriorityQueue<>((job1, job2) -> {
+            if (job1.processTime == job2.processTime) {
+                return job1.id - job2.id;
+            }
+
+            return job1.processTime - job2.processTime;
+        });
+
+        int[] ans = new int[len];
+        int idIdx = 0;
+        int jobIdx = 0;
+        int curTime = 0;
+
+        while (jobIdx < len) {
+            if (pq.isEmpty()) {
+                curTime = Math.max(curTime, jobs[jobIdx].enqueueTime);
+            }
+
+            while (jobIdx < len && jobs[jobIdx].enqueueTime <= curTime) {
+                pq.offer(jobs[jobIdx]);
+                jobIdx++;
+            }
+
+            Job job = pq.poll();
+            ans[idIdx++] = job.id;
+            curTime += job.processTime;
+        }
+
+        while (!pq.isEmpty()) {
+            ans[idIdx++] = pq.poll().id;
+        }
+
+        return ans;
+    }
+
     // Priority Queue time: O(nlogn) space: O(n)
     public static int[] getOrder(int[][] tasks) {
         int len = tasks.length;
@@ -89,14 +152,15 @@ public class Problem1834_singleThreadedCpu {
             }
 
             int[] curr = pq.poll();
-            time += curr[1];
             ans[i] = curr[0];
+            time += curr[1];
         }
 
         return ans;
     }
 
     public static void main(String[] args) {
+        System.out.println("[0,2,3,1] ?= " + Arrays.toString(getOrder_easy(new int[][]{{1, 2}, {2, 4}, {3, 2}, {4, 1}})));
         System.out.println("[0,2,3,1] ?= " + Arrays.toString(getOrder(new int[][]{{1, 2}, {2, 4}, {3, 2}, {4, 1}})));
     }
 }
