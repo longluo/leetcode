@@ -52,12 +52,32 @@ public class Problem215_kthLargestElementInAnArray {
         return ans;
     }
 
-    // TODO: 2022/5/6
+    // PQ Opt time: O(nlogk) space: O(k)
+    public static int findKthLargest_pq_opt(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(k, Comparator.comparingInt(a -> a));
+
+        for (int i = 0; i < k; i++) {
+            pq.offer(nums[i]);
+        }
+
+        for (int i = k; i < nums.length; i++) {
+            if (nums[i] > pq.peek()) {
+                pq.poll();
+                pq.offer(nums[i]);
+            }
+        }
+
+        return pq.peek();
+    }
 
     public static void main(String[] args) {
         System.out.println("5 ?= " + findKthLargest(new int[]{3, 2, 1, 5, 6, 4}, 2));
-        System.out.println("5 ?= " + findKthLargest_pq(new int[]{3, 2, 1, 5, 6, 4}, 2));
         System.out.println("4 ?= " + findKthLargest(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
+
+        System.out.println("5 ?= " + findKthLargest_pq(new int[]{3, 2, 1, 5, 6, 4}, 2));
         System.out.println("4 ?= " + findKthLargest_pq(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
+
+        System.out.println("5 ?= " + findKthLargest_pq_opt(new int[]{3, 2, 1, 5, 6, 4}, 2));
+        System.out.println("4 ?= " + findKthLargest_pq_opt(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
     }
 }
