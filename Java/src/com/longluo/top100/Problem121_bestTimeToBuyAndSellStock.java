@@ -64,6 +64,21 @@ public class Problem121_bestTimeToBuyAndSellStock {
         return dp[len - 1][0];
     }
 
+    // DP Opt Space time: O(n) space: O(n)
+    public static int maxProfit_dp_opt(int[] prices) {
+        int len = prices.length;
+        int[] dp = new int[len];
+
+        int minPrice = prices[0];
+
+        for (int i = 1; i < len; i++) {
+            minPrice = Math.min(minPrice, prices[i]);
+            dp[i] = Math.max(dp[i - 1], prices[i] - minPrice);
+        }
+
+        return dp[len - 1];
+    }
+
     // One Scan time: O(n) space: O(1)
     public static int maxProfit(int[] prices) {
         int len = prices.length;
@@ -83,6 +98,9 @@ public class Problem121_bestTimeToBuyAndSellStock {
 
         System.out.println("5 ?= " + maxProfit_dp(new int[]{7, 1, 5, 3, 6, 4}));
         System.out.println("0 ?= " + maxProfit_dp(new int[]{7, 6, 4, 3, 1}));
+
+        System.out.println("5 ?= " + maxProfit_dp_opt(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println("0 ?= " + maxProfit_dp_opt(new int[]{7, 6, 4, 3, 1}));
 
         System.out.println("5 ?= " + maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
         System.out.println("0 ?= " + maxProfit(new int[]{7, 6, 4, 3, 1}));
