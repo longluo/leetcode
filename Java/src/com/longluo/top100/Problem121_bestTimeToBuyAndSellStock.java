@@ -22,8 +22,8 @@ package com.longluo.top100;
  * Explanation: In this case, no transactions are done and the max profit = 0.
  * <p>
  * Constraints:
- * 1 <= prices.length <= 105
- * 0 <= prices[i] <= 104
+ * 1 <= prices.length <= 10^5
+ * 0 <= prices[i] <= 10^4
  * <p>
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
  */
@@ -41,16 +41,30 @@ public class Problem121_bestTimeToBuyAndSellStock {
                 }
 
                 int profit = prices[j] - prices[i];
-                if (profit > maxProfit) {
-                    maxProfit = profit;
-                }
+                maxProfit = Math.max(maxProfit, profit);
             }
         }
 
         return maxProfit;
     }
 
-    // DP time: O(n) space: O(1)
+    // DP time: O(n) space: O(n)
+    public static int maxProfit_dp(int[] prices) {
+        int len = prices.length;
+        int[][] dp = new int[len][2];
+
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+
+        for (int i = 1; i < len; i++) {
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], -prices[i]);
+        }
+
+        return dp[len - 1][0];
+    }
+
+    // One Scan time: O(n) space: O(1)
     public static int maxProfit(int[] prices) {
         int len = prices.length;
         int minPrice = prices[0];
@@ -66,6 +80,9 @@ public class Problem121_bestTimeToBuyAndSellStock {
     public static void main(String[] args) {
         System.out.println("5 ?= " + maxProfit_bf(new int[]{7, 1, 5, 3, 6, 4}));
         System.out.println("0 ?= " + maxProfit_bf(new int[]{7, 6, 4, 3, 1}));
+
+        System.out.println("5 ?= " + maxProfit_dp(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println("0 ?= " + maxProfit_dp(new int[]{7, 6, 4, 3, 1}));
 
         System.out.println("5 ?= " + maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
         System.out.println("0 ?= " + maxProfit(new int[]{7, 6, 4, 3, 1}));
