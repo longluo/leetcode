@@ -66,8 +66,26 @@ public class Problem122_bestTimeToBuyAndSellStock_ii {
         return sell;
     }
 
+    // Greedy time: O(n) space: O(1)
+    public static int maxProfit_greedy(int[] prices) {
+        int len = prices.length;
+
+        int maxProfit = 0;
+        int diff = 0;
+
+        for (int i = 1; i < len; i++) {
+            diff = prices[i] - prices[i - 1];
+            if (diff > 0) {
+                maxProfit += diff;
+            }
+        }
+
+        return maxProfit;
+    }
+
     public static void main(String[] args) {
         System.out.println("7 ?= " + maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
         System.out.println("7 ?= " + maxProfit_opt(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println("7 ?= " + maxProfit_greedy(new int[]{7, 1, 5, 3, 6, 4}));
     }
 }
