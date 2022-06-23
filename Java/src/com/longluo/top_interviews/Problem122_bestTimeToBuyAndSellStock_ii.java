@@ -51,7 +51,23 @@ public class Problem122_bestTimeToBuyAndSellStock_ii {
         return dp[len - 1][0];
     }
 
+    // DP Opt time: O(n) space: O(1)
+    public static int maxProfit_opt(int[] prices) {
+        int len = prices.length;
+
+        int buy = -prices[0];
+        int sell = 0;
+
+        for (int i = 1; i < len; i++) {
+            sell = Math.max(sell, buy + prices[i]);
+            buy = Math.max(buy, sell - prices[i]);
+        }
+
+        return sell;
+    }
+
     public static void main(String[] args) {
         System.out.println("7 ?= " + maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println("7 ?= " + maxProfit_opt(new int[]{7, 1, 5, 3, 6, 4}));
     }
 }
