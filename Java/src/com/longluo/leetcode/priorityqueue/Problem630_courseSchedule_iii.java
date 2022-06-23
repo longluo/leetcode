@@ -1,7 +1,6 @@
 package com.longluo.leetcode.priorityqueue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 630. 课程表 III
@@ -94,10 +93,40 @@ public class Problem630_courseSchedule_iii {
         }
     }
 
+    // Sort + PQ time: O(nlogn) space: O(n)
+    public static int scheduleCourse(int[][] courses) {
+        Arrays.sort(courses, (a, b) -> {
+            if (a[1] == b[1]) {
+                return a[0] - b[0];
+            }
+            return a[1] - b[1];
+        });
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
+
+        int time = 0;
+
+        for (int[] course : courses) {
+            int costTime = course[0];
+            int dueTime = course[1];
+            if (time + costTime <= dueTime) {
+                pq.offer(costTime);
+                time += costTime;
+            } else if (!pq.isEmpty() && pq.peek() > costTime) {
+                time -= pq.poll() - costTime;
+                pq.offer(costTime);
+            }
+        }
+
+        return pq.size();
+    }
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + scheduleCourse_bf(new int[][]{{1, 2}, {2, 3}}));
         System.out.println("3 ?= " + scheduleCourse_bf(new int[][]{{100, 200}, {200, 1300}, {1000, 1250}, {2000, 3200}}));
         System.out.println("4 ?= " + scheduleCourse_bf(new int[][]{{7, 16}, {2, 3}, {3, 12}, {3, 14}, {10, 19}, {10, 16}, {6, 8}, {6, 11}, {3, 13}, {6, 16}}));
+
+        System.out.println("3 ?= " + scheduleCourse(new int[][]{{100, 200}, {200, 1300}, {1000, 1250}, {2000, 3200}}));
+        System.out.println("4 ?= " + scheduleCourse(new int[][]{{7, 16}, {2, 3}, {3, 12}, {3, 14}, {10, 19}, {10, 16}, {6, 8}, {6, 11}, {3, 13}, {6, 16}}));
     }
 }
