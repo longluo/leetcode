@@ -43,7 +43,28 @@ public class Problem309_bestTimeToBuyAndSellStockWithCooldown {
         return dp[len - 1][0];
     }
 
+    // DP Easy Understand time: O(n) space: O(n)
+    public static int maxProfit_dp(int[] prices) {
+        int len = prices.length;
+
+        int[][] dp = new int[len][3];
+
+        // dp[i][0]: no stock
+        // dp[i][1]: cooldown
+        // dp[i][2]: has stock
+        dp[0][2] = -prices[0];
+
+        for (int i = 1; i < len; i++) {
+            dp[i][0] = Math.max(dp[i - 1][1], dp[i - 1][0]);
+            dp[i][1] = dp[i - 1][2] + prices[i];
+            dp[i][2] = Math.max(dp[i - 1][2], dp[i - 1][0] - prices[i]);
+        }
+
+        return Math.max(dp[len - 1][0], dp[len - 1][1]);
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + maxProfit(new int[]{1, 2, 3, 0, 2}));
+        System.out.println("3 ?= " + maxProfit_dp(new int[]{1, 2, 3, 0, 2}));
     }
 }
