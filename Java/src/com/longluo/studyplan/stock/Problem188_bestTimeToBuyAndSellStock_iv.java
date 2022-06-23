@@ -29,7 +29,7 @@ package com.longluo.studyplan.stock;
  */
 public class Problem188_bestTimeToBuyAndSellStock_iv {
 
-    // DP time: O(n) space: O(n)
+    // DP time: O(nk) space: O(n)
     public static int maxProfit(int k, int[] prices) {
         if (prices == null || prices.length <= 1 || k <= 0) {
             return 0;
@@ -39,10 +39,7 @@ public class Problem188_bestTimeToBuyAndSellStock_iv {
 
         int[][][] dp = new int[len][k + 1][2];
 
-        dp[0][1][0] = 0;
-        dp[0][1][1] = -prices[0];
-
-        for (int i = 2; i <= k; i++) {
+        for (int i = 1; i <= k; i++) {
             dp[0][i][0] = 0;
             dp[0][i][1] = -prices[0];
         }
