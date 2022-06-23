@@ -46,7 +46,23 @@ public class Problem714_bestTimeToBuyAndSellStockWithTransactionFee {
         return dp[len - 1][0];
     }
 
+    // DP time: O(n) space: O(1)
+    public static int maxProfit_opt(int[] prices, int fee) {
+        int len = prices.length;
+
+        int buy = -prices[0];
+        int sell = 0;
+
+        for (int i = 1; i < len; i++) {
+            buy = Math.max(buy, sell - prices[i]);
+            sell = Math.max(sell, buy + prices[i] - fee);
+        }
+
+        return sell;
+    }
+
     public static void main(String[] args) {
         System.out.println("8 ?= " + maxProfit(new int[]{1, 3, 2, 8, 4, 9}, 2));
+        System.out.println("8 ?= " + maxProfit_opt(new int[]{1, 3, 2, 8, 4, 9}, 2));
     }
 }
