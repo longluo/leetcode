@@ -20,60 +20,19 @@ package com.longluo.leetcode.array;
  * 1 <= n <= 10^4
  * - 10^5 <= nums[i] <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/non-decreasing-array/
+ * https://leetcode.com/problems/non-decreasing-array/
  */
 public class Problem665_nonDecreasingArray {
 
+    // Greedy time: O(n) space: O(1)
     public static boolean checkPossibility(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return true;
-        }
+        int len = nums.length;
 
-        int ans = 1;
-        int max = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] >= max) {
-                max = Math.min(nums[i], max);
-                continue;
-            } else {
-                if (ans > 0) {
-                    if (i == 1) {
-                        max = Math.min(nums[0], nums[1]);
-                    } else {
-                        max = Math.max(nums[i], max);
-                    }
-                    ans -= 1;
-                } else {
-                    return false;
-                }
-            }
+        int count = 0;
 
-        }
-
-        return true;
-    }
-
-    private static boolean isIncrease(int[] nums, int idx) {
-        for (int i = idx; i < nums.length - 1; i++) {
-            if (nums[i + 1] >= nums[i]) {
-                continue;
-            } else {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public static boolean checkPossibility_2(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return true;
-        }
-
-        int cnt = 0;
-        for (int i = 1; i < nums.length && cnt < 2; i++) {
+        for (int i = 1; i < len && count < 2; i++) {
             if (nums[i - 1] > nums[i]) {
-                cnt++;
+                count++;
                 if (i - 2 >= 0 && nums[i - 2] > nums[i]) {
                     nums[i] = nums[i - 1];
                 } else {
@@ -82,7 +41,7 @@ public class Problem665_nonDecreasingArray {
             }
         }
 
-        return cnt <= 1;
+        return count <= 1;
     }
 
     public static void main(String[] args) {
@@ -91,11 +50,5 @@ public class Problem665_nonDecreasingArray {
         System.out.println("false ?= " + checkPossibility(new int[]{3, 4, 2, 3}));
         System.out.println("true ?= " + checkPossibility(new int[]{4, 2, 3}));
         System.out.println("true ?= " + checkPossibility(new int[]{-1, 4, 2, 3}));
-
-        System.out.println("true ?= " + checkPossibility_2(new int[]{4, 2, 3}));
-        System.out.println("false ?= " + checkPossibility_2(new int[]{4, 2, 1}));
-        System.out.println("false ?= " + checkPossibility_2(new int[]{3, 4, 2, 3}));
-        System.out.println("true ?= " + checkPossibility_2(new int[]{4, 2, 3}));
-        System.out.println("true ?= " + checkPossibility_2(new int[]{-1, 4, 2, 3}));
     }
 }
