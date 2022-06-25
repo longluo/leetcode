@@ -23,9 +23,9 @@ import java.util.Set;
  * -10^9 <= nums[i] <= 10^9
  * <p>
  * 进阶：可以设计并实现时间复杂度为 O(n) 的解决方案吗？
- * 注意：本题与主站 128 题相同： https://leetcode-cn.com/problems/longest-consecutive-sequence/
+ * 注意：本题与主站 128 题相同： https://leetcode.cn/problems/longest-consecutive-sequence/
  * <p>
- * https://leetcode-cn.com/problems/WhsWhI/
+ * https://leetcode.cn/problems/WhsWhI/
  */
 public class Offer2_119_longestConsecutive {
 

@@ -23,9 +23,9 @@ import java.util.List;
  * 树中节点数的取值范围是 [1, 100]
  * 0 <= Node.val <= 1000
  * <p>
- * 注意：本题与主站 897 题相同： https://leetcode-cn.com/problems/increasing-order-search-tree/
+ * 注意：本题与主站 897 题相同： https://leetcode.cn/problems/increasing-order-search-tree/
  * <p>
- * https://leetcode-cn.com/problems/NYBBNL/
+ * https://leetcode.cn/problems/NYBBNL/
  */
 public class Offer2_52_increasingBST {
 

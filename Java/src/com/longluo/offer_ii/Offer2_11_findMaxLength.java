@@ -46,8 +46,23 @@ public class Offer2_11_findMaxLength {
         return ans;
     }
 
+    public static int findMaxLength_prefix(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return 0;
+        }
+
+        int n = nums.length;
+        int ans = 0;
+        for (int i = 0; i <= n; i++) {
+
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + findMaxLength(new int[]{0, 1}));
         System.out.println("2 ?= " + findMaxLength(new int[]{0, 1, 0}));
+        System.out.println("2 ?= " + findMaxLength_prefix(new int[]{0, 1, 0}));
     }
 }

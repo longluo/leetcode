@@ -32,9 +32,9 @@ import java.util.*;
  * nums1, nums2 均为升序排列
  * 1 <= k <= 1000
  * <p>
- * 注意：本题与主站 373 题相同：https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/
+ * 注意：本题与主站 373 题相同：https://leetcode.cn/problems/find-k-pairs-with-smallest-sums/
  * <p>
- * https://leetcode-cn.com/problems/qn8gGX/
+ * https://leetcode.cn/problems/qn8gGX/
  */
 public class Offer2_61_kSmallestPairs {
 

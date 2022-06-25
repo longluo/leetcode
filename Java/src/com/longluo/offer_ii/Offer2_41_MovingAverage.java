@@ -33,9 +33,9 @@ import java.util.Queue;
  * -10^5 <= val <= 10^5
  * 最多调用 next 方法 10^4 次
  * <p>
- * 注意：本题与主站 346 题相同： https://leetcode-cn.com/problems/moving-average-from-data-stream/
+ * 注意：本题与主站 346 题相同： https://leetcode.cn/problems/moving-average-from-data-stream/
  * <p>
- * https://leetcode-cn.com/problems/qIsx9U/
+ * https://leetcode.cn/problems/qIsx9U/
  */
 public class Offer2_41_MovingAverage {
 

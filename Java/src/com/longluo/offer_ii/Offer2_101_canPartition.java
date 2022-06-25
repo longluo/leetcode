@@ -21,7 +21,7 @@ package com.longluo.offer_ii;
  * <p>
  * 注意：本题与主站 416 题相同： https://leetcode-cn.com/problems/partition-equal-subset-sum/
  * <p>
- * https://leetcode-cn.com/problems/NUPfPr/
+ * https://leetcode.cn/problems/NUPfPr/
  */
 public class Offer2_101_canPartition {
 

@@ -23,9 +23,9 @@ import java.util.Map;
  * <p>
  * 进阶：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
  * <p>
- * 注意：本题与主站 137 题相同：https://leetcode-cn.com/problems/single-number-ii/
+ * 注意：本题与主站 137 题相同：https://leetcode.cn/problems/single-number-ii/
  * <p>
- * https://leetcode-cn.com/problems/WGki4K/
+ * https://leetcode.cn/problems/WGki4K/
  */
 public class Offer2_04_singleNumber {
 

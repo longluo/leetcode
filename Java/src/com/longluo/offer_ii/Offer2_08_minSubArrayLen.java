@@ -58,6 +58,41 @@ public class Offer2_08_minSubArrayLen {
         return ans;
     }
 
+    public static int minSubArrayLen_1(int target, int[] nums) {
+        int n = nums.length;
+        int ans = 0;
+        int[] prefixSum = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        }
+
+
+        return ans;
+    }
+
+    public static int minSubArrayLen_2(int target, int[] nums) {
+        int n = nums.length;
+        int ans = 0;
+        int left = 0;
+        int right = 0;
+        int sum = nums[left];
+        while (left <= right) {
+            while (sum < target && right < n) {
+                right++;
+                sum += nums[right];
+            }
+
+            ans = Math.min(ans, right - left + 1);
+
+        }
+
+        if (ans == Integer.MAX_VALUE) {
+            ans = 0;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
         System.out.println("1 ?= " + minSubArrayLen(4, new int[]{1, 4, 4}));

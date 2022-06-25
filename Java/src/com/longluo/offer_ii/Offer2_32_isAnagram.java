@@ -1,10 +1,5 @@
 package com.longluo.offer_ii;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
 /**
  * 剑指 Offer II 032. 有效的变位词
  * <p>
@@ -29,9 +24,9 @@ import java.util.TreeMap;
  * <p>
  * 进阶: 如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？
  * <p>
- * 注意：本题与主站 242 题相似（字母异位词定义不同）：https://leetcode-cn.com/problems/valid-anagram/
+ * 注意：本题与主站 242 题相似（字母异位词定义不同）：https://leetcode.cn/problems/valid-anagram/
  * <p>
- * https://leetcode-cn.com/problems/dKk3P7/
+ * https://leetcode.cn/problems/dKk3P7/
  */
 public class Offer2_32_isAnagram {
 

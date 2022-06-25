@@ -33,9 +33,9 @@ package com.longluo.offer_ii;
  * nums 为无重复元素的升序排列数组
  * -10^4 <= target <= 10^4
  * <p>
- * 注意：本题与主站 35 题相同： https://leetcode-cn.com/problems/search-insert-position/
+ * 注意：本题与主站 35 题相同： https://leetcode.cn/problems/search-insert-position/
  * <p>
- * https://leetcode-cn.com/problems/N6YdxV/
+ * https://leetcode.cn/problems/N6YdxV/
  */
 public class Offer2_68_searchInsert {
 

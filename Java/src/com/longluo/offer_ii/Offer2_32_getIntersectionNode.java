@@ -44,9 +44,9 @@ import com.longluo.datastructure.ListNode;
  * <p>
  * 进阶：能否设计一个时间复杂度 O(n) 、仅用 O(1) 内存的解决方案？
  * <p>
- * 注意：本题与主站 160 题相同：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
+ * 注意：本题与主站 160 题相同：https://leetcode.cn/problems/intersection-of-two-linked-lists/
  * <p>
- * https://leetcode-cn.com/problems/3u1WK4/
+ * https://leetcode.cn/problems/3u1WK4/
  */
 public class Offer2_32_getIntersectionNode {
 

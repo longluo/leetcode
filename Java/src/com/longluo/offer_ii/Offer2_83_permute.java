@@ -25,12 +25,13 @@ import java.util.List;
  * -10 <= nums[i] <= 10
  * nums 中的所有整数 互不相同
  * <p>
- * 注意：本题与主站 46 题相同：https://leetcode-cn.com/problems/permutations/
+ * 注意：本题与主站 46 题相同：https://leetcode.cn/problems/permutations/
  * <p>
- * https://leetcode-cn.com/problems/VvJkup/
+ * https://leetcode.cn/problems/VvJkup/
  */
 public class Offer2_83_permute {
 
+    // TODO: 2022/6/25
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
 

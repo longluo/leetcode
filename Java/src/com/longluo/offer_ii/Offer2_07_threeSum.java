@@ -24,9 +24,9 @@ import java.util.*;
  * 0 <= nums.length <= 3000
  * -10^5 <= nums[i] <= 10^5
  * <p>
- * 注意：本题与主站 15 题相同：https://leetcode-cn.com/problems/3sum/
+ * 注意：本题与主站 15 题相同：https://leetcode.cn/problems/3sum/
  * <p>
- * https://leetcode-cn.com/problems/1fGaJU/
+ * https://leetcode.cn/problems/1fGaJU/
  */
 public class Offer2_07_threeSum {
 

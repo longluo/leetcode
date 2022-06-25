@@ -22,9 +22,9 @@ package com.longluo.offer_ii;
  * 1 <= s.length <= 10^5
  * s 由小写英文字母组成
  * <p>
- * 注意：本题与主站 680 题相同： https://leetcode-cn.com/problems/valid-palindrome-ii/
+ * 注意：本题与主站 680 题相同： https://leetcode.cn/problems/valid-palindrome-ii/
  * <p>
- * https://leetcode-cn.com/problems/RQku0D/
+ * https://leetcode.cn/problems/RQku0D/
  */
 public class Offer2_19_validPalindrome {
 

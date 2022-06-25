@@ -20,9 +20,9 @@ package com.longluo.offer_ii;
  * 1 <= a.length, b.length <= 10^4
  * 字符串如果不是 "0" ，就都不含前导零。
  * <p>
- * 注意：本题与主站 67 题相同：https://leetcode-cn.com/problems/add-binary/
+ * 注意：本题与主站 67 题相同：https://leetcode.cn/problems/add-binary/
  * <p>
- * https://leetcode-cn.com/problems/JFETK5/
+ * https://leetcode.cn/problems/JFETK5/
  */
 public class Offer2_02_addBinary {
 

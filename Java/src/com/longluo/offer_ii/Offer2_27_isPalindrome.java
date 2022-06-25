@@ -22,11 +22,13 @@ import com.longluo.datastructure.ListNode;
  * <p>
  * 进阶：能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
  * <p>
- * 注意：本题与主站 234 题相同：https://leetcode-cn.com/problems/palindrome-linked-list/
- * https://leetcode-cn.com/problems/aMhZSa/
+ * 注意：本题与主站 234 题相同：https://leetcode.cn/problems/palindrome-linked-list/
+ * <p>
+ * https://leetcode.cn/problems/aMhZSa/
  */
 public class Offer2_27_isPalindrome {
 
+    // TODO: 2022/6/25
     public static boolean isPalindrome(ListNode head) {
         if (head == null || head.next == null) {
             return true;

@@ -19,9 +19,9 @@ package com.longluo.offer_ii;
  * <p>
  * 进阶: 采用的方案可以在 O(log n) 时间复杂度和 O(1) 空间复杂度中运行吗？
  * <p>
- * 注意：本题与主站 540 题相同：https://leetcode-cn.com/problems/single-element-in-a-sorted-array/
+ * 注意：本题与主站 540 题相同：https://leetcode.cn/problems/single-element-in-a-sorted-array/
  * <p>
- * https://leetcode-cn.com/problems/skFtm2/
+ * https://leetcode.cn/problems/skFtm2/
  */
 public class Offer2_70_singleNonDuplicate {
 

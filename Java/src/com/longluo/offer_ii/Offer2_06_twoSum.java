@@ -30,9 +30,9 @@ import java.util.Arrays;
  * -1000 <= target <= 1000
  * 仅存在一个有效答案
  * <p>
- * 注意：本题与主站 167 题相似（下标起点不同）：https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
+ * 注意：本题与主站 167 题相似（下标起点不同）：https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/
  * <p>
- * https://leetcode-cn.com/problems/kLl5u1/
+ * https://leetcode.cn/problems/kLl5u1/
  */
 public class Offer2_06_twoSum {
 

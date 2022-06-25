@@ -31,9 +31,9 @@ import java.util.*;
  * order.length == 26
  * 在 words[i] 和 order 中的所有字符都是英文小写字母。
  * <p>
- * 注意：本题与主站 953 题相同： https://leetcode-cn.com/problems/verifying-an-alien-dictionary/
+ * 注意：本题与主站 953 题相同： https://leetcode.cn/problems/verifying-an-alien-dictionary/
  * <p>
- * https://leetcode-cn.com/problems/lwyVBB/
+ * https://leetcode.cn/problems/lwyVBB/
  */
 public class Offer2_34_isAlienSorted {
 

@@ -23,9 +23,9 @@ import java.util.List;
  * 1 <= nums.length <= 8
  * -10 <= nums[i] <= 10
  * <p>
- * 注意：本题与主站 47 题相同： https://leetcode-cn.com/problems/permutations-ii/
+ * 注意：本题与主站 47 题相同： https://leetcode.cn/problems/permutations-ii/
  * <p>
- * https://leetcode-cn.com/problems/7p8L0Z/
+ * https://leetcode.cn/problems/7p8L0Z/
  */
 public class Offer2_84_permuteUnique {
 

@@ -44,12 +44,13 @@ import java.util.Set;
  * sentence 中单词之间由一个空格隔开。
  * sentence 没有前导或尾随空格。
  * <p>
- * 注意：本题与主站 648 题相同： https://leetcode-cn.com/problems/replace-words/
+ * 注意：本题与主站 648 题相同： https://leetcode.cn/problems/replace-words/
  * <p>
- * https://leetcode-cn.com/problems/UhWRSj/
+ * https://leetcode.cn/problems/UhWRSj/
  */
 public class Offer2_63_replaceWords {
 
+    // TODO: 2022/6/25  
     public static String replaceWords(List<String> dictionary, String sentence) {
         Set<String> set = new HashSet<>();
 

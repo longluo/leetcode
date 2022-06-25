@@ -33,9 +33,9 @@ import java.util.Queue;
  * 保证每次对 ping 调用所使用的 t 值都 严格递增
  * 至多调用 ping 方法 104 次
  * <p>
- * 注意：本题与主站 933 题相同： https://leetcode-cn.com/problems/number-of-recent-calls/
+ * 注意：本题与主站 933 题相同： https://leetcode.cn/problems/number-of-recent-calls/
  * <p>
- * https://leetcode-cn.com/problems/H8086Q/
+ * https://leetcode.cn/problems/H8086Q/
  */
 public class Offer2_42_RecentCounter {
 

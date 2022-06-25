@@ -20,9 +20,9 @@ package com.longluo.offer_ii;
  * 1 <= s.length <= 2 * 10^5
  * 字符串 s 由 ASCII 字符组成
  * <p>
- * 注意：本题与主站 125 题相同： https://leetcode-cn.com/problems/valid-palindrome/
+ * 注意：本题与主站 125 题相同： https://leetcode.cn/problems/valid-palindrome/
  * <p>
- * https://leetcode-cn.com/problems/XltzEq/
+ * https://leetcode.cn/problems/XltzEq/
  */
 public class Offer2_18_isPalindrome {
 

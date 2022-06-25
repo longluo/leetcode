@@ -19,9 +19,9 @@ package com.longluo.offer_ii;
  * 提示:
  * 0 <= x <= 2^31 - 1
  * <p>
- * 注意：本题与主站 69 题相同： https://leetcode-cn.com/problems/sqrtx/
+ * 注意：本题与主站 69 题相同： https://leetcode.cn/problems/sqrtx/
  * <p>
- * https://leetcode-cn.com/problems/jJ0w9p/
+ * https://leetcode.cn/problems/jJ0w9p/
  */
 public class Offer2_72_mysqrt {
 

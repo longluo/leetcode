@@ -34,9 +34,9 @@ package com.longluo.offer_ii;
  * 1 <= nums.length <= 10^4
  * -1000 <= nums[i] <= 1000
  * <p>
- * 注意：本题与主站 724 题相同： https://leetcode-cn.com/problems/find-pivot-index/
+ * 注意：本题与主站 724 题相同： https://leetcode.cn/problems/find-pivot-index/
  * <p>
- * https://leetcode-cn.com/problems/tvdfij/
+ * https://leetcode.cn/problems/tvdfij/
  */
 public class Offer2_12_pivotIndex {
 

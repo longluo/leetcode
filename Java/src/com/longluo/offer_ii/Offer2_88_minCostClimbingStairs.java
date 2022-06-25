@@ -22,9 +22,9 @@ package com.longluo.offer_ii;
  * 2 <= cost.length <= 1000
  * 0 <= cost[i] <= 999
  * <p>
- * 注意：本题与主站 746 题相同： https://leetcode-cn.com/problems/min-cost-climbing-stairs/
+ * 注意：本题与主站 746 题相同： https://leetcode.cn/problems/min-cost-climbing-stairs/
  * <p>
- * https://leetcode-cn.com/problems/GzCJIP/
+ * https://leetcode.cn/problems/GzCJIP/
  */
 public class Offer2_88_minCostClimbingStairs {
 

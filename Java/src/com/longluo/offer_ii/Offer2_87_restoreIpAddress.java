@@ -36,7 +36,7 @@ import java.util.List;
  * <p>
  * 注意：本题与主站 93 题相同：https://leetcode-cn.com/problems/restore-ip-addresses/
  * <p>
- * https://leetcode-cn.com/problems/0on3uN/
+ * https://leetcode.cn/problems/0on3uN/
  */
 public class Offer2_87_restoreIpAddress {
 
@@ -44,6 +44,10 @@ public class Offer2_87_restoreIpAddress {
         List<String> ans = new ArrayList<>();
 
         return ans;
+    }
+
+    public static void backtrace() {
+
     }
 
     public static void main(String[] args) {

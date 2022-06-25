@@ -19,9 +19,9 @@ import java.util.List;
  * 提示：
  * 1 <= n <= 8
  * <p>
- * 注意：本题与主站 22 题相同： https://leetcode-cn.com/problems/generate-parentheses/
+ * 注意：本题与主站 22 题相同： https://leetcode.cn/problems/generate-parentheses/
  * <p>
- * https://leetcode-cn.com/problems/IDBivT/
+ * https://leetcode.cn/problems/IDBivT/
  */
 public class Offer2_85_generateParenthesis {
 

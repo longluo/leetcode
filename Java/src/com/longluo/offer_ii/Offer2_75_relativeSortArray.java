@@ -22,11 +22,9 @@ import java.util.*;
  * arr2 中的每个元素 arr2[i] 都出现在 arr1 中
  * <p>
  * 注意：
- * 本题与主站1122题相同：https://leetcode-cn.com/problems/relative-sort-array/
+ * 本题与主站1122题相同：https://leetcode.cn/problems/relative-sort-array/
  * <p>
- * https://leetcode-cn.com/problems/0H97ZC/
- * <p>
- * https://leetcode-cn.com/problems/relative-sort-array/
+ * https://leetcode.cn/problems/0H97ZC/
  */
 public class Offer2_75_relativeSortArray {
 

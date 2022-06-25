@@ -26,9 +26,9 @@ package com.longluo.offer_ii;
  * 1 <= words[i].length <= 1000
  * words[i] 仅包含小写字母
  * <p>
- * 注意：本题与主站 318 题相同：https://leetcode-cn.com/problems/maximum-product-of-word-lengths/
+ * 注意：本题与主站 318 题相同：https://leetcode.cn/problems/maximum-product-of-word-lengths/
  * <p>
- * https://leetcode-cn.com/problems/aseY1I/
+ * https://leetcode.cn/problems/aseY1I/
  */
 public class Offer2_05_maxProduct {
 

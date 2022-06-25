@@ -31,9 +31,9 @@ package com.longluo.offer_ii;
  * -2^31 <= a, b <= 2^31 - 1
  * b != 0
  * <p>
- * 注意：本题与主站 29 题相同：https://leetcode-cn.com/problems/divide-two-integers/
+ * 注意：本题与主站 29 题相同：https://leetcode.cn/problems/divide-two-integers/
  * <p>
- * https://leetcode-cn.com/problems/xoh6Oh/
+ * https://leetcode.cn/problems/xoh6Oh/
  */
 public class Offer2_01_divide {
 
