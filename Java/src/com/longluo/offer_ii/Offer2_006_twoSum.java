@@ -34,13 +34,16 @@ import java.util.Arrays;
  * <p>
  * https://leetcode.cn/problems/kLl5u1/
  */
-public class Offer2_06_twoSum {
+public class Offer2_006_twoSum {
 
+    // Simulate time: O(n^2) space: O(1)
     public static int[] twoSum(int[] numbers, int target) {
         int[] res = new int[2];
-        int n = numbers.length;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
+
+        int len = numbers.length;
+
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
                 if (numbers[i] + numbers[j] == target) {
                     res[0] = i;
                     res[1] = j;
@@ -52,49 +55,58 @@ public class Offer2_06_twoSum {
         return res;
     }
 
-    public static int[] twoSum_1(int[] numbers, int target) {
+    // Two Pointers time: O(n) space: O(1)
+    public static int[] twoSum_tp(int[] numbers, int target) {
         int[] res = new int[2];
-        int n = numbers.length;
+
+        int len = numbers.length;
+
         int left = 0;
-        int right = n - 1;
+        int right = len - 1;
+
         while (left < right) {
             while (numbers[left] + numbers[right] > target) {
                 right--;
             }
+
             while (numbers[left] + numbers[right] < target) {
                 left++;
             }
+
             if (numbers[left] + numbers[right] == target) {
                 res[0] = left;
                 res[1] = right;
-                return res;
+                break;
             }
         }
 
         return res;
     }
 
-    public static int[] twoSum_2(int[] numbers, int target) {
+    // BinarySearch time: O(logn) space: O(1)
+    public static int[] twoSum_bs(int[] numbers, int target) {
         int[] res = new int[2];
-        int n = numbers.length;
-        int idx = 0;
-        while (idx < n && numbers[idx] <= target / 2) {
-            int low = idx + 1;
-            int high = n - 1;
-            while (low <= high) {
-                int mid = low + (high - low) / 2;
-                if (numbers[mid] == target - numbers[idx]) {
-                    res[0] = idx;
+
+        int len = numbers.length;
+
+        for (int i = 0; i <= len / 2; i++) {
+            int goal = target - numbers[i];
+
+            int left = i + 1;
+            int right = len - 1;
+
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (numbers[mid] == goal) {
+                    res[0] = i;
                     res[1] = mid;
                     return res;
-                } else if (numbers[mid] > target - numbers[idx]) {
-                    high = mid - 1;
-                } else if (numbers[mid] < target - numbers[idx]) {
-                    low = mid + 1;
+                } else if (numbers[mid] > goal) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
                 }
             }
-
-            idx++;
         }
 
         return res;
@@ -102,12 +114,13 @@ public class Offer2_06_twoSum {
 
     public static void main(String[] args) {
         System.out.println("[1, 3] ?= " + Arrays.toString(twoSum(new int[]{1, 2, 4, 6, 10}, 8)));
-        System.out.println("[1, 3] ?= " + Arrays.toString(twoSum_1(new int[]{1, 2, 4, 6, 10}, 8)));
-        System.out.println("[1, 3] ?= " + Arrays.toString(twoSum_2(new int[]{1, 2, 4, 6, 10}, 8)));
-
         System.out.println("[0, 2] ?= " + Arrays.toString(twoSum(new int[]{2, 3, 4}, 6)));
-        System.out.println("[0, 2] ?= " + Arrays.toString(twoSum_2(new int[]{2, 3, 4}, 6)));
-        System.out.println("[0, 1] ?= " + Arrays.toString(twoSum_2(new int[]{0, 0, 3, 4}, 0)));
-        System.out.println("[3, 4] ?= " + Arrays.toString(twoSum_2(new int[]{1, 2, 3, 4, 4, 9, 56, 90}, 8)));
+
+        System.out.println("[1, 3] ?= " + Arrays.toString(twoSum_tp(new int[]{1, 2, 4, 6, 10}, 8)));
+
+        System.out.println("[0, 2] ?= " + Arrays.toString(twoSum_bs(new int[]{2, 3, 4}, 6)));
+        System.out.println("[0, 1] ?= " + Arrays.toString(twoSum_bs(new int[]{0, 0, 3, 4}, 0)));
+        System.out.println("[3, 4] ?= " + Arrays.toString(twoSum_bs(new int[]{1, 2, 3, 4, 4, 9, 56, 90}, 8)));
+        System.out.println("[1, 3] ?= " + Arrays.toString(twoSum_bs(new int[]{1, 2, 4, 6, 10}, 8)));
     }
 }
