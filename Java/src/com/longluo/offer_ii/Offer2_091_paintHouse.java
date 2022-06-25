@@ -54,7 +54,34 @@ public class Offer2_091_paintHouse {
         return min;
     }
 
+    // DP time: O(n) space: O(1)
+    public static int minCost_opt(int[][] costs) {
+        int len = costs.length;
+        int[] dp = new int[3];
+
+        for (int i = 0; i < 3; i++) {
+            dp[i] = costs[0][i];
+        }
+
+        for (int i = 1; i < len; i++) {
+            int[] tmpDp = new int[3];
+            for (int j = 0; j < 3; j++) {
+                tmpDp[j] = Math.min(costs[i][j] + dp[(j + 1) % 3], costs[i][j] + dp[(j + 2) % 3]);
+            }
+
+            System.arraycopy(tmpDp, 0, dp, 0, 3);
+        }
+
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < 3; i++) {
+            min = Math.min(min, dp[i]);
+        }
+
+        return min;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + minCost(new int[][]{{7, 6, 2}}));
+        System.out.println("2 ?= " + minCost_opt(new int[][]{{7, 6, 2}}));
     }
 }
