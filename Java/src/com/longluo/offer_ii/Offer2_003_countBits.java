@@ -38,8 +38,9 @@ import java.util.Arrays;
  * <p>
  * https://leetcode.cn/problems/w3tCBm/
  */
-public class Offer2_03_countBits {
+public class Offer2_003_countBits {
 
+    // Simulate time: O(n) space: O(n)
     public static int[] countBits(int n) {
         int[] res = new int[n + 1];
         for (int i = 1; i <= n; i++) {
@@ -61,16 +62,7 @@ public class Offer2_03_countBits {
 
         return ans;
     }
-
-    public static int[] countBits_dp(int n) {
-        int[] res = new int[n + 1];
-        for (int i = 1; i <= n; i++) {
-            res[i] = getOneNum(i);
-        }
-
-        return res;
-    }
-
+    
     public static void main(String[] args) {
         System.out.println("[0] ?= " + Arrays.toString(countBits(0)));
         System.out.println("[0,1] ?= " + Arrays.toString(countBits(1)));
