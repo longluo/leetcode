@@ -23,11 +23,12 @@ import java.util.Arrays;
  * -1000 <= nums[i] <= 1000
  * -10^4 <= target <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/3sum-closest/
+ * https://leetcode.cn/problems/3sum-closest/
  */
 public class Problem16_3sumClosest {
 
     // BF time: O(n^3) space: O(1)
+    // TLE
     public static int threeSumClosest_bf(int[] nums, int target) {
         if (nums == null || nums.length < 3) {
             return 0;
@@ -60,8 +61,11 @@ public class Problem16_3sumClosest {
         }
 
         int len = nums.length;
+
         Arrays.sort(nums);
+
         int ans = nums[0] + nums[1] + nums[2];
+
         if (nums[0] > target && target > 0) {
             return ans;
         } else if (nums[len - 1] <= target && target < 0) {
@@ -103,6 +107,7 @@ public class Problem16_3sumClosest {
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + threeSumClosest_bf(new int[]{-1, 2, 1, -4}, 1));
+
         System.out.println("2 ?= " + threeSumClosest(new int[]{-1, 2, 1, -4}, 1));
         System.out.println("-101 ?= " + threeSumClosest(new int[]{-100, -98, -2, -1}, -101));
     }
