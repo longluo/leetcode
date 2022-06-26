@@ -115,6 +115,32 @@ public class Problem692_topKFrequentWords {
         return ans;
     }
 
+    // PriorityQueue time: O(nlogn) space: O(n)
+    public static List<String> topKFrequent_pq_opt(String[] words, int k) {
+        Map<String, Integer> countMap = new HashMap<>();
+        for (String word : words) {
+            countMap.put(word, countMap.getOrDefault(word, 0) + 1);
+        }
+
+        PriorityQueue<String> pq = new PriorityQueue<String>((word1, word2) -> {
+            if (countMap.get(word1).equals(countMap.get(word2))) {
+                return word1.compareTo(word2);
+            }
+            return countMap.get(word2) - countMap.get(word1);
+        });
+
+        for (String word : countMap.keySet()) {
+            pq.offer(word);
+        }
+
+        List<String> ans = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            ans.add(pq.poll());
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[i, love] ?= " + topKFrequent_hashmap(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
         System.out.println("[the, is, sunny, day] ?= " + topKFrequent_hashmap(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
@@ -123,5 +149,8 @@ public class Problem692_topKFrequentWords {
 
         System.out.println("[i, love] ?= " + topKFrequent_pq(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
         System.out.println("[the, is, sunny, day] ?= " + topKFrequent_pq(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
+
+        System.out.println("[i, love] ?= " + topKFrequent_pq_opt(new String[]{"i", "love", "leetcode", "i", "love", "coding"}, 2));
+        System.out.println("[the, is, sunny, day] ?= " + topKFrequent_pq_opt(new String[]{"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"}, 4));
     }
 }
