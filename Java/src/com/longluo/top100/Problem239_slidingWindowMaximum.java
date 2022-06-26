@@ -55,21 +55,21 @@ public class Problem239_slidingWindowMaximum {
     }
 
     // SlidingWin + PQ time: O(nlogk) space: O(k)
-    // TimeOut
+    // TLE
     public static int[] maxSlidingWindow_slidingwin(int[] nums, int k) {
         int len = nums.length;
+
         int[] ans = new int[len - k + 1];
+
         int left = 0;
         int right = k;
-        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> o2 - o1);
+
         for (int i = left; i < right; i++) {
             pq.offer(nums[i]);
         }
+
         while (left <= right - k && right < len) {
             ans[left] = pq.peek();
             pq.offer(nums[right]);
