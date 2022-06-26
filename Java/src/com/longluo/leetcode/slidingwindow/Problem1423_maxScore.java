@@ -1,5 +1,7 @@
 package com.longluo.leetcode.slidingwindow;
 
+import java.util.Arrays;
+
 /**
  * 1423. 可获得的最大点数
  * <p>
@@ -65,7 +67,26 @@ public class Problem1423_maxScore {
         return prefixSums[len] - min;
     }
 
+    // SlidingWindow Opt time: O(n) space: O(1)
+    public static int maxScore_opt(int[] cardPoints, int k) {
+        int len = cardPoints.length;
+        int windowSize = len - k;
+        int sum = 0;
+        for (int i = 0; i < windowSize; i++) {
+            sum += cardPoints[i];
+        }
+
+        int minSum = sum;
+        for (int i = windowSize; i < len; i++) {
+            sum = sum - cardPoints[i - windowSize] + cardPoints[i];
+            minSum = Math.min(minSum, sum);
+        }
+
+        return Arrays.stream(cardPoints).sum() - minSum;
+    }
+
     public static void main(String[] args) {
         System.out.println("12 ?= " + maxScore(new int[]{1, 2, 3, 4, 5, 6, 1}, 3));
+        System.out.println("12 ?= " + maxScore_opt(new int[]{1, 2, 3, 4, 5, 6, 1}, 3));
     }
 }
