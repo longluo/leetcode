@@ -31,7 +31,7 @@ package com.longluo.leetcode.greedy;
 public class Problem1689_minPartitions {
 
     // Greedy time: O(nlogn) space: O(n)
-    public static int minPartitions(String n) {
+    public static int minPartitions_simulate(String n) {
         int min = 0;
         while (!check(n)) {
             StringBuilder sb = new StringBuilder();
@@ -63,8 +63,21 @@ public class Problem1689_minPartitions {
         return true;
     }
 
+    // Greedy time: O(n) space: O(1)
+    public static int minPartitions(String n) {
+        int ans = 0;
+        for (char ch : n.toCharArray()) {
+            ans = Math.max(ans, ch - '0');
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
-        System.out.println("3 ?= " + minPartitions("32"));
+        System.out.println("3 ?= " + minPartitions_simulate("32"));
+        System.out.println("8 ?= " + minPartitions_simulate("82734"));
+        System.out.println("9 ?= " + minPartitions_simulate("27346209830709182346"));
+
         System.out.println("8 ?= " + minPartitions("82734"));
         System.out.println("9 ?= " + minPartitions("27346209830709182346"));
     }
