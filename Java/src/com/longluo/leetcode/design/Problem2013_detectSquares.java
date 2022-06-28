@@ -41,10 +41,11 @@ package com.longluo.leetcode.design;
  * 0 <= x, y <= 1000
  * 调用 add 和 count 的 总次数 最多为 5000
  * <p>
- * https://leetcode-cn.com/problems/detect-squares/
+ * https://leetcode.com/problems/detect-squares/
  */
 public class Problem2013_detectSquares {
 
+    // TODO: 2022/6/28  
     class DetectSquares {
 
         public DetectSquares() {
@@ -56,7 +57,7 @@ public class Problem2013_detectSquares {
         }
 
         public int count(int[] point) {
-
+            return 0;
         }
     }
 
