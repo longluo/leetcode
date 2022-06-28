@@ -31,7 +31,7 @@ package com.longluo.contest.weekly_contest_286;
  */
 public class Problem2216_minDeletion {
 
-    // TODO: 2022/6/2  
+    // TODO: 2022/6/2
     public static int minDeletion(int[] nums) {
         int len = nums.length;
         if (len == 1) {
