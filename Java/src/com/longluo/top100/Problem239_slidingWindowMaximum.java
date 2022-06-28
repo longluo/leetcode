@@ -52,7 +52,7 @@ public class Problem239_slidingWindowMaximum {
         return ans;
     }
 
-    // SlidingWin + PQ time: O(nlogk) space: O(k)
+    // SlidingWin + PQ time: O(nklogk) space: O(k)
     // TLE
     public static int[] maxSlidingWindow_slidingwin(int[] nums, int k) {
         int len = nums.length;
@@ -77,6 +77,32 @@ public class Problem239_slidingWindowMaximum {
         }
 
         ans[left] = pq.peek();
+
+        return ans;
+    }
+
+    // PQ Opt time: O(nlogk) space: O(n)
+    public static int[] maxSlidingWindow_pq_opt(int[] nums, int k) {
+        int len = nums.length;
+
+        int[] ans = new int[len - k + 1];
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o2[1] - o1[1]);
+
+        for (int i = 0; i < k; i++) {
+            pq.offer(new int[]{i, nums[i]});
+        }
+
+        ans[0] = pq.peek()[1];
+
+        for (int i = k; i < len; i++) {
+            pq.offer(new int[]{i, nums[i]});
+            while (!pq.isEmpty() && pq.peek()[0] <= i - k) {
+                pq.poll();
+            }
+
+            ans[i - k + 1] = pq.peek()[1];
+        }
 
         return ans;
     }
@@ -113,6 +139,10 @@ public class Problem239_slidingWindowMaximum {
 
         System.out.println("[3,3] ?= " + Arrays.toString(maxSlidingWindow_slidingwin(new int[]{1, 3, -1, -3}, 3)));
         System.out.println("[3,3,5,5,6,7] ?= " + Arrays.toString(maxSlidingWindow_slidingwin(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
+
+        System.out.println("[1] ?= " + Arrays.toString(maxSlidingWindow_pq_opt(new int[]{1}, 1)));
+        System.out.println("[10, 10, 9, 2] ?= " + Arrays.toString(maxSlidingWindow_pq_opt(new int[]{9, 10, 9, -7, -4, -8, 2, -6}, 5)));
+        System.out.println("[3,3,5,5,6,7] ?= " + Arrays.toString(maxSlidingWindow_pq_opt(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
 
         System.out.println("[1, -1] ?= " + Arrays.toString(maxSlidingWindow_dq(new int[]{1, -1}, 1)));
         System.out.println("[3,3,5,5,6,7] ?= " + Arrays.toString(maxSlidingWindow_dq(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
