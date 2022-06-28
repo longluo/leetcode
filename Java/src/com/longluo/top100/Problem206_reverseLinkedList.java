@@ -61,7 +61,7 @@ public class Problem206_reverseLinkedList {
         return prev;
     }
 
-    // Recursive
+    // Recursive time: O(n) space: O(n)
     public static ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
