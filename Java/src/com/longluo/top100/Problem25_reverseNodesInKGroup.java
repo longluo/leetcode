@@ -30,7 +30,7 @@ import java.util.List;
  * <p>
  * 进阶：你可以设计一个只用 O(1) 额外内存空间的算法解决此问题吗？
  * <p>
- * https://leetcode-cn.com/problems/reverse-nodes-in-k-group/
+ * https://leetcode.com/problems/reverse-nodes-in-k-group/
  */
 public class Problem25_reverseNodesInKGroup {
 
@@ -67,7 +67,8 @@ public class Problem25_reverseNodesInKGroup {
         return head;
     }
 
-    //
+    // TODO: 2022/6/28  
+    // Swap Node time: O(nk) space: O(n)
     public static ListNode reverseKGroup_swap(ListNode head, int k) {
         if (head == null || head.next == null || k == 1) {
             return head;
@@ -80,19 +81,42 @@ public class Problem25_reverseNodesInKGroup {
         ListNode endNode = dummyNode;
 
         while (endNode != null) {
+            for (int i = 0; i < k && endNode != null; i++) {
+                endNode = endNode.next;
+            }
 
+            if (endNode == null) {
+                break;
+            }
+
+            ListNode grpBegin = preNode.next;
+            ListNode grpEnd = endNode.next;
+
+            endNode.next = null;
+            preNode.next = reverse(grpBegin);
+            grpBegin.next = grpEnd;
+
+            preNode = grpBegin;
+            endNode = preNode;
         }
 
         return dummyNode.next;
     }
 
     public static ListNode reverse(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
         ListNode pre = null;
         ListNode curr = head;
-        ListNode next = head.next;
+        ListNode next = null;
 
         while (curr != null) {
-
+            next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
         }
 
         return pre;
@@ -101,6 +125,7 @@ public class Problem25_reverseNodesInKGroup {
     public static void main(String[] args) {
         ListNode node3 = LinkedListNodeUtils.constructListNode(new int[]{1, 2});
         System.out.println("[2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseKGroup_bf(node3, 2)));
+        System.out.println("[2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseKGroup_swap(node3, 2)));
 
         ListNode node1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
         System.out.println("[2,1,4,3,5] ?= " + LinkedListNodeUtils.printLinkedList(reverseKGroup_bf(node1, 2)));
