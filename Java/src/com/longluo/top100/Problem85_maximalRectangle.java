@@ -32,30 +32,37 @@ package com.longluo.top100;
  * 0 <= row, cols <= 200
  * matrix[i][j] 为 '0' 或 '1'
  * <p>
- * https://leetcode-cn.com/problems/maximal-rectangle/
+ * https://leetcode.com/problems/maximal-rectangle/
  */
 public class Problem85_maximalRectangle {
 
-    // BF
+    // BF time: O(m^2n) space: O(mn)
     public static int maximalRectangle_bf(char[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return 0;
-        }
-
         int row = matrix.length;
         int col = matrix[0].length;
-        int ans = 0;
-        int minSide = 0;
+
+        int[][] widthMap = new int[row][col];
+
+        int maxArea = 0;
+
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (matrix[i][j] == '1') {
+                    widthMap[i][j] = j == 0 ? 1 : widthMap[i][j - 1] + 1;
+                } else {
+                    widthMap[i][j] = 0;
+                }
 
-                    boolean isRectangle = true;
+                int minWidth = widthMap[i][j];
+                for (int k = i; k >= 0; k--) {
+                    int height = i - k + 1;
+                    minWidth = Math.min(minWidth, widthMap[k][j]);
+                    maxArea = Math.max(maxArea, minWidth * height);
                 }
             }
         }
 
-        return 0;
+        return maxArea;
     }
 
     // DP
