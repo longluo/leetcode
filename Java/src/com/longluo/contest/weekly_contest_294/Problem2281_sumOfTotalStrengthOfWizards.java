@@ -53,13 +53,15 @@ public class Problem2281_sumOfTotalStrengthOfWizards {
     // TLE
     public static int totalStrength_bf(int[] strength) {
         int MOD = 1_000_000_007;
-        int ans = 0;
+
         int len = strength.length;
+
         long[] sums = new long[len + 1];
         for (int i = 0; i < len; i++) {
             sums[i + 1] = sums[i] + strength[i];
         }
 
+        long ans = 0;
         for (int i = 0; i < len; i++) {
             for (int j = i; j < len; j++) {
                 int min = strength[i];
@@ -68,11 +70,11 @@ public class Problem2281_sumOfTotalStrengthOfWizards {
                 }
 
                 long power = (long) min * (sums[j + 1] - sums[i]) % MOD;
-                ans = (int) (((long) ans + power) % MOD);
+                ans = (ans + power) % MOD;
             }
         }
 
-        return ans;
+        return (int) ans;
     }
 
     public static void main(String[] args) {
