@@ -1,5 +1,7 @@
 package com.longluo.leetcode.stack;
 
+import java.util.Stack;
+
 /**
  * 907. 子数组的最小值之和
  * <p>
@@ -113,7 +115,48 @@ public class Problem907_sumOfSubarrayMinimums {
 
         long ans = 0;
         for (int i = 0; i < len; i++) {
-            ans = (ans + ((long)arr[i] * (i - left[i]) * (right[i] - i)) % MOD) % MOD;
+            ans = (ans + (long) arr[i] * (i - left[i]) * (right[i] - i)) % MOD;
+        }
+
+        return (int) ans;
+    }
+
+    // MonoStack time: O(n) space: O(n)
+    public static int sumSubarrayMins(int[] arr) {
+        int MOD = 1_000_000_007;
+
+        int len = arr.length;
+
+        Stack<Integer> stk = new Stack<>();
+
+        long ans = 0;
+
+        for (int i = 0; i < len; i++) {
+            while (!stk.empty() && arr[i] < arr[stk.peek()]) {
+                int curr = stk.pop();
+
+                int prevIndex = stk.isEmpty() ? -1 : stk.peek();
+
+                int prevCnt = curr - prevIndex;
+                int nextCnt = i - curr;
+
+                ans += (long) arr[curr] * prevCnt * nextCnt % MOD;
+                ans %= MOD;
+            }
+
+            stk.push(i);
+        }
+
+        while (!stk.empty()) {
+            int curr = stk.pop();
+
+            int prevIndex = stk.isEmpty() ? -1 : stk.peek();
+
+            int prevCnt = curr - prevIndex;
+            int nextCnt = len - curr;
+
+            ans += (long) arr[curr] * prevCnt * nextCnt % MOD;
+            ans %= MOD;
         }
 
         return (int) ans;
@@ -127,5 +170,9 @@ public class Problem907_sumOfSubarrayMinimums {
 
         System.out.println("17 ?= " + sumSubarrayMins_leftright(new int[]{3, 1, 2, 4}));
         System.out.println("593 ?= " + sumSubarrayMins_leftright(new int[]{71, 55, 82, 55}));
+
+        System.out.println("17 ?= " + sumSubarrayMins(new int[]{3, 1, 2, 4}));
+        System.out.println("40 ?= " + sumSubarrayMins(new int[]{3, 4, 5, 6}));
+        System.out.println("593 ?= " + sumSubarrayMins(new int[]{71, 55, 82, 55}));
     }
 }
