@@ -3,6 +3,8 @@ package com.longluo.top100;
 import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
 
+import java.util.Stack;
+
 /**
  * 206. 反转链表
  * <p>
@@ -19,17 +21,38 @@ import com.longluo.datastructure.ListNode;
  */
 public class Problem206_reverseLinkedList {
 
-    // TODO: 2022/6/7
-    public static ListNode reverseList(ListNode head) {
+    // Stack time: O(n) space: O(n)
+    public static ListNode reverseList_stack(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
+        Stack<ListNode> stack = new Stack<>();
+        while (head != null) {
+            stack.push(head);
+            head = head.next;
+        }
+
+        ListNode pHead = stack.pop();
+        ListNode res = pHead;
+        while (!stack.empty()) {
+            ListNode node = stack.pop();
+            node.next = null;
+            pHead.next = node;
+            pHead = pHead.next;
+        }
+
+        return res;
+    }
+
+    // Iteration time: O(n) space: O(1)
+    public static ListNode reverseList_opt(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
+        ListNode next = null;
 
         while (curr != null) {
-            ListNode next = curr.next;
+            next = curr.next;
             curr.next = prev;
             prev = curr;
             curr = next;
@@ -38,15 +61,13 @@ public class Problem206_reverseLinkedList {
         return prev;
     }
 
-    /**
-     * Recursive
-     */
-    public static ListNode reverseList_rec(ListNode head) {
+    // Recursive
+    public static ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
-        ListNode newHead = reverseList_rec(head.next);
+        ListNode newHead = reverseList(head.next);
         head.next.next = head;
         head.next = null;
         return newHead;
@@ -54,19 +75,20 @@ public class Problem206_reverseLinkedList {
 
     public static void main(String[] args) {
         ListNode test1 = LinkedListNodeUtils.constructListNode(new int[]{});
+        System.out.println("[] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_stack(test1)));
+        System.out.println("[] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_opt(test1)));
         System.out.println("[] ?= " + LinkedListNodeUtils.printLinkedList(reverseList(test1)));
-        System.out.println("[] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_rec(test1)));
 
         ListNode test2 = LinkedListNodeUtils.constructListNode(new int[]{1});
+        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_stack(test2)));
         System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList(test2)));
-        System.out.println("[1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_rec(test2)));
 
         ListNode test3 = LinkedListNodeUtils.constructListNode(new int[]{1, 2});
+        System.out.println("[2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_stack(test3)));
         System.out.println("[2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList(test3)));
-        System.out.println("[2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_rec(test3)));
 
         ListNode test4 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3});
+        System.out.println("[3,2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_stack(test4)));
         System.out.println("[3,2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList(test4)));
-        System.out.println("[3,2,1] ?= " + LinkedListNodeUtils.printLinkedList(reverseList_rec(test4)));
     }
 }
