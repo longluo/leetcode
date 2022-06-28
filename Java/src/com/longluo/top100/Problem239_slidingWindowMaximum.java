@@ -1,8 +1,6 @@
 package com.longluo.top100;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * 239. 滑动窗口最大值
@@ -83,8 +81,31 @@ public class Problem239_slidingWindowMaximum {
         return ans;
     }
 
-    // TODO: 2022/5/11
-    // https://leetcode.cn/problems/sliding-window-maximum/solution/hua-dong-chuang-kou-zui-da-zhi-by-leetco-ki6m/
+    // Deque time: O(n) space: O(k)
+    public static int[] maxSlidingWindow_dq(int[] nums, int k) {
+        int len = nums.length;
+
+        int[] ans = new int[len - k + 1];
+
+        Deque<Integer> deque = new ArrayDeque<>();
+
+        for (int i = 0; i < len; i++) {
+            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
+                deque.pollLast();
+            }
+
+            deque.addLast(i);
+            if (deque.peekFirst() <= i - k) {
+                deque.pollFirst();
+            }
+
+            if (i + 1 >= k) {
+                ans[i + 1 - k] = nums[deque.peekFirst()];
+            }
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
         System.out.println("[1] ?= " + Arrays.toString(maxSlidingWindow_bf(new int[]{1}, 1)));
@@ -92,5 +113,8 @@ public class Problem239_slidingWindowMaximum {
 
         System.out.println("[3,3] ?= " + Arrays.toString(maxSlidingWindow_slidingwin(new int[]{1, 3, -1, -3}, 3)));
         System.out.println("[3,3,5,5,6,7] ?= " + Arrays.toString(maxSlidingWindow_slidingwin(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
+
+        System.out.println("[1, -1] ?= " + Arrays.toString(maxSlidingWindow_dq(new int[]{1, -1}, 1)));
+        System.out.println("[3,3,5,5,6,7] ?= " + Arrays.toString(maxSlidingWindow_dq(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
     }
 }
