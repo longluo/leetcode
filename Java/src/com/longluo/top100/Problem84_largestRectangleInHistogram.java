@@ -26,34 +26,76 @@ import java.util.Stack;
 public class Problem84_largestRectangleInHistogram {
 
     // BF time: O(n^2) space: O(1)
-    // TimeOut
+    // TLE
     public static int largestRectangleArea_bf(int[] heights) {
         int len = heights.length;
         if (len <= 1) {
             return heights[0];
         }
 
-        int ans = heights[0];
+        int max = heights[0];
         for (int i = 0; i < len; i++) {
             if (heights[i] == 0) {
                 continue;
             }
 
-            int min = heights[i];
+            int minH = heights[i];
             for (int j = i; j < len; j++) {
                 if (heights[j] == 0) {
                     break;
                 }
 
-                min = Math.min(min, heights[j]);
-                int area = min * (j - i + 1);
-                ans = Math.max(ans, area);
+                minH = Math.min(minH, heights[j]);
+                int area = minH * (j - i + 1);
+                max = Math.max(max, area);
             }
         }
 
-        return ans;
+        return max;
     }
 
+    // Record time: O(n) space: O(n)
+    public static int largestRectangleArea_bf_opt(int[] heights) {
+        int len = heights.length;
+        if (len <= 1) {
+            return heights[0];
+        }
+
+        int[] left = new int[len];
+        int[] right = new int[len];
+
+        left[0] = -1;
+        right[len - 1] = len;
+
+        for (int i = 1; i < len; i++) {
+            int idx = i - 1;
+            while (idx >= 0 && heights[idx] >= heights[i]) {
+                idx = left[idx];
+            }
+
+            left[i] = idx;
+        }
+
+        for (int i = len - 2; i >= 0; i--) {
+            int idx = i + 1;
+            while (idx < len && heights[idx] >= heights[i]) {
+                idx = right[idx];
+            }
+
+            right[i] = idx;
+        }
+
+        int max = heights[0];
+
+        for (int i = 0; i < len; i++) {
+            int area = heights[i] * (right[i] - left[i] - 1);
+            max = Math.max(max, area);
+        }
+
+        return max;
+    }
+
+    // TODO: 2022/6/28
     // Stack
     public static int largestRectangleArea_stack(int[] heights) {
         int len = heights.length;
@@ -63,7 +105,7 @@ public class Problem84_largestRectangleInHistogram {
 
         int ans = heights[0];
         Stack<Integer> stk = new Stack<>();
-        
+
 
         return ans;
     }
@@ -73,5 +115,7 @@ public class Problem84_largestRectangleInHistogram {
         System.out.println("4 ?= " + largestRectangleArea_bf(new int[]{2, 4}));
         System.out.println("9 ?= " + largestRectangleArea_bf(new int[]{0, 9}));
         System.out.println("10 ?= " + largestRectangleArea_bf(new int[]{2, 1, 5, 6, 2, 3}));
+
+        System.out.println("10 ?= " + largestRectangleArea_bf_opt(new int[]{2, 1, 5, 6, 2, 3}));
     }
 }
