@@ -63,8 +63,69 @@ public class Problem907_sumOfSubarrayMinimums {
         return ans;
     }
 
+    // use minus replace MOD
+    // TLE
+    public static int sumSubarrayMins_bf_opt_mod(int[] arr) {
+        int MOD = 1_000_000_007;
+        int len = arr.length;
+        long ans = 0;
+        for (int i = 0; i < len; i++) {
+            int min = arr[i];
+            for (int j = i; j < len; j++) {
+                min = Math.min(min, arr[j]);
+                ans += min;
+                ans = ans >= MOD ? ans - MOD : ans;
+            }
+        }
+
+        return (int) ans;
+    }
+
+    // LeftRight time: O(n) space: O(n)
+    public static int sumSubarrayMins_leftright(int[] arr) {
+        int MOD = 1_000_000_007;
+
+        int len = arr.length;
+
+        int[] left = new int[len];
+        int[] right = new int[len];
+
+        left[0] = -1;
+        right[len - 1] = len;
+
+        for (int i = 1; i < len; i++) {
+            int idx = i - 1;
+            while (idx >= 0 && arr[idx] > arr[i]) {
+                idx = left[idx];
+            }
+
+            left[i] = idx;
+        }
+
+        for (int i = len - 2; i >= 0; i--) {
+            int idx = i + 1;
+            while (idx < len && arr[idx] >= arr[i]) {
+                idx = right[idx];
+            }
+
+            right[i] = idx;
+        }
+
+        long ans = 0;
+        for (int i = 0; i < len; i++) {
+            ans = (ans + ((long)arr[i] * (i - left[i]) * (right[i] - i)) % MOD) % MOD;
+        }
+
+        return (int) ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("17 ?= " + sumSubarrayMins_bf(new int[]{3, 1, 2, 4}));
+
         System.out.println("17 ?= " + sumSubarrayMins_bf_opt(new int[]{3, 1, 2, 4}));
+        System.out.println("17 ?= " + sumSubarrayMins_bf_opt_mod(new int[]{3, 1, 2, 4}));
+
+        System.out.println("17 ?= " + sumSubarrayMins_leftright(new int[]{3, 1, 2, 4}));
+        System.out.println("593 ?= " + sumSubarrayMins_leftright(new int[]{71, 55, 82, 55}));
     }
 }
