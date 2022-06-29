@@ -95,19 +95,36 @@ public class Problem84_largestRectangleInHistogram {
         return max;
     }
 
-    // TODO: 2022/6/28
-    // Stack
+    // MonoStack time: O(n) space: O(n)
     public static int largestRectangleArea_stack(int[] heights) {
         int len = heights.length;
         if (len <= 1) {
             return heights[0];
         }
 
-        int ans = heights[0];
+        int max = heights[0];
         Stack<Integer> stk = new Stack<>();
+        for (int i = 0; i < len; i++) {
+            while (!stk.empty() && heights[i] < heights[stk.peek()]) {
+                int cur = stk.pop();
+                int prevIdx = stk.empty() ? -1 : stk.peek();
+                int width = i - prevIdx - 1;
+                int area = heights[cur] * width;
+                max = Math.max(max, area);
+            }
 
+            stk.push(i);
+        }
 
-        return ans;
+        while (!stk.empty()) {
+            int cur = stk.pop();
+            int prevIdx = stk.empty() ? -1 : stk.peek();
+            int width = len - prevIdx - 1;
+            int area = heights[cur] * width;
+            max = Math.max(max, area);
+        }
+
+        return max;
     }
 
     public static void main(String[] args) {
@@ -117,5 +134,8 @@ public class Problem84_largestRectangleInHistogram {
         System.out.println("10 ?= " + largestRectangleArea_bf(new int[]{2, 1, 5, 6, 2, 3}));
 
         System.out.println("10 ?= " + largestRectangleArea_bf_opt(new int[]{2, 1, 5, 6, 2, 3}));
+
+        System.out.println("4 ?= " + largestRectangleArea_stack(new int[]{2, 4}));
+        System.out.println("10 ?= " + largestRectangleArea_stack(new int[]{2, 1, 5, 6, 2, 3}));
     }
 }
