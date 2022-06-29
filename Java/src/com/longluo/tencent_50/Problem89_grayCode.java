@@ -33,7 +33,7 @@ import java.util.List;
  * 给定编码总位数为 n 的格雷编码序列，其长度为 2n。当 n = 0 时，长度为 20 = 1。
  * 因此，当 n = 0 时，其格雷编码序列为 [0]。
  * <p>
- * https://leetcode-cn.com/problems/gray-code/
+ * https://leetcode.cn/problems/gray-code/
  */
 public class Problem89_grayCode {
 
