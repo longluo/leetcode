@@ -36,7 +36,7 @@ import java.util.*;
  */
 public class Problem406_queueReconstructionByHeight {
 
-    // Greedy time: O(n^2) space: O(logn)
+    // Greedy time: O(nlogn) space: O(logn)
     public static int[][] reconstructQueue_greedy(int[][] people) {
         if (people == null || people.length <= 1) {
             return people;
@@ -60,12 +60,7 @@ public class Problem406_queueReconstructionByHeight {
 
     // Greedy opt time: O(n^2) space: O(logn)
     public static int[][] reconstructQueue(int[][] people) {
-        Arrays.sort(people, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[0] == o2[0] ? o1[1] - o2[1] : o2[0] - o1[0];
-            }
-        });
+        Arrays.sort(people, (o1, o2) -> o1[0] == o2[0] ? o1[1] - o2[1] : o2[0] - o1[0]);
 
         LinkedList<int[]> ans = new LinkedList<>();
         for (int[] person : people) {
