@@ -18,31 +18,31 @@ import java.util.Stack;
  * 数字 2 找不到下一个更大的数；
  * 第二个 1 的下一个最大的数需要循环搜索，结果也是 2。
  * <p>
- * 注意: 输入数组的长度不会超过 10000。
+ * 提示:
+ * 1 <= nums.length <= 10^4
+ * -10^9 <= nums[i] <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/next-greater-element-ii/
+ * https://leetcode.com/problems/next-greater-element-ii/
  */
 public class Problem503_nextGreaterElements {
 
-    public static int[] nextGreaterElements(int[] nums) {
+    // BF time: O(n^2) space: O(1)
+    public static int[] nextGreaterElements_bf(int[] nums) {
         if (nums == null || nums.length == 0) {
             return nums;
         }
 
-        int[] ans = new int[nums.length];
+        int len = nums.length;
+
+        int[] ans = new int[len];
+
         Arrays.fill(ans, -1);
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 1; j < nums.length; j++) {
-                if (i + j < nums.length) {
-                    if (nums[i + j] > nums[i]) {
-                        ans[i] = nums[i + j];
-                        break;
-                    }
-                } else {
-                    if (nums[(i + j) % nums.length] > nums[i]) {
-                        ans[i] = nums[(i + j) % nums.length];
-                        break;
-                    }
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 1; j < len; j++) {
+                if (nums[(i + j) % len] > nums[i]) {
+                    ans[i] = nums[(i + j) % len];
+                    break;
                 }
             }
         }
@@ -71,8 +71,8 @@ public class Problem503_nextGreaterElements {
     }
 
     public static void main(String[] args) {
-        System.out.println("[-1] ?= " + Arrays.toString(nextGreaterElements(new int[]{1})));
-        System.out.println("[2, -1, 2] ?= " + Arrays.toString(nextGreaterElements(new int[]{1, 2, 1})));
+        System.out.println("[-1] ?= " + Arrays.toString(nextGreaterElements_bf(new int[]{1})));
+        System.out.println("[2, -1, 2] ?= " + Arrays.toString(nextGreaterElements_bf(new int[]{1, 2, 1})));
 
         System.out.println("[-1] ?= " + Arrays.toString(nextGreaterElements_stack(new int[]{1})));
         System.out.println("[2, -1, 2] ?= " + Arrays.toString(nextGreaterElements_stack(new int[]{1, 2, 1})));
