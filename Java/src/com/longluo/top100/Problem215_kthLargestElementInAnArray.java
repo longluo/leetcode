@@ -70,6 +70,68 @@ public class Problem215_kthLargestElementInAnArray {
         return pq.peek();
     }
 
+    // QuickSelect time: O(n) space: O(1)
+    public final static Random random = new Random(System.currentTimeMillis());
+
+    public static int findKthLargest_quick(int[] nums, int k) {
+        int len = nums.length;
+
+        int target = len - k;
+
+        int left = 0;
+        int right = len - 1;
+
+        while (true) {
+            int pivotIndex = partition(nums, left, right);
+            if (pivotIndex == target) {
+                return nums[pivotIndex];
+            } else if (pivotIndex < target) {
+                left = pivotIndex + 1;
+            } else {
+                // pivotIndex > target
+                right = pivotIndex - 1;
+            }
+        }
+    }
+
+    public static int partition(int[] nums, int left, int right) {
+        int randomIndex = left + random.nextInt(right - left + 1);
+
+        swap(nums, left, randomIndex);
+
+        // all in nums[left + 1..le) <= pivot;
+        // all in nums(ge..right] >= pivot;
+        int pivot = nums[left];
+        int le = left + 1;
+        int ge = right;
+
+        while (true) {
+            while (le <= ge && nums[le] < pivot) {
+                le++;
+            }
+
+            while (le <= ge && nums[ge] > pivot) {
+                ge--;
+            }
+
+            if (le >= ge) {
+                break;
+            }
+            swap(nums, le, ge);
+            le++;
+            ge--;
+        }
+
+        swap(nums, left, ge);
+        return ge;
+    }
+
+    private static void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+
     public static void main(String[] args) {
         System.out.println("5 ?= " + findKthLargest(new int[]{3, 2, 1, 5, 6, 4}, 2));
         System.out.println("4 ?= " + findKthLargest(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
@@ -79,5 +141,7 @@ public class Problem215_kthLargestElementInAnArray {
 
         System.out.println("5 ?= " + findKthLargest_pq_opt(new int[]{3, 2, 1, 5, 6, 4}, 2));
         System.out.println("4 ?= " + findKthLargest_pq_opt(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
+
+        System.out.println("4 ?= " + findKthLargest_quick(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
     }
 }
