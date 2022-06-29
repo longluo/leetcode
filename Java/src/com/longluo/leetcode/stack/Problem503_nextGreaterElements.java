@@ -50,21 +50,20 @@ public class Problem503_nextGreaterElements {
         return ans;
     }
 
+    // MonoStack time: O(n) space: O(n)
     public static int[] nextGreaterElements_stack(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return nums;
-        }
-
         int len = nums.length;
+
         int[] ans = new int[len];
         Arrays.fill(ans, -1);
-        Stack<Integer> st = new Stack<>();
+
+        Stack<Integer> stk = new Stack<>();
         for (int i = 0; i < 2 * len - 1; i++) {
-            while (!st.empty() && nums[st.peek()] < nums[i % len]) {
-                ans[st.pop()] = nums[i % len];
+            while (!stk.empty() && nums[stk.peek()] < nums[i % len]) {
+                ans[stk.pop()] = nums[i % len];
             }
 
-            st.push(i % len);
+            stk.push(i % len);
         }
 
         return ans;
