@@ -39,7 +39,7 @@ import java.util.Map;
  * 输出: 9
  * 解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
  * <p>
- * https://leetcode-cn.com/problems/house-robber-iii/
+ * https://leetcode.com/problems/house-robber-iii/
  */
 public class Problem337_houseRobber_iii {
 
@@ -64,7 +64,7 @@ public class Problem337_houseRobber_iii {
         return Math.max(root.val + rob(root.left.left) + rob(root.left.right) + rob(root.right.left) + rob(root.right.right), rob(root.left) + rob(root.right));
     }
 
-    public static int rob_1(TreeNode root) {
+    public static int rob_rec(TreeNode root) {
         Map<TreeNode, Integer> memo = new HashMap<>();
         return robInternal(root, memo);
     }
@@ -97,14 +97,14 @@ public class Problem337_houseRobber_iii {
     public static void main(String[] args) {
         TreeNode tstTree1 = TreeUtils.constructTree(new Integer[]{3, 2, 3, null, 3, null, 1});
         System.out.println("7 ?= " + rob(tstTree1));
-        System.out.println("7 ?= " + rob_1(tstTree1));
+        System.out.println("7 ?= " + rob_rec(tstTree1));
 
         TreeNode tstTree2 = TreeUtils.constructTree(new Integer[]{3, 4, 5, 1, 3, null, 1});
         System.out.println("9 ?= " + rob(tstTree2));
-        System.out.println("9 ?= " + rob_1(tstTree2));
+        System.out.println("9 ?= " + rob_rec(tstTree2));
 
         TreeNode tstTree3 = TreeUtils.constructTree(new Integer[]{3, 1, null, null, 2});
         System.out.println("5 ?= " + rob(tstTree3));
-        System.out.println("5 ?= " + rob_1(tstTree3));
+        System.out.println("5 ?= " + rob_rec(tstTree3));
     }
 }

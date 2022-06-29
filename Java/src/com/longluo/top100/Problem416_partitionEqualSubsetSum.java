@@ -22,7 +22,7 @@ import java.util.List;
  * 1 <= nums.length <= 200
  * 1 <= nums[i] <= 100
  * <p>
- * https://leetcode-cn.com/problems/partition-equal-subset-sum/
+ * https://leetcode.com/problems/partition-equal-subset-sum/
  */
 public class Problem416_partitionEqualSubsetSum {
 

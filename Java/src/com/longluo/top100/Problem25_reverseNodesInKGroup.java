@@ -67,7 +67,7 @@ public class Problem25_reverseNodesInKGroup {
         return head;
     }
 
-    // TODO: 2022/6/28  
+    // TODO: 2022/6/28
     // Swap Node time: O(nk) space: O(n)
     public static ListNode reverseKGroup_swap(ListNode head, int k) {
         if (head == null || head.next == null || k == 1) {
