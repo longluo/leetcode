@@ -24,15 +24,20 @@ import java.util.Arrays;
  * -10^9 <= nums[i] <= 10^9
  * 答案保证符合 32-bit 整数
  * <p>
- * https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements/
+ * https://leetcode.com/problems/minimum-moves-to-equal-array-elements/
  */
 public class Problem453_minMoves {
 
+    // Simulate time: O(n) space: O(1)
     public static int minMoves(int[] nums) {
-        int minNum = Arrays.stream(nums).min().getAsInt();
+        int min = Integer.MAX_VALUE;
+        for (int x : nums) {
+            min = Math.min(min, x);
+        }
+
         int ans = 0;
         for (int x : nums) {
-            ans += x - minNum;
+            ans += x - min;
         }
 
         return ans;
