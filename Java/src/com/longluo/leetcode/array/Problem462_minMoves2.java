@@ -1,5 +1,7 @@
 package com.longluo.leetcode.array;
 
+import java.util.Arrays;
+
 /**
  * 462. 最少移动次数使数组元素相等 II
  * <p>
@@ -82,6 +84,19 @@ public class Problem462_minMoves2 {
         return ans;
     }
 
+    // Sort time: O(nlogn) space: O(logn)
+    public static int minMoves2_sort(int[] nums) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        int base = nums[len / 2];
+        int ans = 0;
+        for (int x : nums) {
+            ans += Math.abs(x - base);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + minMoves2_bf(new int[]{1, 1, 2}));
         System.out.println("2 ?= " + minMoves2_bf(new int[]{1, 2, 3}));
@@ -91,5 +106,7 @@ public class Problem462_minMoves2 {
 
         System.out.println("16 ?= " + minMoves2_bf_opt(new int[]{1, 10, 2, 9}));
         System.out.println("14 ?= " + minMoves2_bf_opt(new int[]{1, 0, 0, 8, 6}));
+
+        System.out.println("14 ?= " + minMoves2_sort(new int[]{1, 0, 0, 8, 6}));
     }
 }
