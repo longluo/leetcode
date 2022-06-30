@@ -51,11 +51,45 @@ public class Problem462_minMoves2 {
         return ans;
     }
 
+    // BF time: O(nC) space: O(1)
+    // TLE
+    public static int minMoves2_bf_opt(int[] nums) {
+        int len = nums.length;
+
+        long sum = 0;
+        int max = nums[0];
+        int min = nums[0];
+
+        for (int x : nums) {
+            min = Math.min(min, x);
+            max = Math.max(max, x);
+            sum += x;
+        }
+
+        int average = (int) (sum / len);
+
+        int ans = Integer.MAX_VALUE;
+        for (int i = min - average; i <= max - average; i++) {
+            int cnt = 0;
+            int base = average + i;
+            for (int x : nums) {
+                cnt += Math.abs(x - base);
+            }
+
+            ans = Math.min(ans, cnt);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + minMoves2_bf(new int[]{1, 1, 2}));
         System.out.println("2 ?= " + minMoves2_bf(new int[]{1, 2, 3}));
         System.out.println("0 ?= " + minMoves2_bf(new int[]{1, 1, 1}));
         System.out.println("1 ?= " + minMoves2_bf(new int[]{1, 2}));
         System.out.println("16 ?= " + minMoves2_bf(new int[]{1, 10, 2, 9}));
+
+        System.out.println("16 ?= " + minMoves2_bf_opt(new int[]{1, 10, 2, 9}));
+        System.out.println("14 ?= " + minMoves2_bf_opt(new int[]{1, 0, 0, 8, 6}));
     }
 }
