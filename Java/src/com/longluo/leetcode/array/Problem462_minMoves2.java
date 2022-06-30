@@ -1,6 +1,7 @@
 package com.longluo.leetcode.array;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * 462. 最少移动次数使数组元素相等 II
@@ -97,6 +98,74 @@ public class Problem462_minMoves2 {
         return ans;
     }
 
+    // QuickSelect time: O(n) space: O(1)
+    private static Random random = new Random();
+
+    public static int minMoves2_quick(int[] nums) {
+        int base = quickSelect(nums);
+        int ans = 0;
+        for (int x : nums) {
+            ans += Math.abs(x - base);
+        }
+
+        return ans;
+    }
+
+    private static int quickSelect(int[] nums) {
+        int len = nums.length;
+
+        int target = len / 2;
+
+        int left = 0;
+        int right = len - 1;
+
+        while (true) {
+            int pivotIndex = partition(nums, left, right);
+            if (pivotIndex == target) {
+                return nums[pivotIndex];
+            } else if (pivotIndex < target) {
+                left = pivotIndex + 1;
+            } else {
+                right = pivotIndex - 1;
+            }
+        }
+    }
+
+    private static int partition(int[] nums, int left, int right) {
+        int randomIdx = left + random.nextInt(right - left + 1);
+        swap(nums, left, randomIdx);
+        int pivot = nums[left];
+        int le = left + 1;
+        int ge = right;
+
+        while (true) {
+            while (le <= ge && nums[le] < pivot) {
+                le++;
+            }
+
+            while (le <= ge && nums[ge] > pivot) {
+                ge--;
+            }
+
+            if (le >= ge) {
+                break;
+            }
+            swap(nums, le, ge);
+            le++;
+            ge--;
+        }
+
+        swap(nums, left, ge);
+
+        return ge;
+    }
+
+    private static void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + minMoves2_bf(new int[]{1, 1, 2}));
         System.out.println("2 ?= " + minMoves2_bf(new int[]{1, 2, 3}));
@@ -108,5 +177,7 @@ public class Problem462_minMoves2 {
         System.out.println("14 ?= " + minMoves2_bf_opt(new int[]{1, 0, 0, 8, 6}));
 
         System.out.println("14 ?= " + minMoves2_sort(new int[]{1, 0, 0, 8, 6}));
+
+        System.out.println("14 ?= " + minMoves2_quick(new int[]{1, 0, 0, 8, 6}));
     }
 }
