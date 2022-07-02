@@ -47,6 +47,7 @@ import java.util.List;
  */
 public class Problem23_mergeKSortedLists {
 
+    // BF time: O(nlogn) space: O(n)
     public static ListNode mergeKLists_bf(ListNode[] lists) {
         if (lists == null || lists.length == 0) {
             return null;
@@ -63,6 +64,7 @@ public class Problem23_mergeKSortedLists {
         }
 
         Collections.sort(nums);
+
         int size = nums.size();
         if (size == 0) {
             return null;
@@ -79,6 +81,7 @@ public class Problem23_mergeKSortedLists {
         return dummyNode.next;
     }
 
+    // Recursion mergeTwoLists time: O(n) space: O(n)
     public static ListNode mergeTwoLists(ListNode listNode1, ListNode listNode2) {
         if (listNode1 == null) {
             return listNode2;
@@ -125,6 +128,7 @@ public class Problem23_mergeKSortedLists {
         return dummyNode.next;
     }
 
+    // Divide and Comquer time: O(n) space: O(1)
     public static ListNode mergeKLists_divide(ListNode[] lists) {
         if (lists == null || lists.length == 0) {
             return null;
