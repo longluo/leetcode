@@ -39,13 +39,14 @@ import java.util.Arrays;
 public class Problem1465_maxArea {
 
     // Sorting time: O(mn) space: O(max(logm, logn))
+    // TLE
     public static int maxArea(int h, int w, int[] horizontalCuts, int[] verticalCuts) {
         int MOD = 1_000_000_007;
 
         Arrays.sort(horizontalCuts);
         Arrays.sort(verticalCuts);
 
-        int max = 0;
+        long max = 0;
         for (int i = 0; i <= horizontalCuts.length; i++) {
             long height = 0;
             if (i == 0) {
@@ -66,12 +67,11 @@ public class Problem1465_maxArea {
                     width = verticalCuts[j] - verticalCuts[j - 1];
                 }
 
-                int area = (int) ((height * width) % MOD);
-                max = Math.max(max, area);
+                max = Math.max(max, height * width);
             }
         }
 
-        return max;
+        return (int) (max % MOD);
     }
 
     // Greedy time: O(max(mlogm) space: O(logm)
