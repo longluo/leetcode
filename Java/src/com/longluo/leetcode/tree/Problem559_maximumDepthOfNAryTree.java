@@ -1,7 +1,6 @@
 package com.longluo.leetcode.tree;
 
 import com.longluo.datastructure.Node;
-import kotlin.Pair;
 
 import java.util.*;
 
@@ -24,7 +23,7 @@ import java.util.*;
  * 树的深度不会超过 1000 。
  * 树的节点数目位于 [0, 10^4] 之间。
  * <p>
- * https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/
+ * https://leetcode.com/problems/maximum-depth-of-n-ary-tree/
  */
 public class Problem559_maximumDepthOfNAryTree {
 

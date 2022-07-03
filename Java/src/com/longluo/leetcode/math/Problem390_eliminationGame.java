@@ -115,7 +115,7 @@ public class Problem390_eliminationGame {
     }
 
     // Sequence
-    // TODO: 2022/6/13  
+    // TODO: 2022/6/13
     public static int lastRemaining_seq(int n) {
         if (n <= 2) {
             return n;

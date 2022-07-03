@@ -45,7 +45,7 @@ package com.longluo.leetcode.design;
  */
 public class Problem2013_detectSquares {
 
-    // TODO: 2022/6/28  
+    // TODO: 2022/6/28
     class DetectSquares {
 
         public DetectSquares() {

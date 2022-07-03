@@ -27,7 +27,7 @@ import java.util.Arrays;
 public class Problem498_diagonalTraverse {
 
     // Simulate time: O(n^2) space: O(1)
-    // TODO: 2022/6/14  
+    // TODO: 2022/6/14
     public static int[] findDiagonalOrder(int[][] mat) {
         int row = mat.length;
         int col = mat[0].length;

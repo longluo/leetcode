@@ -34,7 +34,7 @@ package com.longluo.leetcode.greedy;
  */
 public class Problem1414_findMinFibonacciNumbers {
 
-    // TODO: 2022/7/3  
+    // TODO: 2022/7/3
     public static int findMinFibonacciNumbers(int k) {
         int[] dp = new int[45];
         dp[0] = 1;

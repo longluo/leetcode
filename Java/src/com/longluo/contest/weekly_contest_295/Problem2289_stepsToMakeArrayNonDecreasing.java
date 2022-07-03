@@ -29,7 +29,7 @@ package com.longluo.contest.weekly_contest_295;
  */
 public class Problem2289_stepsToMakeArrayNonDecreasing {
 
-    // TODO: 2022/5/29  
+    // TODO: 2022/5/29
     public static int totalSteps(int[] nums) {
         if (isAscendArray(nums)) {
             return 0;

@@ -33,7 +33,7 @@ package com.longluo.leetcode.greedy;
  */
 public class Problem991_brokenCalculator {
 
-    // TODO: 2022/7/3  
+    // TODO: 2022/7/3
     public static int brokenCalc(int startValue, int target) {
         int ans = 0;
         while (startValue < target) {

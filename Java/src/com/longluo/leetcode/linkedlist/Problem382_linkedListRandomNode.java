@@ -51,6 +51,7 @@ public class Problem382_linkedListRandomNode {
         /** Returns a random node's value. */
         public int getRandom() {
 
+            return 0;
         }
     }
 
@@ -59,7 +60,6 @@ public class Problem382_linkedListRandomNode {
      * Solution obj = new Solution(head);
      * int param_1 = obj.getRandom();
      */
-
     public static void main(String[] args) {
 
     }

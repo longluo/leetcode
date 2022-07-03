@@ -37,7 +37,7 @@ import java.util.List;
  * 提示：
  * 1 <= n <= 5000
  * <p>
- * https://leetcode-cn.com/problems/knight-dialer/
+ * https://leetcode.cn/problems/knight-dialer/
  */
 public class Problem935_knightDialer {
 

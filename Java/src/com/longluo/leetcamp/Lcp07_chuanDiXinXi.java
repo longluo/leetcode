@@ -27,7 +27,7 @@ import java.util.*;
  * 1 <= relation.length <= 90, 且 relation[i].length == 2
  * 0 <= relation[i][0],relation[i][1] < n 且 relation[i][0] != relation[i][1]
  * <p>
- * https://leetcode-cn.com/problems/chuan-di-xin-xi/
+ * https://leetcode.cn/problems/chuan-di-xin-xi/
  */
 public class Lcp07_chuanDiXinXi {
 

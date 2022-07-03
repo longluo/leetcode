@@ -41,7 +41,7 @@ import java.util.Comparator;
  */
 public class Problem1029_twoCityScheduling {
 
-    // TODO: 2022/7/3  
+    // TODO: 2022/7/3
     public static int twoCitySchedCost(int[][] costs) {
         int len = costs.length;
         int[][] diff = new int[len][2];

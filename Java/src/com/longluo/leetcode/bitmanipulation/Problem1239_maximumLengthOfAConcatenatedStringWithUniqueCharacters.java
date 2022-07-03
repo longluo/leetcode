@@ -131,6 +131,7 @@ public class Problem1239_maximumLengthOfAConcatenatedStringWithUniqueCharacters 
         if ((mask & masks.get(pos)) == 0) { // mask 和 masks[pos] 无公共元素
             backtrack(masks, pos + 1, mask | masks.get(pos));
         }
+
         backtrack(masks, pos + 1, mask);
     }
 

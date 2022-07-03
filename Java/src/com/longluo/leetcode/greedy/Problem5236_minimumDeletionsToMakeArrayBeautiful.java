@@ -29,7 +29,7 @@ package com.longluo.leetcode.greedy;
  */
 public class Problem5236_minimumDeletionsToMakeArrayBeautiful {
 
-    // TODO: 2022/7/3  
+    // TODO: 2022/7/3
     public static int minDeletion_greedy(int[] nums) {
         int len = nums.length;
         int ans = 0;

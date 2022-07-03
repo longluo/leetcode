@@ -48,6 +48,7 @@ public class Problem1994_theNumberOfGoodSubsets {
     public static int numberOfGoodSubsets(int[] nums) {
         Arrays.sort(nums);
 
+        return 0;
     }
 
     public static void main(String[] args) {

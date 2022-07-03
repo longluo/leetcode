@@ -28,7 +28,7 @@ import java.util.*;
  */
 public class Problem1046_lastStoneWeight {
 
-    // TODO: 2022/7/3  
+    // TODO: 2022/7/3
     // BF time: O(nlogn) space: O(logn)
     public static int lastStoneWeight_bf(int[] stones) {
         int len = stones.length;

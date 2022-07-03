@@ -26,7 +26,7 @@ package com.longluo.leetcode.backtracking;
  */
 public class Problem306_additiveNumber {
 
-    // TODO: 2022/6/14  
+    // TODO: 2022/6/14
     public static boolean isAdditiveNumber(String num) {
         if (num == null || num.length() <= 2) {
             return false;

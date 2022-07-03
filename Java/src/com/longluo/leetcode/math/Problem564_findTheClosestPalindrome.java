@@ -108,5 +108,6 @@ public class Problem564_findTheClosestPalindrome {
         System.out.println("88 ?= " + nearestPalindromic("99"));
         System.out.println("99 ?= " + nearestPalindromic("100"));
         System.out.println("121 ?= " + nearestPalindromic("123"));
+        System.out.println("1221 ?= " + nearestPalindromic("1213"));
     }
 }

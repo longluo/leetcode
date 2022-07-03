@@ -36,7 +36,7 @@ import java.util.Set;
  */
 public class Problem2215_findDifference {
 
-    // TODO: 2022/6/2  
+    // TODO: 2022/6/2
     public static List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
         List<List<Integer>> ans = new ArrayList<>();
         Set<Integer> list1 = new HashSet<>();

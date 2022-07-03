@@ -39,6 +39,7 @@ public class Problem1036_escapeALargeMaze {
 
     public static boolean isEscapePossible(int[][] blocked, int[] source, int[] target) {
 
+        return false;
     }
 
     public static void main(String[] args) {

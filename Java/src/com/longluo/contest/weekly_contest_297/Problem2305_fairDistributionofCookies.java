@@ -37,7 +37,7 @@ package com.longluo.contest.weekly_contest_297;
  */
 public class Problem2305_fairDistributionofCookies {
 
-    // TODO: 2022/6/13  
+    // TODO: 2022/6/13
     public static int distributeCookies(int[] cookies, int k) {
 
         return 0;

@@ -51,7 +51,7 @@ import java.util.Queue;
  */
 public class Problem1345_jumpGame_iv {
 
-    // TODO: 2022/6/14  
+    // TODO: 2022/6/14
     public static int minJumps(int[] arr) {
         if (arr == null || arr.length <= 1) {
             return 0;

@@ -22,7 +22,7 @@ import java.util.*;
  * <p>
  * 进阶：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
  * <p>
- * https://leetcode-cn.com/problems/single-number-ii/
+ * https://leetcode.cn/problems/single-number-ii/
  */
 public class Problem137_singleNumber_ii {
 

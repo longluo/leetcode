@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class Problem1405_longestHappyString {
 
-    // TODO: 2022/7/3  
+    // TODO: 2022/7/3
     static class CharIdx {
         int num;
         char ch;
