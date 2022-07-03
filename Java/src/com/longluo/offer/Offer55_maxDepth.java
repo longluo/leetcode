@@ -33,7 +33,6 @@ public class Offer55_maxDepth {
             return 0;
         }
 
-
         if (root.left != null && root.right == null) {
             return maxDepth(root.left) + 1;
         }

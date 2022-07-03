@@ -62,7 +62,7 @@ public class Offer2_003_countBits {
 
         return ans;
     }
-    
+
     public static void main(String[] args) {
         System.out.println("[0] ?= " + Arrays.toString(countBits(0)));
         System.out.println("[0,1] ?= " + Arrays.toString(countBits(1)));

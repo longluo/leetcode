@@ -50,7 +50,7 @@ import java.util.Set;
  */
 public class Offer2_63_replaceWords {
 
-    // TODO: 2022/6/25  
+    // TODO: 2022/6/25
     public static String replaceWords(List<String> dictionary, String sentence) {
         Set<String> set = new HashSet<>();
 
