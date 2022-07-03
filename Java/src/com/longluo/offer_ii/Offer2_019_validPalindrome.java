@@ -26,30 +26,28 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode.cn/problems/RQku0D/
  */
-public class Offer2_19_validPalindrome {
+public class Offer2_019_validPalindrome {
 
+    //
     public static boolean validPalindrome(String s) {
-        if (s == null || s.length() <= 2) {
-            return true;
-        }
+        int len = s.length();
 
-        int n = s.length();
         int left = 0;
-        int right = n - 1;
+        int right = len - 1;
 
         while (left < right && s.charAt(left) == s.charAt(right)) {
             left++;
             right--;
         }
 
-        if (left == n / 2) {
+        if (left == len / 2) {
             return true;
         }
 
-        return helper(s, left + 1, right) || helper(s, left, right - 1);
+        return check(s, left + 1, right) || check(s, left, right - 1);
     }
 
-    public static boolean helper(String s, int left, int right) {
+    public static boolean check(String s, int left, int right) {
         while (left < right) {
             if (s.charAt(left) == s.charAt(right)) {
                 left++;

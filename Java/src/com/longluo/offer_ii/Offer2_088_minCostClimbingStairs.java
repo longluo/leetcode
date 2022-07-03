@@ -26,7 +26,7 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode.cn/problems/GzCJIP/
  */
-public class Offer2_88_minCostClimbingStairs {
+public class Offer2_088_minCostClimbingStairs {
 
     public static int minCostClimbingStairs(int[] cost) {
         int n = cost.length;

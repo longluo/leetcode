@@ -48,7 +48,7 @@ import com.longluo.datastructure.ListNode;
  * <p>
  * https://leetcode.cn/problems/3u1WK4/
  */
-public class Offer2_32_getIntersectionNode {
+public class Offer2_023_getIntersectionNode {
 
     public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 

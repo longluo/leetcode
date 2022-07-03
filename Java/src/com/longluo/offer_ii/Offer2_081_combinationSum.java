@@ -40,9 +40,9 @@ import java.util.List;
  * <p>
  * https://leetcode.cn/problems/Ygoe9J/
  */
-public class Offer2_81_combinationSum {
+public class Offer2_081_combinationSum {
 
-    // TODO: 2022/6/25  
+    // TODO: 2022/6/25
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> ans = new ArrayList<>();
         backtrace(ans, new ArrayList<>(), candidates, 0, target);

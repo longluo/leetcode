@@ -23,7 +23,7 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode-cn.com/problems/A1NYOS/
  */
-public class Offer2_11_findMaxLength {
+public class Offer2_011_findMaxLength {
 
     public static int findMaxLength(int[] nums) {
         if (nums == null || nums.length <= 1) {

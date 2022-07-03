@@ -28,7 +28,7 @@ import java.util.*;
  * <p>
  * https://leetcode.cn/problems/1fGaJU/
  */
-public class Offer2_07_threeSum {
+public class Offer2_007_3Sum {
 
     public static List<List<Integer>> threeSum(int[] nums) {
         if (nums == null || nums.length < 3) {

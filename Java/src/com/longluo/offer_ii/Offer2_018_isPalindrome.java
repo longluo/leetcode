@@ -24,7 +24,7 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode.cn/problems/XltzEq/
  */
-public class Offer2_18_isPalindrome {
+public class Offer2_018_isPalindrome {
 
     public static boolean isPalindrome(String s) {
         int len = s.length();

@@ -26,7 +26,7 @@ import com.longluo.datastructure.ListNode;
  * <p>
  * https://leetcode.cn/problems/aMhZSa/
  */
-public class Offer2_27_isPalindrome {
+public class Offer2_027_isPalindrome {
 
     // TODO: 2022/6/25
     public static boolean isPalindrome(ListNode head) {

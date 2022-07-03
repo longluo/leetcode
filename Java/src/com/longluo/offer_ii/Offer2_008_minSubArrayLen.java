@@ -32,7 +32,7 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode-cn.com/problems/2VG8Kg/
  */
-public class Offer2_08_minSubArrayLen {
+public class Offer2_008_minSubArrayLen {
 
     public static int minSubArrayLen(int target, int[] nums) {
         int n = nums.length;

@@ -29,7 +29,7 @@ import java.util.List;
  * <p>
  * https://leetcode.cn/problems/VvJkup/
  */
-public class Offer2_83_permute {
+public class Offer2_083_permute {
 
     // TODO: 2022/6/25
     public static List<List<Integer>> permute(int[] nums) {

@@ -38,7 +38,7 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode.cn/problems/tvdfij/
  */
-public class Offer2_12_pivotIndex {
+public class Offer2_012_pivotIndex {
 
     public static int pivotIndex(int[] nums) {
         int n = nums.length;

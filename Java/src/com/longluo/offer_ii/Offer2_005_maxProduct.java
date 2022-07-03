@@ -30,7 +30,7 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode.cn/problems/aseY1I/
  */
-public class Offer2_05_maxProduct {
+public class Offer2_005_maxProduct {
 
     public static int maxProduct(String[] words) {
         if (words == null || words.length <= 1) {

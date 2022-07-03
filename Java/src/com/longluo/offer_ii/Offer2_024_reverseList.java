@@ -29,8 +29,9 @@ import com.longluo.datastructure.ListNode;
  * <p>
  * https://leetcode.cn/problems/UHnkqh/
  */
-public class Offer2_24_reverseList {
+public class Offer2_024_reverseList {
 
+    // TODO: 2022/6/25
     public static ListNode reverseList(ListNode head) {
 
         return null;

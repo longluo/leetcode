@@ -27,7 +27,7 @@ import java.util.Map;
  * <p>
  * https://leetcode.cn/problems/WGki4K/
  */
-public class Offer2_04_singleNumber {
+public class Offer2_004_singleNumber {
 
     public static int singleNumber(int[] nums) {
         if (nums == null || nums.length < 4) {

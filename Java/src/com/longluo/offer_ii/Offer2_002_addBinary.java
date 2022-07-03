@@ -24,7 +24,7 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode.cn/problems/JFETK5/
  */
-public class Offer2_02_addBinary {
+public class Offer2_002_addBinary {
 
     public static String addBinary(String a, String b) {
         char[] arrA = a.toCharArray();
