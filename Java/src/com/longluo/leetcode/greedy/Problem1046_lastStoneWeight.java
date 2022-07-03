@@ -24,10 +24,11 @@ import java.util.*;
  * 1 <= stones.length <= 30
  * 1 <= stones[i] <= 1000
  * <p>
- * https://leetcode-cn.com/problems/last-stone-weight/
+ * https://leetcode.cn/problems/last-stone-weight/
  */
 public class Problem1046_lastStoneWeight {
 
+    // TODO: 2022/7/3  
     // BF time: O(nlogn) space: O(logn)
     public static int lastStoneWeight_bf(int[] stones) {
         int len = stones.length;

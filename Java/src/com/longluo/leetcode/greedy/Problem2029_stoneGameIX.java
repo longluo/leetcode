@@ -45,10 +45,11 @@ import java.util.Comparator;
  * 1 <= stones.length <= 10^5
  * 1 <= stones[i] <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/stone-game-ix/
+ * https://leetcode.cn/problems/stone-game-ix/
  */
 public class Problem2029_stoneGameIX {
 
+    // TODO: 2022/7/3
     public static boolean stoneGameIX(int[] stones) {
         int cnt0 = 0, cnt1 = 0, cnt2 = 0;
         for (int stone : stones) {

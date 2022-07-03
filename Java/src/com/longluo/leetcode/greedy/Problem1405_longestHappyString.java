@@ -35,10 +35,11 @@ import java.util.List;
  * 0 <= a, b, c <= 100
  * a + b + c > 0
  * <p>
- * https://leetcode-cn.com/problems/longest-happy-string/
+ * https://leetcode.cn/problems/longest-happy-string/
  */
 public class Problem1405_longestHappyString {
 
+    // TODO: 2022/7/3  
     static class CharIdx {
         int num;
         char ch;

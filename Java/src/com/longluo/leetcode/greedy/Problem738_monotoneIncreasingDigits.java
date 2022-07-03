@@ -1,10 +1,8 @@
 package com.longluo.leetcode.greedy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 738. 单调递增的数字
+ * <p>
  * 给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。
  * <p>
  * （当且仅当每个相邻位数上的数字 x 和 y 满足 x <= y 时，我们称这个整数是单调递增的。）
@@ -22,6 +20,8 @@ import java.util.List;
  * 输出: 299
  * <p>
  * 说明: N 是在 [0, 10^9] 范围内的一个整数。
+ *
+ *
  */
 public class Problem738_monotoneIncreasingDigits {
 
@@ -49,6 +49,9 @@ public class Problem738_monotoneIncreasingDigits {
         return Integer.parseInt(new String(arr));
     }
 
+//    public static int monotoneIncreasingDigits_2(int N) {
+//
+//    }
 
     public static void main(String[] args) {
         System.out.println("9 ?= " + monotoneIncreasingDigits(10));

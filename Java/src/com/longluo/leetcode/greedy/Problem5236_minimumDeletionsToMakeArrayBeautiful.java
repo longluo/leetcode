@@ -25,10 +25,11 @@ package com.longluo.leetcode.greedy;
  * 1 <= nums.length <= 10^5
  * 0 <= nums[i] <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/minimum-deletions-to-make-array-beautiful/
+ * https://leetcode.cn/problems/minimum-deletions-to-make-array-beautiful/
  */
 public class Problem5236_minimumDeletionsToMakeArrayBeautiful {
 
+    // TODO: 2022/7/3  
     public static int minDeletion_greedy(int[] nums) {
         int len = nums.length;
         int ans = 0;

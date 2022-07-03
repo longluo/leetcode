@@ -30,10 +30,11 @@ import java.util.Arrays;
  * n 是 偶数 。
  * 1 <= nums[i] <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/minimize-maximum-pair-sum-in-array/
+ * https://leetcode.cn/problems/minimize-maximum-pair-sum-in-array/
  */
 public class Problem1877_minimizeMaximumPairSumInArray {
 
+    // TODO: 2022/7/3
     public static int minPairSum(int[] nums) {
         Arrays.sort(nums);
         int ans = 0;

@@ -29,10 +29,11 @@ package com.longluo.leetcode.greedy;
  * Constraints:
  * 1 <= x, y <= 10^9
  * <p>
- * https://leetcode.com/problems/broken-calculator/
+ * https://leetcode.cn/problems/broken-calculator/
  */
 public class Problem991_brokenCalculator {
 
+    // TODO: 2022/7/3  
     public static int brokenCalc(int startValue, int target) {
         int ans = 0;
         while (startValue < target) {

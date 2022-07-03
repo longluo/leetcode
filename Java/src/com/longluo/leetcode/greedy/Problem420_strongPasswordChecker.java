@@ -34,7 +34,7 @@ package com.longluo.leetcode.greedy;
  */
 public class Problem420_strongPasswordChecker {
 
-    // TODO: 2022/7/3  
+    // TODO: 2022/7/3
     // BF
     public static int strongPasswordChecker(String password) {
         int len = password.length();

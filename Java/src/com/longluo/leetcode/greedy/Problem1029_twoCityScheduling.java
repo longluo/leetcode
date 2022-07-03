@@ -37,10 +37,11 @@ import java.util.Comparator;
  * costs.length is even.
  * 1 <= aCosti, bCosti <= 1000
  * <p>
- * https://leetcode.com/problems/two-city-scheduling/
+ * https://leetcode.cn/problems/two-city-scheduling/
  */
 public class Problem1029_twoCityScheduling {
 
+    // TODO: 2022/7/3  
     public static int twoCitySchedCost(int[][] costs) {
         int len = costs.length;
         int[][] diff = new int[len][2];

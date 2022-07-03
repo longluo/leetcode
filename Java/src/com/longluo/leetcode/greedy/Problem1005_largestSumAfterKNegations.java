@@ -30,30 +30,43 @@ import java.util.Arrays;
  * -100 <= nums[i] <= 100
  * 1 <= k <= 104
  * <p>
- * https://leetcode-cn.com/problems/maximize-sum-of-array-after-k-negations/
+ * https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/
  */
 public class Problem1005_largestSumAfterKNegations {
 
+    // TODO: 2022/7/3
     public static int largestSumAfterKNegations(int[] nums, int k) {
         Arrays.sort(nums);
         int len = nums.length;
         int sum = 0;
-        int cnt = 0;
         for (int i = 0; i < len; i++) {
-            if (nums[i] < 0) {
-                cnt++;
-            }
-            sum += nums[i];
-        }
-
-        for (int i = 0; i < len; i++) {
-            if (cnt >= k) {
-                sum += 2 * (-nums[i]);
-                if (i == cnt - 1) {
-                    break;
+            if (k > 0) {
+                if (nums[i] < 0) {
+                    k--;
+                    sum += -nums[i];
+                } else if (nums[i] == 0) {
+                    k = 0;
+                } else if (nums[i] > 0) {
+                    if (i > 0 && nums[i - 1] < 0) {
+                        int temp = Math.min(-nums[i - 1], nums[i]);
+                        if (k % 2 == 0) {
+                            sum += temp;
+                        } else {
+                            sum += -(2 * temp);
+                        }
+                        k = 0;
+                        sum += nums[i];
+                    } else {
+                        if (k % 2 == 0) {
+                            sum += nums[i];
+                        } else {
+                            sum += -nums[i];
+                        }
+                        k = 0;
+                    }
                 }
             } else {
-
+                sum += nums[i];
             }
         }
 
@@ -64,5 +77,6 @@ public class Problem1005_largestSumAfterKNegations {
         System.out.println("5 ?= " + largestSumAfterKNegations(new int[]{4, 2, 3}, 1));
         System.out.println("6 ?= " + largestSumAfterKNegations(new int[]{3, -1, 0, 2}, 3));
         System.out.println("13 ?= " + largestSumAfterKNegations(new int[]{2, -3, -1, 5, -4}, 2));
+        System.out.println("22 ?= " + largestSumAfterKNegations(new int[]{-8, 3, -5, -3, -5, -2}, 6));
     }
 }

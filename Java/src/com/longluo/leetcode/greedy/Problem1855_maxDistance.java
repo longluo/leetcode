@@ -34,10 +34,11 @@ package com.longluo.leetcode.greedy;
  * 1 <= nums1[i], nums2[j] <= 10^5
  * nums1 和 nums2 都是 非递增 数组
  * <p>
- * https://leetcode-cn.com/problems/maximum-distance-between-a-pair-of-values/
+ * https://leetcode.cn/problems/maximum-distance-between-a-pair-of-values/
  */
 public class Problem1855_maxDistance {
 
+    // TODO: 2022/7/3
     // BF time: O(m*n) space: O(1)
     public static int maxDistance_bf(int[] nums1, int[] nums2) {
         int max = 0;

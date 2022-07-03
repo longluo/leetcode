@@ -40,17 +40,18 @@ import java.util.Comparator;
  * 1 <= n <= 10^5
  * 1 <= nums1[i], nums2[i] <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/minimum-absolute-sum-difference/
+ * https://leetcode.cn/problems/minimum-absolute-sum-difference/
  */
 public class Problem1818_minimumAbsoluteSumDifference {
 
+    // BF time: O(n^2) space: O(n)
     public static int minAbsoluteSumDiff(int[] nums1, int[] nums2) {
-        int n = nums1.length;
-        int absSum = 0;
+        int len = nums1.length;
         int ans = Integer.MAX_VALUE;
-        int MOD = 1000000007;
-        int[] deltaArr = new int[n];
-        for (int i = 0; i < n; i++) {
+        int absSum = 0;
+        int MOD = 1000_000_007;
+        int[] deltaArr = new int[len];
+        for (int i = 0; i < len; i++) {
             absSum = (absSum + Math.abs(nums1[i] - nums2[i])) % MOD;
             deltaArr[i] = Math.abs(nums1[i] - nums2[i]);
         }
@@ -59,8 +60,8 @@ public class Problem1818_minimumAbsoluteSumDifference {
             return 0;
         }
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
                 int temp = absSum;
                 if (i != j) {
                     temp -= deltaArr[j] % MOD;
@@ -73,23 +74,24 @@ public class Problem1818_minimumAbsoluteSumDifference {
         return ans;
     }
 
+    // BF time: O(n^2) space: O(n)
     public static int minAbsoluteSumDiff_bs(int[] nums1, int[] nums2) {
-        int n = nums1.length;
-        int MOD = 1000000007;
-        int[] rec = new int[n];
-        System.arraycopy(nums1, 0, rec, 0, n);
-        Arrays.sort(rec);
+        int len = nums1.length;
+        int MOD = 1_000_000_007;
+        int[] sorted = new int[len];
+        System.arraycopy(nums1, 0, sorted, 0, len);
+        Arrays.sort(sorted);
         int sum = 0;
         int maxn = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < len; i++) {
             int diff = Math.abs(nums1[i] - nums2[i]);
             sum = (sum + diff) % MOD;
-            int j = binarySearch(rec, nums2[i]);
-            if (j < n) {
-                maxn = Math.max(maxn, diff - (rec[j] - nums2[i]));
+            int j = binarySearch(sorted, nums2[i]);
+            if (j < len) {
+                maxn = Math.max(maxn, diff - (sorted[j] - nums2[i]));
             }
             if (j > 0) {
-                maxn = Math.max(maxn, diff - (nums2[i] - rec[j - 1]));
+                maxn = Math.max(maxn, diff - (nums2[i] - sorted[j - 1]));
             }
         }
 
@@ -97,23 +99,23 @@ public class Problem1818_minimumAbsoluteSumDifference {
     }
 
     public static int binarySearch(int[] nums, int target) {
-        int n = nums.length;
-        int low = 0;
-        int high = n - 1;
-        if (nums[high] < target) {
-            return high + 1;
+        int len = nums.length;
+        int left = 0;
+        int right = len - 1;
+        if (nums[right] < target) {
+            return right + 1;
         }
 
-        while (low < high) {
-            int mid = low + (high - low) / 2;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
             if (nums[mid] < target) {
-                low = mid + 1;
+                left = mid + 1;
             } else {
-                high = mid;
+                right = mid;
             }
         }
 
-        return low;
+        return left;
     }
 
     public static void main(String[] args) {

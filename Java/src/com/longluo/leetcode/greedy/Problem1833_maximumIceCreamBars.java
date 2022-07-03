@@ -32,10 +32,11 @@ import java.util.Arrays;
  * 1 <= costs[i] <= 10^5
  * 1 <= coins <= 10^8
  * <p>
- * https://leetcode-cn.com/problems/maximum-ice-cream-bars/
+ * https://leetcode.cn/problems/maximum-ice-cream-bars/
  */
 public class Problem1833_maximumIceCreamBars {
 
+    // TODO: 2022/7/3
     public static int maxIceCream(int[] costs, int coins) {
         if (costs == null || costs.length == 0) {
             return 0;

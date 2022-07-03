@@ -23,10 +23,11 @@ package com.longluo.leetcode.greedy;
  * 1 <= n <= 105
  * n <= k <= 26 * n
  * <p>
- * https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/
+ * https://leetcode.cn/problems/smallest-string-with-a-given-numeric-value/
  */
 public class Problem1663_smallestStringWithAGivenNumericValue {
 
+    // TODO: 2022/7/3
     public static String getSmallestString(int n, int k) {
         StringBuilder sb = new StringBuilder(n);
         for (int i = n; i >= 1; i--) {

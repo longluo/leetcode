@@ -37,10 +37,11 @@ import java.util.PriorityQueue;
  * 0 <= apples[i], days[i] <= 2 * 10^4
  * 只有在 apples[i] = 0 时，days[i] = 0 才成立
  * <p>
- * https://leetcode-cn.com/problems/maximum-number-of-eaten-apples/
+ * https://leetcode.cn/problems/maximum-number-of-eaten-apples/
  */
 public class Problem1705_eatenApples {
 
+    // TODO: 2022/7/3
     // Failed Not AC
     public static int eatenApples_bf(int[] apples, int[] days) {
         int len = apples.length;

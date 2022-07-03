@@ -35,7 +35,7 @@ import java.util.Set;
  */
 public class Problem397_integerReplacement {
 
-    // TODO: 2022/7/3  
+    // TODO: 2022/7/3
     public static int integerReplacement_bf(int n) {
         if (n <= 1) {
             return 0;
