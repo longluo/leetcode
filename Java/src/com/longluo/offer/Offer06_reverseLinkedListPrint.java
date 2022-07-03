@@ -17,7 +17,7 @@ import java.util.*;
  * 限制：
  * 0 <= 链表长度 <= 10000
  * <p>
- * https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
+ * https://leetcode.cn/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
  */
 public class Offer06_reverseLinkedListPrint {
 

@@ -17,7 +17,7 @@ import java.util.List;
  * 用返回一个整数列表来代替打印
  * n为正整数
  * <p>
- * https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/
+ * https://leetcode.cn/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/
  */
 public class Offer17_printNumbers {
 

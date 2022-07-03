@@ -17,7 +17,7 @@ import java.util.*;
  * 限制：
  * 2 <= n <= 100000
  * <p>
- * https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
+ * https://leetcode.cn/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
  */
 public class Offer03_findRepeatNumber {
 

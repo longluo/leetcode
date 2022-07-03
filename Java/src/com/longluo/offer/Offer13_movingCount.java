@@ -23,7 +23,7 @@ import java.util.Queue;
  * 1 <= n,m <= 100
  * 0 <= k <= 20
  * <p>
- * https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/
+ * https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/
  */
 public class Offer13_movingCount {
 

@@ -16,7 +16,7 @@ import java.util.Arrays;
  * 1 <= nums.length <= 50000
  * 1 <= nums[i] <= 10000
  * <p>
- * https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/
+ * https://leetcode.cn/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/
  */
 public class Offer21_exchange {
 

@@ -30,7 +30,7 @@ import java.util.Deque;
  * obj.appendTail(value);
  * int param_2 = obj.deleteHead();
  * <p>
- * https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/
+ * https://leetcode.cn/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/
  */
 public class Offer09_CQueue {
 

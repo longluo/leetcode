@@ -12,7 +12,7 @@ package com.longluo.offer;
  * 限制：
  * 0 <= s的长度 <= 10000
  * <p>
- * https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/
+ * https://leetcode.cn/problems/ti-huan-kong-ge-lcof/
  */
 public class Offer05_replaceSpace {
 

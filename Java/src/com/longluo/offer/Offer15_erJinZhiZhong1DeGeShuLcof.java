@@ -24,7 +24,7 @@ package com.longluo.offer;
  * 提示：
  * 输入必须是长度为 32 的 二进制串。
  * <p>
- * https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/
+ * https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/
  */
 public class Offer15_erJinZhiZhong1DeGeShuLcof {
 

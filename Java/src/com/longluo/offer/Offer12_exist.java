@@ -25,7 +25,7 @@ package com.longluo.offer;
  * 1 <= board.length <= 200
  * 1 <= board[i].length <= 200
  * <p>
- * https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/
+ * https://leetcode.cn/problems/ju-zhen-zhong-de-lu-jing-lcof/
  */
 public class Offer12_exist {
 
