@@ -30,7 +30,7 @@ import java.util.Set;
  * 1 <= words[i].length <= 1000
  * words[i] 仅包含小写字母
  * <p>
- * https://leetcode-cn.com/problems/maximum-product-of-word-lengths/
+ * https://leetcode.cn/problems/maximum-product-of-word-lengths/
  */
 public class Problem318_maxProduct {
 
