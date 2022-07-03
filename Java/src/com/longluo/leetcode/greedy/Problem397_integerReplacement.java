@@ -31,9 +31,22 @@ import java.util.Set;
  * 提示：
  * 1 <= n <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/integer-replacement/
+ * https://leetcode.com/problems/integer-replacement/
  */
 public class Problem397_integerReplacement {
+
+    // TODO: 2022/7/3  
+    public static int integerReplacement_bf(int n) {
+        if (n <= 1) {
+            return 0;
+        }
+
+        if (n % 2 == 0) {
+            return 1 + integerReplacement(n / 2);
+        }
+
+        return 2 + Math.min(integerReplacement(n / 2), integerReplacement(n / 2 + 1));
+    }
 
     public static int integerReplacement(int n) {
         if (n == 1) {
@@ -81,23 +94,13 @@ public class Problem397_integerReplacement {
         return ans;
     }
 
-    public static int integerReplacement_bf(int n) {
-        if (n == 1) {
-            return 0;
-        }
-        if (n % 2 == 0) {
-            return 1 + integerReplacement(n / 2);
-        }
-
-        return 2 + Math.min(integerReplacement(n / 2), integerReplacement(n / 2 + 1));
-    }
-
     public static void main(String[] args) {
         System.out.println("0 ?= " + integerReplacement(1));
         System.out.println("1 ?= " + integerReplacement(2));
         System.out.println("2 ?= " + integerReplacement(3));
         System.out.println("2 ?= " + integerReplacement(4));
         System.out.println("3 ?= " + integerReplacement(6));
+
         System.out.println("4 ?= " + integerReplacement(7));
         System.out.println("3 ?= " + integerReplacement(8));
         System.out.println("12 ?= " + integerReplacement(1000));
