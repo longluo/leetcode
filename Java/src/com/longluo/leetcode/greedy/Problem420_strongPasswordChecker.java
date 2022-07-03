@@ -30,10 +30,11 @@ package com.longluo.leetcode.greedy;
  * 1 <= password.length <= 50
  * password 由字母、数字、点 '.' 或者感叹号 '!'
  * <p>
- * https://leetcode-cn.com/problems/strong-password-checker/
+ * https://leetcode.com/problems/strong-password-checker/
  */
 public class Problem420_strongPasswordChecker {
 
+    // TODO: 2022/7/3  
     // BF
     public static int strongPasswordChecker(String password) {
         int len = password.length();
