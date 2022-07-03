@@ -21,7 +21,7 @@ package com.longluo.top_interviews;
  * 1 <= s.length <= 2 * 10^5
  * 字符串 s 由 ASCII 字符组成
  * <p>
- * https://leetcode.cn/problems/valid-palindrome/
+ * https://leetcode.com/problems/valid-palindrome/
  */
 public class Problem125_validPalindrome {
 

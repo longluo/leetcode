@@ -116,7 +116,7 @@ public class Problem459_repeatedSubstringPattern {
     }
 
     // KMP
-    // TODO: 2022/5/11  
+    // TODO: 2022/5/11
     public static boolean repeatedSubstringPattern_kmp(String s) {
         int len = s.length();
         if (len <= 1) {

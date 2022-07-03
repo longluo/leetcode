@@ -19,7 +19,7 @@ package com.longluo.studyplan.programming_skills;
  * 1 <= a.length, b.length <= 10^4
  * 字符串如果不是 "0" ，就都不含前导零。
  * <p>
- * https://leetcode-cn.com/problems/add-binary/
+ * https://leetcode.cn/problems/add-binary/
  */
 public class Problem67_addBinary {
 

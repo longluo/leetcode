@@ -128,7 +128,7 @@ public class Problem23_mergeKSortedLists {
         return dummyNode.next;
     }
 
-    // Divide and Comquer time: O(n) space: O(1)
+    // Divide and Comquer time: O(mn) space: O(1)
     public static ListNode mergeKLists_divide(ListNode[] lists) {
         if (lists == null || lists.length == 0) {
             return null;

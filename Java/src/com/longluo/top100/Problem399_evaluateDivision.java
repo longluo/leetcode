@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class Problem399_evaluateDivision {
 
-    // TODO: 2022/6/29  
+    // TODO: 2022/6/29
     public static double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
 
         return null;

@@ -1,7 +1,6 @@
 package com.longluo.studyplan.programming_skills;
 
 import java.math.BigInteger;
-import java.util.Arrays;
 
 /**
  * 43. 字符串相乘
@@ -22,7 +21,7 @@ import java.util.Arrays;
  * num1 和 num2 只能由数字组成。
  * num1 和 num2 都不包含任何前导零，除了数字0本身。
  * <p>
- * https://leetcode-cn.com/problems/multiply-strings/
+ * https://leetcode.com/problems/multiply-strings/
  */
 public class Problem43_multiplyStrings {
 
