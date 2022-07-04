@@ -63,7 +63,36 @@ public class Problem1200_minimumAbsoluteDifference {
         return ans;
     }
 
+    // Sorting time: O(nlogn) space: O(logn)
+    public static List<List<Integer>> minimumAbsDifference_opt(int[] arr) {
+        int len = arr.length;
+        Arrays.sort(arr);
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        int min = arr[1] - arr[0];
+        for (int i = 0; i < len - 1; i++) {
+            int cur = arr[i + 1] - arr[i];
+            if (cur > min) {
+                continue;
+            }
+
+            if (cur < min) {
+                ans.clear();
+                min = cur;
+            }
+
+            List<Integer> pair = new ArrayList<>();
+            pair.add(arr[i]);
+            pair.add(arr[i + 1]);
+            ans.add(pair);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[[1,2],[2,3],[3,4]] ?= " + minimumAbsDifference(new int[]{4, 2, 1, 3}));
+        System.out.println("[[1,2],[2,3],[3,4]] ?= " + minimumAbsDifference_opt(new int[]{4, 2, 1, 3}));
     }
 }
