@@ -24,29 +24,37 @@ import java.util.Arrays;
  * 解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。
  * 第三个孩子只得到 1 颗糖果，这已满足上述两个条件。
  * <p>
- * https://leetcode-cn.com/problems/candy/
+ * 提示：
+ * n == ratings.length
+ * 1 <= n <= 2 * 10^4
+ * 0 <= ratings[i] <= 2 * 10^4
+ * <p>
+ * https://leetcode.cn/problems/candy/
  */
 public class Problem135_candy {
 
+    // Greedy time: O(n) space: O(n)
     public static int candy(int[] ratings) {
         if (ratings == null || ratings.length == 0) {
             return 0;
         }
 
-        int[] left = new int[ratings.length];
-        int[] right = new int[ratings.length];
+        int len = ratings.length;
+
+        int[] left = new int[len];
+        int[] right = new int[len];
 
         Arrays.fill(left, 1);
         Arrays.fill(right, 1);
 
-        for (int i = 1; i < ratings.length; i++) {
+        for (int i = 1; i < len; i++) {
             if (ratings[i] > ratings[i - 1]) {
                 left[i] = left[i - 1] + 1;
             }
         }
 
-        int ans = left[ratings.length - 1];
-        for (int i = ratings.length - 2; i >= 0; i--) {
+        int ans = left[len - 1];
+        for (int i = len - 2; i >= 0; i--) {
             if (ratings[i] > ratings[i + 1]) {
                 right[i] = right[i + 1] + 1;
             }
