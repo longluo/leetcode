@@ -23,18 +23,7 @@ package com.longluo.leetcode.math;
  */
 public class Problem556_nextGreaterElement {
 
-    // BF
-    public static int nextGreaterElement_bf(int n) {
-        if (n <= 11) {
-            return -1;
-        }
-
-        String numStr = String.valueOf(n);
-
-
-        return -1;
-    }
-
+    //
     public static int nextGreaterElement(int n) {
         if (n <= 11) {
             return -1;
@@ -56,11 +45,7 @@ public class Problem556_nextGreaterElement {
         swap(array, left, right);
         reverse(array, left + 1);
         long res = Long.parseLong(new String(array));
-        if (res > Integer.MAX_VALUE) {
-            return -1;
-        }
-
-        return (int) res;
+        return res > Integer.MAX_VALUE ? -1 : (int) res;
     }
 
     public static void reverse(char[] arr, int low) {
@@ -79,8 +64,6 @@ public class Problem556_nextGreaterElement {
     }
 
     public static void main(String[] args) {
-        System.out.println("13222344 ?= " + nextGreaterElement_bf(12443322));
-
         System.out.println("21 ?= " + nextGreaterElement(12));
         System.out.println("-1 ?= " + nextGreaterElement(1));
         System.out.println("-1 ?= " + nextGreaterElement(10));
