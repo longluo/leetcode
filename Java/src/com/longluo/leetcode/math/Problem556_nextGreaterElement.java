@@ -1,12 +1,11 @@
 package com.longluo.leetcode.math;
 
-import java.util.Arrays;
-
 /**
  * 556. 下一个更大元素 III
  * <p>
  * 给你一个正整数 n ，请你找出符合条件的最小整数，其由重新排列 n 中存在的每位数字组成，并且其值大于 n 。
  * 如果不存在这样的正整数，则返回 -1 。
+ * <p>
  * 注意 ，返回的整数应当是一个 32 位整数 ，如果存在满足题意的答案，但不是 32 位整数 ，同样返回 -1 。
  * <p>
  * 示例 1：
@@ -20,9 +19,21 @@ import java.util.Arrays;
  * 提示：
  * 1 <= n <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/next-greater-element-iii/
+ * https://leetcode.cn/problems/next-greater-element-iii/
  */
 public class Problem556_nextGreaterElement {
+
+    // BF
+    public static int nextGreaterElement_bf(int n) {
+        if (n <= 11) {
+            return -1;
+        }
+
+        String numStr = String.valueOf(n);
+
+
+        return -1;
+    }
 
     public static int nextGreaterElement(int n) {
         if (n <= 11) {
@@ -68,6 +79,8 @@ public class Problem556_nextGreaterElement {
     }
 
     public static void main(String[] args) {
+        System.out.println("13222344 ?= " + nextGreaterElement_bf(12443322));
+
         System.out.println("21 ?= " + nextGreaterElement(12));
         System.out.println("-1 ?= " + nextGreaterElement(1));
         System.out.println("-1 ?= " + nextGreaterElement(10));
