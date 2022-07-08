@@ -59,10 +59,27 @@ public class Problem1217_minCostToMoveChips {
         return Math.min(odd, even);
     }
 
+    // Count time: O(n) space: O(1)
+    public static int minCostToMoveChips_opt(int[] position) {
+        int odd = 0;
+        int even = 0;
+        for (int pos : position) {
+            if (pos % 2 == 0) {
+                even++;
+            } else {
+                odd++;
+            }
+        }
+
+        return Math.min(odd, even);
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + minCostToMoveChips(new int[]{1, 2, 3}));
         System.out.println("2 ?= " + minCostToMoveChips(new int[]{2, 2, 2, 3, 3}));
         System.out.println("3 ?= " + minCostToMoveChips(new int[]{11, 1, 3, 2, 2, 4}));
         System.out.println("2 ?= " + minCostToMoveChips(new int[]{3, 3, 1, 2, 2}));
+
+        System.out.println("2 ?= " + minCostToMoveChips_opt(new int[]{3, 3, 1, 2, 2}));
     }
 }
