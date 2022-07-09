@@ -51,8 +51,30 @@ public class Problem1696_jumpGame_vi {
         return dp[len - 1];
     }
 
+    // DP Opt time: O(nk) space: O(n)
+    // TLE
+    public static int maxResult_opt(int[] nums, int k) {
+        int len = nums.length;
+
+        int[] dp = new int[len];
+        Arrays.fill(dp, Integer.MIN_VALUE);
+
+        dp[0] = nums[0];
+
+        for (int i = 1; i < len; i++) {
+            for (int j = Math.max(i - k, 0); j < i; j++) {
+                dp[i] = Math.max(dp[i], dp[j]);
+            }
+
+            dp[i] += nums[i];
+        }
+
+        return dp[len - 1];
+    }
+
     public static void main(String[] args) {
         System.out.println("7 ?= " + maxResult(new int[]{1, -1, -2, 4, -7, 3}, 2));
         System.out.println("17 ?= " + maxResult(new int[]{10, -5, -2, 4, 0, 3}, 3));
+        System.out.println("17 ?= " + maxResult_opt(new int[]{10, -5, -2, 4, 0, 3}, 3));
     }
 }
