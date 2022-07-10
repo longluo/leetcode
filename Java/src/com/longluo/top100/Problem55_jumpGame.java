@@ -25,7 +25,7 @@ package com.longluo.top100;
  */
 public class Problem55_jumpGame {
 
-    // BF O(n^2) O(n）
+    // Brute Force time: O(n^2)  space: O(n）
     public static boolean canJump_bf(int[] nums) {
         int len = nums.length;
         boolean[] visited = new boolean[len];
@@ -42,7 +42,7 @@ public class Problem55_jumpGame {
         return visited[len - 1];
     }
 
-    // Greedy O(n) O(1)
+    // Greedy time: O(n) space: O(1)
     public static boolean canJump_greedy(int[] nums) {
         int len = nums.length;
         int maxIdx = 0;
