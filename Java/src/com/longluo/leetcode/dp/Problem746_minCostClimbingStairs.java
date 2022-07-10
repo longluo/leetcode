@@ -20,7 +20,7 @@ package com.longluo.leetcode.dp;
  * cost 的长度将会在 [2, 1000]。
  * 每一个 cost[i] 将会是一个Integer类型，范围为 [0, 999]。
  * <p>
- * https://leetcode-cn.com/problems/min-cost-climbing-stairs/
+ * https://leetcode.cn/problems/min-cost-climbing-stairs/
  */
 public class Problem746_minCostClimbingStairs {
 
