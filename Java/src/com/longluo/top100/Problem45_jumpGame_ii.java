@@ -24,11 +24,11 @@ import java.util.Arrays;
  * 1 <= nums.length <= 10^4
  * 0 <= nums[i] <= 1000
  * <p>
- * https://leetcode-cn.com/problems/jump-game-ii/
+ * https://leetcode.cn/problems/jump-game-ii/
  */
 public class Problem45_jumpGame_ii {
 
-    // Greedy Reverse O(n^2) O(n）
+    // Greedy Reverse time: O(n^2) space: O(n）
     public static int jump_greedy_reverse(int[] nums) {
         int ans = 0;
         int position = nums.length - 1;
@@ -45,7 +45,7 @@ public class Problem45_jumpGame_ii {
         return ans;
     }
 
-    // Greedy O(n) O(n）
+    // Greedy time: O(n) space: O(1）
     public static int jump_greedy(int[] nums) {
         int maxPosition = 0;
         int end = 0;
@@ -73,8 +73,8 @@ public class Problem45_jumpGame_ii {
         dp[0] = 0;
         int minStep = Integer.MAX_VALUE;
         for (int i = 0; i < len; i++) {
-            int num = nums[i];
-            for (int j = 1; j <= num && i + j < len; j++) {
+            int steps = nums[i];
+            for (int j = 1; j <= steps && i + j < len; j++) {
                 dp[i + j] = Math.min(dp[i + j], dp[i] + 1);
                 if (i + j >= len - 1) {
                     minStep = Math.min(minStep, dp[i] + 1);
