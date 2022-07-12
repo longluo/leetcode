@@ -83,8 +83,77 @@ public class Problem1306_jumpGame_iii {
         return false;
     }
 
+    // BFS opt time: O(n) space: O(n)
+    public static boolean canReach_bfs_opt(int[] arr, int start) {
+        if (arr[start] == 0) {
+            return true;
+        }
+
+        int len = arr.length;
+        boolean[] visited = new boolean[len];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(start);
+        visited[start] = true;
+
+        while (!queue.isEmpty()) {
+            int curPos = queue.poll();
+            if (arr[curPos] == 0) {
+                return true;
+            }
+
+            int right = curPos + arr[curPos];
+            if (right >= 0 && right < len && !visited[right]) {
+                visited[right] = true;
+                queue.offer(right);
+            }
+
+            int left = curPos - arr[curPos];
+            if (left >= 0 && left < len && !visited[left]) {
+                visited[left] = true;
+                queue.offer(left);
+            }
+        }
+
+        return false;
+    }
+
+    // DFS time: O(n) space: O(n)
+    public static boolean canReach_dfs(int[] arr, int start) {
+        if (arr[start] == 0) {
+            return true;
+        }
+
+        int len = arr.length;
+        return dfs(arr, new boolean[len], start + arr[start]) || dfs(arr, new boolean[len], start - arr[start]);
+    }
+
+    public static boolean dfs(int[] arr, boolean[] vis, int start) {
+        int len = arr.length;
+        if (start < 0 || start >= len) {
+            return false;
+        }
+
+        vis[start] = true;
+        if (arr[start] == 0) {
+            return true;
+        }
+
+        int nextLeftPos = start - arr[start];
+        boolean left = nextLeftPos >= 0 && nextLeftPos < len && vis[nextLeftPos];
+
+        int nextRightPos = start + arr[start];
+        boolean right = nextRightPos >= 0 && nextRightPos < len && vis[nextRightPos];
+
+        return (left && dfs(arr, vis, nextLeftPos)) || (right && dfs(arr, vis, nextRightPos));
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + canReach_bfs(new int[]{4, 2, 3, 0, 3, 1, 2}, 5));
         System.out.println("false ?= " + canReach_bfs(new int[]{3, 0, 2, 1, 2}, 2));
+
+        System.out.println("false ?= " + canReach_bfs_opt(new int[]{3, 0, 2, 1, 2}, 2));
+
+        System.out.println("true ?= " + canReach_dfs(new int[]{4, 2, 3, 0, 3, 1, 2}, 5));
+        System.out.println("false ?= " + canReach_dfs(new int[]{3, 0, 2, 1, 2}, 2));
     }
 }
