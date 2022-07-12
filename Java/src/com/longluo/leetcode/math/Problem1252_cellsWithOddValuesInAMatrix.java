@@ -38,7 +38,7 @@ package com.longluo.leetcode.math;
  */
 public class Problem1252_cellsWithOddValuesInAMatrix {
 
-    // Simulate time: O(mn + n) space: O(mn)
+    // Simulate time: O(len*(mn) + mn) space: O(mn)
     public static int oddCells_bf(int m, int n, int[][] indices) {
         int[][] matrix = new int[m][n];
         for (int[] index : indices) {
@@ -65,7 +65,30 @@ public class Problem1252_cellsWithOddValuesInAMatrix {
         return ans;
     }
 
+    // Simulate Opt time: O(len + mn) space: O(m+n)
+    public static int oddCells_opt(int m, int n, int[][] indices) {
+        int[] rows = new int[m];
+        int[] cols = new int[n];
+
+        for (int[] index : indices) {
+            rows[index[0]]++;
+            cols[index[1]]++;
+        }
+
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((rows[i] + cols[j]) % 2 == 1) {
+                    ans++;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("6 ?= " + oddCells_bf(2, 3, new int[][]{{0, 1}, {1, 1}}));
+        System.out.println("6 ?= " + oddCells_opt(2, 3, new int[][]{{0, 1}, {1, 1}}));
     }
 }
