@@ -1,7 +1,6 @@
 package com.longluo.studyplan.jumpgame;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 1345. 跳跃游戏 IV
@@ -96,11 +95,67 @@ public class Problem1345_jumpGame_iv {
         return ans - 1;
     }
 
+    // BFS time: O(n) space: O(n)
+    // TLE
+    public static int minJumps_bfs_opt(int[] arr) {
+        int len = arr.length;
+        if (len <= 1) {
+            return 0;
+        }
+
+        Map<Integer, List<Integer>> idxMap = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            idxMap.putIfAbsent(arr[i], new ArrayList<>());
+            idxMap.get(arr[i]).add(i);
+        }
+
+        boolean[] vis = new boolean[len];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(0);
+        vis[0] = true;
+
+        int ans = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            ans++;
+            for (int i = 0; i < size; i++) {
+                int curPos = queue.poll();
+                if (curPos == len - 1) {
+                    return ans - 1;
+                }
+
+                int left = curPos - 1;
+                if (left >= 0) {
+                    vis[left] = true;
+                    queue.offer(left);
+                }
+
+                int right = curPos + 1;
+                if (right < len) {
+                    vis[right] = true;
+                    queue.offer(right);
+                }
+
+                List<Integer> sameValList = idxMap.get(arr[curPos]);
+                for (Integer idx : sameValList) {
+                    if (idx != curPos) {
+                        vis[idx] = true;
+                        queue.offer(idx);
+                    }
+                }
+            }
+        }
+
+        return ans - 1;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + minJumps_bfs(new int[]{7}));
         System.out.println("2 ?= " + minJumps_bfs(new int[]{6, 1, 9}));
         System.out.println("1 ?= " + minJumps_bfs(new int[]{7, 6, 9, 6, 9, 6, 9, 7}));
         System.out.println("3 ?= " + minJumps_bfs(new int[]{11, 22, 7, 7, 7, 7, 7, 7, 7, 22, 13}));
         System.out.println("3 ?= " + minJumps_bfs(new int[]{100, -23, -23, 404, 100, 23, 23, 23, 3, 404}));
+
+        System.out.println("3 ?= " + minJumps_bfs_opt(new int[]{100, -23, -23, 404, 100, 23, 23, 23, 3, 404}));
     }
 }
