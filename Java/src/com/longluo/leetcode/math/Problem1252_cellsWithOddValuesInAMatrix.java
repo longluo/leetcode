@@ -87,8 +87,36 @@ public class Problem1252_cellsWithOddValuesInAMatrix {
         return ans;
     }
 
+    // Count time: O(len + m + n) space: O(m+n)
+    public static int oddCells(int m, int n, int[][] indices) {
+        int[] rows = new int[m];
+        int[] cols = new int[n];
+
+        for (int[] index : indices) {
+            rows[index[0]]++;
+            cols[index[1]]++;
+        }
+
+        int oddx = 0;
+        for (int i = 0; i < m; i++) {
+            if (rows[i] % 2 == 1) {
+                oddx++;
+            }
+        }
+
+        int oddy = 0;
+        for (int i = 0; i < n; i++) {
+            if (cols[i] % 2 == 1) {
+                oddy++;
+            }
+        }
+
+        return oddx * (n - oddy) + oddy * (m - oddx);
+    }
+
     public static void main(String[] args) {
         System.out.println("6 ?= " + oddCells_bf(2, 3, new int[][]{{0, 1}, {1, 1}}));
         System.out.println("6 ?= " + oddCells_opt(2, 3, new int[][]{{0, 1}, {1, 1}}));
+        System.out.println("6 ?= " + oddCells(2, 3, new int[][]{{0, 1}, {1, 1}}));
     }
 }
