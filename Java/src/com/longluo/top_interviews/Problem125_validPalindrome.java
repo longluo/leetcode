@@ -25,6 +25,27 @@ package com.longluo.top_interviews;
  */
 public class Problem125_validPalindrome {
 
+    // BF time: O(n) space: O(n)
+    public static boolean isPalindrome_bf(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : s.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                sb.append(ch);
+            } else if (Character.isLetter(ch)) {
+                sb.append(Character.toLowerCase(ch));
+            }
+        }
+
+        int len = sb.length();
+        for (int i = 0; i < len / 2; i++) {
+            if (sb.charAt(i) != sb.charAt(len - 1 - i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     // Two Pointers time: O(n) space: O(1)
     public static boolean isPalindrome_tp(String s) {
         if (s == null || s.length() <= 1) {
@@ -35,11 +56,11 @@ public class Problem125_validPalindrome {
         int left = 0;
         int right = len - 1;
         while (left < right) {
-            while (left < right && !(Character.isDigit(s.charAt(left)) || Character.isAlphabetic(s.charAt(left)))) {
+            while (left < right && !(Character.isDigit(s.charAt(left)) || Character.isLetter(s.charAt(left)))) {
                 left++;
             }
 
-            while (right > left && !(Character.isDigit(s.charAt(right)) || Character.isAlphabetic(s.charAt(right)))) {
+            while (right > left && !(Character.isDigit(s.charAt(right)) || Character.isLetter(s.charAt(right)))) {
                 right--;
             }
 
@@ -65,11 +86,11 @@ public class Problem125_validPalindrome {
         int left = 0;
         int right = s.length() - 1;
 
-        while (left < right && !(Character.isDigit(s.charAt(left)) || Character.isAlphabetic(s.charAt(left)))) {
+        while (left < right && !(Character.isDigit(s.charAt(left)) || Character.isLetter(s.charAt(left)))) {
             left++;
         }
 
-        while (right > left && !(Character.isDigit(s.charAt(right)) || Character.isAlphabetic(s.charAt(right)))) {
+        while (right > left && !(Character.isDigit(s.charAt(right)) || Character.isLetter(s.charAt(right)))) {
             right--;
         }
 
@@ -81,6 +102,8 @@ public class Problem125_validPalindrome {
     }
 
     public static void main(String[] args) {
+        System.out.println("true ?= " + isPalindrome_bf("A man, a plan, a canal: Panama"));
+
         System.out.println("true ?= " + isPalindrome_tp("A man, a plan, a canal: Panama"));
         System.out.println("false ?= " + isPalindrome_tp("race a car"));
 
