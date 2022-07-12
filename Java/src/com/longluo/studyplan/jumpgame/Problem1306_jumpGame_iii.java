@@ -119,17 +119,13 @@ public class Problem1306_jumpGame_iii {
 
     // DFS time: O(n) space: O(n)
     public static boolean canReach_dfs(int[] arr, int start) {
-        if (arr[start] == 0) {
-            return true;
-        }
-
         int len = arr.length;
-        return dfs(arr, new boolean[len], start + arr[start]) || dfs(arr, new boolean[len], start - arr[start]);
+        boolean[] vis = new boolean[len];
+        return dfs(arr, vis, start);
     }
 
     public static boolean dfs(int[] arr, boolean[] vis, int start) {
-        int len = arr.length;
-        if (start < 0 || start >= len) {
+        if (start < 0 || start >= arr.length || vis[start]) {
             return false;
         }
 
@@ -138,13 +134,7 @@ public class Problem1306_jumpGame_iii {
             return true;
         }
 
-        int nextLeftPos = start - arr[start];
-        boolean left = nextLeftPos >= 0 && nextLeftPos < len && vis[nextLeftPos];
-
-        int nextRightPos = start + arr[start];
-        boolean right = nextRightPos >= 0 && nextRightPos < len && vis[nextRightPos];
-
-        return (left && dfs(arr, vis, nextLeftPos)) || (right && dfs(arr, vis, nextRightPos));
+        return dfs(arr, vis, start - arr[start]) || dfs(arr, vis, start + arr[start]);
     }
 
     public static void main(String[] args) {
