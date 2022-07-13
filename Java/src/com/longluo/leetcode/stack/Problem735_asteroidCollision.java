@@ -84,9 +84,51 @@ public class Problem735_asteroidCollision {
         return res;
     }
 
+    // Stack Opt time: O(n) space: O(n)
+    public static int[] asteroidCollision_opt(int[] asteroids) {
+        int len = asteroids.length;
+        Stack<Integer> stk = new Stack<>();
+        int idx = 0;
+        while (idx < len) {
+            if (stk.empty()) {
+                stk.push(asteroids[idx++]);
+            } else {
+                if ((!stk.empty() && stk.peek() * asteroids[idx] > 0) || (!stk.empty() && stk.peek() < 0)) {
+                    stk.push(asteroids[idx++]);
+                } else if (!stk.empty() && stk.peek() * asteroids[idx] < 0) {
+                    if (Math.abs(stk.peek()) == Math.abs(asteroids[idx])) {
+                        idx++;
+                        stk.pop();
+                    } else if (Math.abs(stk.peek()) > Math.abs(asteroids[idx])) {
+                        idx++;
+                        continue;
+                    } else {
+                        while (!stk.empty() && stk.peek() * asteroids[idx] < 0
+                                && Math.abs(stk.peek()) < Math.abs(asteroids[idx])) {
+                            stk.pop();
+                        }
+                    }
+                }
+            }
+        }
+
+        if (stk.empty()) {
+            return new int[0];
+        }
+
+        int size = stk.size();
+        int[] ans = new int[size];
+        for (int i = size - 1; i >= 0; i--) {
+            ans[i] = stk.pop();
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[5, 10] ?= " + Arrays.toString(asteroidCollision(new int[]{5, 10, -5})));
         System.out.println("[] ?= " + Arrays.toString(asteroidCollision(new int[]{8, -8})));
         System.out.println("[-2,-1,1,2] ?= " + Arrays.toString(asteroidCollision(new int[]{-2, -1, 1, 2})));
+        System.out.println("[-2,-1,1,2] ?= " + Arrays.toString(asteroidCollision_opt(new int[]{-2, -1, 1, 2})));
     }
 }
