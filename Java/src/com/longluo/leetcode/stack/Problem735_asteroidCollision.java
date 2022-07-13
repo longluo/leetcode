@@ -1,7 +1,6 @@
 package com.longluo.leetcode.stack;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 735. 行星碰撞
@@ -38,7 +37,6 @@ import java.util.Stack;
  */
 public class Problem735_asteroidCollision {
 
-    // TODO: 2022/7/13
     // Stack time: O(n) space: O(n)
     public static int[] asteroidCollision(int[] asteroids) {
         int len = asteroids.length;
@@ -48,12 +46,14 @@ public class Problem735_asteroidCollision {
             if (stk.empty()) {
                 stk.push(asteroids[idx++]);
             } else {
-                if (!stk.empty() && stk.peek() * asteroids[idx] > 0) {
+                if ((!stk.empty() && stk.peek() * asteroids[idx] > 0) || (!stk.empty() && stk.peek() < 0)) {
                     stk.push(asteroids[idx++]);
                 } else if (!stk.empty() && stk.peek() * asteroids[idx] < 0) {
                     if (Math.abs(stk.peek()) == Math.abs(asteroids[idx])) {
+                        idx++;
                         stk.pop();
                     } else if (Math.abs(stk.peek()) > Math.abs(asteroids[idx])) {
+                        idx++;
                         continue;
                     } else {
                         while (!stk.empty() && stk.peek() * asteroids[idx] < 0
@@ -66,19 +66,27 @@ public class Problem735_asteroidCollision {
         }
 
         if (stk.empty()) {
-            return new int[]{};
+            return new int[0];
         }
 
-        int[] ans = new int[stk.size()];
-        int i = 0;
+        List<Integer> ans = new ArrayList<>();
         while (!stk.empty()) {
-            ans[i++] = stk.pop();
+            ans.add(stk.pop());
         }
 
-        return ans;
+        Collections.reverse(ans);
+
+        int[] res = new int[ans.size()];
+        for (int i = 0; i < ans.size(); i++) {
+            res[i] = ans.get(i);
+        }
+
+        return res;
     }
 
     public static void main(String[] args) {
         System.out.println("[5, 10] ?= " + Arrays.toString(asteroidCollision(new int[]{5, 10, -5})));
+        System.out.println("[] ?= " + Arrays.toString(asteroidCollision(new int[]{8, -8})));
+        System.out.println("[-2,-1,1,2] ?= " + Arrays.toString(asteroidCollision(new int[]{-2, -1, 1, 2})));
     }
 }
