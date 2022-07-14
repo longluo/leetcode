@@ -1,6 +1,8 @@
 package com.longluo.studyplan.jumpgame;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * 1696. 跳跃游戏 VI
@@ -72,9 +74,29 @@ public class Problem1696_jumpGame_vi {
         return dp[len - 1];
     }
 
+    public static int maxResult_pq(int[] nums, int k) {
+        int len = nums.length;
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o2[1] - o1[1]);
+
+        int max = nums[len - 1];
+        for (int i = len - 2; i >= 0; i--) {
+            pq.offer(new int[]{i, nums[i]});
+            if (pq.size() == k) {
+                max += pq.peek()[1];
+                pq.clear();
+            }
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println("7 ?= " + maxResult(new int[]{1, -1, -2, 4, -7, 3}, 2));
         System.out.println("17 ?= " + maxResult(new int[]{10, -5, -2, 4, 0, 3}, 3));
         System.out.println("17 ?= " + maxResult_opt(new int[]{10, -5, -2, 4, 0, 3}, 3));
+
+        System.out.println("7 ?= " + maxResult_pq(new int[]{1, -1, -2, 4, -7, 3}, 2));
+        System.out.println("17 ?= " + maxResult_pq(new int[]{10, -5, -2, 4, 0, 3}, 3));
     }
 }
