@@ -1,5 +1,6 @@
 package com.longluo.top100;
 
+import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
 
 import java.util.ArrayList;
@@ -31,8 +32,8 @@ import java.util.List;
  */
 public class Problem234_palindromeLinkedList {
 
-    //
-    public static boolean isPalindrome(ListNode head) {
+    // BF time: O(n) space: O(n)
+    public static boolean isPalindrome_bf(ListNode head) {
         if (head == null || head.next == null) {
             return true;
         }
@@ -53,7 +54,8 @@ public class Problem234_palindromeLinkedList {
         return true;
     }
 
-    public static boolean isPalindrome_better(ListNode head) {
+    // BF Opt time: O(n) space: O(n)
+    public static boolean isPalindrome_opt(ListNode head) {
         if (head == null || head.next == null) {
             return true;
         }
@@ -78,6 +80,38 @@ public class Problem234_palindromeLinkedList {
         return true;
     }
 
+    // Two Pointers time: O(n) space: O(1)
+    public static boolean isPalindrome_fastslow(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode pre = null;
+        ListNode current = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            current.next = pre;
+            pre = current;
+            current = slow;
+        }
+
+        while (slow != null) {
+            if (slow.val != fast.val) {
+                return false;
+            }
+
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return true;
+    }
+
+    // Recursion
     public static boolean isPalindrome_rec(ListNode head) {
         if (head == null || head.next == null) {
             return true;
@@ -88,6 +122,13 @@ public class Problem234_palindromeLinkedList {
     }
 
     public static void main(String[] args) {
+        ListNode tstNode1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 2, 1});
+        System.out.println("true ?= " + isPalindrome_bf(tstNode1));
+        System.out.println("true ?= " + isPalindrome_opt(tstNode1));
+        System.out.println("true ?= " + isPalindrome_fastslow(tstNode1));
+        System.out.println("true ?= " + isPalindrome_rec(tstNode1));
 
+        ListNode tstNode2 = LinkedListNodeUtils.constructListNode(new int[]{1, 2});
+        System.out.println("false ?= " + isPalindrome_fastslow(tstNode2));
     }
 }
