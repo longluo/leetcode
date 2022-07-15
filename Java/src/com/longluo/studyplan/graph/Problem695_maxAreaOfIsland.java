@@ -26,7 +26,7 @@ import java.util.Queue;
  * 1 <= m, n <= 50
  * grid[i][j] 为 0 或 1
  * <p>
- * https://leetcode-cn.com/problems/max-area-of-island/
+ * https://leetcode.com/problems/max-area-of-island/
  */
 public class Problem695_maxAreaOfIsland {
 
@@ -76,6 +76,6 @@ public class Problem695_maxAreaOfIsland {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("0 ?= " + maxAreaOfIsland(new int[][]{{0, 0, 0, 0, 0, 0, 0, 0}}));
     }
 }
