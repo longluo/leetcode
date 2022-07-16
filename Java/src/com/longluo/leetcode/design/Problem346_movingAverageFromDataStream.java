@@ -95,6 +95,32 @@ public class Problem346_movingAverageFromDataStream {
         }
     }
 
+    // Queue Opt
+    static class MovingAverage_queue_opt {
+        Queue<Integer> queue;
+        int size = 0;
+        double sum = 0;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public MovingAverage_queue_opt(int size) {
+            queue = new ArrayDeque<>();
+            this.size = size;
+        }
+
+        public double next(int val) {
+            queue.add(val);
+            sum += val;
+            if (queue.size() <= size) {
+                return sum / queue.size();
+            } else {
+                sum -= queue.poll();
+                return sum / size;
+            }
+        }
+    }
+
     /**
      * Your MovingAverage object will be instantiated and called as such:
      * MovingAverage obj = new MovingAverage(size);
