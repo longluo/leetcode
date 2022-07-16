@@ -125,10 +125,40 @@ public class Problem735_asteroidCollision {
         return ans;
     }
 
+    // Stack Best time: O(n) space: O(n)
+    public static int[] asteroidCollision_best(int[] asteroids) {
+        Deque<Integer> stack = new ArrayDeque<>();
+
+        for (int x : asteroids) {
+            boolean isOk = true;
+            while (isOk && x < 0 && !stack.isEmpty() && stack.peekFirst() > 0) {
+                isOk = stack.peek() < -x;
+                if (stack.peek() <= -x) {
+                    stack.pop();
+                }
+            }
+
+            if (isOk) {
+                stack.push(x);
+            }
+        }
+
+        int size = stack.size();
+        int[] ans = new int[size];
+        for (int i = size - 1; i >= 0; i--) {
+            ans[i] = stack.pollFirst();
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[5, 10] ?= " + Arrays.toString(asteroidCollision(new int[]{5, 10, -5})));
         System.out.println("[] ?= " + Arrays.toString(asteroidCollision(new int[]{8, -8})));
         System.out.println("[-2,-1,1,2] ?= " + Arrays.toString(asteroidCollision(new int[]{-2, -1, 1, 2})));
         System.out.println("[-2,-1,1,2] ?= " + Arrays.toString(asteroidCollision_opt(new int[]{-2, -1, 1, 2})));
+
+        System.out.println("[5, 10] ?= " + Arrays.toString(asteroidCollision_best(new int[]{5, 10, -5})));
+        System.out.println("[-2,-1,1,2] ?= " + Arrays.toString(asteroidCollision_best(new int[]{-2, -1, 1, 2})));
     }
 }
