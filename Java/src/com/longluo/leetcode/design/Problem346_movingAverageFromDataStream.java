@@ -1,7 +1,6 @@
 package com.longluo.leetcode.design;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 346. 滑动窗口的平均值
@@ -65,6 +64,34 @@ public class Problem346_movingAverageFromDataStream {
             }
 
             return sum;
+        }
+    }
+
+    // Queue time: O(n) space: O(size)
+    static class MovingAverage_queue {
+        Queue<Integer> queue;
+        int size = 0;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public MovingAverage_queue(int size) {
+            queue = new ArrayDeque<>();
+            this.size = size;
+        }
+
+        public double next(int val) {
+            queue.add(val);
+            double sum = 0;
+            for (int x : queue) {
+                sum += x;
+            }
+            if (queue.size() <= size) {
+                return sum / queue.size();
+            } else {
+                sum -= queue.poll();
+                return sum / size;
+            }
         }
     }
 
