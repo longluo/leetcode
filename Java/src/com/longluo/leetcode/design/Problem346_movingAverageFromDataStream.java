@@ -110,14 +110,13 @@ public class Problem346_movingAverageFromDataStream {
         }
 
         public double next(int val) {
+            if (queue.size() == size) {
+                queue.poll();
+            }
+
             queue.add(val);
             sum += val;
-            if (queue.size() <= size) {
-                return sum / queue.size();
-            } else {
-                sum -= queue.poll();
-                return sum / size;
-            }
+            return sum / queue.size();
         }
     }
 
@@ -131,5 +130,8 @@ public class Problem346_movingAverageFromDataStream {
         System.out.println(ma1.next(12009));
         System.out.println(ma1.next(1965));
         System.out.println(ma1.next(-940));
+
+        MovingAverage_queue_opt ma2 = new MovingAverage_queue_opt(3);
+        ma2.next(12000);
     }
 }
