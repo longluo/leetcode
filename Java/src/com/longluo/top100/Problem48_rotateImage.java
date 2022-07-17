@@ -60,7 +60,7 @@ public class Problem48_rotateImage {
         }
 
         int n = matrix.length;
-        
+
         int[][] newMatrix = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -75,7 +75,8 @@ public class Problem48_rotateImage {
         }
     }
 
-    public static void rotate_2(int[][] matrix) {
+    // Inplace Switch time: O(n^2) space: O(1)
+    public static void rotate_inplace(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return;
         }
@@ -92,7 +93,8 @@ public class Problem48_rotateImage {
         }
     }
 
-    public static void rotate_3(int[][] matrix) {
+    // Mirror time: O(n^2) space: O(1)
+    public static void rotate_mirrow(int[][] matrix) {
         int n = matrix.length;
         for (int i = 0; i < n / 2; i++) {
             for (int j = 0; j < n; j++) {
@@ -113,27 +115,27 @@ public class Problem48_rotateImage {
 
     public static void main(String[] args) {
         int[][] tst1 = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-//        rotate(tst1);
-//        rotate_2(tst1);
-        rotate_3(tst1);
+        rotate(tst1);
+        rotate_inplace(tst1);
+        rotate_mirrow(tst1);
         System.out.println("[[7, 4, 1],[8, 5, 2],[9, 6, 3]] ?= " + ArrayUtils.print2DArray(tst1));
 
         int[][] tst2 = new int[][]{{5, 1, 9, 11}, {2, 4, 8, 10}, {13, 3, 6, 7}, {15, 14, 12, 16}};
-//        rotate(tst2);
-//        rotate_2(tst2);
-        rotate_3(tst2);
+        rotate(tst2);
+        rotate_inplace(tst2);
+        rotate_mirrow(tst2);
         System.out.println("[[15, 13, 2, 5],[14, 3, 4, 1],[12, 6, 8, 9],[16, 7, 10, 11]] ?= " + ArrayUtils.print2DArray(tst2));
 
         int[][] tst3 = new int[][]{{1}};
-//        rotate(tst3);
-//        rotate_2(tst3);
-        rotate_3(tst3);
+        rotate(tst3);
+        rotate_inplace(tst3);
+        rotate_mirrow(tst3);
         System.out.println("[[1]] ?= " + ArrayUtils.print2DArray(tst3));
 
         int[][] tst4 = new int[][]{{1, 2}, {3, 4}};
-//        rotate(tst4);
-//        rotate_2(tst4);
-        rotate_3(tst4);
+        rotate(tst4);
+        rotate_inplace(tst4);
+        rotate_mirrow(tst4);
         System.out.println("[[3, 1],[4, 2]] ?= " + ArrayUtils.print2DArray(tst4));
     }
 }
