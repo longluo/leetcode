@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class Problem118_pascalsTriangle {
 
-    // BF DP time: O(n^2) space: O(n^2)
+    // BF DP time: O(n^2) space: O(n)
     public static List<List<Integer>> generate_bf(int numRows) {
         List<List<Integer>> ans = new ArrayList<>();
         if (numRows <= 0) {
@@ -62,7 +62,7 @@ public class Problem118_pascalsTriangle {
         return ans;
     }
 
-    // DP time: O(n^2) space: O(n^2)
+    // DP time: O(n^2) space: O(1)
     public static List<List<Integer>> generate_dp(int numRows) {
         List<List<Integer>> ans = new ArrayList<>();
         for (int i = 0; i < numRows; i++) {
