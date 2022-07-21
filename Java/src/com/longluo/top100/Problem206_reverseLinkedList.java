@@ -17,7 +17,7 @@ import java.util.Stack;
  * 进阶:
  * 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
  * <p>
- * https://leetcode.com/problems/reverse-linked-list/
+ * https://leetcode.cn/problems/reverse-linked-list/
  */
 public class Problem206_reverseLinkedList {
 
