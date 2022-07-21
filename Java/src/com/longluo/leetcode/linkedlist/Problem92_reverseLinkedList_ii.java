@@ -26,9 +26,33 @@ import java.util.List;
  * -500 <= Node.val <= 500
  * 1 <= left <= right <= n
  * <p>
- * https://leetcode-cn.com/problems/reverse-linked-list-ii/
+ * https://leetcode.cn/problems/reverse-linked-list-ii/
  */
-public class Problem92_reverseLinkedListBetween {
+public class Problem92_reverseLinkedList_ii {
+
+    // BF Swap Val time: O(n) space: O(n)
+    public static ListNode reverseBetween_bf(ListNode head, int left, int right) {
+        if (head == null || head.next == null || left == right) {
+            return head;
+        }
+
+        List<ListNode> nodeList = new ArrayList<>();
+        ListNode pNode = head;
+        while (pNode != null) {
+            nodeList.add(pNode);
+            pNode = pNode.next;
+        }
+
+        while (left < right) {
+            int temp = nodeList.get(left - 1).val;
+            nodeList.get(left - 1).val = nodeList.get(right - 1).val;
+            nodeList.get(right - 1).val = temp;
+            left++;
+            right--;
+        }
+
+        return head;
+    }
 
     //
     public static ListNode reverseBetween(ListNode head, int left, int right) {
@@ -82,6 +106,7 @@ public class Problem92_reverseLinkedListBetween {
     public static void main(String[] args) {
         ListNode test1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
         System.out.println("[1,4,3,2,5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween(test1, 2, 4)));
+        System.out.println("[1,4,3,2,5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween_bf(test1, 2, 4)));
 
         ListNode test2 = LinkedListNodeUtils.constructListNode(new int[]{5});
         System.out.println("[5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween(test2, 1, 1)));
