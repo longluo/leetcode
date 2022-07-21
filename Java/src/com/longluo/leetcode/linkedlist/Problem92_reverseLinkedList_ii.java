@@ -54,6 +54,32 @@ public class Problem92_reverseLinkedList_ii {
         return head;
     }
 
+    // BF Swap Node time: O(n) space: O(n)
+    // TODO: 2022/7/21  
+    public static ListNode reverseBetween_node(ListNode head, int left, int right) {
+        if (head == null || head.next == null || left == right) {
+            return head;
+        }
+
+        List<ListNode> nodeList = new ArrayList<>();
+        ListNode pNode = head;
+        while (pNode != null) {
+            nodeList.add(pNode);
+            pNode = pNode.next;
+        }
+
+        ListNode dummyNode = new ListNode(0);
+        dummyNode.next = head;
+        ListNode preNode = left > 1 ? nodeList.get(left - 2) : dummyNode;
+
+        for (int i = left; i <= right; i++) {
+            ListNode curNode = nodeList.get(left - 1);
+
+        }
+
+        return head;
+    }
+
     //
     public static ListNode reverseBetween(ListNode head, int left, int right) {
         if (head == null || head.next == null || left == right) {
@@ -107,6 +133,7 @@ public class Problem92_reverseLinkedList_ii {
         ListNode test1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
         System.out.println("[1,4,3,2,5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween(test1, 2, 4)));
         System.out.println("[1,4,3,2,5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween_bf(test1, 2, 4)));
+        System.out.println("[1,4,3,2,5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween_node(test1, 2, 4)));
 
         ListNode test2 = LinkedListNodeUtils.constructListNode(new int[]{5});
         System.out.println("[5] ?= " + LinkedListNodeUtils.printLinkedList(reverseBetween(test2, 1, 1)));
