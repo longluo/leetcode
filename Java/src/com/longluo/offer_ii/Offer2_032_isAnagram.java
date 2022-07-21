@@ -28,7 +28,7 @@ package com.longluo.offer_ii;
  * <p>
  * https://leetcode.cn/problems/dKk3P7/
  */
-public class Offer2_32_isAnagram {
+public class Offer2_032_isAnagram {
 
     public static boolean isAnagram(String s, String t) {
         if (s.equals(t) || s.length() != t.length()) {

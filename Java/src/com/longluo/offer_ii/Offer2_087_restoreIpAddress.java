@@ -38,7 +38,7 @@ import java.util.List;
  * <p>
  * https://leetcode.cn/problems/0on3uN/
  */
-public class Offer2_87_restoreIpAddress {
+public class Offer2_087_restoreIpAddress {
 
     public static List<String> restoreIpAddresses(String s) {
         List<String> ans = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Offer2_87_restoreIpAddress {
         return ans;
     }
 
-    public static void backtrace() {
+    public static void backtrack() {
 
     }
 

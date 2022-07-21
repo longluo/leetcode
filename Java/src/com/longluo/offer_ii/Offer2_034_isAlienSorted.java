@@ -35,7 +35,7 @@ import java.util.*;
  * <p>
  * https://leetcode.cn/problems/lwyVBB/
  */
-public class Offer2_34_isAlienSorted {
+public class Offer2_034_isAlienSorted {
 
     public static boolean isAlienSorted(String[] words, String order) {
         int len = order.length();

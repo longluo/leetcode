@@ -37,7 +37,7 @@ import java.util.Queue;
  * <p>
  * https://leetcode.cn/problems/qIsx9U/
  */
-public class Offer2_41_MovingAverage {
+public class Offer2_041_MovingAverage {
 
     static class MovingAverage {
         double sum = 0.0;
