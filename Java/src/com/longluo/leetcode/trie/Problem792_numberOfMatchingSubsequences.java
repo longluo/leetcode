@@ -1,5 +1,10 @@
 package com.longluo.leetcode.trie;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 792. 匹配子序列的单词数
  * <p>
@@ -42,8 +47,6 @@ public class Problem792_numberOfMatchingSubsequences {
             for (int i = 0; i < s.length(); i++) {
                 if (idx < word.length() && s.charAt(i) == word.charAt(idx)) {
                     idx++;
-                } else if (idx == word.length()) {
-                    break;
                 }
             }
 
@@ -55,7 +58,36 @@ public class Problem792_numberOfMatchingSubsequences {
         return ans;
     }
 
+    // Count time: O() space: O()
+    public static int numMatchingSubseq(String s, String[] words) {
+        Map<Character, Deque<String>> map = new HashMap<>();
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+            map.put(ch, new ArrayDeque<>());
+        }
+
+        for (String w : words) {
+            map.get(w.charAt(0)).addLast(w);
+        }
+
+        int count = 0;
+        for (char ch : s.toCharArray()) {
+            Deque<String> deque = map.get(ch);
+            int size = deque.size();
+            for (int i = 0; i < size; i++) {
+                String w = deque.removeFirst();
+                if (w.length() == 1) {
+                    count++;
+                } else {
+                    map.get(w.charAt(1)).addLast(w.substring(1));
+                }
+            }
+        }
+
+        return count;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + numMatchingSubseq_bf("abcde", new String[]{"a", "bb", "acd", "ace"}));
+        System.out.println("3 ?= " + numMatchingSubseq("abcde", new String[]{"a", "bb", "acd", "ace"}));
     }
 }
