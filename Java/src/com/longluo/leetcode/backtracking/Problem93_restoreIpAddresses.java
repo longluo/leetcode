@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class Problem93_restoreIpAddresses {
 
-    // Backtrack time: O() space: O(n)
+    // BF time: O(n^3) space: O(n)
     public static List<String> restoreIpAddresses_bf(String s) {
         List<String> ans = new ArrayList<>();
         int len = s.length();
@@ -56,7 +56,7 @@ public class Problem93_restoreIpAddresses {
 
                 ips[1] = ip2;
 
-                for (int k = j + 1; k <= j + 3 && k < len - 1; k++) {
+                for (int k = j + 1; k <= j + 3 && k >= len - 6 && k < len - 1; k++) {
                     String ip3 = s.substring(j + 1, k + 1);
                     String ip4 = s.substring(k + 1);
                     if (!checkValid(ip3) || !checkValid(ip4)) {
