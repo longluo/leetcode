@@ -58,7 +58,7 @@ public class Problem792_numberOfMatchingSubsequences {
         return ans;
     }
 
-    // Count time: O() space: O()
+    // Count time: O(len + sum(len)) space: O(words.len)
     public static int numMatchingSubseq(String s, String[] words) {
         Map<Character, Deque<String>> map = new HashMap<>();
         for (char ch = 'a'; ch <= 'z'; ch++) {
