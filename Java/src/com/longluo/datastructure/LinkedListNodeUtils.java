@@ -77,14 +77,14 @@ public class LinkedListNodeUtils {
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        while (head.next != null) {
+        while (head != null) {
             sb.append(head.val);
-            if (head != null) {
-                sb.append(",");
-            }
+            sb.append(",");
             head = head.next;
         }
-        sb.append(head.val).append("]");
+
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("]");
 
         return sb.toString();
     }
