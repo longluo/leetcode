@@ -51,7 +51,17 @@ public class Problem315_countOfSmallerNumbersAfterSelf {
         return ans;
     }
 
+    // BinarySearch time: O(n^2logn) space: O(n)
+    public static List<Integer> countSmaller_bs(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 1, 1, 0] ?= " + countSmaller_bf(new int[]{5, 2, 6, 1}));
+        System.out.println("[2, 1, 1, 0] ?= " + countSmaller_bf(new int[]{5, 2, 6, 1}));
+        System.out.println("[2, 1, 1, 0] ?= " + countSmaller_bs(new int[]{5, 2, 6, 1}));
     }
 }
