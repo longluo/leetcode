@@ -1,5 +1,6 @@
 package com.longluo.top_interviews;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,12 +33,25 @@ import java.util.List;
  */
 public class Problem315_countOfSmallerNumbersAfterSelf {
 
-    public static List<Integer> countSmaller(int[] nums) {
+    // BF time: O(n^2) space: O(1)
+    public static List<Integer> countSmaller_bf(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            int cnt = 0;
+            for (int j = i + 1; j < len; j++) {
+                if (nums[j] < nums[i]) {
+                    cnt++;
+                }
+            }
 
-        return null;
+            ans.add(cnt);
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("[2, 1, 1, 0] ?= " + countSmaller_bf(new int[]{5, 2, 6, 1}));
     }
 }
