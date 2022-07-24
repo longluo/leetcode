@@ -72,16 +72,12 @@ public class Problem6124_firstLetterToAppearTwice {
     // HashSet time: O(n) space: O(26)
     public static char repeatedCharacter_hashset(String s) {
         int len = s.length();
-        int min = len;
         char ans = ' ';
         Set<Character> set = new HashSet<>();
         for (int i = 0; i < len; i++) {
             char ch = s.charAt(i);
             if (set.contains(ch)) {
-                if (i < min) {
-                    min = i;
-                    ans = ch;
-                }
+                return ch;
             } else {
                 set.add(ch);
             }
