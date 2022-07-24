@@ -81,6 +81,7 @@ public class Problem6128_bestPokerHand {
     }
 
     public static void main(String[] args) {
+        System.out.println("Flush ?= " + bestHand(new int[]{13, 2, 3, 1, 9}, new char[]{'a', 'a', 'a', 'a', 'a'}));
 
     }
 }
