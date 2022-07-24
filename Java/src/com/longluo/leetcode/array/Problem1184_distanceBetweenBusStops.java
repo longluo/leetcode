@@ -58,7 +58,29 @@ public class Problem1184_distanceBetweenBusStops {
         return Math.min(forwardDis, sum - forwardDis);
     }
 
+    public static int distanceBetweenBusStops_opt(int[] distance, int start, int destination) {
+        if (start > destination) {
+            int tmp = destination;
+            destination = start;
+            start = tmp;
+        }
+
+        int sum1 = 0;
+        int sum2 = 0;
+
+        for (int i = 0; i < distance.length; i++) {
+            if (i >= start && i < destination) {
+                sum1 += distance[i];
+            } else {
+                sum2 += distance[i];
+            }
+        }
+
+        return Math.min(sum1, sum2);
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + distanceBetweenBusStops(new int[]{1, 2, 3, 4}, 0, 1));
+        System.out.println("1 ?= " + distanceBetweenBusStops_opt(new int[]{1, 2, 3, 4}, 0, 1));
     }
 }
