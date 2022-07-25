@@ -97,7 +97,7 @@ public class Offer2_115_sequenceReconstruction {
             }
         }
 
-        return false;
+        return true;
     }
 
     public static void main(String[] args) {
