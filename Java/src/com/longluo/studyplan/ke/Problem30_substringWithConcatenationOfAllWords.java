@@ -30,10 +30,11 @@ import java.util.*;
  * 1 <= words[i].length <= 30
  * words[i] 由小写英文字母组成
  * <p>
- * https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/
+ * https://leetcode.cn/problems/substring-with-concatenation-of-all-words/
  */
 public class Problem30_substringWithConcatenationOfAllWords {
 
+    //
     public static List<Integer> findSubstring(String s, String[] words) {
         if (s == null || words == null || words.length == 0 || s.length() == 0) {
             return new ArrayList<>();
