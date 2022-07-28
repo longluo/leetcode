@@ -33,7 +33,7 @@ import java.util.Stack;
  * <p>
  * 进阶：你可以使用原地算法（O(1) 额外空间）展开这棵树吗？
  * <p>
- * https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/
+ * https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
  */
 public class Problem114_flattenBinaryTreeToLinkedList {
 
