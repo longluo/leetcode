@@ -2,6 +2,7 @@ package com.longluo.leetcode.dp;
 
 /**
  * 115. 不同的子序列
+ * <p>
  * 给定一个字符串 s 和一个字符串 t ，计算在 s 的子序列中 t 出现的个数。
  * 字符串的一个 子序列 是指，通过删除一些（也可以不删除）字符且不干扰剩余字符相对位置所组成的新字符串。
  * （例如，"ACE" 是 "ABCDE" 的一个子序列，而 "AEC" 不是）
@@ -40,9 +41,12 @@ package com.longluo.leetcode.dp;
  * 提示：
  * 0 <= s.length, t.length <= 1000
  * s 和 t 由英文字母组成
+ * <p>
+ * https://leetcode.cn/problems/distinct-subsequences/
  */
 public class Problem115_numDistinct {
 
+    //
     public static int numDistinct(String s, String t) {
         if (s == null || t == null || s.length() == 0 || t.length() == 0 || t.length() > s.length()) {
             return 0;
