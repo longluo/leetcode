@@ -60,7 +60,46 @@ public class Problem1331_rankTransformOfAnArray {
         return ans;
     }
 
+    // BF time: O(nlogn + n^2) space: O(n)
+    // TLE
+    public static int[] arrayRankTransform_ugly(int[] arr) {
+        if (arr == null || arr.length < 1) {
+            return new int[]{};
+        }
+
+        int len = arr.length;
+        int[][] sorted = new int[len][2];
+        for (int i = 0; i < len; i++) {
+            sorted[i][0] = arr[i];
+            sorted[i][1] = i;
+        }
+
+        Arrays.sort(sorted, (o1, o2) -> o1[0] - o2[0]);
+
+        sorted[0][1] = 1;
+        for (int i = 1; i < len; i++) {
+            if (sorted[i][0] > sorted[i - 1][0]) {
+                sorted[i][1] = sorted[i - 1][1] + 1;
+            } else {
+                sorted[i][1] = sorted[i - 1][1];
+            }
+        }
+
+        int[] ans = new int[len];
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (sorted[j][0] == arr[i]) {
+                    ans[i] = sorted[j][1];
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[4, 1, 2, 3] ?= " + Arrays.toString(arrayRankTransform(new int[]{40, 10, 20, 30})));
+        System.out.println("[4, 1, 2, 3] ?= " + Arrays.toString(arrayRankTransform_ugly(new int[]{40, 10, 20, 30})));
     }
 }
