@@ -65,7 +65,42 @@ public class Problem890_findAndReplacePattern {
         return ans;
     }
 
+    // HashMap Opt
+    public static List<String> findAndReplacePattern_opt(String[] words, String pattern) {
+        List<String> ans = new ArrayList<>();
+        for (String word : words) {
+            if (match(word, pattern) && match(pattern, word)) {
+                ans.add(word);
+            }
+        }
+
+        return ans;
+    }
+
+    public static boolean match(String word, String pattern) {
+        if (word.length() != pattern.length()) {
+            return false;
+        }
+
+        Map<Character, Character> map = new HashMap<>();
+        int len = word.length();
+        for (int i = 0; i < len; i++) {
+            char x = word.charAt(i);
+            char y = pattern.charAt(i);
+            if (map.containsKey(x)) {
+                if (map.get(x) != y) {
+                    return false;
+                }
+            } else {
+                map.put(x, y);
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("[mee, aqq] ?= " + findAndReplacePattern(new String[]{"abc", "deq", "mee", "aqq", "dkd", "ccc"}, "abb"));
+        System.out.println("[mee, aqq] ?= " + findAndReplacePattern_opt(new String[]{"abc", "deq", "mee", "aqq", "dkd", "ccc"}, "abb"));
     }
 }
