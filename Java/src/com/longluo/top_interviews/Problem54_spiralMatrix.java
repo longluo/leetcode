@@ -51,7 +51,6 @@ public class Problem54_spiralMatrix {
         int count = 0;
 
         for (int i = 0; i <= rowNum / 2; i++) {
-
             for (int j = i; j < colNum - i; j++) {
                 ans.add(matrix[i][j]);
                 count++;
