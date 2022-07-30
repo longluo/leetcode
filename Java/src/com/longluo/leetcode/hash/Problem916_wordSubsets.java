@@ -124,8 +124,47 @@ public class Problem916_wordSubsets {
         return true;
     }
 
+    // Merge B time: O(Sum(A + B)) space: O(26)
+    public static List<String> wordSubsets(String[] words1, String[] words2) {
+        List<String> ans = new ArrayList<>();
+
+        int[] cntTotalB = new int[26];
+        for (String word : words2) {
+            int[] cnt = new int[26];
+            for (char ch : word.toCharArray()) {
+                cnt[ch - 'a']++;
+            }
+
+            for (int i = 0; i < 26; i++) {
+                cntTotalB[i] = Math.max(cntTotalB[i], cnt[i]);
+            }
+        }
+
+        for (String word : words1) {
+            int[] cnt = new int[26];
+            for (char ch : word.toCharArray()) {
+                cnt[ch - 'a']++;
+            }
+
+            boolean flag = true;
+            for (int i = 0; i < 26; i++) {
+                if (cnt[i] < cntTotalB[i]) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                ans.add(word);
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[facebook, google, leetcode] ?= " + wordSubsets_bf(new String[]{"amazon", "apple", "facebook", "google", "leetcode"}, new String[]{"e", "o"}));
         System.out.println("[facebook, google, leetcode] ?= " + wordSubsets_bf_opt(new String[]{"amazon", "apple", "facebook", "google", "leetcode"}, new String[]{"e", "o"}));
+        System.out.println("[facebook, google, leetcode] ?= " + wordSubsets(new String[]{"amazon", "apple", "facebook", "google", "leetcode"}, new String[]{"e", "o"}));
     }
 }
