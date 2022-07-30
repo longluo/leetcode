@@ -67,6 +67,46 @@ public class Problem916_wordSubsets {
         return ans;
     }
 
+    // Opt
+    // TLE
+    public static List<String> wordSubsets_bf_opt(String[] words1, String[] words2) {
+        List<String> ans = new ArrayList<>();
+
+        for (String word : words1) {
+            int[] count = new int[26];
+            for (char ch : word.toCharArray()) {
+                count[ch - 'a']++;
+            }
+
+            boolean flag = true;
+            for (int i = 0; i < words2.length; i++) {
+                String subStr = words2[i];
+                int[] subCnt = new int[26];
+
+                for (char ch : subStr.toCharArray()) {
+                    subCnt[ch - 'a']++;
+                }
+
+                for (int j = 0; j < 26; j++) {
+                    if (subCnt[j] > count[j]) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (!flag) {
+                    break;
+                }
+            }
+
+            if (flag) {
+                ans.add(word);
+            }
+        }
+
+        return ans;
+    }
+
     private static boolean checkSubset(String a, String b) {
         int[] count = new int[26];
 
@@ -86,5 +126,6 @@ public class Problem916_wordSubsets {
 
     public static void main(String[] args) {
         System.out.println("[facebook, google, leetcode] ?= " + wordSubsets_bf(new String[]{"amazon", "apple", "facebook", "google", "leetcode"}, new String[]{"e", "o"}));
+        System.out.println("[facebook, google, leetcode] ?= " + wordSubsets_bf_opt(new String[]{"amazon", "apple", "facebook", "google", "leetcode"}, new String[]{"e", "o"}));
     }
 }
