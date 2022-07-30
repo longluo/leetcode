@@ -68,19 +68,15 @@ public class Problem916_wordSubsets {
     }
 
     private static boolean checkSubset(String a, String b) {
-        int[] countA = new int[26];
-        int[] countB = new int[26];
+        int[] count = new int[26];
 
         for (char ch : a.toCharArray()) {
-            countA[ch - 'a']++;
+            count[ch - 'a']++;
         }
 
         for (char ch : b.toCharArray()) {
-            countB[ch - 'a']++;
-        }
-
-        for (int i = 0; i < 26; i++) {
-            if (countB[i] > countA[i]) {
+            count[ch - 'a']--;
+            if (count[ch - 'a'] < 0) {
                 return false;
             }
         }
