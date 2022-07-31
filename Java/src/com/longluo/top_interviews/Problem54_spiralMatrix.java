@@ -39,46 +39,49 @@ import java.util.List;
  */
 public class Problem54_spiralMatrix {
 
-    public static List<Integer> spiralOrder(int[][] matrix) {
+    // BF time: O(mn) space: O(1)
+    public static List<Integer> spiralOrder_simu(int[][] matrix) {
         List<Integer> ans = new ArrayList<>();
-        if (matrix == null) {
+
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return ans;
         }
 
-        int rowNum = matrix.length;
-        int colNum = matrix[0].length;
-        int total = rowNum * colNum;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int sum = rows * cols;
         int count = 0;
 
-        for (int i = 0; i <= rowNum / 2; i++) {
-            for (int j = i; j < colNum - i; j++) {
+        for (int i = 0; i <= rows / 2; i++) {
+
+            for (int j = i; j < cols - i; j++) {
                 ans.add(matrix[i][j]);
                 count++;
-                if (count >= total) {
+                if (count >= sum) {
                     return ans;
                 }
             }
 
-            for (int k = i + 1; k < rowNum - i; k++) {
-                ans.add(matrix[k][colNum - i - 1]);
+            for (int k = i + 1; k < rows - i; k++) {
+                ans.add(matrix[k][cols - i - 1]);
                 count++;
-                if (count >= total) {
+                if (count >= sum) {
                     return ans;
                 }
             }
 
-            for (int m = colNum - i - 2; m >= i; m--) {
-                ans.add(matrix[rowNum - i - 1][m]);
+            for (int m = cols - i - 2; m >= i; m--) {
+                ans.add(matrix[rows - i - 1][m]);
                 count++;
-                if (count >= total) {
+                if (count >= sum) {
                     return ans;
                 }
             }
 
-            for (int n = rowNum - i - 2; n > i; n--) {
+            for (int n = rows - i - 2; n > i; n--) {
                 ans.add(matrix[n][i]);
                 count++;
-                if (count >= total) {
+                if (count >= sum) {
                     return ans;
                 }
             }
@@ -88,37 +91,44 @@ public class Problem54_spiralMatrix {
     }
 
     public static List<Integer> spiralOrder_2(int[][] matrix) {
-        List<Integer> res = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
+
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return res;
+            return ans;
         }
 
-        int row = matrix.length;
-        int col = matrix[0].length;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
         int[][] dirs = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
         int rowIdx = 0;
         int colIdx = 0;
-        boolean[][] visited = new boolean[row][col];
+
+        boolean[][] visited = new boolean[rows][cols];
+
         int dirIdx = 0;
-        for (int i = 0; i < row * col; i++) {
-            res.add(matrix[rowIdx][colIdx]);
+
+        for (int i = 0; i < rows * cols; i++) {
+            ans.add(matrix[rowIdx][colIdx]);
             visited[rowIdx][colIdx] = true;
             int nextRow = rowIdx + dirs[dirIdx][0];
             int nextCol = colIdx + dirs[dirIdx][1];
-            if (nextRow < 0 || nextRow >= row || nextCol < 0 || nextCol >= col || visited[nextRow][nextCol]) {
+            if (nextRow < 0 || nextRow >= rows || nextCol < 0 || nextCol >= cols || visited[nextRow][nextCol]) {
                 dirIdx = (dirIdx + 1) % 4;
             }
             rowIdx = rowIdx + dirs[dirIdx][0];
             colIdx = colIdx + dirs[dirIdx][1];
         }
 
-        return res;
+        return ans;
     }
 
     public static List<Integer> spiralOrder_3(int[][] matrix) {
-        List<Integer> res = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
+
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return res;
+            return ans;
         }
 
         int row = matrix.length;
@@ -129,20 +139,20 @@ public class Problem54_spiralMatrix {
         int bottom = row - 1;
         while (left <= right && top <= bottom) {
             for (int colIdx = left; colIdx <= right; colIdx++) {
-                res.add(matrix[top][colIdx]);
+                ans.add(matrix[top][colIdx]);
             }
 
             for (int rowIdx = top + 1; rowIdx <= bottom; rowIdx++) {
-                res.add(matrix[rowIdx][right]);
+                ans.add(matrix[rowIdx][right]);
             }
 
             if (left < right && top < bottom) {
                 for (int colIdx = right - 1; colIdx >= left; colIdx--) {
-                    res.add(matrix[bottom][colIdx]);
+                    ans.add(matrix[bottom][colIdx]);
                 }
 
                 for (int rowIdx = bottom - 1; rowIdx > top; rowIdx--) {
-                    res.add(matrix[rowIdx][left]);
+                    ans.add(matrix[rowIdx][left]);
                 }
             }
 
@@ -152,13 +162,13 @@ public class Problem54_spiralMatrix {
             bottom--;
         }
 
-        return res;
+        return ans;
     }
 
     public static void main(String[] args) {
         System.out.println(" Method 1: ");
-        System.out.println("[1,2,3,6,9,8,7,4,5] ?= " + spiralOrder(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
-        System.out.println("[1,2,3,4,8,12,11,10,9,5,6,7] ?= " + spiralOrder(new int[][]{{1, 2, 3, 4},
+        System.out.println("[1,2,3,6,9,8,7,4,5] ?= " + spiralOrder_simu(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
+        System.out.println("[1,2,3,4,8,12,11,10,9,5,6,7] ?= " + spiralOrder_simu(new int[][]{{1, 2, 3, 4},
                 {5, 6, 7, 8}, {9, 10, 11, 12}}));
 
         System.out.println(" Method 2: ");
