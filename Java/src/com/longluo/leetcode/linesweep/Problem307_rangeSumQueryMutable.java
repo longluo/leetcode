@@ -39,10 +39,10 @@ package com.longluo.leetcode.linesweep;
 public class Problem307_rangeSumQueryMutable {
 
     // BF time: O(n) space: O(n)
-    static class NumArray {
+    static class NumArray_bf {
         int[] nums;
 
-        public NumArray(int[] nums) {
+        public NumArray_bf(int[] nums) {
             int len = nums.length;
             this.nums = nums.clone();
         }
@@ -68,6 +68,9 @@ public class Problem307_rangeSumQueryMutable {
      * int param_2 = obj.sumRange(left,right);
      */
     public static void main(String[] args) {
-
+        NumArray_bf tstNa1 = new NumArray_bf(new int[]{1, 3, 5});
+        System.out.println(tstNa1.sumRange(0, 2));
+        tstNa1.update(1, 2);
+        System.out.println(tstNa1.sumRange(0, 2));
     }
 }
