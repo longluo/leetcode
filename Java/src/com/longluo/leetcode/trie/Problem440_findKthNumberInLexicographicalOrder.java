@@ -1,7 +1,6 @@
 package com.longluo.leetcode.trie;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * 440. 字典序的第K小数字
@@ -25,6 +24,7 @@ import java.util.Comparator;
 public class Problem440_findKthNumberInLexicographicalOrder {
 
     // BF time: O(nlogn) space: O(n)
+    // Memory Out
     public static int findKthNumber_str(int n, int k) {
         if (n == 1) {
             return 1;
@@ -40,8 +40,20 @@ public class Problem440_findKthNumberInLexicographicalOrder {
         return Integer.parseInt(numStrs[k]);
     }
 
+    //
+    public static int findKthNumber(int n, int k) {
+        if (n == 1) {
+            return 1;
+        }
+
+
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + findKthNumber_str(1, 1));
         System.out.println("10 ?= " + findKthNumber_str(13, 2));
+
+        System.out.println("10 ?= " + findKthNumber(13, 2));
     }
 }
