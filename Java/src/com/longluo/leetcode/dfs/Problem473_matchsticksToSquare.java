@@ -28,7 +28,7 @@ import java.util.Arrays;
  */
 public class Problem473_matchsticksToSquare {
 
-    // Backtrack time:
+    // Backtrack time: O(4^n) space: O(n)
     // TLE
     public static boolean makesquare(int[] matchsticks) {
         int len = matchsticks.length;
@@ -44,7 +44,7 @@ public class Problem473_matchsticksToSquare {
         return backtrack(0, matchsticks, edges, sum / 4);
     }
 
-    // Backtrack
+    // Backtrack time: O(4^n) space: O(n)
     // AC
     public static boolean makesquare_opt(int[] matchsticks) {
         int len = matchsticks.length;
