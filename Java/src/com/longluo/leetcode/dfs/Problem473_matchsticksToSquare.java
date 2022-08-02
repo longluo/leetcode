@@ -44,6 +44,28 @@ public class Problem473_matchsticksToSquare {
         return backtrack(0, matchsticks, edges, sum / 4);
     }
 
+    // Backtrack
+    // AC
+    public static boolean makesquare_opt(int[] matchsticks) {
+        int len = matchsticks.length;
+        int sum = Arrays.stream(matchsticks).sum();
+        if (len < 4 || sum % 4 != 0) {
+            return false;
+        }
+
+        Arrays.sort(matchsticks);
+
+        for (int i = 0, j = len - 1; i < j; i++, j--) {
+            int temp = matchsticks[i];
+            matchsticks[i] = matchsticks[j];
+            matchsticks[j] = temp;
+        }
+
+        int[] edges = new int[4];
+
+        return backtrack(0, matchsticks, edges, sum / 4);
+    }
+
     private static boolean backtrack(int index, int[] matchsticks, int[] edges, int len) {
         if (index == matchsticks.length) {
             return true;
@@ -62,5 +84,6 @@ public class Problem473_matchsticksToSquare {
 
     public static void main(String[] args) {
         System.out.println("true ?= " + makesquare(new int[]{1, 1, 2, 2, 2}));
+        System.out.println("true ?= " + makesquare_opt(new int[]{1, 1, 2, 2, 2}));
     }
 }
