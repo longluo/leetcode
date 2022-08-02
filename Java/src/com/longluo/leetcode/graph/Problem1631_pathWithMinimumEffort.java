@@ -35,7 +35,7 @@ import java.util.*;
  */
 public class Problem1631_pathWithMinimumEffort {
 
-    // BFS(Dijkstra) time: O() space: O(mn)
+    // BFS(Dijkstra) time: O(mnlog(mn)) space: O(mn)
     public static int minimumEffortPath_bfs(int[][] heights) {
         if (heights == null || heights.length == 0 || heights[0].length == 0) {
             return 0;
@@ -132,10 +132,98 @@ public class Problem1631_pathWithMinimumEffort {
         return left;
     }
 
+    // Union Find time: O(mnlog(mn)) space: O(mn)
+    public static int minimumEffortPath_uf(int[][] heights) {
+        int rows = heights.length;
+        int cols = heights[0].length;
+
+        List<int[]> edges = new ArrayList<>();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int index = i * cols + j;
+                if (i > 0) {
+                    edges.add(new int[]{index - cols, index, Math.abs(heights[i][j] - heights[i - 1][j])});
+                }
+
+                if (j > 0) {
+                    edges.add(new int[]{index - 1, index, Math.abs(heights[i][j] - heights[i][j - 1])});
+                }
+            }
+        }
+
+        Collections.sort(edges, (edge1, edge2) -> edge1[2] - edge2[2]);
+
+        UnionFind uf = new UnionFind(rows * cols);
+        int ans = 0;
+        for (int[] edge : edges) {
+            int x = edge[0];
+            int y = edge[1];
+            int d = edge[2];
+            uf.union(x, y);
+            if (uf.isConnected(0, rows * cols - 1)) {
+                ans = d;
+                break;
+            }
+        }
+
+        return ans;
+    }
+
+    static class UnionFind {
+        int[] parent;
+        int[] size;
+        int count;
+
+        public UnionFind(int n) {
+            count = n;
+            parent = new int[n];
+            size = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+                size[i] = 1;
+            }
+        }
+
+        public void union(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX == rootY) {
+                return;
+            }
+            if (size[rootX] < size[rootY]) {
+                parent[rootX] = rootY;
+                size[rootY] += size[rootX];
+            } else {
+                parent[rootY] = rootX;
+                size[rootX] += size[rootY];
+            }
+
+            count--;
+        }
+
+        public int find(int x) {
+            while (x != parent[x]) {
+                parent[x] = parent[parent[x]];
+                x = parent[x];
+            }
+
+            return x;
+        }
+
+        public boolean isConnected(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            return rootX == rootY;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + minimumEffortPath_bfs(new int[][]{{1, 2, 3}, {3, 8, 4}, {5, 3, 5}}));
         System.out.println("2 ?= " + minimumEffortPath_bfs(new int[][]{{1, 2, 2}, {3, 8, 2}, {5, 3, 5}}));
 
         System.out.println("2 ?= " + minimumEffortPath_bs(new int[][]{{1, 2, 2}, {3, 8, 2}, {5, 3, 5}}));
+
+        System.out.println("2 ?= " + minimumEffortPath_uf(new int[][]{{1, 2, 2}, {3, 8, 2}, {5, 3, 5}}));
     }
 }
