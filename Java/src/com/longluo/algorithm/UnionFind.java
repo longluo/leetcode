@@ -77,4 +77,9 @@ public class UnionFind {
 
         return x;
     }
+
+    public static void main(String[] args) {
+        UnionFind uf = new UnionFind(10);
+
+    }
 }
