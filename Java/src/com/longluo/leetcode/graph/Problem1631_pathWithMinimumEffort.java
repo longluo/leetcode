@@ -1,8 +1,6 @@
 package com.longluo.leetcode.graph;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 1631. 最小体力消耗路径
@@ -37,55 +35,57 @@ import java.util.Queue;
  */
 public class Problem1631_pathWithMinimumEffort {
 
-    // BFS + DP time: O() space: O()
+    // BFS(Dijkstra) time: O() space: O(mn)
     public static int minimumEffortPath_bfs(int[][] heights) {
         if (heights == null || heights.length == 0 || heights[0].length == 0) {
             return 0;
         }
 
+        int rows = heights.length;
+        int cols = heights[0].length;
+
         int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-        int row = heights.length;
-        int col = heights[0].length;
+        PriorityQueue<int[]> pq = new PriorityQueue<>((edge1, edge2) -> edge1[2] - edge2[2]);
 
-        int[][] dp = new int[row][col];
+        pq.offer(new int[]{0, 0, 0});
 
-        for (int i = 0; i < row; i++) {
-            Arrays.fill(dp[i], Integer.MAX_VALUE);
-        }
+        int[] dist = new int[rows * cols];
+        Arrays.fill(dist, Integer.MAX_VALUE);
 
-        dp[0][0] = 0;
+        dist[0] = 0;
 
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{0, 0});
+        boolean[][] vis = new boolean[rows][cols];
 
-        boolean[][] vis = new boolean[row][col];
-        vis[0][0] = true;
+        while (!pq.isEmpty()) {
+            int[] edge = pq.poll();
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
+            int x = edge[0];
+            int y = edge[1];
+            int d = edge[2];
 
-            for (int i = 0; i < size; i++) {
-                int[] curr = queue.poll();
+            if (vis[x][y]) {
+                continue;
+            }
 
-                int x = curr[0];
-                int y = curr[1];
+            if (x == rows - 1 && y == cols - 1) {
+                break;
+            }
 
-                for (int[] dir : dirs) {
-                    int nextX = x + dir[0];
-                    int nextY = y + dir[1];
+            vis[x][y] = true;
+            for (int[] dir : dirs) {
+                int nextX = x + dir[0];
+                int nextY = y + dir[1];
 
-                    if (nextX >= 0 && nextX < row && nextY >= 0 && nextY < col && !vis[nextX][nextY]) {
-                        vis[nextX][nextY] = true;
-                        int cost = Math.abs(heights[nextX][nextY] - heights[x][y]);
-                        dp[nextX][nextY] = Math.min(dp[nextX][nextY], cost);
-                        queue.offer(new int[]{nextX, nextY});
-                    }
+                if (nextX >= 0 && nextX < rows && nextY >= 0 && nextY < cols
+                        && Math.max(d, Math.abs(heights[nextX][nextY] - heights[x][y])) < dist[nextX * cols + nextY]) {
+                    dist[nextX * cols + nextY] = Math.max(d, Math.abs(heights[nextX][nextY] - heights[x][y]));
+                    pq.offer(new int[]{nextX, nextY, dist[nextX * cols + nextY]});
                 }
             }
         }
 
-        return dp[row - 1][col - 1];
+        return dist[rows * cols - 1];
     }
 
     // BinarySearch time: O(mnlogC) space: O(mn)
