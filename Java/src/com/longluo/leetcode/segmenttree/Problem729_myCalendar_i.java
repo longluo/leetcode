@@ -73,12 +73,85 @@ public class Problem729_myCalendar_i {
 
             return false;
         }
+
+        // time: O(n^2)
+        public boolean book_opt(int start, int end) {
+            for (int[] time : bookList) {
+                if (start < time[1] && end >= time[0]) {
+                    return false;
+                }
+            }
+
+            bookList.add(new int[]{start, end});
+            return true;
+        }
+    }
+
+    // BinarySearch time: O(nlogn) space: O(n)
+    static class MyCalendar_BS {
+        List<Integer> bookList;
+
+        public MyCalendar_BS() {
+            bookList = new ArrayList<>();
+        }
+
+        // time: O(nlogn)
+        public boolean book(int start, int end) {
+            if (bookList.size() <= 0) {
+                bookList.add(start);
+                bookList.add(end);
+                return true;
+            }
+
+            Collections.sort(bookList);
+            int len = bookList.size();
+            if (end <= bookList.get(0) || start >= bookList.get(len - 1)) {
+                bookList.add(start);
+                bookList.add(end);
+                return true;
+            }
+
+            int loc = binarySearch(bookList, start);
+            if (loc % 2 == 0) {
+                if (loc + 2 < len && start >= bookList.get(loc + 1) && end <= bookList.get(loc + 2)) {
+                    bookList.add(loc + 2, start);
+                    bookList.add(loc + 3, end);
+                    return true;
+                }
+            } else {
+                if (loc + 1 < len && start >= bookList.get(loc) && end <= bookList.get(loc + 1)) {
+                    bookList.add(loc + 1, start);
+                    bookList.add(loc + 2, end);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private int binarySearch(List<Integer> numsList, int target) {
+            int len = numsList.size();
+            int left = 0;
+            int right = len - 1;
+
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (numsList.get(mid) < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+
+            return left;
+        }
     }
 
     public static void main(String[] args) {
-        MyCalendar myCalendar = new MyCalendar();
-        myCalendar.book(10, 20);
-        myCalendar.book(15, 25);
-        myCalendar.book(20, 30);
+        MyCalendar_BS myCalendar = new MyCalendar_BS();
+        myCalendar.book(47, 50);
+        myCalendar.book(33, 41);
+        myCalendar.book(39, 45);
+        myCalendar.book(33, 42);
     }
 }
