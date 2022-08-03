@@ -50,9 +50,8 @@ public class Problem1403_minimumSubsequenceInNonIncreasingOrder {
 
         while (index >= 0) {
             ans.add(nums[index]);
-            sum -= nums[index];
             sumRight += nums[index--];
-            if (sumRight > sum) {
+            if (sum - sumRight < sumRight) {
                 break;
             }
         }
