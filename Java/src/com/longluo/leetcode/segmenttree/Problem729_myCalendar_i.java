@@ -1,8 +1,6 @@
 package com.longluo.leetcode.segmenttree;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 729. 我的日程安排表 I
@@ -89,7 +87,7 @@ public class Problem729_myCalendar_i {
 
     // BinarySearch time: O(nlogn) space: O(n)
     static class MyCalendar_BS {
-        List<Integer> bookList;
+        List<int[]> bookList;
 
         public MyCalendar_BS() {
             bookList = new ArrayList<>();
@@ -98,60 +96,50 @@ public class Problem729_myCalendar_i {
         // time: O(nlogn)
         public boolean book(int start, int end) {
             if (bookList.size() <= 0) {
-                bookList.add(start);
-                bookList.add(end);
+                bookList.add(new int[]{start, end});
                 return true;
             }
 
-            Collections.sort(bookList);
-            int len = bookList.size();
-            if (end <= bookList.get(0) || start >= bookList.get(len - 1)) {
-                bookList.add(start);
-                bookList.add(end);
-                return true;
-            }
+            Collections.sort(bookList, (Comparator.comparingInt(o -> o[0])));
 
-            int loc = binarySearch(bookList, start);
-            if (loc % 2 == 0) {
-                if (loc + 2 < len && start >= bookList.get(loc + 1) && end <= bookList.get(loc + 2)) {
-                    bookList.add(loc + 2, start);
-                    bookList.add(loc + 3, end);
-                    return true;
-                }
-            } else {
-                if (loc + 1 < len && start >= bookList.get(loc) && end <= bookList.get(loc + 1)) {
-                    bookList.add(loc + 1, start);
-                    bookList.add(loc + 2, end);
-                    return true;
-                }
+            int loc = binarySearch(bookList, end);
+
+            if (loc >= 1 && start >= bookList.get(loc - 1)[1]) {
+                bookList.add(new int[]{start, end});
+                return true;
             }
 
             return false;
         }
 
-        private int binarySearch(List<Integer> numsList, int target) {
+        private int binarySearch(List<int[]> numsList, int target) {
             int len = numsList.size();
+            if (numsList.get(0)[1] < target) {
+                return -1;
+            }
+
             int left = 0;
             int right = len - 1;
 
             while (left < right) {
                 int mid = left + (right - left) / 2;
-                if (numsList.get(mid) < target) {
-                    left = mid + 1;
-                } else {
+                if (target <= numsList.get(mid)[0]) {
                     right = mid;
+                } else {
+                    left = mid + 1;
                 }
             }
 
-            return left;
+            return numsList.get(left)[0] >= target ? left : -1;
         }
     }
 
     public static void main(String[] args) {
         MyCalendar_BS myCalendar = new MyCalendar_BS();
-        myCalendar.book(47, 50);
-        myCalendar.book(33, 41);
-        myCalendar.book(39, 45);
-        myCalendar.book(33, 42);
+        System.out.println(myCalendar.book(37, 50));
+        System.out.println(myCalendar.book(33, 50));
+        System.out.println(myCalendar.book(4, 17));
+        System.out.println(myCalendar.book(35, 48));
+        System.out.println(myCalendar.book(8, 25));
     }
 }
