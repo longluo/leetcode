@@ -41,9 +41,9 @@ import java.util.*;
  */
 public class Problem322_coinChange {
 
-    // TODO: 2022/6/7
+    //
     public static int coinChange(int[] coins, int amount) {
-        if (amount < 1) {
+        if (amount <= 0) {
             return 0;
         }
 
@@ -73,6 +73,37 @@ public class Problem322_coinChange {
 
         count[rem - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
         return count[rem - 1];
+    }
+
+    // DFS
+    // TLE
+    static int minCount = Integer.MAX_VALUE;
+
+    public static int coinChange_dfs(int[] coins, int amount) {
+        if (amount <= 0) {
+            return 0;
+        }
+
+        minCount = Integer.MAX_VALUE;
+        dfs(coins, amount, 0);
+        return minCount;
+    }
+
+    private static int dfs(int[] coins, int remain, int count) {
+        if (remain < 0) {
+            return -1;
+        }
+
+        if (remain == 0) {
+            minCount = Math.min(minCount, count);
+            return count;
+        }
+
+        for (int x : coins) {
+            dfs(coins, remain - x, count + 1);
+        }
+
+        return -1;
     }
 
     // DP time: O(amount * n) space: O(amount)
@@ -280,6 +311,8 @@ public class Problem322_coinChange {
 
 
         System.out.println("3 ?= " + coinChange(new int[]{1, 2, 5}, 11));
+
+        System.out.println("3 ?= " + coinChange_dfs(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_dp(new int[]{1, 2, 5}, 11));
 
