@@ -1,7 +1,6 @@
 package com.longluo.top100;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 322. 零钱兑换
@@ -141,13 +140,53 @@ public class Problem322_coinChange {
         return cnt;
     }
 
+    // Backtrack
+    // TLE
+    public static int coinChange_bt(int[] coins, int amount) {
+        Arrays.sort(coins);
+
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(coins, res, new ArrayList<>(), amount);
+
+        if (res.size() == 0) {
+            return -1;
+        }
+
+        int ans = amount;
+        for (List path : res) {
+            ans = Math.min(ans, path.size());
+        }
+
+        return ans;
+    }
+
+    private static void backtrack(int[] coins, List<List<Integer>> res, List<Integer> onePath, int target) {
+        if (target == 0) {
+            res.add(new ArrayList<>(onePath));
+            return;
+        }
+
+        for (int i = 0; i < coins.length; i++) {
+            if (coins[i] > target) {
+                break;
+            }
+
+            onePath.add(coins[i]);
+            backtrack(coins, res, onePath, target - coins[i]);
+            onePath.remove(onePath.size() - 1);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + coinChange(new int[]{1, 2, 5}, 11));
         System.out.println("3 ?= " + coinChange_dp(new int[]{1, 2, 5}, 11));
         System.out.println("3 ?= " + coinChange_rec(new int[]{1, 2, 5}, 11));
+
         System.out.println("-1 ?= " + coinChange(new int[]{2}, 3));
         System.out.println("0 ?= " + coinChange(new int[]{1}, 0));
         System.out.println("1 ?= " + coinChange(new int[]{1}, 1));
         System.out.println("2 ?= " + coinChange(new int[]{1}, 2));
+
+        System.out.println("3 ?= " + coinChange_bt(new int[]{1, 2, 5}, 11));
     }
 }
