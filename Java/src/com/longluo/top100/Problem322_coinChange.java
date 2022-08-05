@@ -106,6 +106,25 @@ public class Problem322_coinChange {
         return dp[amount] == 0 ? -1 : dp[amount];
     }
 
+    //
+    public static int coinChange_dp_opt(int[] coins, int amount) {
+        int max = amount + 1;
+
+        int[] dp = new int[max];
+        Arrays.fill(dp, max);
+
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int x : coins) {
+                if (i >= x) {
+                    dp[i] = Math.min(dp[i], dp[i - x] + 1);
+                }
+            }
+        }
+
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+
     // BFS
     // TLE
     public static int coinChange_bfs(int[] coins, int amount) {
@@ -263,6 +282,8 @@ public class Problem322_coinChange {
         System.out.println("3 ?= " + coinChange(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_dp(new int[]{1, 2, 5}, 11));
+
+        System.out.println("3 ?= " + coinChange_dp_opt(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_rec(new int[]{1, 2, 5}, 11));
 
