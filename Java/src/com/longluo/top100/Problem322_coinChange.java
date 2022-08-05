@@ -102,45 +102,51 @@ public class Problem322_coinChange {
         return dp[amount];
     }
 
-    /**
-     * BFS
-     */
+    // BFS
     public static int coinChange_bfs(int[] coins, int amount) {
-        if (amount < 1 || coins == null || coins.length < 1) {
-            return 0;
-        }
+        Arrays.sort(coins);
 
-        int cnt = 0;
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(amount);
+        int ans = -1;
 
 
-        return 0;
+        return ans;
     }
 
+    private static void bfs(int[] coins, List<List<Integer>> res, int target) {
+
+
+        for (int i = 0; i < coins.length; i++) {
+            if (target >= coins[i]) {
+
+            }
+        }
+
+    }
+
+    // Recursion
+    // TLE
+    static int minAns = Integer.MAX_VALUE;
     public static int coinChange_rec(int[] coins, int amount) {
-        if (amount < 1 || coins == null || coins.length < 1) {
-            return 0;
-        }
-
-        return coinChange(coins, amount, 0);
+        minAns = Integer.MAX_VALUE;
+        coinChange(coins, amount, 0);
+        return minAns == Integer.MAX_VALUE ? -1 : minAns;
     }
 
-    public static int coinChange(int[] coins, int amount, int cnt) {
+    public static void coinChange(int[] coins, int amount, int cnt) {
         if (amount == 0) {
-            return cnt;
-        } else if (amount < 0) {
-            return -1;
+            minAns = Math.min(minAns, cnt);
+            return;
         }
 
         for (int i = 0; i < coins.length; i++) {
+            if (coins[i] > amount) {
+                continue;
+            }
             coinChange(coins, amount - coins[i], cnt + 1);
         }
-
-        return cnt;
     }
 
-    // Backtrack
+    // Backtrack time: O() space: O()
     // TLE
     public static int coinChange_bt(int[] coins, int amount) {
         Arrays.sort(coins);
