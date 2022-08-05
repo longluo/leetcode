@@ -136,7 +136,31 @@ public class Problem322_coinChange {
             coinChange(coins, amount - coins[i], cnt + 1);
         }
     }
-    
+
+    // DFS
+    // TLE
+    public static int coinChange_dfs_opt_2(int[] coins, int amount) {
+        Arrays.sort(coins);
+        minAns = Integer.MAX_VALUE;
+        coinChange(coins, amount, coins.length - 1, 0);
+        return minAns == Integer.MAX_VALUE ? -1 : minAns;
+    }
+
+    public static void coinChange(int[] coins, int amount, int index, int cnt) {
+        if (amount == 0) {
+            minAns = Math.min(minAns, cnt);
+            return;
+        }
+
+        if (index < 0) {
+            return;
+        }
+
+        for (int k = amount / coins[index]; k >= 0 && k + cnt < minAns; k--) {
+            coinChange(coins, amount - k * coins[index], index - 1, cnt + k);
+        }
+    }
+
     // DP time: O(amount * n) space: O(amount)
     public static int coinChange_dp(int[] coins, int amount) {
         if (amount == 0) {
@@ -316,11 +340,13 @@ public class Problem322_coinChange {
 
         System.out.println("3 ?= " + coinChange_dfs(new int[]{1, 2, 5}, 11));
 
+        System.out.println("3 ?= " + coinChange_dfs_opt_1(new int[]{1, 2, 5}, 11));
+
+        System.out.println("3 ?= " + coinChange_dfs_opt_2(new int[]{1, 2, 5}, 11));
+
         System.out.println("3 ?= " + coinChange_dp(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_dp_opt(new int[]{1, 2, 5}, 11));
-
-        System.out.println("3 ?= " + coinChange_dfs_opt_1(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_bt(new int[]{1, 2, 5}, 11));
 
