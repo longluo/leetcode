@@ -106,6 +106,37 @@ public class Problem322_coinChange {
         return -1;
     }
 
+    // DFS
+    static int minAns = Integer.MAX_VALUE;
+
+    public static int coinChange_dfs_opt_1(int[] coins, int amount) {
+        Arrays.sort(coins);
+        minAns = Integer.MAX_VALUE;
+        coinChange(coins, amount, 0);
+        return minAns == Integer.MAX_VALUE ? -1 : minAns;
+    }
+
+    public static void coinChange(int[] coins, int amount, int cnt) {
+        if (cnt > minAns) {
+            return;
+        }
+
+        if (amount == 0) {
+            minAns = Math.min(minAns, cnt);
+            return;
+        }
+
+        int len = coins.length;
+
+        for (int i = len - 1; i >= 0; i--) {
+            if (coins[i] > amount) {
+                continue;
+            }
+
+            coinChange(coins, amount - coins[i], cnt + 1);
+        }
+    }
+    
     // DP time: O(amount * n) space: O(amount)
     public static int coinChange_dp(int[] coins, int amount) {
         if (amount == 0) {
@@ -237,35 +268,6 @@ public class Problem322_coinChange {
         return minAns == Integer.MAX_VALUE ? -1 : minAns;
     }
 
-    // Recursion
-    // TLE
-    static int minAns = Integer.MAX_VALUE;
-
-    public static int coinChange_rec(int[] coins, int amount) {
-        Arrays.sort(coins);
-        minAns = Integer.MAX_VALUE;
-        coinChange(coins, amount, 0);
-        return minAns == Integer.MAX_VALUE ? -1 : minAns;
-    }
-
-    public static void coinChange(int[] coins, int amount, int cnt) {
-        if (cnt > minAns) {
-            return;
-        }
-
-        if (amount == 0) {
-            minAns = Math.min(minAns, cnt);
-            return;
-        }
-
-        for (int i = 0; i < coins.length; i++) {
-            if (coins[i] > amount) {
-                break;
-            }
-            coinChange(coins, amount - coins[i], cnt + 1);
-        }
-    }
-
     // Backtrack time: O() space: O()
     // TLE
     public static int coinChange_bt(int[] coins, int amount) {
@@ -318,7 +320,7 @@ public class Problem322_coinChange {
 
         System.out.println("3 ?= " + coinChange_dp_opt(new int[]{1, 2, 5}, 11));
 
-        System.out.println("3 ?= " + coinChange_rec(new int[]{1, 2, 5}, 11));
+        System.out.println("3 ?= " + coinChange_dfs_opt_1(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_bt(new int[]{1, 2, 5}, 11));
 
