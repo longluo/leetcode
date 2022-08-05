@@ -1,5 +1,7 @@
 package com.longluo.top100;
 
+import kotlin.Pair;
+
 import java.util.*;
 
 /**
@@ -103,30 +105,48 @@ public class Problem322_coinChange {
     }
 
     // BFS
+    // TLE
     public static int coinChange_bfs(int[] coins, int amount) {
+        if (amount <= 0) {
+            return 0;
+        }
+
         Arrays.sort(coins);
 
-        int ans = -1;
+        int minAns = Integer.MAX_VALUE;
 
+        for (int coin : coins) {
+            if (coin > amount) {
+                break;
+            }
 
-        return ans;
-    }
+            Queue<int[]> queue = new LinkedList<>();
+            queue.offer(new int[]{amount - coin, 1});
+            while (!queue.isEmpty()) {
+                int[] cur = queue.poll();
+                if (cur[0] == 0) {
+                    minAns = Math.min(minAns, cur[1]);
+                }
 
-    private static void bfs(int[] coins, List<List<Integer>> res, int target) {
+                for (int x : coins) {
+                    if (x > cur[0]) {
+                        break;
+                    }
 
-
-        for (int i = 0; i < coins.length; i++) {
-            if (target >= coins[i]) {
-
+                    queue.offer(new int[]{cur[0] - x, cur[1] + 1});
+                }
             }
         }
 
+        return minAns == Integer.MAX_VALUE ? -1 : minAns;
     }
 
     // Recursion
     // TLE
     static int minAns = Integer.MAX_VALUE;
+
     public static int coinChange_rec(int[] coins, int amount) {
+        Arrays.sort(coins);
         minAns = Integer.MAX_VALUE;
         coinChange(coins, amount, 0);
         return minAns == Integer.MAX_VALUE ? -1 : minAns;
@@ -144,7 +164,7 @@ public class Problem322_coinChange {
 
         for (int i = 0; i < coins.length; i++) {
             if (coins[i] > amount) {
-                continue;
+                break;
             }
             coinChange(coins, amount - coins[i], cnt + 1);
         }
@@ -188,17 +208,20 @@ public class Problem322_coinChange {
     }
 
     public static void main(String[] args) {
+        System.out.println("-1 ?= " + coinChange(new int[]{2}, 3));
+        System.out.println("0 ?= " + coinChange(new int[]{1}, 0));
+        System.out.println("1 ?= " + coinChange(new int[]{1}, 1));
+        System.out.println("2 ?= " + coinChange(new int[]{1}, 2));
+
+
         System.out.println("3 ?= " + coinChange(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_dp(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_rec(new int[]{1, 2, 5}, 11));
 
-        System.out.println("-1 ?= " + coinChange(new int[]{2}, 3));
-        System.out.println("0 ?= " + coinChange(new int[]{1}, 0));
-        System.out.println("1 ?= " + coinChange(new int[]{1}, 1));
-        System.out.println("2 ?= " + coinChange(new int[]{1}, 2));
-
         System.out.println("3 ?= " + coinChange_bt(new int[]{1, 2, 5}, 11));
+
+        System.out.println("3 ?= " + coinChange_bfs(new int[]{1, 2, 5}, 11));
     }
 }
