@@ -118,6 +118,9 @@ public class Problem322_coinChange {
         for (int coin : coins) {
             if (coin > amount) {
                 break;
+            } else if (coin == amount) {
+                minAns = 1;
+                break;
             }
 
             Queue<int[]> queue = new LinkedList<>();
@@ -134,6 +137,47 @@ public class Problem322_coinChange {
                     }
 
                     queue.offer(new int[]{cur[0] - x, cur[1] + 1});
+                }
+            }
+        }
+
+        return minAns == Integer.MAX_VALUE ? -1 : minAns;
+    }
+
+    // BFS Opt
+    // TLE
+    public static int coinChange_bfs_opt(int[] coins, int amount) {
+        if (amount <= 0) {
+            return 0;
+        }
+
+        int minAns = Integer.MAX_VALUE;
+        int len = coins.length;
+        Arrays.sort(coins);
+
+        for (int i = len - 1; i >= 0; i--) {
+            if (amount % coins[i] == 0) {
+                minAns = Math.min(minAns, amount / coins[i]);
+                break;
+            }
+
+            int divide = amount / coins[i];
+            for (int j = divide; j >= 0; j--) {
+                Queue<int[]> queue = new LinkedList<>();
+                queue.offer(new int[]{amount - j * coins[i], j});
+                while (!queue.isEmpty()) {
+                    int[] cur = queue.poll();
+                    if (cur[0] == 0) {
+                        minAns = Math.min(minAns, cur[1]);
+                    }
+
+                    for (int x : coins) {
+                        if (x > cur[0]) {
+                            break;
+                        }
+
+                        queue.offer(new int[]{cur[0] - x, cur[1] + 1});
+                    }
                 }
             }
         }
@@ -223,5 +267,7 @@ public class Problem322_coinChange {
         System.out.println("3 ?= " + coinChange_bt(new int[]{1, 2, 5}, 11));
 
         System.out.println("3 ?= " + coinChange_bfs(new int[]{1, 2, 5}, 11));
+
+        System.out.println("3 ?= " + coinChange_bfs_opt(new int[]{1, 2, 5}, 11));
     }
 }
