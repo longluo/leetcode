@@ -67,7 +67,35 @@ public class Problem377_combinationSum_iv {
         }
     }
 
+    // Backtrack
+    // TLE
+    static int total = 0;
+    public static int combinationSum4_opt(int[] nums, int target) {
+        Arrays.sort(nums);
+        backtrack_opt(nums, new ArrayList<>(), target);
+        return total;
+    }
+
+    private static void backtrack_opt(int[] nums, List<Integer> onePath, int remain) {
+        if (remain == 0) {
+            total++;
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > remain) {
+                break;
+            }
+
+            onePath.add(nums[i]);
+            backtrack_opt(nums, onePath, remain - nums[i]);
+            onePath.remove(onePath.size() - 1);
+        }
+    }
+
+
     public static void main(String[] args) {
         System.out.println("7 ?= " + combinationSum4(new int[]{1, 2, 3}, 4));
+        System.out.println("7 ?= " + combinationSum4_opt(new int[]{1, 2, 3}, 4));
     }
 }
