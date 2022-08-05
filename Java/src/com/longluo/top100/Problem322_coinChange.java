@@ -133,6 +133,10 @@ public class Problem322_coinChange {
     }
 
     public static void coinChange(int[] coins, int amount, int cnt) {
+        if (cnt > minAns) {
+            return;
+        }
+
         if (amount == 0) {
             minAns = Math.min(minAns, cnt);
             return;
@@ -185,7 +189,9 @@ public class Problem322_coinChange {
 
     public static void main(String[] args) {
         System.out.println("3 ?= " + coinChange(new int[]{1, 2, 5}, 11));
+
         System.out.println("3 ?= " + coinChange_dp(new int[]{1, 2, 5}, 11));
+
         System.out.println("3 ?= " + coinChange_rec(new int[]{1, 2, 5}, 11));
 
         System.out.println("-1 ?= " + coinChange(new int[]{2}, 3));
