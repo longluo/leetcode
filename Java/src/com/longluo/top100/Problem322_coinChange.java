@@ -297,7 +297,6 @@ public class Problem322_coinChange {
             return 0;
         }
 
-        int len = coins.length;
         Arrays.sort(coins);
 
         Queue<Integer> queue = new LinkedList<>();
