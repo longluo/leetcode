@@ -75,13 +75,20 @@ public class Problem322_coinChange {
         return count[rem - 1];
     }
 
-    //
+    // DP time: O(amount * n) space: O(amount)
     public static int coinChange_dp(int[] coins, int amount) {
-        int len = coins.length;
+        if (amount == 0) {
+            return 0;
+        }
+
         int[] dp = new int[amount + 1];
         dp[0] = 0;
-        for (int i = 0; i < len; i++) {
-            dp[coins[i]] = 1;
+
+        for (int x : coins) {
+            if (x > amount) {
+                continue;
+            }
+            dp[x] = 1;
         }
 
         for (int i = 1; i <= amount; i++) {
@@ -89,19 +96,14 @@ public class Problem322_coinChange {
                 continue;
             }
 
-            for (int j = 0; j < len; j++) {
-                int coin = coins[j];
-                if (i >= coin && dp[i - coin] > 0) {
-                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+            for (int x : coins) {
+                if (i >= x && dp[i - x] > 0) {
+                    dp[i] = dp[i] > 0 ? Math.min(dp[i], dp[i - x] + 1) : dp[i - x] + 1;
                 }
             }
         }
 
-        if (dp[amount] == 0) {
-            return -1;
-        }
-
-        return dp[amount];
+        return dp[amount] == 0 ? -1 : dp[amount];
     }
 
     // BFS
