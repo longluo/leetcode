@@ -118,9 +118,34 @@ public class Problem377_combinationSum_iv {
         }
     }
 
+    // DP time: O(target * n) space: O(target)
+    public static int combinationSum4_dp(int[] nums, int target) {
+        Arrays.sort(nums);
+        int minVal = nums[0];
+        if (target < minVal) {
+            return 0;
+        }
+
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
+        for (int i = 1; i <= target; i++) {
+            for (int x : nums) {
+                if (x > i) {
+                    break;
+                }
+
+                dp[i] += dp[i - x];
+            }
+        }
+
+        return dp[target];
+    }
+
     public static void main(String[] args) {
         System.out.println("7 ?= " + combinationSum4(new int[]{1, 2, 3}, 4));
         System.out.println("7 ?= " + combinationSum4_opt(new int[]{1, 2, 3}, 4));
         System.out.println("7 ?= " + combinationSum4_opt2(new int[]{1, 2, 3}, 4));
+
+        System.out.println("7 ?= " + combinationSum4_dp(new int[]{1, 2, 3}, 4));
     }
 }
