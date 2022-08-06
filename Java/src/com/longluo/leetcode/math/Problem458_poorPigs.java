@@ -30,36 +30,11 @@ package com.longluo.leetcode.math;
  * 1 <= buckets <= 1000
  * 1 <= minutesToDie <= minutesToTest <= 100
  * <p>
- * https://leetcode-cn.com/problems/poor-pigs/
+ * https://leetcode.com/problems/poor-pigs/
  */
 public class Problem458_poorPigs {
 
-    public static int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
-        int ratio = minutesToTest / minutesToDie;
-        int num = 1;
-        int exp = 0;
-        while (num < buckets) {
-            num *= 2;
-            exp++;
-        }
-
-        int bits = 1;
-        int times = 0;
-        while (bits < ratio) {
-            bits *= 2;
-            times++;
-        }
-
-        int ans = 1;
-        if (times > 0) {
-            ans = exp / times;
-        } else {
-            ans = exp;
-        }
-
-        return ans;
-    }
-
+    // Math time: O(1) space: O(1)
     public static int poorPigs_math(int buckets, int minutesToDie, int minutesToTest) {
         int states = minutesToTest / minutesToDie + 1;
         int pigs = (int) Math.ceil(Math.log(buckets) / Math.log(states));
@@ -69,9 +44,10 @@ public class Problem458_poorPigs {
     public static void main(String[] args) {
         System.out.println(Math.ceil(Math.log(1000) / Math.log(2)));
 
-        System.out.println("2 ?= " + poorPigs(4, 15, 15));
-        System.out.println("2 ?= " + poorPigs(4, 15, 30));
-        System.out.println("2 ?= " + poorPigs(8, 15, 40));
-        System.out.println("5 ?= " + poorPigs(1000, 15, 60));
+        System.out.println("2 ?= " + poorPigs_math(4, 15, 15));
+        System.out.println("2 ?= " + poorPigs_math(4, 15, 30));
+        System.out.println("2 ?= " + poorPigs_math(8, 15, 40));
+        System.out.println("5 ?= " + poorPigs_math(1000, 15, 60));
+        System.out.println("5 ?= " + poorPigs_math(1000, 15, 60));
     }
 }
