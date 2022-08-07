@@ -73,7 +73,7 @@ public class Problem1220_countVowelPermutation {
     public static int countVowelPermutation_dp(int n) {
         long mod = 1_000_000_007;
 
-        int[][] dp = new int[n][5];
+        long[][] dp = new long[n][5];
         Arrays.fill(dp[0], 1);
 
         for (int i = 0; i < n - 1; i++) {
