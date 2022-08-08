@@ -68,7 +68,7 @@ public class Problem300_longestIncreasingSubsequence {
         }
     }
 
-    // DP time: O(n^2) space: O(1)
+    // DP time: O(n^2) space: O(n)
     public static int lengthOfLIS_dp(int[] nums) {
         int len = nums.length;
         if (len <= 1) {
@@ -92,25 +92,38 @@ public class Problem300_longestIncreasingSubsequence {
         return max;
     }
 
+    // Greedy + BinarySearch time: O(nlogn) space: O(n)
     public static int lengthOfLIS_bs(int[] nums) {
-        if (nums.length == 0) {
-            return 0;
+        int len = nums.length;
+        if (len <= 1) {
+            return len;
         }
 
-        int[] dp = new int[nums.length];
-        dp[0] = 1;
-        int maxans = 1;
-        for (int i = 1; i < nums.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
+        int[] tail = new int[len];
+        tail[0] = nums[0];
+        int maxLen = 1;
+
+        for (int i = 1; i < len; i++) {
+            if (nums[i] > tail[maxLen - 1]) {
+                tail[maxLen] = nums[i];
+                maxLen++;
+            } else {
+                int left = 0;
+                int right = maxLen - 1;
+                while (left < right) {
+                    int mid = left + (right - left) / 2;
+                    if (tail[mid] < nums[i]) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
                 }
+
+                tail[left] = nums[i];
             }
-            maxans = Math.max(maxans, dp[i]);
         }
 
-        return maxans;
+        return maxLen;
     }
 
     public static void main(String[] args) {
