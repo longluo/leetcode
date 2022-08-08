@@ -28,15 +28,17 @@ import java.util.List;
  * -10^4 <= nums[i] <= 10^4
  * <p>
  * 进阶：
- * 你可以设计时间复杂度为 O(n2) 的解决方案吗？
- * 你能将算法的时间复杂度降低到 O(n log(n)) 吗?
+ * 你可以设计时间复杂度为 O(n^2) 的解决方案吗？
+ * 你能将算法的时间复杂度降低到 O(nlog(n)) 吗?
  * <p>
  * https://leetcode.com/problems/longest-increasing-subsequence/
  */
 public class Problem300_longestIncreasingSubsequence {
 
-    // BF time: O(n^2) space: O(1)
+    // Backtrack time: O(n^2) space: O(n)
+    // TLE
     static int max = 1;
+
     public static int lengthOfLIS_bf(int[] nums) {
         int len = nums.length;
         if (len <= 1) {
@@ -47,20 +49,21 @@ public class Problem300_longestIncreasingSubsequence {
         return max;
     }
 
-    public static void backtrack(int[] nums, List<Integer> list, int start) {
-        if (start == nums.length) {
-            max = Math.max(max, list.size());
+    private static void backtrack(int[] nums, List<Integer> path, int index) {
+        max = Math.max(max, path.size());
+
+        if (index == nums.length) {
             return;
         }
 
-        for (int i = start; i < nums.length; i++) {
-            if (list.size() > 0 && nums[i] <= list.get(list.size() - 1)) {
+        for (int i = index; i < nums.length; i++) {
+            if (path.size() > 0 && nums[i] <= path.get(path.size() - 1)) {
                 continue;
             }
 
-            list.add(nums[i]);
-            backtrack(nums, list, i + 1);
-            list.remove(list.size() - 1);
+            path.add(nums[i]);
+            backtrack(nums, path, i + 1);
+            path.remove(path.size() - 1);
         }
     }
 
@@ -105,6 +108,7 @@ public class Problem300_longestIncreasingSubsequence {
     }
 
     public static void main(String[] args) {
+        System.out.println("6 ?= " + lengthOfLIS_bf(new int[]{1, 3, 6, 7, 9, 4, 10, 5, 6}));
         System.out.println("4 ?= " + lengthOfLIS_bf(new int[]{0, 1, 0, 3, 2, 3}));
         System.out.println("4 ?= " + lengthOfLIS_bf(new int[]{10, 9, 2, 5, 3, 7, 101, 18}));
         System.out.println("1 ?= " + lengthOfLIS_bf(new int[]{7, 7, 7, 7, 7, 7, 7}));
