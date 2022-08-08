@@ -1,6 +1,7 @@
 package com.longluo.top100;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ import java.util.List;
  */
 public class Problem300_longestIncreasingSubsequence {
 
-    // Backtrack time: O(n^2) space: O(n)
+    // Backtrack time: O(2^n) space: O(n)
     // TLE
     static int max = 1;
 
@@ -69,21 +70,26 @@ public class Problem300_longestIncreasingSubsequence {
 
     // DP time: O(n^2) space: O(1)
     public static int lengthOfLIS_dp(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return nums.length;
-        }
-
         int len = nums.length;
-        int ans = 1;
-
-        //
-        int[] dp = new int[len];
-        dp[0] = 1;
-        for (int i = 1; i < len; i++) {
-
+        if (len <= 1) {
+            return len;
         }
 
-        return ans;
+        int max = 1;
+        int[] dp = new int[len];
+        Arrays.fill(dp, 1);
+
+        for (int i = 1; i < len; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+
+            max = Math.max(max, dp[i]);
+        }
+
+        return max;
     }
 
     public static int lengthOfLIS_bs(int[] nums) {
