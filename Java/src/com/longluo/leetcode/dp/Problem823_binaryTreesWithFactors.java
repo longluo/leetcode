@@ -62,7 +62,40 @@ public class Problem823_binaryTreesWithFactors {
         return (int) (ans % mod);
     }
 
+    // HashMap time: O(n^2) space: O(n)
+    public static int numFactoredBinaryTrees_opt(int[] arr) {
+        int mod = 1_000_000_007;
+        int len = arr.length;
+
+        Arrays.sort(arr);
+
+        Map<Integer, Long> map = new HashMap<>();
+        for (int x : arr) {
+            map.put(x, 1L);
+        }
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[i] % arr[j] == 0) {
+                    int result = arr[i] / arr[j];
+                    if (map.containsKey(result)) {
+                        long cnt = (map.get(arr[i]) + map.get(arr[j]) * map.get(result)) % mod;
+                        map.put(arr[i], cnt);
+                    }
+                }
+            }
+        }
+
+        long ans = 0;
+        for (long x : map.values()) {
+            ans += x;
+        }
+
+        return (int) (ans % mod);
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + numFactoredBinaryTrees(new int[]{2, 4}));
+        System.out.println("3 ?= " + numFactoredBinaryTrees_opt(new int[]{2, 4}));
     }
 }
