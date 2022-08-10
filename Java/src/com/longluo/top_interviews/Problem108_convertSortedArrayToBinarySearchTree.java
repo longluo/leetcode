@@ -28,6 +28,7 @@ import com.longluo.datastructure.TreeUtils;
  */
 public class Problem108_convertSortedArrayToBinarySearchTree {
 
+    // DFS time: O(n) space: O(n)
     public static TreeNode sortedArrayToBST(int[] nums) {
         if (nums == null || nums.length <= 0) {
             return null;
