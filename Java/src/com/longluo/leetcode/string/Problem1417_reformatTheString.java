@@ -82,7 +82,40 @@ public class Problem1417_reformatTheString {
         return sb.toString();
     }
 
+    // Two Pointers time: O(n) space: O(1)
+    public static String reformat_opt(String s) {
+        int len = s.length();
+        int letterCnt = 0;
+        for (char ch : s.toCharArray()) {
+            if (Character.isLetter(ch)) {
+                letterCnt++;
+            }
+        }
+
+        int digitCnt = len - letterCnt;
+        if (Math.abs(letterCnt - digitCnt) > 1) {
+            return "";
+        }
+
+        boolean flag = letterCnt > digitCnt;
+        char[] array = s.toCharArray();
+        for (int i = 0, j = 1; i < len; i += 2) {
+            if (Character.isLetter(array[i]) != flag) {
+                while (Character.isLetter(array[j]) != flag) {
+                    j += 2;
+                }
+
+                char temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+        return new String(array);
+    }
+
     public static void main(String[] args) {
         System.out.println("a0b1c2 ?= " + reformat("a0b1c2"));
+        System.out.println("c2o0v1i9d ?= " + reformat_opt("covid2019"));
     }
 }
