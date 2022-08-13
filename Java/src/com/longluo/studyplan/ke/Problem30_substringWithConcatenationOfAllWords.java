@@ -34,26 +34,37 @@ import java.util.*;
  */
 public class Problem30_substringWithConcatenationOfAllWords {
 
-    //
+    // Simulate + HashMap time: O(n*m) space: O(m)
     public static List<Integer> findSubstring(String s, String[] words) {
-        if (s == null || words == null || words.length == 0 || s.length() == 0) {
-            return new ArrayList<>();
-        }
-
         List<Integer> ans = new ArrayList<>();
-        int sum = 0;
-        Set<String> wordSet = new HashSet<>();
+        Map<String, Integer> allWordsMap = new HashMap<>();
         for (String word : words) {
-            sum += word.length();
-            wordSet.add(word);
+            allWordsMap.put(word, allWordsMap.getOrDefault(word, 0) + 1);
         }
-        int len = s.length();
-        int left = 0;
-        int right = sum;
-        Map<String, Integer> winMap = new HashMap<>();
-        while (left < right && right < len) {
-            while (left < right && right < len) {
 
+        int len = s.length();
+        int wordsCnt = words.length;
+        int wordLen = words[0].length();
+
+        for (int i = 0; i < len - wordsCnt * wordLen + 1; i++) {
+            Map<String, Integer> hasWordsMap = new HashMap<>();
+            int hasWordsCnt = 0;
+            while (hasWordsCnt < wordsCnt) {
+                String word = s.substring(i + hasWordsCnt * wordLen, i + (hasWordsCnt + 1) * wordLen);
+                if (allWordsMap.containsKey(word)) {
+                    hasWordsMap.put(word, hasWordsMap.getOrDefault(word, 0) + 1);
+                    if (hasWordsMap.get(word) > allWordsMap.get(word)) {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+
+                hasWordsCnt++;
+            }
+
+            if (hasWordsCnt == wordsCnt) {
+                ans.add(i);
             }
         }
 
