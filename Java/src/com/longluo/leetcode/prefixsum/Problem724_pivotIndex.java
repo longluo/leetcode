@@ -1,5 +1,7 @@
 package com.longluo.leetcode.prefixsum;
 
+import java.util.Arrays;
+
 /**
  * 724. 寻找数组的中心索引
  * <p>
@@ -61,12 +63,28 @@ public class Problem724_pivotIndex {
         return -1;
     }
 
+    // PrefixSum time: O(n) space: O(1)
+    public static int pivotIndex(int[] nums) {
+        int len = nums.length;
+        int total = Arrays.stream(nums).sum();
+        int sum = 0;
+        for (int i = 0; i < len; i++) {
+            if (2 * sum + nums[i] == total) {
+                return i;
+            }
+
+            sum += nums[i];
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + pivotIndex_bf(new int[]{1, 7, 3, 6, 5, 6}));
 
-        System.out.println("3 ?= " + pivotIndex_bf(new int[]{1, 7, 3, 6, 5, 6}));
-        System.out.println("-1 ?= " + pivotIndex_bf(new int[]{1, 2, 3}));
-        System.out.println("-1 ?= " + pivotIndex_bf(new int[]{}));
-        System.out.println("0 ?= " + pivotIndex_bf(new int[]{-1, -1, -1, 0, 1, 1}));
+        System.out.println("3 ?= " + pivotIndex(new int[]{1, 7, 3, 6, 5, 6}));
+        System.out.println("-1 ?= " + pivotIndex(new int[]{1, 2, 3}));
+        System.out.println("-1 ?= " + pivotIndex(new int[]{}));
+        System.out.println("0 ?= " + pivotIndex(new int[]{-1, -1, -1, 0, 1, 1}));
     }
 }
