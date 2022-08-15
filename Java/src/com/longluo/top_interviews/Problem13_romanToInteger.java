@@ -146,13 +146,68 @@ public class Problem13_romanToInteger {
     public static int romanToInt_hashmap(String s) {
         int ans = 0;
         int len = s.length();
-        for (int i = 0; i < len; ++i) {
+        for (int i = 0; i < len; i++) {
             int value = symbolValues.get(s.charAt(i));
             if (i < len - 1 && value < symbolValues.get(s.charAt(i + 1))) {
                 ans -= value;
             } else {
                 ans += value;
             }
+        }
+
+        return ans;
+    }
+
+    // Opt time: O(n) space: O(1)
+    public static int romanToInt_opt(String s) {
+        int len = s.length();
+        int ans = 0;
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            int cur = getValue(ch);
+            if (i < len - 1 && cur < getValue(s.charAt(i + 1))) {
+                ans -= cur;
+            } else {
+                ans += cur;
+            }
+        }
+
+        return ans;
+    }
+
+    private static int getValue(char ch) {
+        int ans = 0;
+        switch (ch) {
+            case 'I':
+                ans = 1;
+                break;
+
+            case 'V':
+                ans = 5;
+                break;
+
+            case 'X':
+                ans = 10;
+                break;
+
+            case 'L':
+                ans = 50;
+                break;
+
+            case 'C':
+                ans = 100;
+                break;
+
+            case 'D':
+                ans = 500;
+                break;
+
+            case 'M':
+                ans = 1000;
+                break;
+
+            default:
+                break;
         }
 
         return ans;
@@ -170,5 +225,8 @@ public class Problem13_romanToInteger {
         System.out.println("9 ?= " + romanToInt_hashmap("IX"));
         System.out.println("58 ?= " + romanToInt_hashmap("LVIII"));
         System.out.println("1994 ?= " + romanToInt_hashmap("MCMXCIV"));
+
+        System.out.println("58 ?= " + romanToInt_opt("LVIII"));
+        System.out.println("1994 ?= " + romanToInt_opt("MCMXCIV"));
     }
 }
