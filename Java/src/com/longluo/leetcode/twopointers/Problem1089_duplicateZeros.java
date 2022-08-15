@@ -31,19 +31,31 @@ public class Problem1089_duplicateZeros {
     // BF time: O(n) space: O(n)
     public static void duplicateZeros_bf(int[] arr) {
         int len = arr.length;
-        int[] back = new int[len];
+        int[] copy = new int[len];
         for (int i = 0, j = 0; i < len && j < len; i++) {
             if (arr[i] != 0) {
-                back[j++] = arr[i];
+                copy[j++] = arr[i];
             } else {
-                back[j++] = 0;
+                copy[j++] = 0;
                 if (j < len) {
-                    back[j++] = 0;
+                    copy[j++] = 0;
                 }
             }
         }
 
-        System.arraycopy(back, 0, arr, 0, len);
+        for (int i = 0; i < len; i++) {
+            arr[i] = copy[i];
+        }
+    }
+
+    // TODO: 2022/8/15
+    // Two Pointers
+    public static void duplicateZeros(int[] arr) {
+        int len = arr.length;
+        int left = 0;
+        int right = 0;
+
+
     }
 
     public static void main(String[] args) {
