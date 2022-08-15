@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.leetcode.prefixsum;
 
 import java.util.Arrays;
 
