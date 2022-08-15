@@ -26,14 +26,15 @@ import java.util.Arrays;
  * 1 <= nums.length <= 1000
  * -10^6 <= nums[i] <= 10^6
  * <p>
- * https://leetcode-cn.com/problems/running-sum-of-1d-array/
+ * https://leetcode.com/problems/running-sum-of-1d-array/
  */
 public class Problem1480_runningSumOf1dArray {
 
     // BF time: O(n^2) space: O(n)
     public static int[] runningSum(int[] nums) {
-        int[] sums = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
+        int len = nums.length;
+        int[] sums = new int[len];
+        for (int i = 0; i < len; i++) {
             for (int j = 0; j <= i; j++) {
                 sums[i] += nums[j];
             }
