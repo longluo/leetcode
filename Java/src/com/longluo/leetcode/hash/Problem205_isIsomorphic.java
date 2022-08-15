@@ -57,10 +57,34 @@ public class Problem205_isIsomorphic {
         return true;
     }
 
+    // HashMap time: O(n) space: O(n)
+    public static boolean isIsomorphic_opt(String s, String t) {
+        int len = s.length();
+        Map<Character, Character> s2tmap = new HashMap<>();
+        Map<Character, Character> t2smap = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            char chSrc = s.charAt(i);
+            char chTgt = t.charAt(i);
+            if (!s2tmap.containsKey(chSrc) && !t2smap.containsKey(chTgt)) {
+                s2tmap.put(chSrc, chTgt);
+                t2smap.put(chTgt, chSrc);
+            } else {
+                if ((s2tmap.containsKey(chSrc) && chTgt != s2tmap.get(chSrc))
+                        || (t2smap.containsKey(chTgt) && chSrc != t2smap.get(chTgt))) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + isIsomorphic("egg", "add"));
         System.out.println("false ?= " + isIsomorphic("foo", "bar"));
         System.out.println("true ?= " + isIsomorphic("paper", "title"));
         System.out.println("false ?= " + isIsomorphic("ab", "aa"));
+
+        System.out.println("false ?= " + isIsomorphic_opt("ab", "aa"));
     }
 }
