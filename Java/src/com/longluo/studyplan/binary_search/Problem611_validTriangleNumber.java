@@ -20,7 +20,7 @@ import java.util.Arrays;
  * 数组长度不超过1000。
  * 数组里整数的范围为 [0, 1000]。
  * <p>
- * https://leetcode-cn.com/problems/valid-triangle-number/
+ * https://leetcode.com/problems/valid-triangle-number/
  */
 public class Problem611_validTriangleNumber {
 
