@@ -226,7 +226,7 @@ public class Problem923_3sumWithMultiplicity {
     }
 
     // Count Opt time: O(N + 101^2) space: O(101)
-    public int threeSumMulti(int[] arr, int target) {
+    public static int threeSumMulti(int[] arr, int target) {
         int MOD = 1_000_000_007;
         long[] count = new long[101];
         for (int x : arr) {
@@ -279,7 +279,8 @@ public class Problem923_3sumWithMultiplicity {
     }
 
     // TreeMap time: O(N + 101^2) space: O(101)
-    public int threeSumMulti_treeMap(int[] arr, int target) {
+    // AC
+    public static int threeSumMulti_treeMap(int[] arr, int target) {
         int MOD = 1_000_000_007;
 
         Map<Integer, Integer> map = new TreeMap<>();
@@ -380,7 +381,10 @@ public class Problem923_3sumWithMultiplicity {
         System.out.println("10 ?= " + threeSumMulti_count(new int[]{0}, 0));
         System.out.println("20 ?= " + threeSumMulti_count(new int[]{1, 1, 2, 2, 3, 3, 4, 4, 5, 5}, 8));
         System.out.println("10 ?= " + threeSumMulti_count(new int[]{0, 0, 0, 0, 0}, 0));
+        System.out.println("10 ?= " + threeSumMulti(new int[]{0, 0, 0, 0, 0}, 0));
+        System.out.println("10 ?= " + threeSumMulti_treeMap(new int[]{0, 0, 0, 0, 0}, 0));
         System.out.println("1 ?= " + threeSumMulti_dp(new int[]{0, 0, 0}, 0));
+
         int mod = 1_000_000_007;
         System.out.println(mod);
     }
