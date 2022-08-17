@@ -48,19 +48,42 @@ public class Problem1089_duplicateZeros {
         }
     }
 
-    // TODO: 2022/8/15
-    // Two Pointers
+    // Two Pointers time: O(n) space: O(1)
     public static void duplicateZeros(int[] arr) {
         int len = arr.length;
-        int left = 0;
-        int right = 0;
+        int top = 0;
+        int i = -1;
+        while (top < len) {
+            i++;
+            if (arr[i] != 0) {
+                top++;
+            } else {
+                top += 2;
+            }
+        }
 
+        int j = len - 1;
+        if (top == len + 1) {
+            arr[j] = 0;
+            j--;
+            i--;
+        }
 
+        while (j >= 0) {
+            arr[j] = arr[i];
+            j--;
+            if (arr[i] == 0) {
+                arr[j] = arr[i];
+                j--;
+            }
+            i--;
+        }
     }
 
     public static void main(String[] args) {
         int[] tst1 = new int[]{1, 0, 2, 3, 0, 4, 5, 0};
-        duplicateZeros_bf(tst1);
+//        duplicateZeros_bf(tst1);
+        duplicateZeros(tst1);
         System.out.println(Arrays.toString(tst1));
     }
 }
