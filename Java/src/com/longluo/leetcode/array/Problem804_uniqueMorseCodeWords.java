@@ -40,7 +40,7 @@ import java.util.Set;
  * 1 <= words[i].length <= 12
  * words[i] 由小写英文字母组成
  * <p>
- * https://leetcode-cn.com/problems/unique-morse-code-words/
+ * https://leetcode.com/problems/unique-morse-code-words/
  */
 public class Problem804_uniqueMorseCodeWords {
 
@@ -65,6 +65,6 @@ public class Problem804_uniqueMorseCodeWords {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("2 ?= " + uniqueMorseRepresentations_array(new String[]{"gin", "zen", "gig", "msg"}));
     }
 }
