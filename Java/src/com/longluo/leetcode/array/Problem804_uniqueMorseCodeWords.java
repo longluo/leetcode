@@ -44,8 +44,8 @@ import java.util.Set;
  */
 public class Problem804_uniqueMorseCodeWords {
 
-    // Count time: O(S) space: O(S)
-    public static int uniqueMorseRepresentations_array(String[] words) {
+    // HashSet time: O(S) space: O(S)
+    public static int uniqueMorseRepresentations(String[] words) {
         if (words == null || words.length <= 1) {
             return words.length;
         }
@@ -65,6 +65,6 @@ public class Problem804_uniqueMorseCodeWords {
     }
 
     public static void main(String[] args) {
-        System.out.println("2 ?= " + uniqueMorseRepresentations_array(new String[]{"gin", "zen", "gig", "msg"}));
+        System.out.println("2 ?= " + uniqueMorseRepresentations(new String[]{"gin", "zen", "gig", "msg"}));
     }
 }
