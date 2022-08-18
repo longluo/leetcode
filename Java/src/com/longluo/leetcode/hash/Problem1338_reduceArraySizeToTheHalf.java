@@ -111,8 +111,38 @@ public class Problem1338_reduceArraySizeToTheHalf {
         return ans;
     }
 
+    // Sort time: O(nlogn) space: O(n）
+    public static int minSetSize_sort(int[] arr) {
+        int len = arr.length;
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int x : arr) {
+            freqMap.put(x, freqMap.getOrDefault(x, 0) + 1);
+        }
+
+        int size = freqMap.size();
+        int[] counts = new int[size];
+        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
+            counts[--size] = entry.getValue();
+        }
+
+        Arrays.sort(counts);
+
+        int ans = 0;
+        int sum = 0;
+        for (int i = counts.length - 1; i >= 0; i--) {
+            sum += counts[i];
+            ans++;
+            if (sum >= len / 2) {
+                break;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + minSetSize(new int[]{3, 3, 3, 3, 5, 5, 5, 2, 2, 7}));
         System.out.println("2 ?= " + minSetSize_opt(new int[]{3, 3, 3, 3, 5, 5, 5, 2, 2, 7}));
+        System.out.println("2 ?= " + minSetSize_sort(new int[]{3, 3, 3, 3, 5, 5, 5, 2, 2, 7}));
     }
 }
