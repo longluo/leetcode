@@ -74,7 +74,45 @@ public class Problem1338_reduceArraySizeToTheHalf {
         return ans;
     }
 
+    // HashMap + PQ time: O(nlogn) space: O(n)
+    // AC
+    public static int minSetSize_opt(int[] arr) {
+        int len = arr.length;
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int x : arr) {
+            freqMap.put(x, freqMap.getOrDefault(x, 0) + 1);
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] pair1, int[] pair2) {
+                return pair2[1] - pair1[1];
+            }
+        });
+
+        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
+            pq.offer(new int[]{entry.getKey(), entry.getValue()});
+        }
+
+        int ans = len / 2;
+        int count = 0;
+        for (int i = 1; i <= len / 2; i++) {
+            if (!pq.isEmpty()) {
+                int[] cur = pq.poll();
+                count += cur[1];
+            }
+
+            if (count >= len / 2) {
+                ans = i;
+                break;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + minSetSize(new int[]{3, 3, 3, 3, 5, 5, 5, 2, 2, 7}));
+        System.out.println("2 ?= " + minSetSize_opt(new int[]{3, 3, 3, 3, 5, 5, 5, 2, 2, 7}));
     }
 }
