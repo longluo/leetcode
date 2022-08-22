@@ -66,6 +66,11 @@ public class Problem342_powerOfFour {
         return true;
     }
 
+    // Bit time: O(32) space: O(1)
+    public static boolean isPowerOfFour_bit(int n) {
+        return (n & (n - 1)) == 0 && n % 3 == 1;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + isPowerOfFour(1));
         System.out.println("false ?= " + isPowerOfFour(5));
@@ -73,5 +78,8 @@ public class Problem342_powerOfFour {
 
         System.out.println("false ?= " + isPowerOfFour_iter(5));
         System.out.println("true ?= " + isPowerOfFour_iter(16));
+
+        System.out.println("false ?= " + isPowerOfFour_bit(5));
+        System.out.println("true ?= " + isPowerOfFour_bit(16));
     }
 }
