@@ -24,12 +24,32 @@ package com.longluo.leetcode.bitmanipulation;
  * 进阶：
  * 你能不使用循环或者递归来完成本题吗？
  * <p>
- * https://leetcode-cn.com/problems/power-of-four/
+ * https://leetcode.com/problems/power-of-four/
  */
 public class Problem342_powerOfFour {
 
+    // Recursion time: O(log4n) space: O(log4n)
     public static boolean isPowerOfFour(int n) {
         if (n <= 0) {
+            return false;
+        } else if (n == 1) {
+            return true;
+        }
+
+        while (n > 1) {
+            if (n % 4 != 0) {
+                return false;
+            }
+
+            n /= 4;
+        }
+
+        return true;
+    }
+
+    // Iteration
+    public static boolean isPowerOfFour_iter(int n) {
+        if (n < 1) {
             return false;
         } else if (n == 1) {
             return true;
@@ -50,5 +70,8 @@ public class Problem342_powerOfFour {
         System.out.println("true ?= " + isPowerOfFour(1));
         System.out.println("false ?= " + isPowerOfFour(5));
         System.out.println("true ?= " + isPowerOfFour(16));
+
+        System.out.println("false ?= " + isPowerOfFour_iter(5));
+        System.out.println("true ?= " + isPowerOfFour_iter(16));
     }
 }
