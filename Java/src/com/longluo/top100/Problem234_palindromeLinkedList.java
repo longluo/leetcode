@@ -159,10 +159,10 @@ public class Problem234_palindromeLinkedList {
 
     public static void main(String[] args) {
         ListNode tstNode1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 2, 1});
+        System.out.println("true ?= " + isPalindrome(tstNode1));
         System.out.println("true ?= " + isPalindrome_bf(tstNode1));
         System.out.println("true ?= " + isPalindrome_opt(tstNode1));
         System.out.println("true ?= " + isPalindrome_fastslow(tstNode1));
-        System.out.println("true ?= " + isPalindrome(tstNode1));
         System.out.println("true ?= " + isPalindrome_stack(tstNode1));
 
         ListNode tstNode2 = LinkedListNodeUtils.constructListNode(new int[]{1, 2});
