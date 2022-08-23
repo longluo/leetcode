@@ -3,9 +3,7 @@ package com.longluo.top100;
 import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 234. Palindrome Linked List
@@ -46,7 +44,7 @@ public class Problem234_palindromeLinkedList {
 
         int len = list.size();
         for (int i = 0; i < len / 2; i++) {
-            if (list.get(i) != list.get(len - 1 - i)) {
+            if (!list.get(i).equals(list.get(len - 1 - i))) {
                 return false;
             }
         }
@@ -69,7 +67,7 @@ public class Problem234_palindromeLinkedList {
         int left = 0;
         int right = list.size() - 1;
         while (left < right) {
-            if (list.get(left) != list.get(right)) {
+            if (!list.get(left).equals(list.get(right))) {
                 return false;
             }
 
@@ -80,7 +78,7 @@ public class Problem234_palindromeLinkedList {
         return true;
     }
 
-    // Two Pointers time: O(n) space: O(1)
+    // Fast Slow Pointers time: O(n) space: O(1)
     public static boolean isPalindrome_fastslow(ListNode head) {
         if (head == null || head.next == null) {
             return true;
@@ -88,37 +86,75 @@ public class Problem234_palindromeLinkedList {
 
         ListNode slow = head;
         ListNode fast = head;
-        ListNode pre = null;
-        ListNode current = head;
 
+        ListNode pre = head;
+        ListNode prePre = null;
         while (fast != null && fast.next != null) {
+            pre = slow;
             slow = slow.next;
             fast = fast.next.next;
-            current.next = pre;
-            pre = current;
-            current = slow;
+            pre.next = prePre;
+            prePre = pre;
         }
 
-        while (slow != null) {
-            if (slow.val != fast.val) {
+        if (fast != null) {
+            slow = slow.next;
+        }
+
+        while (pre != null && slow != null) {
+            if (pre.val != slow.val) {
                 return false;
             }
-
+            pre = pre.next;
             slow = slow.next;
-            fast = fast.next;
         }
 
         return true;
     }
 
-    // Recursion
-    public static boolean isPalindrome_rec(ListNode head) {
-        if (head == null || head.next == null) {
+    // Stack time: O(n) space: O(n)
+    public static boolean isPalindrome_stack(ListNode head) {
+        if (head == null) {
             return true;
         }
 
+        ListNode pNode = head;
+        Deque<Integer> stk = new ArrayDeque<>();
+        int len = 0;
+        while (pNode != null) {
+            stk.push(pNode.val);
+            pNode = pNode.next;
+            len++;
+        }
 
-        return false;
+        len /= 2;
+        while (len-- >= 0) {
+            if (head.val != stk.pop()) {
+                return false;
+            }
+
+            head = head.next;
+        }
+
+        return true;
+    }
+
+    // Recursion time: O(n) space: O(n)
+    static ListNode temp;
+
+    public static boolean isPalindrome(ListNode head) {
+        temp = head;
+        return check(head);
+    }
+
+    private static boolean check(ListNode head) {
+        if (head == null) {
+            return true;
+        }
+
+        boolean res = check(head.next) && (temp.val == head.val);
+        temp = temp.next;
+        return res;
     }
 
     public static void main(String[] args) {
@@ -126,7 +162,8 @@ public class Problem234_palindromeLinkedList {
         System.out.println("true ?= " + isPalindrome_bf(tstNode1));
         System.out.println("true ?= " + isPalindrome_opt(tstNode1));
         System.out.println("true ?= " + isPalindrome_fastslow(tstNode1));
-        System.out.println("true ?= " + isPalindrome_rec(tstNode1));
+        System.out.println("true ?= " + isPalindrome(tstNode1));
+        System.out.println("true ?= " + isPalindrome_stack(tstNode1));
 
         ListNode tstNode2 = LinkedListNodeUtils.constructListNode(new int[]{1, 2});
         System.out.println("false ?= " + isPalindrome_fastslow(tstNode2));
