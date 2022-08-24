@@ -56,9 +56,23 @@ public class Problem873_lenLongestFibSubseq {
         return max;
     }
 
+    // DP
+    // TODO: 2022/8/24  
+    public static int lenLongestFibSubseq_dp(int[] arr) {
+        int len = arr.length;
+
+        int max = 0;
+
+
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println("5 ?= " + lenLongestFibSubseq_bf(new int[]{1, 2, 3, 4, 5, 6, 7, 8}));
         System.out.println("3 ?= " + lenLongestFibSubseq_bf(new int[]{1, 3, 7, 11, 12, 14, 18}));
         System.out.println("5 ?= " + lenLongestFibSubseq_bf(new int[]{2, 4, 7, 8, 9, 10, 14, 15, 18, 23, 32, 50}));
+
+        System.out.println("5 ?= " + lenLongestFibSubseq_dp(new int[]{2, 4, 7, 8, 9, 10, 14, 15, 18, 23, 32, 50}));
+
     }
 }
