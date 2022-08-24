@@ -31,6 +31,7 @@ import java.util.*;
 public class Problem234_palindromeLinkedList {
 
     // BF time: O(n) space: O(n)
+    // TLE
     public static boolean isPalindrome_bf(ListNode head) {
         if (head == null || head.next == null) {
             return true;
@@ -52,7 +53,8 @@ public class Problem234_palindromeLinkedList {
         return true;
     }
 
-    // BF Opt time: O(n) space: O(n)
+    // BF List Opt time: O(n) space: O(n)
+    // AC
     public static boolean isPalindrome_opt(ListNode head) {
         if (head == null || head.next == null) {
             return true;
@@ -73,6 +75,33 @@ public class Problem234_palindromeLinkedList {
 
             left++;
             right--;
+        }
+
+        return true;
+    }
+
+    // Stack time: O(n) space: O(n)
+    public static boolean isPalindrome_stack(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode pNode = head;
+        Deque<Integer> stk = new ArrayDeque<>();
+        int len = 0;
+        while (pNode != null) {
+            stk.push(pNode.val);
+            pNode = pNode.next;
+            len++;
+        }
+
+        len /= 2;
+        while (len-- >= 0) {
+            if (head.val != stk.pop()) {
+                return false;
+            }
+
+            head = head.next;
         }
 
         return true;
@@ -107,33 +136,6 @@ public class Problem234_palindromeLinkedList {
             }
             pre = pre.next;
             slow = slow.next;
-        }
-
-        return true;
-    }
-
-    // Stack time: O(n) space: O(n)
-    public static boolean isPalindrome_stack(ListNode head) {
-        if (head == null) {
-            return true;
-        }
-
-        ListNode pNode = head;
-        Deque<Integer> stk = new ArrayDeque<>();
-        int len = 0;
-        while (pNode != null) {
-            stk.push(pNode.val);
-            pNode = pNode.next;
-            len++;
-        }
-
-        len /= 2;
-        while (len-- >= 0) {
-            if (head.val != stk.pop()) {
-                return false;
-            }
-
-            head = head.next;
         }
 
         return true;
