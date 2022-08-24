@@ -24,7 +24,7 @@ import com.longluo.datastructure.TreeUtils;
  * -10^4 <= nums[i] <= 10^4
  * nums 按 严格递增 顺序排列
  * <p>
- * https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+ * https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/
  */
 public class Problem108_convertSortedArrayToBinarySearchTree {
 
@@ -51,7 +51,7 @@ public class Problem108_convertSortedArrayToBinarySearchTree {
     }
 
     // Iteration time: O(n) space: O(n)
-    // TODO: 2022/8/10  
+    // TODO: 2022/8/10
     public static TreeNode sortedArrayToBST_iter(int[] nums) {
         if (nums == null || nums.length == 0) {
             return null;
