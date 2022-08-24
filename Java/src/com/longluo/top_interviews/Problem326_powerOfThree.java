@@ -1,5 +1,8 @@
 package com.longluo.top_interviews;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 326. 3的幂
  * <p>
@@ -32,11 +35,10 @@ package com.longluo.top_interviews;
  */
 public class Problem326_powerOfThree {
 
-    public static boolean isPowerOfThree(int n) {
+    // BF time: O(logn) space: O(1)
+    public static boolean isPowerOfThree_bf(int n) {
         if (n <= 0) {
             return false;
-        } else if (n == 1) {
-            return true;
         }
 
         while (n > 1) {
@@ -50,10 +52,8 @@ public class Problem326_powerOfThree {
         return true;
     }
 
-    /**
-     * Recursive
-     */
-    public static boolean isPowerOfThree_rec(int n) {
+    // Recursion
+    public static boolean isPowerOfThree(int n) {
         if (n <= 0) {
             return false;
         } else if (n == 1) {
@@ -63,21 +63,28 @@ public class Problem326_powerOfThree {
         }
 
         if (n % 3 == 0) {
-            return isPowerOfThree_rec(n / 3);
+            return isPowerOfThree(n / 3);
         } else {
             return false;
         }
     }
 
+    // Divide time: O(logn) space: O(1)
+    public static boolean isPowerOfThree_opt(int n) {
+        while (n != 0 && n % 3 == 0) {
+            n /= 3;
+        }
+
+        return n == 1;
+    }
+
+    //
     public static boolean isPowerOfThree_fast(int n) {
         return n > 0 && 1162261467 % n == 0;
     }
 
+    // Table time: O(1) space: O(1)
     public static boolean isPowerOfThree_table(int n) {
-        if (n <= 0) {
-            return false;
-        }
-
         int[] nums = {1, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683, 59049, 177147, 531441, 1594323, 4782969, 14348907, 43046721, 129140163, 387420489, 1162261467};
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == n) {
@@ -88,20 +95,57 @@ public class Problem326_powerOfThree {
         return false;
     }
 
+    public static boolean isPowerOfThree_set(int n) {
+        if (n == 1 || n == 3 || n == 9 || n == 27 || n == 81 || n == 243 || n == 729 || n == 2187 || n == 6561 || n == 19683 || n == 59049 || n == 177147 || n == 531441 || n == 1594323 || n == 4782969 || n == 14348907 || n == 43046721 || n == 129140163 || n == 387420489 || n == 1162261467) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // Table time: O(1) space: O(1)
+    public static boolean isPowerOfThree_swith(int n) {
+        switch (n) {
+            case 1:
+            case 3:
+            case 9:
+            case 27:
+            case 81:
+            case 243:
+            case 729:
+            case 2187:
+            case 6561:
+            case 19683:
+            case 59049:
+            case 177147:
+            case 531441:
+            case 1594323:
+            case 4782969:
+            case 14348907:
+            case 43046721:
+            case 129140163:
+            case 387420489:
+            case 1162261467:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
     public static int powerOfThree(int n) {
         return (int) Math.pow(3, n);
     }
 
     public static void main(String[] args) {
-        System.out.println("false ?= " + isPowerOfThree(0));
-        System.out.println("true ?= " + isPowerOfThree(1));
+        System.out.println("false ?= " + isPowerOfThree_bf(0));
+        System.out.println("false ?= " + isPowerOfThree_opt(0));
+        System.out.println("true ?= " + isPowerOfThree_table(1));
+        System.out.println("true ?= " + isPowerOfThree_set(3));
+        System.out.println("false ?= " + isPowerOfThree_swith(6));
+        System.out.println("true ?= " + isPowerOfThree_fast(9));
         System.out.println("true ?= " + isPowerOfThree(3));
-        System.out.println("false ?= " + isPowerOfThree(6));
-        System.out.println("true ?= " + isPowerOfThree(9));
-        System.out.println("true ?= " + isPowerOfThree(27));
         System.out.println("false ?= " + isPowerOfThree(45));
-        System.out.println("true ?= " + isPowerOfThree_rec(3));
-        System.out.println("false ?= " + isPowerOfThree_rec(45));
 
         for (int i = 0; i < 10000; i++) {
             if (powerOfThree(i) < Integer.MAX_VALUE) {
