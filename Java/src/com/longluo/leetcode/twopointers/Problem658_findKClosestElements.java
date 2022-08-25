@@ -160,6 +160,46 @@ public class Problem658_findKClosestElements {
         return ans;
     }
 
+    // BinarySearch Opt
+    public static List<Integer> findClosestElements_bs_opt(int[] arr, int k, int x) {
+        int len = arr.length;
+        int right = binarySearchRight(arr, x);
+        int left = right - 1;
+        while (k-- > 0) {
+            if (left < 0) {
+                right++;
+            } else if (right >= len) {
+                left--;
+            } else if (Math.abs(arr[left] - x) <= Math.abs(arr[right] - x)) {
+                left--;
+            } else {
+                right++;
+            }
+        }
+
+        List<Integer> ans = new ArrayList<>();
+        for (int i = left + 1; i < right; i++) {
+            ans.add(arr[i]);
+        }
+
+        return ans;
+    }
+
+    private static int binarySearchRight(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return right;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bf(new int[]{1, 2, 3, 4, 5}, 4, 3));
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bf(new int[]{1, 2, 3, 4, 5}, 4, -1));
@@ -169,5 +209,8 @@ public class Problem658_findKClosestElements {
         System.out.println("[10] ?= " + findClosestElements_bs(new int[]{1, 1, 10, 10, 10}, 1, 9));
 
         System.out.println("[10] ?= " + findClosestElements_sort(new int[]{1, 1, 10, 10, 10}, 1, 9));
+
+        System.out.println("[1,2,3,4] ?= " + findClosestElements_bs_opt(new int[]{1, 2, 3, 4, 5}, 4, 3));
+        System.out.println("[1,2,3,4] ?= " + findClosestElements_bs_opt(new int[]{1, 2, 3, 4, 5}, 4, -1));
     }
 }
