@@ -1,5 +1,7 @@
 package com.longluo.leetcode.sorting;
 
+import java.util.Arrays;
+
 /**
  * 1464. 数组中两元素的最大乘积
  * <p>
@@ -41,8 +43,15 @@ public class Problem1464_maxProduct {
         return maxans;
     }
 
+    // Sort time: O(nlogn) space: O(logn)
+    public static int maxProduct_sort(int[] nums) {
+        int len = nums.length;
+        Arrays.sort(nums);
+        return (nums[len - 1] - 1) * (nums[len - 2] - 1);
+    }
 
     public static void main(String[] args) {
         System.out.println("12 ?= " + maxProduct_bf(new int[]{3, 4, 5, 2}));
+        System.out.println("12 ?= " + maxProduct_sort(new int[]{3, 4, 5, 2}));
     }
 }
