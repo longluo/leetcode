@@ -160,7 +160,7 @@ public class Problem658_findKClosestElements {
         return ans;
     }
 
-    // BinarySearch Opt
+    // BinarySearch Opt time: O(logn+k) space: O(1)
     public static List<Integer> findClosestElements_bs_opt(int[] arr, int k, int x) {
         int len = arr.length;
         int right = binarySearchRight(arr, x);
