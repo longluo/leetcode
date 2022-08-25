@@ -61,9 +61,32 @@ public class Problem1464_maxProduct {
         return (pq.poll() - 1) * (pq.poll() - 1);
     }
 
+    // Find The Max time: O(n) space: O(1)
+    public static int maxProduct(int[] nums) {
+        int max = nums[0];
+        int subMax = nums[1];
+        if (max < subMax) {
+            int temp = max;
+            max = subMax;
+            subMax = temp;
+        }
+
+        for (int i = 2; i < nums.length; i++) {
+            if (nums[i] > max) {
+                subMax = max;
+                max = nums[i];
+            } else if (nums[i] <= max && nums[i] > subMax) {
+                subMax = nums[i];
+            }
+        }
+
+        return (max - 1) * (subMax - 1);
+    }
+
     public static void main(String[] args) {
         System.out.println("12 ?= " + maxProduct_bf(new int[]{3, 4, 5, 2}));
         System.out.println("12 ?= " + maxProduct_sort(new int[]{3, 4, 5, 2}));
         System.out.println("12 ?= " + maxProduct_pq(new int[]{3, 4, 5, 2}));
+        System.out.println("12 ?= " + maxProduct(new int[]{3, 4, 5, 2}));
     }
 }
