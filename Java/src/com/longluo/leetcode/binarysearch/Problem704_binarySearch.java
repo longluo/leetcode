@@ -29,10 +29,24 @@ package com.longluo.leetcode.binarysearch;
  */
 public class Problem704_binarySearch {
 
+    // BF time: O(n) space: O(1)
     public static int search_bf(int[] nums, int target) {
         int len = nums.length;
         for (int i = 0; i < len; i++) {
             if (nums[i] == target) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public static int search_bf_opt(int[] nums, int target) {
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > target) {
+                break;
+            } else if (nums[i] == target) {
                 return i;
             }
         }
@@ -96,6 +110,8 @@ public class Problem704_binarySearch {
     }
 
     public static void main(String[] args) {
+        System.out.println("4 ?= " + search_bf(new int[]{-1, 0, 3, 5, 9, 12}, 9));
+        System.out.println("4 ?= " + search_bf_opt(new int[]{-1, 0, 3, 5, 9, 12}, 9));
         System.out.println("4 ?= " + search_bs(new int[]{-1, 0, 3, 5, 9, 12}, 9));
         System.out.println("4 ?= " + search_bs_rec(new int[]{-1, 0, 3, 5, 9, 12}, 9));
         System.out.println("0 ?= " + search_bs_less(new int[]{1, 3}, 1));
