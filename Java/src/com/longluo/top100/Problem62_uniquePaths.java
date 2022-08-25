@@ -2,6 +2,7 @@ package com.longluo.top100;
 
 import kotlin.Pair;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ import java.util.Map;
  * 1 <= m, n <= 100
  * 题目数据保证答案小于等于 2 * 10^9
  * <p>
- * https://leetcode.com/problems/unique-paths/
+ * https://leetcode.cn/problems/unique-paths/
  */
 public class Problem62_uniquePaths {
 
@@ -56,6 +57,21 @@ public class Problem62_uniquePaths {
         }
 
         return dp[m - 1][n - 1];
+    }
+
+    // DP Opt time: O(m*n) space: O(n)
+    public static int uniquePaths_dp(int m, int n) {
+        int[] dp = new int[n];
+
+        Arrays.fill(dp, 1);
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[j] += dp[j - 1];
+            }
+        }
+
+        return dp[n - 1];
     }
 
     // Math time: O(m) space: O(1)
@@ -93,6 +109,8 @@ public class Problem62_uniquePaths {
     public static void main(String[] args) {
         System.out.println("3 ?= " + uniquePaths(3, 2));
         System.out.println("28 ?= " + uniquePaths(7, 3));
+        System.out.println("28 ?= " + uniquePaths_dp(7, 3));
+        System.out.println("28 ?= " + uniquePaths_recursion(7, 3));
         System.out.println("28 ?= " + uniquePaths_math(7, 3));
         System.out.println("48620 ?= " + uniquePaths_math(10, 10));
     }
