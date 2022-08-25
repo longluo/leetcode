@@ -75,8 +75,73 @@ public class Problem658_findKClosestElements {
         return ans;
     }
 
+    // BinarySearch time: O(n) space: O(1)
+    public static List<Integer> findClosestElements_bs(int[] arr, int k, int x) {
+        List<Integer> ans = new ArrayList<>();
+        int len = arr.length;
+        int targetPos = binarySearch(arr, x);
+        ans.add(arr[targetPos]);
+        k--;
+
+        int left = targetPos - 1;
+        int right = targetPos + 1;
+        while (k > 0) {
+            if (left >= 0 && right < len && Math.abs(arr[left] - x) <= Math.abs(arr[right] - x)) {
+                ans.add(arr[left]);
+                left--;
+                k--;
+            } else if (left >= 0 && right < len && Math.abs(arr[left] - x) > Math.abs(arr[right] - x)) {
+                ans.add(arr[right]);
+                right++;
+                k--;
+            } else if (left >= 0 && right == len) {
+                ans.add(arr[left]);
+                left--;
+                k--;
+            } else if (left < 0 && right < len) {
+                ans.add(arr[right]);
+                right++;
+                k--;
+            }
+        }
+
+        Collections.sort(ans);
+
+        return ans;
+    }
+
+    private static int binarySearch(int[] arr, int target) {
+        int len = arr.length;
+        if (arr[0] >= target) {
+            return 0;
+        } else if (arr[len - 1] <= target) {
+            return len - 1;
+        }
+
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (arr[mid] <= target) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        if (Math.abs(arr[left] - target) <= Math.abs(arr[left + 1] - target)) {
+            return left;
+        } else {
+            return left + 1;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bf(new int[]{1, 2, 3, 4, 5}, 4, 3));
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bf(new int[]{1, 2, 3, 4, 5}, 4, -1));
+
+        System.out.println("[1,2,3,4] ?= " + findClosestElements_bs(new int[]{1, 2, 3, 4, 5}, 4, 3));
+        System.out.println("[1,2,3,4] ?= " + findClosestElements_bs(new int[]{1, 2, 3, 4, 5}, 4, -1));
+        System.out.println("[10] ?= " + findClosestElements_bs(new int[]{1, 1, 10, 10, 10}, 1, 9));
     }
 }
