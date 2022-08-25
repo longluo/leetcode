@@ -28,12 +28,21 @@ package com.longluo.leetcode.recursion;
  * 提示：
  * 0 <= n <= 30
  * <p>
- * https://leetcode-cn.com/problems/fibonacci-number/
+ * https://leetcode.cn/problems/fibonacci-number/
  */
 public class Problem509_fibonacciNumber {
 
-    // Dynamic Programming
+    // Recursive
     public static int fib(int n) {
+        if (n == 0 || n == 1) {
+            return n;
+        }
+
+        return fib(n - 1) + fib(n - 2);
+    }
+
+    // DP
+    public static int fib_dp(int n) {
         if (n == 0 || n == 1) {
             return n;
         }
@@ -48,16 +57,7 @@ public class Problem509_fibonacciNumber {
         return dp[n];
     }
 
-    // Recursive
-    public static int fib2(int n) {
-        if (n == 0 || n == 1) {
-            return n;
-        }
-
-        return fib2(n - 1) + fib2(n - 2);
-    }
-
-    public static int fib_dp(int n) {
+    public static int fib_dp_opt(int n) {
         if (n <= 1) {
             return n;
         }
@@ -74,6 +74,11 @@ public class Problem509_fibonacciNumber {
         return r;
     }
 
+    public static int fib_table(int n) {
+        int[] fibNums = new int[]{0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040};
+        return fibNums[n];
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + fib(0));
         System.out.println("1 ?= " + fib(1));
@@ -81,10 +86,13 @@ public class Problem509_fibonacciNumber {
         System.out.println("2 ?= " + fib(3));
         System.out.println("3 ?= " + fib(4));
 
-        System.out.println("0 ?= " + fib2(0));
-        System.out.println("1 ?= " + fib2(1));
-        System.out.println("1 ?= " + fib2(2));
-        System.out.println("2 ?= " + fib2(3));
-        System.out.println("3 ?= " + fib2(4));
+        System.out.println("3 ?= " + fib_dp(4));
+        System.out.println("3 ?= " + fib_dp_opt(4));
+
+        System.out.println("3 ?= " + fib_table(4));
+
+        for (int i = 0; i <= 30; i++) {
+            System.out.print(fib(i) + ",");
+        }
     }
 }
