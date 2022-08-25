@@ -2,6 +2,7 @@ package com.longluo.leetcode.twopointers;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -136,6 +137,29 @@ public class Problem658_findKClosestElements {
         }
     }
 
+    // Sort time: O(nlogn) space: O(logn)
+    public static List<Integer> findClosestElements_sort(int[] arr, int k, int x) {
+        List<Integer> list = new ArrayList<>();
+        for (int e : arr) {
+            list.add(e);
+        }
+
+        Collections.sort(list, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer a, Integer b) {
+                if (Math.abs(a - x) != Math.abs(b - x)) {
+                    return Math.abs(a - x) - Math.abs(b - x);
+                }
+
+                return a - b;
+            }
+        });
+
+        List<Integer> ans = list.subList(0, k);
+        Collections.sort(ans);
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bf(new int[]{1, 2, 3, 4, 5}, 4, 3));
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bf(new int[]{1, 2, 3, 4, 5}, 4, -1));
@@ -143,5 +167,7 @@ public class Problem658_findKClosestElements {
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bs(new int[]{1, 2, 3, 4, 5}, 4, 3));
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bs(new int[]{1, 2, 3, 4, 5}, 4, -1));
         System.out.println("[10] ?= " + findClosestElements_bs(new int[]{1, 1, 10, 10, 10}, 1, 9));
+
+        System.out.println("[10] ?= " + findClosestElements_sort(new int[]{1, 1, 10, 10, 10}, 1, 9));
     }
 }
