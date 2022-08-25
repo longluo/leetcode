@@ -1,6 +1,8 @@
 package com.longluo.leetcode.sorting;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * 1464. 数组中两元素的最大乘积
@@ -50,8 +52,18 @@ public class Problem1464_maxProduct {
         return (nums[len - 1] - 1) * (nums[len - 2] - 1);
     }
 
+    // PQ time: O(nlogn) space: O(logn)
+    public static int maxProduct_pq(int[] nums) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
+        for (int x : nums) {
+            pq.offer(x);
+        }
+        return (pq.poll() - 1) * (pq.poll() - 1);
+    }
+
     public static void main(String[] args) {
         System.out.println("12 ?= " + maxProduct_bf(new int[]{3, 4, 5, 2}));
         System.out.println("12 ?= " + maxProduct_sort(new int[]{3, 4, 5, 2}));
+        System.out.println("12 ?= " + maxProduct_pq(new int[]{3, 4, 5, 2}));
     }
 }
