@@ -28,10 +28,11 @@ import java.util.Map;
  * 1 <= ransomNote.length, magazine.length <= 10^5
  * ransomNote 和 magazine 由小写英文字母组成
  * <p>
- * https://leetcode-cn.com/problems/ransom-note/
+ * https://leetcode.cn/problems/ransom-note/
  */
 public class Problem383_ransomNote {
 
+    // HashMap time: O(n) space: O(n)
     public static boolean canConstruct(String ransomNote, String magazine) {
         Map<Character, Integer> magMap = new HashMap<>();
         for (char ch : magazine.toCharArray()) {
@@ -54,15 +55,16 @@ public class Problem383_ransomNote {
         return true;
     }
 
+    // Count time: O(n) space: O(26)
     public static boolean canConstruct_array(String ransomNote, String magazine) {
-        int[] freq = new int[26];
+        int[] count = new int[26];
         for (char ch : magazine.toCharArray()) {
-            freq[ch - 'a']++;
+            count[ch - 'a']++;
         }
 
         for (char ch : ransomNote.toCharArray()) {
-            freq[ch - 'a']--;
-            if (freq[ch - 'a'] < 0) {
+            count[ch - 'a']--;
+            if (count[ch - 'a'] < 0) {
                 return false;
             }
         }
@@ -74,5 +76,6 @@ public class Problem383_ransomNote {
         System.out.println("false ?= " + canConstruct("a", "b"));
         System.out.println("false ?= " + canConstruct("aa", "ab"));
         System.out.println("true ?= " + canConstruct("aa", "aab"));
+        System.out.println("true ?= " + canConstruct_array("aa", "aab"));
     }
 }
