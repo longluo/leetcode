@@ -33,27 +33,27 @@ import java.util.Map;
  */
 public class Problem424_longestRepeatingCharacterReplacement {
 
-    public static int characterReplacement(String s, int k) {
-        if (s == null || s.length() == 0) {
-            return 0;
-        }
-
-        int[] num = new int[26];
-        int n = s.length();
-        int maxn = 0;
-        int left = 0;
-        int right = 0;
-        while (right < n) {
-            num[s.charAt(right) - 'A']++;
-            maxn = Math.max(maxn, num[s.charAt(right) - 'A']);
-            if (right - left + 1 - maxn > k) {
-                num[s.charAt(left) - 'A']--;
-                left++;
+    // BF time: O(n^3) space: O(1)
+    // TLE
+    public static int characterReplacement_bf(String s, int k) {
+        int len = s.length();
+        int maxAns = 1;
+        for (int i = 0; i < len - k; i++) {
+            for (int j = i + k; j < len; j++) {
+                int maxCnt = 1;
+                int[] cnt = new int[26];
+                for (int p = i; p <= j; p++) {
+                    char ch = s.charAt(p);
+                    cnt[ch - 'A']++;
+                    maxCnt = Math.max(maxCnt, cnt[ch - 'A']);
+                    if (j - i + 1 <= maxCnt + k) {
+                        maxAns = Math.max(maxAns, j - i + 1);
+                    }
+                }
             }
-            right++;
         }
 
-        return right - left;
+        return maxAns;
     }
 
     // HashMap time: O(n) space: O(26)
@@ -78,9 +78,35 @@ public class Problem424_longestRepeatingCharacterReplacement {
         return right - left;
     }
 
+    // SlidingWindow time: O(n) space: O(26)
+    public static int characterReplacement(String s, int k) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        int[] num = new int[26];
+        int n = s.length();
+        int maxn = 0;
+        int left = 0;
+        int right = 0;
+        while (right < n) {
+            num[s.charAt(right) - 'A']++;
+            maxn = Math.max(maxn, num[s.charAt(right) - 'A']);
+            if (right - left + 1 - maxn > k) {
+                num[s.charAt(left) - 'A']--;
+                left++;
+            }
+            right++;
+        }
+
+        return right - left;
+    }
+
     public static void main(String[] args) {
+        System.out.println("4 ?= " + characterReplacement_bf("ABAB", 2));
+        System.out.println("4 ?= " + characterReplacement_hashmap("AABABBA", 1));
+
         System.out.println("4 ?= " + characterReplacement("ABAB", 2));
         System.out.println("4 ?= " + characterReplacement("AABABBA", 1));
-        System.out.println("4 ?= " + characterReplacement_hashmap("AABABBA", 1));
     }
 }
