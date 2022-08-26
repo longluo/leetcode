@@ -32,7 +32,7 @@ import java.util.Set;
  * 提示：
  * 1 <= N <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/reordered-power-of-2/
+ * https://leetcode.cn/problems/reordered-power-of-2/
  */
 public class Problem869_reorderedPowerOf2 {
 
@@ -68,12 +68,49 @@ public class Problem869_reorderedPowerOf2 {
         return false;
     }
 
-    public static boolean isPowerOf2(int num) {
-        if ((num & (num - 1)) == 0) {
+
+    // Backtrack
+    static boolean result = false;
+
+    public static boolean reorderedPowerOf2_bf(int n) {
+        if (isPowerOf2(n)) {
             return true;
         }
 
-        return false;
+        result = false;
+        String numStr = String.valueOf(n);
+        int len = numStr.length();
+        boolean[] visited = new boolean[len];
+        backtrack(numStr.toCharArray(), new StringBuilder(), visited, 0);
+        return result;
+    }
+
+    private static void backtrack(char[] arr, StringBuilder path, boolean[] visited, int idx) {
+        if (idx == arr.length) {
+            if (path.charAt(0) == '0') {
+                return;
+            }
+
+            int res = Integer.parseInt(path.toString());
+            if (isPowerOf2(res)) {
+                result = true;
+            }
+            return;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                path.append(arr[i]);
+                backtrack(arr, path, visited, idx + 1);
+                path.deleteCharAt(path.length() - 1);
+                visited[i] = false;
+            }
+        }
+    }
+
+    private static boolean isPowerOf2(int n) {
+        return (n & (n - 1)) == 0;
     }
 
     public static void main(String[] args) {
@@ -83,5 +120,7 @@ public class Problem869_reorderedPowerOf2 {
         System.out.println("true ?= " + reorderedPowerOf2(16));
         System.out.println("true ?= " + reorderedPowerOf2(46));
         System.out.println("true ?= " + reorderedPowerOf2(218));
+
+        System.out.println("true ?= " + reorderedPowerOf2_bf(218));
     }
 }
