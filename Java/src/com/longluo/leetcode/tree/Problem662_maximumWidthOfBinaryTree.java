@@ -106,8 +106,54 @@ public class Problem662_maximumWidthOfBinaryTree {
         return right < 0 ? 1 : right - left + 1;
     }
 
+    // BFS Opt time: O(n) space: O(n)
+    // TLE
+    public static int widthOfBinaryTree_bfs_opt(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int maxWidth = 1;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            boolean isNull = true;
+            int left = -1;
+            int right = -1;
+            for (int i = 0; i < size; i++) {
+                TreeNode curNode = queue.poll();
+                if (curNode != null && left < 0) {
+                    isNull = false;
+                    left = i;
+                    queue.offer(curNode.left);
+                    queue.offer(curNode.right);
+                } else if (curNode != null && left >= 0) {
+                    isNull = false;
+                    right = i;
+                    queue.offer(curNode.left);
+                    queue.offer(curNode.right);
+                } else {
+                    queue.offer(null);
+                    queue.offer(null);
+                }
+            }
+
+            if (isNull) {
+                break;
+            }
+
+            maxWidth = Math.max(maxWidth, right < 0 ? 1 : right - left + 1);
+        }
+
+        return maxWidth;
+    }
+
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 3, 2, 5, 3, null, 9});
         System.out.println("4 ?= " + widthOfBinaryTree_bfs(tst1));
+        System.out.println("4 ?= " + widthOfBinaryTree_bfs_opt(tst1));
     }
 }
