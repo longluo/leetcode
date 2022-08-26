@@ -68,7 +68,6 @@ public class Problem869_reorderedPowerOf2 {
         return false;
     }
 
-
     // Backtrack
     static boolean result = false;
 
@@ -113,6 +112,42 @@ public class Problem869_reorderedPowerOf2 {
         return (n & (n - 1)) == 0;
     }
 
+    public static boolean reorderedPowerOf2_opt(int n) {
+        if (isPowerOf2(n)) {
+            return true;
+        }
+
+        String numStr = String.valueOf(n);
+        int len = numStr.length();
+        boolean[] visited = new boolean[len];
+        return backtrack_opt(numStr.toCharArray(), new StringBuilder(), visited, 0);
+    }
+
+    private static boolean backtrack_opt(char[] arr, StringBuilder path, boolean[] visited, int idx) {
+        if (idx == arr.length) {
+            if (path.charAt(0) == '0') {
+                return false;
+            }
+
+            int res = Integer.parseInt(path.toString());
+            return isPowerOf2(res);
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                path.append(arr[i]);
+                if (backtrack_opt(arr, path, visited, idx + 1)) {
+                    return true;
+                }
+                path.deleteCharAt(path.length() - 1);
+                visited[i] = false;
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + reorderedPowerOf2(1));
         System.out.println("false ?= " + reorderedPowerOf2(10));
@@ -122,5 +157,6 @@ public class Problem869_reorderedPowerOf2 {
         System.out.println("true ?= " + reorderedPowerOf2(218));
 
         System.out.println("true ?= " + reorderedPowerOf2_bf(218));
+        System.out.println("true ?= " + reorderedPowerOf2_opt(218));
     }
 }
