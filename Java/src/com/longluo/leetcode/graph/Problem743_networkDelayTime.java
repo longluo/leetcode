@@ -82,7 +82,15 @@ public class Problem743_networkDelayTime {
         return ans == INF ? -1 : ans;
     }
 
+    // BFS
+    // TODO: 2022/8/27  
+    public static int networkDelayTime_bfs(int[][] times, int n, int k) {
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + networkDelayTime(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
+        System.out.println("2 ?= " + networkDelayTime_bfs(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
     }
 }
