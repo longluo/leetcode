@@ -150,10 +150,106 @@ public class Problem662_maximumWidthOfBinaryTree {
         return maxWidth;
     }
 
+    public static int widthOfBinaryTree_bfs_opt2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int maxWidth = 1;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int level = 0;
+        while (!queue.isEmpty()) {
+            level++;
+            int size = queue.size();
+            boolean isNull = true;
+            int left = -1;
+            int right = -1;
+            for (int i = 0; i < size; i++) {
+                TreeNode curNode = queue.poll();
+                if (curNode != null && left < 0) {
+                    isNull = false;
+                    left = i;
+                    queue.offer(curNode.left);
+                    queue.offer(curNode.right);
+                } else if (curNode != null && left >= 0) {
+                    isNull = false;
+                    right = i;
+                    queue.offer(curNode.left);
+                    queue.offer(curNode.right);
+                } else {
+                    queue.offer(null);
+                    queue.offer(null);
+                }
+            }
+
+            if (isNull) {
+                break;
+            }
+
+            if (level > 1 && right < 0) {
+                break;
+            }
+
+            maxWidth = Math.max(maxWidth, right < 0 ? 1 : right - left + 1);
+        }
+
+        return maxWidth;
+    }
+
+    // BFS time: O(n) space: O(n)
+    public static int widthOfBinaryTree(TreeNode root) {
+        int maxWidth = 1;
+        List<Pair<TreeNode, Integer>> nodeList = new ArrayList<>();
+        nodeList.add(new Pair<>(root, 1));
+
+        while (!nodeList.isEmpty()) {
+            List<Pair<TreeNode, Integer>> tmpList = new ArrayList<>();
+            for (Pair<TreeNode, Integer> curPair : nodeList) {
+                TreeNode curNode = curPair.getKey();
+                int index = curPair.getValue();
+                if (curNode.left != null) {
+                    tmpList.add(new Pair<>(curNode.left, 2 * index));
+                }
+                if (curNode.right != null) {
+                    tmpList.add(new Pair<>(curNode.right, 2 * index + 1));
+                }
+            }
+
+            int len = nodeList.size();
+            maxWidth = Math.max(maxWidth, nodeList.get(len - 1).getValue() - nodeList.get(0).getValue() + 1);
+            nodeList = tmpList;
+        }
+
+        return maxWidth;
+    }
+
+    static class Pair<K, V> {
+        TreeNode key;
+        Integer value;
+
+        public Pair(TreeNode key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public TreeNode getKey() {
+            return key;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
 
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 3, 2, 5, 3, null, 9});
         System.out.println("4 ?= " + widthOfBinaryTree_bfs(tst1));
         System.out.println("4 ?= " + widthOfBinaryTree_bfs_opt(tst1));
+        System.out.println("4 ?= " + widthOfBinaryTree_bfs_opt2(tst1));
+        System.out.println("4 ?= " + widthOfBinaryTree(tst1));
+
+        TreeNode tst2 = TreeUtils.constructTree(new Integer[]{1, 3, 2, 5, null, null, 9, 6, null, 7});
+        System.out.println("7 ?= " + widthOfBinaryTree(tst2));
     }
 }
