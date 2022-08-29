@@ -43,7 +43,19 @@ public class Problem1470_shuffleTheArray {
         return res;
     }
 
+    // Opt time: O(n) space: O(n)
+    public static int[] shuffle_opt(int[] nums, int n) {
+        int[] res = new int[n * 2];
+        for (int i = 0; i < n; i++) {
+            res[2 * i] = nums[i];
+            res[2 * i + 1] = nums[i + n];
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2,3,5,4,1,7] ?= " + Arrays.toString(shuffle(new int[]{2, 5, 1, 3, 4, 7}, 3)));
+        System.out.println("[2,3,5,4,1,7] ?= " + Arrays.toString(shuffle_opt(new int[]{2, 5, 1, 3, 4, 7}, 3)));
     }
 }
