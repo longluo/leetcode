@@ -1,5 +1,8 @@
 package com.longluo.leetcode.stack;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * 844. 比较含退格的字符串
  * <p>
@@ -35,7 +38,7 @@ public class Problem844_backspaceStringCompare {
 
     // StringBuilder time: O(n) space: O(n)
     // TLE
-    public static boolean backspaceCompare(String s, String t) {
+    public static boolean backspaceCompare_sb(String s, String t) {
         int sLen = s.length();
         StringBuilder src = new StringBuilder(sLen);
         int idx = 0;
@@ -75,8 +78,38 @@ public class Problem844_backspaceStringCompare {
         return src.toString().equals(dest.toString());
     }
 
+    // Stack time: O(n) space: O(n)
+    public static boolean backspaceCompare_stack(String s, String t) {
+        Deque<Character> srcStk = new ArrayDeque<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != '#') {
+                srcStk.push(s.charAt(i));
+            } else if (s.charAt(i) == '#' && !srcStk.isEmpty()) {
+                srcStk.pop();
+            }
+        }
+
+        Deque<Character> destStk = new ArrayDeque<>();
+        for (int i = 0; i < t.length(); i++) {
+            if (t.charAt(i) != '#') {
+                destStk.push(t.charAt(i));
+            } else if (t.charAt(i) == '#' && !destStk.isEmpty()) {
+                destStk.pop();
+            }
+        }
+
+        return srcStk.toString().equals(destStk.toString());
+    }
+
+    public static boolean backspaceCompare_tp(String s, String t) {
+        return false;
+    }
+
     public static void main(String[] args) {
-        System.out.println("true ?= " + backspaceCompare("ab#c", "ad#c"));
-        System.out.println("true ?= " + backspaceCompare("a##c", "#a#c"));
+        System.out.println("true ?= " + backspaceCompare_sb("ab#c", "ad#c"));
+
+        System.out.println("true ?= " + backspaceCompare_stack("a##c", "#a#c"));
+
+        System.out.println("true ?= " + backspaceCompare_tp("a##c", "#a#c"));
     }
 }
