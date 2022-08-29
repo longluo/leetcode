@@ -32,25 +32,20 @@ public class Problem77_combinations {
     // Backtrack time: O(k^n) space: O(n)
     public static List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> ans = new ArrayList<>();
-        boolean[] visited = new boolean[n];
-        backtrack(ans, new ArrayList<>(), visited, n, k);
+        backtrack(ans, new ArrayList<>(), 1, n, k);
         return ans;
     }
 
-    private static void backtrack(List<List<Integer>> res, List<Integer> path, boolean[] visited, int max, int sum) {
-        if (path.size() == sum) {
+    private static void backtrack(List<List<Integer>> res, List<Integer> path, int start, int n, int k) {
+        if (path.size() == k) {
             res.add(new ArrayList<>(path));
             return;
         }
 
-        for (int i = 1; i <= max; i++) {
-            if (!visited[i - 1]) {
-                visited[i - 1] = true;
-                path.add(i);
-                backtrack(res, path, visited, max, sum);
-                path.remove(path.size() - 1);
-                visited[i - 1] = false;
-            }
+        for (int i = start; i <= n; i++) {
+            path.add(i);
+            backtrack(res, path, i + 1, n, k);
+            path.remove(path.size() - 1);
         }
     }
 
