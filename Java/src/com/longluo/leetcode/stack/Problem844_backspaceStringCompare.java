@@ -101,8 +101,49 @@ public class Problem844_backspaceStringCompare {
         return srcStk.toString().equals(destStk.toString());
     }
 
+    // Two Pointers time: O(m+n) space: O(1)
     public static boolean backspaceCompare_tp(String s, String t) {
-        return false;
+        int p = s.length() - 1;
+        int q = t.length() - 1;
+        int skipSrc = 0;
+        int skipDest = 0;
+
+        while (p >= 0 || q >= 0) {
+            while (p >= 0) {
+                if (s.charAt(p) == '#') {
+                    p--;
+                    skipSrc++;
+                } else if (skipSrc > 0) {
+                    p--;
+                    skipSrc--;
+                } else {
+                    break;
+                }
+            }
+
+            while (q >= 0) {
+                if (t.charAt(q) == '#') {
+                    q--;
+                    skipDest++;
+                } else if (skipDest > 0) {
+                    q--;
+                    skipDest--;
+                } else {
+                    break;
+                }
+            }
+
+            if (p >= 0 && q >= 0 && s.charAt(p) != t.charAt(q)) {
+                return false;
+            } else if (p >= 0 && q >= 0 && s.charAt(p) == t.charAt(q)) {
+                p--;
+                q--;
+            } else if ((p >= 0 && q < 0) || (p < 0 && q >= 0)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
@@ -111,5 +152,7 @@ public class Problem844_backspaceStringCompare {
         System.out.println("true ?= " + backspaceCompare_stack("a##c", "#a#c"));
 
         System.out.println("true ?= " + backspaceCompare_tp("a##c", "#a#c"));
+        System.out.println("false ?= " + backspaceCompare_tp("bxj##tw", "bxj###tw"));
+        System.out.println("true ?= " + backspaceCompare_tp("ab##", "c#d#"));
     }
 }
