@@ -54,8 +54,33 @@ public class Problem1470_shuffleTheArray {
         return res;
     }
 
+    // Simulate time: O(n) space: O(1)
+    public static int[] shuffle_o1(int[] nums, int n) {
+        for (int i = 0; i < 2 * n; i++) {
+            if (nums[i] > 0) {
+                int j = i;
+                while (nums[i] > 0) {
+                    j = j < n ? 2 * j : 2 * (j - n) + 1;
+
+                    int tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tmp;
+
+                    nums[j] = -nums[j];
+                }
+            }
+        }
+
+        for (int i = 0; i < 2 * n; i++) {
+            nums[i] = -nums[i];
+        }
+
+        return nums;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2,3,5,4,1,7] ?= " + Arrays.toString(shuffle(new int[]{2, 5, 1, 3, 4, 7}, 3)));
         System.out.println("[2,3,5,4,1,7] ?= " + Arrays.toString(shuffle_opt(new int[]{2, 5, 1, 3, 4, 7}, 3)));
+        System.out.println("[2,3,5,4,1,7] ?= " + Arrays.toString(shuffle_o1(new int[]{2, 5, 1, 3, 4, 7}, 3)));
     }
 }
