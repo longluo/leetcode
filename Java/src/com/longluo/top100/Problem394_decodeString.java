@@ -46,23 +46,37 @@ public class Problem394_decodeString {
             return s;
         }
 
-        Deque<String> stk = new ArrayDeque<>();
+        Deque<StringBuilder> strStk = new ArrayDeque<>();
+        Deque<Integer> cntStk = new ArrayDeque<>();
+
+        StringBuilder ans = new StringBuilder(len);
         int idx = 0;
+        int cnt = 0;
+        while (idx < len) {
+            char ch = s.charAt(idx);
+            if (Character.isDigit(ch)) {
+                cnt = 10 * cnt + (ch - '0');
+            } else if (ch == '[') {
+                cntStk.push(cnt);
+                strStk.push(ans);
+                ans = new StringBuilder();
+                cnt = 0;
+            } else if (ch == ']') {
+                int repeat = cntStk.pop();
+                StringBuilder tmp = ans;
+                ans = strStk.pop();
+                while (repeat > 0) {
+                    repeat--;
+                    ans.append(tmp);
+                }
+            } else {
+                ans.append(ch);
+            }
 
-        return "";
-    }
-
-    public static String mergeString(String str, int repeat) {
-        if (str.length() == 0 || repeat <= 1) {
-            return str;
+            idx++;
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= repeat; i++) {
-            sb.append(str);
-        }
-
-        return sb.toString();
+        return ans.toString();
     }
 
     // Recursion time: O(n) space: O(n)
