@@ -1,6 +1,9 @@
 package com.longluo.top100;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 394. 字符串解码
@@ -32,44 +35,19 @@ import java.util.Stack;
  * s 保证是一个 有效 的输入。
  * s 中所有整数的取值范围为 [1, 300]
  * <p>
- * https://leetcode-cn.com/problems/decode-string/
+ * https://leetcode.cn/problems/decode-string/
  */
 public class Problem394_decodeString {
 
-    public static String decodeString(String s) {
+    // Stack time: O(n) space: O(n)
+    public static String decodeString_stack(String s) {
         int len = s.length();
         if (len <= 1) {
             return s;
         }
 
-        Stack<String> stk = new Stack<>();
+        Deque<String> stk = new ArrayDeque<>();
         int idx = 0;
-        int num = 0;
-        while (idx < len) {
-            char ch = s.charAt(idx);
-            while (num == 0 && Character.isLetter(s.charAt(idx))) {
-                idx++;
-            }
-
-            while (idx < len && Character.isDigit(s.charAt(idx))) {
-                idx++;
-                num = 10 * num + ch - '0';
-            }
-
-            stk.push("" + num);
-            num = 0;
-            if (s.charAt(idx) == '[') {
-                idx++;
-                StringBuilder sb = new StringBuilder();
-                while (idx < len && Character.isLetter(s.charAt(idx))) {
-                    sb.append(s.charAt(idx));
-                    idx++;
-                }
-                stk.push(sb.toString());
-            } else if (s.charAt(idx) == ']') {
-                idx++;
-            }
-        }
 
         return "";
     }
@@ -87,59 +65,43 @@ public class Problem394_decodeString {
         return sb.toString();
     }
 
-    public static String decodeString_rec(String s) {
-        int len = s.length();
-        if (len <= 1) {
-            return s;
+    // Recursion time: O(n) space: O(n)
+    public static String decodeString(String s) {
+        Queue<Character> queue = new LinkedList<>();
+        for (char ch : s.toCharArray()) {
+            queue.offer(ch);
         }
 
-        int bal = 0;
-        int num = 0;
-        for (int i = 0; i < len; i++) {
-            char ch = s.charAt(i);
-
-        }
-
-        return "";
+        return helper(queue);
     }
 
-    public static String helper(String str, int repeat) {
-        int len = str.length();
-        if (len <= 1) {
-            return str;
-        }
-
-        int num = 0;
-        int bal = 0;
-        int left = 0;
-        int right = 0;
-        StringBuilder sb = new StringBuilder(len);
-        for (int i = 0; i < len; i++) {
-            char ch = str.charAt(i);
-            if (num == 0 && Character.isLetter(ch)) {
-                sb.append(ch);
-                continue;
-            }
-
+    private static String helper(Queue<Character> queue) {
+        StringBuilder res = new StringBuilder(queue.size());
+        int cnt = 0;
+        while (!queue.isEmpty()) {
+            char ch = queue.poll();
             if (Character.isDigit(ch)) {
-                num = 10 * num + ch - '0';
-            }
-
-            if (bal == 0 && ch == '[') {
-                left = i;
-                bal++;
-            } else if (ch == ']') {
-                bal--;
-                if (bal == 0) {
-
+                cnt = 10 * cnt + (ch - '0');
+            } else if (ch == '[') {
+                String sub = helper(queue);
+                while (cnt > 0) {
+                    cnt--;
+                    res.append(sub);
                 }
+            } else if (ch == ']') {
+                break;
+            } else if (Character.isLetter(ch)) {
+                res.append(ch);
             }
         }
 
-        return sb.toString();
+        return res.toString();
     }
 
     public static void main(String[] args) {
+        System.out.println("aaabcbc ?= " + decodeString_stack("3[a]2[bc]"));
+        System.out.println("accaccacc ?= " + decodeString_stack("3[a2[c]]"));
+
         System.out.println("aaabcbc ?= " + decodeString("3[a]2[bc]"));
         System.out.println("accaccacc ?= " + decodeString("3[a2[c]]"));
     }
