@@ -165,8 +165,78 @@ public class Problem417_pacificAtlanticWaterFlow {
         }
     }
 
+    // DFS time: O((m+n)*mn) space: O(mn)
+    public static List<List<Integer>> pacificAtlantic_dfs_opt(int[][] heights) {
+        int m = heights.length;
+        int n = heights[0].length;
+
+        boolean[][] pacific = new boolean[m][n];
+        boolean[][] atlantic = new boolean[m][n];
+
+        for (int i = 0; i < m; i++) {
+            pacific[i][0] = true;
+            dfs(heights, pacific, i, 0);
+
+            atlantic[i][n - 1] = true;
+            dfs(heights, atlantic, i, n - 1);
+        }
+
+        for (int j = 0; j < n; j++) {
+            pacific[0][j] = true;
+            dfs(heights, pacific, 0, j);
+
+            atlantic[m - 1][j] = true;
+            dfs(heights, atlantic, m - 1, j);
+        }
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (pacific[i][j] && atlantic[i][j]) {
+                    List<Integer> cell = new ArrayList<>();
+                    cell.add(i);
+                    cell.add(j);
+                    ans.add(cell);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    private static void dfs(int[][] grid, boolean[][] visited, int x, int y) {
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int m = grid.length;
+        int n = grid[0].length;
+
+        if (x < 0 || x >= m || y < 0 || y >= n) {
+            return;
+        }
+
+        visited[x][y] = true;
+
+        for (int[] dir : dirs) {
+            int nextX = x + dir[0];
+            int nextY = y + dir[1];
+
+            if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n) {
+                continue;
+            }
+
+            if (visited[nextX][nextY] || grid[nextX][nextY] < grid[x][y]) {
+                continue;
+            }
+
+            dfs(grid, visited, nextX, nextY);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("[[0,0],[0,1],[1,0],[1,1]] ?= " + pacificAtlantic_bfs(new int[][]{{2, 1}, {1, 2}}).toString());
         System.out.println("[[0,0],[0,1],[1,0],[1,1]] ?= " + pacificAtlantic_bfs_opt(new int[][]{{2, 1}, {1, 2}}).toString());
+
+        System.out.println("[[0,0],[0,1],[1,0],[1,1]] ?= " + pacificAtlantic_dfs_opt(new int[][]{{2, 1}, {1, 2}}).toString());
     }
 }
