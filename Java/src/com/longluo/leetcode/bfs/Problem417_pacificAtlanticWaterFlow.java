@@ -32,10 +32,12 @@ import java.util.Queue;
 public class Problem417_pacificAtlanticWaterFlow {
 
     // BFS time: O(m^2 * n^2) space: O(mn)
-    public static List<List<Integer>> pacificAtlantic(int[][] heights) {
+    public static List<List<Integer>> pacificAtlantic_bfs(int[][] heights) {
         List<List<Integer>> ans = new ArrayList<>();
+
         int m = heights.length;
         int n = heights[0].length;
+
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (bfs(heights, i, j)) {
@@ -73,9 +75,11 @@ public class Problem417_pacificAtlanticWaterFlow {
             for (int[] dir : dirs) {
                 int nextX = x + dir[0];
                 int nextY = y + dir[1];
+
                 if (nextX < 0 || nextY < 0) {
                     pacific = true;
                 }
+
                 if (nextX >= m || nextY >= n) {
                     atlantic = true;
                 }
@@ -91,7 +95,78 @@ public class Problem417_pacificAtlanticWaterFlow {
         return pacific && atlantic;
     }
 
+    // BFS Opt time: O((m+n)mn) space: O(mn)
+    public static List<List<Integer>> pacificAtlantic_bfs_opt(int[][] heights) {
+        int m = heights.length;
+        int n = heights[0].length;
+
+        boolean[][] pacific = new boolean[m][n];
+        boolean[][] atlantic = new boolean[m][n];
+
+        Queue<int[]> pacificQueue = new LinkedList<>();
+        Queue<int[]> atlanticQueue = new LinkedList<>();
+
+        for (int i = 0; i < m; i++) {
+            pacific[i][0] = true;
+            pacificQueue.offer(new int[]{i, 0});
+
+            atlantic[i][n - 1] = true;
+            atlanticQueue.offer(new int[]{i, n - 1});
+        }
+
+        for (int j = 0; j < n; j++) {
+            pacific[0][j] = true;
+            pacificQueue.offer(new int[]{0, j});
+
+            atlantic[m - 1][j] = true;
+            atlanticQueue.offer(new int[]{m - 1, j});
+        }
+
+        bfs(heights, pacific, pacificQueue);
+        bfs(heights, atlantic, atlanticQueue);
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (pacific[i][j] && atlantic[i][j]) {
+                    List<Integer> cell = new ArrayList<>();
+                    cell.add(i);
+                    cell.add(j);
+                    ans.add(cell);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    private static void bfs(int[][] grid, boolean[][] visited, Queue<int[]> queue) {
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int m = grid.length;
+        int n = grid[0].length;
+
+        while (!queue.isEmpty()) {
+            int[] cur = queue.poll();
+            int x = cur[0];
+            int y = cur[1];
+
+            for (int[] dir : dirs) {
+                int nextX = x + dir[0];
+                int nextY = y + dir[1];
+
+                if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n
+                        && !visited[nextX][nextY] && grid[nextX][nextY] >= grid[x][y]) {
+                    visited[nextX][nextY] = true;
+                    queue.offer(new int[]{nextX, nextY});
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println("[[0,0],[0,1],[1,0],[1,1]] ?= " + pacificAtlantic(new int[][]{{2, 1}, {1, 2}}).toString());
+        System.out.println("[[0,0],[0,1],[1,0],[1,1]] ?= " + pacificAtlantic_bfs(new int[][]{{2, 1}, {1, 2}}).toString());
+        System.out.println("[[0,0],[0,1],[1,0],[1,1]] ?= " + pacificAtlantic_bfs_opt(new int[][]{{2, 1}, {1, 2}}).toString());
     }
 }
