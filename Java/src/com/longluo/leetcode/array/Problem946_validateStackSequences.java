@@ -33,6 +33,7 @@ import java.util.Stack;
  */
 public class Problem946_validateStackSequences {
 
+    // Stack BF time: O(n) space: O(n)
     public static boolean validateStackSequences(int[] pushed, int[] popped) {
         if (popped == null || pushed.length <= 1) {
             return true;
@@ -70,6 +71,7 @@ public class Problem946_validateStackSequences {
         return false;
     }
 
+    // Stack Opt time: O(n) space: O(n)
     public static boolean validateStackSequences_stack(int[] pushed, int[] popped) {
         if (popped == null || pushed.length <= 1) {
             return true;
@@ -89,9 +91,11 @@ public class Problem946_validateStackSequences {
         return popIdx == len;
     }
 
-    public boolean validateStackSequences_fast(int[] pushed, int[] popped) {
+    // Fast time: O(n) space: O(1)
+    public static boolean validateStackSequences_fast(int[] pushed, int[] popped) {
+        int len = pushed.length;
         int size = 0;
-        for (int i = 0, j = 0; i < pushed.length; i++) {
+        for (int i = 0, j = 0; i < len; i++) {
             pushed[size++] = pushed[i];
             while (size != 0 && pushed[size - 1] == popped[j]) {
                 size--;
@@ -107,5 +111,9 @@ public class Problem946_validateStackSequences {
         System.out.println("false ?= " + validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 1, 2}));
         System.out.println("true ?= " + validateStackSequences(new int[]{2, 3, 0, 1}, new int[]{0, 3, 2, 1}));
         System.out.println("true ?= " + validateStackSequences(new int[]{0, 2, 1}, new int[]{0, 1, 2}));
+
+        System.out.println("true ?= " + validateStackSequences_stack(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1}));
+        System.out.println("false ?= " + validateStackSequences_stack(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 1, 2}));
+        System.out.println("false ?= " + validateStackSequences_fast(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 1, 2}));
     }
 }
