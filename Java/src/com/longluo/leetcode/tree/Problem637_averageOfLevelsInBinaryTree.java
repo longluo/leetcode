@@ -27,7 +27,7 @@ import java.util.Queue;
  * 提示：
  * 节点值的范围在32位有符号整数范围内。
  * <p>
- * https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/
+ * https://leetcode.cn/problems/average-of-levels-in-binary-tree/
  */
 public class Problem637_averageOfLevelsInBinaryTree {
 
@@ -65,7 +65,9 @@ public class Problem637_averageOfLevelsInBinaryTree {
         List<Double> averages = new ArrayList<>();
         List<Integer> counts = new ArrayList<>();
         List<Double> sums = new ArrayList<>();
+
         dfs(root, 0, sums, counts);
+
         for (int i = 0; i < sums.size(); i++) {
             averages.add((double) sums.get(i) / counts.get(i));
         }
@@ -73,7 +75,7 @@ public class Problem637_averageOfLevelsInBinaryTree {
         return averages;
     }
 
-    public static void dfs(TreeNode root, int level, List<Double> sums, List<Integer> counts) {
+    private static void dfs(TreeNode root, int level, List<Double> sums, List<Integer> counts) {
         if (root == null) {
             return;
         }
