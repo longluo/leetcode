@@ -1,4 +1,4 @@
-package com.longluo.studyplan.binary_search;
+package com.longluo.studyplan.binary_search.ii;
 
 /**
  * 209. 长度最小的子数组
@@ -14,7 +14,7 @@ package com.longluo.studyplan.binary_search;
  * 进阶：
  * 如果你已经完成了 O(n) 时间复杂度的解法, 请尝试 O(n log n) 时间复杂度的解法。
  * <p>
- * https://leetcode-cn.com/problems/minimum-size-subarray-sum/
+ * https://leetcode.cn/problems/minimum-size-subarray-sum/
  */
 public class Problem209_minimumSizeSubarraySum {
 
@@ -25,7 +25,9 @@ public class Problem209_minimumSizeSubarraySum {
         }
 
         int len = nums.length;
+
         int ans = Integer.MAX_VALUE;
+
         for (int i = 0; i < len; i++) {
             int sum = 0;
             for (int j = i; j < len; j++) {
@@ -48,9 +50,12 @@ public class Problem209_minimumSizeSubarraySum {
 
         int len = nums.length;
         int ans = Integer.MAX_VALUE;
+
         int sum = 0;
+
         int left = 0;
         int right = 0;
+
         while (right < len) {
             sum += nums[right];
             while (sum >= target) {
@@ -101,6 +106,7 @@ public class Problem209_minimumSizeSubarraySum {
 
         int len = nums.length;
         int ans = Integer.MAX_VALUE;
+
         int[] prefixSums = new int[len + 1];
         for (int i = 1; i <= len; i++) {
             prefixSums[i] = prefixSums[i - 1] + nums[i - 1];
