@@ -73,6 +73,38 @@ public class Problem841_keysAndRooms {
         return true;
     }
 
+    // DFS time: O(n) space: O(n)
+    public static boolean canVisitAllRooms_dfs(List<List<Integer>> rooms) {
+        int n = rooms.size();
+
+        boolean[] visited = new boolean[n];
+        visited[0] = true;
+
+        for (int room : rooms.get(0)) {
+            dfs(rooms, visited, room);
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static void dfs(List<List<Integer>> rooms, boolean[] visited, int roomNo) {
+        if (visited[roomNo]) {
+            return;
+        }
+
+        visited[roomNo] = true;
+
+        for (int room : rooms.get(roomNo)) {
+            dfs(rooms, visited, room);
+        }
+    }
+
     public static void main(String[] args) {
 
     }
