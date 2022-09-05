@@ -34,42 +34,39 @@ import java.util.*;
  * 此外，"bbaA"也是一个有效的答案，但"Aabb"是不正确的。
  * 注意'A'和'a'被认为是两种不同的字符。
  * <p>
- * https://leetcode-cn.com/problems/sort-characters-by-frequency/
+ * https://leetcode.cn/problems/sort-characters-by-frequency/
  */
 public class Problem451_sortCharactersByFrequency {
 
+    // HashMap + Sort time: O(nlogn) space: O(n)
     public static String frequencySort(String s) {
         if (s == null || s.length() <= 2) {
             return s;
         }
 
-        StringBuilder sb = new StringBuilder();
-        int n = s.length();
         Map<Character, Integer> freqMap = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            if (freqMap.containsKey(s.charAt(i))) {
-                freqMap.put(s.charAt(i), freqMap.get(s.charAt(i)) + 1);
+        for (char ch : s.toCharArray()) {
+            if (freqMap.containsKey(ch)) {
+                freqMap.put(ch, freqMap.get(ch) + 1);
             } else {
-                freqMap.put(s.charAt(i), 1);
+                freqMap.put(ch, 1);
             }
         }
 
         int[][] freqArray = new int[freqMap.size()][2];
-        Iterator<Map.Entry<Character, Integer>> iterator = freqMap.entrySet().iterator();
+
         int idx = 0;
-        while (iterator.hasNext()) {
-            Map.Entry<Character, Integer> entry = iterator.next();
-            freqArray[idx][0] = (int) entry.getKey();
-            freqArray[idx][1] = entry.getValue();
+        for (Map.Entry<Character, Integer> entry : freqMap.entrySet()) {
+            char ch = entry.getKey();
+            int cnt = entry.getValue();
+            freqArray[idx][0] = (int) ch;
+            freqArray[idx][1] = cnt;
             idx++;
         }
-        Arrays.sort(freqArray, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o2[1] - o1[1];
-            }
-        });
 
+        Arrays.sort(freqArray, (o1, o2) -> o2[1] - o1[1]);
+
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < freqMap.size(); i++) {
             for (int j = 0; j < freqArray[i][1]; j++) {
                 sb.append((char) freqArray[i][0]);
