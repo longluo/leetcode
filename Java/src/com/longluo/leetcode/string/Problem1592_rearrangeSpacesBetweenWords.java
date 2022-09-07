@@ -1,5 +1,8 @@
 package com.longluo.leetcode.string;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 1592. 重新排列单词间的空格
  * <p>
@@ -71,7 +74,50 @@ public class Problem1592_rearrangeSpacesBetweenWords {
         return sb.toString();
     }
 
+    // Opt time: O(n) space: O(n)
+    public static String reorderSpaces_opt(String text) {
+        List<String> words = new ArrayList<>();
+
+        int spaceCnt = 0;
+        StringBuilder sb = new StringBuilder();
+        for (char ch : text.toCharArray()) {
+            if (ch == ' ') {
+                spaceCnt++;
+                if (sb.length() > 0) {
+                    words.add(sb.toString());
+                }
+                sb.delete(0, sb.length());
+            } else {
+                sb.append(ch);
+            }
+        }
+
+        if (sb.length() > 0) {
+            words.add(sb.toString());
+        }
+
+        int wordCnt = words.size();
+        int remain = wordCnt > 1 ? spaceCnt % (wordCnt - 1) : spaceCnt;
+        int gap = wordCnt > 1 ? (spaceCnt - remain) / (wordCnt - 1) : spaceCnt;
+
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < wordCnt; i++) {
+            ans.append(words.get(i));
+            for (int j = 0; j < gap && i < wordCnt - 1; j++) {
+                ans.append(" ");
+            }
+        }
+
+        for (int i = 0; i < remain; i++) {
+            ans.append(" ");
+        }
+
+        return ans.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("this   is   a   sentence ?= " + reorderSpaces("  this   is  a sentence "));
+        System.out.println("this   is   a   sentence ?= " + reorderSpaces_opt("  this   is  a sentence "));
+        System.out.println("practice   makes   perfect  ?= " + reorderSpaces_opt(" practice   makes   perfect"));
     }
 }
