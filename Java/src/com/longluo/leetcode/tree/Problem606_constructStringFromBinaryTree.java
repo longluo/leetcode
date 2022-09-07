@@ -59,31 +59,35 @@ public class Problem606_constructStringFromBinaryTree {
         return root.val + "(" + tree2str(root.left) + ")" + "(" + tree2str(root.right) + ")";
     }
 
-    public static String tree2str2(TreeNode t) {
-        if (t == null) {
+    // Stack time: O(n) space: O(n)
+    public static String tree2str_stack(TreeNode root) {
+        if (root == null) {
             return "";
         }
 
         Stack<TreeNode> st = new Stack<>();
         Set<TreeNode> visited = new HashSet<>();
         StringBuilder sb = new StringBuilder();
-        st.push(t);
+
+        st.push(root);
         while (!st.empty()) {
-            t = st.peek();
-            if (visited.contains(t)) {
+            root = st.peek();
+            if (visited.contains(root)) {
                 st.pop();
                 sb.append(")");
             } else {
-                visited.add(t);
-                sb.append("(" + t.val);
-                if (t.left == null && t.right != null) {
+                visited.add(root);
+                sb.append("(" + root.val);
+                if (root.left == null && root.right != null) {
                     sb.append("()");
                 }
-                if (t.right != null) {
-                    st.push(t.right);
+
+                if (root.right != null) {
+                    st.push(root.right);
                 }
-                if (t.left != null) {
-                    st.push(t.left);
+
+                if (root.left != null) {
+                    st.push(root.left);
                 }
             }
         }
@@ -123,11 +127,11 @@ public class Problem606_constructStringFromBinaryTree {
 
     public static void main(String[] args) {
         System.out.println("1(2(4))(3) ?= " + tree2str(TreeUtils.constructTree(new Integer[]{1, 2, 3, 4})));
-        System.out.println("1(2(4))(3) ?= " + tree2str2(TreeUtils.constructTree(new Integer[]{1, 2, 3, 4})));
+        System.out.println("1(2(4))(3) ?= " + tree2str_stack(TreeUtils.constructTree(new Integer[]{1, 2, 3, 4})));
         System.out.println("1(2(4))(3) ?= " + tree2str3(TreeUtils.constructTree(new Integer[]{1, 2, 3, 4})));
 
         System.out.println("1(2()(4))(3) ?= " + tree2str(TreeUtils.constructTree(new Integer[]{1, 2, 3, null, 4})));
-        System.out.println("1(2()(4))(3) ?= " + tree2str2(TreeUtils.constructTree(new Integer[]{1, 2, 3, null, 4})));
+        System.out.println("1(2()(4))(3) ?= " + tree2str_stack(TreeUtils.constructTree(new Integer[]{1, 2, 3, null, 4})));
         System.out.println("1(2()(4))(3) ?= " + tree2str3(TreeUtils.constructTree(new Integer[]{1, 2, 3, null, 4})));
     }
 }
