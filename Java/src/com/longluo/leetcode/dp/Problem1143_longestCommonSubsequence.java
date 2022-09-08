@@ -33,37 +33,43 @@ import java.util.*;
  */
 public class Problem1143_longestCommonSubsequence {
 
-    // Backtrack
+    // Backtrack Opt
     // TLE
     public static int longestCommonSubsequence_bf(String text1, String text2) {
         if (text1.length() > text2.length()) {
             return longestCommonSubsequence_bf(text2, text1);
         }
 
-        Set<String> subStrList = new HashSet<>();
+        Set<String> seen = new HashSet<>();
+        List<String> subStrList = new ArrayList<>();
+
         for (int i = 1; i <= text1.length(); i++) {
-            backtrack(subStrList, new StringBuilder(), text1, 0, i);
+            backtrack(subStrList, seen, new StringBuilder(), text1, 0, i);
         }
+
+        Collections.sort(subStrList, (s1, s2) -> s2.length() - s1.length());
 
         int max = 0;
         for (String subStr : subStrList) {
             if (check(subStr, text2)) {
                 max = Math.max(max, subStr.length());
+                break;
             }
         }
 
         return max;
     }
 
-    private static void backtrack(Set<String> res, StringBuilder path, String s, int idx, int len) {
-        if (path.length() == len) {
+    private static void backtrack(List<String> res, Set<String> seen, StringBuilder path, String s, int idx, int len) {
+        if (path.length() == len && !seen.contains(path.toString())) {
+            seen.add(path.toString());
             res.add(path.toString());
             return;
         }
 
         for (int i = idx; i < s.length(); i++) {
             path.append(s.charAt(i));
-            backtrack(res, path, s, i + 1, len);
+            backtrack(res, seen, path, s, i + 1, len);
             path.deleteCharAt(path.length() - 1);
         }
     }
@@ -71,7 +77,7 @@ public class Problem1143_longestCommonSubsequence {
     private static boolean check(String subStr, String s) {
         int p = 0;
         int q = 0;
-        for (; p < subStr.length() && q < s.length();) {
+        for (; p < subStr.length() && q < s.length(); ) {
             if (subStr.charAt(p) == s.charAt(q)) {
                 p++;
                 q++;
@@ -87,5 +93,6 @@ public class Problem1143_longestCommonSubsequence {
         System.out.println("3 ?= " + longestCommonSubsequence_bf("abcde", "ace"));
         System.out.println("3 ?= " + longestCommonSubsequence_bf("abc", "abc"));
         System.out.println("0 ?= " + longestCommonSubsequence_bf("abc", "def"));
+        System.out.println("1 ?= " + longestCommonSubsequence_bf("psnw", "vozsh"));
     }
 }
