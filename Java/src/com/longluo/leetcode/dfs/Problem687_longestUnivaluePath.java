@@ -27,7 +27,6 @@ import com.longluo.datastructure.TreeUtils;
  */
 public class Problem687_longestUnivaluePath {
 
-    // TODO: 2022/9/8  
     // DFS time: O(n) space: O(n)
     static int maxAns = 1;
 
@@ -46,24 +45,28 @@ public class Problem687_longestUnivaluePath {
             return 0;
         }
 
-        int leftMax = dfs(root.left);
-        int rightMax = dfs(root.right);
+        int left = dfs(root.left);
+        int right = dfs(root.right);
 
         if (root.left != null && root.val == root.left.val) {
-            leftMax++;
-            maxAns = Math.max(maxAns, leftMax);
+            left++;
+            maxAns = Math.max(maxAns, left);
+        } else {
+            left = 0;
         }
 
         if (root.right != null && root.val == root.right.val) {
-            rightMax++;
-            maxAns = Math.max(maxAns, rightMax);
+            right++;
+            maxAns = Math.max(maxAns, right);
+        } else {
+            right = 0;
         }
 
         if (root.left != null && root.right != null && root.val == root.right.val && root.val == root.left.val) {
-            maxAns = Math.max(maxAns, leftMax + rightMax);
+            maxAns = Math.max(maxAns, left + right);
         }
 
-        return Math.max(leftMax, rightMax);
+        return Math.max(left, right);
     }
 
     public static void main(String[] args) {
