@@ -9,7 +9,9 @@ import java.util.Queue;
 
 /**
  * 429. N-ary Tree Level Order Traversal
+ * <p>
  * Medium
+ * <p>
  * Given an n-ary tree, return the level order traversal of its nodes' values.
  * Nary-Tree input serialization is represented in their level order traversal,
  * each group of children is separated by the null value (See examples).
@@ -24,7 +26,7 @@ import java.util.Queue;
  * <p>
  * Constraints:
  * The height of the n-ary tree is less than or equal to 1000
- * The total number of nodes is between [0, 104]
+ * The total number of nodes is between [0, 10^4]
  * <p>
  * https://leetcode.com/problems/n-ary-tree-level-order-traversal/
  */
@@ -46,9 +48,10 @@ public class Problem429_levelOrder {
                 Node node = queue.poll();
                 if (node != null) {
                     levelList.add(node.val);
+
                     List<Node> children = node.children;
-                    for (int j = 0; j < children.size(); j++) {
-                        queue.add(children.get(j));
+                    for (Node child : children) {
+                        queue.offer(child);
                     }
                 }
             }
