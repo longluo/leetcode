@@ -1,12 +1,11 @@
 package com.longluo.leetcode.stack;
 
-import java.util.Arrays;
-
 /**
  * 2104. 子数组范围和
  * <p>
  * 给你一个整数数组 nums 。nums 中，子数组的 范围 是子数组中最大元素和最小元素的差值。
  * 返回 nums 中 所有 子数组范围的 和 。
+ * <p>
  * 子数组是数组中一个连续 非空 的元素序列。
  * <p>
  * 示例 1：
@@ -44,11 +43,12 @@ import java.util.Arrays;
  * <p>
  * 进阶：你可以设计一种时间复杂度为 O(n) 的解决方案吗？
  * <p>
- * https://leetcode-cn.com/problems/sum-of-subarray-ranges/
+ * https://leetcode.cn/problems/sum-of-subarray-ranges/
  */
 public class Problem2104_sumOfSubarrayRanges {
 
-    public static long subArrayRanges(int[] nums) {
+    // BF time: O(n^2) space: O(n)
+    public static long subArrayRanges_bf(int[] nums) {
         long ans = 0;
         int len = nums.length;
         for (int i = 0; i < len; i++) {
@@ -65,8 +65,8 @@ public class Problem2104_sumOfSubarrayRanges {
     }
 
     public static void main(String[] args) {
-        System.out.println("4 ?= " + subArrayRanges(new int[]{1, 2, 3}));
-        System.out.println("4 ?= " + subArrayRanges(new int[]{1, 3, 3}));
-        System.out.println("59 ?= " + subArrayRanges(new int[]{4, -2, -3, 4, 1}));
+        System.out.println("4 ?= " + subArrayRanges_bf(new int[]{1, 2, 3}));
+        System.out.println("4 ?= " + subArrayRanges_bf(new int[]{1, 3, 3}));
+        System.out.println("59 ?= " + subArrayRanges_bf(new int[]{4, -2, -3, 4, 1}));
     }
 }
