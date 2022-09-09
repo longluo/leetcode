@@ -1,5 +1,8 @@
 package com.longluo.leetcode.stack;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -30,38 +33,45 @@ import java.util.Stack;
  * s 中只有小写英文字母和括号
  * 我们确保所有括号都是成对出现的
  * <p>
- * https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses/
+ * https://leetcode.cn/problems/reverse-substrings-between-each-pair-of-parentheses/
  */
 public class Problem1190_reverseSubstringsBetweenEachPairOfParentheses {
 
+    // Stack time: O(n) space: O(n)
     public static String reverseParentheses(String s) {
         if (s == null || s.length() <= 1) {
             return s;
         }
 
-        int n = s.length();
-        StringBuilder sb = new StringBuilder(n);
-        Stack<String> stack = new Stack<>();
+        int len = s.length();
+        Deque<Character> st = new ArrayDeque<>();
         int idx = 0;
-        while (s.charAt(idx) != '(' && stack.empty()) {
-            sb.append(s.charAt(idx));
+        while (idx < len) {
+            char ch = s.charAt(idx);
+            if (Character.isLetter(ch) || ch == '(') {
+                st.push(ch);
+            } else {
+                Queue<Character> queue = new ArrayDeque<>();
+                while (!st.isEmpty() && st.peek() != '(') {
+                    queue.offer(st.pop());
+                }
+
+                st.pop();
+
+                while (!queue.isEmpty()) {
+                    st.push(queue.poll());
+                }
+            }
+
             idx++;
         }
 
-        return sb.toString();
-    }
-
-    private static String reverseString(String str) {
-        if (str == null || str.length() <= 1) {
-            return str;
+        StringBuilder ans = new StringBuilder();
+        while (!st.isEmpty()) {
+            ans.append(st.pop());
         }
 
-        StringBuilder sb = new StringBuilder(str.length());
-        for (int i = str.length() - 1; i >= 0; i--) {
-            sb.append(str.charAt(i));
-        }
-
-        return sb.toString();
+        return ans.reverse().toString();
     }
 
     public static void main(String[] args) {
