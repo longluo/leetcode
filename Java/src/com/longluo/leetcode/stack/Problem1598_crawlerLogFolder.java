@@ -62,7 +62,26 @@ public class Problem1598_crawlerLogFolder {
         return st.size();
     }
 
+    // Simulate time: O(n) space: O(1)
+    public static int minOperations_opt(String[] logs) {
+        int len = logs.length;
+        int ans = 0;
+        for (int i = 0; i < len; i++) {
+            String log = logs[i];
+            if (log.equals("./") || (ans <= 0 && log.equals("../"))) {
+                continue;
+            } else if (log.equals("../")) {
+                ans--;
+            } else {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + minOperations(new String[]{"d1/", "d2/", "../", "d21/", "./"}));
+        System.out.println("2 ?= " + minOperations_opt(new String[]{"d1/", "d2/", "../", "d21/", "./"}));
     }
 }
