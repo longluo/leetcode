@@ -51,13 +51,11 @@ public class Problem948_bagOfTokens {
         int right = tokens.length - 1;
         while (left <= right) {
             if (power >= tokens[left]) {
-                power -= tokens[left];
-                left++;
+                power -= tokens[left++];
                 ans++;
             } else if (ans > 0 && left < right) {
                 ans--;
-                power += tokens[right];
-                right--;
+                power += tokens[right--];
             } else {
                 break;
             }
