@@ -46,10 +46,6 @@ public class Problem948_bagOfTokens {
     public static int bagOfTokensScore(int[] tokens, int power) {
         Arrays.sort(tokens);
 
-        if (tokens[0] > power) {
-            return 0;
-        }
-
         int ans = 0;
         int left = 0;
         int right = tokens.length - 1;
