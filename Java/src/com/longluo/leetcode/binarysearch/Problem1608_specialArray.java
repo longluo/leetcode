@@ -38,7 +38,7 @@ import java.util.Arrays;
  * 1 <= nums.length <= 100
  * 0 <= nums[i] <= 1000
  * <p>
- * https://leetcode-cn.com/problems/special-array-with-x-elements-greater-than-or-equal-x/
+ * https://leetcode.cn/problems/special-array-with-x-elements-greater-than-or-equal-x/
  */
 public class Problem1608_specialArray {
 
@@ -63,6 +63,7 @@ public class Problem1608_specialArray {
     // Sort + BF O(n^2 + nlogn) space: O(logn)
     public static int specialArray_sort(int[] nums) {
         Arrays.sort(nums);
+
         int len = nums.length;
         for (int i = 0; i <= len; i++) {
             int cnt = 0;
@@ -81,14 +82,16 @@ public class Problem1608_specialArray {
         return -1;
     }
 
-    // TODO: 2022/4/2
     // Sort time: O(nlogn) space: O(1)
     public static int specialArray_sort_better(int[] nums) {
         Arrays.sort(nums);
-        if (nums[0] >= nums.length) {
-            return nums.length;
+
+        int len = nums.length;
+        if (nums[0] >= len) {
+            return len;
         }
-        int x = nums.length - 1;
+
+        int x = len - 1;
         int i = 1;
         while (x > 0) {
             if (x <= nums[i] && nums[i - 1] < x) {
@@ -106,8 +109,10 @@ public class Problem1608_specialArray {
     public static int specialArray_bs(int[] nums) {
         int left = 0;
         int right = nums.length;
+
         while (left <= right) {
             int mid = left + (right - left) / 2;
+
             int cnt = 0;
             for (int num : nums) {
                 cnt = num >= mid ? cnt + 1 : cnt;
@@ -124,8 +129,11 @@ public class Problem1608_specialArray {
 
         return -1;
     }
-    
+
     public static void main(String[] args) {
+        System.out.println("2 ?= " + specialArray_bf(new int[]{3, 5}));
+        System.out.println("2 ?= " + specialArray_sort(new int[]{3, 5}));
+        System.out.println("2 ?= " + specialArray_sort_better(new int[]{3, 5}));
         System.out.println("2 ?= " + specialArray_bs(new int[]{3, 5}));
         System.out.println("-1 ?= " + specialArray_bs(new int[]{0, 0}));
     }
