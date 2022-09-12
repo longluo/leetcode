@@ -64,8 +64,35 @@ public class Problem948_bagOfTokens {
         return ans;
     }
 
+    // Easy to understand
+    public static int bagOfTokensScore_better(int[] tokens, int power) {
+        Arrays.sort(tokens);
+
+        int maxPoints = 0;
+        int points = 0;
+        int left = 0;
+        int right = tokens.length - 1;
+        while (left <= right) {
+            if (power >= tokens[left]) {
+                power -= tokens[left++];
+                points++;
+                maxPoints = Math.max(maxPoints, points);
+            } else if (points > 0) {
+                points--;
+                power += tokens[right--];
+            } else {
+                break;
+            }
+        }
+
+        return maxPoints;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + bagOfTokensScore(new int[]{100, 200}, 150));
         System.out.println("2 ?= " + bagOfTokensScore(new int[]{100, 200, 300, 400}, 200));
+
+        System.out.println("1 ?= " + bagOfTokensScore_better(new int[]{100, 200}, 150));
+        System.out.println("2 ?= " + bagOfTokensScore_better(new int[]{100, 200, 300, 400}, 200));
     }
 }
