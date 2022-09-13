@@ -55,6 +55,12 @@ public class Problem399_evaluateDivision {
         for (int i = 0; i < len; i++) {
             String u = queries.get(i).get(0);
             String v = queries.get(i).get(1);
+
+            if (!graph.containsKey(u) || !graph.containsKey(v)) {
+                results[i] = -1.0;
+                continue;
+            }
+
             results[i] = bfs(graph, u, v);
         }
 
@@ -62,10 +68,6 @@ public class Problem399_evaluateDivision {
     }
 
     private static double bfs(Map<String, Map<String, Double>> graph, String u, String v) {
-        if (!graph.containsKey(u) || !graph.containsKey(v)) {
-            return -1.0;
-        }
-
         Set<String> visited = new HashSet<>();
 
         Queue<String[]> queue = new LinkedList<>();
