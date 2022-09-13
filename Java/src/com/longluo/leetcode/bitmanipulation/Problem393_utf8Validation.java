@@ -39,10 +39,12 @@ package com.longluo.leetcode.bitmanipulation;
  * 1 <= data.length <= 2 * 10^4
  * 0 <= data[i] <= 255
  * <p>
- * https://leetcode-cn.com/problems/utf-8-validation/
+ * https://leetcode.cn/problems/utf-8-validation/
  */
 public class Problem393_utf8Validation {
 
+    // Simulate time: O(n) space: O(n)
+    // AC
     public static boolean validUtf8(int[] data) {
         if (data == null || data.length <= 0) {
             return false;
@@ -51,14 +53,62 @@ public class Problem393_utf8Validation {
         int len = data.length;
         int idx = 0;
         while (idx < len) {
-            int num = data[idx];
+            int byteNum = data[idx] < 128 ? 1 : getByte(Integer.toBinaryString(data[idx]));
+            if (byteNum > 0) {
+                if (!check(data, idx, byteNum)) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
 
+            idx += byteNum;
+        }
+
+        return true;
+    }
+
+    private static int getByte(String s) {
+        int idx = 0;
+        while (idx < 6 && s.charAt(idx) == '1') {
+            idx++;
+        }
+
+        return idx <= 4 ? idx : -1;
+    }
+
+    private static boolean check(int[] data, int start, int len) {
+        if (len == 1) {
+            return data[start] < 128;
+        }
+
+        if (start + len > data.length) {
+            return false;
+        }
+
+        for (int i = start + 1; i < start + len; i++) {
+            if (data[i] < 128 || data[i] > 191) {
+                return false;
+            }
         }
 
         return true;
     }
 
     public static void main(String[] args) {
+        System.out.println(Integer.toBinaryString(0));
+        System.out.println(Integer.toBinaryString(1));
+        System.out.println(Integer.toBinaryString(127));
+        System.out.println(Integer.toBinaryString(128));
+        System.out.println(Integer.toBinaryString(191));
+        System.out.println(Integer.toBinaryString(255));
+        System.out.println(Integer.toBinaryString(197));
+        System.out.println(Integer.toBinaryString(130));
+        System.out.println(Integer.toBinaryString(235));
 
+        System.out.println("false ?= " + validUtf8(new int[]{237}));
+        System.out.println("true ?= " + validUtf8(new int[]{197, 130, 1}));
+        System.out.println("false ?= " + validUtf8(new int[]{235, 140, 4}));
+        System.out.println("true ?= " + validUtf8(new int[]{230, 136, 145}));
     }
 }
