@@ -45,7 +45,8 @@ import java.util.*;
 public class Problem399_evaluateDivision {
 
     // BFS time: O(n^2 * m) space: O(n)
-    public static double[] calcEquation_bfs(List<List<String>> equations, double[] values, List<List<String>> queries) {
+    // DFS time: O(n^2 * m) space: O(n)
+    public static double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
         Map<String, Map<String, Double>> graph = buildGraph(equations, values);
 
         int len = queries.size();
@@ -60,7 +61,13 @@ public class Problem399_evaluateDivision {
                 continue;
             }
 
-            results[i] = bfs(graph, u, v);
+            if (u.equals(v)) {
+                results[i] = 1.0;
+                continue;
+            }
+
+//            results[i] = bfs(graph, u, v);
+            results[i] = dfs(graph, new HashSet<>(), u, v);
         }
 
         return results;
@@ -116,6 +123,32 @@ public class Problem399_evaluateDivision {
         return -1.0;
     }
 
+    private static double dfs(Map<String, Map<String, Double>> graph, Set<String> visited, String u, String v) {
+        if (graph.get(u).containsKey(v)) {
+            return graph.get(u).get(v);
+        }
+
+        visited.add(u);
+
+        Map<String, Double> map = graph.get(u);
+
+        for (Map.Entry<String, Double> entry : map.entrySet()) {
+            String nextKey = entry.getKey();
+            double nextRatio = entry.getValue();
+
+            if (visited.contains(nextKey)) {
+                continue;
+            }
+
+            double result = dfs(graph, visited, nextKey, v);
+            if (result != -1.0) {
+                return result * nextRatio;
+            }
+        }
+
+        return -1.0;
+    }
+
     private static Map<String, Map<String, Double>> buildGraph(List<List<String>> equations, double[] values) {
         Map<String, Map<String, Double>> graph = new HashMap<>();
 
@@ -137,8 +170,8 @@ public class Problem399_evaluateDivision {
         return graph;
     }
 
-    // BFS time:
-    public static double[] calcEquation_(List<List<String>> equations, double[] values, List<List<String>> queries) {
+    // BFS Opt time:
+    public static double[] calcEquation_bfs_opt(List<List<String>> equations, double[] values, List<List<String>> queries) {
         int len = equations.size();
         Map<String, Integer> varMap = new HashMap<>();
         int varCnt = 0;
@@ -247,8 +280,8 @@ public class Problem399_evaluateDivision {
         eq2.add("c");
 
         List<String> eq3 = new ArrayList<>();
-        eq3.add("a");
         eq3.add("c");
+        eq3.add("d");
 
         List<String> eq4 = new ArrayList<>();
         eq4.add("d");
@@ -260,45 +293,50 @@ public class Problem399_evaluateDivision {
         tst1_eq.add(eq3);
         tst1_eq.add(eq4);
 
-        double[] values1 = new double[]{2.0, 3.0, 6.0, 1.0};
+        double[] values1 = new double[]{2.0, 3.0, 4.0, 5.0};
 
         List<String> q1 = new ArrayList<>();
         q1.add("a");
-        q1.add("c");
+        q1.add("e");
+//        q1.add("c");
 
         List<String> q2 = new ArrayList<>();
+//        q2.add("b");
+//        q2.add("a");
+
+        q2.add("e");
         q2.add("b");
-        q2.add("a");
 
         List<String> q3 = new ArrayList<>();
-        q3.add("a");
-        q3.add("e");
+        q3.add("b");
+        q3.add("d");
 
-        List<String> q4 = new ArrayList<>();
-        q4.add("a");
-        q4.add("a");
-
-        List<String> q5 = new ArrayList<>();
-        q5.add("x");
-        q5.add("x");
-
-        List<String> q6 = new ArrayList<>();
-        q6.add("b");
-        q6.add("c");
-
-        List<String> q7 = new ArrayList<>();
-        q7.add("a");
-        q7.add("d");
+//        List<String> q4 = new ArrayList<>();
+//        q4.add("a");
+//        q4.add("a");
+//
+//        List<String> q5 = new ArrayList<>();
+//        q5.add("x");
+//        q5.add("x");
+//
+//        List<String> q6 = new ArrayList<>();
+//        q6.add("b");
+//        q6.add("c");
+//
+//        List<String> q7 = new ArrayList<>();
+//        q7.add("a");
+//        q7.add("d");
 
         List<List<String>> query = new ArrayList<>();
         query.add(q1);
         query.add(q2);
         query.add(q3);
-        query.add(q4);
-        query.add(q5);
-        query.add(q6);
-        query.add(q7);
+//        query.add(q4);
+//        query.add(q5);
+//        query.add(q6);
+//        query.add(q7);
 
-        System.out.println("[6.00000,0.50000,-1.00000, 1.00000,-1.00000] ?= " + Arrays.toString(calcEquation_bfs(tst1_eq, values1, query)));
+        System.out.println("[6.0, 0.5, -1.0, 1.0, -1.0, 3.0, -1.0] ?= " + Arrays.toString(calcEquation(tst1_eq, values1, query)));
+        System.out.println("[6.0, 0.5, -1.0, 1.0, -1.0, 3.0, -1.0] ?= " + Arrays.toString(calcEquation_bfs_opt(tst1_eq, values1, query)));
     }
 }
