@@ -40,12 +40,94 @@ import java.util.*;
  * 1 <= Cj.length, Dj.length <= 5
  * Ai, Bi, Cj, Dj 由小写英文字母与数字组成
  * <p>
- * https://leetcode.com/problems/evaluate-division/
+ * https://leetcode.cn/problems/evaluate-division/
  */
 public class Problem399_evaluateDivision {
 
-    // BFS
+    // BFS time: O(n^2 * m) space: O(n)
+    // TLE
     public static double[] calcEquation_bfs(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        Map<String, Map<String, Double>> graph = buildGraph(equations, values);
+
+        int len = queries.size();
+        double[] results = new double[len];
+
+        for (int i = 0; i < len; i++) {
+            String u = queries.get(i).get(0);
+            String v = queries.get(i).get(1);
+            results[i] = bfs(graph, u, v);
+        }
+
+        return results;
+    }
+
+    private static double bfs(Map<String, Map<String, Double>> graph, String u, String v) {
+        if (!graph.containsKey(u) || !graph.containsKey(v)) {
+            return -1.0;
+        }
+
+        Set<String> visited = new HashSet<>();
+
+        Queue<String[]> queue = new LinkedList<>();
+        queue.offer(new String[]{u, String.valueOf(1.0)});
+
+        visited.add(u);
+
+        while (!queue.isEmpty()) {
+            String[] cur = queue.poll();
+
+            String curKey = cur[0];
+            double curRatio = Double.parseDouble(cur[1]);
+
+            if (curKey.equals(v)) {
+                return curRatio;
+            }
+
+            Map<String, Double> curMap = graph.get(curKey);
+
+            for (Map.Entry<String, Double> entry : curMap.entrySet()) {
+                String nextKey = entry.getKey();
+                double nextRatio = entry.getValue();
+
+                if (visited.contains(nextKey)) {
+                    continue;
+                }
+
+                if (!graph.containsKey(nextKey)) {
+                    continue;
+                }
+
+                double product = curRatio * nextRatio;
+                queue.offer(new String[]{nextKey, String.valueOf(product)});
+            }
+        }
+
+        return -1.0;
+    }
+
+    private static Map<String, Map<String, Double>> buildGraph(List<List<String>> equations, double[] values) {
+        Map<String, Map<String, Double>> graph = new HashMap<>();
+
+        int len = equations.size();
+
+        for (int i = 0; i < len; i++) {
+            String u = equations.get(i).get(0);
+            String v = equations.get(i).get(1);
+
+            double w = values[i];
+
+            graph.putIfAbsent(u, new HashMap<>());
+            graph.get(u).put(v, w);
+
+            graph.putIfAbsent(v, new HashMap<>());
+            graph.get(v).put(u, 1.0 / w);
+        }
+
+        return graph;
+    }
+
+    // BFS time:
+    public static double[] calcEquation_(List<List<String>> equations, double[] values, List<List<String>> queries) {
         int len = equations.size();
         Map<String, Integer> varMap = new HashMap<>();
         int varCnt = 0;
@@ -145,6 +227,47 @@ public class Problem399_evaluateDivision {
     }
 
     public static void main(String[] args) {
+        List<String> eq1 = new ArrayList<>();
+        eq1.add("a");
+        eq1.add("b");
 
+        List<String> eq2 = new ArrayList<>();
+        eq2.add("b");
+        eq2.add("c");
+
+        List<List<String>> tst1_eq = new ArrayList<>();
+        tst1_eq.add(eq1);
+        tst1_eq.add(eq2);
+
+        double[] values1 = new double[]{2.0, 3.0};
+
+        List<String> q1 = new ArrayList<>();
+        q1.add("a");
+        q1.add("c");
+
+        List<String> q2 = new ArrayList<>();
+        q2.add("b");
+        q2.add("a");
+
+        List<String> q3 = new ArrayList<>();
+        q3.add("a");
+        q3.add("e");
+
+        List<String> q4 = new ArrayList<>();
+        q4.add("a");
+        q4.add("a");
+
+        List<String> q5 = new ArrayList<>();
+        q5.add("x");
+        q5.add("x");
+
+        List<List<String>> query = new ArrayList<>();
+        query.add(q1);
+        query.add(q2);
+        query.add(q3);
+        query.add(q4);
+        query.add(q5);
+
+        System.out.println("[6.00000,0.50000,-1.00000, 1.00000,-1.00000] ?= " + Arrays.toString(calcEquation_bfs(tst1_eq, values1, query)));
     }
 }
