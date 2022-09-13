@@ -45,7 +45,6 @@ import java.util.*;
 public class Problem399_evaluateDivision {
 
     // BFS time: O(n^2 * m) space: O(n)
-    // TLE
     public static double[] calcEquation_bfs(List<List<String>> equations, double[] values, List<List<String>> queries) {
         Map<String, Map<String, Double>> graph = buildGraph(equations, values);
 
@@ -68,6 +67,10 @@ public class Problem399_evaluateDivision {
     }
 
     private static double bfs(Map<String, Map<String, Double>> graph, String u, String v) {
+        if (graph.get(u).containsKey(v)) {
+            return graph.get(u).get(v);
+        }
+
         Set<String> visited = new HashSet<>();
 
         Queue<String[]> queue = new LinkedList<>();
@@ -100,6 +103,12 @@ public class Problem399_evaluateDivision {
                 }
 
                 double product = curRatio * nextRatio;
+
+                if (!graph.get(curKey).containsKey(nextKey)) {
+                    graph.get(curKey).put(nextKey, product);
+                }
+
+                visited.add(nextKey);
                 queue.offer(new String[]{nextKey, String.valueOf(product)});
             }
         }
@@ -237,11 +246,21 @@ public class Problem399_evaluateDivision {
         eq2.add("b");
         eq2.add("c");
 
+        List<String> eq3 = new ArrayList<>();
+        eq3.add("a");
+        eq3.add("c");
+
+        List<String> eq4 = new ArrayList<>();
+        eq4.add("d");
+        eq4.add("e");
+
         List<List<String>> tst1_eq = new ArrayList<>();
         tst1_eq.add(eq1);
         tst1_eq.add(eq2);
+        tst1_eq.add(eq3);
+        tst1_eq.add(eq4);
 
-        double[] values1 = new double[]{2.0, 3.0};
+        double[] values1 = new double[]{2.0, 3.0, 6.0, 1.0};
 
         List<String> q1 = new ArrayList<>();
         q1.add("a");
@@ -263,12 +282,22 @@ public class Problem399_evaluateDivision {
         q5.add("x");
         q5.add("x");
 
+        List<String> q6 = new ArrayList<>();
+        q6.add("b");
+        q6.add("c");
+
+        List<String> q7 = new ArrayList<>();
+        q7.add("a");
+        q7.add("d");
+
         List<List<String>> query = new ArrayList<>();
         query.add(q1);
         query.add(q2);
         query.add(q3);
         query.add(q4);
         query.add(q5);
+        query.add(q6);
+        query.add(q7);
 
         System.out.println("[6.00000,0.50000,-1.00000, 1.00000,-1.00000] ?= " + Arrays.toString(calcEquation_bfs(tst1_eq, values1, query)));
     }
