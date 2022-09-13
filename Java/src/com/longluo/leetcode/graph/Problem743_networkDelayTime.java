@@ -89,6 +89,54 @@ public class Problem743_networkDelayTime {
         return ans;
     }
 
+    // BFS time: O(n^2 + m) space: O(n)
+    // AC
+    public static int networkDelayTime_bfs(int[][] times, int n, int k) {
+        Map<Integer, Map<Integer, Integer>> graph = buildGraph(times);
+
+        int[] costs = new int[n + 1];
+        Arrays.fill(costs, Integer.MAX_VALUE);
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{k, 0});
+
+        costs[k] = 0;
+
+        while (!queue.isEmpty()) {
+            int[] curNode = queue.poll();
+
+            int nodeId = curNode[0];
+            int curTime = curNode[1];
+
+            if (graph.containsKey(nodeId)) {
+                Map<Integer, Integer> nextNodesMap = graph.get(nodeId);
+
+                for (Map.Entry<Integer, Integer> entry : nextNodesMap.entrySet()) {
+                    int nextId = entry.getKey();
+                    int weight = entry.getValue();
+
+                    int newTime = curTime + weight;
+
+                    if (newTime < costs[nextId]) {
+                        costs[nextId] = newTime;
+                        queue.offer(new int[]{nextId, newTime});
+                    }
+                }
+            }
+        }
+
+        int ans = 0;
+        for (int i = 1; i <= n; i++) {
+            if (costs[i] == Integer.MAX_VALUE) {
+                return -1;
+            }
+
+            ans = Math.max(ans, costs[i]);
+        }
+
+        return ans;
+    }
+
     private static Map<Integer, Map<Integer, Integer>> buildGraph(int[][] times) {
         Map<Integer, Map<Integer, Integer>> graph = new HashMap<>();
 
@@ -152,6 +200,8 @@ public class Problem743_networkDelayTime {
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + networkDelayTime_naive_bfs(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
+
+        System.out.println("2 ?= " + networkDelayTime_bfs(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
 
         System.out.println("2 ?= " + networkDelayTime(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
     }
