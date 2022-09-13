@@ -1,6 +1,6 @@
 package com.longluo.leetcode.graph;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * 743. 网络延迟时间
@@ -35,6 +35,74 @@ import java.util.Arrays;
  * https://leetcode.cn/problems/network-delay-time/
  */
 public class Problem743_networkDelayTime {
+
+    // Naive BFS time: O(n^2) space: O(n)
+    // Wrong Answer
+    public static int networkDelayTime_naive_bfs(int[][] times, int n, int k) {
+        Map<Integer, Map<Integer, Integer>> graph = buildGraph(times);
+
+        int[] costs = new int[n + 1];
+        Arrays.fill(costs, -1);
+
+        boolean[] visited = new boolean[n + 1];
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{k, 0});
+
+        visited[k] = true;
+        costs[k] = 0;
+
+        while (!queue.isEmpty()) {
+            int[] curNode = queue.poll();
+
+            int nodeId = curNode[0];
+            int time = curNode[1];
+
+            if (graph.containsKey(nodeId)) {
+                Map<Integer, Integer> nextNodesMap = graph.get(nodeId);
+
+                for (Map.Entry<Integer, Integer> entry : nextNodesMap.entrySet()) {
+                    int nextId = entry.getKey();
+                    int weight = entry.getValue();
+
+                    if (visited[nextId]) {
+                        continue;
+                    }
+
+                    visited[nextId] = true;
+                    int newTime = time + weight;
+                    costs[nextId] = newTime;
+                    queue.offer(new int[]{nextId, newTime});
+                }
+            }
+        }
+
+        int ans = -1;
+        for (int i = 1; i <= n; i++) {
+            if (costs[i] == -1) {
+                return -1;
+            }
+
+            ans = Math.max(ans, costs[i]);
+        }
+
+        return ans;
+    }
+
+    private static Map<Integer, Map<Integer, Integer>> buildGraph(int[][] times) {
+        Map<Integer, Map<Integer, Integer>> graph = new HashMap<>();
+
+        for (int[] time : times) {
+            int u = time[0];
+            int v = time[1];
+            int w = time[2];
+
+            graph.putIfAbsent(u, new HashMap<>());
+            graph.get(u).put(v, w);
+        }
+
+        return graph;
+    }
 
     // Dijkstra time: O(n^2 + m) space: O(n^2)
     public static int networkDelayTime(int[][] times, int n, int k) {
@@ -82,15 +150,9 @@ public class Problem743_networkDelayTime {
         return ans == INF ? -1 : ans;
     }
 
-    // BFS
-    // TODO: 2022/8/27  
-    public static int networkDelayTime_bfs(int[][] times, int n, int k) {
-
-        return -1;
-    }
-
     public static void main(String[] args) {
+        System.out.println("2 ?= " + networkDelayTime_naive_bfs(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
+
         System.out.println("2 ?= " + networkDelayTime(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
-        System.out.println("2 ?= " + networkDelayTime_bfs(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
     }
 }
