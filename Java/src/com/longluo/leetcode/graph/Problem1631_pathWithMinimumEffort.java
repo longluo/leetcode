@@ -35,8 +35,8 @@ import java.util.*;
  */
 public class Problem1631_pathWithMinimumEffort {
 
-    // BFS
-    public static int minimumEffortPath(int[][] heights) {
+    // Navie BFS
+    public static int minimumEffortPath_naiveBFS(int[][] heights) {
         int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
         int m = heights.length;
@@ -66,7 +66,7 @@ public class Problem1631_pathWithMinimumEffort {
 
                     minCost = Math.max(minCost, Math.abs(heights[nextX][nextY] - heights[cur[0]][cur[1]]));
 
-                    if (nextX == m - 1 && nextY == n - 1){
+                    if (nextX == m - 1 && nextY == n - 1) {
                         break;
                     }
 
@@ -77,6 +77,54 @@ public class Problem1631_pathWithMinimumEffort {
         }
 
         return minCost;
+    }
+
+    // Cost BFS time: O(m^2n^2) space: O(mn)
+    public static int minimumEffortPath(int[][] heights) {
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int m = heights.length;
+        int n = heights[0].length;
+
+        int[][] costs = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            Arrays.fill(costs[i], Integer.MAX_VALUE);
+        }
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{0, 0});
+
+        costs[0][0] = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                int[] cur = queue.poll();
+
+                int x = cur[0];
+                int y = cur[1];
+
+                int curCost = costs[x][y];
+
+                for (int[] dir : dirs) {
+                    int nextX = x + dir[0];
+                    int nextY = y + dir[1];
+
+                    if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n) {
+                        continue;
+                    }
+
+                    int newCost = Math.max(curCost, Math.abs(heights[nextX][nextY] - heights[x][y]));
+                    if (newCost < costs[nextX][nextY]) {
+                        costs[nextX][nextY] = newCost;
+                        queue.offer(new int[]{nextX, nextY});
+                    }
+                }
+            }
+        }
+
+        return costs[m - 1][n - 1];
     }
 
     // BFS(Dijkstra) time: O(mnlog(mn)) space: O(mn)
@@ -263,6 +311,9 @@ public class Problem1631_pathWithMinimumEffort {
     }
 
     public static void main(String[] args) {
+        System.out.println("1 ?= " + minimumEffortPath_naiveBFS(new int[][]{{1, 2, 3}, {3, 8, 4}, {5, 3, 5}}));
+
+        System.out.println("9 ?= " + minimumEffortPath(new int[][]{{1, 10, 6, 7, 9, 10, 4, 9}}));
         System.out.println("1 ?= " + minimumEffortPath(new int[][]{{1, 2, 3}, {3, 8, 4}, {5, 3, 5}}));
 
         System.out.println("1 ?= " + minimumEffortPath_bfs(new int[][]{{1, 2, 3}, {3, 8, 4}, {5, 3, 5}}));
