@@ -1,8 +1,6 @@
 package com.longluo.leetcode.trie;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 440. 字典序的第K小数字
@@ -30,7 +28,7 @@ public class Problem440_findKthNumberInLexicographicalOrder {
     public static int findKthNumber_str(int n, int k) {
         String[] numStrs = new String[n];
         for (int i = 1; i <= n; i++) {
-            numStrs[i - 1] = String.valueOf(i - 1);
+            numStrs[i - 1] = String.valueOf(i);
         }
 
         Arrays.sort(numStrs);
@@ -119,14 +117,41 @@ public class Problem440_findKthNumberInLexicographicalOrder {
         return prefix;
     }
 
-    private static int prefixCount(long prefix, int upperBound) {
+    private static int prefixCount_bf(long prefix, int upperBound) {
         if (prefix > upperBound) {
             return 0;
         }
 
         int res = 1;
         for (int i = 0; i < 10; i++) {
-            res += prefixCount(10 * prefix + i, upperBound);
+            res += prefixCount_bf(10 * prefix + i, upperBound);
+        }
+
+        return res;
+    }
+
+    public static int prefixCount(long prefix, int n) {
+        long mask = 1;
+
+        while (prefix * mask <= n) {
+            mask *= 10;
+        }
+
+        return prefixCount(prefix, mask / 10, n);
+    }
+
+    public static int prefixCount(long prefix, long mask, int upperBound) {
+        if (prefix > upperBound) {
+            return 0;
+        }
+
+        if (prefix != upperBound / mask) {
+            return 1 + 10 * prefixCount(prefix * 10 + 0, mask / 10, upperBound);
+        }
+
+        int res = 1;
+        for (int i = 0; i < 10; ++i) {
+            res += prefixCount(prefix * 10 + i, mask / 10, upperBound);
         }
 
         return res;
@@ -167,9 +192,13 @@ public class Problem440_findKthNumberInLexicographicalOrder {
         System.out.println("1 ?= " + findKthNumber_str(1, 1));
         System.out.println("10 ?= " + findKthNumber_str(13, 2));
 
+        System.out.println("19 ?= " + findKthNumber_str(25, 11));
+
         System.out.println("10 ?= " + findKthNumber_dfs(13, 2));
 
         System.out.println("10 ?= " + findKthNumber(13, 2));
+        System.out.println("19 ?= " + findKthNumber(25, 11));
+        System.out.println("21 ?= " + findKthNumber(25, 14));
 
         System.out.println("138377349 ?= " + findKthNumber(804289384, 42641503));
 
