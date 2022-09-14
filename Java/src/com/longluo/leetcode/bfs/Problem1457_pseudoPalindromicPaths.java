@@ -101,11 +101,62 @@ public class Problem1457_pseudoPalindromicPaths {
         return cnt <= 1;
     }
 
+    // DFS time: O(n) space: O(n)
+    public static int pseudoPalindromicPaths_dfs(TreeNode root) {
+        int[] count = new int[10];
+
+        return dfs(root, count);
+    }
+
+    private static int dfs(TreeNode root, int[] count) {
+        if (root == null) {
+            return 0;
+        }
+
+        count[root.val]++;
+
+        int ans = 0;
+
+        if (root.left == null && root.right == null) {
+            if (check(count)) {
+                ans++;
+            }
+
+            count[root.val]--;
+            return ans;
+        }
+
+        int left = 0;
+        int right = 0;
+
+        if (root.left != null) {
+            left = dfs(root.left, count);
+        }
+
+        if (root.right != null) {
+            right = dfs(root.right, count);
+        }
+
+        count[root.val]--;
+        return left + right;
+    }
+
+    private static boolean check(int[] count) {
+        int odd = 0;
+        for (int x : count) {
+            odd += (x & 0x01) == 1 ? 1 : 0;
+        }
+
+        return odd <= 1;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{2, 3, 1, 3, 1, null, 1});
         System.out.println("2 ?= " + pseudoPalindromicPaths(tst1));
+        System.out.println("2 ?= " + pseudoPalindromicPaths_dfs(tst1));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{2, 1, 1, 1, 3, null, null, null, null, null, 1});
         System.out.println("1 ?= " + pseudoPalindromicPaths(tst2));
+        System.out.println("1 ?= " + pseudoPalindromicPaths_dfs(tst2));
     }
 }
