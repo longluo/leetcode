@@ -132,6 +132,37 @@ public class Problem440_findKthNumberInLexicographicalOrder {
         return res;
     }
 
+    public static int findKthNumber_ref(int n, int k) {
+        int prefix = 1;
+        k--;
+        while (k > 0) {
+            int steps = calSteps(n, prefix, prefix + 1);
+
+            if (steps <= k) {
+                prefix += 1;
+                k -= steps;
+            } else {
+                prefix *= 10;
+                k -= 1;
+            }
+        }
+
+        return prefix;
+    }
+
+    //use long in case of overflow
+    public static int calSteps(int n, long n1, long n2) {
+        int steps = 0;
+
+        while (n1 <= n) {
+            steps += Math.min(n + 1, n2) - n1;
+            n1 *= 10;
+            n2 *= 10;
+        }
+
+        return steps;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + findKthNumber_str(1, 1));
         System.out.println("10 ?= " + findKthNumber_str(13, 2));
@@ -139,5 +170,9 @@ public class Problem440_findKthNumberInLexicographicalOrder {
         System.out.println("10 ?= " + findKthNumber_dfs(13, 2));
 
         System.out.println("10 ?= " + findKthNumber(13, 2));
+
+        System.out.println("138377349 ?= " + findKthNumber(804289384, 42641503));
+
+        System.out.println("138377349 ?= " + findKthNumber_ref(804289384, 42641503));
     }
 }
