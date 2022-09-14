@@ -35,11 +35,11 @@ import java.util.*;
  * ai != bi
  * 所有[ai, bi] 互不相同
  * <p>
- * https://leetcode.com/problems/course-schedule-ii/
+ * https://leetcode.cn/problems/course-schedule-ii/
  */
 public class Problem210_findOrder {
 
-    // TODO: 2022/6/7
+    // Topo Sort
     public static int[] findOrder(int numCourses, int[][] prerequisites) {
         if (numCourses < 0 || prerequisites == null || prerequisites.length == 0) {
             return new int[0];
@@ -141,6 +141,13 @@ public class Problem210_findOrder {
         }
 
         return count == nodeNum ? res : new int[0];
+    }
+
+    // TODO: 2022/9/14
+    // https://leetcode.cn/problems/course-schedule-ii/solution/java-jian-dan-hao-li-jie-de-tuo-bu-pai-xu-by-kelly/
+    private static boolean dfs(Map<Integer, Set<Integer>> graph, Map<Integer, Integer> inDegreesMap, int nodeNum) {
+
+        return false;
     }
 
     public static void main(String[] args) {
