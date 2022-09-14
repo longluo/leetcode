@@ -38,32 +38,6 @@ public class Problem440_findKthNumberInLexicographicalOrder {
         return Integer.parseInt(numStrs[k - 1]);
     }
 
-    // PreOrder Tree
-    public static int findKthNumber_tree(int n, int k) {
-
-
-        return 0;
-    }
-
-    private static void buildTree(int n) {
-        int idx = 1;
-
-        Node root = new Node(0);
-        for (int i = 1; i <= 9; i++) {
-
-        }
-    }
-
-    static class Node {
-        int idx;
-        List<Node> children;
-
-        public Node(int idx) {
-            this.idx = idx;
-            this.children = new ArrayList<>();
-        }
-    }
-
     // DFS
     // AC
     static int index = 0;
@@ -127,10 +101,43 @@ public class Problem440_findKthNumberInLexicographicalOrder {
         return res;
     }
 
+    //
+    public static int findKthNumber(int n, int k) {
+        k--;
+        int prefix = 1;
+        while (k > 0) {
+            int cnt = prefixCount(prefix, n);
+            if (k < cnt) {
+                k--;
+                prefix *= 10;
+            } else {
+                k -= cnt;
+                prefix++;
+            }
+        }
+
+        return prefix;
+    }
+
+    private static int prefixCount(long prefix, int upperBound) {
+        if (prefix > upperBound) {
+            return 0;
+        }
+
+        int res = 1;
+        for (int i = 0; i < 10; i++) {
+            res += prefixCount(10 * prefix + i, upperBound);
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + findKthNumber_str(1, 1));
         System.out.println("10 ?= " + findKthNumber_str(13, 2));
 
         System.out.println("10 ?= " + findKthNumber_dfs(13, 2));
+
+        System.out.println("10 ?= " + findKthNumber(13, 2));
     }
 }
