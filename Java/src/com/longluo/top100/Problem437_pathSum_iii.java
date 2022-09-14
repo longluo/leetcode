@@ -1,6 +1,7 @@
 package com.longluo.top100;
 
 import com.longluo.datastructure.TreeNode;
+import com.longluo.datastructure.TreeUtils;
 
 /**
  * 437. 路径总和 III
@@ -22,9 +23,41 @@ import com.longluo.datastructure.TreeNode;
  * -10^9 <= Node.val <= 10^9
  * -1000 <= targetSum <= 1000
  * <p>
- * https://leetcode-cn.com/problems/path-sum-iii/
+ * https://leetcode.cn/problems/path-sum-iii/
  */
 public class Problem437_pathSum_iii {
+
+    // BF DFS time: O(n^2) space: O(n)
+    static int res = 0;
+
+    public static int pathSum_dfs(TreeNode root, int targetSum) {
+        res = 0;
+        traverse(root, targetSum);
+        return res;
+    }
+
+    private static void traverse(TreeNode root, int targetSum) {
+        if (root == null) {
+            return;
+        }
+
+        dfs(root, targetSum);
+        traverse(root.left, targetSum);
+        traverse(root.right, targetSum);
+    }
+
+    private static void dfs(TreeNode root, long remain) {
+        if (root == null) {
+            return;
+        }
+
+        if (remain == root.val) {
+            res++;
+        }
+
+        dfs(root.left, remain - root.val);
+        dfs(root.right, remain - root.val);
+    }
 
     public static int ans = 0;
 
@@ -56,6 +89,12 @@ public class Problem437_pathSum_iii {
     }
 
     public static void main(String[] args) {
+        TreeNode tst1 = TreeUtils.constructTree(new Integer[]{10, 5, -3, 3, 2, null, 11, 3, -2, null, 1});
+        System.out.println("3 ?= " + pathSum_dfs(tst1, 8));
+        System.out.println("3 ?= " + pathSum(tst1, 8));
 
+        TreeNode tst2 = TreeUtils.constructTree(new Integer[]{1, -2, -3, 1, 3, -2, null, -1});
+        TreeUtils.printTree(tst2);
+        System.out.println("4 ?= " + pathSum_dfs(tst2, -1));
     }
 }
