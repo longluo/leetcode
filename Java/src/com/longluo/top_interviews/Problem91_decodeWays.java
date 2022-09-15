@@ -1,5 +1,8 @@
 package com.longluo.top_interviews;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 91. 解码方法
  * <p>
@@ -45,24 +48,59 @@ package com.longluo.top_interviews;
  * 1 <= s.length <= 100
  * s 只包含数字，并且可能包含前导零。
  * <p>
- * https://leetcode.com/problems/decode-ways/
+ * https://leetcode.cn/problems/decode-ways/
  */
 public class Problem91_decodeWays {
 
-    //
-    public static int numDecodings(String s) {
+    // Backtrack time: O(2^n) space: O(n)
+    // TLE
+    public static int numDecodings_backtrack(String s) {
+        List<String> ans = new ArrayList<>();
+
+        backtrack(ans, new StringBuilder(), s, 0);
+
+        return ans.size();
+    }
+
+    private static void backtrack(List<String> res, StringBuilder path, String s, int idx) {
+        int len = s.length();
+
+        if (idx == len) {
+            res.add(path.toString());
+            return;
+        }
+
+        if (s.charAt(idx) == '0') {
+            return;
+        }
+
+        int digit = s.charAt(idx) - '0' - 1;
+        path.append((char) ('A' + digit));
+        backtrack(res, path, s, idx + 1);
+        path.deleteCharAt(path.length() - 1);
+
+        if (idx < len - 1) {
+            digit = Integer.parseInt(s.substring(idx, idx + 2));
+            if (digit <= 26) {
+                path.append((char) ('A' + digit - 1));
+                backtrack(res, path, s, idx + 2);
+                path.deleteCharAt(path.length() - 1);
+            }
+        }
+    }
+
+    // DP time: O(n) space: O(n)
+    public static int numDecodings_dp(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
 
-        if (s.charAt(0) == '0') {
-            return 0;
-        }
+        int len = s.length();
 
-        int length = s.length();
-        int[] dp = new int[length + 1];
+        int[] dp = new int[len + 1];
         dp[0] = 1;
-        for (int i = 1; i <= length; i++) {
+
+        for (int i = 1; i <= len; i++) {
             if (s.charAt(i - 1) != '0') {
                 dp[i] = dp[i - 1];
             }
@@ -72,16 +110,19 @@ public class Problem91_decodeWays {
             }
         }
 
-        return dp[length];
+        return dp[len];
     }
 
     public static void main(String[] args) {
-        System.out.println("2 ?= " + numDecodings("12"));
-        System.out.println("3 ?= " + numDecodings("226"));
-        System.out.println("0 ?= " + numDecodings("0"));
-        System.out.println("0 ?= " + numDecodings("06"));
-        System.out.println("1 ?= " + numDecodings("10"));
-        System.out.println("1 ?= " + numDecodings("2101"));
-        System.out.println("5 ?= " + numDecodings("1123")); // 1 1 2 3  11 2 3  1 12 3  1 1 23   11 23
+        System.out.println("2 ?= " + numDecodings_backtrack("12"));
+        System.out.println("3 ?= " + numDecodings_backtrack("226"));
+
+        System.out.println("2 ?= " + numDecodings_dp("12"));
+        System.out.println("3 ?= " + numDecodings_dp("226"));
+        System.out.println("0 ?= " + numDecodings_dp("0"));
+        System.out.println("0 ?= " + numDecodings_dp("06"));
+        System.out.println("1 ?= " + numDecodings_dp("10"));
+        System.out.println("1 ?= " + numDecodings_dp("2101"));
+        System.out.println("5 ?= " + numDecodings_dp("1123")); // 1 1 2 3  11 2 3  1 12 3  1 1 23   11 23
     }
 }
