@@ -105,6 +105,7 @@ public class Problem440_findKthNumberInLexicographicalOrder {
         int prefix = 1;
         while (k > 0) {
             int cnt = prefixCount(prefix, n);
+//            int cnt = prefixCount_bf(prefix, n);
             if (k < cnt) {
                 k--;
                 prefix *= 10;
@@ -196,6 +197,7 @@ public class Problem440_findKthNumberInLexicographicalOrder {
 
         System.out.println("10 ?= " + findKthNumber_dfs(13, 2));
 
+        System.out.println("7 ?= " + findKthNumber(13, 11));
         System.out.println("10 ?= " + findKthNumber(13, 2));
         System.out.println("19 ?= " + findKthNumber(25, 11));
         System.out.println("21 ?= " + findKthNumber(25, 14));
