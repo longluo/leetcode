@@ -89,6 +89,33 @@ public class Problem91_decodeWays {
         }
     }
 
+    // DFS
+    // TLE
+    public static int numDecodings_dfs(String s) {
+        return dfs(s, 0);
+    }
+
+    private static int dfs(String s, int idx) {
+        int len = s.length();
+        if (idx == len) {
+            return 1;
+        }
+
+        if (s.charAt(idx) == '0') {
+            return 0;
+        }
+
+        int ans = dfs(s, idx + 1);
+        if (idx < len - 1) {
+            int digit = Integer.parseInt(s.substring(idx, idx + 2));
+            if (digit <= 26) {
+                ans += dfs(s, idx + 2);
+            }
+        }
+
+        return ans;
+    }
+
     // DP time: O(n) space: O(n)
     public static int numDecodings_dp(String s) {
         if (s == null || s.length() == 0) {
@@ -117,6 +144,11 @@ public class Problem91_decodeWays {
         System.out.println("2 ?= " + numDecodings_backtrack("12"));
         System.out.println("3 ?= " + numDecodings_backtrack("226"));
 
+        System.out.println("2 ?= " + numDecodings_dfs("12"));
+        System.out.println("3 ?= " + numDecodings_dfs("226"));
+
+        System.out.println("1836311903 ?= " + numDecodings_dfs("111111111111111111111111111111111111111111111"));
+
         System.out.println("2 ?= " + numDecodings_dp("12"));
         System.out.println("3 ?= " + numDecodings_dp("226"));
         System.out.println("0 ?= " + numDecodings_dp("0"));
@@ -124,5 +156,7 @@ public class Problem91_decodeWays {
         System.out.println("1 ?= " + numDecodings_dp("10"));
         System.out.println("1 ?= " + numDecodings_dp("2101"));
         System.out.println("5 ?= " + numDecodings_dp("1123")); // 1 1 2 3  11 2 3  1 12 3  1 1 23   11 23
+
+        System.out.println("1836311903 ?= " + numDecodings_dp("111111111111111111111111111111111111111111111"));
     }
 }
