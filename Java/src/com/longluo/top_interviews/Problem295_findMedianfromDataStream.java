@@ -29,38 +29,53 @@ import java.util.List;
  * 如果数据流中所有整数都在0到100范围内，你将如何优化你的算法？
  * 如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？
  * <p>
- * https://leetcode.com/problems/find-median-from-data-stream/
+ * https://leetcode.cn/problems/find-median-from-data-stream/
  */
 public class Problem295_findMedianfromDataStream {
 
-    class MedianFinder {
-        List<Integer> list = new LinkedList<>();
+    // BF time: O(nlogn) space: O(n)
+    static class MedianFinder {
+        List<Integer> nums;
 
         /**
          * initialize your data structure here.
          */
         public MedianFinder() {
+            nums = new ArrayList<>();
         }
 
         public void addNum(int num) {
-            list.add(num);
-            Collections.sort(list);
+            nums.add(num);
         }
 
         public double findMedian() {
-            if (list.size() % 2 == 0) {
-                double sum = list.get(list.size() / 2 - 1) + list.get(list.size() / 2);
+            Collections.sort(nums);
+
+            int len = nums.size();
+
+            double sum = nums.get(len / 2);
+
+            if (len % 2 == 0) {
+                sum += nums.get(len / 2 - 1);
                 return sum / 2;
-            } else {
-                return list.get(list.size() / 2);
             }
+
+            return sum;
         }
     }
 
-/**
- * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder obj = new MedianFinder();
- * obj.addNum(num);
- * double param_2 = obj.findMedian();
- */
+    /**
+     * Your MedianFinder object will be instantiated and called as such:
+     * MedianFinder obj = new MedianFinder();
+     * obj.addNum(num);
+     * double param_2 = obj.findMedian();
+     */
+    public static void main(String[] args) {
+        MedianFinder tst1 = new MedianFinder();
+        tst1.addNum(2);
+        tst1.addNum(3);
+        System.out.println(tst1.findMedian());
+        tst1.addNum(5);
+        System.out.println(tst1.findMedian());
+    }
 }
