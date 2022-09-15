@@ -68,6 +68,42 @@ public class Problem2007_findOriginalArray {
         return ans;
     }
 
+    // Sort + Map
+    public static int[] findOriginalArray_map(int[] changed) {
+        int len = changed.length;
+        if (len % 2 == 1) {
+            return new int[]{};
+        }
+
+        Arrays.sort(changed);
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int x : changed) {
+            map.put(x, map.getOrDefault(x, 0) + 1);
+        }
+
+        int[] ans = new int[len / 2];
+        int idx = 0;
+        for (int x : changed) {
+            int doubled = 2 * x;
+            if (map.getOrDefault(x, 0) > 0) {
+                ans[idx++] = x;
+                map.put(x, map.get(x) - 1);
+                if (map.get(x) == 0) {
+                    map.remove(x);
+                }
+
+                if (map.getOrDefault(doubled, 0) > 0) {
+                    map.put(doubled, map.get(doubled) - 1);
+                } else {
+                    return new int[]{};
+                }
+            }
+        }
+
+        return idx == len / 2 ? ans : new int[]{};
+    }
+
     // Sort + Queue time: O(nlogn) space: O(n)
     public static int[] findOriginalArray_queue(int[] changed) {
         int len = changed.length;
@@ -97,6 +133,9 @@ public class Problem2007_findOriginalArray {
     public static void main(String[] args) {
         System.out.println("[1, 3, 4] ?= " + Arrays.toString(findOriginalArray(new int[]{1, 3, 4, 2, 6, 8})));
         System.out.println("[] ?= " + Arrays.toString(findOriginalArray(new int[]{5, 0})));
+
+        System.out.println("[1, 3, 4] ?= " + Arrays.toString(findOriginalArray_map(new int[]{1, 3, 4, 2, 6, 8})));
+        System.out.println("[] ?= " + Arrays.toString(findOriginalArray_map(new int[]{6, 3, 0, 1})));
 
         System.out.println("[1, 3, 4] ?= " + Arrays.toString(findOriginalArray_queue(new int[]{1, 3, 4, 2, 6, 8})));
         System.out.println("[] ?= " + Arrays.toString(findOriginalArray_queue(new int[]{5, 0})));
