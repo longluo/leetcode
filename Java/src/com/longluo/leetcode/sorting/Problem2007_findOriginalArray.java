@@ -1,8 +1,6 @@
 package com.longluo.leetcode.sorting;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 2007. 从双倍数组中还原原数组
@@ -38,7 +36,7 @@ import java.util.Map;
  */
 public class Problem2007_findOriginalArray {
 
-    // Sort time: O(nlogn) space: O(n)
+    // Sort + HashMap time: O(nlogn) space: O(n)
     public static int[] findOriginalArray(int[] changed) {
         int len = changed.length;
         if (len % 2 == 1) {
@@ -70,8 +68,37 @@ public class Problem2007_findOriginalArray {
         return ans;
     }
 
+    // Sort + Queue time: O(nlogn) space: O(n)
+    public static int[] findOriginalArray_queue(int[] changed) {
+        int len = changed.length;
+        if (len % 2 == 1) {
+            return new int[]{};
+        }
+
+        Arrays.sort(changed);
+
+        Queue<Integer> queue = new ArrayDeque<>();
+
+        int[] ans = new int[len / 2];
+        int idx = 0;
+        for (int i = 0; i < len; i++) {
+            if (queue.isEmpty()) {
+                queue.offer(changed[i]);
+            } else if (queue.peek() * 2 == changed[i]) {
+                ans[idx++] = queue.poll();
+            } else {
+                queue.offer(changed[i]);
+            }
+        }
+
+        return queue.isEmpty() ? ans : new int[]{};
+    }
+
     public static void main(String[] args) {
         System.out.println("[1, 3, 4] ?= " + Arrays.toString(findOriginalArray(new int[]{1, 3, 4, 2, 6, 8})));
         System.out.println("[] ?= " + Arrays.toString(findOriginalArray(new int[]{5, 0})));
+
+        System.out.println("[1, 3, 4] ?= " + Arrays.toString(findOriginalArray_queue(new int[]{1, 3, 4, 2, 6, 8})));
+        System.out.println("[] ?= " + Arrays.toString(findOriginalArray_queue(new int[]{5, 0})));
     }
 }
