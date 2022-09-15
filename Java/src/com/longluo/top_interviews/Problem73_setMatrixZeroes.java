@@ -48,12 +48,12 @@ public class Problem73_setMatrixZeroes {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (matrix[i][j] == 0) {
-                    for (int k = 0; k < n; k++) {
-                        copyMat[i][k] = 0;
-                    }
-
                     for (int k = 0; k < m; k++) {
                         copyMat[k][j] = 0;
+                    }
+
+                    for (int k = 0; k < n; k++) {
+                        copyMat[i][k] = 0;
                     }
                 }
             }
@@ -66,29 +66,27 @@ public class Problem73_setMatrixZeroes {
         }
     }
 
+    // Better time: O(mn) space: O(m+n)
     public static void setZeroes(int[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return;
-        }
+        int m = matrix.length;
+        int n = matrix[0].length;
 
-        int row = matrix.length;
-        int col = matrix[0].length;
+        // use to store the row and col to set to 0.
+        boolean[] rows = new boolean[m];
+        boolean[] cols = new boolean[n];
 
-        boolean[] rowFlg = new boolean[row];
-        boolean[] colFlg = new boolean[col];
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (matrix[i][j] == 0) {
-                    rowFlg[i] = true;
-                    colFlg[j] = true;
+                    rows[i] = true;
+                    cols[j] = true;
                 }
             }
         }
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (rowFlg[i] || colFlg[j]) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (rows[i] || cols[j]) {
                     matrix[i][j] = 0;
                 }
             }
@@ -139,6 +137,7 @@ public class Problem73_setMatrixZeroes {
     public static void main(String[] args) {
         int[][] test1 = new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
         setZeroes_bf(test1);
+        setZeroes(test1);
         System.out.println("[[1, 0, 1],[0, 0, 0],[1, 0, 1]] ?= " + Arrays.deepToString(test1));
 
         int[][] test2 = new int[][]{{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}};
