@@ -1,7 +1,9 @@
 package com.longluo.top100;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 416. 分割等和子集
@@ -89,6 +91,31 @@ public class Problem416_partitionEqualSubsetSum {
         return flag;
     }
 
+    // HashSet time: O(2^n) space: O(2^n)
+    // AC
+    public static boolean canPartition_set(int[] nums) {
+        int sum = 0;
+        for (int x : nums) {
+            sum += x;
+        }
+
+        if (sum % 2 == 1) {
+            return false;
+        }
+
+        Set<Integer> sumsSet = new HashSet<>();
+        sumsSet.add(0);
+
+        for (int num : nums) {
+            List<Integer> sumList = new ArrayList<>(sumsSet);
+            for (int x : sumList) {
+                sumsSet.add(x + num);
+            }
+        }
+
+        return sumsSet.contains(sum / 2);
+    }
+
     // DP
     public static boolean canPartition_dp(int[] nums) {
         if (nums.length < 2) {
@@ -114,5 +141,8 @@ public class Problem416_partitionEqualSubsetSum {
     public static void main(String[] args) {
         System.out.println("true ?= " + canPartition_bt(new int[]{1, 5, 11, 5}));
         System.out.println("false ?= " + canPartition_bt(new int[]{1, 2, 3, 5}));
+
+        System.out.println("true ?= " + canPartition_set(new int[]{1, 5, 11, 5}));
+        System.out.println("false ?= " + canPartition_set(new int[]{1, 2, 3, 5}));
     }
 }
