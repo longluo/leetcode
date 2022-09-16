@@ -78,12 +78,10 @@ public class Problem295_findMedianfromDataStream {
                 if (queueMax.size() + 1 < queueMin.size()) {
                     queueMax.offer(queueMin.poll());
                 }
-            }
-
-            if (num > queueMin.peek()) {
+            } else {
                 queueMax.offer(num);
 
-                if (queueMin.size() + 1 <= queueMax.size()) {
+                if (queueMin.size() < queueMax.size()) {
                     queueMin.offer(queueMax.poll());
                 }
             }
