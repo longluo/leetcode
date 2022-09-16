@@ -116,7 +116,7 @@ public class Problem416_partitionEqualSubsetSum {
         return sumsSet.contains(sum / 2);
     }
 
-    // DP
+    // DP time: O(n^2) space: O(n)
     public static boolean canPartition_dp(int[] nums) {
         if (nums.length < 2) {
             return false;
@@ -132,10 +132,20 @@ public class Problem416_partitionEqualSubsetSum {
             return false;
         }
 
-        int[] dp = new int[len];
+        boolean[][] dp = new boolean[len + 1][sum / 2 + 1];
+        dp[0][0] = true;
 
+        for (int i = 1; i <= len; i++) {
+            for (int j = 1; j <= sum / 2; j++) {
+                if (j - nums[i - 1] >= 0) {
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
 
-        return false;
+        return dp[len][sum / 2];
     }
 
     public static void main(String[] args) {
@@ -144,5 +154,8 @@ public class Problem416_partitionEqualSubsetSum {
 
         System.out.println("true ?= " + canPartition_set(new int[]{1, 5, 11, 5}));
         System.out.println("false ?= " + canPartition_set(new int[]{1, 2, 3, 5}));
+
+        System.out.println("true ?= " + canPartition_dp(new int[]{1, 5, 11, 5}));
+        System.out.println("false ?= " + canPartition_dp(new int[]{1, 2, 3, 5}));
     }
 }
