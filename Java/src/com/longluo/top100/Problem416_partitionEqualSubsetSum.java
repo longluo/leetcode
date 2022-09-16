@@ -116,7 +116,7 @@ public class Problem416_partitionEqualSubsetSum {
         return sumsSet.contains(sum / 2);
     }
 
-    // DP time: O(n^2) space: O(n)
+    // DP time: O(n^sum) space: O(n*sum)
     public static boolean canPartition_dp(int[] nums) {
         if (nums.length < 2) {
             return false;
@@ -136,7 +136,7 @@ public class Problem416_partitionEqualSubsetSum {
         dp[0][0] = true;
 
         for (int i = 1; i <= len; i++) {
-            for (int j = 1; j <= sum / 2; j++) {
+            for (int j = 0; j <= sum / 2; j++) {
                 if (j - nums[i - 1] >= 0) {
                     dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
                 } else {
@@ -148,6 +148,42 @@ public class Problem416_partitionEqualSubsetSum {
         return dp[len][sum / 2];
     }
 
+    // DP Opt time: O(n^sum) space: O(sum)
+    public static boolean canPartition_dp_opt(int[] nums) {
+        if (nums.length < 2) {
+            return false;
+        }
+
+        int len = nums.length;
+        int sum = 0;
+        for (int x : nums) {
+            sum += x;
+        }
+
+        if (sum % 2 == 1) {
+            return false;
+        }
+
+        boolean[][] dp = new boolean[2][sum / 2 + 1];
+        dp[0][0] = true;
+
+        for (int i = 1; i <= len; i++) {
+            for (int j = 0; j <= sum / 2; j++) {
+                if (j - nums[i - 1] >= 0) {
+                    dp[1][j] = dp[0][j] || dp[0][j - nums[i - 1]];
+                } else {
+                    dp[1][j] = dp[0][j];
+                }
+            }
+
+            for (int k = 0; k <= sum / 2; k++) {
+                dp[0][k] = dp[1][k];
+            }
+        }
+
+        return dp[1][sum / 2];
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + canPartition_bt(new int[]{1, 5, 11, 5}));
         System.out.println("false ?= " + canPartition_bt(new int[]{1, 2, 3, 5}));
@@ -155,7 +191,12 @@ public class Problem416_partitionEqualSubsetSum {
         System.out.println("true ?= " + canPartition_set(new int[]{1, 5, 11, 5}));
         System.out.println("false ?= " + canPartition_set(new int[]{1, 2, 3, 5}));
 
+        System.out.println("false ?= " + canPartition_dp(new int[]{1, 2, 5}));
         System.out.println("true ?= " + canPartition_dp(new int[]{1, 5, 11, 5}));
         System.out.println("false ?= " + canPartition_dp(new int[]{1, 2, 3, 5}));
+
+        System.out.println("false ?= " + canPartition_dp_opt(new int[]{1, 2, 5}));
+        System.out.println("true ?= " + canPartition_dp_opt(new int[]{1, 5, 11, 5}));
+        System.out.println("false ?= " + canPartition_dp_opt(new int[]{1, 2, 3, 5}));
     }
 }
