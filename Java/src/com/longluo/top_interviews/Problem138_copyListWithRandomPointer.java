@@ -38,7 +38,7 @@ import java.util.Map;
  * -10000 <= Node.val <= 10000
  * Node.random 为空（null）或指向链表中的节点。
  * <p>
- * https://leetcode.com/problems/copy-list-with-random-pointer/
+ * https://leetcode.cn/problems/copy-list-with-random-pointer/
  */
 public class Problem138_copyListWithRandomPointer {
 
@@ -55,6 +55,24 @@ public class Problem138_copyListWithRandomPointer {
         }
     }
 
+    // Only copy Nodes
+    public static Node copyRandomList_bf(Node head) {
+        if (head == null) {
+            return head;
+        }
+
+        Node dummyNode = new Node(head.val);
+        Node pNode = dummyNode;
+
+        while (head.next != null) {
+            head = head.next;
+            pNode.next = new Node(head.val);
+            pNode = pNode.next;
+        }
+
+        return dummyNode;
+    }
+
     public static Node copyRandomList(Node head) {
         if (head == null) {
             return null;
@@ -66,26 +84,31 @@ public class Problem138_copyListWithRandomPointer {
         Map<Integer, Node> map = new HashMap<>();
         Map<Integer, Integer> valMap = new HashMap<>();
 
-        Node dummy = q;
+        Node dummyNode = q;
         while (p != null) {
             valMap.put(head.val, head.random.val);
             Node node = new Node(p.val);
             p = p.next;
             map.put(head.val, node);
-            dummy = dummy.next;
+            dummyNode = dummyNode.next;
         }
 
-        dummy = q;
-        while (dummy.next != null) {
-            int index = valMap.get(dummy.next.val);
+        dummyNode = q;
+        while (dummyNode.next != null) {
+            int index = valMap.get(dummyNode.next.val);
             Node node = map.get(index);
-            dummy.random = node;
+            dummyNode.random = node;
         }
 
         return q;
     }
 
     public static void main(String[] args) {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        n1.next = n2;
+        n2.random = n2;
 
+        System.out.println(copyRandomList_bf(n1));
     }
 }
