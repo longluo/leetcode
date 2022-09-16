@@ -52,6 +52,30 @@ import java.util.List;
  */
 public class Problem91_decodeWays {
 
+    // Recursion time: O(2^n) space: O(n)
+    public static int numDecodings(String s) {
+        return numDecodings(s, 0);
+    }
+
+    private static int numDecodings(String s, int idx) {
+        if (idx == s.length()) {
+            return 1;
+        }
+
+        if (s.charAt(idx) == '0') {
+            return 0;
+        }
+
+        int ans = numDecodings(s, idx + 1);
+        if (idx < s.length() - 1) {
+            if (Integer.parseInt(s.substring(idx, idx + 2)) <= 26) {
+                ans += numDecodings(s, idx + 2);
+            }
+        }
+
+        return ans;
+    }
+
     // Backtrack time: O(2^n) space: O(n)
     // TLE
     public static int numDecodings_backtrack(String s) {
@@ -141,13 +165,21 @@ public class Problem91_decodeWays {
     }
 
     public static void main(String[] args) {
+        System.out.println("1 ?= " + numDecodings("10"));
+        System.out.println("2 ?= " + numDecodings("12"));
+        System.out.println("3 ?= " + numDecodings("226"));
+        System.out.println("9 ?= " + numDecodings("123123"));
+        // 1 2 3 1 2 3
+        // 12 3 1 2 3
+        // 1 23 1 2 3
+
         System.out.println("2 ?= " + numDecodings_backtrack("12"));
         System.out.println("3 ?= " + numDecodings_backtrack("226"));
 
         System.out.println("2 ?= " + numDecodings_dfs("12"));
         System.out.println("3 ?= " + numDecodings_dfs("226"));
 
-        System.out.println("1836311903 ?= " + numDecodings_dfs("111111111111111111111111111111111111111111111"));
+//        System.out.println("1836311903 ?= " + numDecodings_dfs("111111111111111111111111111111111111111111111"));
 
         System.out.println("2 ?= " + numDecodings_dp("12"));
         System.out.println("3 ?= " + numDecodings_dp("226"));
