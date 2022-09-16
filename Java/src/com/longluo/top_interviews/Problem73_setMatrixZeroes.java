@@ -93,28 +93,40 @@ public class Problem73_setMatrixZeroes {
         }
     }
 
-    public static void setZeroes_2(int[][] matrix) {
+    // Use Row 0 & Column 0 to store the i & j
+    // time: O(mn) space: O(1)
+    public static void setZeroes_space(int[][] matrix) {
         int m = matrix.length;
         int n = matrix[0].length;
-        boolean flag_col0 = false;
+
         boolean flag_row0 = false;
+        boolean flag_col0 = false;
+
+        // Col 0 should set to 0
         for (int i = 0; i < m; i++) {
             if (matrix[i][0] == 0) {
                 flag_col0 = true;
             }
         }
+
+        // Row 0 should set to 0
         for (int j = 0; j < n; j++) {
             if (matrix[0][j] == 0) {
                 flag_row0 = true;
             }
         }
+
+        // Row 0 to store the column index
+        // Col 0 to store the row index
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++) {
                 if (matrix[i][j] == 0) {
-                    matrix[i][0] = matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
                 }
             }
         }
+
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++) {
                 if (matrix[i][0] == 0 || matrix[0][j] == 0) {
@@ -122,11 +134,13 @@ public class Problem73_setMatrixZeroes {
                 }
             }
         }
+
         if (flag_col0) {
             for (int i = 0; i < m; i++) {
                 matrix[i][0] = 0;
             }
         }
+
         if (flag_row0) {
             for (int j = 0; j < n; j++) {
                 matrix[0][j] = 0;
@@ -141,7 +155,7 @@ public class Problem73_setMatrixZeroes {
         System.out.println("[[1, 0, 1],[0, 0, 0],[1, 0, 1]] ?= " + Arrays.deepToString(test1));
 
         int[][] test2 = new int[][]{{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}};
-        setZeroes_2(test2);
+        setZeroes_space(test2);
         System.out.println("[[0,0,0,0],[0,4,5,0],[0,3,1,0]] ?= " + ArrayUtils.print2DArray(test2));
     }
 }
