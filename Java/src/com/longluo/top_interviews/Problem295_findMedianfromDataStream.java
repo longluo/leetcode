@@ -1,9 +1,6 @@
 package com.longluo.top_interviews;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 295. 数据流的中位数
@@ -64,6 +61,43 @@ public class Problem295_findMedianfromDataStream {
         }
     }
 
+    // PriorityQueue time: O(logn) space: O(n)
+    static class MedianFinder_pq {
+        PriorityQueue<Integer> queueMin;
+        PriorityQueue<Integer> queueMax;
+
+        public MedianFinder_pq() {
+            queueMin = new PriorityQueue<>((a, b) -> b - a);
+            queueMax = new PriorityQueue<>(((a, b) -> a - b));
+        }
+
+        public void addNum(int num) {
+            if (queueMin.isEmpty() || num <= queueMin.peek()) {
+                queueMin.offer(num);
+
+                if (queueMax.size() + 1 < queueMin.size()) {
+                    queueMax.offer(queueMin.poll());
+                }
+            }
+
+            if (num > queueMin.peek()) {
+                queueMax.offer(num);
+
+                if (queueMin.size() + 1 <= queueMax.size()) {
+                    queueMin.offer(queueMax.poll());
+                }
+            }
+        }
+
+        public double findMedian() {
+            if (queueMin.size() > queueMax.size()) {
+                return queueMin.peek();
+            }
+
+            return (queueMin.peek() + queueMax.peek()) / 2.0;
+        }
+    }
+
     /**
      * Your MedianFinder object will be instantiated and called as such:
      * MedianFinder obj = new MedianFinder();
@@ -77,5 +111,12 @@ public class Problem295_findMedianfromDataStream {
         System.out.println(tst1.findMedian());
         tst1.addNum(5);
         System.out.println(tst1.findMedian());
+
+        MedianFinder_pq tst2 = new MedianFinder_pq();
+        tst2.addNum(1);
+        tst2.addNum(2);
+        System.out.println(tst2.findMedian());
+        tst2.addNum(3);
+        System.out.println(tst2.findMedian());
     }
 }
