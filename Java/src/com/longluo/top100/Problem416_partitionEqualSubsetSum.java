@@ -22,12 +22,12 @@ import java.util.List;
  * 1 <= nums.length <= 200
  * 1 <= nums[i] <= 100
  * <p>
- * https://leetcode.com/problems/partition-equal-subset-sum/
+ * https://leetcode.cn/problems/partition-equal-subset-sum/
  */
 public class Problem416_partitionEqualSubsetSum {
 
     // Backtracking time: O(2^n) space: O(n)
-    // TimeOut
+    // TLE
     public static boolean canPartition_bt(int[] nums) {
         int len = nums.length;
         if (len < 2) {
@@ -43,10 +43,11 @@ public class Problem416_partitionEqualSubsetSum {
             return false;
         }
 
-        return backtrack(nums, new ArrayList<>(), 0, sum / 2);
+//        return backtrack(nums, new ArrayList<>(), 0, sum / 2);
+        return backtrack(nums, 0, sum / 2);
     }
 
-    public static boolean backtrack(int[] nums, List<Integer> list, int idx, int remain) {
+    private static boolean backtrack(int[] nums, List<Integer> list, int idx, int remain) {
         if (remain == 0) {
             return true;
         }
@@ -63,6 +64,26 @@ public class Problem416_partitionEqualSubsetSum {
                 break;
             }
             list.remove(list.size() - 1);
+        }
+
+        return flag;
+    }
+
+    private static boolean backtrack(int[] nums, int idx, int remain) {
+        if (remain == 0) {
+            return true;
+        }
+
+        boolean flag = false;
+        for (int i = idx; i < nums.length; i++) {
+            if (nums[i] > remain) {
+                continue;
+            }
+
+            flag = backtrack(nums, i + 1, remain - nums[i]);
+            if (flag) {
+                break;
+            }
         }
 
         return flag;
