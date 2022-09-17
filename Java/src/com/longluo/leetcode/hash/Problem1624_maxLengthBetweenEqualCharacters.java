@@ -1,5 +1,7 @@
 package com.longluo.leetcode.hash;
 
+import java.util.Arrays;
+
 /**
  * 1624. 两个相同字符之间的最长子字符串
  * <p>
@@ -54,8 +56,29 @@ public class Problem1624_maxLengthBetweenEqualCharacters {
         return ans;
     }
 
+    // Count Opt time: O(n) space: O(26)
+    public static int maxLengthBetweenEqualCharacters_opt(String s) {
+        int[] count = new int[26];
+        Arrays.fill(count, -1);
+
+        int ans = -1;
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            if (count[ch - 'a'] >= 0) {
+                ans = Math.max(ans, i - count[ch - 'a'] - 1);
+            } else {
+                count[ch - 'a'] = i;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + maxLengthBetweenEqualCharacters("abca"));
         System.out.println("-1 ?= " + maxLengthBetweenEqualCharacters("cbzxy"));
+
+        System.out.println("-1 ?= " + maxLengthBetweenEqualCharacters_opt("cbzxy"));
     }
 }
