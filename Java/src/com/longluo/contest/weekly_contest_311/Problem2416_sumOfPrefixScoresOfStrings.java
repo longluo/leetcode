@@ -73,15 +73,11 @@ public class Problem2416_sumOfPrefixScoresOfStrings {
         return ans;
     }
 
-    public static int[] sumPrefixScores_(String[] words) {
+    // Opt time: O(n^3) space: O(n)
+    // TLE
+    public static int[] sumPrefixScores_opt(String[] words) {
         int len = words.length;
         int[] res = new int[len];
-
-//        Trie trie = new Trie();
-
-//        for (String word : words) {
-//            trie.insert(word);
-//        }
 
         for (int i = 0; i < len; i++) {
             String word = words[i];
@@ -101,6 +97,7 @@ public class Problem2416_sumOfPrefixScoresOfStrings {
         return res;
     }
 
+    // Trie time: O(L) space: O(n)
     public static int[] sumPrefixScores_trie(String[] words) {
         int len = words.length;
         int[] res = new int[len];
@@ -111,16 +108,7 @@ public class Problem2416_sumOfPrefixScoresOfStrings {
         }
 
         for (int i = 0; i < len; i++) {
-            String word = words[i];
-            res[i] = word.length();
-
-            int size = word.length();
-            for (int j = 1; j <= size; j++) {
-                String prefix = word.substring(0, j);
-                if (trie.search(prefix)) {
-                    res[i]++;
-                }
-            }
+            res[i] = trie.query(words[i]);
         }
 
         return res;
@@ -128,11 +116,11 @@ public class Problem2416_sumOfPrefixScoresOfStrings {
 
     // Trie
     static class Trie {
-        boolean isEnd;
+        int value;
         Trie next[];
 
         public Trie() {
-            isEnd = false;
+            value = 0;
             next = new Trie[26];
         }
 
@@ -144,40 +132,34 @@ public class Problem2416_sumOfPrefixScoresOfStrings {
                     node.next[idx] = new Trie();
                 }
 
+                node.next[idx].value++;
                 node = node.next[idx];
             }
-
-            node.isEnd = true;
         }
 
-        public boolean search(String word) {
-            Trie node = searchPrefix(word);
-            return node != null && node.isEnd;
-        }
-
-        public boolean startsWith(String prefix) {
-            Trie node = searchPrefix(prefix);
-            return node != null;
-        }
-
-        public Trie searchPrefix(String prefix) {
+        public int query(String prefix) {
             Trie node = this;
+            int cnt = 0;
             for (char ch : prefix.toCharArray()) {
                 int idx = ch - 'a';
+
                 if (node.next[idx] == null) {
-                    return null;
+                    break;
                 }
 
+                cnt += node.next[idx].value;
                 node = node.next[idx];
             }
 
-            return node;
+            return cnt;
         }
     }
 
     public static void main(String[] args) {
         System.out.println("[4] ?= " + Arrays.toString(sumPrefixScores(new String[]{"abcd"})));
         System.out.println("[5, 4, 3, 2] ?= " + Arrays.toString(sumPrefixScores(new String[]{"abc", "ab", "bc", "b"})));
+
+        System.out.println("[5, 4, 3, 2] ?= " + Arrays.toString(sumPrefixScores_opt(new String[]{"abc", "ab", "bc", "b"})));
 
         System.out.println("[4] ?= " + Arrays.toString(sumPrefixScores_trie(new String[]{"abcd"})));
         System.out.println("[5, 4, 3, 2] ?= " + Arrays.toString(sumPrefixScores_trie(new String[]{"abc", "ab", "bc", "b"})));
