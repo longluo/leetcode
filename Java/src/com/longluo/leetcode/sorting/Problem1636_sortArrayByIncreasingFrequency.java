@@ -1,8 +1,6 @@
 package com.longluo.leetcode.sorting;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 1636. 按照频率将数组升序排序
@@ -62,7 +60,31 @@ public class Problem1636_sortArrayByIncreasingFrequency {
         return ans;
     }
 
+    // HashMap time: O(nlogn) space: O(n)
+    public static int[] frequencySort_opt(int[] nums) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        List<Integer> sorted = new ArrayList<>();
+        for (int x : nums) {
+            freqMap.put(x, freqMap.getOrDefault(x, 0) + 1);
+            sorted.add(x);
+        }
+
+        Collections.sort(sorted, (a, b) -> {
+            if (freqMap.get(a) == freqMap.get(b)) {
+                return b - a;
+            }
+            return freqMap.get(a) - freqMap.get(b);
+        });
+
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = sorted.get(i);
+        }
+
+        return nums;
+    }
+
     public static void main(String[] args) {
         System.out.println("[3,1,1,2,2,2] ?= " + Arrays.toString(frequencySort(new int[]{1, 1, 2, 2, 2, 3})));
+        System.out.println("[3,1,1,2,2,2] ?= " + Arrays.toString(frequencySort_opt(new int[]{1, 1, 2, 2, 2, 3})));
     }
 }
