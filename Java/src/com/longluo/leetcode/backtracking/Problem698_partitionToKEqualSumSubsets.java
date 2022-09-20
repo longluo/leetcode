@@ -71,8 +71,9 @@ public class Problem698_partitionToKEqualSumSubsets {
         return flag;
     }
 
-    // DP
-    public static boolean canPartitionKSubsets_dp(int[] nums, int k) {
+    // Backtrack Opt time: O(k^n) space: O(n)
+    // AC
+    public static boolean canPartitionKSubsets_opt(int[] nums, int k) {
         int len = nums.length;
 
         int sum = 0;
@@ -84,10 +85,39 @@ public class Problem698_partitionToKEqualSumSubsets {
             return false;
         }
 
-        boolean[][] dp = new boolean[len + 1][sum / k + 1];
+        Arrays.sort(nums);
+        for (int i = 0; i < len / 2; i++) {
+            int temp = nums[i];
+            nums[i] = nums[len - 1 - i];
+            nums[len - 1 - i] = temp;
+        }
 
+        int[] res = new int[k];
+        Arrays.fill(res, sum / k);
 
-        return dp[len][sum / k];
+        return backtrack_opt(nums, res, 0, k);
+    }
+
+    private static boolean backtrack_opt(int[] nums, int[] res, int idx, int k) {
+        if (idx == nums.length) {
+            return true;
+        }
+
+        for (int i = 0; i < k; i++) {
+            if (res[i] < nums[idx]) {
+                continue;
+            }
+
+            res[i] -= nums[idx];
+
+            if (backtrack_opt(nums, res, idx + 1, k)) {
+                return true;
+            }
+
+            res[i] += nums[idx];
+        }
+
+        return false;
     }
 
     public static void main(String[] args) {
@@ -95,5 +125,6 @@ public class Problem698_partitionToKEqualSumSubsets {
         System.out.println("true ?= " + canPartitionKSubsets(new int[]{4, 3, 2, 3, 5, 2, 1}, 4));
         System.out.println("false ?= " + canPartitionKSubsets(new int[]{1, 2, 3, 4}, 3));
         System.out.println("true ?= " + canPartitionKSubsets(new int[]{114, 96, 18, 190, 207, 111, 73, 471, 99, 20, 1037, 700, 295, 101, 39, 649}, 4));
+        System.out.println("true ?= " + canPartitionKSubsets_opt(new int[]{114, 96, 18, 190, 207, 111, 73, 471, 99, 20, 1037, 700, 295, 101, 39, 649}, 4));
     }
 }
