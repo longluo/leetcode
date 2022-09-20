@@ -1,6 +1,6 @@
 package com.longluo.leetcode.backtracking;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * 698. 划分为k个相等的子集
@@ -27,8 +27,6 @@ public class Problem698_partitionToKEqualSumSubsets {
 
     // Backtrack time: O(k^n) space: O(n)
     // TLE
-    static boolean flag = false;
-
     public static boolean canPartitionKSubsets(int[] nums, int k) {
         int sum = 0;
         for (int x : nums) {
@@ -39,37 +37,57 @@ public class Problem698_partitionToKEqualSumSubsets {
             return false;
         }
 
-        flag = false;
-
         int[] ans = new int[k];
         Arrays.fill(ans, sum / k);
 
-        backtrack(nums, ans, 0, k);
-
-        return flag;
+        return backtrack(nums, ans, 0, k);
     }
 
-    private static void backtrack(int[] nums, int[] res, int idx, int k) {
+    private static boolean backtrack(int[] nums, int[] res, int idx, int k) {
         if (idx == nums.length) {
             for (int x : res) {
                 if (x != 0) {
-                    return;
+                    return false;
                 }
             }
 
-            flag = true;
-            return;
+            return true;
         }
 
+        boolean flag = false;
         for (int i = 0; i < k; i++) {
             if (res[i] < nums[idx]) {
                 continue;
             }
 
             res[i] -= nums[idx];
-            backtrack(nums, res, idx + 1, k);
+            if (backtrack(nums, res, idx + 1, k)) {
+                flag = true;
+                break;
+            }
             res[i] += nums[idx];
         }
+
+        return flag;
+    }
+
+    // DP
+    public static boolean canPartitionKSubsets_dp(int[] nums, int k) {
+        int len = nums.length;
+
+        int sum = 0;
+        for (int x : nums) {
+            sum += x;
+        }
+
+        if (sum % k != 0) {
+            return false;
+        }
+
+        boolean[][] dp = new boolean[len + 1][sum / k + 1];
+
+
+        return dp[len][sum / k];
     }
 
     public static void main(String[] args) {
