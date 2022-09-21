@@ -55,7 +55,37 @@ public class Problem985_sumOfEvenNumbersAfterQueries {
         return ans;
     }
 
+    // Opt time: O(n) space: O(n)
+    public static int[] sumEvenAfterQueries_opt(int[] nums, int[][] queries) {
+        int sum = 0;
+
+        for (int x : nums) {
+            sum += x % 2 == 0 ? x : 0;
+        }
+
+        int[] ans = new int[queries.length];
+
+        for (int i = 0; i < queries.length; i++) {
+            int value = queries[i][0];
+            int index = queries[i][1];
+
+            if (value % 2 == 0 && nums[index] % 2 == 0) {
+                sum += value;
+            } else if (value % 2 != 0 && nums[index] % 2 != 0) {
+                sum += (value + nums[index]);
+            } else if (value % 2 != 0 && nums[index] % 2 == 0) {
+                sum -= nums[index];
+            }
+
+            nums[index] += value;
+            ans[i] = sum;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
-        System.out.println("[8,6,2,4] ?= " + Arrays.toString(sumEvenAfterQueries(new int[]{1, 2, 3, 4}, new int[][]{{1, 0}, {-3, 1}, {-4, 0}, {2, 3}})));
+        System.out.println("[8, 6, 2, 4] ?= " + Arrays.toString(sumEvenAfterQueries(new int[]{1, 2, 3, 4}, new int[][]{{1, 0}, {-3, 1}, {-4, 0}, {2, 3}})));
+        System.out.println("[8, 6, 2, 4] ?= " + Arrays.toString(sumEvenAfterQueries_opt(new int[]{1, 2, 3, 4}, new int[][]{{1, 0}, {-3, 1}, {-4, 0}, {2, 3}})));
     }
 }
