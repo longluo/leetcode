@@ -46,6 +46,7 @@ import java.util.*;
 public class Problem1770_maximumScore {
 
     // BF Backtrack time: O(2^m) space: O(n)
+    // TLE
     public static int maximumScore_bf(int[] nums, int[] multipliers) {
         int m = multipliers.length;
 
@@ -57,12 +58,12 @@ public class Problem1770_maximumScore {
         List<List<Integer>> res = new ArrayList<>();
         backtrack(res, new ArrayList<>(), deque, m);
 
-        long ans = 0;
+        int ans = 0;
         for (List<Integer> path : res) {
             ans = Math.max(ans, calcScore(path, multipliers));
         }
 
-        return (int) ans;
+        return ans;
     }
 
     private static void backtrack(List<List<Integer>> res, List<Integer> path, Deque<Integer> deque, int m) {
@@ -85,12 +86,55 @@ public class Problem1770_maximumScore {
         deque.offerLast(end);
     }
 
-    private static long calcScore(List<Integer> nums, int[] multipliers) {
-        long ans = 0;
+    private static int calcScore(List<Integer> nums, int[] multipliers) {
+        int ans = 0;
         int m = multipliers.length;
 
         for (int i = 0; i < m; i++) {
-            ans += (long) nums.get(i) * multipliers[i];
+            ans += nums.get(i) * multipliers[i];
+        }
+
+        return ans;
+    }
+
+    // DFS time: O(2^m) space: O(m)
+    // TLE
+    public static int maximumScore_dfs(int[] nums, int[] multipliers) {
+        return dfs(nums, multipliers, 0, 0, nums.length - 1);
+    }
+
+    private static int dfs(int[] nums, int[] multipliers, int op, int leftIdx, int rightIdx) {
+        if (op == multipliers.length) {
+            return 0;
+        }
+
+        int left = nums[leftIdx] * multipliers[op] + dfs(nums, multipliers, op + 1, leftIdx + 1, rightIdx);
+        int right = nums[rightIdx] * multipliers[op] + dfs(nums, multipliers, op + 1, leftIdx, rightIdx - 1);
+        return Math.max(left, right);
+    }
+
+    // DP
+    public static int maximumScore(int[] nums, int[] multipliers) {
+        int n = nums.length;
+        int m = multipliers.length;
+
+        int[][] dp = new int[m + 1][m + 1];
+
+        for (int i = 1; i <= m; i++) {
+            dp[0][i] = dp[0][i - 1] + nums[n - i] * multipliers[i - 1];
+            dp[i][0] = dp[i - 1][0] + nums[i - 1] * multipliers[i - 1];
+        }
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= m - i; j++) {
+                int idx = i + j - 1;
+                dp[i][j] = Math.max(dp[i - 1][j] + nums[i - 1] * multipliers[idx], dp[i][j - 1] + nums[n - j] * multipliers[idx]);
+            }
+        }
+
+        int ans = Integer.MIN_VALUE;
+        for (int i = 0; i <= m; i++) {
+            ans = Math.max(ans, dp[i][m - i]);
         }
 
         return ans;
@@ -98,7 +142,14 @@ public class Problem1770_maximumScore {
 
     public static void main(String[] args) {
         System.out.println("14 ?= " + maximumScore_bf(new int[]{1, 2, 3}, new int[]{3, 2, 1}));
-        System.out.println("6861161 ?= " + maximumScore_bf(new int[]{555, 526, 732, 182, 43, -537, -434, -233, -947, 968, -250, -10, 470, -867, -809, -987, 120, 607, -700, 25, -349, -657, 349, -75, -936, -473, 615, 691, -261, -517, -867, 527, 782, 939, -465, 12, 988, -78, -990, 504, -358, 491, 805, 756, -218, 513, -928, 579, 678, 10},
+//        System.out.println("6861161 ?= " + maximumScore_bf(new int[]{555, 526, 732, 182, 43, -537, -434, -233, -947, 968, -250, -10, 470, -867, -809, -987, 120, 607, -700, 25, -349, -657, 349, -75, -936, -473, 615, 691, -261, -517, -867, 527, 782, 939, -465, 12, 988, -78, -990, 504, -358, 491, 805, 756, -218, 513, -928, 579, 678, 10},
+//                new int[]{783, 911, 820, 37, 466, -251, 286, -74, -899, 586, 792, -643, -969, -267, 121, -656, 381, 871, 762, -355, 721, 753, -521}));
+
+        System.out.println("14 ?= " + maximumScore_dfs(new int[]{1, 2, 3}, new int[]{3, 2, 1}));
+        System.out.println("6861161 ?= " + maximumScore_dfs(new int[]{555, 526, 732, 182, 43, -537, -434, -233, -947, 968, -250, -10, 470, -867, -809, -987, 120, 607, -700, 25, -349, -657, 349, -75, -936, -473, 615, 691, -261, -517, -867, 527, 782, 939, -465, 12, 988, -78, -990, 504, -358, 491, 805, 756, -218, 513, -928, 579, 678, 10},
+                new int[]{783, 911, 820, 37, 466, -251, 286, -74, -899, 586, 792, -643, -969, -267, 121, -656, 381, 871, 762, -355, 721, 753, -521}));
+
+        System.out.println("6861161 ?= " + maximumScore(new int[]{555, 526, 732, 182, 43, -537, -434, -233, -947, 968, -250, -10, 470, -867, -809, -987, 120, 607, -700, 25, -349, -657, 349, -75, -936, -473, 615, 691, -261, -517, -867, 527, 782, 939, -465, 12, 988, -78, -990, 504, -358, 491, 805, 756, -218, 513, -928, 579, 678, 10},
                 new int[]{783, 911, 820, 37, 466, -251, 286, -74, -899, 586, 792, -643, -969, -267, 121, -656, 381, 871, 762, -355, 721, 753, -521}));
     }
 }
