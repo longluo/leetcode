@@ -113,6 +113,25 @@ public class Problem1770_maximumScore {
         return Math.max(left, right);
     }
 
+    // DFS Opt Only Use left
+    // TLE
+    public static int maximumScore_dfs_opt(int[] nums, int[] multipliers) {
+        return dfs(nums, multipliers, 0, 0);
+    }
+
+    private static int dfs(int[] nums, int[] multipliers, int op, int leftIdx) {
+        int n = nums.length;
+        int m = multipliers.length;
+
+        if (op == m) {
+            return 0;
+        }
+
+        int left = nums[leftIdx] * multipliers[op] + dfs(nums, multipliers, op + 1, leftIdx + 1);
+        int right = nums[n - 1 + leftIdx - op] * multipliers[op] + dfs(nums, multipliers, op + 1, leftIdx);
+        return Math.max(left, right);
+    }
+
     // DP
     public static int maximumScore(int[] nums, int[] multipliers) {
         int n = nums.length;
@@ -147,6 +166,10 @@ public class Problem1770_maximumScore {
 
         System.out.println("14 ?= " + maximumScore_dfs(new int[]{1, 2, 3}, new int[]{3, 2, 1}));
         System.out.println("6861161 ?= " + maximumScore_dfs(new int[]{555, 526, 732, 182, 43, -537, -434, -233, -947, 968, -250, -10, 470, -867, -809, -987, 120, 607, -700, 25, -349, -657, 349, -75, -936, -473, 615, 691, -261, -517, -867, 527, 782, 939, -465, 12, 988, -78, -990, 504, -358, 491, 805, 756, -218, 513, -928, 579, 678, 10},
+                new int[]{783, 911, 820, 37, 466, -251, 286, -74, -899, 586, 792, -643, -969, -267, 121, -656, 381, 871, 762, -355, 721, 753, -521}));
+
+        System.out.println("14 ?= " + maximumScore_dfs_opt(new int[]{1, 2, 3}, new int[]{3, 2, 1}));
+        System.out.println("6861161 ?= " + maximumScore_dfs_opt(new int[]{555, 526, 732, 182, 43, -537, -434, -233, -947, 968, -250, -10, 470, -867, -809, -987, 120, 607, -700, 25, -349, -657, 349, -75, -936, -473, 615, 691, -261, -517, -867, 527, 782, 939, -465, 12, 988, -78, -990, 504, -358, 491, 805, 756, -218, 513, -928, 579, 678, 10},
                 new int[]{783, 911, 820, 37, 466, -251, 286, -74, -899, 586, 792, -643, -969, -267, 121, -656, 381, 871, 762, -355, 721, 753, -521}));
 
         System.out.println("6861161 ?= " + maximumScore(new int[]{555, 526, 732, 182, 43, -537, -434, -233, -947, 968, -250, -10, 470, -867, -809, -987, 120, 607, -700, 25, -349, -657, 349, -75, -936, -473, 615, 691, -261, -517, -867, 527, 782, 939, -465, 12, 988, -78, -990, 504, -358, 491, 805, 756, -218, 513, -928, 579, 678, 10},
