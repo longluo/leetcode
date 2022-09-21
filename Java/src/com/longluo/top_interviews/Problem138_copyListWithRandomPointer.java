@@ -73,6 +73,44 @@ public class Problem138_copyListWithRandomPointer {
         return dummyNode;
     }
 
+    // HashMap time: O(n) space: O(n)
+    // AC
+    public static Node copyRandomList_hash(Node head) {
+        if (head == null) {
+            return head;
+        }
+
+        Map<Node, Node> nodeMap = new HashMap<>();
+
+        Node pNode = head;
+        Node dummyNode = new Node(pNode.val);
+        Node qNode = dummyNode;
+
+        while (pNode != null) {
+            nodeMap.put(pNode, qNode);
+
+            pNode = pNode.next;
+
+            if (pNode != null) {
+                qNode.next = new Node(pNode.val);
+                qNode = qNode.next;
+            }
+        }
+
+        pNode = head;
+        qNode = dummyNode;
+
+        while (pNode != null) {
+            qNode.random = nodeMap.getOrDefault(pNode.random, null);
+
+            pNode = pNode.next;
+            qNode = qNode.next;
+        }
+
+        return dummyNode;
+    }
+
+    //
     public static Node copyRandomList(Node head) {
         if (head == null) {
             return null;
@@ -110,5 +148,6 @@ public class Problem138_copyListWithRandomPointer {
         n2.random = n2;
 
         System.out.println(copyRandomList_bf(n1));
+        System.out.println(copyRandomList_hash(n1));
     }
 }
