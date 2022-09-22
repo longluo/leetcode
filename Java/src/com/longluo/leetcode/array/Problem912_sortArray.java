@@ -33,7 +33,26 @@ public class Problem912_sortArray {
         return nums;
     }
 
+    // Bubble time: O(n^2) space: O(1)
+    // TLE
     public static int[] bubbleSort(int[] nums) {
+        int len = nums.length;
+
+        for (int i = len - 1; i >= 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                }
+            }
+        }
+
+        return nums;
+    }
+
+    // Better
+    public static int[] bubbleSort_opt(int[] nums) {
         int len = nums.length;
 
         for (int i = len - 1; i >= 0; i--) {
@@ -55,31 +74,28 @@ public class Problem912_sortArray {
         return nums;
     }
 
+    // SelectSort time: O(n^2) space: O(1)
+    // TLE
     public static int[] selectSort(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return nums;
-        }
-
         int len = nums.length;
+
         for (int i = 0; i < len; i++) {
+            int min = i;
             for (int j = i + 1; j < len; j++) {
-                if (nums[j] < nums[i]) {
-                    int temp = nums[j];
-                    nums[j] = nums[i];
-                    nums[i] = temp;
+                if (nums[j] < nums[min]) {
+                    min = j;
                 }
             }
+
+            swap(nums, i, min);
         }
 
         return nums;
     }
 
     public static int[] insertSort(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return nums;
-        }
-
         int len = nums.length;
+
         for (int i = 1; i < len; i++) {
             for (int j = i - 1; j >= 0; j--) {
                 if (nums[j] > nums[j + 1]) {
@@ -94,11 +110,8 @@ public class Problem912_sortArray {
     }
 
     public static int[] shellSort(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return nums;
-        }
-
         int len = nums.length;
+
         for (int gap = len / 2; gap >= 1; gap /= 2) {
             for (int i = gap; i < len; i++) {
                 int j = i;
@@ -256,6 +269,8 @@ public class Problem912_sortArray {
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(sortArray(new int[]{5, 2, 3, 1})));
 
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(bubbleSort(new int[]{5, 2, 3, 1})));
+        System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(bubbleSort_opt(new int[]{5, 2, 3, 1})));
+
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(selectSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(insertSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(shellSort(new int[]{5, 2, 3, 1})));
