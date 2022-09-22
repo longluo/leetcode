@@ -86,6 +86,39 @@ public class Problem557_reverseWordsInAString_iii {
         return new String(arr);
     }
 
+    // Two Pointers Opt time: O(n) space: O(n)
+    public static String reverseWords_tp_opt(String s) {
+        int len = s.length();
+
+        char[] arr = s.toCharArray();
+
+        int idx = 0;
+        while (idx < len) {
+            int start = idx;
+
+            while (idx < len && arr[idx] != ' ') {
+                idx++;
+            }
+
+            int left = start;
+            int right = idx - 1;
+
+            while (left < right) {
+                char temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                left++;
+                right--;
+            }
+
+            while (idx < len && arr[idx] == ' ') {
+                idx++;
+            }
+        }
+
+        return new String(arr);
+    }
+
     // Regex Reverse Word O(n) O(n)
     public static String reverseWords_regex(String s) {
         if (s == null || s.length() <= 1) {
@@ -145,7 +178,11 @@ public class Problem557_reverseWordsInAString_iii {
         System.out.println("ab  ?= " + reverseWords_tp("ab "));
         System.out.println("ba ab ?= " + reverseWords_tp("ab ba"));
         System.out.println("cba ?= " + reverseWords_tp("abc"));
+
+        System.out.println("cba ?= " + reverseWords_tp_opt("abc"));
+
         System.out.println("s'teL ekat edoCteeL tsetnoc ?= " + reverseWords_tp("Let's take LeetCode contest"));
         System.out.println("s'teL ekat edoCteeL tsetnoc ?= " + reverseWords_regex("Let's take LeetCode contest"));
+        System.out.println("s'teL ekat edoCteeL tsetnoc ?= " + reverseWords_regex_opt("Let's take LeetCode contest"));
     }
 }
