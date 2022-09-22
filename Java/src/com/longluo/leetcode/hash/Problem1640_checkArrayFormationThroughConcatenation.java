@@ -68,8 +68,41 @@ public class Problem1640_checkArrayFormationThroughConcatenation {
         return true;
     }
 
+    // Opt
+    public static boolean canFormArray_opt(int[] arr, int[][] pieces) {
+        int n = arr.length;
+        int m = pieces.length;
+
+        Map<Integer, Integer> idxMap = new HashMap<>();
+
+        for (int i = 0; i < m; i++) {
+            idxMap.put(pieces[i][0], i);
+        }
+
+        for (int i = 0; i < n; ) {
+            if (!idxMap.containsKey(arr[i])) {
+                return false;
+            }
+
+            int j = idxMap.get(arr[i]);
+            int len = pieces[j].length;
+
+            for (int k = 0; k < len; k++) {
+                if (i + k < n && arr[i + k] != pieces[j][k]) {
+                    return false;
+                }
+            }
+
+            i += len;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + canFormArray(new int[]{15, 88}, new int[][]{{88}, {15}}));
         System.out.println("false ?= " + canFormArray(new int[]{49, 18, 16}, new int[][]{{16, 18, 49}}));
+
+        System.out.println("false ?= " + canFormArray_opt(new int[]{49, 18, 16}, new int[][]{{16, 18, 49}}));
     }
 }
