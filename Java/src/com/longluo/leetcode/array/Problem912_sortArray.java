@@ -93,6 +93,8 @@ public class Problem912_sortArray {
         return nums;
     }
 
+    // InsertSort time: O(n^2) space: O(1)
+    // TLE
     public static int[] insertSort(int[] nums) {
         int len = nums.length;
 
@@ -109,6 +111,7 @@ public class Problem912_sortArray {
         return nums;
     }
 
+    //
     public static int[] shellSort(int[] nums) {
         int len = nums.length;
 
@@ -127,12 +130,13 @@ public class Problem912_sortArray {
         return nums;
     }
 
+    //
     public static int[] heapSort(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums;
         }
 
-        //1.构建大顶堆
+        // 1.构建大顶堆
         for (int i = nums.length / 2 - 1; i >= 0; i--) {
             //从第一个非叶子结点从下至上，从右至左调整结构
             adjustHeap(nums, i, nums.length);
@@ -259,6 +263,31 @@ public class Problem912_sortArray {
         return gt;
     }
 
+    // CountSort time: O(n) space: O(n)
+    public static int[] countSort(int[] nums) {
+        int OFFSET = 50000;
+        int size = 10_0000;
+        int[] count = new int[size + 1];
+
+        for (int x : nums) {
+            count[x + OFFSET]++;
+        }
+
+        int idx = 0;
+        for (int i = 0; i <= size; i++) {
+            if (count[i] <= 0) {
+                continue;
+            }
+
+            for (int j = 0; j < count[i]; j++) {
+                nums[idx] = i - OFFSET;
+                idx++;
+            }
+        }
+
+        return nums;
+    }
+
     public static void swap(int[] nums, int a, int b) {
         int temp = nums[a];
         nums[a] = nums[b];
@@ -280,5 +309,7 @@ public class Problem912_sortArray {
         System.out.println("[1, 2, 3, 4, 5] ?= " + Arrays.toString(quickSort(new int[]{1, 2, 3, 4, 5})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(quickSort(new int[]{5, 1, 1, 2, 0, 0})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(quickSort(new int[]{5, 2, 3, 1})));
+
+        System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(countSort(new int[]{5, 2, 3, 1})));
     }
 }
