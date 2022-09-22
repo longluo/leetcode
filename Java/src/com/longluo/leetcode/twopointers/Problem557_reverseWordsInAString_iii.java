@@ -3,19 +3,28 @@ package com.longluo.leetcode.twopointers;
 /**
  * 557. 反转字符串中的单词 III
  * <p>
- * 给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+ * 给定一个字符串 s ，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
  * <p>
- * 示例：
- * 输入："Let's take LeetCode contest"
+ * 示例 1：
+ * 输入：s = "Let's take LeetCode contest"
  * 输出："s'teL ekat edoCteeL tsetnoc"
  * <p>
- * 提示：
- * 在字符串中，每个单词由单个空格分隔，并且字符串中不会有任何额外的空格。
+ * 示例 2:
+ * 输入： s = "God Ding"
+ * 输出："doG gniD"
  * <p>
- * https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/
+ * 提示：
+ * 1 <= s.length <= 5 * 10^4
+ * s 包含可打印的 ASCII 字符。
+ * s 不包含任何开头或结尾空格。
+ * s 里 至少 有一个词。
+ * s 中的所有单词都用一个空格隔开。
+ * <p>
+ * https://leetcode.cn/problems/reverse-words-in-a-string-iii/
  */
 public class Problem557_reverseWordsInAString_iii {
-    // BF O(n) O(n)
+
+    // BF time: O(n)  space: O(n)
     public static String reverseWords_bf(String s) {
         if (s == null || s.length() <= 1) {
             return s;
@@ -23,9 +32,11 @@ public class Problem557_reverseWordsInAString_iii {
 
         int len = s.length();
         StringBuilder sb = new StringBuilder();
+
         int idx = 0;
         while (idx < len) {
             int start = idx;
+
             while (idx < len && s.charAt(idx) != ' ') {
                 idx++;
             }
@@ -43,7 +54,7 @@ public class Problem557_reverseWordsInAString_iii {
         return sb.toString();
     }
 
-    // Two Pointers O(n) O(n)
+    // Two Pointers time: O(n) space: O(n)
     public static String reverseWords_tp(String s) {
         if (s == null || s.length() <= 1) {
             return s;
@@ -127,6 +138,7 @@ public class Problem557_reverseWordsInAString_iii {
     }
 
     public static void main(String[] args) {
+        System.out.println("doG gniD ?= " + reverseWords_bf("God Ding"));
         System.out.println("a ?= " + reverseWords_tp("a"));
         System.out.println("a b ?= " + reverseWords_tp("a b"));
         System.out.println("ab ?= " + reverseWords_tp("ab"));
