@@ -1,6 +1,7 @@
 package com.longluo.leetcode.array;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * 912. 排序数组
@@ -27,16 +28,14 @@ public class Problem912_sortArray {
         if (nums == null || nums.length <= 1) {
             return nums;
         }
+
         Arrays.sort(nums);
         return nums;
     }
 
     public static int[] bubbleSort(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return nums;
-        }
-
         int len = nums.length;
+
         for (int i = len - 1; i >= 0; i--) {
             boolean isSorted = true;
             for (int j = 0; j < i; j++) {
@@ -47,6 +46,7 @@ public class Problem912_sortArray {
                     nums[j + 1] = temp;
                 }
             }
+
             if (isSorted) {
                 break;
             }
@@ -199,37 +199,51 @@ public class Problem912_sortArray {
         }
     }
 
+    // QuickSort time: O(nlogn) space: O(logn)
     public static int[] quickSort(int[] nums) {
         quickSort(nums, 0, nums.length - 1);
         return nums;
     }
 
-    public static void quickSort(int[] nums, int low, int high) {
-        if (low < high) {
-            int pos = partition(nums, low, high);
-            quickSort(nums, low, pos - 1);
-            quickSort(nums, pos + 1, high);
+    public static void quickSort(int[] nums, int left, int right) {
+        if (left < right) {
+            int pos = partition(nums, left, right);
+            quickSort(nums, left, pos - 1);
+            quickSort(nums, pos + 1, right);
         }
     }
 
-    public static int partition(int[] nums, int low, int high) {
-        int pivot = nums[low];
-        while (low < high) {
-            while (low < high && nums[high] > pivot) {
-                high--;
+    public static int partition(int[] nums, int left, int right) {
+        int randomIdx = left + new Random().nextInt(right - left + 1);
+
+        swap(nums, left, randomIdx);
+
+        int pivot = nums[left];
+
+        int lt = left + 1;
+        int gt = right;
+
+        while (true) {
+            while (lt < right && nums[lt] < pivot) {
+                lt++;
             }
-            if (low < high) {
-                nums[low] = nums[high];
+
+            while (gt > left && nums[gt] > pivot) {
+                gt--;
             }
-            while (low < high && nums[low] < pivot) {
-                low++;
+
+            if (lt >= gt) {
+                break;
             }
-            if (low < high) {
-                nums[high] = nums[low];
-            }
+
+            swap(nums, lt, gt);
+            lt++;
+            gt--;
         }
-        nums[low] = pivot;
-        return low;
+
+        swap(nums, left, gt);
+
+        return gt;
     }
 
     public static void swap(int[] nums, int a, int b) {
@@ -240,12 +254,16 @@ public class Problem912_sortArray {
 
     public static void main(String[] args) {
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(sortArray(new int[]{5, 2, 3, 1})));
+
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(bubbleSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(selectSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(insertSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(shellSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(heapSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(mergeSort(new int[]{5, 2, 3, 1})));
+
+        System.out.println("[1, 2, 3, 4, 5] ?= " + Arrays.toString(quickSort(new int[]{1, 2, 3, 4, 5})));
+        System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(quickSort(new int[]{5, 1, 1, 2, 0, 0})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(quickSort(new int[]{5, 2, 3, 1})));
     }
 }
