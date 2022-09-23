@@ -111,6 +111,25 @@ public class Problem912_sortArray {
         return nums;
     }
 
+    // Insert Sort Opt
+    public static int[] insertSort_opt(int[] nums) {
+        int len = nums.length;
+
+        for (int i = 1; i < len; i++) {
+            int temp = nums[i];
+
+            int j = i;
+            while (j > 0 && nums[j - 1] > temp) {
+                nums[j] = nums[j - 1];
+                j--;
+            }
+
+            nums[j] = temp;
+        }
+
+        return nums;
+    }
+
     //
     public static int[] shellSort(int[] nums) {
         int len = nums.length;
@@ -301,7 +320,10 @@ public class Problem912_sortArray {
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(bubbleSort_opt(new int[]{5, 2, 3, 1})));
 
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(selectSort(new int[]{5, 2, 3, 1})));
+
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(insertSort(new int[]{5, 2, 3, 1})));
+        System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(insertSort_opt(new int[]{5, 2, 3, 1})));
+
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(shellSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(heapSort(new int[]{5, 2, 3, 1})));
         System.out.println("[1, 2, 3, 5] ?= " + Arrays.toString(mergeSort(new int[]{5, 2, 3, 1})));
