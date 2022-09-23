@@ -49,11 +49,43 @@ public class Problem1680_concatenationOfConsecutiveBinaryNumbers {
         return ans;
     }
 
+    // Use API
+    public static int concatenatedBinary_opt(int n) {
+        final int MOD = 1_000_000_007;
+        long ans = 1;
+        for (int i = 2; i <= n; i++) {
+            int shift = Integer.toBinaryString(i).length();
+            ans = ((ans << shift) + i) % MOD;
+        }
+
+        return (int) ans;
+    }
+
+    // Use Bit time: O(n) space: O(1)
+    public static int concatenatedBinary_best(int n) {
+        final int MOD = 1_000_000_007;
+        long ans = 1;
+        int shift = 1;
+        for (int i = 2; i <= n; i++) {
+            if ((i & (i - 1)) == 0) {
+                shift++;
+            }
+
+            ans = ((ans << shift) + i) % MOD;
+        }
+
+        return (int) ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + concatenatedBinary(1));
         System.out.println("27 ?= " + concatenatedBinary(3));
         System.out.println("220 ?= " + concatenatedBinary(7));
         System.out.println("505379714 ?= " + concatenatedBinary(12));
+
+        System.out.println("27 ?= " + concatenatedBinary_opt(3));
+
+        System.out.println("27 ?= " + concatenatedBinary_best(3));
 
         System.out.println(Integer.parseInt("11011100", 2));
         System.out.println(Integer.parseInt("11011100101", 2));
