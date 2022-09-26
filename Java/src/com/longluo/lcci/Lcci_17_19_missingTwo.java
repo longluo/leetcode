@@ -48,8 +48,34 @@ public class Lcci_17_19_missingTwo {
         return ans;
     }
 
+    // Count time: O(n) space: O(n)
+    public static int[] missingTwo_opt(int[] nums) {
+        int len = nums.length;
+
+        boolean[] counts = new boolean[len + 3];
+        for (int i = 0; i < len; i++) {
+            counts[nums[i]] = true;
+        }
+
+        int[] ans = new int[2];
+        int idx = 0;
+        for (int i = 1; i <= len + 2; i++) {
+            if (!counts[i]) {
+                ans[idx] = i;
+                idx++;
+                if (idx == 2) {
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 3] ?= " + Arrays.toString(missingTwo(new int[]{1})));
         System.out.println("[1, 4] ?= " + Arrays.toString(missingTwo(new int[]{2, 3})));
+
+        System.out.println("[1, 4] ?= " + Arrays.toString(missingTwo_opt(new int[]{2, 3})));
     }
 }
