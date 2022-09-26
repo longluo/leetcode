@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import java.util.Arrays;
 
@@ -37,7 +37,7 @@ import java.util.Arrays;
  *
  *
  */
-public class Interview_01_08_setZeroes {
+public class Lcci_01_08_setZeroes {
 
     public static void setZeroes(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {

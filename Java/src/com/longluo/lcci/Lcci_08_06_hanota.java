@@ -1,7 +1,6 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import java.util.List;
-import java.util.Stack;
 
 /**
  * 面试题 08.06. 汉诺塔问题
@@ -29,7 +28,7 @@ import java.util.Stack;
  * <p>
  * https://leetcode-cn.com/problems/hanota-lcci/
  */
-public class Interview_08_06_hanota {
+public class Lcci_08_06_hanota {
 
     public static void hanota(List<Integer> A, List<Integer> B, List<Integer> C) {
         move(A.size(), A, B, C);

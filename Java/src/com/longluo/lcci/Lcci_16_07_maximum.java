@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 16.07. 最大数值
@@ -11,7 +11,7 @@ package com.longluo.interview;
  *
  *
  */
-public class Interview_16_07_maximum {
+public class Lcci_16_07_maximum {
 
     public static int maximum(int a, int b) {
         return a > b ? a : b;

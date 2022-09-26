@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import java.util.Arrays;
 
@@ -24,7 +24,7 @@ import java.util.Arrays;
  *
  *
  */
-public class Interview_16_15_masterMind {
+public class Lcci_16_15_masterMind {
 
     public static int[] masterMind(String solution, String guess) {
         int[] ans = new int[2];

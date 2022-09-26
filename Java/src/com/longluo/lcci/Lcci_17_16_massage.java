@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 17.16. 按摩师
@@ -24,7 +24,7 @@ package com.longluo.interview;
  * 输出： 12
  * 解释： 选择 1 号预约、 3 号预约、 5 号预约和 8 号预约，总时长 = 2 + 4 + 3 + 3 = 12。
  */
-public class Interview_17_16_massage {
+public class Lcci_17_16_massage {
 
     public static int massage(int[] nums) {
         if (nums == null || nums.length == 0) {

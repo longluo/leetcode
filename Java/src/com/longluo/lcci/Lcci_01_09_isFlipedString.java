@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 01.09. 字符串轮转
@@ -18,7 +18,7 @@ package com.longluo.interview;
  * 说明:
  * 你能只调用一次检查子串的方法吗？
  */
-public class Interview_01_09_isFlipedString {
+public class Lcci_01_09_isFlipedString {
 
     public static boolean isFlipedString(String s1, String s2) {
         if (s1 == null || s2 == null) {

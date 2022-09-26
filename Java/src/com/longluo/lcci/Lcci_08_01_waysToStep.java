@@ -1,7 +1,8 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 08.01. 三步问题
+ * <p>
  * 三步问题。有个小孩正在上楼梯，楼梯有n阶台阶，小孩一次可以上1阶、2阶或3阶。实现一种方法，计算小孩有多少种上楼梯的方式。
  * 结果可能很大，你需要对结果模1000000007。
  * <p>
@@ -16,8 +17,10 @@ package com.longluo.interview;
  * <p>
  * 提示:
  * n范围在[1, 1000000]之间
+ * <p>
+ * https://leetcode.cn/problems/three-steps-problem-lcci/?favorite=xb9lfcwi
  */
-public class Interview_08_01_waysToStep {
+public class Lcci_08_01_waysToStep {
 
     public static int waysToStep(int n) {
         if (n <= 1) {

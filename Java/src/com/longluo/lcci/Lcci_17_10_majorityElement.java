@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ import java.util.Map;
  * 说明：
  * 你有办法在时间复杂度为 O(N)，空间复杂度为 O(1) 内完成吗？
  */
-public class Interview_17_10_majorityElement {
+public class Lcci_17_10_majorityElement {
 
     public static int majorityElement(int[] nums) {
         if (nums == null || nums.length == 0) {

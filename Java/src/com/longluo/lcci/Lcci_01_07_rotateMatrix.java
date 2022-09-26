@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 01.07. 旋转矩阵
@@ -38,7 +38,7 @@ package com.longluo.interview;
  * [16, 7,10,11]
  * ]
  */
-public class Interview_01_07_rotateMatrix {
+public class Lcci_01_07_rotateMatrix {
 
     public static void rotate(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {

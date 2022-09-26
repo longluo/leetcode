@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 01.06. 字符串压缩
@@ -17,7 +17,7 @@ package com.longluo.interview;
  * 提示：
  * 字符串长度在[0, 50000]范围内。
  */
-public class Interview_01_06_compressString {
+public class Lcci_01_06_compressString {
 
     public static String compressString(String S) {
         if (S == null || S.length() <= 2) {

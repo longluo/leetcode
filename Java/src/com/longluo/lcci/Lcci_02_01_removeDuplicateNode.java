@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import com.longluo.datastructure.LinkedListNodeUtils;
 import com.longluo.datastructure.ListNode;
@@ -28,7 +28,7 @@ import java.util.Map;
  * <p>
  * https://leetcode-cn.com/problems/remove-duplicate-node-lcci/
  */
-public class Interview_02_01_removeDuplicateNodeLcci {
+public class Lcci_02_01_removeDuplicateNode {
 
     public static ListNode removeDuplicateNodes(ListNode head) {
         if (head == null || head.next == null) {

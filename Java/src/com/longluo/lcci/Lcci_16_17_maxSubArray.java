@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 16.17. 连续数列
@@ -15,7 +15,7 @@ package com.longluo.interview;
  *
  *
  */
-public class Interview_16_17_maxSubArray {
+public class Lcci_16_17_maxSubArray {
 
     public static int maxSubArray(int[] nums) {
         int max = Integer.MIN_VALUE;

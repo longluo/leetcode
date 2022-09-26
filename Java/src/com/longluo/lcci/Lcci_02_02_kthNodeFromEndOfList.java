@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import com.longluo.datastructure.ListNode;
 
@@ -17,7 +17,7 @@ import com.longluo.datastructure.ListNode;
  * 给定的 k 保证是有效的。
  *
  */
-public class Interview_02_02_kthNodeFromEndOfList {
+public class Lcci_02_02_kthNodeFromEndOfList {
 
     public static int kthToLast(ListNode head, int k) {
         int n = 0;

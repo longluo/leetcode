@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import com.longluo.datastructure.ArrayUtils;
 
@@ -25,7 +25,7 @@ import java.util.*;
  * <p>
  * https://leetcode-cn.com/problems/group-anagrams-lcci/
  */
-public class Interview_10_02_group_anagrams_lcci {
+public class Lcci_10_02_group_anagrams {
 
     public static List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<String, List<String>>();

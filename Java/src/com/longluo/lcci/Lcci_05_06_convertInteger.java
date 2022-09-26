@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 05.06. 整数转换
@@ -16,9 +16,9 @@ package com.longluo.interview;
  * 提示:
  * A，B范围在[-2147483648, 2147483647]之间
  * <p>
- * https://leetcode-cn.com/problems/convert-integer-lcci/
+ * https://leetcode.cn/problems/convert-integer-lcci/?favorite=xb9lfcwi
  */
-public class Interview_05_06_convert_integer_lcci {
+public class Lcci_05_06_convertInteger {
 
     public static int convertInteger(int A, int B) {
         int count = 0;

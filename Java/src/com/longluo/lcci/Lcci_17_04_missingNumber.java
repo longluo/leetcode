@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import java.util.Arrays;
 
@@ -15,7 +15,7 @@ import java.util.Arrays;
  * 输入：[9,6,4,2,3,5,7,0,1]
  * 输出：8
  */
-public class Interview_17_04_missingNumber {
+public class Lcci_17_04_missingNumber {
 
     public static int missingNumber(int[] nums) {
         if (nums == null || nums.length == 0) {

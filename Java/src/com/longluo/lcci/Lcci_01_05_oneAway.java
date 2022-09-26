@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 01.05. 一次编辑
@@ -18,9 +18,9 @@ package com.longluo.interview;
  * second = "pal"
  * 输出: False
  * <p>
- * https://leetcode-cn.com/problems/one-away-lcci/
+ * https://leetcode.cn/problems/one-away-lcci/?favorite=xb9lfcwi
  */
-public class Interview_01_05_one_away_lcci {
+public class Lcci_01_05_oneAway {
 
     // Two Pointers time: O(n) space: O(1)
     public static boolean oneEditAway_tp(String first, String second) {

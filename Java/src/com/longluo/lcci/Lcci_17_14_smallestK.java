@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 import java.util.*;
 
@@ -15,9 +15,9 @@ import java.util.*;
  * 0 <= len(arr) <= 100000
  * 0 <= k <= min(100000, len(arr))
  * <p>
- * https://leetcode-cn.com/problems/smallest-k-lcci/
+ * https://leetcode.cn/problems/smallest-k-lcci/
  */
-public class Interview_17_14_smallestKLcci {
+public class Lcci_17_14_smallestK {
 
     public static int[] smallestK(int[] arr, int k) {
         if (arr == null || arr.length == 0 || k == 0) {

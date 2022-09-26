@@ -1,4 +1,4 @@
-package com.longluo.interview;
+package com.longluo.lcci;
 
 /**
  * 面试题 16.05. 阶乘尾数
@@ -16,7 +16,7 @@ package com.longluo.interview;
  * 解释: 5! = 120, 尾数中有 1 个零.
  * 说明: 你算法的时间复杂度应为 O(logn)。
  */
-public class Interview_16_05_trailingZeroes {
+public class Lcci_16_05_trailingZeroes {
 
     public static int trailingZeroes(int n) {
         int count = 0;
