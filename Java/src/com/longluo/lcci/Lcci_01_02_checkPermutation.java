@@ -1,5 +1,6 @@
 package com.longluo.lcci;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,8 +58,31 @@ public class Lcci_01_02_checkPermutation {
         return true;
     }
 
+    // Sort time: O(nlogn) space: O(n)
+    public static boolean CheckPermutation_sort(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+
+        char[] array1 = s1.toCharArray();
+        char[] array2 = s2.toCharArray();
+
+        Arrays.sort(array1);
+        Arrays.sort(array2);
+
+        for (int i = 0; i < array1.length; i++) {
+            if (array1[i] != array2[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + CheckPermutation("abc", "bca"));
         System.out.println("false ?= " + CheckPermutation("abc", "bad"));
+
+        System.out.println("false ?= " + CheckPermutation_sort("abc", "bad"));
     }
 }
