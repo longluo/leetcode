@@ -79,10 +79,34 @@ public class Lcci_01_02_checkPermutation {
         return true;
     }
 
+    // Count time: O(n) space: O(C)
+    public static boolean CheckPermutation_count(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+
+        int len = s1.length();
+        int[] count = new int[128];
+        for (int i = 0; i < len; i++) {
+            count[s1.charAt(i)]++;
+            count[s2.charAt(i)]--;
+        }
+
+        for (int x : count) {
+            if (x != 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + CheckPermutation("abc", "bca"));
         System.out.println("false ?= " + CheckPermutation("abc", "bad"));
 
         System.out.println("false ?= " + CheckPermutation_sort("abc", "bad"));
+
+        System.out.println("false ?= " + CheckPermutation_count("abc", "bad"));
     }
 }
