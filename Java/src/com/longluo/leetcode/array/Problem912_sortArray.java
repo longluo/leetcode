@@ -206,34 +206,35 @@ public class Problem912_sortArray {
             int mid = left + (right - left) / 2;
             mergeSort(nums, left, mid, temp);
             mergeSort(nums, mid + 1, right, temp);
+
+            if (nums[mid] <= nums[mid + 1]) {
+                return;
+            }
+
             merge(nums, left, mid, right, temp);
         }
     }
 
     public static void merge(int[] nums, int left, int mid, int right, int[] temp) {
+        System.arraycopy(nums, left, temp, left, right - left + 1);
+
         int i = left;
         int j = mid + 1;
 
-        int idx = 0;
-        while (i <= mid && j <= right) {
-            if (nums[i] >= nums[j]) {
-                temp[idx++] = nums[j++];
+        for (int k = left; k <= right; k++) {
+            if (i == mid + 1) {
+                nums[k] = temp[j];
+                j++;
+            } else if (j == right + 1) {
+                nums[k] = temp[i];
+                i++;
+            } else if (temp[i] <= temp[j]) {
+                nums[k] = temp[i];
+                i++;
             } else {
-                temp[idx++] = nums[i++];
+                nums[k] = temp[j];
+                j++;
             }
-        }
-
-        while (i <= mid) {
-            temp[idx++] = nums[i++];
-        }
-
-        while (j <= right) {
-            temp[idx++] = nums[j++];
-        }
-
-        idx = 0;
-        while (left <= right) {
-            nums[left++] = temp[idx++];
         }
     }
 
