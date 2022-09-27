@@ -189,49 +189,51 @@ public class Problem912_sortArray {
         arr[i] = temp;//将temp值放到最终的位置
     }
 
+    // MergeSort time: O(nlogn) space: O(n)
     public static int[] mergeSort(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums;
         }
 
         int len = nums.length;
-        mergeSort(nums, 0, len - 1);
+        int[] temp = new int[len];
+        mergeSort(nums, 0, len - 1, temp);
         return nums;
     }
 
-    public static void mergeSort(int[] nums, int left, int right) {
+    public static void mergeSort(int[] nums, int left, int right, int[] temp) {
         if (left < right) {
             int mid = left + (right - left) / 2;
-            mergeSort(nums, left, mid);
-            mergeSort(nums, mid + 1, right);
-            merge(nums, left, mid, right);
+            mergeSort(nums, left, mid, temp);
+            mergeSort(nums, mid + 1, right, temp);
+            merge(nums, left, mid, right, temp);
         }
     }
 
-    public static void merge(int[] nums, int left, int mid, int right) {
+    public static void merge(int[] nums, int left, int mid, int right, int[] temp) {
         int i = left;
         int j = mid + 1;
-        int[] temp = new int[nums.length];
-        int t = 0;
+
+        int idx = 0;
         while (i <= mid && j <= right) {
             if (nums[i] >= nums[j]) {
-                temp[t++] = nums[j++];
+                temp[idx++] = nums[j++];
             } else {
-                temp[t++] = nums[i++];
+                temp[idx++] = nums[i++];
             }
         }
 
         while (i <= mid) {
-            temp[t++] = nums[i++];
+            temp[idx++] = nums[i++];
         }
 
         while (j <= right) {
-            temp[t++] = nums[j++];
+            temp[idx++] = nums[j++];
         }
 
-        t = 0;
+        idx = 0;
         while (left <= right) {
-            nums[left++] = temp[t++];
+            nums[left++] = temp[idx++];
         }
     }
 
