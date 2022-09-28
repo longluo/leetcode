@@ -1,8 +1,6 @@
 package com.longluo.lcci;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 面试题 17.09. 第 k 个数
@@ -64,6 +62,35 @@ public class Lcci_17_09_getKthMagicNumber {
         return dp[k - 1];
     }
 
+    // PQ time: O(klogk) space: O(k)
+    public static int getKthMagicNumber_pq(int k) {
+        int[] factors = {3, 5, 7};
+
+        TreeSet<Long> set = new TreeSet<>();
+        set.add(1L);
+
+        PriorityQueue<Long> pq = new PriorityQueue<>();
+        pq.offer(1L);
+
+        int ans = 1;
+        for (int i = 0; i < k; i++) {
+            long min = pq.poll();
+            ans = (int) min;
+
+            for (int x : factors) {
+                long res = x * min;
+                if (set.contains(res)) {
+                    continue;
+                }
+
+                set.add(res);
+                pq.offer(res);
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("9 ?= " + getKthMagicNumber_bf(5));
         System.out.println("81 ?= " + getKthMagicNumber_bf(15));
@@ -71,5 +98,8 @@ public class Lcci_17_09_getKthMagicNumber {
 
         System.out.println("81 ?= " + getKthMagicNumber_dp(15));
         System.out.println("3215625 ?= " + getKthMagicNumber_dp(251));
+
+        System.out.println("9 ?= " + getKthMagicNumber_pq(5));
+        System.out.println("81 ?= " + getKthMagicNumber_pq(15));
     }
 }
