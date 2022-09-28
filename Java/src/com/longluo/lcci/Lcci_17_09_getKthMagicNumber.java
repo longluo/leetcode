@@ -40,9 +40,36 @@ public class Lcci_17_09_getKthMagicNumber {
         return numsList.get(k - 1);
     }
 
+    // DP time: O(k) space: O(k)
+    public static int getKthMagicNumber_dp(int k) {
+        int[] dp = new int[k + 1];
+        dp[0] = 1;
+        int p3 = 0;
+        int p5 = 0;
+        int p7 = 0;
+
+        for (int i = 1; i <= k; i++) {
+            dp[i] = Math.min(dp[p3] * 3, Math.min(dp[p5] * 5, dp[p7] * 7));
+            if (dp[i] == dp[p3] * 3) {
+                p3++;
+            }
+            if (dp[i] == dp[p5] * 5) {
+                p5++;
+            }
+            if (dp[i] == dp[p7] * 7) {
+                p7++;
+            }
+        }
+
+        return dp[k - 1];
+    }
+
     public static void main(String[] args) {
         System.out.println("9 ?= " + getKthMagicNumber_bf(5));
         System.out.println("81 ?= " + getKthMagicNumber_bf(15));
-        System.out.println("81 ?= " + getKthMagicNumber_bf(251));
+        System.out.println("3215625 ?= " + getKthMagicNumber_bf(251));
+
+        System.out.println("81 ?= " + getKthMagicNumber_dp(15));
+        System.out.println("3215625 ?= " + getKthMagicNumber_dp(251));
     }
 }
