@@ -1,9 +1,6 @@
 package com.longluo.leetcode.twopointers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * 658. 找到 K 个最接近的元素
@@ -200,6 +197,33 @@ public class Problem658_findKClosestElements {
         return right;
     }
 
+    // PQ time: O() space: O(k)
+    public static List<Integer> findClosestElements_pq(int[] arr, int k, int x) {
+        List<Integer> ans = new ArrayList<>();
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer a, Integer b) {
+                if (Math.abs(a - x) == Math.abs(b - x)) {
+                    return a - b;
+                }
+                return Math.abs(a - x) - Math.abs(b - x);
+            }
+        });
+
+        for (int num : arr) {
+            pq.offer(num);
+        }
+
+        while (!pq.isEmpty() && ans.size() < k) {
+            ans.add(pq.poll());
+        }
+
+        Collections.sort(ans);
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bf(new int[]{1, 2, 3, 4, 5}, 4, 3));
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bf(new int[]{1, 2, 3, 4, 5}, 4, -1));
@@ -212,5 +236,8 @@ public class Problem658_findKClosestElements {
 
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bs_opt(new int[]{1, 2, 3, 4, 5}, 4, 3));
         System.out.println("[1,2,3,4] ?= " + findClosestElements_bs_opt(new int[]{1, 2, 3, 4, 5}, 4, -1));
+
+        System.out.println("[1, 2, 3, 4] ?= " + findClosestElements_pq(new int[]{1, 2, 3, 4, 5}, 4, 3));
+        System.out.println("[1, 2, 3, 4] ?= " + findClosestElements_pq(new int[]{1, 2, 3, 4, 5}, 4, -1));
     }
 }
