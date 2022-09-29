@@ -149,44 +149,45 @@ public class Problem912_sortArray {
         return nums;
     }
 
-    //
+    // HeapSort time: O(nlogn) space: O(1)
     public static int[] heapSort(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums;
         }
 
-        // 1.构建大顶堆
-        for (int i = nums.length / 2 - 1; i >= 0; i--) {
-            //从第一个非叶子结点从下至上，从右至左调整结构
-            adjustHeap(nums, i, nums.length);
+        int len = nums.length;
+
+        // 1. build the Max Heap
+        for (int i = len / 2 - 1; i >= 0; i--) {
+            maxHeapify(nums, i, len - 1);
         }
 
-        //2.调整堆结构+交换堆顶元素与末尾元素
-        for (int j = nums.length - 1; j > 0; j--) {
-            swap(nums, 0, j);//将堆顶元素与末尾元素进行交换
-            adjustHeap(nums, 0, j);//重新对堆进行调整
+        // 2. swap Heap peek with the end, adjust the heap
+        for (int i = len - 1; i > 0; i--) {
+            swap(nums, 0, i);
+            maxHeapify(nums, 0, i - 1);
         }
 
         return nums;
     }
 
-    /**
-     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）
-     */
-    public static void adjustHeap(int[] arr, int i, int length) {
-        int temp = arr[i];//先取出当前元素i
-        for (int k = i * 2 + 1; k < length; k = k * 2 + 1) {//从i结点的左子结点开始，也就是2i+1处开始
-            if (k + 1 < length && arr[k] < arr[k + 1]) {//如果左子结点小于右子结点，k指向右子结点
-                k++;
+    private static void maxHeapify(int[] arr, int start, int end) {
+        int dad = start;
+        int max_son = 2 * start + 1;
+
+        while (max_son <= end) {
+            if (max_son + 1 <= end && arr[max_son] < arr[max_son + 1]) {
+                max_son++;
             }
-            if (arr[k] > temp) {//如果子节点大于父节点，将子节点值赋给父节点（不用进行交换）
-                arr[i] = arr[k];
-                i = k;
+
+            if (arr[dad] < arr[max_son]) {
+                swap(arr, dad, max_son);
+                dad = max_son;
+                max_son = 2 * dad + 1;
             } else {
                 break;
             }
         }
-        arr[i] = temp;//将temp值放到最终的位置
     }
 
     // MergeSort time: O(nlogn) space: O(n)
