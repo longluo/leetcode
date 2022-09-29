@@ -1,7 +1,5 @@
 package com.longluo.lcci;
 
-import java.util.Arrays;
-
 /**
  * 面试题 01.09. 字符串轮转
  * <p>
@@ -54,7 +52,7 @@ public class Lcci_01_09_stringRotation {
         return false;
     }
 
-
+    // Best time: O(n) space: O(n)
     public static boolean isFlipedString(String s1, String s2) {
         if (s1 == null || s2 == null) {
             return false;
