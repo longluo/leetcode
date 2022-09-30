@@ -172,18 +172,18 @@ public class Problem912_sortArray {
     }
 
     private static void maxHeapify(int[] arr, int start, int end) {
-        int dad = start;
-        int max_son = 2 * start + 1;
+        int parent = start;
+        int child = 2 * start + 1;
 
-        while (max_son <= end) {
-            if (max_son + 1 <= end && arr[max_son] < arr[max_son + 1]) {
-                max_son++;
+        while (child <= end) {
+            if (child + 1 <= end && arr[child] < arr[child + 1]) {
+                child++;
             }
 
-            if (arr[dad] < arr[max_son]) {
-                swap(arr, dad, max_son);
-                dad = max_son;
-                max_son = 2 * dad + 1;
+            if (arr[parent] < arr[child]) {
+                swap(arr, parent, child);
+                parent = child;
+                child = 2 * child + 1;
             } else {
                 break;
             }
