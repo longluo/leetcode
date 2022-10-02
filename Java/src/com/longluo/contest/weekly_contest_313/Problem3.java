@@ -3,35 +3,47 @@ package com.longluo.contest.weekly_contest_313;
 public class Problem3 {
 
     public static int minimizeXor(int num1, int num2) {
-        int num1bits = Integer.bitCount(num1);
-        int num2bits = Integer.bitCount(num2);
+        int cnt1 = 0;
+        int cnt2 = 0;
 
-        if (num1bits == num2bits) {
-            return num1;
+        int p1 = num1;
+        int p2 = num2;
+
+        for (int i = 0; i < 32 && p1 != 0; i++) {
+            cnt1 += (p1 & 0x01) == 1 ? 1 : 0;
+            p1 = p1 >> 1;
         }
 
-        int ans = 0;
-        int cnt = 0;
+        for (int i = 0; i < 32 && p2 != 0; i++) {
+            cnt2 += (p2 & 0x01) == 1 ? 1 : 0;
+            p2 = p2 >> 1;
+        }
 
-        if (num1bits < num2bits) {
-            int diff = num2bits - num1bits;
-            while (num1 != 0 && diff > 0) {
-                if ((num1 & 0x01) == 0) {
-                    diff--;
-                }
-                ans |= (1 << cnt);
-                num1 = num1 >> 1;
-                cnt++;
-            }
-        } else {
-            int diff = num1bits - num2bits;
-            while (num1 != 0 && diff > 0) {
+        int ans = num1;
+        int diff = Math.abs(cnt1 - cnt2);
+        int base = 1;
+
+        if (cnt1 == cnt2) {
+            return num1;
+        } else if (cnt1 > cnt2) {
+            while (diff > 0) {
                 if ((num1 & 0x01) == 1) {
                     diff--;
+                    ans -= base;
                 }
-                ans |= 1 << cnt;
-                num1 >>= 1;
-                cnt++;
+
+                base *= 2;
+                num1 = num1 >> 1;
+            }
+        } else {
+            while (diff > 0) {
+                if ((num1 & 0x01) == 0) {
+                    diff--;
+                    ans += base;
+                }
+
+                base *= 2;
+                num1 = num1 >> 1;
             }
         }
 
