@@ -83,8 +83,34 @@ public class Problem1578_minimumTimeToMakeRopeColorful {
         return min;
     }
 
+    // Greedy Opt time: O(n) space: O(1)
+    public static int minCost_opt(String colors, int[] neededTime) {
+        int idx = 0;
+        int len = colors.length();
+
+        int ans = 0;
+        while (idx < len) {
+            char ch = colors.charAt(idx);
+
+            int max = 0;
+            int sum = 0;
+
+            while (idx < len && colors.charAt(idx) == ch) {
+                sum += neededTime[idx];
+                max = Math.max(max, neededTime[idx]);
+                idx++;
+            }
+
+            ans += sum - max;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + minCost("abaac", new int[]{1, 2, 3, 4, 5}));
         System.out.println("2 ?= " + minCost("aabaa", new int[]{1, 2, 3, 4, 1}));
+
+        System.out.println("2 ?= " + minCost_opt("aabaa", new int[]{1, 2, 3, 4, 1}));
     }
 }
