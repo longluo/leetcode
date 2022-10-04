@@ -30,15 +30,16 @@ import java.util.Queue;
  * -1000 <= Node.val <= 1000
  * -1000 <= targetSum <= 1000
  * <p>
- * https://leetcode-cn.com/problems/path-sum/
+ * https://leetcode.cn/problems/path-sum/
  */
 public class Problem112_pathSum {
 
     // DFS time: O(n) space: O(n)
-    public static boolean hasPathSum(TreeNode root, int targetSum) {
+    public static boolean hasPathSum_dfs(TreeNode root, int targetSum) {
         if (root == null) {
             return false;
         }
+
         return dfs(root, targetSum);
     }
 
@@ -51,12 +52,12 @@ public class Problem112_pathSum {
             return targetSum == root.val;
         }
 
-        return  (root.left != null && dfs(root.left, targetSum - root.val))
+        return (root.left != null && dfs(root.left, targetSum - root.val))
                 || (root.right != null && dfs(root.right, targetSum - root.val));
     }
 
     // Recursion time: O(n) space: O(n)
-    public static boolean hasPathSum_rec(TreeNode root, int targetSum) {
+    public static boolean hasPathSum(TreeNode root, int targetSum) {
         if (root == null) {
             return false;
         }
@@ -65,8 +66,8 @@ public class Problem112_pathSum {
             return root.val == targetSum;
         }
 
-        return hasPathSum_rec(root.left, targetSum - root.val)
-                || hasPathSum_rec(root.right, targetSum - root.val);
+        return hasPathSum(root.left, targetSum - root.val)
+                || hasPathSum(root.right, targetSum - root.val);
     }
 
     // BFS time: O(n) space: O(n)
@@ -106,23 +107,23 @@ public class Problem112_pathSum {
 
     public static void main(String[] args) {
         TreeNode tst3 = TreeUtils.constructTree(new Integer[]{1, 2});
+        System.out.println("false ?= " + hasPathSum_dfs(tst3, 0));
         System.out.println("false ?= " + hasPathSum(tst3, 0));
-        System.out.println("false ?= " + hasPathSum_rec(tst3, 0));
         System.out.println("false ?= " + hasPathSum_bfs(tst3, 0));
 
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1});
+        System.out.println("true ?= " + hasPathSum_dfs(tst1, 22));
         System.out.println("true ?= " + hasPathSum(tst1, 22));
-        System.out.println("true ?= " + hasPathSum_rec(tst1, 22));
         System.out.println("true ?= " + hasPathSum_bfs(tst1, 22));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{1, 2, 3});
+        System.out.println("false ?= " + hasPathSum_dfs(tst2, 5));
         System.out.println("false ?= " + hasPathSum(tst2, 5));
-        System.out.println("false ?= " + hasPathSum_rec(tst2, 5));
         System.out.println("false ?= " + hasPathSum_bfs(tst2, 5));
 
         TreeNode tst4 = TreeUtils.constructTree(new Integer[]{});
+        System.out.println("false ?= " + hasPathSum_dfs(tst4, 0));
         System.out.println("false ?= " + hasPathSum(tst4, 0));
-        System.out.println("false ?= " + hasPathSum_rec(tst4, 0));
         System.out.println("false ?= " + hasPathSum_bfs(tst4, 0));
     }
 }
