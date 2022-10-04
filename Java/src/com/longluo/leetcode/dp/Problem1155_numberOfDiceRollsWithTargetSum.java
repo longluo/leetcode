@@ -104,9 +104,37 @@ public class Problem1155_numberOfDiceRollsWithTargetSum {
         }
     }
 
+    // DP time: O(n * target) space: O(n*target)
+    public static int numRollsToTarget_dp(int n, int k, int target) {
+        int mod = 1_000_000_007;
+
+        int[][] dp = new int[n + 1][target + 1];
+
+        for (int i = 1; i <= k && i <= target; i++) {
+            dp[1][i] = 1;
+        }
+
+        for (int i = 2; i <= n; i++) {
+            for (int j = i; j <= target; j++) {
+                for (int m = 1; m <= k; m++) {
+                    if (j >= m) {
+                        dp[i][j] += dp[i - 1][j - m];
+                        dp[i][j] %= mod;
+                    }
+                }
+            }
+        }
+
+        return dp[n][target] % mod;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + numRollsToTarget(1, 6, 3));
         System.out.println("6 ?= " + numRollsToTarget(2, 6, 7));
-        System.out.println("222616187 ?= " + numRollsToTarget(30, 30, 500));
+
+        System.out.println("1 ?= " + numRollsToTarget_dp(1, 6, 3));
+        System.out.println("6 ?= " + numRollsToTarget_dp(2, 6, 7));
+        System.out.println("222616187 ?= " + numRollsToTarget_dp(30, 30, 500));
+//        System.out.println("222616187 ?= " + numRollsToTarget(30, 30, 500));
     }
 }
