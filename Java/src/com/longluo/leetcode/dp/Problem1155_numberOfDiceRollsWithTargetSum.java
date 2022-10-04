@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class Problem1155_numberOfDiceRollsWithTargetSum {
 
-    // Backtrack
+    // Backtrack time: O(n^k) space: O(n^k)
     // TLE
     public static int numRollsToTarget(int n, int k, int target) {
         if (n * k < target) {
@@ -55,9 +55,11 @@ public class Problem1155_numberOfDiceRollsWithTargetSum {
 
         int[] dices = new int[n];
 
-        backtrack(res, dices, n, 0, k, target);
+//        backtrack(res, dices, n, 0, k, target);
+        backtrack(n, 0, k, target);
 
-        return res.size() % mod;
+//        return res.size() % mod;
+        return ans;
     }
 
     private static void backtrack(List<int[]> res, int[] dices, int n, int idx, int k, int target) {
@@ -77,6 +79,28 @@ public class Problem1155_numberOfDiceRollsWithTargetSum {
             dices[idx] = i;
             backtrack(res, dices, n, idx + 1, k, target - i);
             dices[idx] = 0;
+        }
+    }
+
+    static int ans = 0;
+
+    // Backtrack Opt
+    private static void backtrack(int n, int idx, int k, int target) {
+        if (idx == n) {
+            if (target == 0) {
+                ans++;
+                ans %= 1_000_000_007;
+            }
+
+            return;
+        }
+
+        for (int i = k; i >= 1; i--) {
+            if (target - i < n - idx - 1) {
+                continue;
+            }
+
+            backtrack(n, idx + 1, k, target - i);
         }
     }
 
