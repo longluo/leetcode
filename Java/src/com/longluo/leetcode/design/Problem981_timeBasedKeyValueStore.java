@@ -39,7 +39,7 @@ import java.util.*;
  * 1 <= timestamp <= 10^7
  * TimeMap.set 和 TimeMap.get 函数在每个测试用例中将（组合）调用总计 120000 次。
  * <p>
- * https://leetcode-cn.com/problems/time-based-key-value-store/
+ * https://leetcode.cn/problems/time-based-key-value-store/
  */
 public class Problem981_timeBasedKeyValueStore {
 
@@ -118,14 +118,56 @@ public class Problem981_timeBasedKeyValueStore {
         }
     }
 
+    // HashMap time: O(n) space: O(n)
+    static class TimeMap_Map {
+        Map<String, Map<String, Integer>> map;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public TimeMap_Map() {
+            map = new HashMap<>();
+        }
+
+        public void set(String key, String value, int timestamp) {
+            if (map.containsKey(key)) {
+                Map<String, Integer> kv = map.get(key);
+                kv.put(value, timestamp);
+                map.put(key, kv);
+            } else {
+                Map<String, Integer> kv = new HashMap<>();
+                kv.put(value, timestamp);
+                map.put(key, kv);
+            }
+        }
+
+        public String get(String key, int timestamp) {
+            if (!map.containsKey(key)) {
+                return "";
+            }
+
+            String ans = "";
+            int maxTime = 0;
+
+            Map<String, Integer> kv = map.get(key);
+            for (Map.Entry<String, Integer> entry : kv.entrySet()) {
+                int time = entry.getValue();
+                if (maxTime < time && time <= timestamp) {
+                    maxTime = time;
+                    ans = entry.getKey();
+                }
+            }
+
+            return ans;
+        }
+    }
+
     /**
      * Your TimeMap object will be instantiated and called as such:
      * TimeMap obj = new TimeMap();
      * obj.set(key,value,timestamp);
      * String param_2 = obj.get(key,timestamp);
      */
-
-
     public static void main(String[] args) {
         List<TimeMap.Node> list = new ArrayList<>();
         list.add(new TimeMap.Node("high", 10));
@@ -152,10 +194,18 @@ public class Problem981_timeBasedKeyValueStore {
         }
 
 
-
         System.out.println(start + " " + " " + end);
         System.out.println(list.get(start - 1).value);
         System.out.println(list.get(start).value);
         System.out.println(list.get(end).value);
+
+
+        TimeMap_Map tst1 = new TimeMap_Map();
+        tst1.set("foo", "bar", 1);  // 存储键 "foo" 和值 "bar" ，时间戳 timestamp = 1  
+        tst1.get("foo", 1);         // 返回 "bar"
+        tst1.get("foo", 3);         // 返回 "bar", 因为在时间戳 3 和时间戳 2 处没有对应 "foo" 的值，所以唯一的值位于时间戳 1 处（即 "bar"） 。
+        tst1.set("foo", "bar2", 4); // 存储键 "foo" 和值 "bar2" ，时间戳 timestamp = 4 
+        tst1.get("foo", 4);         // 返回 "bar2"
+        tst1.get("foo", 5);         // 返回 "bar2"
     }
 }
