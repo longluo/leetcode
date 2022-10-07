@@ -52,7 +52,38 @@ public class Problem243_shortestWordDistance {
         return ans;
     }
 
+    // Opt time: O(n) space: O(2)
+    public static int shortestDistance_opt(String[] wordsDict, String word1, String word2) {
+        int len = wordsDict.length;
+
+        Map<String, Integer> map = new HashMap<>();
+
+        int ans = len;
+        for (int i = 0; i < len; i++) {
+            String word = wordsDict[i];
+            if (word.equals(word1)) {
+                if (map.containsKey(word2)) {
+                    int idx = map.get(word2);
+                    ans = Math.min(ans, i - idx);
+                }
+
+                map.put(word1, i);
+            } else if (word.equals(word2)) {
+                if (map.containsKey(word1)) {
+                    int idx = map.get(word1);
+                    ans = Math.min(ans, i - idx);
+                }
+
+                map.put(word2, i);
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + shortestDistance(new String[]{"practice", "makes", "perfect", "coding", "makes"}, "coding", "practice"));
+        System.out.println("3 ?= " + shortestDistance_opt(new String[]{"practice", "makes", "perfect", "coding", "makes"}, "coding", "practice"));
+        System.out.println("1 ?= " + shortestDistance_opt(new String[]{"practice", "makes", "perfect", "coding", "makes"}, "makes", "coding"));
     }
 }
