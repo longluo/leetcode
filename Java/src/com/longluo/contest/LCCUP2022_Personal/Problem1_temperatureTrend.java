@@ -75,7 +75,27 @@ public class Problem1_temperatureTrend {
         return max;
     }
 
+    // Opt time: O(n) space: O(1)
+    public static int temperatureTrend_opt(int[] temperatureA, int[] temperatureB) {
+        int len = temperatureA.length;
+
+        int max = 0;
+        int cnt = 0;
+
+        for (int i = 1; i < len; i++) {
+            if (Integer.compare(temperatureA[i], temperatureA[i - 1]) != Integer.compare(temperatureB[i], temperatureB[i - 1])) {
+                cnt = 0;
+            } else {
+                cnt++;
+                max = Math.max(max, cnt);
+            }
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + temperatureTrend(new int[]{21, 18, 18, 18, 31}, new int[]{34, 32, 16, 16, 17}));
+        System.out.println("2 ?= " + temperatureTrend_opt(new int[]{21, 18, 18, 18, 31}, new int[]{34, 32, 16, 16, 17}));
     }
 }
