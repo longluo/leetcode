@@ -73,26 +73,42 @@ public class Problem3_beautifulBouquet {
         return ans % mod;
     }
 
-    public static int beautifulBouquet(int[] flowers, int cnt) {
+    // Two Pointers time: O(n) space: O(n)
+    public static int beautifulBouquet_tp(int[] flowers, int cnt) {
         int mod = 1_000_000_007;
 
         int len = flowers.length;
 
-        long ans = len;
-
-        Map<Integer, Integer> map = new HashMap<>();
+        int ans = 0;
 
         int left = 0;
         int right = 0;
 
-        while (left < right) {
+        Map<Integer, Integer> count = new HashMap<>();
 
+        while (left <= right && right <= len) {
+            while (right < len && count.getOrDefault(flowers[right], 0) <= cnt - 1) {
+                count.put(flowers[right], count.getOrDefault(flowers[right], 0) + 1);
+                right++;
+            }
+
+            ans += right - left;
+            ans %= mod;
+
+            count.put(flowers[left], count.get(flowers[left]) - 1);
+            left++;
+            if (left == len) {
+                break;
+            }
         }
 
-        return 0;
+        return ans % mod;
     }
 
     public static void main(String[] args) {
         System.out.println("8 ?= " + beautifulBouquet_bf(new int[]{1, 2, 3, 2}, 1));
+
+        System.out.println("8 ?= " + beautifulBouquet_tp(new int[]{1, 2, 3, 2}, 1));
+        System.out.println("18 ?= " + beautifulBouquet_tp(new int[]{1, 10, 1, 10, 1, 10}, 2));
     }
 }
