@@ -105,10 +105,36 @@ public class Problem3_beautifulBouquet {
         return ans % mod;
     }
 
+    // Two Pointers Opt
+    public static int beautifulBouquet_tp_opt(int[] flowers, int cnt) {
+        int mod = 1_000_000_007;
+
+        int len = flowers.length;
+        int ans = 0;
+
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int i = 0, j = 0; i < len && j < len; j++) {
+            int x = flowers[j];
+            int freq = count.getOrDefault(x, 0);
+            count.put(x, freq + 1);
+            while (count.getOrDefault(x, 0) > cnt) {
+                count.put(flowers[i], count.getOrDefault(flowers[i], 0) - 1);
+                i++;
+            }
+
+            ans += j - i + 1;
+            ans %= mod;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("8 ?= " + beautifulBouquet_bf(new int[]{1, 2, 3, 2}, 1));
 
         System.out.println("8 ?= " + beautifulBouquet_tp(new int[]{1, 2, 3, 2}, 1));
         System.out.println("18 ?= " + beautifulBouquet_tp(new int[]{1, 10, 1, 10, 1, 10}, 2));
+
+        System.out.println("18 ?= " + beautifulBouquet_tp_opt(new int[]{1, 10, 1, 10, 1, 10}, 2));
     }
 }
