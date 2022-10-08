@@ -101,11 +101,37 @@ public class Problem163_missingRanges {
         return ans;
     }
 
+    // Opt time: O(n) space: O(n)
+    public static List<String> findMissingRanges_opt(int[] nums, int lower, int upper) {
+        List<String> res = new ArrayList<>();
+        long pre = (long) lower - 1; // prevent 'int' overflow
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] - pre == 2) {
+                res.add(String.valueOf(pre + 1));
+            } else if (nums[i] - pre > 2) {
+                res.add((pre + 1) + "->" + (nums[i] - 1));
+            }
+
+            pre = nums[i]; // 'int' to 'long'
+        }
+
+        if (upper - pre == 1) {
+            res.add(String.valueOf(pre + 1));
+        } else if (upper - pre > 1) {
+            res.add((pre + 1) + "->" + upper);
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 4->49, 51->74, 76->99] ?= " + findMissingRanges(new int[]{0, 1, 3, 50, 75}, 0, 99));
         System.out.println("[0] ?= " + findMissingRanges(new int[]{-1}, -1, 0));
         System.out.println("[0->1, 3->9] ?= " + findMissingRanges(new int[]{2}, 0, 9));
         System.out.println("[0->7, 9] ?= " + findMissingRanges(new int[]{8}, 0, 9));
         System.out.println("[0->4, 6-7, 9] ?= " + findMissingRanges(new int[]{5, 8}, 0, 9));
+
+        System.out.println("[0->4, 6-7, 9] ?= " + findMissingRanges_opt(new int[]{5, 8}, 0, 9));
     }
 }
