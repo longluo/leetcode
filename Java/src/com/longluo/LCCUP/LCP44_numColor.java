@@ -4,6 +4,8 @@ import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -49,8 +51,30 @@ public class LCP44_numColor {
         dfs(root.right, set);
     }
 
+    // BFS time: O(n) space: O(n)
+    public static int numColor_bfs(TreeNode root) {
+        Set<Integer> set = new HashSet<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode curNode = queue.poll();
+            set.add(curNode.val);
+            if (curNode.left != null) {
+                queue.offer(curNode.left);
+            }
+
+            if (curNode.right != null) {
+                queue.offer(curNode.right);
+            }
+        }
+
+        return set.size();
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, 3, 2, 1, null, 2});
         System.out.println("3 ?= " + numColor(tst1));
+        System.out.println("3 ?= " + numColor_bfs(tst1));
     }
 }
