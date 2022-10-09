@@ -61,11 +61,50 @@ public class Problem340_lengthOfLongestSubstringKDistinct {
         return max;
     }
 
+    // Two Pointers time: O(n) space: O(n)
+    public static int lengthOfLongestSubstringKDistinct_tp(String s, int k) {
+        if (k <= 0) {
+            return 0;
+        }
+
+        int len = s.length();
+        int max = 0;
+
+        Map<Character, Integer> countsMap = new HashMap<>();
+
+        int left = 0;
+        int right = 0;
+
+        while (right < len) {
+            char ch = s.charAt(right);
+            countsMap.put(ch, countsMap.getOrDefault(ch, 0) + 1);
+
+            while (countsMap.size() > k) {
+                int freq = countsMap.getOrDefault(s.charAt(left), 0);
+                if (freq == 1) {
+                    countsMap.remove(s.charAt(left));
+                } else {
+                    countsMap.put(s.charAt(left), countsMap.get(s.charAt(left)) - 1);
+                }
+
+                left++;
+            }
+
+            max = Math.max(max, right - left + 1);
+
+            right++;
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + lengthOfLongestSubstringKDistinct("a", 1));
         System.out.println("2 ?= " + lengthOfLongestSubstringKDistinct("aa", 2));
         System.out.println("1 ?= " + lengthOfLongestSubstringKDistinct("ab", 1));
         System.out.println("3 ?= " + lengthOfLongestSubstringKDistinct("eceba", 2));
         System.out.println("4 ?= " + lengthOfLongestSubstringKDistinct("abaccc", 2));
+
+        System.out.println("4 ?= " + lengthOfLongestSubstringKDistinct_tp("abaccc", 2));
     }
 }
