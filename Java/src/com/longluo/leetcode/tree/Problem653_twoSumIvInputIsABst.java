@@ -32,10 +32,47 @@ import java.util.*;
  * Target = 28
  * 输出: False
  * <p>
- * https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/
+ * 提示:
+ * 二叉树的节点个数的范围是[1, 10^4].
+ * -10^4 <= Node.val <= 10^4
+ * 题目数据保证，输入的 root 是一棵 有效 的二叉搜索树
+ * -10^5 <= k <= 10^5
+ * <p>
+ * https://leetcode.cn/problems/two-sum-iv-input-is-a-bst/
  */
 public class Problem653_twoSumIvInputIsABst {
 
+    // BF + Two Pointers time: O(n) space: O(n)
+    public static boolean findTarget_bf(TreeNode root, int k) {
+        List<Integer> numsList = new ArrayList<>();
+        preOrder(numsList, root);
+
+        int len = numsList.size();
+        for (int i = 0, j = len - 1; i < j; ) {
+            int sum = numsList.get(i) + numsList.get(j);
+            if (sum < k) {
+                i++;
+            } else if (sum > k) {
+                j--;
+            } else {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static void preOrder(List<Integer> nums, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        preOrder(nums, root.left);
+        nums.add(root.val);
+        preOrder(nums, root.right);
+    }
+
+    //
     public static boolean findTarget(TreeNode root, int k) {
         if (root == null) {
             return false;
@@ -174,6 +211,7 @@ public class Problem653_twoSumIvInputIsABst {
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{5, 3, 6, 2, 4, 7});
         System.out.println("true ?= " + findTarget(tst1, 9));
+        System.out.println("true ?= " + findTarget_bf(tst1, 9));
         System.out.println("true ?= " + findTarget_2(tst1, 9));
         System.out.println("true ?= " + findTarget_3(tst1, 9));
         System.out.println("true ?= " + findTarget_4(tst1, 9));
