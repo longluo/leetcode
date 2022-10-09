@@ -1,8 +1,6 @@
 package com.longluo.algo200;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 170. 两数之和 III - 数据结构设计
@@ -72,6 +70,31 @@ public class Problem170_twoSum_iii {
         }
     }
 
+    // HashMap time: O(n) space: O(n)
+    static class TwoSum_map {
+        Map<Integer, Integer> countsMap;
+
+        public TwoSum_map() {
+            countsMap = new HashMap<>();
+        }
+
+        public void add(int number) {
+            countsMap.put(number, countsMap.getOrDefault(number, 0) + 1);
+        }
+
+        public boolean find(int value) {
+            for (Map.Entry<Integer, Integer> entry : countsMap.entrySet()) {
+                int key = entry.getKey();
+                int freq = entry.getValue();
+                if ((key * 2 == value && freq >= 2) || (key * 2 != value && countsMap.containsKey(value - key))) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
     /**
      * Your TwoSum object will be instantiated and called as such:
      * TwoSum obj = new TwoSum();
@@ -85,5 +108,10 @@ public class Problem170_twoSum_iii {
         tst1.add(5);
         tst1.find(4);
         tst1.find(7);
+
+        TwoSum_map tst2 = new TwoSum_map();
+        tst2.add(1);
+        tst2.add(3);
+        tst2.find(4);
     }
 }
