@@ -83,10 +83,39 @@ public class Problem170_twoSum_iii {
         }
 
         public boolean find(int value) {
+
             for (Map.Entry<Integer, Integer> entry : countsMap.entrySet()) {
                 int key = entry.getKey();
                 int freq = entry.getValue();
                 if ((key * 2 == value && freq >= 2) || (key * 2 != value && countsMap.containsKey(value - key))) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    // HashMap Opt time: O(n) space: O(n)
+    static class TwoSum_map_opt {
+        Map<Integer, Integer> countsMap;
+
+        public TwoSum_map_opt() {
+            countsMap = new HashMap<>();
+        }
+
+        public void add(int number) {
+            countsMap.put(number, countsMap.getOrDefault(number, 0) + 1);
+        }
+
+        public boolean find(int value) {
+            if (value % 2 == 0 && countsMap.getOrDefault(value / 2, 0) >= 2) {
+                return true;
+            }
+
+            for (int x : countsMap.keySet()) {
+                int y = value - x;
+                if (y > x && countsMap.containsKey(y)) {
                     return true;
                 }
             }
@@ -113,5 +142,10 @@ public class Problem170_twoSum_iii {
         tst2.add(1);
         tst2.add(3);
         tst2.find(4);
+
+        TwoSum_map_opt tst3 = new TwoSum_map_opt();
+        tst3.add(1);
+        tst3.add(3);
+        tst3.find(4);
     }
 }
