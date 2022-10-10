@@ -1,5 +1,9 @@
 package com.longluo.algo200;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /**
  * 253. 会议室 II
  * <p>
@@ -22,12 +26,45 @@ package com.longluo.algo200;
  */
 public class Problem253_meetingRooms_ii {
 
+    // Sorting + PQ time: O(nlogn) space: O(n)
     public static int minMeetingRooms(int[][] intervals) {
+        if (intervals == null || intervals.length <= 1) {
+            return intervals.length;
+        }
 
-        return 0;
+        int len = intervals.length;
+
+        Arrays.sort(intervals, (a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return a[1] == b[1] ? a[0] - b[0] : a[1] - b[1];
+            }
+        });
+
+        int min = 1;
+
+        pq.offer(intervals[0]);
+
+        for (int i = 1; i < len; i++) {
+            int start = intervals[i][0];
+            int end = intervals[i][1];
+
+            if (!pq.isEmpty() && start < pq.peek()[1]) {
+                pq.offer(intervals[i]);
+                min = Math.max(min, pq.size());
+            } else {
+                pq.poll();
+                pq.offer(intervals[i]);
+            }
+        }
+
+        return min;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("2 ?= " + minMeetingRooms(new int[][]{{0, 30}, {5, 10}, {15, 20}}));
+        System.out.println("1 ?= " + minMeetingRooms(new int[][]{{7, 10}, {2, 4}}));
     }
 }
