@@ -1,5 +1,8 @@
 package com.longluo.algo200;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 325. 和等于 k 的最长子数组长度
  * <p>
@@ -43,7 +46,35 @@ public class Problem325_maxSubArrayLen {
         return ans;
     }
 
+    // PrefixSum + HashMap time: O(n) space: O(n)
+    public static int maxSubArrayLen(int[] nums, int k) {
+        int len = nums.length;
+        int ans = 0;
+
+        Map<Long, Integer> map = new HashMap<>();
+
+        long preSum = 0L;
+        map.put(0L, 0);
+
+        for (int i = 1; i <= len; i++) {
+            preSum += nums[i - 1];
+            long target = preSum - k;
+            if (map.containsKey(target)) {
+                int left = map.get(target);
+                ans = Math.max(ans, i - left);
+            }
+
+            map.putIfAbsent(preSum, i);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + maxSubArrayLen_bf(new int[]{1, -1, 5, -2, 3}, 3));
+
+        System.out.println("4 ?= " + maxSubArrayLen(new int[]{1, -1, 5, -2, 3}, 3));
+        System.out.println("2 ?= " + maxSubArrayLen(new int[]{-2, -1, 2, 1}, 1));
+        System.out.println("1 ?= " + maxSubArrayLen(new int[]{-1}, -1));
     }
 }
