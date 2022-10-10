@@ -1,5 +1,9 @@
 package com.longluo.algo200;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 505. 迷宫 II
  * <p>
@@ -53,12 +57,57 @@ package com.longluo.algo200;
  */
 public class Problem505_theMaze_ii {
 
-    public int shortestDistance(int[][] maze, int[] start, int[] destination) {
+    // BFS time: O(mn) space: O(mn)
+    public static int shortestDistance(int[][] maze, int[] start, int[] destination) {
+        int[][] dirs = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
 
-        return 0;
+        int m = maze.length;
+        int n = maze[0].length;
+
+        if (m * n <= 2) {
+            return 1;
+        }
+
+        int[][] distance = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            Arrays.fill(distance[i], Integer.MAX_VALUE);
+        }
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{start[0], start[1]});
+
+        distance[start[0]][start[1]] = 0;
+
+        while (!queue.isEmpty()) {
+            int[] curPos = queue.poll();
+
+            int x = curPos[0];
+            int y = curPos[1];
+
+            for (int[] dir : dirs) {
+                int nextX = x + dir[0];
+                int nextY = y + dir[1];
+
+                int stepCnt = 0;
+
+                while (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && maze[nextX][nextY] == 0) {
+                    nextX += dir[0];
+                    nextY += dir[1];
+                    stepCnt++;
+                }
+
+                if (distance[nextX - dir[0]][nextY - dir[1]] > distance[x][y] + stepCnt) {
+                    distance[nextX - dir[0]][nextY - dir[1]] = distance[x][y] + stepCnt;
+                    queue.offer(new int[]{nextX - dir[0], nextY - dir[1]});
+                }
+            }
+        }
+
+        return distance[destination[0]][destination[1]] == Integer.MAX_VALUE ? -1 : distance[destination[0]][destination[1]];
     }
 
     public static void main(String[] args) {
-
+        System.out.println("12 ?= " + shortestDistance(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{4, 4}));
+        System.out.println("-1 ?= " + shortestDistance(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{3, 2}));
     }
 }
