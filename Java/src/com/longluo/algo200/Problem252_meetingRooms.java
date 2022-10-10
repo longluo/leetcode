@@ -25,6 +25,27 @@ import java.util.Arrays;
  */
 public class Problem252_meetingRooms {
 
+    // BF time: O(n^2) space: O(1)
+    public static boolean canAttendMeetings_bf(int[][] intervals) {
+        int len = intervals.length;
+        if (len <= 1) {
+            return true;
+        }
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                int[] m1 = intervals[i];
+                int[] m2 = intervals[j];
+
+                if (!(m1[1] <= m2[0] || m1[0] >= m2[1])) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     // Sorting time: O(nlogn) space: O(logn)
     public static boolean canAttendMeetings(int[][] intervals) {
         if (intervals == null || intervals.length <= 1) {
@@ -48,6 +69,8 @@ public class Problem252_meetingRooms {
     }
 
     public static void main(String[] args) {
+        System.out.println("false ?= " + canAttendMeetings_bf(new int[][]{{0, 30}, {5, 10}, {15, 20}}));
+
         System.out.println("false ?= " + canAttendMeetings(new int[][]{{0, 30}, {5, 10}, {15, 20}}));
         System.out.println("true ?= " + canAttendMeetings(new int[][]{{7, 10}, {2, 4}}));
     }
