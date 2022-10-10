@@ -1,4 +1,7 @@
-package com.longluo.leetcode.dfs;
+package com.longluo.algo200;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 490. 迷宫
@@ -41,7 +44,48 @@ package com.longluo.leetcode.dfs;
  */
 public class Problem490_theMaze {
 
+    // BFS time: O(mn) space: O(mn)
     public static boolean hasPath(int[][] maze, int[] start, int[] destination) {
+        int[][] dirs = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
+
+        int m = maze.length;
+        int n = maze[0].length;
+
+        if (m * n <= 2) {
+            return true;
+        }
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(start);
+
+        boolean[][] visited = new boolean[m][n];
+        visited[start[0]][start[1]] = true;
+
+        while (!queue.isEmpty()) {
+            int[] curPos = queue.poll();
+
+            int x = curPos[0];
+            int y = curPos[1];
+
+            if (x == destination[0] && y == destination[1]) {
+                return true;
+            }
+
+            for (int[] dir : dirs) {
+                int nextX = x + dir[0];
+                int nextY = y + dir[1];
+
+                while (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && maze[nextX][nextY] == 0) {
+                    nextX += dir[0];
+                    nextY += dir[1];
+                }
+
+                if (!visited[nextX - dir[0]][nextY - dir[1]]) {
+                    visited[nextX - dir[0]][nextY - dir[1]] = true;
+                    queue.offer(new int[]{nextX - dir[0], nextY - dir[1]});
+                }
+            }
+        }
 
         return false;
     }
