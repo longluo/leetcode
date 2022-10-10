@@ -24,12 +24,26 @@ package com.longluo.algo200;
  */
 public class Problem325_maxSubArrayLen {
 
-    public static int maxSubArrayLen(int[] nums, int k) {
+    // BF time: O(n^2) space: O(1)
+    // TLE
+    public static int maxSubArrayLen_bf(int[] nums, int k) {
+        int len = nums.length;
+        int ans = 0;
 
-        return 0;
+        for (int i = 0; i < len; i++) {
+            int sum = 0;
+            for (int j = i; j < len; j++) {
+                sum += nums[j];
+                if (sum == k) {
+                    ans = Math.max(ans, j - i + 1);
+                }
+            }
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("4 ?= " + maxSubArrayLen_bf(new int[]{1, -1, 5, -2, 3}, 3));
     }
 }
