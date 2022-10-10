@@ -55,6 +55,26 @@ public class Problem1328_breakAPalindrome {
         return new String(array);
     }
 
+    // Opt time: O(n) space: O(n)
+    public static String breakPalindrome_opt(String palindrome) {
+        if (palindrome == null || palindrome.length() <= 1) {
+            return "";
+        }
+
+        int len = palindrome.length();
+        char[] array = palindrome.toCharArray();
+        for (int i = 0; i < len / 2; i++) {
+            if (array[i] > 'a') {
+                array[i] = 'a';
+                return new String(array);
+            }
+        }
+
+        array[len - 1] = 'b';
+
+        return new String(array);
+    }
+
     public static void main(String[] args) {
         System.out.println(" ?= " + breakPalindrome("a"));
         System.out.println(" ?= " + breakPalindrome("b"));
@@ -63,5 +83,7 @@ public class Problem1328_breakAPalindrome {
         System.out.println("abb ?= " + breakPalindrome("aba"));
         System.out.println("aabab ?= " + breakPalindrome("aabaa"));
         System.out.println("aaccba ?= " + breakPalindrome("abccba"));
+
+        System.out.println("aaccba ?= " + breakPalindrome_opt("abccba"));
     }
 }
