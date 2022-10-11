@@ -69,10 +69,47 @@ public class Problem1099_twoSumLessThanK {
         return ans;
     }
 
+    // BinarySearch time: O(nlogn + nlogn) space: O(logn)
+    public static int twoSumLessThanK_bs(int[] nums, int k) {
+        Arrays.sort(nums);
+
+        int ans = -1;
+
+        for (int i = 0; i < nums.length - 1; i++) {
+            int target = k - nums[i];
+            if (nums[i + 1] >= target) {
+                continue;
+            }
+
+            int ret = binarySearch(nums, i + 1, target);
+            if (ret > 0) {
+                ans = Math.max(ans, nums[i] + nums[ret]);
+            }
+        }
+
+        return ans;
+    }
+
+    private static int binarySearch(int[] arr, int left, int target) {
+        int right = arr.length - 1;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (arr[mid] < target) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return arr[left] < target ? left : -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("58 ?= " + twoSumLessThanK(new int[]{34, 23, 1, 24, 75, 33, 54, 8}, 60));
         System.out.println("-1 ?= " + twoSumLessThanK(new int[]{10, 20, 30}, 15));
 
         System.out.println("-1 ?= " + twoSumLessThanK_tp(new int[]{10, 20, 30}, 15));
+
+        System.out.println("58 ?= " + twoSumLessThanK_bs(new int[]{34, 23, 1, 24, 75, 33, 54, 8}, 60));
     }
 }
