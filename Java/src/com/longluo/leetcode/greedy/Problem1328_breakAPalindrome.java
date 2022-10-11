@@ -31,6 +31,48 @@ package com.longluo.leetcode.greedy;
  */
 public class Problem1328_breakAPalindrome {
 
+    // BF time: O(26 * n) space: O(n)
+    // AC
+    public static String breakPalindrome_bf(String palindrome) {
+        int len = palindrome.length();
+        if (len <= 1) {
+            return "";
+        }
+
+        String ans = "z";
+        char[] array = palindrome.toCharArray();
+        for (int i = 0; i < len; i++) {
+            char temp = array[i];
+            for (char j = 'a'; j <= 'z'; j++) {
+                if (array[i] == j) {
+                    continue;
+                }
+
+                array[i] = j;
+                if (invalidPalindrome(array)) {
+                    String s = new String(array);
+                    if (s.compareTo(ans) < 0) {
+                        ans = s;
+                    }
+                }
+            }
+
+            array[i] = temp;
+        }
+
+        return ans;
+    }
+
+    private static boolean invalidPalindrome(char[] array) {
+        for (int i = 0, j = array.length - 1; i < j; i++, j--) {
+            if (array[i] != array[j]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     // Greedy time: O(n) space: O(n)
     public static String breakPalindrome(String palindrome) {
         if (palindrome == null || palindrome.length() <= 1) {
@@ -85,5 +127,8 @@ public class Problem1328_breakAPalindrome {
         System.out.println("aaccba ?= " + breakPalindrome("abccba"));
 
         System.out.println("aaccba ?= " + breakPalindrome_opt("abccba"));
+
+        System.out.println("az ?= " + breakPalindrome_bf("zz"));
+        System.out.println("aaccba ?= " + breakPalindrome_bf("abccba"));
     }
 }
