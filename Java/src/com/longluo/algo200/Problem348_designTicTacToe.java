@@ -63,15 +63,95 @@ package com.longluo.algo200;
  */
 public class Problem348_designTicTacToe {
 
-    class TicTacToe {
+    // BF
+    // AC
+    static class TicTacToe {
+        int[][] matrix;
+        int n = 0;
+        int cnt = 0;
 
         public TicTacToe(int n) {
-
+            matrix = new int[n][n];
+            this.n = n;
+            cnt = 0;
         }
 
         public int move(int row, int col, int player) {
+            cnt++;
+            matrix[row][col] = player;
+            if (cnt < 2 * n - 1) {
+                return 0;
+            }
 
-            return 0;
+            int playerId = 0;
+
+            boolean flag = true;
+
+            for (int i = 0; i < n; i++) {
+                if (matrix[i][0] == 0) {
+                    continue;
+                }
+
+                playerId = matrix[i][0];
+                flag = true;
+                for (int j = 1; j < n; j++) {
+                    if (matrix[i][j] != playerId) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag) {
+                    return playerId;
+                }
+            }
+
+            for (int j = 0; j < n; j++) {
+                if (matrix[0][j] == 0) {
+                    continue;
+                }
+
+                playerId = matrix[0][j];
+                flag = true;
+                for (int i = 1; i < n; i++) {
+                    if (matrix[i][j] != playerId) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag) {
+                    return playerId;
+                }
+            }
+
+            playerId = matrix[0][0];
+            flag = true;
+            for (int i = 1; i < n; i++) {
+                if (matrix[i][i] != playerId) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                return playerId;
+            }
+
+            playerId = matrix[0][n - 1];
+            flag = true;
+            for (int i = 1; i < n; i++) {
+                if (matrix[i][n - 1 - i] != playerId) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                return playerId;
+            } else {
+                return 0;
+            }
         }
     }
 
@@ -80,8 +160,21 @@ public class Problem348_designTicTacToe {
      * TicTacToe obj = new TicTacToe(n);
      * int param_1 = obj.move(row,col,player);
      */
-
     public static void main(String[] args) {
+        TicTacToe tst1 = new TicTacToe(3);
 
+        System.out.println(tst1.move(0, 0, 1));
+        System.out.println(tst1.move(0, 2, 2));
+        System.out.println(tst1.move(2, 2, 1));
+        System.out.println(tst1.move(1, 1, 2));
+        System.out.println(tst1.move(2, 0, 1));
+        System.out.println(tst1.move(1, 0, 2));
+        System.out.println(tst1.move(2, 1, 1));
+
+        TicTacToe tst2 = new TicTacToe(2);
+
+        System.out.println(tst2.move(0, 1, 2));
+        System.out.println(tst2.move(1, 0, 1));
+        System.out.println(tst2.move(1, 1, 2));
     }
 }
