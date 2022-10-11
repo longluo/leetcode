@@ -1,5 +1,8 @@
 package com.longluo.algo200;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * 1099. 小于 K 的两数之和
  * <p>
@@ -44,8 +47,32 @@ public class Problem1099_twoSumLessThanK {
         return ans;
     }
 
+    // Two Pointers time: O(nlogn + n) space: O(logn)
+    public static int twoSumLessThanK_tp(int[] nums, int k) {
+        Arrays.sort(nums);
+
+        int ans = -1;
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            if (sum >= k) {
+                right--;
+            } else {
+                ans = Math.max(ans, sum);
+                left++;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("58 ?= " + twoSumLessThanK(new int[]{34, 23, 1, 24, 75, 33, 54, 8}, 60));
         System.out.println("-1 ?= " + twoSumLessThanK(new int[]{10, 20, 30}, 15));
+
+        System.out.println("-1 ?= " + twoSumLessThanK_tp(new int[]{10, 20, 30}, 15));
     }
 }
