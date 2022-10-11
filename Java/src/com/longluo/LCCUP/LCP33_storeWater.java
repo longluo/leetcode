@@ -47,8 +47,7 @@ public class LCP33_storeWater {
 
         int len = bucket.length;
 
-        int min = 0;
-        int max = Integer.MAX_VALUE;
+        int opBucket = 0;
 
         for (int i = 0; i < len; i++) {
             if (vat[i] == 0) {
@@ -57,7 +56,7 @@ public class LCP33_storeWater {
 
             if (bucket[i] == 0) {
                 bucket[i]++;
-                min++;
+                opBucket++;
                 pq.offer(new int[]{i, vat[i]});
             } else {
                 int times = (vat[i] + bucket[i] - 1) / bucket[i];
@@ -65,25 +64,28 @@ public class LCP33_storeWater {
             }
         }
 
+        int ans = Integer.MAX_VALUE;
+
         while (!pq.isEmpty()) {
             int[] mostTimes = pq.poll();
 
             int idx = mostTimes[0];
             int needTimes = mostTimes[1];
 
-            if (min >= max) {
-                return max;
+            if (opBucket >= ans) {
+                break;
             }
-            max = Math.min(max, needTimes + min);
+
+            ans = Math.min(ans, needTimes + opBucket);
 
             bucket[idx]++;
-            min++;
+            opBucket++;
 
             int nowNeedTimes = (vat[idx] + bucket[idx] - 1) / bucket[idx];
             pq.offer(new int[]{idx, nowNeedTimes});
         }
 
-        return min;
+        return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 
     public static void main(String[] args) {
