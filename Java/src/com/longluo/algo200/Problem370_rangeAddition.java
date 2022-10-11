@@ -33,7 +33,7 @@ import java.util.Arrays;
  */
 public class Problem370_rangeAddition {
 
-    // Simulate time: O(n) space: O(n)
+    // Simulate time: O(n*k) space: O(n)
     public static int[] getModifiedArray_bf(int length, int[][] updates) {
         int[] ans = new int[length];
 
@@ -50,7 +50,26 @@ public class Problem370_rangeAddition {
         return ans;
     }
 
+    // Add time: O(n+k) space: O(n)
+    public static int[] getModifiedArray(int length, int[][] updates) {
+        int[] ans = new int[length];
+
+        for (int[] op : updates) {
+            ans[op[0]] += op[2];
+            if (op[1] + 1 < length) {
+                ans[op[1] + 1] -= op[2];
+            }
+        }
+
+        for (int i = 1; i < length; i++) {
+            ans[i] += ans[i - 1];
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[-2, 0, 3, 5, 3] ?= " + Arrays.toString(getModifiedArray_bf(5, new int[][]{{1, 3, 2}, {2, 4, 3}, {0, 2, -2}})));
+        System.out.println("[-2, 0, 3, 5, 3] ?= " + Arrays.toString(getModifiedArray(5, new int[][]{{1, 3, 2}, {2, 4, 3}, {0, 2, -2}})));
     }
 }
