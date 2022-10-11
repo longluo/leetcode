@@ -1,9 +1,10 @@
 package com.longluo.algo200;
 
 import com.longluo.datastructure.TreeNode;
+import com.longluo.datastructure.TreeUtils;
+import kotlin.Pair;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 314. 二叉树的垂直遍历
@@ -32,13 +33,74 @@ import java.util.List;
  */
 public class Problem314_verticalOrderTraversal {
 
+    // BFS time: O(n) space: O(n)
     public static List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
+        if (root == null) {
+            return ans;
+        }
+
+        List<int[]> nodeList = new ArrayList<>();
+
+        Queue<Pair> queue = new LinkedList<>();
+        queue.offer(new Pair(root, 0));
+
+        while (!queue.isEmpty()) {
+            Pair cur = queue.poll();
+
+            TreeNode curNode = cur.node;
+            int index = cur.index;
+            nodeList.add(new int[]{curNode.val, index});
+
+            if (curNode.left != null) {
+                Pair left = new Pair(curNode.left, index - 1);
+                queue.offer(left);
+            }
+
+            if (curNode.right != null) {
+                Pair right = new Pair(curNode.right, index + 1);
+                queue.offer(right);
+            }
+        }
+
+        Collections.sort(nodeList, (a, b) -> a[1] - b[1]);
+
+        int n = nodeList.size();
+
+        List<Integer> vertList = new ArrayList<>();
+        int idx = nodeList.get(0)[1];
+        vertList.add(nodeList.get(0)[0]);
+
+        for (int i = 1; i < n; i++) {
+            if (nodeList.get(i)[1] == idx) {
+                vertList.add(nodeList.get(i)[0]);
+            } else {
+                ans.add(new ArrayList<>(vertList));
+                vertList.clear();
+
+                idx = nodeList.get(i)[1];
+                vertList.add(nodeList.get(i)[0]);
+            }
+        }
+
+        ans.add(new ArrayList<>(vertList));
 
         return ans;
     }
 
-    public static void main(String[] args) {
+    static class Pair {
+        TreeNode node;
+        int index;
 
+        Pair(TreeNode node, int index) {
+            this.node = node;
+            this.index = index;
+        }
+    }
+
+    public static void main(String[] args) {
+        TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 9, 20, null, null, 15, 7});
+        TreeUtils.printTree(tst1);
+        System.out.println("[[9], [3, 15], [20], [7]] ?= " + verticalOrder(tst1));
     }
 }
