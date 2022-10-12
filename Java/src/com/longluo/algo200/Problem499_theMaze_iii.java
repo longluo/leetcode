@@ -1,5 +1,7 @@
 package com.longluo.algo200;
 
+import java.util.*;
+
 /**
  * 499. 迷宫 III
  * <p>
@@ -59,12 +61,82 @@ package com.longluo.algo200;
  */
 public class Problem499_theMaze_iii {
 
+    // BFS time: O(mn) space: O(mn)
     public static String findShortestWay(int[][] maze, int[] ball, int[] hole) {
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        String[] actions = {"u", "d", "l", "r"};
 
-        return "";
+        int m = maze.length;
+        int n = maze[0].length;
+
+        int[][] distance = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            Arrays.fill(distance[i], Integer.MAX_VALUE);
+        }
+
+        Map<Integer, String> map = new HashMap<>();
+        for (int i = 0; i < m * n; i++) {
+            map.put(i, "");
+        }
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{ball[0], ball[1]});
+
+        distance[ball[0]][ball[1]] = 0;
+
+        while (!queue.isEmpty()) {
+            int[] curPos = queue.poll();
+
+            int x = curPos[0];
+            int y = curPos[1];
+            int dist = distance[x][y];
+
+            for (int i = 0; i < 4; i++) {
+                int nextX = x;
+                int nextY = y;
+
+                String path = map.get(x * n + y);
+                int steps = 0;
+
+                while (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && maze[nextX][nextY] == 0
+                        && !(nextX == hole[0] && nextY == hole[1])) {
+                    nextX += dirs[i][0];
+                    nextY += dirs[i][1];
+                    steps++;
+                }
+
+                if (!(nextX == hole[0] && nextY == hole[1])) {
+                    nextX -= dirs[i][0];
+                    nextY -= dirs[i][1];
+                    steps--;
+                }
+
+                path += actions[i];
+
+                if (dist + steps < distance[nextX][nextY]) {
+                    distance[nextX][nextY] = dist + steps;
+                    map.put(nextX * n + nextY, path);
+
+                    if (!(nextX == hole[0] && nextY == hole[1])) {
+                        queue.offer(new int[]{nextX, nextY});
+                    }
+                } else if (dist + steps == distance[nextX][nextY] && path.compareTo(map.get(nextX * n + nextY)) < 0) {
+                    map.put(nextX * n + nextY, path);
+                    if (!(nextX == hole[0] && nextY == hole[1])) {
+                        queue.offer(new int[]{nextX, nextY});
+                    }
+                }
+            }
+        }
+
+        String res = map.get(hole[0] * n + hole[1]);
+        return res.equals("") ? "impossible" : res;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("u ?= " + findShortestWay(new int[][]{{0}, {0}}, new int[]{1, 0}, new int[]{0, 0}));
+        System.out.println("lul ?= " + findShortestWay(new int[][]{{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}}, new int[]{4, 3}, new int[]{0, 1}));
+        System.out.println("impossible ?= " + findShortestWay(new int[][]{{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}}, new int[]{4, 3}, new int[]{3, 0}));
+        System.out.println("dldr ?= " + findShortestWay(new int[][]{{0, 0, 0, 0, 0, 0, 0}, {0, 0, 1, 0, 0, 1, 0}, {0, 0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 1}}, new int[]{0, 4}, new int[]{3, 5}));
     }
 }
