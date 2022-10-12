@@ -25,6 +25,7 @@ import java.util.Arrays;
 public class Problem976_largestPerimeterTriangle {
 
     // BF time: O(n^3) space: O(1)
+    // TLE
     public static int largestPerimeter_bf(int[] nums) {
         int len = nums.length;
 
@@ -32,7 +33,9 @@ public class Problem976_largestPerimeterTriangle {
         for (int i = 0; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
                 for (int k = j + 1; k < len; k++) {
-
+                    if (nums[i] + nums[j] > nums[k] && nums[i] + nums[k] > nums[j] && nums[j] + nums[k] > nums[i]) {
+                        ans = Math.max(ans, nums[i] + nums[j] + nums[k]);
+                    }
                 }
             }
         }
