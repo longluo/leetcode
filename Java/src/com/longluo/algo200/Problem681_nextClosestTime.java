@@ -1,5 +1,7 @@
 package com.longluo.algo200;
 
+import java.util.*;
+
 /**
  * 681. 最近时刻
  * <p>
@@ -30,12 +32,107 @@ package com.longluo.algo200;
  */
 public class Problem681_nextClosestTime {
 
+    // Simulate time: O(n) space: O(n)
     public static String nextClosestTime(String time) {
+        if (time.equals("23:59")) {
+            return "22:22";
+        }
 
-        return "";
+        Set<Integer> set = new TreeSet<>();
+        for (char ch : time.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                set.add(ch - '0');
+            }
+        }
+
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int minute = Integer.parseInt(time.substring(3));
+
+        int dayMax = 23 * 60 + 59;
+        int dayTime = hour * 60 + minute;
+
+        List<Integer> nums = new ArrayList<>(set);
+
+        List<Integer> parts = new ArrayList<>();
+
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = 0; j < nums.size(); j++) {
+                int value = nums.get(i) * 10 + nums.get(j);
+                if (value < 60) {
+                    parts.add(value);
+                }
+            }
+        }
+
+        int[] res = new int[2];
+        int minDate = dayMax;
+        boolean findNextBig = false;
+        int nextMin = dayMax;
+        int[] next = new int[2];
+
+        for (int i = 0; i < parts.size(); i++) {
+            for (int j = 0; j < parts.size(); j++) {
+                int h = parts.get(i);
+                int m = parts.get(j);
+                if (h <= 23 && m <= 59) {
+                    int date = h * 60 + m;
+                    if (date <= dayMax) {
+                        if (date > dayTime) {
+                            findNextBig = true;
+                            if (date < minDate) {
+                                minDate = date;
+                                res[0] = h;
+                                res[1] = m;
+                            }
+                        } else {
+                            if (date < nextMin) {
+                                nextMin = date;
+                                next[0] = h;
+                                next[1] = m;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        StringBuilder ans = new StringBuilder();
+        if (findNextBig) {
+            if (res[0] < 10) {
+                ans.append('0');
+            }
+            ans.append(res[0]);
+
+            ans.append(':');
+
+            if (res[1] < 10) {
+                ans.append('0');
+            }
+            ans.append(res[1]);
+        } else {
+            if (next[0] < 10) {
+                ans.append('0');
+            }
+            ans.append(next[0]);
+
+            ans.append(':');
+
+            if (next[1] < 10) {
+                ans.append('0');
+            }
+            ans.append(next[1]);
+        }
+
+        return ans.toString();
     }
 
     public static void main(String[] args) {
-
+        System.out.println("11:11 ?= " + nextClosestTime("15:55"));
+        System.out.println("19:39 ?= " + nextClosestTime("19:34"));
+        System.out.println("23:22 ?= " + nextClosestTime("22:37"));
+        System.out.println("15:11 ?= " + nextClosestTime("13:55"));
+        System.out.println("03:03 ?= " + nextClosestTime("03:00"));
+        System.out.println("00:00 ?= " + nextClosestTime("03:33"));
+        System.out.println("22:22 ?= " + nextClosestTime("23:59"));
     }
 }
