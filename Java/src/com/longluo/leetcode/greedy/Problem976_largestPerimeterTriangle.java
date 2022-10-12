@@ -20,27 +20,45 @@ import java.util.Arrays;
  * 3 <= nums.length <= 10^4
  * 1 <= nums[i] <= 10^6
  * <p>
- * https://leetcode-cn.com/problems/largest-perimeter-triangle/
+ * https://leetcode.cn/problems/largest-perimeter-triangle/
  */
 public class Problem976_largestPerimeterTriangle {
 
-    // Use Greedy
-    public static int largestPerimeter(int[] nums) {
-        Arrays.sort(nums);
-        int ans = 0;
-        int idx = nums.length - 1;
-        while (idx >= 2 && nums[idx] >= nums[idx - 1] + nums[idx - 2]) {
-            idx--;
-        }
+    // BF time: O(n^3) space: O(1)
+    public static int largestPerimeter_bf(int[] nums) {
+        int len = nums.length;
 
-        if (idx >= 2) {
-            ans += nums[idx] + nums[idx - 1] + nums[idx - 2];
+        int ans = 0;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                for (int k = j + 1; k < len; k++) {
+
+                }
+            }
         }
 
         return ans;
     }
 
-    public static void main(String[] args) {
+    // Sort + Greedy time: O(nlogn) space: O(logn)
+    public static int largestPerimeter(int[] nums) {
+        Arrays.sort(nums);
 
+        int len = nums.length;
+
+        int max = 0;
+        for (int i = len - 1; i >= 2; i--) {
+            if (nums[i] < nums[i - 1] + nums[i - 2]) {
+                max = Math.max(max, nums[i] + nums[i - 1] + nums[i - 2]);
+                break;
+            }
+        }
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("5 ?= " + largestPerimeter_bf(new int[]{2, 1, 2}));
+        System.out.println("5 ?= " + largestPerimeter(new int[]{2, 1, 2}));
     }
 }
