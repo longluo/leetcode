@@ -35,65 +35,6 @@ import java.util.*;
  */
 public class Problem1135_connectingCitiesWithMinimumCost {
 
-    //
-    // TODO: 2022/10/12
-    public static int minimumCost(int n, int[][] connections) {
-        Map<Integer, Map<Integer, Integer>> graph = buildGraph(n, connections);
-
-        boolean[] visited = new boolean[n];
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
-
-        pq.offer(new int[]{1, 0});
-
-        int minCost = 0;
-        int vertexCnt = 0;
-
-        while (!pq.isEmpty()) {
-            int[] cur = pq.poll();
-
-            int vertex = cur[0];
-            if (visited[vertex - 1]) {
-                continue;
-            }
-
-            visited[vertex - 1] = true;
-
-            Map<Integer, Integer> adjs = graph.get(vertex);
-            for (Map.Entry<Integer, Integer> entry : adjs.entrySet()) {
-                int next = entry.getKey();
-                int w = entry.getValue();
-
-                pq.offer(new int[]{next, w});
-            }
-
-            minCost += cur[1];
-            vertexCnt++;
-            if (vertexCnt == n) {
-                return minCost;
-            }
-        }
-
-        return -1;
-    }
-
-    private static Map<Integer, Map<Integer, Integer>> buildGraph(int n, int[][] connections) {
-        Map<Integer, Map<Integer, Integer>> graph = new HashMap<>();
-
-        for (int[] edge : connections) {
-            int from = edge[0];
-            int to = edge[1];
-            int weight = edge[2];
-
-            graph.putIfAbsent(from, new HashMap<>());
-            graph.get(from).put(to, weight);
-
-            graph.putIfAbsent(to, new HashMap<>());
-            graph.get(to).put(from, weight);
-        }
-
-        return graph;
-    }
-
     // Prim time: O(nlogn) space: O(n)
     public static int minimumCost_prim(int n, int[][] connections) {
         HashMap<Integer, List<int[]>> graph = new HashMap<>();
@@ -135,9 +76,6 @@ public class Problem1135_connectingCitiesWithMinimumCost {
     }
 
     public static void main(String[] args) {
-        System.out.println("6 ?= " + minimumCost(3, new int[][]{{1, 2, 5}, {1, 3, 6}, {2, 3, 1}}));
-        System.out.println("-1 ?= " + minimumCost(4, new int[][]{{1, 2, 3}, {3, 4, 4}}));
-
         System.out.println("6 ?= " + minimumCost_prim(3, new int[][]{{1, 2, 5}, {1, 3, 6}, {2, 3, 1}}));
         System.out.println("-1 ?= " + minimumCost_prim(4, new int[][]{{1, 2, 3}, {3, 4, 4}}));
     }
