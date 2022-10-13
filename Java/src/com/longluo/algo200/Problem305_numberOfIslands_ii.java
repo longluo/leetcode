@@ -44,14 +44,111 @@ import java.util.List;
  */
 public class Problem305_numberOfIslands_ii {
 
+    // UnionFind time: O(k*mn*aplha(mn) space: O(mn)
     public static List<Integer> numIslands2(int m, int n, int[][] positions) {
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
         List<Integer> ans = new ArrayList<>();
 
+        boolean[] visited = new boolean[m * n];
+
+        UnionFind uf = new UnionFind(m, n);
+
+        for (int[] pos : positions) {
+            int r = pos[0];
+            int c = pos[1];
+
+            int idx = r * n + c;
+            if (visited[idx]) {
+                ans.add(uf.getCount());
+                continue;
+            }
+
+            visited[idx] = true;
+            uf.addCount();
+
+            for (int[] dir : dirs) {
+                int nextX = r + dir[0];
+                int nextY = c + dir[1];
+
+                if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n) {
+                    continue;
+                }
+
+                int nextIdx = nextX * n + nextY;
+                if (!visited[nextIdx]) {
+                    continue;
+                }
+
+                if (!uf.isConnected(idx, nextIdx)) {
+                    uf.union(idx, nextIdx);
+                }
+            }
+
+            ans.add(uf.getCount());
+        }
 
         return ans;
     }
 
-    public static void main(String[] args) {
+    static class UnionFind {
+        int[] parents;
+        int[] size;
+        int count = 0;
 
+        UnionFind(int m, int n) {
+            parents = new int[m * n];
+            size = new int[m * n];
+
+            for (int i = 0; i < m * n; i++) {
+                parents[i] = i;
+                size[i] = 1;
+            }
+        }
+
+        void addCount() {
+            count++;
+        }
+
+        int find(int x) {
+            while (x != parents[x]) {
+                x = parents[x];
+            }
+
+            return parents[x];
+        }
+
+        boolean isConnected(int x, int y) {
+            return find(x) == find(y);
+        }
+
+        void union(int x, int y) {
+            int a = find(x);
+            int b = find(y);
+
+            if (a != b) {
+                if (size[a] > size[b]) {
+                    parents[b] = a;
+                    size[a] += size[b];
+                } else if (size[a] < size[b]) {
+                    parents[a] = b;
+                    size[b] += size[a];
+                } else {
+                    parents[a] = b;
+                    size[b] += size[a];
+                }
+
+                count--;
+            }
+        }
+
+        int getCount() {
+            return count;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("[1, 1, 2, 3] ?= " + numIslands2(3, 3, new int[][]{{0, 0}, {0, 1}, {1, 2}, {2, 1}}));
+        System.out.println("[1] ?= " + numIslands2(3, 3, new int[][]{{0, 0}}));
     }
 }
