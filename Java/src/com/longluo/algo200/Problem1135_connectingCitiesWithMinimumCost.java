@@ -75,8 +75,90 @@ public class Problem1135_connectingCitiesWithMinimumCost {
         return visited.size() == n ? ans : -1;
     }
 
+    // Kruskal time: O(mlogm + mlogn) space: O(n+m)
+    public static int minimumCost_kruskal(int n, int[][] connections) {
+        Arrays.sort(connections, (a, b) -> a[2] - b[2]);
+
+        UnionFind uf = new UnionFind(n);
+
+        int minCost = 0;
+
+        for (int[] edge : connections) {
+            int u = edge[0];
+            int v = edge[1];
+            int weight = edge[2];
+
+            if (uf.isConnected(u - 1, v - 1)) {
+                continue;
+            }
+
+            uf.union(u - 1, v - 1);
+            minCost += weight;
+
+            if (uf.getCount() == 1) {
+                break;
+            }
+        }
+
+        return uf.getCount() == 1 ? minCost : -1;
+    }
+
+    static class UnionFind {
+        int[] parents;
+        int[] size;
+        int count;
+
+        UnionFind(int n) {
+            parents = new int[n];
+            size = new int[n];
+            for (int i = 0; i < n; i++) {
+                parents[i] = i;
+                size[i] = 1;
+                count++;
+            }
+        }
+
+        int find(int x) {
+            while (x != parents[x]) {
+                x = parents[x];
+            }
+
+            return parents[x];
+        }
+
+        boolean isConnected(int x, int y) {
+            return find(x) == find(y);
+        }
+
+        void union(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+
+            if (rootX == rootY) {
+                return;
+            }
+
+            if (size[rootX] > size[rootY]) {
+                parents[rootY] = rootX;
+                size[rootX] += size[rootY];
+            } else {
+                parents[rootX] = rootY;
+                size[rootY] += size[rootX];
+            }
+
+            count--;
+        }
+
+        int getCount() {
+            return count;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("6 ?= " + minimumCost_prim(3, new int[][]{{1, 2, 5}, {1, 3, 6}, {2, 3, 1}}));
         System.out.println("-1 ?= " + minimumCost_prim(4, new int[][]{{1, 2, 3}, {3, 4, 4}}));
+
+        System.out.println("6 ?= " + minimumCost_kruskal(3, new int[][]{{1, 2, 5}, {1, 3, 6}, {2, 3, 1}}));
+        System.out.println("-1 ?= " + minimumCost_kruskal(4, new int[][]{{1, 2, 3}, {3, 4, 4}}));
     }
 }
