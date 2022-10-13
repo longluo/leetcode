@@ -83,9 +83,101 @@ public class Problem200_numberOfIslands {
 
     // TODO: 2022/5/6 DFS
 
-    // TODO: 2022/5/6 并查集
+
+    // Union Find time: O(mn*aplha(mn)) space: O(mn)
+    public static int numIslands_uf(char[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        UnionFind uf = new UnionFind(grid);
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '0') {
+                    continue;
+                }
+
+                if (i > 0 && grid[i - 1][j] == '1') {
+                    uf.union(i * n + j, (i - 1) * n + j);
+                }
+
+                if (i < m - 1 && grid[i + 1][j] == '1') {
+                    uf.union(i * n + j, (i + 1) * n + j);
+                }
+
+                if (j > 0 && grid[i][j - 1] == '1') {
+                    uf.union(i * n + j, i * n + j - 1);
+                }
+
+                if (j < n - 1 && grid[i][j + 1] == '1') {
+                    uf.union(i * n + j, i * n + j + 1);
+                }
+            }
+        }
+
+        return uf.getCount();
+    }
+
+    static class UnionFind {
+        int count = 0;
+        int[] parents;
+        int[] size;
+
+        UnionFind(char[][] grid) {
+            int m = grid.length;
+            int n = grid[0].length;
+
+            parents = new int[m * n];
+            size = new int[m * n];
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == '1') {
+                        parents[i * n + j] = i * n + j;
+                        size[i * n + j] = 1;
+                        count++;
+                    }
+                }
+            }
+        }
+
+        int find(int x) {
+            while (x != parents[x]) {
+                x = parents[x];
+            }
+
+            return parents[x];
+        }
+
+        void union(int x, int y) {
+            int a = find(x);
+            int b = find(y);
+
+            if (a != b) {
+                if (size[a] < size[b]) {
+                    parents[a] = b;
+                    size[b] += size[a];
+                } else if (size[a] > size[b]) {
+                    parents[b] = a;
+                    size[a] += size[b];
+                } else {
+                    parents[b] = a;
+                    size[a] += size[b];
+                }
+
+                count--;
+            }
+        }
+
+        int getCount() {
+            return count;
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("1 ?= " + numIslands_bfs(new char[][]{{'1', '1', '1', '1', '0'}, {'1', '1', '0', '1', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '0', '0', '0'}}));
+
+        System.out.println("1 ?= " + numIslands_uf(new char[][]{{'1', '1', '1', '1', '0'}, {'1', '1', '0', '1', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '0', '0', '0'}}));
+        System.out.println("3 ?= " + numIslands_uf(new char[][]{{'1', '1', '0', '0', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '1', '0', '0'}, {'0', '0', '0', '1', '1'}}));
     }
 }
