@@ -50,38 +50,36 @@ public class Problem305_numberOfIslands_ii {
 
         List<Integer> ans = new ArrayList<>();
 
-        boolean[] visited = new boolean[m * n];
-
-        UnionFind uf = new UnionFind(m, n);
+        boolean[][] visited = new boolean[m][n];
+        UnionFind uf = new UnionFind(m * n);
 
         for (int[] pos : positions) {
-            int r = pos[0];
-            int c = pos[1];
+            int x = pos[0];
+            int y = pos[1];
 
-            int idx = r * n + c;
-            if (visited[idx]) {
+            if (visited[x][y]) {
                 ans.add(uf.getCount());
                 continue;
             }
 
-            visited[idx] = true;
+            visited[x][y] = true;
             uf.addCount();
 
             for (int[] dir : dirs) {
-                int nextX = r + dir[0];
-                int nextY = c + dir[1];
+                int nextX = x + dir[0];
+                int nextY = y + dir[1];
 
                 if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n) {
                     continue;
                 }
 
                 int nextIdx = nextX * n + nextY;
-                if (!visited[nextIdx]) {
+                if (!visited[nextX][nextY]) {
                     continue;
                 }
 
-                if (!uf.isConnected(idx, nextIdx)) {
-                    uf.union(idx, nextIdx);
+                if (!uf.isConnected(x * n + y, nextIdx)) {
+                    uf.union(x * n + y, nextIdx);
                 }
             }
 
@@ -96,11 +94,11 @@ public class Problem305_numberOfIslands_ii {
         int[] size;
         int count = 0;
 
-        UnionFind(int m, int n) {
-            parents = new int[m * n];
-            size = new int[m * n];
+        UnionFind(int n) {
+            parents = new int[n];
+            size = new int[n];
 
-            for (int i = 0; i < m * n; i++) {
+            for (int i = 0; i < n; i++) {
                 parents[i] = i;
                 size[i] = 1;
             }
@@ -123,19 +121,19 @@ public class Problem305_numberOfIslands_ii {
         }
 
         void union(int x, int y) {
-            int a = find(x);
-            int b = find(y);
+            int rootX = find(x);
+            int rootY = find(y);
 
-            if (a != b) {
-                if (size[a] > size[b]) {
-                    parents[b] = a;
-                    size[a] += size[b];
-                } else if (size[a] < size[b]) {
-                    parents[a] = b;
-                    size[b] += size[a];
+            if (rootX != rootY) {
+                if (size[rootX] > size[rootY]) {
+                    parents[rootY] = rootX;
+                    size[rootX] += size[rootY];
+                } else if (size[rootX] < size[rootY]) {
+                    parents[rootX] = rootY;
+                    size[rootY] += size[rootX];
                 } else {
-                    parents[a] = b;
-                    size[b] += size[a];
+                    parents[rootX] = rootY;
+                    size[rootY] += size[rootX];
                 }
 
                 count--;
