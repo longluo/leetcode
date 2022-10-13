@@ -120,10 +120,11 @@ public class Problem1135_connectingCitiesWithMinimumCost {
 
         int find(int x) {
             while (x != parents[x]) {
+                parents[x] = parents[parents[x]];
                 x = parents[x];
             }
 
-            return parents[x];
+            return x;
         }
 
         boolean isConnected(int x, int y) {
