@@ -1,6 +1,8 @@
 package com.longluo.algo200;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -46,40 +48,36 @@ public class Problem305_numberOfIslands_ii {
 
     // UnionFind time: O(k*mn*aplha(mn) space: O(mn)
     public static List<Integer> numIslands2(int m, int n, int[][] positions) {
-        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
         List<Integer> ans = new ArrayList<>();
 
-        boolean[][] visited = new boolean[m][n];
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
         UnionFind uf = new UnionFind(m * n);
+
+        boolean[] visited = new boolean[m * n];
 
         for (int[] pos : positions) {
             int x = pos[0];
             int y = pos[1];
 
-            if (visited[x][y]) {
+            int idx = x * n + y;
+
+            if (visited[idx]) {
                 ans.add(uf.getCount());
                 continue;
             }
 
-            visited[x][y] = true;
-            uf.addCount();
+            uf.setParent(idx);
+            visited[idx] = true;
 
             for (int[] dir : dirs) {
                 int nextX = x + dir[0];
                 int nextY = y + dir[1];
 
-                if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n) {
-                    continue;
-                }
-
                 int nextIdx = nextX * n + nextY;
-                if (!visited[nextX][nextY]) {
-                    continue;
-                }
 
-                if (!uf.isConnected(x * n + y, nextIdx)) {
-                    uf.union(x * n + y, nextIdx);
+                if (inArea(m, n, nextX, nextY) && uf.isValid(nextIdx) && visited[nextIdx]) {
+                    uf.union(idx, nextIdx);
                 }
             }
 
@@ -89,31 +87,42 @@ public class Problem305_numberOfIslands_ii {
         return ans;
     }
 
+    private static boolean inArea(int rows, int cols, int x, int y) {
+        return x >= 0 && x < rows && y >= 0 && y < cols;
+    }
+
     static class UnionFind {
         int[] parents;
-        int[] size;
+        int[] rank;
         int count = 0;
 
         UnionFind(int n) {
             parents = new int[n];
-            size = new int[n];
+            rank = new int[n];
+            count = 0;
 
-            for (int i = 0; i < n; i++) {
-                parents[i] = i;
-                size[i] = 1;
-            }
+            Arrays.fill(parents, -1);
         }
 
-        void addCount() {
-            count++;
+        boolean isValid(int x) {
+            return parents[x] != -1;
+        }
+
+        void setParent(int x) {
+            if (parents[x] != x) {
+                count++;
+            }
+
+            parents[x] = x;
         }
 
         int find(int x) {
             while (x != parents[x]) {
+                parents[x] = parents[parents[x]];
                 x = parents[x];
             }
 
-            return parents[x];
+            return x;
         }
 
         boolean isConnected(int x, int y) {
@@ -124,20 +133,20 @@ public class Problem305_numberOfIslands_ii {
             int rootX = find(x);
             int rootY = find(y);
 
-            if (rootX != rootY) {
-                if (size[rootX] > size[rootY]) {
-                    parents[rootY] = rootX;
-                    size[rootX] += size[rootY];
-                } else if (size[rootX] < size[rootY]) {
-                    parents[rootX] = rootY;
-                    size[rootY] += size[rootX];
-                } else {
-                    parents[rootX] = rootY;
-                    size[rootY] += size[rootX];
-                }
-
-                count--;
+            if (rootX == rootY) {
+                return;
             }
+
+            if (rank[rootX] > rank[rootY]) {
+                parents[rootY] = rootX;
+            } else if (rank[rootX] < rank[rootY]) {
+                parents[rootX] = rootY;
+            } else {
+                parents[rootY] = rootX;
+                rank[rootX]++;
+            }
+
+            count--;
         }
 
         int getCount() {
@@ -145,8 +154,112 @@ public class Problem305_numberOfIslands_ii {
         }
     }
 
+    public static List<Integer> numIslands2_ref(int m, int n, int[][] positions) {
+        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+        List<Integer> ans = new LinkedList<>();
+
+        UnionFind_ref uf = new UnionFind_ref(m * n);
+
+        for (int[] position : positions) {
+            int row = position[0];
+            int col = position[1];
+
+            //当前加入的位置，把这个二维坐标转化为一维坐标
+            int index = row * n + col;
+            //初始化加入位置的parent数组
+            uf.setParent(index);
+
+            //检查周围是否有陆地
+            List<Integer> around = new LinkedList<>();
+            for (int[] dir : directions) {
+                int newX = row + dir[0];
+                int newY = col + dir[1];
+
+                if (inArea(m, n, newX, newY) && uf.isValid(newX * n + newY)) {
+                    around.add(newX * n + newY);
+                }
+            }
+
+            //union当前的和周围的
+            for (int round : around) {
+                uf.union(index, round);
+            }
+
+            ans.add(uf.getCount());
+        }
+
+        return ans;
+    }
+
+    static class UnionFind_ref {
+        int count;
+        int[] parent;
+        int[] rank;
+
+        public UnionFind_ref(int n) {
+            count = 0;
+            parent = new int[n];
+            rank = new int[n];
+
+            //因为还不知道land加在哪，parent先赋值为-1
+            for (int i = 0; i < n; i++) {
+                parent[i] = -1;
+                rank[i] = 0;
+            }
+        }
+
+        public int find(int p) {
+            //路径压缩
+            while (p != parent[p]) {
+                parent[p] = parent[parent[p]];
+                p = parent[p];
+            }
+
+            return p;
+        }
+
+        public void union(int p, int q) {
+            int pRoot = find(p);
+            int qRoot = find(q);
+            if (pRoot == qRoot) {
+                return;
+            }
+
+            if (rank[pRoot] > rank[qRoot]) {
+                parent[qRoot] = pRoot;
+            } else if (rank[qRoot] > rank[pRoot]) {
+                parent[pRoot] = qRoot;
+            } else {
+                parent[pRoot] = qRoot;
+                rank[qRoot]++;
+            }
+
+            count--;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public boolean isValid(int p) {
+            return parent[p] != -1;
+        }
+
+        //根据添加做初始化
+        public void setParent(int p) {
+            if (parent[p] != p) {
+                count++;
+            }
+            parent[p] = p;
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println("[1, 1, 2, 3] ?= " + numIslands2(3, 3, new int[][]{{0, 0}, {0, 1}, {1, 2}, {2, 1}}));
         System.out.println("[1] ?= " + numIslands2(3, 3, new int[][]{{0, 0}}));
+        System.out.println("[1, 1, 2, 3] ?= " + numIslands2(3, 3, new int[][]{{0, 0}, {0, 1}, {1, 2}, {2, 1}}));
+        System.out.println("[1, 1, 2, 3, 3, 3, 2, 2, 1, 1] ?= " + numIslands2(3, 3, new int[][]{{0, 0}, {0, 1}, {1, 2}, {2, 1}, {1, 0}, {0, 0}, {2, 2}, {1, 2}, {1, 1}, {0, 1}}));
+
+        System.out.println("[1, 1, 2, 3, 3, 3, 2, 2, 1, 1] ?= " + numIslands2_ref(3, 3, new int[][]{{0, 0}, {0, 1}, {1, 2}, {2, 1}, {1, 0}, {0, 0}, {2, 2}, {1, 2}, {1, 1}, {0, 1}}));
     }
 }
