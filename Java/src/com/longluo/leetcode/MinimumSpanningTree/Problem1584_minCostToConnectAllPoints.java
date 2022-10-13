@@ -85,10 +85,103 @@ public class Problem1584_minCostToConnectAllPoints {
         return minCost;
     }
 
+    // Kruskal
+    public static int minCostConnectPoints_kruskal(int[][] points) {
+        int len = points.length;
+
+        List<int[]> edges = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                int dist = Math.abs(points[i][0] - points[j][0]) + Math.abs(points[i][1] - points[j][1]);
+                edges.add(new int[]{i, j, dist});
+            }
+        }
+
+        Collections.sort(edges, (a, b) -> a[2] - b[2]);
+
+        UnionFind uf = new UnionFind(len);
+
+        int minCost = 0;
+
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+
+            if (uf.isConnected(u, v)) {
+                continue;
+            }
+
+            uf.union(u, v);
+            minCost += edge[2];
+            if (uf.getCount() == 1) {
+                break;
+            }
+        }
+
+        return minCost;
+    }
+
+    static class UnionFind {
+        int[] parents;
+        int[] rank;
+        int count;
+
+        UnionFind(int n) {
+            parents = new int[n];
+            rank = new int[n];
+            count = 0;
+
+            for (int i = 0; i < n; i++) {
+                parents[i] = i;
+            }
+        }
+
+        int find(int x) {
+            while (x != parents[x]) {
+                parents[x] = parents[parents[x]];
+                x = parents[x];
+            }
+
+            return x;
+        }
+
+        void union(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+
+            if (rootX == rootY) {
+                return;
+            }
+
+            if (rank[rootX] < rank[rootY]) {
+                parents[rootX] = rootY;
+            } else if (rank[rootX] > rank[rootY]) {
+                parents[rootY] = rootX;
+            } else {
+                parents[rootY] = rootX;
+                rank[rootX]++;
+            }
+
+            count--;
+        }
+
+        boolean isConnected(int x, int y) {
+            return find(x) == find(y);
+        }
+
+        int getCount() {
+            return count;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + minCostConnectPoints_prim(new int[][]{{0}}));
         System.out.println("4 ?= " + minCostConnectPoints_prim(new int[][]{{0, 0}, {1, 1}, {1, 0}, {-1, 1}}));
         System.out.println("4000000 ?= " + minCostConnectPoints_prim(new int[][]{{-1000000, -1000000}, {1000000, 1000000}}));
         System.out.println("18 ?= " + minCostConnectPoints_prim(new int[][]{{3, 12}, {-2, 5}, {-4, 1}}));
+
+        System.out.println("4000000 ?= " + minCostConnectPoints_kruskal(new int[][]{{-1000000, -1000000}, {1000000, 1000000}}));
+        System.out.println("18 ?= " + minCostConnectPoints_kruskal(new int[][]{{3, 12}, {-2, 5}, {-4, 1}}));
     }
 }
