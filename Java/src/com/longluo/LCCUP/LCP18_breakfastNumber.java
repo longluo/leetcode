@@ -1,6 +1,5 @@
 package com.longluo.LCCUP;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -64,6 +63,10 @@ public class LCP18_breakfastNumber {
                 j--;
             }
 
+            if (j < 0) {
+                break;
+            }
+
             ans += (j + 1);
             ans %= mod;
         }
@@ -71,8 +74,50 @@ public class LCP18_breakfastNumber {
         return (int) ans;
     }
 
+    // BinarySearch time: O(nlogn) space: O(logn)
+    public static int breakfastNumber_bs(int[] staple, int[] drinks, int x) {
+        int mod = 1_000_000_007;
+
+        Arrays.sort(staple);
+        Arrays.sort(drinks);
+
+        long ans = 0;
+
+        int foodMax = binarySearch(staple, x - drinks[0]);
+        for (int i = 0; i <= foodMax; i++) {
+            int drink = binarySearch(drinks, x - staple[i]);
+            ans += drink + 1;
+            ans %= mod;
+        }
+
+        return (int) ans;
+    }
+
+    private static int binarySearch(int[] arr, int target) {
+        if (arr[0] > target) {
+            return -1;
+        } else if (arr[arr.length - 1] <= target) {
+            return arr.length - 1;
+        }
+
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (arr[mid] <= target) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return left;
+    }
+
     public static void main(String[] args) {
         System.out.println("6 ?= " + breakfastNumber(new int[]{10, 20, 5}, new int[]{5, 5, 2}, 15));
         System.out.println("8 ?= " + breakfastNumber(new int[]{2, 1, 1}, new int[]{8, 9, 5, 1}, 9));
+        System.out.println("8 ?= " + breakfastNumber_bs(new int[]{2, 1, 1}, new int[]{8, 9, 5, 1}, 9));
     }
 }
