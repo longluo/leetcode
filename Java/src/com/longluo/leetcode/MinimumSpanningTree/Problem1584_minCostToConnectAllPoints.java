@@ -114,7 +114,8 @@ public class Problem1584_minCostToConnectAllPoints {
 
             uf.union(u, v);
             minCost += edge[2];
-            if (uf.getCount() == 1) {
+            len--;
+            if (len == 1) {
                 break;
             }
         }
