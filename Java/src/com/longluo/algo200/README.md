@@ -28,6 +28,7 @@
 | [772. 基本计算器 III](https://leetcode.cn/problems/basic-calculator-iii/) | Hard | [Java](./Problem772_basicCalculator_iii.java) |
 | [1056. 易混淆数](https://leetcode.cn/problems/confusing-number/) | Easy | [Java](./Problem1056_confusingNumber.java) |
 | [1059. 从始点到终点的所有路径](https://leetcode.cn/problems/all-paths-from-source-lead-to-destination/) | Medium | [Java](./Problem1059_leadsToDestination.java) |
+| [1062. 最长重复子串]( https://leetcode.cn/problems/longest-repeating-substring/) | Medium | [Java](./Problem1062_longestRepeatingSubstring.java) |
 | [1085. 最小元素各数位之和](https://leetcode.cn/problems/sum-of-digits-in-the-minimum-number/) | Easy | [Java](./Problem1085_sumOfDigits.java) |
 | [1099. 小于 K 的两数之和](https://leetcode.cn/problems/two-sum-less-than-k/) | Easy | [Java](./Problem1099_twoSumLessThanK.java) |
 | [1152. 用户网站访问行为分析](https://leetcode.cn/problems/analyze-user-website-visit-pattern/) | Medium | [Java](./Problem1152_analyzeUserWebsiteVisitPattern.java) |
