@@ -1,5 +1,8 @@
 package com.longluo.leetcode.hash;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 1832. 判断句子是否为全字母句
  * <p>
@@ -42,8 +45,22 @@ public class Problem1832_checkIfPangram {
         return true;
     }
 
+    // HashSet time: O(n) space: O(C)
+    public static boolean checkIfPangram_hash(String sentence) {
+        Set<Character> set = new HashSet<>();
+
+        for (char ch : sentence.toCharArray()) {
+            set.add(ch);
+        }
+
+        return set.size() == 26;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + checkIfPangram("thequickbrownfoxjumpsoverthelazydog"));
         System.out.println("false ?= " + checkIfPangram("leetcode"));
+
+        System.out.println("true ?= " + checkIfPangram_hash("thequickbrownfoxjumpsoverthelazydog"));
+        System.out.println("false ?= " + checkIfPangram_hash("leetcode"));
     }
 }
