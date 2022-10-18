@@ -76,6 +76,28 @@ public class Problem902_numbersAtMostNGivenDigitSet {
         }
     }
 
+    // Backtrack Opt
+    // TLE
+    public static int atMostNGivenDigitSet_bt(String[] digits, int n) {
+        if (digits == null || digits.length == 0) {
+            return 0;
+        }
+
+        int len = digits.length;
+
+        List<Integer> nums = new ArrayList<>();
+        int maxLen = Math.min(String.valueOf(n).length(), 10);
+        backtrack(nums, new StringBuilder(), digits, 0, maxLen, n);
+
+        int ans = nums.size();
+        for (int i = 1; i < maxLen; i++) {
+            ans += Math.pow(len, i);
+        }
+
+        return ans;
+    }
+
+
     public static void main(String[] args) {
         System.out.println(Integer.MAX_VALUE);
 //        System.out.println(Integer.parseInt("4111111111"));
@@ -83,5 +105,8 @@ public class Problem902_numbersAtMostNGivenDigitSet {
         System.out.println("2 ?= " + atMostNGivenDigitSet(new String[]{"3", "4", "8"}, 4));
         System.out.println("20 ?= " + atMostNGivenDigitSet(new String[]{"1", "3", "5", "7"}, 100));
         System.out.println("29523 ?= " + atMostNGivenDigitSet(new String[]{"1", "4", "9"}, 1000000000));
+
+        System.out.println("20 ?= " + atMostNGivenDigitSet_bt(new String[]{"1", "3", "5", "7"}, 100));
+        System.out.println("29523 ?= " + atMostNGivenDigitSet_bt(new String[]{"1", "4", "9"}, 1000000000));
     }
 }
