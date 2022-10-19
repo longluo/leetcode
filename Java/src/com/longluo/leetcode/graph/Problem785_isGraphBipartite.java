@@ -1,5 +1,9 @@
 package com.longluo.leetcode.graph;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * 785. 判断二分图
  * <p>
@@ -34,14 +38,46 @@ package com.longluo.leetcode.graph;
  * graph[u] 的所有值 互不相同
  * 如果 graph[u] 包含 v，那么 graph[v] 也会包含 u
  * <p>
- * https://leetcode-cn.com/problems/is-graph-bipartite/
+ * https://leetcode.cn/problems/is-graph-bipartite/
  */
 public class Problem785_isGraphBipartite {
 
-    //
+    // BFS time: O(mn) space: O(mn)
     public static boolean isBipartite(int[][] graph) {
+        int n = graph.length;
 
-        return false;
+        int[] color = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            if (color[i] > 0) {
+                continue;
+            }
+
+            Queue<Integer> queue = new LinkedList<>();
+            queue.offer(i);
+            while (!queue.isEmpty()) {
+                int curNode = queue.poll();
+
+                if (color[curNode] == 0) {
+                    color[curNode] = 1;
+                }
+
+                int[] neighbors = graph[curNode];
+                for (int j = 0; j < neighbors.length; j++) {
+                    int nNode = neighbors[j];
+                    if (color[curNode] == color[nNode]) {
+                        return false;
+                    }
+
+                    if (color[nNode] == 0) {
+                        color[nNode] = 3 - color[curNode];
+                        queue.offer(nNode);
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
