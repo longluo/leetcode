@@ -36,7 +36,8 @@ import java.util.*;
  */
 public class Problem886_possibleBipartition {
 
-    // BF
+    // BF 不是很明白
+    // TODO: 2022/10/19
     public static boolean possibleBipartition_bf(int n, int[][] dislikes) {
         if (dislikes == null || dislikes.length < 2) {
             return true;
