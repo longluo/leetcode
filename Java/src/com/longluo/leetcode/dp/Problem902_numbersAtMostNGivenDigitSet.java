@@ -97,6 +97,41 @@ public class Problem902_numbersAtMostNGivenDigitSet {
         return ans;
     }
 
+    // Math time: O(mn) space: O(n)
+    public static int atMostNGivenDigitSet_math(String[] digits, int n) {
+        int len = digits.length;
+
+        String numStr = String.valueOf(n);
+        int m = numStr.length();
+
+        int ans = 0;
+        for (int i = 1; i < m; i++) {
+            ans += Math.pow(len, i);
+        }
+
+        for (int i = 0; i < m; i++) {
+            char numCh = numStr.charAt(i);
+
+            boolean needCompareNext = false;
+
+            for (String digit : digits) {
+                char digitCh = digit.charAt(0);
+                if (digitCh < numCh) {
+                    ans += Math.pow(len, m - i - 1);
+                } else if (digitCh == numCh) {
+                    needCompareNext = true;
+                }
+            }
+
+            if (!needCompareNext) {
+                return ans;
+            }
+        }
+
+        ans += 1;
+
+        return ans;
+    }
 
     public static void main(String[] args) {
         System.out.println(Integer.MAX_VALUE);
@@ -108,5 +143,12 @@ public class Problem902_numbersAtMostNGivenDigitSet {
 
         System.out.println("20 ?= " + atMostNGivenDigitSet_bt(new String[]{"1", "3", "5", "7"}, 100));
         System.out.println("29523 ?= " + atMostNGivenDigitSet_bt(new String[]{"1", "4", "9"}, 1000000000));
+
+        System.out.println("1 ?= " + atMostNGivenDigitSet_math(new String[]{"9"}, 55));
+        System.out.println("1 ?= " + atMostNGivenDigitSet_math(new String[]{"3", "5"}, 4));
+        System.out.println("2 ?= " + atMostNGivenDigitSet_math(new String[]{"5", "6"}, 19));
+        System.out.println("2 ?= " + atMostNGivenDigitSet_math(new String[]{"3", "4", "8"}, 4));
+        System.out.println("20 ?= " + atMostNGivenDigitSet_math(new String[]{"1", "3", "5", "7"}, 100));
+        System.out.println("29523 ?= " + atMostNGivenDigitSet_math(new String[]{"1", "4", "9"}, 1000000000));
     }
 }
