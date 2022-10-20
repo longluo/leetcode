@@ -60,11 +60,28 @@ public class Problem769_maxChunksToMakeSorted {
         return deque.size();
     }
 
+    // Math time: O(n) space: O(1)
+    public static int maxChunksToSorted_math(int[] arr) {
+        int len = arr.length;
+        int ans = 0;
+        int max = 0;
+        for (int i = 0; i < len; i++) {
+            max = Math.max(max, arr[i]);
+            if (max == i) {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + maxChunksToSorted(new int[]{0}));
         System.out.println("2 ?= " + maxChunksToSorted(new int[]{0, 1}));
         System.out.println("1 ?= " + maxChunksToSorted(new int[]{4, 3, 2, 1, 0}));
         System.out.println("4 ?= " + maxChunksToSorted(new int[]{1, 0, 2, 3, 4}));
         System.out.println("2 ?= " + maxChunksToSorted(new int[]{0, 4, 5, 2, 1, 3}));
+
+        System.out.println("2 ?= " + maxChunksToSorted_math(new int[]{0, 4, 5, 2, 1, 3}));
     }
 }
