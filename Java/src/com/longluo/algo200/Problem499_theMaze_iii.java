@@ -133,10 +133,81 @@ public class Problem499_theMaze_iii {
         return res.equals("") ? "impossible" : res;
     }
 
+    // DFS time: O(mn) space: O(mn)
+    public static String findShortestWay_dfs(int[][] maze, int[] ball, int[] hole) {
+        int m = maze.length;
+        int n = maze[0].length;
+
+        int[][] distance = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            Arrays.fill(distance[i], Integer.MAX_VALUE);
+        }
+
+        Map<Integer, String> map = new HashMap<>();
+        for (int i = 0; i < m * n; i++) {
+            map.put(i, "");
+        }
+
+        distance[ball[0]][ball[1]] = 0;
+        dfs(maze, distance, map, ball[0], ball[1], hole);
+
+        String res = map.get(hole[0] * n + hole[1]);
+        return res.equals("") ? "impossible" : res;
+    }
+
+    private static void dfs(int[][] maze, int[][] distance, Map<Integer, String> map, int x, int y, int[] hole) {
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        String[] actions = {"u", "d", "l", "r"};
+
+        int m = maze.length;
+        int n = maze[0].length;
+
+        for (int i = 0; i < 4; i++) {
+            int nextX = x;
+            int nextY = y;
+            int stepCnt = 0;
+
+            String path = map.get(x * n + y);
+
+            while (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && maze[nextX][nextY] == 0
+                    && !(nextX == hole[0] && nextY == hole[1])) {
+                nextX += dirs[i][0];
+                nextY += dirs[i][1];
+                stepCnt++;
+            }
+
+            if (nextX != hole[0] || hole[1] != nextY) {
+                nextX -= dirs[i][0];
+                nextY -= dirs[i][1];
+                stepCnt--;
+            }
+
+            path += actions[i];
+
+            if (distance[nextX][nextY] > distance[x][y] + stepCnt) {
+                distance[nextX][nextY] = distance[x][y] + stepCnt;
+                map.put(nextX * n + nextY, path);
+                if (nextX != hole[0] || nextY != hole[1]) {
+                    dfs(maze, distance, map, nextX, nextY, hole);
+                }
+            } else if (distance[nextX][nextY] == distance[x][y] + stepCnt && path.compareTo(map.get(nextX * n + nextY)) < 0) {
+                map.put(nextX * n + nextY, path);
+                if (nextX != hole[0] || nextY != hole[1]) {
+                    dfs(maze, distance, map, nextX, nextY, hole);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("u ?= " + findShortestWay(new int[][]{{0}, {0}}, new int[]{1, 0}, new int[]{0, 0}));
         System.out.println("lul ?= " + findShortestWay(new int[][]{{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}}, new int[]{4, 3}, new int[]{0, 1}));
         System.out.println("impossible ?= " + findShortestWay(new int[][]{{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}}, new int[]{4, 3}, new int[]{3, 0}));
         System.out.println("dldr ?= " + findShortestWay(new int[][]{{0, 0, 0, 0, 0, 0, 0}, {0, 0, 1, 0, 0, 1, 0}, {0, 0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 1}}, new int[]{0, 4}, new int[]{3, 5}));
+
+        System.out.println("u ?= " + findShortestWay_dfs(new int[][]{{0}, {0}}, new int[]{1, 0}, new int[]{0, 0}));
+        System.out.println("lul ?= " + findShortestWay_dfs(new int[][]{{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}}, new int[]{4, 3}, new int[]{0, 1}));
+        System.out.println("impossible ?= " + findShortestWay_dfs(new int[][]{{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}}, new int[]{4, 3}, new int[]{3, 0}));
+        System.out.println("dldr ?= " + findShortestWay_dfs(new int[][]{{0, 0, 0, 0, 0, 0, 0}, {0, 0, 1, 0, 0, 1, 0}, {0, 0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 1}}, new int[]{0, 4}, new int[]{3, 5}));
     }
 }
