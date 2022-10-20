@@ -156,20 +156,20 @@ public class Problem200_numberOfIslands {
     static class UnionFind {
         int count = 0;
         int[] parents;
-        int[] size;
+        int[] rank;
 
         UnionFind(char[][] grid) {
             int m = grid.length;
             int n = grid[0].length;
 
             parents = new int[m * n];
-            size = new int[m * n];
+            rank = new int[m * n];
 
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     if (grid[i][j] == '1') {
                         parents[i * n + j] = i * n + j;
-                        size[i * n + j] = 1;
+                        rank[i * n + j] = 1;
                         count++;
                     }
                 }
@@ -179,29 +179,30 @@ public class Problem200_numberOfIslands {
         int find(int x) {
             while (x != parents[x]) {
                 x = parents[x];
+                parents[x] = parents[parents[x]];
             }
 
-            return parents[x];
+            return x;
         }
 
         void union(int x, int y) {
-            int a = find(x);
-            int b = find(y);
+            int rootX = find(x);
+            int rootY = find(y);
 
-            if (a != b) {
-                if (size[a] < size[b]) {
-                    parents[a] = b;
-                    size[b] += size[a];
-                } else if (size[a] > size[b]) {
-                    parents[b] = a;
-                    size[a] += size[b];
-                } else {
-                    parents[b] = a;
-                    size[a] += size[b];
-                }
-
-                count--;
+            if (rootX == rootY) {
+                return;
             }
+
+            if (rank[rootX] < rank[rootY]) {
+                parents[rootX] = rootY;
+            } else if (rank[rootX] > rank[rootY]) {
+                parents[rootY] = rootX;
+            } else {
+                parents[rootY] = rootX;
+                rank[rootX]++;
+            }
+
+            count--;
         }
 
         int getCount() {
