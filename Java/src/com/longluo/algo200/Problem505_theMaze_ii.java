@@ -106,8 +106,58 @@ public class Problem505_theMaze_ii {
         return distance[destination[0]][destination[1]] == Integer.MAX_VALUE ? -1 : distance[destination[0]][destination[1]];
     }
 
+    // DFS time: O(mn) space: O(mn)
+    public static int shortestDistance_dfs(int[][] maze, int[] start, int[] destination) {
+        int m = maze.length;
+        int n = maze[0].length;
+
+        if (m * n <= 2) {
+            return 1;
+        }
+
+        int[][] distance = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            Arrays.fill(distance[i], Integer.MAX_VALUE);
+        }
+
+        distance[start[0]][start[1]] = 0;
+        dfs(maze, distance, start);
+
+        return distance[destination[0]][destination[1]] == Integer.MAX_VALUE ? -1 : distance[destination[0]][destination[1]];
+    }
+
+    private static void dfs(int[][] maze, int[][] distance, int[] start) {
+        int[][] dirs = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
+
+        int m = maze.length;
+        int n = maze[0].length;
+
+        for (int[] dir : dirs) {
+            int nextX = start[0] + dir[0];
+            int nextY = start[1] + dir[1];
+            int steps = 0;
+
+            while (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && maze[nextX][nextY] == 0) {
+                nextX += dir[0];
+                nextY += dir[1];
+                steps++;
+            }
+
+            nextX -= dir[0];
+            nextY -= dir[1];
+
+            if (distance[nextX][nextY] > distance[start[0]][start[1]] + steps) {
+                distance[nextX][nextY] = distance[start[0]][start[1]] + steps;
+                dfs(maze, distance, new int[]{nextX, nextY});
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("12 ?= " + shortestDistance(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{4, 4}));
         System.out.println("-1 ?= " + shortestDistance(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{3, 2}));
+
+        System.out.println("12 ?= " + shortestDistance_dfs(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{4, 4}));
+        System.out.println("-1 ?= " + shortestDistance_dfs(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{3, 2}));
     }
 }
