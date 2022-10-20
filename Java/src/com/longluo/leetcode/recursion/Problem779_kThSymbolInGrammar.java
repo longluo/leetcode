@@ -57,9 +57,31 @@ public class Problem779_kThSymbolInGrammar {
         return symbols[n - 1].charAt(k - 1) - '0';
     }
 
+    // Memory Out
+    public static int kthGrammar_bf_opt(int n, int k) {
+        String s = "0";
+        for (int i = 1; i < n; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (char ch : s.toCharArray()) {
+                if (ch == '0') {
+                    sb.append("01");
+                } else {
+                    sb.append("10");
+                }
+            }
+
+            s = sb.toString();
+        }
+
+        return s.charAt(k - 1) - '0';
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + kthGrammar_bf(1, 1));
         System.out.println("0 ?= " + kthGrammar_bf(2, 1));
         System.out.println("1 ?= " + kthGrammar_bf(2, 2));
+        System.out.println("1 ?= " + kthGrammar_bf_opt(2, 2));
+
+
     }
 }
