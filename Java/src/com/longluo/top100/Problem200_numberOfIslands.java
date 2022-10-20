@@ -69,9 +69,9 @@ public class Problem200_numberOfIslands {
         visited[x][y] = true;
         while (!queue.isEmpty()) {
             int[] pos = queue.poll();
-            for (int i = 0; i < dirs.length; i++) {
-                int nextX = pos[0] + dirs[i][0];
-                int nextY = pos[1] + dirs[i][1];
+            for (int[] dir : dirs) {
+                int nextX = pos[0] + dir[0];
+                int nextY = pos[1] + dir[1];
                 if (nextX >= 0 && nextX < grid.length && nextY >= 0 && nextY < grid[0].length
                         && !visited[nextX][nextY] && grid[nextX][nextY] == '1') {
                     queue.offer(new int[]{nextX, nextY});
@@ -81,8 +81,43 @@ public class Problem200_numberOfIslands {
         }
     }
 
-    // TODO: 2022/5/6 DFS
+    // DFS time: O(mn) space: O(mn)
+    public static int numIslands_dfs(char[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
 
+        boolean[][] visited = new boolean[m][n];
+
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    dfs(grid, visited, i, j);
+                    ans++;
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    private static void dfs(char[][] grid, boolean[][] visited, int x, int y) {
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int m = grid.length;
+        int n = grid[0].length;
+
+        visited[x][y] = true;
+
+        for (int[] dir : dirs) {
+            int nextX = x + dir[0];
+            int nextY = y + dir[1];
+
+            if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && grid[nextX][nextY] == '1' && !visited[nextX][nextY]) {
+                dfs(grid, visited, nextX, nextY);
+            }
+        }
+    }
 
     // Union Find time: O(mn*aplha(mn)) space: O(mn)
     public static int numIslands_uf(char[][] grid) {
@@ -176,6 +211,8 @@ public class Problem200_numberOfIslands {
 
     public static void main(String[] args) {
         System.out.println("1 ?= " + numIslands_bfs(new char[][]{{'1', '1', '1', '1', '0'}, {'1', '1', '0', '1', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '0', '0', '0'}}));
+
+        System.out.println("1 ?= " + numIslands_dfs(new char[][]{{'1', '1', '1', '1', '0'}, {'1', '1', '0', '1', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '0', '0', '0'}}));
 
         System.out.println("1 ?= " + numIslands_uf(new char[][]{{'1', '1', '1', '1', '0'}, {'1', '1', '0', '1', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '0', '0', '0'}}));
         System.out.println("3 ?= " + numIslands_uf(new char[][]{{'1', '1', '0', '0', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '1', '0', '0'}, {'0', '0', '0', '1', '1'}}));
