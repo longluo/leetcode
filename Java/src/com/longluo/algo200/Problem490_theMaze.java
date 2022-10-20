@@ -90,8 +90,62 @@ public class Problem490_theMaze {
         return false;
     }
 
+    // DFS time: O(mn) space: O(mn)
+    public static boolean hasPath_dfs(int[][] maze, int[] start, int[] destination) {
+        int m = maze.length;
+        int n = maze[0].length;
+
+        if (m * n <= 2) {
+            return true;
+        }
+
+        boolean[][] visited = new boolean[m][n];
+        return dfs(maze, visited, start, destination);
+    }
+
+    private static boolean dfs(int[][] maze, boolean[][] visited, int[] start, int[] destination) {
+        int[][] dirs = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
+
+        if (start[0] == destination[0] && start[1] == destination[1]) {
+            return true;
+        }
+
+        int m = maze.length;
+        int n = maze[0].length;
+
+        visited[start[0]][start[1]] = true;
+        boolean result = false;
+
+        for (int[] dir : dirs) {
+            int nextX = start[0] + dir[0];
+            int nextY = start[1] + dir[1];
+
+            while (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && maze[nextX][nextY] == 0) {
+                nextX += dir[0];
+                nextY += dir[1];
+            }
+
+            nextX -= dir[0];
+            nextY -= dir[1];
+
+            if (visited[nextX][nextY]) {
+                continue;
+            }
+
+            if (dfs(maze, visited, new int[]{nextX, nextY}, destination)) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + hasPath(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{4, 4}));
         System.out.println("false ?= " + hasPath(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{3, 2}));
+
+        System.out.println("true ?= " + hasPath_dfs(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{4, 4}));
+        System.out.println("false ?= " + hasPath_dfs(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}}, new int[]{0, 4}, new int[]{3, 2}));
     }
 }
