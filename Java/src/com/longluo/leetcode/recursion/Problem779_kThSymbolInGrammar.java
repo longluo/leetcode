@@ -80,8 +80,6 @@ public class Problem779_kThSymbolInGrammar {
     public static int kthGrammar(int n, int k) {
         if (n == 1) {
             return 0;
-        } else if (n == 2) {
-            return k == 1 ? 0 : 1;
         }
 
         int ret = kthGrammar(n - 1, (k + 1) / 2);
