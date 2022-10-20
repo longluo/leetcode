@@ -76,12 +76,33 @@ public class Problem779_kThSymbolInGrammar {
         return s.charAt(k - 1) - '0';
     }
 
+    // Recursion time: O(n) space: O(n)
+    public static int kthGrammar(int n, int k) {
+        if (n == 1) {
+            return 0;
+        } else if (n == 2) {
+            return k == 1 ? 0 : 1;
+        }
+
+        int ret = kthGrammar(n - 1, (k + 1) / 2);
+        if (ret == 0) {
+            return k % 2 == 0 ? 1 : 0;
+        } else {
+            return k % 2 == 0 ? 0 : 1;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + kthGrammar_bf(1, 1));
         System.out.println("0 ?= " + kthGrammar_bf(2, 1));
         System.out.println("1 ?= " + kthGrammar_bf(2, 2));
         System.out.println("1 ?= " + kthGrammar_bf_opt(2, 2));
 
-
+        System.out.println("0 ?= " + kthGrammar(1, 1));
+        System.out.println("0 ?= " + kthGrammar(2, 1));
+        System.out.println("1 ?= " + kthGrammar(2, 2));
+        System.out.println("1 ?= " + kthGrammar(3, 2));
+        System.out.println("1 ?= " + kthGrammar(3, 3));
+        System.out.println("1 ?= " + kthGrammar(4, 5));
     }
 }
