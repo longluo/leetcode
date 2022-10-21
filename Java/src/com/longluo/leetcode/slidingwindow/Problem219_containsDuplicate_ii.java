@@ -1,4 +1,4 @@
-package com.longluo.leetcode.array;
+package com.longluo.leetcode.slidingwindow;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,9 +28,7 @@ import java.util.Set;
  * -10^9 <= nums[i] <= 10^9
  * 0 <= k <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/contains-duplicate-ii/
- * <p>
- * https://leetcode.com/problems/contains-duplicate-ii/
+ * https://leetcode.cn/problems/contains-duplicate-ii/
  */
 public class Problem219_containsDuplicate_ii {
 
@@ -53,6 +51,25 @@ public class Problem219_containsDuplicate_ii {
         return false;
     }
 
+    // BF time: O(n^2) space: O(1)
+    // TLE
+    public static boolean containsNearbyDuplicate_bf(int[] nums, int k) {
+        int len = nums.length;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (nums[i] == nums[j]) {
+                    if (Math.abs(i - j) <= k) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // HashMap time: O(n) space: O(n)
     public static boolean containsNearbyDuplicate_hash(int[] nums, int k) {
         if (nums == null || nums.length <= 1 || k <= 0) {
             return false;
@@ -66,15 +83,15 @@ public class Problem219_containsDuplicate_ii {
                 if (Math.abs(i - idx) <= k) {
                     return true;
                 }
-                map.put(nums[i], i);
-            } else {
-                map.put(nums[i], i);
             }
+
+            map.put(nums[i], i);
         }
 
         return false;
     }
 
+    // Sliding Window time: O(n) space: O(1)
     public static boolean containsNearbyDuplicate_win(int[] nums, int k) {
         if (nums == null || nums.length <= 1 || k <= 0) {
             return false;
@@ -127,6 +144,8 @@ public class Problem219_containsDuplicate_ii {
     }
 
     public static void main(String[] args) {
+        System.out.println("true ?= " + containsNearbyDuplicate_bf(new int[]{1, 2, 3, 1}, 3));
+
         System.out.println("true ?= " + containsNearbyDuplicate(new int[]{1, 2, 3, 1}, 3));
         System.out.println("true ?= " + containsNearbyDuplicate(new int[]{1, 0, 1, 1}, 1));
         System.out.println("false ?= " + containsNearbyDuplicate(new int[]{1, 2, 3, 1, 2, 3}, 2));
