@@ -1,5 +1,8 @@
 package com.longluo.leetcode.BucketSort;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 220. 存在重复元素 III
  * <p>
@@ -49,8 +52,38 @@ public class Problem220_containsDuplicate_iii {
         return false;
     }
 
+    // SlidingWindow time: O(n*2t) space: O(k)
+    // TLE
+    public static boolean containsNearbyAlmostDuplicate_win(int[] nums, int indexDiff, int valueDiff) {
+        if (nums == null || nums.length <= 1 || indexDiff <= 0) {
+            return false;
+        }
+
+        int len = nums.length;
+        Set<Integer> set = new HashSet<>();
+        int max = 0;
+        for (int i = 0; i < len; i++) {
+            if (i > indexDiff) {
+                set.remove(nums[i - indexDiff - 1]);
+            }
+
+            for (int j = nums[i] - valueDiff; j <= nums[i] + valueDiff; j++) {
+                if (set.contains(j)) {
+                    return true;
+                }
+            }
+
+            set.add(nums[i]);
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + containsNearbyAlmostDuplicate_bf(new int[]{1, 2, 3, 1}, 3, 0));
         System.out.println("true ?= " + containsNearbyAlmostDuplicate_bf(new int[]{1, 0, 1, 1}, 1, 2));
+
+        System.out.println("true ?= " + containsNearbyAlmostDuplicate_win(new int[]{1, 2, 3, 1}, 3, 0));
+        System.out.println("true ?= " + containsNearbyAlmostDuplicate_win(new int[]{1, 0, 1, 1}, 1, 2));
     }
 }
