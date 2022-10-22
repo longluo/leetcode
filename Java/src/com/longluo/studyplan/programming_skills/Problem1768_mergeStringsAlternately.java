@@ -35,7 +35,7 @@ package com.longluo.studyplan.programming_skills;
  * 1 <= word1.length, word2.length <= 100
  * word1 和 word2 由小写英文字母组成
  * <p>
- * https://leetcode-cn.com/problems/merge-strings-alternately/
+ * https://leetcode.cn  /problems/merge-strings-alternately/
  */
 public class Problem1768_mergeStringsAlternately {
 
@@ -55,9 +55,9 @@ public class Problem1768_mergeStringsAlternately {
             } else if (p < len1) {
                 sb.append(word1.charAt(p));
                 p++;
-            } else if (q < len2) {
-               sb.append(word2.charAt(q));
-               q++;
+            } else {
+                sb.append(word2.charAt(q));
+                q++;
             }
         }
 
@@ -65,6 +65,6 @@ public class Problem1768_mergeStringsAlternately {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("apbqcr ?= " + mergeAlternately("abc", "pqr"));
     }
 }
