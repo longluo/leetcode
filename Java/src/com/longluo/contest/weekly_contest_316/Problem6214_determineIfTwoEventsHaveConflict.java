@@ -60,7 +60,13 @@ public class Problem6214_determineIfTwoEventsHaveConflict {
         return true;
     }
 
+    // Opt time: O(1) space: O(1)
+    public static boolean haveConflict_opt(String[] event1, String[] event2) {
+        return !(event1[1].compareTo(event2[0]) < 0 || event2[1].compareTo(event1[0]) < 0);
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + haveConflict(new String[]{"10:00", "11:00"}, new String[]{"14:00", "15:00"}));
+        System.out.println("false ?= " + haveConflict_opt(new String[]{"10:00", "11:00"}, new String[]{"14:00", "15:00"}));
     }
 }
