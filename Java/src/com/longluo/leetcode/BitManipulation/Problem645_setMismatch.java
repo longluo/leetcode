@@ -1,6 +1,7 @@
-package com.longluo.leetcode.bitmanipulation;
+package com.longluo.leetcode.BitManipulation;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -24,7 +25,7 @@ import java.util.TreeSet;
  * 2 <= nums.length <= 10^4
  * 1 <= nums[i] <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/set-mismatch/
+ * https://leetcode.cn/problems/set-mismatch/
  */
 public class Problem645_setMismatch {
 
@@ -35,7 +36,7 @@ public class Problem645_setMismatch {
 
         int n = nums.length;
         int[] ans = new int[2];
-        Set<Integer> set = new TreeSet<>();
+        Set<Integer> set = new HashSet<>();
         for (int i = 0; i < n; i++) {
             if (set.contains(nums[i])) {
                 ans[0] = nums[i];
