@@ -1,7 +1,7 @@
 package com.longluo.algorithm;
 
 /**
- *  Bitwise Set
+ * Bitwise Set
  */
 public class BitManipulation {
 
@@ -27,6 +27,7 @@ public class BitManipulation {
 
     /**
      * The Lower 1 of the bits.
+     *
      * @param num
      * @return
      */
@@ -39,6 +40,7 @@ public class BitManipulation {
         System.out.println("2 ?= " + countBits_for(6));
         System.out.println("1 ?= " + lowBit(7));
         System.out.println("0 ?= " + lowBit(6));
+        System.out.println("12 = " + Integer.toBinaryString(12) + ", lowbit(" + 12 + ") = " + lowBit(12));
         System.out.println(Integer.bitCount(60) + " ?= " + countBits(60));
     }
 }
