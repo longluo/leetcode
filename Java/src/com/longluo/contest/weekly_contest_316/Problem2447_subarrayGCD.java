@@ -29,7 +29,7 @@ package com.longluo.contest.weekly_contest_316;
  */
 public class Problem2447_subarrayGCD {
 
-    // BF time: O(n^2logU) space: O(1)
+    // BF time: O(n(n+logU)) space: O(1)
     public static int subarrayGCD_bf(int[] nums, int k) {
         int len = nums.length;
 
@@ -40,10 +40,15 @@ public class Problem2447_subarrayGCD {
                 continue;
             }
 
-            int g = nums[i];
+            int maxFactor = nums[i];
             for (int j = i; j < len; j++) {
-                g = gcd(g, nums[j]);
-                if (g == k) {
+                maxFactor = gcd(maxFactor, nums[j]);
+
+                if (maxFactor % k > 0) {
+                    break;
+                }
+
+                if (maxFactor == k) {
                     ans++;
                 }
             }
@@ -60,7 +65,5 @@ public class Problem2447_subarrayGCD {
         System.out.println("4 ?= " + subarrayGCD_bf(new int[]{9, 3, 1, 2, 6, 3}, 3));
         System.out.println("10 ?= " + subarrayGCD_bf(new int[]{3, 3, 4, 1, 2}, 1));
         System.out.println("10 ?= " + subarrayGCD_bf(new int[]{4, 3, 1, 3, 3}, 1));
-
-        System.out.println(35 ^ 2);
     }
 }
