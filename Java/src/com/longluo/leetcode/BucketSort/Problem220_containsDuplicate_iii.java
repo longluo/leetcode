@@ -2,6 +2,7 @@ package com.longluo.leetcode.BucketSort;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * 220. 存在重复元素 III
@@ -61,7 +62,6 @@ public class Problem220_containsDuplicate_iii {
 
         int len = nums.length;
         Set<Integer> set = new HashSet<>();
-        int max = 0;
         for (int i = 0; i < len; i++) {
             if (i > indexDiff) {
                 set.remove(nums[i - indexDiff - 1]);
@@ -79,11 +79,39 @@ public class Problem220_containsDuplicate_iii {
         return false;
     }
 
+    // SlidingWindow + TreeSet time: O(nlogk) space: O(k)
+    public static boolean containsNearbyAlmostDuplicate_win_opt(int[] nums, int indexDiff, int valueDiff) {
+        if (nums == null || nums.length <= 1 || indexDiff <= 0) {
+            return false;
+        }
+
+        int len = nums.length;
+
+        TreeSet<Integer> set = new TreeSet<>();
+        for (int i = 0; i < len; i++) {
+            if (i > indexDiff) {
+                set.remove(nums[i - indexDiff - 1]);
+            }
+
+            if (set.floor(nums[i] + valueDiff) != null && set.floor(nums[i] + valueDiff) >= nums[i] - valueDiff) {
+                return true;
+            }
+
+            set.add(nums[i]);
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + containsNearbyAlmostDuplicate_bf(new int[]{1, 2, 3, 1}, 3, 0));
         System.out.println("true ?= " + containsNearbyAlmostDuplicate_bf(new int[]{1, 0, 1, 1}, 1, 2));
 
         System.out.println("true ?= " + containsNearbyAlmostDuplicate_win(new int[]{1, 2, 3, 1}, 3, 0));
         System.out.println("true ?= " + containsNearbyAlmostDuplicate_win(new int[]{1, 0, 1, 1}, 1, 2));
+
+        System.out.println("false ?= " + containsNearbyAlmostDuplicate_win_opt(new int[]{1, 5, 9, 1, 5, 9}, 2, 3));
+        System.out.println("true ?= " + containsNearbyAlmostDuplicate_win_opt(new int[]{1, 2, 3, 1}, 3, 0));
+        System.out.println("true ?= " + containsNearbyAlmostDuplicate_win_opt(new int[]{1, 0, 1, 1}, 1, 2));
     }
 }
