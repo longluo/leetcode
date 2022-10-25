@@ -82,9 +82,15 @@ public class Problem1662_arrayStringsAreEqual {
         return true;
     }
 
+    // Java 1 Line Code time: O(n) space: O(n)
+    public static boolean arrayStringsAreEqual_join(String[] word1, String[] word2) {
+        return String.join("", word1).equals(String.join("", word2));
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + arrayStringsAreEqual(new String[]{"ab", "c"}, new String[]{"a", "bc"}));
         System.out.println("true ?= " + arrayStringsAreEqual_opt(new String[]{"ab", "c"}, new String[]{"a", "bc"}));
         System.out.println("false ?= " + arrayStringsAreEqual_opt(new String[]{"abc", "d", "defg"}, new String[]{"abcddef"}));
+        System.out.println("false ?= " + arrayStringsAreEqual_join(new String[]{"abc", "d", "defg"}, new String[]{"abcddef"}));
     }
 }
