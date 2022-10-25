@@ -29,6 +29,7 @@ import java.util.TreeSet;
  */
 public class Problem645_setMismatch {
 
+    // HashSet time: O(n) space: O(n)
     public static int[] findErrorNums(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return null;
@@ -40,9 +41,9 @@ public class Problem645_setMismatch {
         for (int i = 0; i < n; i++) {
             if (set.contains(nums[i])) {
                 ans[0] = nums[i];
-            } else {
-                set.add(nums[i]);
             }
+
+            set.add(nums[i]);
         }
 
         for (int i = 1; i <= n; i++) {
@@ -54,9 +55,45 @@ public class Problem645_setMismatch {
         return ans;
     }
 
+    // Sort time: O(nlogn) space: O(1)
+    public static int[] findErrorNums_sort(int[] nums) {
+        Arrays.sort(nums);
+
+        int len = nums.length;
+
+        int[] ans = new int[2];
+
+        int prev = 0;
+        for (int i = 0; i < len; i++) {
+            if (i < len - 1 && nums[i] == nums[i + 1]) {
+                ans[0] = nums[i];
+            }
+
+            if (nums[i] > prev + 1) {
+                ans[1] = prev + 1;
+            }
+
+            prev = nums[i];
+        }
+
+        if (prev != len) {
+            ans[1] = len;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
-        System.out.println("[2,3] ?= " + Arrays.toString(findErrorNums(new int[]{1, 2, 2, 4})));
-        System.out.println("[1,2] ?= " + Arrays.toString(findErrorNums(new int[]{1, 1})));
-        System.out.println("[3,2] ?= " + Arrays.toString(findErrorNums(new int[]{1, 3, 3})));
+        System.out.println("[2, 3] ?= " + Arrays.toString(findErrorNums(new int[]{1, 2, 2, 4})));
+        System.out.println("[1, 2] ?= " + Arrays.toString(findErrorNums(new int[]{1, 1})));
+        System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums(new int[]{1, 3, 3})));
+
+        System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 3, 3})));
+        System.out.println("[2, 1] ?= " + Arrays.toString(findErrorNums_sort(new int[]{2, 2, 3})));
+        System.out.println("[2, 3] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 2, 2})));
+
+        System.out.println("[3, 1] ?= " + Arrays.toString(findErrorNums_sort(new int[]{3, 2, 3, 4, 6, 5})));
+        System.out.println("[2, 10] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 5, 3, 2, 2, 7, 6, 4, 8, 9})));
     }
 }
+
