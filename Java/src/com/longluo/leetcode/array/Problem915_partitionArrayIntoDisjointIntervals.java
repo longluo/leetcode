@@ -101,11 +101,34 @@ public class Problem915_partitionArrayIntoDisjointIntervals {
         return 0;
     }
 
+    // Best time: O(n) space: O(1)
+    public static int partitionDisjoint_best(int[] nums) {
+        int len = nums.length;
+
+        int leftMax = nums[0];
+        int max = leftMax;
+
+        int ans = 0;
+
+        for (int i = 1; i < len; i++) {
+            if (leftMax > nums[i]) {
+                ans = i;
+                leftMax = max;
+            } else {
+                max = Math.max(max, nums[i]);
+            }
+        }
+
+        return ans + 1;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + partitionDisjoint(new int[]{5, 0, 3, 8, 6}));
         System.out.println("4 ?= " + partitionDisjoint(new int[]{1, 1, 1, 0, 6, 12}));
 
         System.out.println("4 ?= " + partitionDisjoint_opt(new int[]{1, 1, 1, 0, 6, 12}));
         System.out.println("4 ?= " + partitionDisjoint_opt_2(new int[]{1, 1, 1, 0, 6, 12}));
+
+        System.out.println("4 ?= " + partitionDisjoint_best(new int[]{1, 1, 1, 0, 6, 12}));
     }
 }
