@@ -80,6 +80,35 @@ public class Problem645_setMismatch {
         return new int[]{duplicate, missing};
     }
 
+    // BF Opt time: O(n^2) space: O(1)
+    public static int[] findErrorNums_bf_opt(int[] nums) {
+        int len = nums.length;
+
+        int duplicate = -1;
+        int missing = -1;
+
+        for (int i = 1; i <= len; i++) {
+            int count = 0;
+            for (int j = 0; j < len; j++) {
+                if (nums[j] == i) {
+                    count++;
+                }
+            }
+
+            if (count == 2) {
+                duplicate = i;
+            } else if (count == 0) {
+                missing = i;
+            }
+
+            if (duplicate > 0 && missing > 0) {
+                break;
+            }
+        }
+
+        return new int[]{duplicate, missing};
+    }
+
     // Sort time: O(nlogn) space: O(1)
     public static int[] findErrorNums_sort(int[] nums) {
         Arrays.sort(nums);
@@ -114,6 +143,8 @@ public class Problem645_setMismatch {
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums(new int[]{1, 3, 3})));
 
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_bf(new int[]{1, 3, 3})));
+
+        System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_bf_opt(new int[]{1, 3, 3})));
 
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 3, 3})));
         System.out.println("[2, 1] ?= " + Arrays.toString(findErrorNums_sort(new int[]{2, 2, 3})));
