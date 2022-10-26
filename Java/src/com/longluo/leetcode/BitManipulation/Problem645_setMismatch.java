@@ -1,9 +1,6 @@
 package com.longluo.leetcode.BitManipulation;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * 645. 错误的集合
@@ -109,6 +106,31 @@ public class Problem645_setMismatch {
         return new int[]{duplicate, missing};
     }
 
+    // HashMap time: O(n) space: O(n)
+    public static int[] findErrorNums_hashmap(int[] nums) {
+        int len = nums.length;
+
+        int duplicate = -1;
+        int missing = -1;
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int x : nums) {
+            map.put(x, map.getOrDefault(x, 0) + 1);
+        }
+
+        for (int i = 1; i <= len; i++) {
+            int cnt = map.getOrDefault(i, 0);
+            if (cnt == 2) {
+                duplicate = i;
+            } else if (cnt == 0) {
+                missing = i;
+            }
+        }
+
+        return new int[]{duplicate, missing};
+    }
+
     // Sort time: O(nlogn) space: O(1)
     public static int[] findErrorNums_sort(int[] nums) {
         Arrays.sort(nums);
@@ -145,6 +167,8 @@ public class Problem645_setMismatch {
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_bf(new int[]{1, 3, 3})));
 
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_bf_opt(new int[]{1, 3, 3})));
+
+        System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_hashmap(new int[]{1, 3, 3})));
 
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 3, 3})));
         System.out.println("[2, 1] ?= " + Arrays.toString(findErrorNums_sort(new int[]{2, 2, 3})));
