@@ -87,10 +87,42 @@ public class Problem1662_arrayStringsAreEqual {
         return String.join("", word1).equals(String.join("", word2));
     }
 
+    // Two Pointers time: O(nk) space: O(1)
+    public static boolean arrayStringsAreEqual_tp(String[] word1, String[] word2) {
+        int word1pt = 0;
+        int str1pt = 0;
+
+        int word2pt = 0;
+        int str2pt = 0;
+
+        while (word1pt < word1.length && word2pt < word2.length) {
+            if (word1[word1pt].charAt(str1pt) == word2[word2pt].charAt(str2pt)) {
+                str1pt++;
+                str2pt++;
+            } else {
+                return false;
+            }
+
+            if (str1pt == word1[word1pt].length()) {
+                str1pt = 0;
+                word1pt++;
+            }
+
+            if (str2pt == word2[word2pt].length()) {
+                str2pt = 0;
+                word2pt++;
+            }
+        }
+
+        return word1pt == word1.length && word2pt == word2.length;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + arrayStringsAreEqual(new String[]{"ab", "c"}, new String[]{"a", "bc"}));
         System.out.println("true ?= " + arrayStringsAreEqual_opt(new String[]{"ab", "c"}, new String[]{"a", "bc"}));
         System.out.println("false ?= " + arrayStringsAreEqual_opt(new String[]{"abc", "d", "defg"}, new String[]{"abcddef"}));
         System.out.println("false ?= " + arrayStringsAreEqual_join(new String[]{"abc", "d", "defg"}, new String[]{"abcddef"}));
+
+        System.out.println("false ?= " + arrayStringsAreEqual_tp(new String[]{"abc", "d", "defg"}, new String[]{"abcddef"}));
     }
 }
