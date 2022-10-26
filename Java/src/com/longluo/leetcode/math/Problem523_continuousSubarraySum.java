@@ -64,19 +64,17 @@ public class Problem523_continuousSubarraySum {
 
     // HashMap time: O(n) space: O(n)
     public static boolean checkSubarraySum_hashmap(int[] nums, int k) {
-        if (nums == null || nums.length <= 1) {
-            return false;
-        }
-
         int len = nums.length;
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, -1);
+
+        Map<Integer, Integer> map = new HashMap<>(Map.of(0, -1));
+
         int remainder = 0;
+
         for (int i = 0; i < len; i++) {
             remainder = (remainder + nums[i]) % k;
             if (map.containsKey(remainder)) {
-                int preIndex = map.get(remainder);
-                if (i - preIndex >= 2) {
+                int preIdx = map.get(remainder);
+                if (i - preIdx >= 2) {
                     return true;
                 }
             } else {
