@@ -1,7 +1,9 @@
 package com.longluo.leetcode.math;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 523. 连续的子数组和
@@ -34,10 +36,12 @@ import java.util.Map;
  * 0 <= sum(nums[i]) <= 2^31 - 1
  * 1 <= k <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/continuous-subarray-sum/
+ * https://leetcode.cn/problems/continuous-subarray-sum/
  */
 public class Problem523_continuousSubarraySum {
 
+    // BF time: O(n^2) space: O(1)
+    // TLE
     public static boolean checkSubarraySum(int[] nums, int k) {
         if (nums == null || nums.length <= 1) {
             return false;
@@ -58,7 +62,8 @@ public class Problem523_continuousSubarraySum {
         return false;
     }
 
-    public static boolean checkSubarraySum_dp(int[] nums, int k) {
+    // HashMap time: O(n) space: O(n)
+    public static boolean checkSubarraySum_hashmap(int[] nums, int k) {
         if (nums == null || nums.length <= 1) {
             return false;
         }
@@ -82,12 +87,35 @@ public class Problem523_continuousSubarraySum {
         return false;
     }
 
+    // HashSet time: O(n) space: O(n)
+    public static boolean checkSubarraySum_hashset(int[] nums, int k) {
+        int len = nums.length;
+
+        int[] sums = new int[len + 1];
+        for (int i = 1; i <= len; i++) {
+            sums[i] = sums[i - 1] + nums[i - 1];
+        }
+
+        Set<Integer> set = new HashSet<>();
+        for (int i = 2; i <= len; i++) {
+            set.add(sums[i - 2] % k);
+            if (set.contains(sums[i] % k)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + checkSubarraySum(new int[]{23, 2, 4, 6, 7}, 6));
-        System.out.println("true ?= " + checkSubarraySum_dp(new int[]{23, 2, 4, 6, 7}, 6));
         System.out.println("true ?= " + checkSubarraySum(new int[]{23, 2, 4, 6, 7}, 6));
-        System.out.println("true ?= " + checkSubarraySum_dp(new int[]{23, 2, 4, 6, 7}, 6));
         System.out.println("true ?= " + checkSubarraySum(new int[]{23, 2, 6, 4, 7}, 13));
-        System.out.println("true ?= " + checkSubarraySum_dp(new int[]{23, 2, 6, 4, 7}, 13));
+
+        System.out.println("true ?= " + checkSubarraySum_hashmap(new int[]{23, 2, 4, 6, 7}, 6));
+        System.out.println("true ?= " + checkSubarraySum_hashmap(new int[]{23, 2, 4, 6, 7}, 6));
+        System.out.println("true ?= " + checkSubarraySum_hashmap(new int[]{23, 2, 6, 4, 7}, 13));
+
+        System.out.println("true ?= " + checkSubarraySum_hashset(new int[]{23, 2, 4, 6, 7}, 6));
     }
 }
