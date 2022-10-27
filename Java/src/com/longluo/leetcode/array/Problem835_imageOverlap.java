@@ -57,16 +57,15 @@ public class Problem835_imageOverlap {
         int rightShiftCount = 0;
 
         int row = 0;
-        int col = 0;
 
         for (int i = yShift; i < n; i++) {
-            col = 0;
+            int col = 0;
             for (int j = xShift; j < n; j++) {
-                if (mat[i][j] == 1 && mat[i][j] == ref[row][col]) {
+                if (mat[i][j] == 1 && ref[row][col] == 1) {
                     leftShiftCount++;
                 }
 
-                if (mat[i][col] == 1 && mat[i][col] == ref[row][j]) {
+                if (mat[i][col] == 1 && ref[row][j] == 1) {
                     rightShiftCount++;
                 }
 
@@ -79,8 +78,43 @@ public class Problem835_imageOverlap {
         return Math.max(leftShiftCount, rightShiftCount);
     }
 
+    // Easy To Understand time: O(n^4) space: O(1)
+    public static int largestOverlap_opt(int[][] img1, int[][] img2) {
+        int n = img1.length;
+
+        int maxOverlaps = 0;
+
+        for (int xShift = -n; xShift < n; xShift++) {
+            for (int yShift = -n; yShift < n; yShift++) {
+                maxOverlaps = Math.max(maxOverlaps, countOverlap(img1, img2, xShift, yShift));
+            }
+        }
+
+        return maxOverlaps;
+    }
+
+    private static int countOverlap(int[][] A, int[][] B, int xShift, int yShift) {
+        int n = A.length;
+
+        int ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int r = i + xShift;
+                int c = j + yShift;
+
+                if (r >= 0 && r < n && c >= 0 && c < n && A[i][j] == 1 && B[r][c] == 1) {
+                    ans++;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + largestOverlap(new int[][]{{1, 1, 0}, {0, 1, 0}, {0, 1, 0}}, new int[][]{{0, 0, 0}, {0, 1, 1}, {0, 0, 1}}));
+        System.out.println("3 ?= " + largestOverlap_opt(new int[][]{{1, 1, 0}, {0, 1, 0}, {0, 1, 0}}, new int[][]{{0, 0, 0}, {0, 1, 1}, {0, 0, 1}}));
         System.out.println("1 ?= " + largestOverlap(new int[][]{{1}}, new int[][]{{1}}));
         System.out.println("0 ?= " + largestOverlap(new int[][]{{0}}, new int[][]{{0}}));
     }
