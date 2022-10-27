@@ -183,6 +183,31 @@ public class Problem645_setMismatch {
         return new int[]{duplicate, missing};
     }
 
+    // Modify Array Constant Space time: O(n) space: O(1)
+    public static int[] findErrorNums_space(int[] nums) {
+        int len = nums.length;
+
+        int duplicate = -1;
+        int missing = -1;
+
+        for (int x : nums) {
+            if (nums[Math.abs(x) - 1] < 0) {
+                duplicate = Math.abs(x);
+            } else {
+                nums[Math.abs(x) - 1] *= -1;
+            }
+        }
+
+        for (int i = 1; i <= len; i++) {
+            if (nums[i - 1] > 0) {
+                missing = i;
+                break;
+            }
+        }
+
+        return new int[]{duplicate, missing};
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 3] ?= " + Arrays.toString(findErrorNums(new int[]{1, 2, 2, 4})));
         System.out.println("[1, 2] ?= " + Arrays.toString(findErrorNums(new int[]{1, 1})));
@@ -194,14 +219,17 @@ public class Problem645_setMismatch {
 
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_hashmap(new int[]{1, 3, 3})));
 
-        System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_count(new int[]{1, 3, 3})));
-
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 3, 3})));
         System.out.println("[2, 1] ?= " + Arrays.toString(findErrorNums_sort(new int[]{2, 2, 3})));
         System.out.println("[2, 3] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 2, 2})));
 
         System.out.println("[3, 1] ?= " + Arrays.toString(findErrorNums_sort(new int[]{3, 2, 3, 4, 6, 5})));
         System.out.println("[2, 10] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 5, 3, 2, 2, 7, 6, 4, 8, 9})));
+
+        System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_count(new int[]{1, 3, 3})));
+
+        System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_space(new int[]{1, 3, 3})));
+        System.out.println("[2, 1] ?= " + Arrays.toString(findErrorNums_space(new int[]{2, 2, 3})));
     }
 }
 
