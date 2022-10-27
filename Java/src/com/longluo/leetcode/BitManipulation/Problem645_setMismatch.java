@@ -159,6 +159,30 @@ public class Problem645_setMismatch {
         return ans;
     }
 
+    // Count Array time: O(n) space: O(n)
+    public static int[] findErrorNums_count(int[] nums) {
+        int len = nums.length;
+
+        int[] count = new int[len + 1];
+
+        int duplicate = -1;
+        int missing = -1;
+
+        for (int x : nums) {
+            count[x]++;
+        }
+
+        for (int i = 1; i <= len; i++) {
+            if (count[i] == 2) {
+                duplicate = i;
+            } else if (count[i] == 0) {
+                missing = i;
+            }
+        }
+
+        return new int[]{duplicate, missing};
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 3] ?= " + Arrays.toString(findErrorNums(new int[]{1, 2, 2, 4})));
         System.out.println("[1, 2] ?= " + Arrays.toString(findErrorNums(new int[]{1, 1})));
@@ -169,6 +193,8 @@ public class Problem645_setMismatch {
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_bf_opt(new int[]{1, 3, 3})));
 
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_hashmap(new int[]{1, 3, 3})));
+
+        System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_count(new int[]{1, 3, 3})));
 
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_sort(new int[]{1, 3, 3})));
         System.out.println("[2, 1] ?= " + Arrays.toString(findErrorNums_sort(new int[]{2, 2, 3})));
