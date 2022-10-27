@@ -208,6 +208,50 @@ public class Problem645_setMismatch {
         return new int[]{duplicate, missing};
     }
 
+    // XOR time: O(n) space: O(1)
+    public static int[] findErrorNums_xor(int[] nums) {
+        int len = nums.length;
+
+        int xor = 0;
+
+        int num1 = 0;
+        int num2 = 0;
+
+        for (int x : nums) {
+            xor = xor ^ x;
+        }
+
+        for (int i = 1; i <= len; i++) {
+            xor = xor ^ i;
+        }
+
+        int lowbit = xor & (-xor);
+
+        for (int x : nums) {
+            if ((x & lowbit) != 0) {
+                num1 = num1 ^ x;
+            } else {
+                num2 = num2 ^ x;
+            }
+        }
+
+        for (int i = 1; i <= len; i++) {
+            if ((i & lowbit) != 0) {
+                num1 = num1 ^ i;
+            } else {
+                num2 = num2 ^ i;
+            }
+        }
+
+        for (int x : nums) {
+            if (x == num1) {
+                return new int[]{num1, num2};
+            }
+        }
+
+        return new int[]{num2, num1};
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 3] ?= " + Arrays.toString(findErrorNums(new int[]{1, 2, 2, 4})));
         System.out.println("[1, 2] ?= " + Arrays.toString(findErrorNums(new int[]{1, 1})));
@@ -230,6 +274,9 @@ public class Problem645_setMismatch {
 
         System.out.println("[3, 2] ?= " + Arrays.toString(findErrorNums_space(new int[]{1, 3, 3})));
         System.out.println("[2, 1] ?= " + Arrays.toString(findErrorNums_space(new int[]{2, 2, 3})));
+
+        System.out.println("[1, 2] ?= " + Arrays.toString(findErrorNums_xor(new int[]{1, 1})));
+        System.out.println("[2, 1] ?= " + Arrays.toString(findErrorNums_xor(new int[]{2, 2, 3})));
     }
 }
 
