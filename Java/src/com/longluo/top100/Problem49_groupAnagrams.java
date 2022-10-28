@@ -47,6 +47,7 @@ public class Problem49_groupAnagrams {
             String word = strs[i];
             list.add(word);
             visited[i] = true;
+
             for (int j = i + 1; j < len; j++) {
                 if (checkAnagram(word, strs[j]) && !visited[j]) {
                     list.add(strs[j]);
@@ -101,10 +102,59 @@ public class Problem49_groupAnagrams {
         return true;
     }
 
-    // TODO: 2022/5/11
+    // Sort time: O(nklogk) space: O(nk)
+    public static List<List<String>> groupAnagrams_sort(String[] strs) {
+        HashMap<String, List<String>> map = new HashMap<>();
+
+        for (String s : strs) {
+            char[] array = s.toCharArray();
+
+            Arrays.sort(array);
+
+            String key = new String(array);
+
+            if (map.containsKey(key)) {
+                map.get(key).add(s);
+            } else {
+                map.putIfAbsent(key, new ArrayList<>());
+                map.get(key).add(s);
+            }
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
+    // Count time: O(n(k + sum)) space: O(n(k+Σ))
+    public static List<List<String>> groupAnagrams_count(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String s : strs) {
+            int[] cnt = new int[26];
+            for (char ch : s.toCharArray()) {
+                cnt[ch - 'a']++;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 26; i++) {
+                sb.append(cnt[i]);
+                if (i < 25) {
+                    sb.append("#");
+                }
+            }
+
+            String key = sb.toString();
+            map.putIfAbsent(key, new ArrayList<>());
+            map.get(key).add(s);
+        }
+
+        return new ArrayList<>(map.values());
+    }
 
     public static void main(String[] args) {
-        System.out.println(" ?= " + groupAnagrams_hash(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
         System.out.println(" ?= " + groupAnagrams_hash(new String[]{"", ""}));
+        System.out.println("[[tan, nat], [eat, tea, ate], [bat]] ?= " + groupAnagrams_hash(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
+
+        System.out.println("[[eat, tea, ate], [bat], [tan, nat]] ?= " + groupAnagrams_sort(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
+        System.out.println("[[tan, nat], [eat, tea, ate], [bat]] ?= " + groupAnagrams_count(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
     }
 }
