@@ -150,11 +150,35 @@ public class Problem49_groupAnagrams {
         return new ArrayList<>(map.values());
     }
 
+    // Primes time: O(nk) space: O(nk)
+    public static List<List<String>> groupAnagrams_prime(String[] strs) {
+        int mod = 1_000_000_007;
+
+        Map<Long, List<String>> map = new HashMap<>();
+
+        int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101};
+
+        for (String s : strs) {
+            long key = 1L;
+            for (char ch : s.toCharArray()) {
+                key = key * primes[ch - 'a'] % mod;
+            }
+
+            map.putIfAbsent(key, new ArrayList<>());
+            map.get(key).add(s);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
     public static void main(String[] args) {
         System.out.println(" ?= " + groupAnagrams_hash(new String[]{"", ""}));
         System.out.println("[[tan, nat], [eat, tea, ate], [bat]] ?= " + groupAnagrams_hash(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
 
         System.out.println("[[eat, tea, ate], [bat], [tan, nat]] ?= " + groupAnagrams_sort(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
         System.out.println("[[tan, nat], [eat, tea, ate], [bat]] ?= " + groupAnagrams_count(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
+
+        System.out.println("[[tan, nat], [eat, tea, ate], [bat]] ?= " + groupAnagrams_prime(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
+        System.out.println("[[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab], [aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]] ?= " + groupAnagrams_prime(new String[]{"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"}));
     }
 }
