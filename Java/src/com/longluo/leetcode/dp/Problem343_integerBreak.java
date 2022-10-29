@@ -37,7 +37,6 @@ public class Problem343_integerBreak {
             dfs(res, new ArrayList<>(), i, 1, n);
 
             for (List<Integer> item : res) {
-
                 int product = 1;
                 for (int x : item) {
                     product *= x;
@@ -50,13 +49,22 @@ public class Problem343_integerBreak {
         return maxProduct;
     }
 
+    // Opt
+    // AC
     private static void dfs(List<List<Integer>> res, List<Integer> path, int segs, int start, int remain) {
-        if (remain == 0) {
-            res.add(new ArrayList<>(path));
+        if (segs == 0) {
+            if (remain == 0) {
+                res.add(new ArrayList<>(path));
+            }
+
             return;
         }
 
         for (int i = start; i <= remain - segs + 1; i++) {
+            if (path.size() > 0 && i < path.get(path.size() - 1)) {
+                continue;
+            }
+
             path.add(i);
             dfs(res, path, segs - 1, i, remain - i);
             path.remove(path.size() - 1);
