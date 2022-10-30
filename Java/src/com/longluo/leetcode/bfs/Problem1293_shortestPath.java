@@ -43,11 +43,24 @@ public class Problem1293_shortestPath {
         int m = grid.length;
         int n = grid[0].length;
 
+        // Opt 3
         if (m <= 2 && n == 1) {
             return 0;
         }
 
-        // Trim Opt
+        int cnt = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                cnt += grid[i][j];
+            }
+        }
+
+        // Opt 2
+        if (k >= m + n - 3 || k >= cnt) {
+            return m + n - 2;
+        }
+
+        // Trim Opt 1
         k = Math.min(k, m + n - 3);
 
         Queue<int[]> queue = new LinkedList<>();
