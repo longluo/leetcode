@@ -60,9 +60,6 @@ public class Problem1293_shortestPath {
             return m + n - 2;
         }
 
-        // Trim Opt 1
-        k = Math.min(k, m + n - 3);
-
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{0, 0, k});
 
