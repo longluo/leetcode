@@ -1,6 +1,10 @@
 package com.longluo.contest.weekly_contest_285;
 
 /**
+ * https://leetcode.cn/contest/weekly-contest-285/
+ */
+
+/**
  * 2210. 统计数组中峰和谷的数量
  * <p>
  * 给你一个下标从 0 开始的整数数组 nums 。如果两侧距 i 最近的不相等邻居的值均小于 nums[i] ，则下标 i 是 nums 中，某个峰的一部分。类似地，如果两侧距 i 最近的不相等邻居的值均大于 nums[i] ，则下标 i 是 nums 中某个谷的一部分。对于相邻下标 i 和 j ，如果 nums[i] == nums[j] ， 则认为这两下标属于 同一个 峰或谷。
@@ -41,13 +45,40 @@ package com.longluo.contest.weekly_contest_285;
  */
 public class Problem2210_countHillValley {
 
-    // TODO: 2022/6/2
     public static int countHillValley(int[] nums) {
+        int len = nums.length;
 
-        return 0;
+        int ans = 0;
+
+        for (int i = 1; i < len - 1; i++) {
+            if (nums[i + 1] == nums[i]) {
+                continue;
+            }
+
+            int left = i - 1;
+            while (left > 0 && nums[left] == nums[i]) {
+                left--;
+            }
+
+            int right = i + 1;
+            while (right < len - 1 && nums[right] == nums[i]) {
+                right++;
+            }
+
+            if ((nums[left] > nums[i] && nums[right] > nums[i])
+                    || (nums[left] < nums[i] && nums[right] < nums[i])) {
+                ans++;
+            }
+        }
+
+        return ans;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("1 ?= " + countHillValley(new int[]{3, 1, 2}));
+        System.out.println("0 ?= " + countHillValley(new int[]{2, 2, 2}));
+        System.out.println("0 ?= " + countHillValley(new int[]{1, 2, 3}));
+        System.out.println("3 ?= " + countHillValley(new int[]{2, 4, 1, 1, 6, 5}));
+        System.out.println("0 ?= " + countHillValley(new int[]{6, 6, 5, 5, 4, 1}));
     }
 }
