@@ -6,7 +6,11 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * 5234. 移除字母异位词后的结果数组
+ * https://leetcode.cn/contest/weekly-contest-293/
+ */
+
+/**
+ * 2273. 移除字母异位词后的结果数组
  * <p>
  * 给你一个下标从 0 开始的字符串 words ，其中 words[i] 由小写英文字符组成。
  * 在一步操作中，需要选出任一下标 i ，从 words 中 删除 words[i] 。其中下标 i 需要同时满足下述两个条件：
@@ -45,7 +49,7 @@ import java.util.List;
  * <p>
  * https://leetcode.cn/problems/find-resultant-array-after-removing-anagrams/
  */
-public class Problem5234_findResultantArrayAfterRemovingAnagrams {
+public class Problem2273_findResultantArrayAfterRemovingAnagrams {
 
     public static List<String> removeAnagrams(String[] words) {
         List<String> ans = new ArrayList<>();
@@ -55,25 +59,31 @@ public class Problem5234_findResultantArrayAfterRemovingAnagrams {
             return ans;
         }
 
-        boolean[] vis = new boolean[len];
-
-        for (int i = 0; i < len; i++) {
-            String word = words[i];
-            char[] array1 = word.toCharArray();
-            Arrays.sort(array1);
-
-            for (int j = i + 1; j < len; j++) {
-                if (words[j].length() == word.length()) {
-                    char[] array2 = words[j].toCharArray();
-                    Arrays.sort(array2);
-                }
+        for (int i = 0, j = 0; i < len; ) {
+            j = i + 1;
+            while (j < len && checkAnagram(words[i], words[j])) {
+                j++;
             }
+
+            ans.add(words[i]);
+            i = j;
         }
 
         return ans;
     }
 
-    public static void main(String[] args) {
+    private static boolean checkAnagram(String s1, String s2) {
+        char[] array1 = s1.toCharArray();
+        char[] array2 = s2.toCharArray();
 
+        Arrays.sort(array1);
+        Arrays.sort(array2);
+
+        return Arrays.equals(array1, array2);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("[abba, cd] ?= " + removeAnagrams(new String[]{"abba", "baba", "bbaa", "cd", "cd"}));
+        System.out.println("[a, b, c, d, e] ?= " + removeAnagrams(new String[]{"a", "b", "c", "d", "e"}));
     }
 }
