@@ -36,38 +36,33 @@ using namespace std;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
+    // BF
     vector<vector<int>> generateMatrix(int n) {
+
         vector<vector<int>> mat(n, vector<int>(n));
-        int cycle = (n + 1) / 2;
-        int idx = 1;
-        for (int c = 0; c < cycle; c++) {
-            for (int i = c; i < n - c; i++) {
-                mat[c][i] = idx++;
-                if (idx > n * n) {
-                    return mat;
-                }
+
+        vector<vector<int>> dirs = {{0,  1},
+                                    {1,  0},
+                                    {0,  -1},
+                                    {-1, 0}};
+
+        int dirIdx = 0;
+
+        int x = 0;
+        int y = 0;
+
+        for (int i = 1; i <= n * n; i++) {
+            mat[x][y] = i;
+
+            int nextX = x + dirs[dirIdx][0];
+            int nextY = y + dirs[dirIdx][1];
+
+            if (nextX < 0 || nextX >= n || nextY < 0 || nextY >= n || mat[nextX][nextY] != 0) {
+                dirIdx = (dirIdx + 1) % 4;
             }
 
-            for (int j = c + 1; j < n - c; j++) {
-                mat[j][n - 1 - c] = idx++;
-                if (idx > n * n) {
-                    return mat;
-                }
-            }
-
-            for (int k = n - 2 - c; k >= c; k--) {
-                mat[n - 1 - c][k] = idx++;
-                if (idx > n * n) {
-                    return mat;
-                }
-            }
-
-            for (int l = n - 2 - c; l > c; l--) {
-                mat[l][c] = idx++;
-                if (idx > n * n) {
-                    return mat;
-                }
-            }
+            x += dirs[dirIdx][0];
+            y += dirs[dirIdx][1];
         }
 
         return mat;
