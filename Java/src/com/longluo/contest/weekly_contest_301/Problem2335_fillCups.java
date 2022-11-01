@@ -1,6 +1,11 @@
 package com.longluo.contest.weekly_contest_301;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
+
+/**
+ * https://leetcode.cn/contest/weekly-contest-301/
+ */
 
 /**
  * 2335. 装满杯子需要的最短总时长
@@ -44,6 +49,43 @@ import java.util.Arrays;
  */
 public class Problem2335_fillCups {
 
+    public static int fillCups_pq(int[] amount) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
+
+        for (int x : amount) {
+            if (x > 0) {
+                pq.offer(x);
+            }
+        }
+
+        int ans = 0;
+
+        while (!pq.isEmpty()) {
+            int size = pq.size();
+            if (size > 1) {
+                int first = pq.poll();
+                int second = pq.poll();
+
+                first--;
+                second--;
+
+                ans++;
+
+                if (first > 0) {
+                    pq.offer(first);
+                }
+
+                if (second > 0) {
+                    pq.offer(second);
+                }
+            } else {
+                ans += pq.poll();
+            }
+        }
+
+        return ans;
+    }
+
     // Sort Greedy time: O(nlogn) space: O(log3)
     public static int fillCups(int[] amount) {
         Arrays.sort(amount);
@@ -56,6 +98,9 @@ public class Problem2335_fillCups {
     }
 
     public static void main(String[] args) {
+        System.out.println("4 ?= " + fillCups_pq(new int[]{1, 4, 2}));
+        System.out.println("6 ?= " + fillCups_pq(new int[]{3, 4, 5}));
+
         System.out.println("4 ?= " + fillCups(new int[]{1, 4, 2}));
         System.out.println("6 ?= " + fillCups(new int[]{3, 4, 5}));
     }
