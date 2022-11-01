@@ -36,8 +36,7 @@ using namespace std;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    // BF
-    vector<vector<int>> generateMatrix(int n) {
+    vector<vector<int>> generateMatrix_simu(int n) {
 
         vector<vector<int>> mat(n, vector<int>(n));
 
@@ -63,6 +62,41 @@ public:
 
             x += dirs[dirIdx][0];
             y += dirs[dirIdx][1];
+        }
+
+        return mat;
+    }
+
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> mat(n, vector<int>(n));
+
+        int left = 0;
+        int right = n - 1;
+        int top = 0;
+        int bottom = n - 1;
+
+        int value = 1;
+
+        while (value <= n * n) {
+            for (int col = left; col <= right; col++, value++) {
+                mat[top][col] = value;
+            }
+            top++;
+
+            for (int row = top; row <= bottom; row++, value++) {
+                mat[row][right] = value;
+            }
+            right--;
+
+            for (int col = right; col >= left; col--, value++) {
+                mat[bottom][col] = value;
+            }
+            bottom--;
+
+            for (int row = bottom; row >= top; row--, value++) {
+                mat[row][left] = value;
+            }
+            left++;
         }
 
         return mat;
