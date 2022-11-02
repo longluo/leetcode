@@ -32,6 +32,27 @@ public class Problem3 {
         return ans;
     }
 
+    // Opt time: O(n) space: O(1)
+    public static int maximumXOR_opt(int[] nums) {
+        int ans = 0;
+
+        for (int i = 0; i < 32; i++) {
+            int oneCnt = 0;
+            for (int x : nums) {
+                if ((x & 0x01 << i) > 0) {
+                    oneCnt++;
+                    break;
+                }
+            }
+
+            if (oneCnt > 0) {
+                ans += 0x01 << i;
+            }
+        }
+
+        return ans;
+    }
+
     //
     public static int maximumXOR_or(int[] nums) {
         int ans = 0;
@@ -45,6 +66,7 @@ public class Problem3 {
     public static void main(String[] args) {
         System.out.println("7 ?= " + maximumXOR(new int[]{3, 2, 4, 6}));
         System.out.println("11 ?= " + maximumXOR(new int[]{1, 2, 3, 9, 2}));
+        System.out.println("11 ?= " + maximumXOR_opt(new int[]{1, 2, 3, 9, 2}));
         System.out.println("11 ?= " + maximumXOR_or(new int[]{1, 2, 3, 9, 2}));
     }
 }
