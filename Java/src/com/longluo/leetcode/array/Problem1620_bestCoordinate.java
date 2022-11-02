@@ -94,9 +94,49 @@ public class Problem1620_bestCoordinate {
         return new int[]{points[0][0], points[0][1]};
     }
 
+    // Opt time: O(mnk) space: O(1)
+    public static int[] bestCoordinate_opt(int[][] towers, int radius) {
+        int maxX = 0;
+        int maxY = 0;
+
+        for (int[] tower : towers) {
+            maxX = Math.max(maxX, tower[0]);
+            maxY = Math.max(maxY, tower[1]);
+        }
+
+        int[] ans = new int[2];
+
+        int maxQuality = 0;
+
+        for (int i = 0; i <= maxX; i++) {
+            for (int j = 0; j <= maxY; j++) {
+                int[] coord = {i, j};
+                int quality = 0;
+
+                for (int[] tower : towers) {
+                    double dist = Math.sqrt((tower[0] - i) * (tower[0] - i) + (tower[1] - j) * (tower[1] - j));
+                    if (dist > radius) {
+                        continue;
+                    }
+
+                    int signal = (int) (tower[2] / (1 + dist));
+                    quality += signal;
+                }
+
+                if (quality > maxQuality) {
+                    maxQuality = quality;
+                    ans = coord;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[23, 11] ?= " + Arrays.toString(bestCoordinate(new int[][]{{23, 11, 21}}, 9)));
         System.out.println("[2, 1] ?= " + Arrays.toString(bestCoordinate(new int[][]{{1, 2, 5}, {2, 1, 7}, {3, 1, 9}}, 2)));
         System.out.println("[1, 1] ?= " + Arrays.toString(bestCoordinate(new int[][]{{0, 1, 2}, {2, 1, 2}, {1, 0, 2}, {1, 2, 2}}, 1)));
+        System.out.println("[1, 1] ?= " + Arrays.toString(bestCoordinate_opt(new int[][]{{0, 1, 2}, {2, 1, 2}, {1, 0, 2}, {1, 2, 2}}, 1)));
     }
 }
