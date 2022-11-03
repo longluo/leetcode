@@ -52,11 +52,39 @@ public class Problem1668_maxRepeating {
         return ans;
     }
 
+    // BF time: O(nk) space: O(1)
+    public static int maxRepeating_bf(String sequence, String word) {
+        int sLen = sequence.length();
+        int wLen = word.length();
+
+        int ans = 0;
+
+        for (int i = 0; i < sLen; i++) {
+            if (sequence.charAt(i) != word.charAt(0)) {
+                continue;
+            }
+
+            for (int k = 1; k <= (sLen - i) / wLen; k++) {
+                int j = 0;
+                while (j < k * wLen && sequence.charAt(i + j) == word.charAt(j % wLen)) {
+                    j++;
+                }
+
+                ans = Math.max(ans, j / wLen);
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + maxRepeating("a", "a"));
         System.out.println("2 ?= " + maxRepeating("ababc", "ab"));
         System.out.println("1 ?= " + maxRepeating("ababc", "ba"));
         System.out.println("0 ?= " + maxRepeating("ababc", "ac"));
         System.out.println("5 ?= " + maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
+
+        System.out.println("1 ?= " + maxRepeating_bf("ababc", "ba"));
+        System.out.println("5 ?= " + maxRepeating_bf("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
     }
 }
