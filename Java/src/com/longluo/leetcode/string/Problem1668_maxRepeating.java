@@ -77,6 +77,29 @@ public class Problem1668_maxRepeating {
         return ans;
     }
 
+    // BF Opt time: O(nk) space: O(1)
+    public static int maxRepeating_bf_opt(String sequence, String word) {
+        int sLen = sequence.length();
+        int wLen = word.length();
+
+        int ans = 0;
+
+        for (int i = 0; i < sLen; i++) {
+            if (sequence.charAt(i) != word.charAt(0)) {
+                continue;
+            }
+
+            int j = 0;
+            while (i + j < sLen && sequence.charAt(i + j) == word.charAt(j % wLen)) {
+                j++;
+            }
+
+            ans = Math.max(ans, j / wLen);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + maxRepeating("a", "a"));
         System.out.println("2 ?= " + maxRepeating("ababc", "ab"));
@@ -86,5 +109,8 @@ public class Problem1668_maxRepeating {
 
         System.out.println("1 ?= " + maxRepeating_bf("ababc", "ba"));
         System.out.println("5 ?= " + maxRepeating_bf("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
+
+        System.out.println("1 ?= " + maxRepeating_bf_opt("ababc", "ba"));
+        System.out.println("5 ?= " + maxRepeating_bf_opt("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
     }
 }
