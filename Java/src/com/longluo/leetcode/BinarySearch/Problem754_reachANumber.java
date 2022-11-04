@@ -66,8 +66,30 @@ public class Problem754_reachANumber {
         return steps;
     }
 
+    // Math time: O(sqrt(n)) space: O(1)
+    public static int reachNumber(int target) {
+        target = Math.abs(target);
+        int k = 0;
+        int sum = 0;
+        while (sum < target || (sum - target) % 2 != 0) {
+            k++;
+            sum += k;
+        }
+
+        return k;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + reachNumber_bfs(2));
         System.out.println("2 ?= " + reachNumber_bfs(3));
+        System.out.println("5 ?= " + reachNumber_bfs(5));
+        System.out.println("3 ?= " + reachNumber_bfs(6));
+        System.out.println("5 ?= " + reachNumber_bfs(7));
+
+        System.out.println("3 ?= " + reachNumber(2));
+        System.out.println("2 ?= " + reachNumber(3));
+        System.out.println("5 ?= " + reachNumber(5));
+        System.out.println("5 ?= " + reachNumber(7));
+        System.out.println("4 ?= " + reachNumber(8));
     }
 }
