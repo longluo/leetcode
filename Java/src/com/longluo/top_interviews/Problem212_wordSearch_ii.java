@@ -32,6 +32,8 @@ import java.util.*;
  */
 public class Problem212_wordSearch_ii {
 
+    // Backtrack
+    // TLE
     public static List<String> findWords_bf(char[][] board, String[] words) {
         List<String> ans = new ArrayList<>();
 
@@ -103,12 +105,80 @@ public class Problem212_wordSearch_ii {
         return x >= 0 && x < row && y >= 0 && y < col;
     }
 
+    // DFS
+    // TLE
+    public static List<String> findWords_dfs(char[][] board, String[] words) {
+        List<String> ans = new ArrayList<>();
+
+        Set<String> set = new HashSet<>();
+        for (String word : words) {
+            set.add(word);
+        }
+
+        int m = board.length;
+        int n = board[0].length;
+
+        boolean[][] visited = new boolean[m][n];
+        StringBuilder path = new StringBuilder();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                path.append(board[i][j]);
+                visited[i][j] = true;
+                dfs(ans, set, path, board, visited, i, j);
+                visited[i][j] = false;
+                path.deleteCharAt(path.length() - 1);
+            }
+        }
+
+        return ans;
+    }
+
+    private static void dfs(List<String> ans, Set<String> set, StringBuilder path, char[][] board, boolean[][] visited, int x, int y) {
+        if (path.length() > 10) {
+            return;
+        }
+
+        if (set.contains(path.toString())) {
+            ans.add(path.toString());
+            set.remove(path.toString());
+        }
+
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int m = board.length;
+        int n = board[0].length;
+
+        for (int[] dir : dirs) {
+            int nextX = x + dir[0];
+            int nextY = y + dir[1];
+
+            if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n) {
+                continue;
+            }
+
+            if (visited[nextX][nextY]) {
+                continue;
+            }
+
+            visited[nextX][nextY] = true;
+            path.append(board[nextX][nextY]);
+            dfs(ans, set, path, board, visited, nextX, nextY);
+            path.deleteCharAt(path.length() - 1);
+            visited[nextX][nextY] = false;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("[] ?= " + findWords_bf(new char[][]{{'a', 'b'}, {'c', 'd'}}, new String[]{"abcd"}));
         System.out.println("[eat, oath] ?= " + findWords_bf(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
-        // bfs的坑 eaabcdgfa
         System.out.println("[abcdefg, befa, eaabcdgfa, gfedcbaaa] ?= " + findWords_bf(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"abcdefg", "gfedcbaaa", "eaabcdgfa", "befa", "dgc", "ade"}));
         System.out.println("[eaabcdgfa, eaafgdcba] ?= " + findWords_bf(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"eaafgdcba", "eaabcdgfa"}));
+
+        System.out.println("[] ?= " + findWords_dfs(new char[][]{{'a', 'b'}, {'c', 'd'}}, new String[]{"abcd"}));
+        System.out.println("[eat, oath] ?= " + findWords_dfs(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
+        System.out.println("[abcdefg, befa, eaabcdgfa, gfedcbaaa] ?= " + findWords_dfs(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"abcdefg", "gfedcbaaa", "eaabcdgfa", "befa", "dgc", "ade"}));
+        System.out.println("[eaabcdgfa, eaafgdcba] ?= " + findWords_dfs(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"eaafgdcba", "eaabcdgfa"}));
     }
 }
 
