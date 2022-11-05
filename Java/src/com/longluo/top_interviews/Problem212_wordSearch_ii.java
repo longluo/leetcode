@@ -28,120 +28,87 @@ import java.util.*;
  * words[i] 由小写英文字母组成
  * words 中的所有字符串互不相同
  * <p>
- * https://leetcode-cn.com/problems/word-search-ii/
+ * https://leetcode.cn/problems/word-search-ii/
  */
 public class Problem212_wordSearch_ii {
 
-    public static boolean[][] visited = new boolean[13][13];
-
-    public static List<String> findWords(char[][] board, String[] words) {
+    public static List<String> findWords_bf(char[][] board, String[] words) {
         List<String> ans = new ArrayList<>();
-        if (board == null || board.length == 0 || board[0].length == 0 || words == null || words.length == 0) {
-            return ans;
+
+        Set<String> set = new HashSet<>();
+        for (String word : words) {
+            set.add(word);
         }
 
-        for (String word : words) {
-            if (searchWord(board, word)) {
-                ans.add(word);
+        int m = board.length;
+        int n = board[0].length;
+
+        Set<String> res = new HashSet<>();
+        boolean[][] visited = new boolean[m][n];
+
+        StringBuilder path = new StringBuilder();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                path.append(board[i][j]);
+                visited[i][j] = true;
+                backtrack(res, path, board, visited, i, j);
+                visited[i][j] = false;
+                path.deleteCharAt(path.length() - 1);
+            }
+        }
+
+        for (String s : res) {
+            if (set.contains(s)) {
+                ans.add(s);
             }
         }
 
         return ans;
     }
 
-    public static boolean searchWord(char[][] board, String word) {
-        int row = board.length;
-        int col = board[0].length;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (board[i][j] == word.charAt(0)) {
-//                    if (bfs(board, i, j, word)) {
-//                        return true;
-//                    }
-
-                    for (int k = 0; k < visited.length; k++) {
-                        Arrays.fill(visited[k], false);
-                    }
-
-                    if (dfs(board, i, j, word, 1)) {
-                        return true;
-                    }
-                }
-            }
+    private static void backtrack(Set<String> res, StringBuilder path, char[][] board, boolean[][] visited, int x, int y) {
+        if (path.length() > 10) {
+            return;
         }
 
-        return false;
-    }
+        res.add(path.toString());
 
-    public static boolean bfs(char[][] board, int x, int y, String word) {
-        int length = word.length();
-        if (length == 1) {
-            return true;
-        }
-        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        int row = board.length;
-        int col = board[0].length;
-        boolean[][] visited = new boolean[row][col];
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{x, y});
-        visited[x][y] = true;
-        int step = 0;
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            step++;
-            for (int i = 0; i < size; i++) {
-                int[] currPos = queue.poll();
-                for (int j = 0; j < dirs.length; j++) {
-                    int nextX = currPos[0] + dirs[j][0];
-                    int nextY = currPos[1] + dirs[j][1];
-                    if (nextX < 0 || nextX >= row || nextY < 0 || nextY >= col) {
-                        continue;
-                    }
-                    if (!visited[nextX][nextY] && board[nextX][nextY] == word.charAt(step)) {
-                        if (step == length - 1) {
-                            return true;
-                        }
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-                        queue.add(new int[]{nextX, nextY});
-                        visited[nextX][nextY] = true;
-                    }
-                }
-            }
-        }
+        int m = board.length;
+        int n = board[0].length;
 
-        return false;
-    }
+        for (int[] dir : dirs) {
+            int nextX = x + dir[0];
+            int nextY = y + dir[1];
 
-    public static boolean dfs(char[][] board, int x, int y, String word, int step) {
-        int length = word.length();
-        if (step == length) {
-            return true;
-        }
-
-        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        int row = board.length;
-        int col = board[0].length;
-        visited[x][y] = true;
-        for (int j = 0; j < dirs.length; j++) {
-            int nextX = x + dirs[j][0];
-            int nextY = y + dirs[j][1];
-            if (nextX < 0 || nextX >= row || nextY < 0 || nextY >= col) {
+            if (!isInArea(m, n, nextX, nextY)) {
                 continue;
             }
-            if (!visited[nextX][nextY] && board[nextX][nextY] == word.charAt(step)) {
-                return dfs(board, nextX, nextY, word, step + 1);
-            }
-        }
 
-        return false;
+            if (visited[nextX][nextY]) {
+                continue;
+            }
+
+            visited[nextX][nextY] = true;
+            path.append(board[nextX][nextY]);
+            backtrack(res, path, board, visited, nextX, nextY);
+            path.deleteCharAt(path.length() - 1);
+            visited[nextX][nextY] = false;
+        }
+    }
+
+    private static boolean isInArea(int row, int col, int x, int y) {
+        return x >= 0 && x < row && y >= 0 && y < col;
     }
 
     public static void main(String[] args) {
-//        System.out.println("eat, oath ?= " + findWords(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
-//        System.out.println("[] ?= " + findWords(new char[][]{{'a', 'b'}, {'c', 'd'}}, new String[]{"abcd"}));
+        System.out.println("[] ?= " + findWords_bf(new char[][]{{'a', 'b'}, {'c', 'd'}}, new String[]{"abcd"}));
+        System.out.println("[eat, oath] ?= " + findWords_bf(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
         // bfs的坑 eaabcdgfa
-//        System.out.println("[abcdefg,befa,eaabcdgfa,gfedcbaaa] ?= " + findWords(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"abcdefg", "gfedcbaaa", "eaabcdgfa", "befa", "dgc", "ade"}));
-        System.out.println("[eaabcdgfa, eaafgdcba] ?= " + findWords(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"eaafgdcba", "eaabcdgfa"}));
+        System.out.println("[abcdefg, befa, eaabcdgfa, gfedcbaaa] ?= " + findWords_bf(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"abcdefg", "gfedcbaaa", "eaabcdgfa", "befa", "dgc", "ade"}));
+        System.out.println("[eaabcdgfa, eaafgdcba] ?= " + findWords_bf(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"eaafgdcba", "eaabcdgfa"}));
     }
 }
 
