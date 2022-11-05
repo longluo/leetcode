@@ -293,6 +293,94 @@ public class Problem212_wordSearch_ii {
         }
     }
 
+    // Trie Opt
+    public static List<String> findWords_opt(char[][] board, String[] words) {
+        MyTrie trie = new MyTrie();
+        for (String s : words) {
+            trie.insert(s);
+        }
+
+        int m = board.length;
+        int n = board[0].length;
+
+        boolean[][] visited = new boolean[m][n];
+
+        Set<String> ans = new HashSet<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int idx = board[i][j] - 'a';
+                if (trie.children[idx] == null) {
+                    continue;
+                }
+
+                visited[i][j] = true;
+                dfs(ans, trie.children[idx], board, visited, i, j);
+                visited[i][j] = false;
+            }
+        }
+
+        return new ArrayList<>(ans);
+    }
+
+    private static void dfs(Set<String> ans, MyTrie trie, char[][] board, boolean[][] visited, int x, int y) {
+        if (trie.word != null) {
+            ans.add(trie.word);
+        }
+
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int m = board.length;
+        int n = board[0].length;
+
+        for (int[] dir : dirs) {
+            int nextX = x + dir[0];
+            int nextY = y + dir[1];
+
+            if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n) {
+                continue;
+            }
+
+            if (visited[nextX][nextY]) {
+                continue;
+            }
+
+            int idx = board[nextX][nextY] - 'a';
+            if (trie.children[idx] == null) {
+                continue;
+            }
+
+            visited[nextX][nextY] = true;
+            dfs(ans, trie.children[idx], board, visited, nextX, nextY);
+            visited[nextX][nextY] = false;
+        }
+    }
+
+    static class MyTrie {
+        String word;
+        MyTrie[] children;
+
+        MyTrie() {
+            children = new MyTrie[26];
+        }
+
+        void insert(String word) {
+            MyTrie curTrie = this;
+
+            for (char ch : word.toCharArray()) {
+                int idx = ch - 'a';
+
+                if (curTrie.children[idx] == null) {
+                    curTrie.children[idx] = new MyTrie();
+                }
+
+                curTrie = curTrie.children[idx];
+            }
+
+            curTrie.word = word;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("[] ?= " + findWords_bf(new char[][]{{'a', 'b'}, {'c', 'd'}}, new String[]{"abcd"}));
         System.out.println("[eat, oath] ?= " + findWords_bf(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
@@ -308,6 +396,9 @@ public class Problem212_wordSearch_ii {
         System.out.println("[eat, oath] ?= " + findWords(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
         System.out.println("[abcdefg, befa, eaabcdgfa, gfedcbaaa] ?= " + findWords(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"abcdefg", "gfedcbaaa", "eaabcdgfa", "befa", "dgc", "ade"}));
         System.out.println("[eaabcdgfa, eaafgdcba] ?= " + findWords(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"eaafgdcba", "eaabcdgfa"}));
+
+        System.out.println("[] ?= " + findWords_opt(new char[][]{{'a', 'b'}, {'c', 'd'}}, new String[]{"abcd"}));
+        System.out.println("[eaabcdgfa, eaafgdcba] ?= " + findWords_opt(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"eaafgdcba", "eaabcdgfa"}));
     }
 }
 
