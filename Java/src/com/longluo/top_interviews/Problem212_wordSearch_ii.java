@@ -169,6 +169,130 @@ public class Problem212_wordSearch_ii {
         }
     }
 
+    // Trie
+    public static List<String> findWords(char[][] board, String[] words) {
+        Trie trie = new Trie();
+        for (String s : words) {
+            trie.insert(s);
+        }
+
+        int m = board.length;
+        int n = board[0].length;
+
+        boolean[][] visited = new boolean[m][n];
+
+        Set<String> ans = new HashSet<>();
+        StringBuilder path = new StringBuilder();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                path.append(board[i][j]);
+                visited[i][j] = true;
+                dfs(ans, trie, path, board, visited, i, j);
+                visited[i][j] = false;
+                path.deleteCharAt(path.length() - 1);
+            }
+        }
+
+        return new ArrayList<>(ans);
+    }
+
+    private static void dfs(Set<String> ans, Trie trie, StringBuilder path, char[][] board, boolean[][] visited, int x, int y) {
+        if (!trie.isPrefix(path.toString())) {
+            return;
+        }
+
+        if (path.length() > 10) {
+            return;
+        }
+
+        if (trie.search(path.toString())) {
+            ans.add(path.toString());
+        }
+
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+        int m = board.length;
+        int n = board[0].length;
+
+        for (int[] dir : dirs) {
+            int nextX = x + dir[0];
+            int nextY = y + dir[1];
+
+            if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n) {
+                continue;
+            }
+
+            if (visited[nextX][nextY]) {
+                continue;
+            }
+
+            visited[nextX][nextY] = true;
+            path.append(board[nextX][nextY]);
+            dfs(ans, trie, path, board, visited, nextX, nextY);
+            path.deleteCharAt(path.length() - 1);
+            visited[nextX][nextY] = false;
+        }
+    }
+
+    static class Trie {
+        boolean isLeaf;
+        Trie[] children;
+
+        Trie() {
+            isLeaf = false;
+            children = new Trie[26];
+        }
+
+        void insert(String word) {
+            Trie curNode = this;
+
+            for (char ch : word.toCharArray()) {
+                int idx = ch - 'a';
+
+                if (curNode.children[idx] == null) {
+                    curNode.children[idx] = new Trie();
+                }
+
+                curNode = curNode.children[idx];
+            }
+
+            curNode.isLeaf = true;
+        }
+
+        boolean isPrefix(String word) {
+            Trie curNode = this;
+
+            for (char ch : word.toCharArray()) {
+                int idx = ch - 'a';
+
+                if (curNode.children[idx] == null) {
+                    return false;
+                }
+
+                curNode = curNode.children[idx];
+            }
+
+            return true;
+        }
+
+        boolean search(String word) {
+            Trie curNode = this;
+
+            for (char ch : word.toCharArray()) {
+                int idx = ch - 'a';
+
+                if (curNode.children[idx] == null) {
+                    return false;
+                }
+
+                curNode = curNode.children[idx];
+            }
+
+            return curNode.isLeaf;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("[] ?= " + findWords_bf(new char[][]{{'a', 'b'}, {'c', 'd'}}, new String[]{"abcd"}));
         System.out.println("[eat, oath] ?= " + findWords_bf(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
@@ -179,6 +303,11 @@ public class Problem212_wordSearch_ii {
         System.out.println("[eat, oath] ?= " + findWords_dfs(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
         System.out.println("[abcdefg, befa, eaabcdgfa, gfedcbaaa] ?= " + findWords_dfs(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"abcdefg", "gfedcbaaa", "eaabcdgfa", "befa", "dgc", "ade"}));
         System.out.println("[eaabcdgfa, eaafgdcba] ?= " + findWords_dfs(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"eaafgdcba", "eaabcdgfa"}));
+
+        System.out.println("[] ?= " + findWords(new char[][]{{'a', 'b'}, {'c', 'd'}}, new String[]{"abcd"}));
+        System.out.println("[eat, oath] ?= " + findWords(new char[][]{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}}, new String[]{"oath", "pea", "eat", "rain"}));
+        System.out.println("[abcdefg, befa, eaabcdgfa, gfedcbaaa] ?= " + findWords(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"abcdefg", "gfedcbaaa", "eaabcdgfa", "befa", "dgc", "ade"}));
+        System.out.println("[eaabcdgfa, eaafgdcba] ?= " + findWords(new char[][]{{'a', 'b', 'c'}, {'a', 'e', 'd'}, {'a', 'f', 'g'}}, new String[]{"eaafgdcba", "eaabcdgfa"}));
     }
 }
 
