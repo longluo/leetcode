@@ -37,6 +37,7 @@ package com.longluo.leetcode.math;
  */
 public class Problem1323_maximum69Number {
 
+    // String time: O(n) space: O(n)
     public static int maximum69Number(int num) {
         char[] array = String.valueOf(num).toCharArray();
 
@@ -50,9 +51,35 @@ public class Problem1323_maximum69Number {
         return Integer.parseInt(new String(array));
     }
 
+    // Math time: O(logn) space: O(1)
+    public static int maximum69Number_math(int num) {
+        int base = 1000;
+
+        int ans = 0;
+
+        while (num > 0) {
+            int digit = num / base;
+
+            if (digit == 6) {
+                digit = 9;
+                ans += digit * base + num % base;
+                break;
+            } else {
+                ans += digit * base;
+            }
+
+            num %= base;
+            base /= 10;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("9969 ?= " + maximum69Number(9669));
         System.out.println("9999 ?= " + maximum69Number(9996));
         System.out.println("9999 ?= " + maximum69Number(9999));
+
+        System.out.println("9969 ?= " + maximum69Number_math(9669));
     }
 }
