@@ -93,11 +93,40 @@ public class Problem1684_countConsistentStrings {
         return ans;
     }
 
+    // Bit time: O(n) space: O(1)
+    public static int countConsistentStrings_bits(String allowed, String[] words) {
+        int allowBits = 0;
+
+        for (char ch : allowed.toCharArray()) {
+            int shift = ch - 'a';
+            allowBits = allowBits | (0x01 << shift);
+        }
+
+        int ans = 0;
+        for (String s : words) {
+            boolean flag = true;
+            for (char ch : s.toCharArray()) {
+                int shift = 0x01 << (ch - 'a');
+                if ((shift & allowBits) == 0) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + countConsistentStrings("ab", new String[]{"ad", "bd", "aaab", "baa", "badab"}));
         System.out.println("7 ?= " + countConsistentStrings("abc", new String[]{"a", "b", "c", "ab", "ac", "bc", "abc"}));
         System.out.println("4 ?= " + countConsistentStrings("cad", new String[]{"cc", "acd", "b", "ba", "bac", "bad", "ac", "d"}));
 
         System.out.println("4 ?= " + countConsistentStrings_count("cad", new String[]{"cc", "acd", "b", "ba", "bac", "bad", "ac", "d"}));
+        System.out.println("4 ?= " + countConsistentStrings_bits("cad", new String[]{"cc", "acd", "b", "ba", "bac", "bad", "ac", "d"}));
     }
 }
