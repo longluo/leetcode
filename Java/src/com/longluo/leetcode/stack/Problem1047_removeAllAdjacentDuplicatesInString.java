@@ -1,5 +1,7 @@
 package com.longluo.leetcode.stack;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -20,7 +22,7 @@ import java.util.Stack;
  * 1 <= S.length <= 20000
  * S 仅由小写英文字母组成。
  * <p>
- * https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
+ * https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/
  */
 public class Problem1047_removeAllAdjacentDuplicatesInString {
 
@@ -68,6 +70,25 @@ public class Problem1047_removeAllAdjacentDuplicatesInString {
         return sb.toString();
     }
 
+    // Deque time: O(n) space: O(n)
+    public static String removeDuplicates_deque(String s) {
+        Deque<Character> stk = new ArrayDeque<>();
+        for (char ch : s.toCharArray()) {
+            if (!stk.isEmpty() && stk.peek() == ch) {
+                stk.pop();
+            } else {
+                stk.push(ch);
+            }
+        }
+
+        StringBuilder ans = new StringBuilder();
+        while (!stk.isEmpty()) {
+            ans.append(stk.pollLast());
+        }
+
+        return ans.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("ca ?= " + removeDuplicates_bf("abbaca"));
         System.out.println("c ?= " + removeDuplicates_bf("c"));
@@ -78,5 +99,7 @@ public class Problem1047_removeAllAdjacentDuplicatesInString {
         System.out.println("c ?= " + removeDuplicates("c"));
         System.out.println(" ?= " + removeDuplicates("aa"));
         System.out.println("ab ?= " + removeDuplicates("ab"));
+
+        System.out.println("ca ?= " + removeDuplicates_deque("abbaca"));
     }
 }
