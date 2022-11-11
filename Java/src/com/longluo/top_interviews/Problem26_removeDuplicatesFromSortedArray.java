@@ -61,6 +61,24 @@ public class Problem26_removeDuplicatesFromSortedArray {
         return idx + 1;
     }
 
+    // Two Pointers time: O(n) space: O(1)
+    public static int removeDuplicates_tp(int[] nums) {
+        int len = nums.length;
+
+        int left = 0;
+        int right = 1;
+
+        while (right < len) {
+            if (nums[right] > nums[left]) {
+                left++;
+                nums[left] = nums[right];
+            }
+
+            right++;
+        }
+
+        return left + 1;
+    }
 
     public static int removeDuplicates(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -88,6 +106,9 @@ public class Problem26_removeDuplicatesFromSortedArray {
     public static void main(String[] args) {
         System.out.println("2 ?= " + removeDuplicates_bf(new int[]{1, 1, 2}));
         System.out.println("5 ?= " + removeDuplicates_bf(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
+
+        System.out.println("2 ?= " + removeDuplicates_tp(new int[]{1, 1, 2}));
+        System.out.println("5 ?= " + removeDuplicates_tp(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
 
         System.out.println("2 ?= " + removeDuplicates(new int[]{1, 1, 2}));
         System.out.println("5 ?= " + removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
