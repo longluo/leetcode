@@ -39,6 +39,29 @@ package com.longluo.top_interviews;
  */
 public class Problem26_removeDuplicatesFromSortedArray {
 
+    // BF time: O(n) space: O(n)
+    public static int removeDuplicates_bf(int[] nums) {
+        int len = nums.length;
+
+        int[] expected = new int[len];
+        expected[0] = nums[0];
+        int idx = 0;
+
+        for (int i = 1; i < len; i++) {
+            if (nums[i] > expected[idx]) {
+                idx++;
+                expected[idx] = nums[i];
+            }
+        }
+
+        for (int i = 0; i <= idx; i++) {
+            nums[i] = expected[i];
+        }
+
+        return idx + 1;
+    }
+
+
     public static int removeDuplicates(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
@@ -63,6 +86,9 @@ public class Problem26_removeDuplicatesFromSortedArray {
     }
 
     public static void main(String[] args) {
+        System.out.println("2 ?= " + removeDuplicates_bf(new int[]{1, 1, 2}));
+        System.out.println("5 ?= " + removeDuplicates_bf(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
+
         System.out.println("2 ?= " + removeDuplicates(new int[]{1, 1, 2}));
         System.out.println("5 ?= " + removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
     }
