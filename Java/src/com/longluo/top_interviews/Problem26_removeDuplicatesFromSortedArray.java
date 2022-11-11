@@ -1,8 +1,6 @@
 package com.longluo.top_interviews;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * 26. 删除有序数组中的重复项
@@ -82,6 +80,23 @@ public class Problem26_removeDuplicatesFromSortedArray {
         return cnt;
     }
 
+    // HashMap time: O(n) space: O(n)
+    public static int removeDuplicates_map(int[] nums) {
+        Map<Integer, Integer> map = new TreeMap<>();
+
+        for (int x : nums) {
+            map.put(x, map.getOrDefault(x, 0) + 1);
+        }
+
+        int cnt = 0;
+        for (int key : map.keySet()) {
+            nums[cnt] = key;
+            cnt++;
+        }
+
+        return cnt;
+    }
+
     // Two Pointers time: O(n) space: O(1)
     public static int removeDuplicates_tp(int[] nums) {
         int len = nums.length;
@@ -134,6 +149,10 @@ public class Problem26_removeDuplicatesFromSortedArray {
         System.out.println("4 ?= " + removeDuplicates_set(new int[]{-3, -1, 0, 0, 0, 3, 3}));
         System.out.println("2 ?= " + removeDuplicates_set(new int[]{1, 1, 2}));
         System.out.println("5 ?= " + removeDuplicates_set(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
+
+        System.out.println("4 ?= " + removeDuplicates_map(new int[]{-3, -1, 0, 0, 0, 3, 3}));
+        System.out.println("2 ?= " + removeDuplicates_map(new int[]{1, 1, 2}));
+        System.out.println("5 ?= " + removeDuplicates_map(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
 
         System.out.println("2 ?= " + removeDuplicates(new int[]{1, 1, 2}));
         System.out.println("5 ?= " + removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
