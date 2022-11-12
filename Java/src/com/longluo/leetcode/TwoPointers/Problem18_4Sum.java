@@ -1,4 +1,4 @@
-package com.longluo.leetcode.twopointers;
+package com.longluo.leetcode.TwoPointers;
 
 import com.longluo.datastructure.ArrayUtils;
 
@@ -27,9 +27,10 @@ import java.util.*;
  * -10^9 <= nums[i] <= 10^9
  * -10^9 <= target <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/4sum/
+ * https://leetcode.cn/problems/4sum/
  */
 public class Problem18_4Sum {
+
     // Sort + BF + Set time: O(n^4) space: O(logn)
     public static List<List<Integer>> fourSum_bf_set(int[] nums, int target) {
         if (nums == null || nums.length < 4) {
