@@ -9,7 +9,7 @@ package com.longluo.leetcode.TwoPointers;
  * <p>
  * 返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。
  * <p>
- * 注意：输入字符串 s中可能会存在前导空格、尾随空格或者单词间的多个空格。
+ * 注意：输入字符串 s 中可能会存在前导空格、尾随空格或者单词间的多个空格。
  * 返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。
  * <p>
  * 示例 1：
@@ -56,8 +56,45 @@ public class Problem151_reverseWordsInAString {
         return sb.toString();
     }
 
+    // Two Pointers time: O(n) space: O(n)
+    public static String reverseWords_tp(String s) {
+        int len = s.length();
+
+        StringBuilder sb = new StringBuilder();
+
+        int right = len - 1;
+        int left = right;
+
+        while (left >= 0) {
+            while (right >= 0 && s.charAt(right) == ' ') {
+                right--;
+            }
+
+            if (right < 0) {
+                break;
+            }
+
+            left = right;
+
+            while (left >= 0 && s.charAt(left) != ' ') {
+                left--;
+            }
+
+            sb.append(s, left + 1, right + 1).append(' ');
+            right = left;
+        }
+
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("blue is sky the ?= " + reverseWords_regex("the sky is blue"));
         System.out.println("example good a ?= " + reverseWords_regex("a good   example"));
+        System.out.println("world hello ?= " + reverseWords_regex("  hello world  "));
+
+        System.out.println("blue is sky the ?= " + reverseWords_tp("the sky is blue"));
+        System.out.println("world hello ?= " + reverseWords_tp("  hello world  "));
     }
 }
