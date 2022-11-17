@@ -36,22 +36,23 @@ public class Problem792_numberOfMatchingSubsequences {
     // BF time: O(mn) space: O(1)
     // TLE
     public static int numMatchingSubseq_bf(String s, String[] words) {
+        int len = s.length();
+
         int ans = 0;
 
         for (String word : words) {
-            if (word.length() > s.length()) {
+            if (word.length() > len) {
                 continue;
             }
 
-            int idx = 0;
-            for (int i = 0; i < s.length(); i++) {
-                if (idx < word.length() && s.charAt(i) == word.charAt(idx)) {
-                    idx++;
+            for (int i = 0, j = 0; i < word.length() && j < len; j++) {
+                if (word.charAt(i) == s.charAt(j)) {
+                    i++;
                 }
-            }
 
-            if (idx == word.length()) {
-                ans++;
+                if (i == word.length()) {
+                    ans++;
+                }
             }
         }
 
