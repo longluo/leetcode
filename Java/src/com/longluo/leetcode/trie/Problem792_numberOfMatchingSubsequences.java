@@ -1,9 +1,6 @@
 package com.longluo.leetcode.trie;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 792. 匹配子序列的单词数
@@ -59,6 +56,58 @@ public class Problem792_numberOfMatchingSubsequences {
         return ans;
     }
 
+    // Binary Search time: O() space: O(n)
+    public static int numMatchingSubseq_bs(String s, String[] words) {
+        int len = s.length();
+
+        List<Integer>[] marks = new ArrayList[26];
+        for (int i = 0; i < 26; i++) {
+            marks[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < len; i++) {
+            int idx = s.charAt(i) - 'a';
+            marks[idx].add(i);
+        }
+
+        int ans = words.length;
+        for (String word : words) {
+            int p = -1;
+            for (int i = 0; i < word.length(); i++) {
+                char ch = word.charAt(i);
+                int idx = binarySearch(marks[ch - 'a'], p);
+                if (idx <= p) {
+                    ans--;
+                    break;
+                }
+
+                p = idx;
+            }
+        }
+
+        return ans;
+    }
+
+    private static int binarySearch(List<Integer> list, int target) {
+        if (list.size() == 0) {
+            return -1;
+        }
+
+        int left = 0;
+        int right = list.size() - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (list.get(mid) <= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return list.get(left) > target ? list.get(left) : -1;
+    }
+
     // Count time: O(len + sum(len)) space: O(words.len)
     public static int numMatchingSubseq(String s, String[] words) {
         Map<Character, Deque<String>> map = new HashMap<>();
@@ -89,6 +138,10 @@ public class Problem792_numberOfMatchingSubsequences {
 
     public static void main(String[] args) {
         System.out.println("3 ?= " + numMatchingSubseq_bf("abcde", new String[]{"a", "bb", "acd", "ace"}));
+
+        System.out.println("2 ?= " + numMatchingSubseq_bs("dsahjpjauf", new String[]{"ahjpjau", "ja", "ahbwzgqnuk", "tnmlanowax"}));
+        System.out.println("3 ?= " + numMatchingSubseq_bs("abcde", new String[]{"a", "bb", "acd", "ace"}));
+
         System.out.println("3 ?= " + numMatchingSubseq("abcde", new String[]{"a", "bb", "acd", "ace"}));
     }
 }
