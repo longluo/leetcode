@@ -60,6 +60,27 @@ public class Problem263_uglyNumber {
         return false;
     }
 
+    // Math time: O(logn) space: O(1)
+    public static boolean isUgly_iter(int n) {
+        if (n <= 0) {
+            return false;
+        }
+
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+
+        while (n % 5 == 0) {
+            n /= 5;
+        }
+
+        return n == 1;
+    }
+
     // Binary Search time: O(logn) space: O(n)
     static int[] uglyNumbers = {1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40,
             45, 48, 50, 54, 60, 64, 72, 75, 80, 81, 90, 96, 100, 108, 120, 125, 128,
@@ -125,6 +146,8 @@ public class Problem263_uglyNumber {
         System.out.println("true ?= " + isUgly(6));
         System.out.println("true ?= " + isUgly(8));
         System.out.println("false ?= " + isUgly(14));
+
+        System.out.println("false ?= " + isUgly_iter(14));
 
         System.out.println("false ?= " + isUgly_bs(14));
     }
