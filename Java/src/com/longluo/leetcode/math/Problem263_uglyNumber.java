@@ -2,8 +2,9 @@ package com.longluo.leetcode.math;
 
 /**
  * 263. 丑数
+ * <p>
+ * 丑数 就是只包含质因数2、3 和 5的正整数。
  * 给你一个整数 n ，请你判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false 。
- * 丑数 就是只包含质因数 2、3和/或 5 的正整数。
  * <p>
  * 示例 1：
  * 输入：n = 6
@@ -27,13 +28,18 @@ package com.longluo.leetcode.math;
  * <p>
  * 提示：
  * -2^31 <= n <= 2^31 - 1
+ * <p>
+ * https://leetcode.cn/problems/ugly-number/
  */
 public class Problem263_uglyNumber {
 
+    // Recursion time: O(logn) space: O(logn)
     public static boolean isUgly(int n) {
         if (n <= 0) {
             return false;
-        } else if (n == 1) {
+        }
+
+        if (n == 1) {
             return true;
         }
 
