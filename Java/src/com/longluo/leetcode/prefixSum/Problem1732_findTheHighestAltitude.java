@@ -54,9 +54,22 @@ public class Problem1732_findTheHighestAltitude {
         return max;
     }
 
+    // Best time: O(n) space: O(1)
+    public static int largestAltitude_best(int[] gain) {
+        int ans = 0;
+        int sum = 0;
+        for (int x : gain) {
+            sum += x;
+            ans = Math.max(ans, sum);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + largestAltitude(new int[]{-5, 1, 5, 0, -7}));
         System.out.println("0 ?= " + largestAltitude(new int[]{-4, -3, -2, -1, 4, 3, 2}));
         System.out.println("0 ?= " + largestAltitude_opt(new int[]{-4, -3, -2, -1, 4, 3, 2}));
+        System.out.println("0 ?= " + largestAltitude_best(new int[]{-4, -3, -2, -1, 4, 3, 2}));
     }
 }
