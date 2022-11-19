@@ -1,4 +1,4 @@
-package com.longluo.leetcode.prefixsum;
+package com.longluo.leetcode.prefixSum;
 
 /**
  * 1732. 找到最高海拔
@@ -40,8 +40,23 @@ public class Problem1732_findTheHighestAltitude {
         return max;
     }
 
+    // Opt time: O(n) space: O(1)
+    public static int largestAltitude_opt(int[] gain) {
+        int max = 0;
+        int len = gain.length;
+        for (int i = 0; i < len; i++) {
+            if (i > 0) {
+                gain[i] += gain[i - 1];
+            }
+            max = Math.max(max, gain[i]);
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + largestAltitude(new int[]{-5, 1, 5, 0, -7}));
         System.out.println("0 ?= " + largestAltitude(new int[]{-4, -3, -2, -1, 4, 3, 2}));
+        System.out.println("0 ?= " + largestAltitude_opt(new int[]{-4, -3, -2, -1, 4, 3, 2}));
     }
 }
