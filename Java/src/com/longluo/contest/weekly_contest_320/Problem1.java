@@ -7,25 +7,16 @@ import java.util.Arrays;
  */
 public class Problem1 {
 
+    // BF time: O(n^3) space: O(1)
     public static int unequalTriplets(int[] nums) {
         int len = nums.length;
-
-        Arrays.sort(nums);
 
         int ans = 0;
 
         for (int i = 0; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
-                if (nums[j] == nums[i]) {
-                    continue;
-                }
-
                 for (int k = j + 1; k < len; k++) {
-                    if (nums[k] == nums[j]) {
-                        continue;
-                    }
-
-                    if (nums[i] != nums[j] && nums[j] != nums[k]) {
+                    if (nums[i] != nums[j] && nums[j] != nums[k] && nums[i] != nums[k]) {
                         ans++;
                     }
                 }
@@ -34,7 +25,6 @@ public class Problem1 {
 
         return ans;
     }
-
 
     public static int unequalTriplets_opt(int[] nums) {
         Arrays.sort(nums);
@@ -61,6 +51,7 @@ public class Problem1 {
     }
 
     public static void main(String[] args) {
-        System.out.println(" ");
+        System.out.println("3 ?= " + unequalTriplets(new int[]{4, 4, 2, 4, 3}));
+        System.out.println("3 ?= " + unequalTriplets_opt(new int[]{4, 4, 2, 4, 3}));
     }
 }
