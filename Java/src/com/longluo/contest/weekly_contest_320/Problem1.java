@@ -103,10 +103,28 @@ public class Problem1 {
         return ans;
     }
 
+    // One Pass O(n)
+    public static int unequalTriplets_onepass(int[] nums) {
+        int ans = 0;
+
+        int count[] = new int[1001];
+
+        int pairs = 0;
+
+        for (int i = 0; i < nums.length; ++i) {
+            ans += pairs - count[nums[i]] * (i - count[nums[i]]);
+            pairs += i - count[nums[i]];
+            count[nums[i]] += 1;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + unequalTriplets(new int[]{4, 4, 2, 4, 3}));
         System.out.println("3 ?= " + unequalTriplets_opt(new int[]{4, 4, 2, 4, 3}));
         System.out.println("3 ?= " + unequalTriplets_best(new int[]{4, 4, 2, 4, 3}));
         System.out.println("3 ?= " + unequalTriplets_math(new int[]{4, 4, 2, 4, 3}));
+        System.out.println("3 ?= " + unequalTriplets_onepass(new int[]{4, 4, 2, 4, 3}));
     }
 }
