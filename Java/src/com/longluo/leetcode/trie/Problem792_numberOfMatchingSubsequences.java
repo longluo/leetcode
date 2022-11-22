@@ -109,6 +109,7 @@ public class Problem792_numberOfMatchingSubsequences {
     }
 
     // Count time: O(len + sum(len)) space: O(words.len)
+    // TODO: 2022/11/17  
     public static int numMatchingSubseq(String s, String[] words) {
         Map<Character, Deque<String>> map = new HashMap<>();
         for (char ch = 'a'; ch <= 'z'; ch++) {
@@ -136,6 +137,88 @@ public class Problem792_numberOfMatchingSubsequences {
         return count;
     }
 
+    // Trie time: O(mn) space: O(n)
+    // AC
+    public static int numMatchingSubseq_trie(String s, String[] words) {
+        Trie trie = new Trie();
+
+        for (String word : words) {
+            trie.insert(word);
+        }
+
+        return trie.search(s);
+    }
+
+    static class Trie {
+        int cnt = 0;
+        Trie[] children;
+
+        Trie() {
+            cnt = 0;
+            children = new Trie[26];
+        }
+
+        public void insert(String word) {
+            Trie curNode = this;
+
+            for (char ch : word.toCharArray()) {
+                int idx = ch - 'a';
+
+                if (curNode.children[idx] == null) {
+                    curNode.children[idx] = new Trie();
+                }
+
+                curNode = curNode.children[idx];
+            }
+
+            curNode.cnt++;
+        }
+
+        int result;
+
+        public int search(String word) {
+            search(word, 0, this);
+            return result;
+        }
+
+        /**
+         * 深度优先遍历
+         * <p>
+         * cnt 变量存储树中以此结点为结尾的单词的数量
+         * <p>
+         * 首先构建字典树，然后深度优先遍历字典树，当前结点如果 cnt > 0，将 cnt 的数量加入 result 中遍历当前结点的后续结点，
+         * <p>
+         * 不为空时，判断后续结点的字符是否存在与字符串中如果存在则递归
+         * <p>
+         * 这里递归时传入的判断字符是否存在时的起始点
+         * 也就是下一个字符必须出现在当前字符的后面才符合条件
+         * <p>
+         *
+         * @param word
+         * @param index
+         * @param node
+         */
+        public void search(String word, int index, Trie node) {
+            if (node.cnt > 0) {
+                result += node.cnt;
+            }
+
+            Trie next;
+            int indexOf;
+
+            for (int i = 0; i < node.children.length; i++) {
+                next = node.children[i];
+
+                if (next != null) {
+                    indexOf = word.indexOf(i + 'a', index);
+                    if (indexOf != -1) {
+                        search(word, indexOf + 1, next);
+                    }
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + numMatchingSubseq_bf("abcde", new String[]{"a", "bb", "acd", "ace"}));
 
@@ -143,5 +226,7 @@ public class Problem792_numberOfMatchingSubsequences {
         System.out.println("3 ?= " + numMatchingSubseq_bs("abcde", new String[]{"a", "bb", "acd", "ace"}));
 
         System.out.println("3 ?= " + numMatchingSubseq("abcde", new String[]{"a", "bb", "acd", "ace"}));
+
+        System.out.println("3 ?= " + numMatchingSubseq_trie("abcde", new String[]{"a", "bb", "acd", "ace"}));
     }
 }
