@@ -186,7 +186,7 @@ public class Problem792_numberOfMatchingSubsequences {
          * <p>
          * cnt 变量存储树中以此结点为结尾的单词的数量
          * <p>
-         * 首先构建字典树，然后深度优先遍历字典树，当前结点如果 cnt > 0，将 cnt 的数量加入 result 中遍历当前结点的后续结点，
+         * 首先构建字典树，然后深度优先遍历字典树，当前结点如果 cnt > 0 ，将 cnt 的数量加入 result 中遍历当前结点的后续结点，
          * <p>
          * 不为空时，判断后续结点的字符是否存在与字符串中如果存在则递归
          * <p>
@@ -203,14 +203,11 @@ public class Problem792_numberOfMatchingSubsequences {
                 result += node.cnt;
             }
 
-            Trie next;
-            int indexOf;
-
             for (int i = 0; i < node.children.length; i++) {
-                next = node.children[i];
+                Trie next = node.children[i];
 
                 if (next != null) {
-                    indexOf = word.indexOf(i + 'a', index);
+                    int indexOf = word.indexOf(i + 'a', index);
                     if (indexOf != -1) {
                         search(word, indexOf + 1, next);
                     }
