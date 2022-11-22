@@ -189,13 +189,40 @@ public class Problem856_scoreOfParentheses {
                     base /= 2;
                     break;
 
-                case '1':
+                default:
                     ans += base;
                     break;
             }
         }
 
         return ans;
+    }
+
+    // DFS time: O(n) space: O(n)
+    public static int scoreOfParentheses_dfs(String s) {
+        char[] array = s.toCharArray();
+        return dfs(array, 0)[0];
+    }
+
+    private static int[] dfs(char[] array, int start) {
+        int score = 0;
+
+        while (start < array.length && array[start] == '(') {
+            start++;
+
+            if (array[start] == ')') {
+                score += 1;
+            } else {
+                int[] ret = dfs(array, start);
+
+                score += ret[0] * 2;
+                start = ret[1];
+            }
+
+            start++;
+        }
+
+        return new int[]{score, start};
     }
 
     public static void main(String[] args) {
@@ -212,5 +239,8 @@ public class Problem856_scoreOfParentheses {
         System.out.println("2 ?= " + scoreOfParentheses_best("()()"));
 
         System.out.println("2 ?= " + scoreOfParentheses_clean("()()"));
+
+        System.out.println("2 ?= " + scoreOfParentheses_dfs("()()"));
+        System.out.println("3 ?= " + scoreOfParentheses_dfs("(())()"));
     }
 }
