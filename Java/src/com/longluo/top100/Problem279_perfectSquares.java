@@ -255,6 +255,7 @@ public class Problem279_perfectSquares {
     // DP Opt  time: O(n sqrt(n) space: O(n)
     public static int numSquares_dp_opt(int n) {
         int[] dp = new int[n + 1];
+
         for (int i = 1; i <= n; i++) {
             dp[i] = i;
             for (int j = 1; j * j <= i; j++) {
@@ -293,5 +294,8 @@ public class Problem279_perfectSquares {
         System.out.println("3 ?= " + numSquares_dp(12));
         System.out.println("2 ?= " + numSquares_dp(13));
         System.out.println("2 ?= " + numSquares_dp(41));
+
+        System.out.println("3 ?= " + numSquares_dp_opt(12));
+        System.out.println("2 ?= " + numSquares_dp_opt(13));
     }
 }
