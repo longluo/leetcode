@@ -28,6 +28,44 @@ import java.util.*;
  */
 public class Problem279_perfectSquares {
 
+    // BF time: O(2^n) space: O(n)
+    // TLE
+    public static int numSquares_bf(int n) {
+        int ans = n;
+
+        List<Integer> squares = new ArrayList<>();
+        for (int i = 1; i * i <= n; i++) {
+            squares.add(i * i);
+        }
+
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(res, new ArrayList<>(), squares, 0, n);
+
+        for (List<Integer> item : res) {
+            ans = Math.min(ans, item.size());
+        }
+
+        return ans;
+    }
+
+    private static void backtrack(List<List<Integer>> res, List<Integer> path, List<Integer> squares, int start, int remain) {
+        if (remain == 0) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        int len = squares.size();
+        for (int i = start; i < len; i++) {
+            if (squares.get(i) > remain) {
+                continue;
+            }
+
+            path.add(squares.get(i));
+            backtrack(res, path, squares, i, remain - squares.get(i));
+            path.remove(path.size() - 1);
+        }
+    }
+
     // TODO: 2022/6/7
     static class Res {
         int value;
@@ -132,6 +170,8 @@ public class Problem279_perfectSquares {
     }
 
     public static void main(String[] args) {
+        System.out.println("3 ?= " + numSquares_bf(12));
+
         System.out.println("1 ?= " + numSquares_bfs(1));
         System.out.println("1 ?= " + numSquares_bfs_2(1));
         System.out.println("1 ?= " + numSquares_dp(1));
