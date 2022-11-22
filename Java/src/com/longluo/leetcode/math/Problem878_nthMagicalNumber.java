@@ -1,5 +1,7 @@
 package com.longluo.leetcode.math;
 
+import java.util.HashSet;
+
 /**
  * 878. 第 N 个神奇数字
  * <p>
@@ -22,7 +24,7 @@ package com.longluo.leetcode.math;
  */
 public class Problem878_nthMagicalNumber {
 
-    // BF time: O() space: O(1)
+    // BF time: O(max(a^n, b^n, (ab)^n) space: O(1)
     // TLE
     public static int nthMagicalNumber_bf(int n, int a, int b) {
         int mod = 1_000_000_007;
@@ -41,8 +43,37 @@ public class Problem878_nthMagicalNumber {
         return (int) (num % mod);
     }
 
+    // DP time: O(n) space: O(n)
+    // MLE
+    public static int nthMagicalNumber_dp(int n, int a, int b) {
+        int mod = 1_000_000_007;
+
+        long[] dp = new long[n + 1];
+
+        int p = 1;
+        int q = 1;
+
+        for (int i = 1; i <= n; i++) {
+            dp[i] = Math.min(p * a, q * b);
+            if (dp[i] % a == 0 && dp[i] % b == 0) {
+                p++;
+                q++;
+            } else if (dp[i] % a == 0) {
+                p++;
+            } else {
+                q++;
+            }
+        }
+
+        return (int) (dp[n] % mod);
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + nthMagicalNumber_bf(1, 2, 3));
         System.out.println("6 ?= " + nthMagicalNumber_bf(4, 2, 3));
+
+        System.out.println("2 ?= " + nthMagicalNumber_dp(1, 2, 3));
+        System.out.println("10 ?= " + nthMagicalNumber_dp(5, 2, 4));
+        System.out.println("6 ?= " + nthMagicalNumber_dp(4, 2, 3));
     }
 }
