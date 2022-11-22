@@ -66,18 +66,8 @@ public class Problem279_perfectSquares {
         }
     }
 
-    // TODO: 2022/6/7
-    static class Res {
-        int value;
-        List<Integer> list;
-
-        Res(int value, List<Integer> list) {
-            this.value = value;
-            this.list = list;
-        }
-    }
-
     // BFS time: O(n) space: O(n)
+    // TLE
     public static int numSquares_bfs(int n) {
         List<Integer> squares = new ArrayList();
         for (int i = 1; i * i <= n; i++) {
@@ -85,20 +75,27 @@ public class Problem279_perfectSquares {
         }
 
         int ans = n;
-        Queue<Res> queue = new LinkedList<>();
-        queue.offer(new Res(n, new ArrayList<>()));
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{n, 0});
+
         while (!queue.isEmpty()) {
-            Res res = queue.poll();
-            if (res.value == 0) {
-                ans = Math.min(ans, res.list.size());
-            }
-            for (int i = 0; i < squares.size(); i++) {
-                if (res.value < squares.get(i)) {
-                    break;
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                int[] cur = queue.poll();
+
+                if (cur[0] == 0) {
+                    ans = Math.min(ans, cur[1]);
                 }
-                List list = new ArrayList(res.list);
-                list.add(squares.get(i));
-                queue.offer(new Res(res.value - squares.get(i), list));
+
+                for (int x : squares) {
+                    if (x > cur[0]) {
+                        break;
+                    }
+
+                    queue.offer(new int[]{cur[0] - x, cur[1] + 1});
+                }
             }
         }
 
@@ -172,24 +169,26 @@ public class Problem279_perfectSquares {
     public static void main(String[] args) {
         System.out.println("3 ?= " + numSquares_bf(12));
 
-        System.out.println("1 ?= " + numSquares_bfs(1));
-        System.out.println("1 ?= " + numSquares_bfs_2(1));
-        System.out.println("1 ?= " + numSquares_dp(1));
-        System.out.println("2 ?= " + numSquares_bfs(2));
-        System.out.println("2 ?= " + numSquares_bfs_2(2));
-        System.out.println("2 ?= " + numSquares_dp(2));
-        System.out.println("3 ?= " + numSquares_bfs(3));
-        System.out.println("3 ?= " + numSquares_dp(3));
-        System.out.println("1 ?= " + numSquares_bfs(4));
-        System.out.println("1 ?= " + numSquares_dp(4));
-        System.out.println("2 ?= " + numSquares_bfs(5));
-        System.out.println("2 ?= " + numSquares_dp(5));
         System.out.println("3 ?= " + numSquares_bfs(12));
-        System.out.println("3 ?= " + numSquares_dp(12));
+        System.out.println("1 ?= " + numSquares_bfs(1));
+        System.out.println("2 ?= " + numSquares_bfs(2));
+        System.out.println("3 ?= " + numSquares_bfs(3));
+        System.out.println("1 ?= " + numSquares_bfs(4));
+        System.out.println("2 ?= " + numSquares_bfs(5));
         System.out.println("2 ?= " + numSquares_bfs(13));
-        System.out.println("2 ?= " + numSquares_dp(13));
         System.out.println("2 ?= " + numSquares_bfs(41));
+
+        System.out.println("1 ?= " + numSquares_bfs_2(1));
+        System.out.println("2 ?= " + numSquares_bfs_2(2));
         System.out.println("2 ?= " + numSquares_bfs_2(41));
+
+        System.out.println("1 ?= " + numSquares_dp(1));
+        System.out.println("2 ?= " + numSquares_dp(2));
+        System.out.println("3 ?= " + numSquares_dp(3));
+        System.out.println("1 ?= " + numSquares_dp(4));
+        System.out.println("2 ?= " + numSquares_dp(5));
+        System.out.println("3 ?= " + numSquares_dp(12));
+        System.out.println("2 ?= " + numSquares_dp(13));
         System.out.println("2 ?= " + numSquares_dp(41));
     }
 }
