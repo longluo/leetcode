@@ -68,6 +68,31 @@ public class Problem878_nthMagicalNumber {
         return (int) (dp[n] % mod);
     }
 
+    // DP time: O(n) space: O(1)
+    // TLE
+    public static int nthMagicalNumber_dp_opt(int n, int a, int b) {
+        int mod = 1_000_000_007;
+
+        long ans = 1;
+
+        int p = 1;
+        int q = 1;
+
+        for (int i = 1; i <= n; i++) {
+            ans = Math.min(p * a, q * b);
+            if (ans % a == 0 && ans % b == 0) {
+                p++;
+                q++;
+            } else if (ans % a == 0) {
+                p++;
+            } else {
+                q++;
+            }
+        }
+
+        return (int) (ans % mod);
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + nthMagicalNumber_bf(1, 2, 3));
         System.out.println("6 ?= " + nthMagicalNumber_bf(4, 2, 3));
@@ -75,5 +100,8 @@ public class Problem878_nthMagicalNumber {
         System.out.println("2 ?= " + nthMagicalNumber_dp(1, 2, 3));
         System.out.println("10 ?= " + nthMagicalNumber_dp(5, 2, 4));
         System.out.println("6 ?= " + nthMagicalNumber_dp(4, 2, 3));
+
+        System.out.println("10 ?= " + nthMagicalNumber_dp_opt(5, 2, 4));
+        System.out.println("6 ?= " + nthMagicalNumber_dp_opt(4, 2, 3));
     }
 }
