@@ -195,27 +195,33 @@ public class Problem279_perfectSquares {
         return ans;
     }
 
-    public static int numSquares_bfs_2(int n) {
+    // BFS Final
+    public static int numSquares_bfs_final(int n) {
         Queue<Integer> queue = new LinkedList<>();
-        Set<Integer> visited = new HashSet<>();
         queue.offer(n);
+
+        Set<Integer> visited = new HashSet<>();
         visited.add(n);
+
         int level = 0;
 
         while (!queue.isEmpty()) {
-            int size = queue.size();
             level++;
+
+            int size = queue.size();
             for (int i = 0; i < size; i++) {
-                int value = queue.poll();
-                for (int j = 1; j * j <= value; j++) {
-                    int tmp = value - j * j;
-                    if (tmp == 0) {
+                int remain = queue.poll();
+
+                for (int j = 1; j * j <= remain; j++) {
+                    int next = remain - j * j;
+
+                    if (next == 0) {
                         return level;
                     }
 
-                    if (!visited.contains(tmp)) {
-                        visited.add(tmp);
-                        queue.offer(tmp);
+                    if (!visited.contains(next)) {
+                        visited.add(next);
+                        queue.offer(next);
                     }
                 }
             }
@@ -275,9 +281,9 @@ public class Problem279_perfectSquares {
 
         System.out.println("3 ?= " + numSquares_bfs_opt(12));
 
-        System.out.println("1 ?= " + numSquares_bfs_2(1));
-        System.out.println("2 ?= " + numSquares_bfs_2(2));
-        System.out.println("2 ?= " + numSquares_bfs_2(41));
+        System.out.println("1 ?= " + numSquares_bfs_final(1));
+        System.out.println("2 ?= " + numSquares_bfs_final(2));
+        System.out.println("2 ?= " + numSquares_bfs_final(41));
 
         System.out.println("1 ?= " + numSquares_dp(1));
         System.out.println("2 ?= " + numSquares_dp(2));
