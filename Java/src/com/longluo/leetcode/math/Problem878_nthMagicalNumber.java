@@ -93,6 +93,36 @@ public class Problem878_nthMagicalNumber {
         return (int) (ans % mod);
     }
 
+    // Math Binary Search time: O(logn) space: O(1)
+    public static int nthMagicalNumber(int n, int a, int b) {
+        int mod = 1_000_000_007;
+
+        long left = Math.min(a, b);
+        long right = (long) Math.min(a, b) * n;
+
+        while (left < right) {
+            long mid = left + (right - left) / 2;
+
+            int cnt = (int) (mid / a + mid / b - mid / lcm(a, b));
+
+            if (cnt >= n) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return (int) (left % mod);
+    }
+
+    private static int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    private static int lcm(int a, int b) {
+        return a * b / gcd(a, b);
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + nthMagicalNumber_bf(1, 2, 3));
         System.out.println("6 ?= " + nthMagicalNumber_bf(4, 2, 3));
@@ -103,5 +133,8 @@ public class Problem878_nthMagicalNumber {
 
         System.out.println("10 ?= " + nthMagicalNumber_dp_opt(5, 2, 4));
         System.out.println("6 ?= " + nthMagicalNumber_dp_opt(4, 2, 3));
+
+        System.out.println("10 ?= " + nthMagicalNumber(5, 2, 4));
+        System.out.println("6 ?= " + nthMagicalNumber(4, 2, 3));
     }
 }
