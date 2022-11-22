@@ -80,12 +80,12 @@ public class Problem878_nthMagicalNumber {
 
         for (int i = 1; i <= n; i++) {
             ans = Math.min(p * a, q * b);
-            if (ans % a == 0 && ans % b == 0) {
+
+            if (ans % a == 0) {
                 p++;
-                q++;
-            } else if (ans % a == 0) {
-                p++;
-            } else {
+            }
+
+            if (ans % b == 0) {
                 q++;
             }
         }
