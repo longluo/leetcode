@@ -1,11 +1,14 @@
 package com.longluo.leetcode.string;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 /**
  * 856. Score of Parentheses
  * <p>
  * Given a balanced parentheses string s, return the score of the string.
+ * <p>
  * The score of a balanced parentheses string is based on the following rule:
  * "()" has score 1.
  * AB has score A + B, where A and B are balanced parentheses strings.
@@ -32,6 +35,7 @@ import java.util.Stack;
  */
 public class Problem856_scoreOfParentheses {
 
+    //
     public static int scoreOfParentheses(String s) {
         if (s == null || s.length() < 1) {
             return 0;
@@ -108,7 +112,31 @@ public class Problem856_scoreOfParentheses {
         return res;
     }
 
+    // Stack
     public static int scoreOfParentheses_stack(String s) {
+        int len = s.length();
+
+        int score = 0;
+        int base = 1;
+        Deque<Character> stk = new ArrayDeque<>();
+
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') {
+                stk.push(ch);
+            } else {
+                stk.pop();
+
+                if (stk.isEmpty()) {
+
+                }
+            }
+        }
+
+        return score;
+    }
+
+    public static int scoreOfParentheses_stack_opt(String s) {
         Stack<Integer> stack = new Stack<>();
         stack.push(0);
         for (char ch : s.toCharArray()) {
@@ -124,6 +152,7 @@ public class Problem856_scoreOfParentheses {
         return stack.pop();
     }
 
+    //
     public static int scoreOfParentheses_best(String s) {
         int ans = 0;
         int level = 0;
@@ -143,7 +172,37 @@ public class Problem856_scoreOfParentheses {
         return ans;
     }
 
+    // Very Clean Answer time: O(n) space: O(n)
+    public static int scoreOfParentheses_clean(String s) {
+        s = s.replace("()", "1");
+
+        int ans = 0;
+        int base = 1;
+
+        for (char ch : s.toCharArray()) {
+            switch (ch) {
+                case '(':
+                    base *= 2;
+                    break;
+
+                case ')':
+                    base /= 2;
+                    break;
+
+                case '1':
+                    ans += base;
+                    break;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
+        System.out.println("6 ?= " + scoreOfParentheses_stack("(()(()))"));
+        System.out.println("1 ?= " + scoreOfParentheses_stack("()"));
+        System.out.println("2 ?= " + scoreOfParentheses_stack("()()"));
+
         System.out.println("1 ?= " + scoreOfParentheses("()"));
         System.out.println("2 ?= " + scoreOfParentheses("(())"));
         System.out.println("4 ?= " + scoreOfParentheses("((()))"));
@@ -151,5 +210,7 @@ public class Problem856_scoreOfParentheses {
 
         System.out.println("1 ?= " + scoreOfParentheses_best("()"));
         System.out.println("2 ?= " + scoreOfParentheses_best("()()"));
+
+        System.out.println("2 ?= " + scoreOfParentheses_clean("()()"));
     }
 }
