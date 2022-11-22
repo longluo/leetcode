@@ -137,7 +137,7 @@ public class Problem792_numberOfMatchingSubsequences {
         return count;
     }
 
-    // Trie time: O(mn) space: O(n)
+    // Trie DFS time: O(mn) space: O(n)
     // AC
     public static int numMatchingSubseq_trie(String s, String[] words) {
         Trie trie = new Trie();
@@ -146,7 +146,7 @@ public class Problem792_numberOfMatchingSubsequences {
             trie.insert(word);
         }
 
-        return trie.search(s);
+        return trie.search(s, 0, trie);
     }
 
     static class Trie {
@@ -174,13 +174,6 @@ public class Problem792_numberOfMatchingSubsequences {
             curNode.cnt++;
         }
 
-        int result;
-
-        public int search(String word) {
-            search(word, 0, this);
-            return result;
-        }
-
         /**
          * 深度优先遍历
          * <p>
@@ -198,9 +191,11 @@ public class Problem792_numberOfMatchingSubsequences {
          * @param index
          * @param node
          */
-        public void search(String word, int index, Trie node) {
+        public int search(String word, int index, Trie node) {
+            int res = 0;
+
             if (node.cnt > 0) {
-                result += node.cnt;
+                res += node.cnt;
             }
 
             for (int i = 0; i < node.children.length; i++) {
@@ -209,10 +204,12 @@ public class Problem792_numberOfMatchingSubsequences {
                 if (next != null) {
                     int indexOf = word.indexOf(i + 'a', index);
                     if (indexOf != -1) {
-                        search(word, indexOf + 1, next);
+                        res += search(word, indexOf + 1, next);
                     }
                 }
             }
+
+            return res;
         }
     }
 
