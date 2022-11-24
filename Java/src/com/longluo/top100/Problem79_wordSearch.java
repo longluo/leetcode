@@ -33,19 +33,18 @@ package com.longluo.top100;
  */
 public class Problem79_wordSearch {
 
-    static boolean isOk = false;
-
     // Backtrack time: O(m*n) space: O(m*n)
     public static boolean exist(char[][] board, String word) {
-        isOk = false;
         int row = board.length;
         int col = board[0].length;
-        // boolean[][] visited = new boolean[row][col];
+
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (board[i][j] == word.charAt(0)) {
-                    backtrack(board, new boolean[row][col], i, j, 0, word);
-                    if (isOk) {
+                    boolean[][] visited = new boolean[row][col];
+                    visited[i][j] = true;
+
+                    if (backtrack(board, visited, i, j, 1, word)) {
                         return true;
                     }
                 }
@@ -55,22 +54,17 @@ public class Problem79_wordSearch {
         return false;
     }
 
-    public static void backtrack(char[][] board, boolean[][] visited, int x, int y, int idx, String word) {
-        if (idx == word.length() - 1 && board[x][y] == word.charAt(idx)) {
-            isOk = true;
-            return;
-        }
-
-        if (board[x][y] != word.charAt(idx)) {
-            return;
+    public static boolean backtrack(char[][] board, boolean[][] visited, int x, int y, int idx, String word) {
+        if (idx == word.length()) {
+            return true;
         }
 
         int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        visited[x][y] = true;
 
         for (int[] dir : dirs) {
             int nextX = x + dir[0];
             int nextY = y + dir[1];
+
             if (nextX < 0 || nextX >= board.length || nextY < 0 || nextY >= board[0].length) {
                 continue;
             }
@@ -79,10 +73,18 @@ public class Problem79_wordSearch {
                 continue;
             }
 
+            if (idx < word.length() && board[nextX][nextY] != word.charAt(idx)) {
+                continue;
+            }
+
             visited[nextX][nextY] = true;
-            backtrack(board, visited, nextX, nextY, idx + 1, word);
+            if (backtrack(board, visited, nextX, nextY, idx + 1, word)) {
+                return true;
+            }
             visited[nextX][nextY] = false;
         }
+
+        return false;
     }
 
     public static void main(String[] args) {
