@@ -47,8 +47,36 @@ public class Problem795_numSubarrayBoundedMax {
         return ans;
     }
 
+    // Two Pointers time: O(n) space: O(1)
+    public static int numSubarrayBoundedMax(int[] nums, int left, int right) {
+        int len = nums.length;
+
+        int ans = 0;
+
+        int start = 0;
+
+        int p = -1;
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > right) {
+                start = i + 1;
+            }
+
+            if (nums[i] >= left) {
+                p = i;
+            }
+
+            ans += p - start + 1;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + numSubarrayBoundedMax_bf(new int[]{2, 1, 4, 3}, 2, 3));
         System.out.println("7 ?= " + numSubarrayBoundedMax_bf(new int[]{2, 9, 2, 5, 6}, 2, 8));
+
+        System.out.println("3 ?= " + numSubarrayBoundedMax(new int[]{2, 1, 4, 3}, 2, 3));
+        System.out.println("7 ?= " + numSubarrayBoundedMax(new int[]{2, 9, 2, 5, 6}, 2, 8));
     }
 }
