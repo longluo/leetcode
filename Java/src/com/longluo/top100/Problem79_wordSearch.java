@@ -73,7 +73,7 @@ public class Problem79_wordSearch {
                 continue;
             }
 
-            if (idx < word.length() && board[nextX][nextY] != word.charAt(idx)) {
+            if (board[nextX][nextY] != word.charAt(idx)) {
                 continue;
             }
 
@@ -87,9 +87,58 @@ public class Problem79_wordSearch {
         return false;
     }
 
+    // DFS time: O(m^2n^2) space: O(mn)
+    public static boolean exist_dfs(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dfs(board, word, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean dfs(char[][] board, String word, int x, int y, int index) {
+        int m = board.length;
+        int n = board[0].length;
+
+        if (x < 0 || x >= m || y < 0 || y >= n || board[x][y] != word.charAt(index)) {
+            return false;
+        }
+
+        if (index == word.length() - 1) {
+            return true;
+        }
+
+        char temp = board[x][y];
+
+        board[x][y] = '#';
+
+        boolean result = dfs(board, word, x - 1, y, index + 1)
+                || dfs(board, word, x + 1, y, index + 1)
+                || dfs(board, word, x, y - 1, index + 1)
+                || dfs(board, word, x, y + 1, index + 1);
+
+        board[x][y] = temp;
+
+        return result;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + exist(new char[][]{{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}}, "ABCCED"));
         System.out.println("true ?= " + exist(new char[][]{{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}}, "SEE"));
         System.out.println("false ?= " + exist(new char[][]{{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}}, "ABCB"));
+        System.out.println("false ?= " + exist(new char[][]{{'A'}, {'S'}}, "B"));
+        System.out.println("true ?= " + exist(new char[][]{{'A'}, {'S'}}, "A"));
+
+        System.out.println("true ?= " + exist_dfs(new char[][]{{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}}, "ABCCED"));
+        System.out.println("true ?= " + exist_dfs(new char[][]{{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}}, "SEE"));
+        System.out.println("true ?= " + exist_dfs(new char[][]{{'A', 'B', 'C', 'S'}}, "BC"));
+        System.out.println("false ?= " + exist_dfs(new char[][]{{'A', 'B', 'C', 'S'}}, "ABD"));
     }
 }
