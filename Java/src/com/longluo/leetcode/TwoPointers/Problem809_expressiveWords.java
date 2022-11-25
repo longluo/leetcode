@@ -88,10 +88,73 @@ public class Problem809_expressiveWords {
         return ans;
     }
 
+    // Two Pointers time: O(sum) space: O(1)
+    public static int expressiveWords_opt(String s, String[] words) {
+        int ans = 0;
+
+        for (String word : words) {
+            if (check(word, s)) {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
+    private static boolean check(String s, String pattern) {
+        if (s.length() > pattern.length()) {
+            return false;
+        }
+
+        int i = 0;
+        int j = 0;
+
+        int pCnt = 1;
+        int sCnt = 1;
+
+        boolean flag = true;
+
+        while (i < pattern.length() && j < s.length()) {
+            int p = i;
+
+            while (i + 1 < pattern.length() && pattern.charAt(i) == pattern.charAt(i + 1)) {
+                i++;
+                pCnt++;
+            }
+
+            int q = j;
+            while (j + 1 < s.length() && s.charAt(j) == s.charAt(j + 1)) {
+                j++;
+                sCnt++;
+            }
+
+            if (pattern.charAt(p) == s.charAt(q)) {
+                if (pCnt >= 3 && pCnt >= sCnt) {
+                    i++;
+                    j++;
+                } else {
+                    i = p + 1;
+                    j = q + 1;
+                }
+
+                pCnt = 1;
+                sCnt = 1;
+            } else {
+                flag = false;
+                break;
+            }
+        }
+
+        return i == pattern.length() && j == s.length() && flag;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + expressiveWords("heeellooo", new String[]{"hello", "hi", "helo"}));
         System.out.println("0 ?= " + expressiveWords("heeelllooo", new String[]{"hellllo"}));
         System.out.println("1 ?= " + expressiveWords("ggkyyyyffffbbhddddrxxsiixccqqqqkmmmiiiiiivvvyyuuujccuuuhhhhwssssnnttoyuuuussggttttfeeeebbbbeedddddqq", new String[]{"ggkyyfbbhdrxxsiixccqkmmiiivvvyyujccuuuhhwsnnttoyuuussggtttfeeebbbeedddqq"}));
         System.out.println("0 ?= " + expressiveWords("abcd", new String[]{"abc"}));
+
+        System.out.println("1 ?= " + expressiveWords_opt("ggkyyyyffffbbhddddrxxsiixccqqqqkmmmiiiiiivvvyyuuujccuuuhhhhwssssnnttoyuuuussggttttfeeeebbbbeedddddqq", new String[]{"ggkyyfbbhdrxxsiixccqkmmiiivvvyyujccuuuhhwsnnttoyuuussggtttfeeebbbeedddqq"}));
+        System.out.println("0 ?= " + expressiveWords_opt("abcd", new String[]{"abc"}));
     }
 }
