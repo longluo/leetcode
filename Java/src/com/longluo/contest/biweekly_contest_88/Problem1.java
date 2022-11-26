@@ -1,5 +1,8 @@
 package com.longluo.contest.biweekly_contest_88;
 
+/**
+ * https://leetcode.cn/contest/biweekly-contest-88/
+ */
 public class Problem1 {
 
     public static boolean equalFrequency(String word) {
