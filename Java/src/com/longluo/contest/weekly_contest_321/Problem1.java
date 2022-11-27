@@ -26,9 +26,23 @@ public class Problem1 {
         return -1;
     }
 
+    // Math time: O(1) space: O(1)
+    public static int pivotInteger_fast(int n) {
+        int total = n * (n + 1) / 2;
+
+        double sqrt = Math.sqrt(total);
+
+        int x = (int) sqrt;
+
+        return sqrt == x ? x : -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + pivotInteger(1));
         System.out.println("-1 ?= " + pivotInteger(4));
         System.out.println("6 ?= " + pivotInteger(8));
+
+        System.out.println("-1 ?= " + pivotInteger_fast(4));
+        System.out.println("6 ?= " + pivotInteger_fast(8));
     }
 }
