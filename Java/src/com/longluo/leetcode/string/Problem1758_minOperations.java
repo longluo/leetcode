@@ -57,10 +57,27 @@ public class Problem1758_minOperations {
         return Math.min(zero, one);
     }
 
+    // Better time: O(n) space: O(1)
+    public static int minOperations_opt(String s) {
+        int len = s.length();
+
+        int cnt = 0;
+
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            if (ch != (char) ('0' + i % 2)) {
+                cnt++;
+            }
+        }
+
+        return Math.min(cnt, len - cnt);
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + minOperations("0100"));
         System.out.println("0 ?= " + minOperations("10"));
         System.out.println("2 ?= " + minOperations("1111"));
         System.out.println("3 ?= " + minOperations("10010100"));
+        System.out.println("3 ?= " + minOperations_opt("10010100"));
     }
 }
