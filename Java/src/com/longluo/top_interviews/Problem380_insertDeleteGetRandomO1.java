@@ -1,5 +1,9 @@
 package com.longluo.top_interviews;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 /**
  * 380. O(1) 时间插入、删除和获取随机元素
  * <p>
@@ -38,22 +42,51 @@ package com.longluo.top_interviews;
  */
 public class Problem380_insertDeleteGetRandomO1 {
 
+    // Hash time: O(1)  space: O(n)
     static class RandomizedSet {
+        Map<Integer, Integer> map;
+        int[] nums;
+        int idx;
+        Random random;
 
         public RandomizedSet() {
-
+            map = new HashMap<>();
+            nums = new int[2 * 1_00_000];
+            idx = 0;
+            random = new Random();
         }
 
         public boolean insert(int val) {
-            return false;
+            if (map.containsKey(val)) {
+                return false;
+            }
+
+            nums[idx] = val;
+            map.put(val, idx);
+            idx++;
+            return true;
         }
 
         public boolean remove(int val) {
+            if (map.containsKey(val)) {
+                int loc = map.get(val);
+                map.remove(val);
+
+                if (loc != idx - 1) {
+                    nums[loc] = nums[idx - 1];
+                    map.put(nums[idx - 1], loc);
+                }
+
+                idx--;
+                return true;
+            }
+
             return false;
         }
 
         public int getRandom() {
-            return 0;
+            int loc = random.nextInt(idx);
+            return nums[loc];
         }
     }
 
@@ -64,8 +97,24 @@ public class Problem380_insertDeleteGetRandomO1 {
      * boolean param_2 = obj.remove(val);
      * int param_3 = obj.getRandom();
      */
-
     public static void main(String[] args) {
+        RandomizedSet tst1 = new RandomizedSet();
 
+        System.out.println(tst1.insert(1));
+        System.out.println(tst1.remove(2));
+        System.out.println(tst1.insert(2));
+        System.out.println("1 ?= " + tst1.getRandom());
+        System.out.println(tst1.remove(1));
+        System.out.println(tst1.insert(2));
+        System.out.println("2 ?= " + tst1.getRandom());
+
+        RandomizedSet tst2 = new RandomizedSet();
+
+        System.out.println(tst2.remove(0));
+        System.out.println(tst2.remove(0));
+        System.out.println(tst2.insert(0));
+        System.out.println("0 ?= " + tst2.getRandom());
+        System.out.println(tst2.remove(0));
+        System.out.println(tst2.insert(0));
     }
 }
