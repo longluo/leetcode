@@ -1,9 +1,6 @@
 package com.longluo.leetcode.hash;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 1207. 独一无二的出现次数
@@ -51,9 +48,34 @@ public class Problem1207_uniqueNumberofOccurrences {
         return true;
     }
 
+    // Count time: O(n) space: O(n)
+    public static boolean uniqueOccurrences_count(int[] arr) {
+        int[] count = new int[2002];
+
+        for (int x : arr) {
+            count[x + 1000]++;
+        }
+
+        boolean[] flag = new boolean[2002];
+        for (int x : count) {
+            if (x == 0) {
+                continue;
+            }
+
+            if (flag[x]) {
+                return false;
+            }
+
+            flag[x] = true;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + uniqueOccurrences(new int[]{1, 2}));
         System.out.println("true ?= " + uniqueOccurrences(new int[]{1, 2, 2, 1, 1, 3}));
         System.out.println("true ?= " + uniqueOccurrences(new int[]{-3, 0, 1, -3, 1, 1, 1, -3, 10, 0}));
+        System.out.println("true ?= " + uniqueOccurrences_count(new int[]{-3, 0, 1, -3, 1, 1, 1, -3, 10, 0}));
     }
 }
