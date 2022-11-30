@@ -11,7 +11,7 @@ package com.longluo.leetcode.array;
  * 两个点 (x1, y1) 和 (x2, y2) 之间的 曼哈顿距离 为 abs(x1 - x2) + abs(y1 - y2) 。
  * <p>
  * 示例 1：
- * 输入：x = 3, y = 4, points = [[1,2],[3,1],[2,4],[2,3],[4,4]]
+ * 输入：x = 3, y = 4, points = [[1,2}, {3,1}, {2,4}, {2,3}, {4,4]]
  * 输出：2
  * 解释：所有点中，[3,1]，[2,4] 和 [4,4] 是有效点。有效点中，[2,4] 和 [4,4] 距离你当前位置的曼哈顿距离最小，都为 1 。[2,4] 的下标最小，所以返回 2 。
  * <p>
@@ -30,14 +30,17 @@ package com.longluo.leetcode.array;
  * points[i].length == 2
  * 1 <= x, y, ai, bi <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/
+ * https://leetcode.cn/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/
  */
 public class Problem1779_nearestValidPoint {
 
+    // Simulate time: O(n) space: O(1)
     public static int nearestValidPoint(int x, int y, int[][] points) {
-        int minDistance = Integer.MAX_VALUE;
         int len = points.length;
+
+        int minDistance = Integer.MAX_VALUE;
         int ans = -1;
+
         for (int i = 0; i < len; i++) {
             if (points[i][0] == x || points[i][1] == y) {
                 int distance = Math.abs(x - points[i][0]) + Math.abs(y - points[i][1]);
@@ -54,6 +57,8 @@ public class Problem1779_nearestValidPoint {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("1 ?= " + nearestValidPoint(3, 4, new int[][]{{3, 4}}));
+        System.out.println("-1 ?= " + nearestValidPoint(3, 4, new int[][]{{2, 3}}));
+        System.out.println("2 ?= " + nearestValidPoint(3, 4, new int[][]{{1, 2}, {3, 1}, {2, 4}, {2, 3}, {4, 4}}));
     }
 }
