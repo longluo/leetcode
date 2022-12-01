@@ -72,14 +72,22 @@ public class Problem1704_halvesAreAlike {
 
         int cnt = 0;
 
-        for (int i = 0; i < len / 2; i++) {
-            if (set.contains(s.charAt(i))) {
-                cnt++;
+//        for (int i = 0; i < len / 2; i++) {
+//            if (set.contains(s.charAt(i))) {
+//                cnt++;
+//            }
+//
+//            if (set.contains(s.charAt(i + len / 2))) {
+//                cnt--;
+//            }
+//        }
+
+        for (int i = 0; i < len; i++) {
+            if (!set.contains(s.charAt(i))) {
+                continue;
             }
 
-            if (set.contains(s.charAt(i + len / 2))) {
-                cnt--;
-            }
+            cnt += i < len / 2 ? 1 : -1;
         }
 
         return cnt == 0;
