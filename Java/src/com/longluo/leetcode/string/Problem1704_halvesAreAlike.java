@@ -60,8 +60,36 @@ public class Problem1704_halvesAreAlike {
         return cnt == 0;
     }
 
+    // HashSet time: O(n) space: O(C)
+    public static boolean halvesAreAlike_hash(String s) {
+        int len = s.length();
+
+        Set<Character> set = new HashSet<>();
+
+        for (char ch : "aeiouAEIOU".toCharArray()) {
+            set.add(ch);
+        }
+
+        int cnt = 0;
+
+        for (int i = 0; i < len / 2; i++) {
+            if (set.contains(s.charAt(i))) {
+                cnt++;
+            }
+
+            if (set.contains(s.charAt(i + len / 2))) {
+                cnt--;
+            }
+        }
+
+        return cnt == 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + halvesAreAlike("book"));
         System.out.println("false ?= " + halvesAreAlike("textbook"));
+
+        System.out.println("true ?= " + halvesAreAlike_hash("book"));
+        System.out.println("false ?= " + halvesAreAlike_hash("textbook"));
     }
 }
