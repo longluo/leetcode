@@ -68,23 +68,25 @@ public class Problem451_sortCharactersByFrequency {
     }
 
     // PriorityQueue time: O(nlogn) space: O(n)
-    // TODO: 2022/9/5
     public static String frequencySort_pq(String s) {
-        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[1] == o2[1]) {
-                    return o1[0] - o2[0];
-                }
-                return o1[1] - o2[1];
-            }
-        });
-
+        Map<Character, Integer> countMap = new HashMap<>();
         for (char ch : s.toCharArray()) {
+            countMap.put(ch, countMap.getOrDefault(ch, 0) + 1);
+        }
 
+        PriorityQueue<Character> pq = new PriorityQueue<>((a, b) -> countMap.get(b) - countMap.get(a));
+
+        for (Character ch : countMap.keySet()) {
+            pq.offer(ch);
         }
 
         StringBuilder sb = new StringBuilder();
+        while (!pq.isEmpty()) {
+            char ch = pq.poll();
+            for (int i = 0; i < countMap.get(ch); i++) {
+                sb.append(ch);
+            }
+        }
 
         return sb.toString();
     }
