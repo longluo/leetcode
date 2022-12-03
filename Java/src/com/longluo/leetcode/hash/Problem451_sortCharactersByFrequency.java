@@ -38,38 +38,29 @@ import java.util.*;
  */
 public class Problem451_sortCharactersByFrequency {
 
-    // HashMap + Sort time: O(nlogn) space: O(n)
+    // HashMap + Sort time: O(n + ClogC) space: O(C)
     public static String frequencySort(String s) {
         if (s == null || s.length() <= 2) {
             return s;
         }
 
-        Map<Character, Integer> freqMap = new HashMap<>();
+        Map<Character, Integer> countMap = new HashMap<>();
         for (char ch : s.toCharArray()) {
-            if (freqMap.containsKey(ch)) {
-                freqMap.put(ch, freqMap.get(ch) + 1);
-            } else {
-                freqMap.put(ch, 1);
-            }
+            countMap.put(ch, countMap.getOrDefault(ch, 0) + 1);
         }
 
-        int[][] freqArray = new int[freqMap.size()][2];
+        List<int[]> freqList = new ArrayList<>();
 
-        int idx = 0;
-        for (Map.Entry<Character, Integer> entry : freqMap.entrySet()) {
-            char ch = entry.getKey();
-            int cnt = entry.getValue();
-            freqArray[idx][0] = (int) ch;
-            freqArray[idx][1] = cnt;
-            idx++;
+        for (Map.Entry<Character, Integer> entry : countMap.entrySet()) {
+            freqList.add(new int[]{entry.getKey(), entry.getValue()});
         }
 
-        Arrays.sort(freqArray, (o1, o2) -> o2[1] - o1[1]);
+        Collections.sort(freqList, (a, b) -> b[1] - a[1]);
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < freqMap.size(); i++) {
-            for (int j = 0; j < freqArray[i][1]; j++) {
-                sb.append((char) freqArray[i][0]);
+        for (int[] x : freqList) {
+            for (int i = 0; i < x[1]; i++) {
+                sb.append((char) x[0]);
             }
         }
 
@@ -77,7 +68,7 @@ public class Problem451_sortCharactersByFrequency {
     }
 
     // PriorityQueue time: O(nlogn) space: O(n)
-    // TODO: 2022/9/5  
+    // TODO: 2022/9/5
     public static String frequencySort_pq(String s) {
         PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<>() {
             @Override
