@@ -9,6 +9,43 @@ package com.longluo.contest.biweekly_contest_77;
  */
 public class Problem2 {
 
+    // BF time: O(n^2) space: O(1)
+    // TLE
+    public static int minimumAverageDifference_bf(int[] nums) {
+        int len = nums.length;
+        if (len <= 1) {
+            return 0;
+        }
+
+        int ans = 0;
+        long minDiff = Integer.MAX_VALUE;
+        for (int i = 0; i < len; i++) {
+            long leftSum = 0;
+            for (int j = 0; j <= i; j++) {
+                leftSum += nums[j];
+            }
+
+            long rightSum = 0;
+            for (int j = i + 1; j < len; j++) {
+                rightSum += nums[j];
+            }
+
+            long diff = 0;
+            if (i == len - 1) {
+                diff = leftSum / len;
+            } else {
+                diff = Math.abs(leftSum / (i + 1) - rightSum / (len - i - 1));
+            }
+
+            if (diff < minDiff) {
+                ans = i;
+                minDiff = diff;
+            }
+        }
+
+        return ans;
+    }
+
     public static int minimumAverageDifference(int[] nums) {
         int len = nums.length;
         if (len <= 1) {
@@ -45,5 +82,6 @@ public class Problem2 {
         System.out.println("0 ?= " + minimumAverageDifference(new int[]{0}));
         System.out.println("0 ?= " + minimumAverageDifference(new int[]{1}));
         System.out.println("3 ?= " + minimumAverageDifference(new int[]{2, 5, 3, 9, 5, 3}));
+        System.out.println("3 ?= " + minimumAverageDifference_bf(new int[]{2, 5, 3, 9, 5, 3}));
     }
 }
