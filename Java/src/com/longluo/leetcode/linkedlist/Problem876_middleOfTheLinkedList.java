@@ -3,6 +3,9 @@ package com.longluo.leetcode.linkedlist;
 import com.longluo.datastructure.ListNode;
 import com.longluo.datastructure.LinkedListNodeUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 876. 链表的中间结点
  * <p>
@@ -24,42 +27,42 @@ import com.longluo.datastructure.LinkedListNodeUtils;
  * 提示：
  * 给定链表的结点数介于 1 和 100 之间
  * <p>
- * https://leetcode-cn.com/problems/middle-of-the-linked-list/
+ * https://leetcode.cn/problems/middle-of-the-linked-list/
  */
 public class Problem876_middleOfTheLinkedList {
 
     // BF time: O(n) space: O(n)
     public static ListNode middleNode_bf_store(ListNode head) {
-        ListNode[] arr = new ListNode[100];
-        int n = 0;
+        List<ListNode> nodeList = new ArrayList<>();
         while (head != null) {
-            arr[n++] = head;
+            nodeList.add(head);
             head = head.next;
         }
 
-        return arr[n / 2];
+        return nodeList.get(nodeList.size() / 2);
     }
 
-    // BF time: O(2*n) space: O(n)
+    // BF time: O(n) space: O(1)
     public static ListNode middleNode_bf_scan(ListNode head) {
-        int n = 0;
-        ListNode cur = head;
-        while (cur != null) {
-            n++;
-            cur = cur.next;
+        int cnt = 0;
+
+        ListNode curNode = head;
+        while (curNode != null) {
+            cnt++;
+            curNode = curNode.next;
         }
 
         int k = 0;
-        cur = head;
-        while (k < n / 2) {
+        curNode = head;
+        while (k < cnt / 2) {
             k++;
-            cur = cur.next;
+            curNode = curNode.next;
         }
 
-        return cur;
+        return curNode;
     }
 
-    // Two Pointers time: O(2*n) space: O(1)
+    // Two Pointers time: O(n) space: O(1)
     public static ListNode middleNode_tp(ListNode head) {
         if (head == null || head.next == null) {
             return head;
