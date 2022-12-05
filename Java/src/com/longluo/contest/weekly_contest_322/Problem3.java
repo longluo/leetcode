@@ -1,38 +1,67 @@
 package com.longluo.contest.weekly_contest_322;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * https://leetcode.cn/contest/weekly-contest-322
  */
+
+/**
+ * https://leetcode.cn/problems/minimum-score-of-a-path-between-two-cities/
+ */
 public class Problem3 {
 
+    // Union Find time: O(n) space: O(n)
     public static int minScore(int n, int[][] roads) {
-        int[] parents = new int[n + 1];
+        List<int[]>[] graph = new List[n + 1];
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 0; i <= n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int[] edge : roads) {
+            graph[edge[0]].add(new int[]{edge[1], edge[2]});
+            graph[edge[1]].add(new int[]{edge[0], edge[2]});
+        }
+
+        int[] parents = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
             parents[i] = i;
         }
 
         for (int[] edge : roads) {
-            int u = edge[0];
-            int v = edge[1];
-            int weight = edge[2];
+            union(parents, edge[0], edge[1]);
         }
 
+        int ans = Integer.MAX_VALUE;
+        for (int i = 1; i <= n; i++) {
+            if (find(parents, i) == 1 && graph[i].size() > 0) {
+                graph[i].sort(Comparator.comparingInt(a -> a[1]));
+                ans = Math.min(ans, graph[i].get(0)[1]);
+            }
+        }
 
-        return 0;
+        return ans;
     }
 
-    private static int find(int x) {
-        return 0;
+    private static int find(int[] parents, int x) {
+        while (x != parents[x]) {
+            x = parents[x];
+            parents[x] = parents[parents[x]];
+        }
+
+        return x;
     }
 
-    private static void union(int x, int y) {
+    private static void union(int[] parents, int x, int y) {
+        int rootX = find(parents, x);
+        int rootY = find(parents, y);
 
+        if (rootX <= rootY) {
+            parents[rootY] = rootX;
+        } else {
+            parents[rootX] = rootY;
+        }
     }
 
     // BFS time: O(n) space: O(n)
