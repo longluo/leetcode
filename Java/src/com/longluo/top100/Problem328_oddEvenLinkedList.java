@@ -90,9 +90,32 @@ public class Problem328_oddEvenLinkedList {
         return head;
     }
 
+    // Better time: O(n) space: O(1)
+    public static ListNode oddEvenList_opt(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+
+        ListNode evenHead = head.next;
+
+        ListNode pOdd = head;
+        ListNode pEven = evenHead;
+
+        while (pEven != null && pEven.next != null) {
+            pOdd.next = pEven.next;
+            pOdd = pOdd.next;
+            pEven.next = pOdd.next;
+            pEven = pEven.next;
+        }
+
+        pOdd.next = evenHead;
+        return head;
+    }
+
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
-//        System.out.println(LinkedListNodeUtils.printLinkedList(oddEvenList_bf(tst1)));
+        LinkedListNodeUtils.printLinkedList(oddEvenList_bf(tst1));
         LinkedListNodeUtils.printLinkedList(oddEvenList(tst1));
+        LinkedListNodeUtils.printLinkedList(oddEvenList_opt(tst1));
     }
 }
