@@ -56,7 +56,6 @@ public class Problem328_oddEvenLinkedList {
         }
 
         pNode.next = null;
-
         return head;
     }
 
@@ -66,22 +65,34 @@ public class Problem328_oddEvenLinkedList {
             return head;
         }
 
-        ListNode pNode = head;
         ListNode pOdd = head;
         ListNode pEven = head.next;
+        ListNode evenHead = pEven;
 
-        int len = 0;
+        ListNode pNode = pEven.next;
+        boolean isOdd = true;
+
         while (pNode != null) {
-            len++;
+            if (isOdd) {
+                pOdd.next = pNode;
+                pOdd = pOdd.next;
+            } else {
+                pEven.next = pNode;
+                pEven = pEven.next;
+            }
+
             pNode = pNode.next;
+            isOdd = !isOdd;
         }
 
+        pOdd.next = evenHead;
+        pEven.next = null;
         return head;
     }
 
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{1, 2, 3, 4, 5});
-        System.out.println(LinkedListNodeUtils.printLinkedList(oddEvenList_bf(tst1)));
-        System.out.println(LinkedListNodeUtils.printLinkedList(oddEvenList(tst1)));
+//        System.out.println(LinkedListNodeUtils.printLinkedList(oddEvenList_bf(tst1)));
+        LinkedListNodeUtils.printLinkedList(oddEvenList(tst1));
     }
 }
