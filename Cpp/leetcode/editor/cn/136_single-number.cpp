@@ -28,10 +28,21 @@ using namespace std;
 class Solution {
 public:
     // XOR time: O(n) space: O(1)
-    int singleNumber(vector<int> &nums) {
+    int singleNumber_xor(vector<int> &nums) {
         int ans = 0;
         for (auto x : nums) {
             ans = ans ^ x;
+        }
+
+        return ans;
+    }
+
+    // HashMap time: O(n) space: O(1)
+    int singleNumber_hash(vector<int> &nums) {
+        int ans = 0;
+        unordered_map<int, int> freqMap;
+        for (auto x : nums) {
+            freqMap[x]++;
         }
 
         return ans;
@@ -43,5 +54,6 @@ public:
 int main() {
     Solution s;
     vector<int> data{2, 2, 1};
-    cout << "2 ?= " << s.singleNumber(data) << endl;
+    cout << "1 ?= " << s.singleNumber_xor(data) << endl;
+    cout << "1 ?= " << s.singleNumber_hash(data) << endl;
 }
