@@ -60,58 +60,62 @@ public class Problem938_rangeSumOfBST {
         inOrder(root.right, numsList);
     }
 
-    public static int rangeSumBST(TreeNode root, int low, int high) {
+    // BFS time: O(n) space: O(n)
+    public static int rangeSumBST_bfs(TreeNode root, int low, int high) {
         if (root == null) {
             return 0;
         }
 
         int sum = 0;
+
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
+
         while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
+            TreeNode curNode = queue.poll();
 
-            if (node.val >= low && node.val <= high) {
-                sum += node.val;
+            if (curNode.val >= low && curNode.val <= high) {
+                sum += curNode.val;
             }
 
-            if (node.left != null && node.val >= low) {
-                queue.offer(node.left);
+            if (curNode.left != null && curNode.val >= low) {
+                queue.offer(curNode.left);
             }
 
-            if (node.right != null && node.val <= high) {
-                queue.offer(node.right);
+            if (curNode.right != null && curNode.val <= high) {
+                queue.offer(curNode.right);
             }
         }
 
         return sum;
     }
 
-    public static int rangeSumBST_rec(TreeNode root, int low, int high) {
+    // Recursion time: O(n) space: O(n)
+    public static int rangeSumBST(TreeNode root, int low, int high) {
         if (root == null) {
             return 0;
         }
 
         if (root.val > high) {
-            return rangeSumBST_rec(root.left, low, high);
+            return rangeSumBST(root.left, low, high);
         }
 
         if (root.val < low) {
-            return rangeSumBST_rec(root.right, low, high);
+            return rangeSumBST(root.right, low, high);
         }
 
-        return root.val + rangeSumBST_rec(root.left, low, high) + rangeSumBST_rec(root.right, low, high);
+        return root.val + rangeSumBST(root.left, low, high) + rangeSumBST(root.right, low, high);
     }
 
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{10, 5, 15, 3, 7, null, 18});
         System.out.println("32 ?= " + rangeSumBST_bf(tst1, 7, 15));
+        System.out.println("32 ?= " + rangeSumBST_bfs(tst1, 7, 15));
         System.out.println("32 ?= " + rangeSumBST(tst1, 7, 15));
-        System.out.println("32 ?= " + rangeSumBST_rec(tst1, 7, 15));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{10, 5, 15, 3, 7, 13, 18, 1, null, 6});
         System.out.println("23 ?= " + rangeSumBST_bf(tst2, 6, 10));
+        System.out.println("23 ?= " + rangeSumBST_bfs(tst2, 6, 10));
         System.out.println("23 ?= " + rangeSumBST(tst2, 6, 10));
-        System.out.println("23 ?= " + rangeSumBST_rec(tst2, 6, 10));
     }
 }
