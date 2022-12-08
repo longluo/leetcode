@@ -49,9 +49,22 @@ public class Problem1812_squareIsWhite {
         return board[7 - (coordinates.charAt(0) - 'a')][coordinates.charAt(1) - '1'] > 0;
     }
 
+    // Math time: O(1) space: O(1)
+    public static boolean squareIsWhite_opt(String coordinates) {
+        int row = coordinates.charAt(1) - '1';
+        int col = coordinates.charAt(0) - 'a';
+
+        if (row % 2 == 0) {
+            return col % 2 != 0;
+        } else {
+            return col % 2 == 0;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + squareIsWhite("a1"));
         System.out.println("true ?= " + squareIsWhite("h3"));
         System.out.println("false ?= " + squareIsWhite("c7"));
+        System.out.println("false ?= " + squareIsWhite_opt("c7"));
     }
 }
