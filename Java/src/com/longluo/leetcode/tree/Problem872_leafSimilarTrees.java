@@ -39,10 +39,11 @@ import java.util.Stack;
  * 给定的两棵树可能会有 1 到 200 个结点。
  * 给定的两棵树上的值介于 0 到 200 之间。
  * <p>
- * https://leetcode-cn.com/problems/leaf-similar-trees/
+ * https://leetcode.cn/problems/leaf-similar-trees/
  */
 public class Problem872_leafSimilarTrees {
 
+    // DFS time: O(m+n) space: O(m+n)
     public static boolean leafSimilar(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null) {
             return true;
@@ -50,23 +51,11 @@ public class Problem872_leafSimilarTrees {
 
         List<Integer> leafList1 = new ArrayList<>();
         dfs(root1, leafList1);
+
         List<Integer> leafList2 = new ArrayList<>();
         dfs(root2, leafList2);
 
-        int len1 = leafList1.size();
-        int len2 = leafList2.size();
-
-        if (len1 != len2) {
-            return false;
-        }
-
-        for (int i = 0; i < len1; i++) {
-            if (leafList1.get(i) != leafList2.get(i)) {
-                return false;
-            }
-        }
-
-        return true;
+        return leafList1.equals(leafList2);
     }
 
     public static void dfs(TreeNode root, List<Integer> leafList) {
@@ -79,56 +68,36 @@ public class Problem872_leafSimilarTrees {
             return;
         }
 
-        if (root.left != null && root.right == null) {
-            dfs(root.left, leafList);
-            return;
-        }
-
-        if (root.left == null && root.right != null) {
-            dfs(root.right, leafList);
-            return;
-        }
-
         dfs(root.left, leafList);
         dfs(root.right, leafList);
     }
 
-    public static boolean leafSimilar_2(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return true;
-        }
+    // Stack time: O(m+n) space: O(m+n)
+    public static boolean leafSimilar_iterate(TreeNode root1, TreeNode root2) {
+        List<Integer> seq1 = new ArrayList<>();
+        List<Integer> seq2 = new ArrayList<>();
 
-        List<Integer> leaf1 = new ArrayList<>();
-        List<Integer> leaf2 = new ArrayList<>();
+        inOrder(root1, seq1);
+        inOrder(root2, seq2);
 
-        process(root1, leaf1);
-        process(root2, leaf2);
-
-        if (leaf1.size() == leaf2.size()) {
-            for (int i = 0; i < leaf1.size(); i++) {
-                if (leaf1.get(i) != leaf2.get(i)) {
-                    return false;
-                }
-            }
-        } else {
-            return false;
-        }
-
-        return true;
+        return seq1.equals(seq2);
     }
 
-    public static void process(TreeNode root, List<Integer> list) {
-        Stack<TreeNode> st = new Stack<>();
-        while (root != null || !st.empty()) {
+    public static void inOrder(TreeNode root, List<Integer> list) {
+        Stack<TreeNode> stk = new Stack<>();
+
+        while (root != null || !stk.empty()) {
             while (root != null) {
-                st.push(root);
+                stk.push(root);
                 root = root.left;
             }
 
-            root = st.pop();
+            root = stk.pop();
+
             if (root.left == null && root.right == null) {
                 list.add(root.val);
             }
+
             root = root.right;
         }
     }
@@ -137,31 +106,31 @@ public class Problem872_leafSimilarTrees {
         TreeNode treeNode1 = TreeUtils.constructTree(new Integer[]{3, 5, 1, 6, 2, 9, 8, null, null, 7, 4});
         TreeNode treeNode2 = TreeUtils.constructTree(new Integer[]{3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8});
         System.out.println("true ?= " + leafSimilar(treeNode1, treeNode2));
-        System.out.println("true ?= " + leafSimilar_2(treeNode1, treeNode2));
+        System.out.println("true ?= " + leafSimilar_iterate(treeNode1, treeNode2));
 
         TreeNode treeNode3 = TreeUtils.constructTree(new Integer[]{1});
         TreeNode treeNode4 = TreeUtils.constructTree(new Integer[]{1});
         System.out.println("true ?= " + leafSimilar(treeNode3, treeNode4));
-        System.out.println("true ?= " + leafSimilar_2(treeNode3, treeNode4));
+        System.out.println("true ?= " + leafSimilar_iterate(treeNode3, treeNode4));
 
         TreeNode treeNode5 = TreeUtils.constructTree(new Integer[]{1});
         TreeNode treeNode6 = TreeUtils.constructTree(new Integer[]{2});
         System.out.println("false ?= " + leafSimilar(treeNode5, treeNode6));
-        System.out.println("false ?= " + leafSimilar_2(treeNode5, treeNode6));
+        System.out.println("false ?= " + leafSimilar_iterate(treeNode5, treeNode6));
 
         TreeNode treeNode7 = TreeUtils.constructTree(new Integer[]{1, 2});
         TreeNode treeNode8 = TreeUtils.constructTree(new Integer[]{2, 2});
         System.out.println("true ?= " + leafSimilar(treeNode7, treeNode8));
-        System.out.println("true ?= " + leafSimilar_2(treeNode7, treeNode8));
+        System.out.println("true ?= " + leafSimilar_iterate(treeNode7, treeNode8));
 
         TreeNode treeNode9 = TreeUtils.constructTree(new Integer[]{1, 2, 3});
         TreeNode treeNode10 = TreeUtils.constructTree(new Integer[]{1, 3, 2});
         System.out.println("false ?= " + leafSimilar(treeNode9, treeNode10));
-        System.out.println("false ?= " + leafSimilar_2(treeNode9, treeNode10));
+        System.out.println("false ?= " + leafSimilar_iterate(treeNode9, treeNode10));
 
         TreeNode treeNode11 = TreeUtils.constructTree(new Integer[]{3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 11, null, null, 8, 10});
         TreeNode treeNode12 = TreeUtils.constructTree(new Integer[]{3, 5, 1, 6, 2, 9, 8, null, null, 7, 4});
         System.out.println("false ?= " + leafSimilar(treeNode11, treeNode12));
-        System.out.println("false ?= " + leafSimilar_2(treeNode11, treeNode12));
+        System.out.println("false ?= " + leafSimilar_iterate(treeNode11, treeNode12));
     }
 }
