@@ -55,8 +55,8 @@ public class Problem841_keysAndRooms {
         while (!queue.isEmpty()) {
             int key = queue.poll();
             visited[key] = true;
-            List<Integer> roomKeys = rooms.get(key);
 
+            List<Integer> roomKeys = rooms.get(key);
             for (int x : roomKeys) {
                 if (!visited[x]) {
                     queue.offer(x);
@@ -106,6 +106,24 @@ public class Problem841_keysAndRooms {
     }
 
     public static void main(String[] args) {
+        List<List<Integer>> tst1 = new ArrayList<>();
 
+        List<Integer> r1 = new ArrayList<>();
+        r1.add(1);
+
+        List<Integer> r2 = new ArrayList<>();
+        r2.add(2);
+
+        List<Integer> r3 = new ArrayList<>();
+        r3.add(3);
+
+        List<Integer> r4 = new ArrayList<>();
+
+        tst1.add(r1);
+        tst1.add(r2);
+        tst1.add(r3);
+        tst1.add(r4);
+
+        System.out.println("true ?= " + canVisitAllRooms(tst1));
     }
 }
