@@ -47,6 +47,7 @@ package com.longluo.leetcode.string;
  */
 public class Problem2011_FinalValueofVariableAfterPerformingOperations {
 
+    // Simulate time: O(n) space: O(1)
     public static int finalValueAfterOperations(String[] operations) {
         int ans = 0;
 
@@ -61,8 +62,24 @@ public class Problem2011_FinalValueofVariableAfterPerformingOperations {
         return ans;
     }
 
+    // Simulate Opt time: O(n) space: O(1)
+    public static int finalValueAfterOperations_opt(String[] operations) {
+        int ans = 0;
+
+        for (String op : operations) {
+            if ((op.charAt(0) == 'X' && op.charAt(1) == '-') || op.charAt(0) == '-') {
+                ans--;
+            } else {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + finalValueAfterOperations(new String[]{"--X", "X++", "X++"}));
         System.out.println("3 ?= " + finalValueAfterOperations(new String[]{"++X", "++X", "X++"}));
+        System.out.println("3 ?= " + finalValueAfterOperations_opt(new String[]{"++X", "++X", "X++"}));
     }
 }
