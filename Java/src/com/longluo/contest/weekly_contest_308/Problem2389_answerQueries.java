@@ -3,7 +3,7 @@ package com.longluo.contest.weekly_contest_308;
 import java.util.Arrays;
 
 /**
- * 6160. 和有限的最长子序列
+ * 2389. 和有限的最长子序列
  * <p>
  * 给你一个长度为 n 的整数数组 nums ，和一个长度为 m 的整数数组 queries 。
  * <p>
@@ -32,18 +32,24 @@ import java.util.Arrays;
  * <p>
  * https://leetcode.cn/problems/longest-subsequence-with-limited-sum/
  */
-public class Problem6160_answerQueries {
+public class Problem2389_answerQueries {
 
+    // Sort + BF time: O(mn) space: O(logn)
     public static int[] answerQueries(int[] nums, int[] queries) {
         int sum = Arrays.stream(nums).sum();
+
         Arrays.sort(nums);
-        int m = nums.length;
-        int len = queries.length;
-        int[] ans = new int[len];
-        for (int i = 0; i < len; i++) {
+
+        int n = nums.length;
+        int m = queries.length;
+
+        int[] ans = new int[m];
+
+        for (int i = 0; i < m; i++) {
             int max = 0;
             int subSum = sum;
-            for (int j = m - 1; j >= 0; j--) {
+
+            for (int j = n - 1; j >= 0; j--) {
                 if (subSum <= queries[i]) {
                     max = j + 1;
                     break;
