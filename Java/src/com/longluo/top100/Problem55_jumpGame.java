@@ -28,8 +28,10 @@ public class Problem55_jumpGame {
     // Brute Force time: O(n^2)  space: O(n）
     public static boolean canJump_bf(int[] nums) {
         int len = nums.length;
+
         boolean[] visited = new boolean[len];
         visited[0] = true;
+
         for (int i = 0; i < len; i++) {
             int steps = nums[i];
             if (visited[i] && steps > 0) {
