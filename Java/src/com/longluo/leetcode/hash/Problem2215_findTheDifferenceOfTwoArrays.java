@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 5268. 找出两数组的不同
+ * 2215. 找出两数组的不同
  * <p>
  * 给你两个下标从 0 开始的整数数组 nums1 和 nums2 ，请你返回一个长度为 2 的列表 answer ，其中：
  * <p>
@@ -32,27 +32,32 @@ import java.util.Set;
  * 1 <= nums1.length, nums2.length <= 1000
  * -1000 <= nums1[i], nums2[i] <= 1000
  * <p>
- * https://leetcode-cn.com/problems/find-the-difference-of-two-arrays/
+ * https://leetcode.cn/problems/find-the-difference-of-two-arrays/
  */
-public class Problem5268_findTheDifferenceOfTwoArrays {
+public class Problem2215_findTheDifferenceOfTwoArrays {
 
+    // HashSet time: O(n) space: O(n)
     public static List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
         Set<Integer> set1 = new HashSet<>();
         Set<Integer> set2 = new HashSet<>();
+
         for (int num : nums1) {
             set1.add(num);
         }
+
         for (int num : nums2) {
             set2.add(num);
         }
 
         Set<Integer> diff1 = new HashSet<>();
         Set<Integer> diff2 = new HashSet<>();
+
         for (int num : nums1) {
             if (!set2.contains(num)) {
                 diff1.add(num);
             }
         }
+
         for (int num : nums2) {
             if (!set1.contains(num)) {
                 diff2.add(num);
@@ -62,15 +67,19 @@ public class Problem5268_findTheDifferenceOfTwoArrays {
         List<List<Integer>> ans = new ArrayList<>();
         ans.add(new ArrayList<>(diff1));
         ans.add(new ArrayList<>(diff2));
+
         return ans;
     }
 
+    // Opt time: O(n) space: O(n)
     public static List<List<Integer>> findDifference_opt(int[] nums1, int[] nums2) {
         Set<Integer> set1 = new HashSet<>();
         Set<Integer> set2 = new HashSet<>();
+
         for (int num : nums1) {
             set1.add(num);
         }
+
         for (int num : nums2) {
             set2.add(num);
             set1.remove(num);
@@ -83,10 +92,12 @@ public class Problem5268_findTheDifferenceOfTwoArrays {
         List<List<Integer>> ans = new ArrayList<>();
         ans.add(new ArrayList<>(set1));
         ans.add(new ArrayList<>(set2));
+
         return ans;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("[[1, 3], [4, 6]] ?= " + findDifference(new int[]{1, 2, 3}, new int[]{2, 4, 6}));
+        System.out.println("[[1, 3], [4, 6]] ?= " + findDifference_opt(new int[]{1, 2, 3}, new int[]{2, 4, 6}));
     }
 }
