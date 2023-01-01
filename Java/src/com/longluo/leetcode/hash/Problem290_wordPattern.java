@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * 290. 单词规律
+ * <p>
  * 给定一种规律 pattern 和一个字符串 str ，判断 str 是否遵循相同的规律。
  * <p>
  * 这里的 遵循 指完全匹配，例如， pattern 里的每个字母和字符串 str 中的每个非空单词之间存在着双向连接的对应规律。
@@ -23,29 +24,37 @@ import java.util.*;
  * 示例 4:
  * 输入: pattern = "abba", str = "dog dog dog dog"
  * 输出: false
- * 说明:
- * 你可以假设 pattern 只包含小写字母， str 包含了由单个空格分隔的小写字母。
+ * <p>
+ * 提示:
+ * 1 <= pattern.length <= 300
+ * pattern只包含小写英文字母
+ * 1 <= s.length <= 3000
+ * s只包含小写英文字母和' '
+ * s不包含 任何前导或尾随对空格
+ * s中每个单词都被 单个空格 分隔
+ * <p>
+ * https://leetcode.cn/problems/word-pattern/
  */
 public class Problem290_wordPattern {
 
     // Hash + Regex time: O(n) space: O(n)
     public static boolean wordPattern(String pattern, String s) {
-        Map<Character, String> wordMap = new HashMap<>();
-        String[] words = s.split("\\ ");
+        Map<Character, String> map = new HashMap<>();
+
+        String[] words = s.split("\\s+");
+
         if (pattern.length() != words.length) {
             return false;
         }
 
         for (int i = 0; i < words.length; i++) {
-            if (wordMap.containsKey(pattern.charAt(i))) {
-                if (wordMap.get(pattern.charAt(i)).equals(words[i])) {
-                    continue;
-                } else {
+            if (map.containsKey(pattern.charAt(i))) {
+                if (!map.get(pattern.charAt(i)).equals(words[i])) {
                     return false;
                 }
             } else {
-                if (!wordMap.containsValue(words[i])) {
-                    wordMap.put(pattern.charAt(i), words[i]);
+                if (!map.containsValue(words[i])) {
+                    map.put(pattern.charAt(i), words[i]);
                 } else {
                     return false;
                 }
