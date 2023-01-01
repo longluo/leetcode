@@ -52,8 +52,24 @@ public class Problem2351_firstLetterToAppearTwice {
         return 'a';
     }
 
+    // Count time: O(n) space: O(C)
+    public static char repeatedCharacter_cnt(String s) {
+        int[] cnt = new int[26];
+
+        for (char ch : s.toCharArray()) {
+            if (cnt[ch - 'a'] > 0) {
+                return ch;
+            } else {
+                cnt[ch - 'a']++;
+            }
+        }
+
+        return 'a';
+    }
+
     public static void main(String[] args) {
         System.out.println("d ?= " + repeatedCharacter("abcdd"));
         System.out.println("c ?= " + repeatedCharacter("abccbaacz"));
+        System.out.println("c ?= " + repeatedCharacter_cnt("abccbaacz"));
     }
 }
