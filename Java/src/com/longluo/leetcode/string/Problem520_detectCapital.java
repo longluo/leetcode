@@ -22,10 +22,11 @@ package com.longluo.leetcode.string;
  * 1 <= word.length <= 100
  * word 由小写和大写英文字母组成
  * <p>
- * https://leetcode-cn.com/problems/detect-capital/
+ * https://leetcode.cn/problems/detect-capital/
  */
 public class Problem520_detectCapital {
 
+    //
     public static boolean detectCapitalUse(String word) {
         if (word == null || word.length() <= 1) {
             return true;
@@ -57,7 +58,7 @@ public class Problem520_detectCapital {
         return false;
     }
 
-    public static boolean detectCapitalUse_1(String word) {
+    public static boolean detectCapitalUse_best(String word) {
         if (word.length() >= 2 && Character.isLowerCase(word.charAt(0)) && Character.isUpperCase(word.charAt(1))) {
             return false;
         }
@@ -72,6 +73,38 @@ public class Problem520_detectCapital {
         return true;
     }
 
+    // Simulate time: O(n) space: O(1)
+    public static boolean detectCapitalUse_opt(String word) {
+        boolean isAllCapital = true;
+        boolean firstCapital = true;
+        boolean allLowercase = true;
+
+        for (char ch : word.toCharArray()) {
+            if (Character.isUpperCase(ch)) {
+                allLowercase = false;
+                break;
+            }
+        }
+
+        for (char ch : word.toCharArray()) {
+            if (Character.isLowerCase(ch)) {
+                isAllCapital = false;
+                break;
+            }
+        }
+
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+
+            if ((i == 0 && Character.isLowerCase(ch)) || (i > 0 && Character.isUpperCase(ch))) {
+                firstCapital = false;
+                break;
+            }
+        }
+
+        return isAllCapital || firstCapital || allLowercase;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + detectCapitalUse("USA"));
         System.out.println("true ?= " + detectCapitalUse("GG"));
@@ -79,5 +112,10 @@ public class Problem520_detectCapital {
         System.out.println("false ?= " + detectCapitalUse("TtTG"));
         System.out.println("true ?= " + detectCapitalUse("Leetcode"));
         System.out.println("false ?= " + detectCapitalUse("ffffffffffffffffffffF"));
+
+        System.out.println("true ?= " + detectCapitalUse_opt("USA"));
+        System.out.println("true ?= " + detectCapitalUse_opt("Leetcode"));
+        System.out.println("true ?= " + detectCapitalUse_opt("leetcode"));
+        System.out.println("false ?= " + detectCapitalUse_opt("FlaG"));
     }
 }
