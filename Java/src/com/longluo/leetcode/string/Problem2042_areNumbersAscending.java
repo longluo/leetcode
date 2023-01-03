@@ -69,8 +69,42 @@ public class Problem2042_areNumbersAscending {
         return true;
     }
 
+    // Simulate time: O(n) space: O(1)
+    public static boolean areNumbersAscending_simu(String s) {
+        int len = s.length();
+
+        int num = 0;
+
+        for (int i = 0; i < len; ) {
+            char ch = s.charAt(i);
+            if (ch == ' ' || Character.isLetter(ch)) {
+                i++;
+                continue;
+            }
+
+            int j = i;
+            while (j < len && Character.isDigit(s.charAt(j))) {
+                j++;
+            }
+
+            int digit = Integer.parseInt(s.substring(i, j));
+            if (digit > num) {
+                num = digit;
+            } else {
+                return false;
+            }
+
+            i = j;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + areNumbersAscending("1 box has 3 blue 4 red 6 green and 12 yellow marbles"));
         System.out.println("false ?= " + areNumbersAscending("hello world 5 x 5"));
+
+        System.out.println("true ?= " + areNumbersAscending_simu("1 box has 3 blue 4 red 6 green and 12 yellow marbles"));
+        System.out.println("false ?= " + areNumbersAscending_simu("hello world 5 x 5"));
     }
 }
