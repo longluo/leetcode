@@ -36,16 +36,15 @@ import java.util.Arrays;
  */
 public class Problem1833_maximumIceCreamBars {
 
-    // TODO: 2022/7/3
+    // Sort time: O(nlogn) space: O(logn)
     public static int maxIceCream(int[] costs, int coins) {
-        if (costs == null || costs.length == 0) {
-            return 0;
-        }
+        int len = costs.length;
 
-        int n = costs.length;
         Arrays.sort(costs);
+
         int ans = 0;
-        for (int i = 0; i < n; i++) {
+
+        for (int i = 0; i < len; i++) {
             if (coins >= costs[i]) {
                 coins -= costs[i];
                 ans++;
