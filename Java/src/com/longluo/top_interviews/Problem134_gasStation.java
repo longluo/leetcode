@@ -73,9 +73,34 @@ public class Problem134_gasStation {
         return -1;
     }
 
+    // O(n) time: O(n) space: O(1)
+    public static int canCompleteCircuit_on(int[] gas, int[] cost) {
+        int len = gas.length;
+
+        int ans = -1;
+
+        int oil = 0;
+        int minSpare = Integer.MAX_VALUE;
+
+        for (int i = 0; i < len; i++) {
+            oil += gas[i] - cost[i];
+            if (oil < minSpare) {
+                minSpare = oil;
+                ans = i;
+            }
+        }
+
+        return oil >= 0 ? (ans + 1) % len : -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("3 ?= " + canCompleteCircuit(new int[]{1, 2, 3, 4, 5}, new int[]{3, 4, 5, 1, 2}));
         System.out.println("-1 ?= " + canCompleteCircuit(new int[]{2, 3, 4}, new int[]{3, 4, 3}));
         System.out.println("4 ?= " + canCompleteCircuit(new int[]{5, 1, 2, 3, 4}, new int[]{4, 4, 1, 5, 1}));
+
+        System.out.println("3 ?= " + canCompleteCircuit_on(new int[]{1, 2, 3, 4, 5}, new int[]{3, 4, 5, 1, 2}));
+        System.out.println("0 ?= " + canCompleteCircuit_on(new int[]{3, 1, 1}, new int[]{1, 2, 2}));
+        System.out.println("-1 ?= " + canCompleteCircuit_on(new int[]{2, 3, 4}, new int[]{3, 4, 3}));
+        System.out.println("4 ?= " + canCompleteCircuit_on(new int[]{5, 1, 2, 3, 4}, new int[]{4, 4, 1, 5, 1}));
     }
 }
