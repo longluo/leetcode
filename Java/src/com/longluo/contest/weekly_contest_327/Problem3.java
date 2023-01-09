@@ -157,6 +157,65 @@ public class Problem3 {
         return false;
     }
 
+    // HashMap time: O(26*26) space: O(m+n)
+    public static boolean isItPossible_hashmap_opt(String word1, String word2) {
+        Map<Character, Integer> mapA = new HashMap<>();
+        Map<Character, Integer> mapB = new HashMap<>();
+
+        for (char ch : word1.toCharArray()) {
+            mapA.put(ch, mapA.getOrDefault(ch, 0) + 1);
+        }
+
+        for (char ch : word2.toCharArray()) {
+            mapB.put(ch, mapB.getOrDefault(ch, 0) + 1);
+        }
+
+        for (char chA = 'a'; chA <= 'z'; chA++) {
+            if (!mapA.containsKey(chA)) {
+                continue;
+            }
+
+            for (char chB = 'a'; chB <= 'z'; chB++) {
+                if (!mapB.containsKey(chB)) {
+                    continue;
+                }
+
+                int cntA = mapA.size();
+                int cntB = mapB.size();
+
+                if (chA == chB) {
+                    if (cntA == cntB) {
+                        return true;
+                    }
+
+                    continue;
+                }
+
+                if (mapA.get(chA) == 1) {
+                    cntA--;
+                }
+
+                if (!mapA.containsKey(chB)) {
+                    cntA++;
+                }
+
+                if (!mapB.containsKey(chA)) {
+                    cntB++;
+                }
+
+                if (mapB.get(chB) == 1) {
+                    cntB--;
+                }
+
+                if (cntA == cntB) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + isItPossible("ac", "b"));
         System.out.println("true ?= " + isItPossible("ab", "b"));
@@ -171,5 +230,10 @@ public class Problem3 {
         System.out.println("false ?= " + isItPossible_hashmap("aa", "bcd"));
         System.out.println("true ?= " + isItPossible_hashmap("ab", "b"));
         System.out.println("false ?= " + isItPossible_hashmap("a", "bb"));
+
+        System.out.println("false ?= " + isItPossible_hashmap_opt("aa", "ab"));
+        System.out.println("false ?= " + isItPossible_hashmap_opt("aa", "bcd"));
+        System.out.println("true ?= " + isItPossible_hashmap_opt("ab", "b"));
+        System.out.println("false ?= " + isItPossible_hashmap_opt("a", "bb"));
     }
 }
