@@ -1,6 +1,10 @@
 package com.longluo.contest.biweekly_contest_79;
 
 /**
+ * https://leetcode.cn/contest/biweekly-contest-79/
+ */
+
+/**
  * 6083. 判断一个数的数字计数是否等于数位的值
  * <p>
  * 给你一个下标从 0 开始长度为 n 的字符串 num ，它只包含数字。
@@ -35,10 +39,12 @@ package com.longluo.contest.biweekly_contest_79;
  */
 public class Problem2283_checkifNumberHasEqualDigitCountandDigitValue {
 
-    // Simulate time: O(n) space: O(n)
+    // Simulate time: O(n) space: O(C)
     public static boolean digitCount(String num) {
         int len = num.length();
+
         int[] cnt = new int[10];
+
         for (int i = 0; i < len; i++) {
             char ch = num.charAt(i);
             cnt[ch - '0']++;
@@ -57,8 +63,10 @@ public class Problem2283_checkifNumberHasEqualDigitCountandDigitValue {
     //  Simulate time: O(n^2) space: O(1)
     public static boolean digitCount_bf(String num) {
         int len = num.length();
+
         for (int i = 0; i < len; i++) {
             char digit = (char) ('0' + i);
+
             int cnt = 0;
             for (char ch : num.toCharArray()) {
                 if (ch == digit) {
