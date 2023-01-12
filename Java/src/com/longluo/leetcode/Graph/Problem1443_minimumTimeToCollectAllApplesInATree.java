@@ -12,17 +12,17 @@ import java.util.*;
  * 除此以外，还有一个布尔数组 hasApple ，其中 hasApple[i] = true 代表节点 i 有一个苹果，否则，节点 i 没有苹果。
  * <p>
  * 示例 1：
- * 输入：n = 7, edges = [[0,1],[0,2],[1,4],[1,5],[2,3],[2,6]], hasApple = [false,false,true,false,true,true,false]
+ * 输入：n = 7, edges = [[0,1}, {0,2}, {1,4}, {1,5}, {2,3}, {2,6]], hasApple = [false,false,true,false,true,true,false]
  * 输出：8
  * 解释：上图展示了给定的树，其中红色节点表示有苹果。一个能收集到所有苹果的最优方案由绿色箭头表示。
  * <p>
  * 示例 2：
- * 输入：n = 7, edges = [[0,1],[0,2],[1,4],[1,5],[2,3],[2,6]], hasApple = [false,false,true,false,false,true,false]
+ * 输入：n = 7, edges = [[0,1}, {0,2}, {1,4}, {1,5}, {2,3}, {2,6]], hasApple = [false,false,true,false,false,true,false]
  * 输出：6
  * 解释：上图展示了给定的树，其中红色节点表示有苹果。一个能收集到所有苹果的最优方案由绿色箭头表示。
  * <p>
  * 示例 3：
- * 输入：n = 7, edges = [[0,1],[0,2],[1,4],[1,5],[2,3],[2,6]], hasApple = [false,false,false,false,false,false,false]
+ * 输入：n = 7, edges = [[0,1}, {0,2}, {1,4}, {1,5}, {2,3}, {2,6]], hasApple = [false,false,false,false,false,false,false]
  * 输出：0
  * <p>
  * 提示：
@@ -37,9 +37,12 @@ import java.util.*;
  */
 public class Problem1443_minimumTimeToCollectAllApplesInATree {
 
+    // Bottom-Up DFS time: O(nC) space: O(n)
     static int ans = 0;
 
     public static int minTime(int n, int[][] edges, List<Boolean> hasApple) {
+        ans = 0;
+
         Map<Integer, List<Integer>> graph = new HashMap<>();
 
         for (int[] edge : edges) {
@@ -87,7 +90,48 @@ public class Problem1443_minimumTimeToCollectAllApplesInATree {
         }
     }
 
-    public static void main(String[] args) {
+    // Top-Down DFS time: O(nC) space: O(n)
+    public static int minTime_topdown(int n, int[][] edges, List<Boolean> hasApple) {
+        Map<Integer, List<Integer>> graph = new HashMap<>();
 
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+
+            graph.computeIfAbsent(u, value -> new ArrayList<>()).add(v);
+            graph.computeIfAbsent(v, value -> new ArrayList<>()).add(u);
+        }
+
+        return dfs(graph, 0, -1, hasApple);
+    }
+
+    private static int dfs(Map<Integer, List<Integer>> graph, int curNode, int parent, List<Boolean> hasApple) {
+        if (!graph.containsKey(curNode)) {
+            return 0;
+        }
+
+        int ans = 0;
+
+        List<Integer> children = graph.get(curNode);
+
+        for (int child : children) {
+            if (child == parent) {
+                continue;
+            }
+
+            int childTime = dfs(graph, child, curNode, hasApple);
+
+            if (childTime > 0 || hasApple.get(child)) {
+                ans += childTime + 2;
+            }
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Boolean[] tst2 = {false, false, true, false, true, true, false};
+        System.out.println("8 ?= " + minTime(7, new int[][]{{0, 1}, {0, 2}, {1, 4}, {1, 5}, {2, 3}, {2, 6}}, new ArrayList<>(Arrays.asList(tst2))));
+        System.out.println("8 ?= " + minTime_topdown(7, new int[][]{{0, 1}, {0, 2}, {1, 4}, {1, 5}, {2, 3}, {2, 6}}, new ArrayList<>(Arrays.asList(tst2))));
     }
 }
