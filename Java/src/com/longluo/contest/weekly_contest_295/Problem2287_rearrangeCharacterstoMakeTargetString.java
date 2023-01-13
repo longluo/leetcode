@@ -1,7 +1,10 @@
 package com.longluo.contest.weekly_contest_295;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * 6078. 重排字符形成目标字符串
+ * 2287.重排字符形成目标字符串
  * <p>
  * 给你两个下标从 0 开始的字符串 s 和 target 。你可以从 s 取出一些字符并将其重排，得到若干新的字符串。
  * <p>
@@ -97,8 +100,32 @@ public class Problem2287_rearrangeCharacterstoMakeTargetString {
         return ans;
     }
 
+    public static int rearrangeCharacters_hash(String s, String target) {
+        if (s.length() < target.length()) {
+            return 0;
+        }
+
+        Map<Character, Integer> srcMap = new HashMap<>();
+        for (char ch : s.toCharArray()) {
+            srcMap.put(ch, srcMap.getOrDefault(ch, 0) + 1);
+        }
+
+        Map<Character, Integer> tgtMap = new HashMap<>();
+        for (char ch : target.toCharArray()) {
+            tgtMap.put(ch, tgtMap.getOrDefault(ch, 0) + 1);
+        }
+
+        int ans = s.length() / target.length();
+        for (char ch : tgtMap.keySet()) {
+            ans = Math.min(ans, srcMap.getOrDefault(ch, 0) / tgtMap.get(ch));
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + rearrangeCharacters("ilovecodingonleetcode", "code"));
         System.out.println("2 ?= " + rearrangeCharacters_opt("ilovecodingonleetcode", "code"));
+        System.out.println("2 ?= " + rearrangeCharacters_hash("ilovecodingonleetcode", "code"));
     }
 }
