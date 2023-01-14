@@ -1,7 +1,7 @@
 package com.longluo.contest.weekly_contest_308;
 
 /**
- * 6161. 从字符串中移除星号
+ * 2390. 从字符串中移除星号
  * <p>
  * 给你一个包含若干星号 * 的字符串 s 。
  * <p>
@@ -35,7 +35,7 @@ package com.longluo.contest.weekly_contest_308;
  * <p>
  * https://leetcode.cn/problems/removing-stars-from-a-string/
  */
-public class Problem6161_removeStars {
+public class Problem2390_removeStars {
 
     public static String removeStars(String s) {
         int len = s.length();
