@@ -1,4 +1,4 @@
-package com.longluo.leetcode.binarysearch;
+package com.longluo.leetcode.BinarySearch;
 
 /**
  * 1351. 统计有序矩阵中的负数
@@ -22,7 +22,7 @@ package com.longluo.leetcode.binarysearch;
  * <p>
  * 进阶：你可以设计一个时间复杂度为 O(n + m) 的解决方案吗？
  * <p>
- * https://leetcode-cn.com/problems/count-negative-numbers-in-a-sorted-matrix/
+ * https://leetcode.cn/problems/count-negative-numbers-in-a-sorted-matrix/
  */
 public class Problem1351_countNegatives {
 
