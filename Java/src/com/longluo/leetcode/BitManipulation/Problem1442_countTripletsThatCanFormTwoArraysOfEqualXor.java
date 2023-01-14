@@ -1,4 +1,4 @@
-package com.longluo.leetcode.bitmanipulation;
+package com.longluo.leetcode.BitManipulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ import java.util.List;
  * 1 <= arr.length <= 300
  * 1 <= arr[i] <= 10^8
  * <p>
- * https://leetcode-cn.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/
+ * https://leetcode.cn/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/
  */
 public class Problem1442_countTripletsThatCanFormTwoArraysOfEqualXor {
 
@@ -78,11 +78,37 @@ public class Problem1442_countTripletsThatCanFormTwoArraysOfEqualXor {
         return res;
     }
 
+    public static int countTriplets_2(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return 0;
+        }
+
+        int ans = 0;
+        int n = arr.length;
+        int[] xor = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            xor[i + 1] = xor[i] ^ arr[i];
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + countTriplets(new int[]{2, 3, 1, 6, 7}));
+        System.out.println("4 ?= " + countTriplets_2(new int[]{2, 3, 1, 6, 7}));
         System.out.println("10 ?= " + countTriplets(new int[]{1, 1, 1, 1, 1}));
+        System.out.println("10 ?= " + countTriplets_2(new int[]{1, 1, 1, 1, 1}));
         System.out.println("0 ?= " + countTriplets(new int[]{2, 3}));
+        System.out.println("0 ?= " + countTriplets_2(new int[]{2, 3}));
         System.out.println("3 ?= " + countTriplets(new int[]{1, 3, 5, 7, 9}));
+        System.out.println("3 ?= " + countTriplets_2(new int[]{1, 3, 5, 7, 9}));
         System.out.println("8 ?= " + countTriplets(new int[]{7, 11, 12, 9, 5, 2, 7, 17, 22}));
+        System.out.println("8 ?= " + countTriplets_2(new int[]{7, 11, 12, 9, 5, 2, 7, 17, 22}));
     }
 }
