@@ -1,4 +1,4 @@
-package com.longluo.leetcode.bitmanipulation;
+package com.longluo.leetcode.BitManipulation;
 
 /**
  * 1342. 将数字变成 0 的操作次数
@@ -32,7 +32,7 @@ package com.longluo.leetcode.bitmanipulation;
  * 提示：
  * 0 <= num <= 10^6
  * <p>
- * https://leetcode-cn.com/problems/number-of-steps-to-reduce-a-number-to-zero/
+ * https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-to-zero/
  */
 public class Problem1342_numberOfStepsToReduceANumberToZero {
 
@@ -54,6 +54,7 @@ public class Problem1342_numberOfStepsToReduceANumberToZero {
     // Bit
     public static int numberOfSteps_bit(int num) {
         int ans = 0;
+
         while (num > 0) {
             ans += (num > 1 ? 1 : 0) + (num & 0x01);
             num = num >> 1;
