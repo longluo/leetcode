@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 6090. 极大极小游戏
+ * 2293. 极大极小游戏
  * <p>
  * 给你一个下标从 0 开始的整数数组 nums ，其长度是 2 的幂。
  * <p>
@@ -38,7 +38,7 @@ import java.util.List;
  * <p>
  * https://leetcode.cn/problems/min-max-game/
  */
-public class Problem6090_minMaxGame {
+public class Problem2293_minMaxGame {
 
     // Simulate time: O(nlogn) space: O(n)
     public static int minMaxGame(int[] nums) {
@@ -52,7 +52,7 @@ public class Problem6090_minMaxGame {
             list.add(nums[i]);
         }
 
-        int cycle = (int) (Math.log(len) / Math.log(2)) ;
+        int cycle = (int) (Math.log(len) / Math.log(2));
         for (int i = 0; i < cycle; i++) {
             List<Integer> newList = new ArrayList<>();
             for (int j = 0; j < list.size() / 2; j++) {
@@ -69,10 +69,37 @@ public class Problem6090_minMaxGame {
         return list.get(0);
     }
 
+    // Simulate time: O(logn) space: O(n)
+    public static int minMaxGame_array(int[] nums) {
+        int len = nums.length;
+        if (len <= 1) {
+            return nums[0];
+        }
+
+        while (nums.length > 1) {
+            int n = nums.length;
+
+            int[] temp = new int[n / 2];
+
+            for (int i = 0; i < n / 2; i++) {
+                if (i % 2 == 0) {
+                    temp[i] = Math.min(nums[2 * i], nums[2 * i + 1]);
+                } else {
+                    temp[i] = Math.max(nums[2 * i], nums[2 * i + 1]);
+                }
+            }
+
+            nums = temp;
+        }
+
+        return nums[0];
+    }
+
     public static void main(String[] args) {
         System.out.println((Math.log(8) / Math.log(2)));
         System.out.println(minMaxGame(new int[]{93, 40}));
         System.out.println(minMaxGame(new int[]{70, 38, 21, 22}));
-        System.out.println(minMaxGame(new int[]{1, 3, 5, 2, 4, 8, 2, 2}));
+        System.out.println("1 ?= " + minMaxGame(new int[]{1, 3, 5, 2, 4, 8, 2, 2}));
+        System.out.println("1 ?= " + minMaxGame_array(new int[]{1, 3, 5, 2, 4, 8, 2, 2}));
     }
 }
