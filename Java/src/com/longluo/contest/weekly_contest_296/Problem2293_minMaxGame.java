@@ -95,11 +95,31 @@ public class Problem2293_minMaxGame {
         return nums[0];
     }
 
+    // Simulate time: O(n) space: O(1)
+    public static int minMaxGame_best(int[] nums) {
+        int len = nums.length;
+
+        while (len > 1) {
+            for (int i = 0; i < len / 2; i++) {
+                if (i % 2 == 0) {
+                    nums[i] = Math.min(nums[2 * i], nums[2 * i + 1]);
+                } else {
+                    nums[i] = Math.max(nums[2 * i], nums[2 * i + 1]);
+                }
+            }
+
+            len /= 2;
+        }
+
+        return nums[0];
+    }
+
     public static void main(String[] args) {
         System.out.println((Math.log(8) / Math.log(2)));
         System.out.println(minMaxGame(new int[]{93, 40}));
         System.out.println(minMaxGame(new int[]{70, 38, 21, 22}));
         System.out.println("1 ?= " + minMaxGame(new int[]{1, 3, 5, 2, 4, 8, 2, 2}));
         System.out.println("1 ?= " + minMaxGame_array(new int[]{1, 3, 5, 2, 4, 8, 2, 2}));
+        System.out.println("1 ?= " + minMaxGame_best(new int[]{1, 3, 5, 2, 4, 8, 2, 2}));
     }
 }
