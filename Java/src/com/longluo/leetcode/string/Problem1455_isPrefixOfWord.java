@@ -35,10 +35,12 @@ package com.longluo.leetcode.string;
  */
 public class Problem1455_isPrefixOfWord {
 
-    // Regex
+    // Regex time: O(n) space: O(n)
     public static int isPrefixOfWord(String sentence, String searchWord) {
-        int ans = -1;
         String[] words = sentence.split("\\s+");
+
+        int ans = -1;
+
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
             if (word.startsWith(searchWord)) {
@@ -50,7 +52,46 @@ public class Problem1455_isPrefixOfWord {
         return ans;
     }
 
+    // Simulate time: O(n) space: O(1)
+    public static int isPrefixOfWord_simu(String sentence, String searchWord) {
+        int len = sentence.length();
+
+        int idx = 1;
+
+        for (int i = 0; i < len; ) {
+            char ch = sentence.charAt(i);
+            if (ch == ' ') {
+                i++;
+                idx++;
+                continue;
+            }
+
+            if (ch != searchWord.charAt(0)) {
+                while (i < len && sentence.charAt(i) != ' ') {
+                    i++;
+                }
+
+                continue;
+            }
+
+            int j = 0;
+
+            while (i < len && j < searchWord.length() && sentence.charAt(i) == searchWord.charAt(j)) {
+                i++;
+                j++;
+            }
+
+            if (j == searchWord.length()) {
+                return idx;
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("4 ?= " + isPrefixOfWord("i love eating burger", "burg"));
+        System.out.println("4 ?= " + isPrefixOfWord_simu("i love eating burger", "burg"));
+        System.out.println("-1 ?= " + isPrefixOfWord_simu("hellohello hellohellohello", "ell"));
     }
 }
