@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 6095. 强密码检验器 II
+ * 2299. 强密码检验器 II
  * <p>
  * 如果一个密码满足以下所有条件，我们称它是一个 强 密码：
  * <p>
@@ -37,7 +37,7 @@ import java.util.Set;
  * <p>
  * https://leetcode.cn/problems/strong-password-checker-ii/
  */
-public class Problem6095_strongPasswordChecker_ii {
+public class Problem2299_strongPasswordChecker_ii {
 
     // Simulate time: O(n) space: O(1)
     public static boolean strongPasswordCheckerII(String password) {
@@ -80,7 +80,44 @@ public class Problem6095_strongPasswordChecker_ii {
         return false;
     }
 
+    // Flags time: O(n) space: O(1)
+    public static boolean strongPasswordCheckerII_opt(String password) {
+        boolean digit = false;
+        boolean lower = false;
+        boolean upper = false;
+        boolean special = false;
+
+        String specialChars = "!@#$%^&*()-+";
+
+        for (int i = 0; i < password.length(); i++) {
+            char ch = password.charAt(i);
+
+            if (i > 0 && ch == password.charAt(i - 1)) {
+                return false;
+            }
+
+            if (Character.isDigit(ch)) {
+                digit = true;
+            } else if (Character.isLowerCase(ch)) {
+                lower = true;
+            } else if (Character.isUpperCase(ch)) {
+                upper = true;
+            } else if (specialChars.indexOf(ch) >= 0) {
+                special = true;
+            }
+        }
+
+        return password.length() >= 8 && digit && lower && upper && special;
+    }
+
     public static void main(String[] args) {
+        System.out.println("true ?= " + strongPasswordCheckerII("IloveLe3tcode!"));
         System.out.println("false ?= " + strongPasswordCheckerII("1aB!"));
+        System.out.println("false ?= " + strongPasswordCheckerII("Me+You--IsMyDream"));
+
+        System.out.println("true ?= " + strongPasswordCheckerII_opt("a1A!A!A!"));
+        System.out.println("true ?= " + strongPasswordCheckerII_opt("IloveLe3tcode!"));
+        System.out.println("false ?= " + strongPasswordCheckerII_opt("1aB!"));
+        System.out.println("false ?= " + strongPasswordCheckerII_opt("Me+You--IsMyDream"));
     }
 }
