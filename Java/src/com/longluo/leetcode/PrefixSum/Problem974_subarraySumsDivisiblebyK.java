@@ -1,5 +1,8 @@
 package com.longluo.leetcode.PrefixSum;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 974. 和可被 K 整除的子数组
  * <p>
@@ -48,8 +51,33 @@ public class Problem974_subarraySumsDivisiblebyK {
         return ans;
     }
 
+    // PrefixSums time: O(n) space: O(k)
+    public static int subarraysDivByK_prefix(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+
+        int sum = 0;
+
+        for (int x : nums) {
+            sum += x;
+
+            int module = (sum % k + k) % k;
+            map.put(module, map.getOrDefault(module, 0) + 1);
+        }
+
+        int ans = 0;
+
+        for (int value : map.values()) {
+            ans += value * (value - 1) / 2;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + subarraysDivByK_bf(new int[]{5}, 9));
         System.out.println("7 ?= " + subarraysDivByK_bf(new int[]{4, 5, 0, -2, -3, 1}, 5));
+
+        System.out.println("7 ?= " + subarraysDivByK_prefix(new int[]{4, 5, 0, -2, -3, 1}, 5));
     }
 }
