@@ -75,8 +75,38 @@ public class Problem1817_findingTheUsersActiveMinutes {
         return ans;
     }
 
+    // HashMap time: O(n) space: O(n)
+    public static int[] findingUsersActiveMinutes_opt(int[][] logs, int k) {
+        Map<Integer, Set<Integer>> tasksMap = new HashMap<>();
+
+        for (int[] log : logs) {
+            int id = log[0];
+            int time = log[1];
+
+            tasksMap.putIfAbsent(id, new HashSet<>());
+            tasksMap.get(id).add(time);
+        }
+
+        Map<Integer, Integer> uamMap = new HashMap<>();
+
+        for (Set<Integer> item : tasksMap.values()) {
+            int uam = item.size();
+            uamMap.put(uam, uamMap.getOrDefault(uam, 0) + 1);
+        }
+
+        int[] ans = new int[k];
+
+        for (int i = 0; i < k; i++) {
+            ans[i] = uamMap.getOrDefault(i + 1, 0);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[0, 2, 0, 0, 0] ?= " + Arrays.toString(findingUsersActiveMinutes(new int[][]{{0, 5}, {1, 2}, {0, 2}, {0, 5}, {
+                1, 3}}, 5)));
+        System.out.println("[0, 2, 0, 0, 0] ?= " + Arrays.toString(findingUsersActiveMinutes_opt(new int[][]{{0, 5}, {1, 2}, {0, 2}, {0, 5}, {
                 1, 3}}, 5)));
     }
 }
