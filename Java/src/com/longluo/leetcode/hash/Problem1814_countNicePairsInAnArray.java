@@ -60,6 +60,27 @@ public class Problem1814_countNicePairsInAnArray {
         return ans;
     }
 
+    // HashMap + Math time: O(n) space: O(n)
+    public static int countNicePairs_opt(int[] nums) {
+        int MOD = 1_000_000_007;
+
+        Map<Integer, Integer> countMap = new HashMap<>();
+
+        for (int x : nums) {
+            int diff = x - reverse(x);
+            countMap.put(diff, countMap.getOrDefault(diff, 0) + 1);
+        }
+
+        long ans = 0;
+        for (int x : countMap.values()) {
+            long comb = (long) x * (x - 1) / 2;
+            ans += comb;
+            ans %= MOD;
+        }
+
+        return (int) ans;
+    }
+
     private static int reverse(int num) {
         int ans = 0;
 
@@ -74,5 +95,8 @@ public class Problem1814_countNicePairsInAnArray {
     public static void main(String[] args) {
         System.out.println("2 ?= " + countNicePairs(new int[]{42, 11, 1, 97}));
         System.out.println("4 ?= " + countNicePairs(new int[]{13, 10, 35, 24, 76}));
+
+        System.out.println("2 ?= " + countNicePairs_opt(new int[]{42, 11, 1, 97}));
+        System.out.println("4 ?= " + countNicePairs_opt(new int[]{13, 10, 35, 24, 76}));
     }
 }
