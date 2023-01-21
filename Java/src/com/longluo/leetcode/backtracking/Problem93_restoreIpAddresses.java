@@ -90,7 +90,7 @@ public class Problem93_restoreIpAddresses {
     }
 
     public static void main(String[] args) {
-//        System.out.println("[0,0,0,0] ?= " + restoreIpAddresses_bf("0000"));
+        System.out.println("[0,0,0,0] ?= " + restoreIpAddresses_bf("0000"));
         System.out.println("[255.255.11.135, 255.255.111.35] ?= " + restoreIpAddresses_bf("25525511135"));
     }
 }
