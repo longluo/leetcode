@@ -90,8 +90,70 @@ public class Problem1815_maximumNumberofGroupsGettingFreshDonuts {
         }
     }
 
+
+    // Backtracking time: O(n!) space: O(n!)
+    // TLE
+    static int maxHappy = 0;
+
+    public static int maxHappyGroups_opt(int batchSize, int[] groups) {
+        maxHappy = 0;
+
+        int len = groups.length;
+
+        for (int i = 0; i < len; i++) {
+            groups[i] = groups[i] % batchSize;
+        }
+
+        List<Integer> path = new ArrayList<>();
+        boolean[] visited = new boolean[len];
+
+        backtrack(path, visited, groups, batchSize);
+
+        return maxHappy;
+    }
+
+    private static void backtrack(List<Integer> path, boolean[] visited, int[] nums, int batchSize) {
+        if (path.size() == nums.length) {
+            int remain = 0;
+            int happy = 0;
+
+            for (int x : path) {
+                if (remain == 0) {
+                    happy++;
+                }
+
+                if (remain >= x) {
+                    remain -= x;
+                } else {
+                    remain = batchSize + remain - x;
+                }
+            }
+
+            maxHappy = Math.max(maxHappy, happy);
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (visited[i]) {
+                continue;
+            }
+
+            path.add(nums[i]);
+            visited[i] = true;
+
+            backtrack(path, visited, nums, batchSize);
+
+            visited[i] = false;
+            path.remove(path.size() - 1);
+        }
+    }
+
+
     public static void main(String[] args) {
-        System.out.println("4 ?= " + maxHappyGroups(4, new int[]{1, 3, 2, 5, 2, 2, 1, 6}));
         System.out.println("4 ?= " + maxHappyGroups(3, new int[]{1, 2, 3, 4, 5, 6}));
+        System.out.println("4 ?= " + maxHappyGroups(4, new int[]{1, 3, 2, 5, 2, 2, 1, 6}));
+
+        System.out.println("4 ?= " + maxHappyGroups_opt(3, new int[]{1, 2, 3, 4, 5, 6}));
+        System.out.println("4 ?= " + maxHappyGroups_opt(4, new int[]{1, 3, 2, 5, 2, 2, 1, 6}));
     }
 }
