@@ -1,6 +1,10 @@
 package com.longluo.contest.weekly_contest_308;
 
 /**
+ * https://leetcode.cn/contest/weekly-contest-308/
+ */
+
+/**
  * 2391. 收集垃圾的最少总时间
  * <p>
  * 给你一个下标从 0 开始的字符串数组 garbage ，其中 garbage[i] 表示第 i 个房子的垃圾集合。garbage[i] 只包含字符 'M' ，'P' 和 'G' ，但可能包含多个相同字符，每个字符分别表示一单位的金属、纸和玻璃。垃圾车收拾 一 单位的任何一种垃圾都需要花费 1 分钟。
@@ -54,7 +58,7 @@ package com.longluo.contest.weekly_contest_308;
  */
 public class Problem2391_garbageCollection {
 
-    // TODO: 2022/9/9  
+    // TODO: 2022/9/9
     public static int garbageCollection(String[] garbage, int[] travel) {
 
         return 0;
