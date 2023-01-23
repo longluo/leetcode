@@ -1,7 +1,7 @@
 package com.longluo.contest.weekly_contest_297;
 
 /**
- * 5259. 计算应缴税款总额
+ * 2303. 计算应缴税款总额
  * <p>
  * 给你一个下标从 0 开始的二维整数数组 brackets ，其中 brackets[i] = [upperi, percenti] ，表示第 i 个税级的上限是 upperi ，征收的税率为 percenti 。税级按上限 从低到高排序（在满足 0 < i < brackets.length 的前提下，upperi-1 < upperi）。
  * <p>
@@ -46,7 +46,7 @@ package com.longluo.contest.weekly_contest_297;
  * <p>
  * https://leetcode.cn/problems/calculate-amount-paid-in-taxes/
  */
-public class Problem5259_calculateAmountPaidinTaxes {
+public class Problem2303_calculateAmountPaidinTaxes {
 
     // Simulate time: O(n) space: O(1)
     public static double calculateTax(int[][] brackets, int income) {
@@ -72,14 +72,20 @@ public class Problem5259_calculateAmountPaidinTaxes {
     // Simulate Opt time: O(n) space: O(1)
     public static double calculateTax_opt(int[][] brackets, int income) {
         int len = brackets.length;
+
         double tax = 0;
         int prev = 0;
+
         for (int i = 0; i < len; i++) {
             int upper = brackets[i][0];
             int percent = brackets[i][1];
+
             int diff = Math.min(income, upper) - prev;
+
             prev = upper;
+
             tax += (double) diff * percent / 100;
+
             if (income < upper) {
                 break;
             }
