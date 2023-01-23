@@ -1,4 +1,4 @@
-package com.longluo.leetcode.graph;
+package com.longluo.leetcode.Graph;
 
 /**
  * 997. 找到小镇的法官
