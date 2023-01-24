@@ -1,8 +1,6 @@
 package com.longluo.leetcode.bfs;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /**
@@ -48,7 +46,7 @@ import java.util.Queue;
  */
 public class Problem909_snakesAndLadders {
 
-    // BFS
+    // BFS time: O(n^2) space: O(n^2)
     public static int snakesAndLadders(int[][] board) {
         if (board == null || board.length <= 1 || board[0].length <= 1) {
             return 0;
@@ -70,6 +68,7 @@ public class Problem909_snakesAndLadders {
             steps++;
 
             int size = queue.size();
+
             for (int i = 0; i < size; i++) {
                 int[] curPos = queue.poll();
 
@@ -103,42 +102,29 @@ public class Problem909_snakesAndLadders {
         return -1;
     }
 
-    public static List<int[]> getNextStep(int[][] board, int[] status) {
-        List<int[]> ans = new ArrayList<>();
-        int n = board.length;
-        int idx = getIndexByPos(board, status);
-        for (int i = 1; i <= 6; i++) {
-            if (idx + i > n * n) {
-                break;
-            }
-            int[] next = getPosByIndex(board, idx + i);
-            ans.add(next);
-        }
-        return ans;
-    }
-
     public static int getIndexByPos(int[][] board, int[] pos) {
         int n = board.length;
 
-        int ans = 0;
+        int x = pos[0];
+        int y = pos[1];
 
-        if (board[pos[0]][pos[1]] > 0) {
-            ans = board[pos[0]][pos[1]];
-        } else {
-            int row = n - 1 - pos[0];
-            int col = pos[1];
-            if (row % 2 == 1) {
-                col = n - 1 - col;
-            }
-            ans = row * n + col;
+        if (board[x][y] > 0) {
+            return board[x][y] + 1;
         }
 
-        return ans + 1;
+        int row = n - 1 - pos[0];
+        int col = pos[1];
+        if (row % 2 == 1) {
+            col = n - 1 - col;
+        }
+
+        return row * n + col + 1;
     }
 
     public static int[] getPosByIndex(int[][] board, int index) {
-        int[] ans = new int[2];
         int n = board.length;
+
+        int[] ans = new int[2];
 
         int row = (index - 1) / n;
         int col = (index - 1) % n;
