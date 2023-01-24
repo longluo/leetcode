@@ -39,47 +39,61 @@ import java.util.Queue;
  * 可以证明你需要至少 4 次移动才能到达第 N*N 个方格，所以答案是 4。
  * <p>
  * 提示：
- * 2 <= board.length = board[0].length <= 20
- * board[i][j] 介于 1 和 N*N 之间或者等于 -1。
- * 编号为 1 的方格上没有蛇或梯子。
- * 编号为 N*N 的方格上没有蛇或梯子。
+ * n == board.length == board[i].length
+ * 2 <= n <= 20
+ * grid[i][j] 的值是 -1 或在范围 [1, n^2] 内
+ * 编号为 1 和 n^2 的方格上没有蛇或梯子
  * <p>
  * https://leetcode-cn.com/problems/snakes-and-ladders/
  */
 public class Problem909_snakesAndLadders {
 
+    // BFS
     public static int snakesAndLadders(int[][] board) {
         if (board == null || board.length <= 1 || board[0].length <= 1) {
             return 0;
         }
 
         int n = board.length;
-        boolean[][] visited = new boolean[n][n];
-        int step = 0;
+
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{n - 1, 0});
+
+        boolean[][] visited = new boolean[n][n];
         visited[n - 1][0] = true;
+
         int[] target = getPosByIndex(board, n * n);
+
+        int steps = 0;
+
         while (!queue.isEmpty()) {
-            step++;
+            steps++;
+
             int size = queue.size();
             for (int i = 0; i < size; i++) {
-                int[] status = queue.poll();
-                if (status[0] == target[0] && status[1] == target[1]) {
-                    return step - 1;
+                int[] curPos = queue.poll();
+
+                if (curPos[0] == target[0] && curPos[1] == target[1]) {
+                    return steps - 1;
                 }
-                int index = getIndexByPos(board, status);
+
+                int index = getIndexByPos(board, curPos);
+
                 for (int j = 1; j <= 6; j++) {
                     if (index + j > n * n) {
                         continue;
                     }
+
                     int[] next = getPosByIndex(board, index + j);
+
                     if (board[next[0]][next[1]] > 0) {
                         next = getPosByIndex(board, board[next[0]][next[1]]);
                     }
+
                     if (visited[next[0]][next[1]]) {
                         continue;
                     }
+
                     visited[next[0]][next[1]] = true;
                     queue.offer(next);
                 }
@@ -105,7 +119,9 @@ public class Problem909_snakesAndLadders {
 
     public static int getIndexByPos(int[][] board, int[] pos) {
         int n = board.length;
+
         int ans = 0;
+
         if (board[pos[0]][pos[1]] > 0) {
             ans = board[pos[0]][pos[1]];
         } else {
@@ -123,49 +139,67 @@ public class Problem909_snakesAndLadders {
     public static int[] getPosByIndex(int[][] board, int index) {
         int[] ans = new int[2];
         int n = board.length;
+
         int row = (index - 1) / n;
         int col = (index - 1) % n;
+
         if (row % 2 == 1) {
             col = n - 1 - col;
         }
+
         ans[0] = n - 1 - row;
         ans[1] = col;
+
         return ans;
     }
 
+    //
     public static int snakesAndLadders_bfs(int[][] board) {
         int n = board.length;
-        boolean[] vis = new boolean[n * n + 1];
-        Queue<int[]> queue = new LinkedList<int[]>();
+
+        Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{1, 0});
+
+        boolean[] visited = new boolean[n * n + 1];
+
         while (!queue.isEmpty()) {
-            int[] p = queue.poll();
+            int[] cur = queue.poll();
+
             for (int i = 1; i <= 6; ++i) {
-                int nxt = p[0] + i;
-                if (nxt > n * n) { // 超出边界
+                int next = cur[0] + i;
+
+                if (next > n * n) {
                     break;
                 }
-                int[] rc = id2rc(nxt, n); // 得到下一步的行列
-                if (board[rc[0]][rc[1]] > 0) { // 存在蛇或梯子
-                    nxt = board[rc[0]][rc[1]];
+
+                int[] rc = id2rc(next, n);
+
+                if (board[rc[0]][rc[1]] > 0) {
+                    next = board[rc[0]][rc[1]];
                 }
-                if (nxt == n * n) { // 到达终点
-                    return p[1] + 1;
+
+                if (next == n * n) {
+                    return cur[1] + 1;
                 }
-                if (!vis[nxt]) {
-                    vis[nxt] = true;
-                    queue.offer(new int[]{nxt, p[1] + 1}); // 扩展新状态
+
+                if (!visited[next]) {
+                    visited[next] = true;
+                    queue.offer(new int[]{next, cur[1] + 1});
                 }
             }
         }
+
         return -1;
     }
 
     public static int[] id2rc(int id, int n) {
-        int r = (id - 1) / n, c = (id - 1) % n;
+        int r = (id - 1) / n;
+        int c = (id - 1) % n;
+
         if (r % 2 == 1) {
             c = n - 1 - c;
         }
+
         return new int[]{n - 1 - r, c};
     }
 
