@@ -3,7 +3,7 @@ package com.longluo.contest.weekly_contest_298;
 import java.util.*;
 
 /**
- * 5242. 兼具大小写的最好英文字母
+ * 2309. 兼具大小写的最好英文字母
  * <p>
  * 给你一个由英文字母组成的字符串 s ，请你找出并返回 s 中的 最好 英文字母。返回的字母必须为大写形式。
  * 如果不存在满足条件的字母，则返回一个空字符串。
@@ -37,7 +37,7 @@ import java.util.*;
  * <p>
  * https://leetcode.cn/problems/greatest-english-letter-in-upper-and-lower-case/
  */
-public class Problem5242_greatestLetter {
+public class Problem2309_greatestLetter {
 
     // HashSet time: O(n) space: O(n)
     public static String greatestLetter(String s) {
@@ -68,8 +68,45 @@ public class Problem5242_greatestLetter {
         return Character.toUpperCase(res.get(0)) + "";
     }
 
+    // HashSet time: O(n) space: O(n)
+    public static String greatestLetter_hash(String s) {
+        char ans = ' ';
+
+        Set<Character> seen = new HashSet<>();
+
+        for (char ch : s.toCharArray()) {
+            if (seen.contains(ch)) {
+                continue;
+            }
+
+            if (Character.isLowerCase(ch)) {
+                char upper = Character.toUpperCase(ch);
+                if (seen.contains(upper)) {
+                    if (upper > ans) {
+                        ans = upper;
+                    }
+                }
+            } else {
+                if (seen.contains(Character.toLowerCase(ch))) {
+                    if (ch > ans) {
+                        ans = ch;
+                    }
+                }
+            }
+
+            seen.add(ch);
+        }
+
+        return ans == ' ' ? "" : ans + "";
+    }
+
     public static void main(String[] args) {
         System.out.println("E ?= " + greatestLetter("lEeTcOdE"));
         System.out.println("R ?= " + greatestLetter("arRAzFif"));
+        System.out.println(" ?= " + greatestLetter("AbCdEfGhIjK"));
+
+        System.out.println("E ?= " + greatestLetter_hash("lEeTcOdE"));
+        System.out.println("R ?= " + greatestLetter_hash("arRAzFif"));
+        System.out.println(" ?= " + greatestLetter_hash("AbCdEfGhIjK"));
     }
 }
