@@ -1,7 +1,7 @@
 package com.longluo.leetcode.string;
 
 /**
- * 6104. 统计星号
+ * 2315. 统计星号
  * <p>
  * 给你一个字符串 s ，每 两个 连续竖线 '|' 为 一对 。换言之，第一个和第二个 '|' 为一对，第三个和第四个 '|' 为一对，以此类推。
  * <p>
@@ -34,13 +34,16 @@ package com.longluo.leetcode.string;
  * <p>
  * https://leetcode.cn/problems/count-asterisks/
  */
-public class Problem6104_countAsterisks {
+public class Problem2315_countAsterisks {
 
     // Simulate time: O(n) space: O(1)
     public static int countAsterisks(String s) {
         int len = s.length();
+
         int ans = 0;
+
         boolean isInPair = false;
+
         for (int i = 0; i < len; i++) {
             char ch = s.charAt(i);
             if (ch == '|') {
@@ -56,7 +59,9 @@ public class Problem6104_countAsterisks {
     // Simulate Opt time: O(n) space: O(1)
     public static int countAsterisks_opt(String s) {
         int ans = 0;
+
         boolean isInPair = false;
+
         for (char ch : s.toCharArray()) {
             if (ch == '|') {
                 isInPair = !isInPair;
@@ -68,10 +73,31 @@ public class Problem6104_countAsterisks {
         return ans;
     }
 
+    // Simulate time: O(n) space: O(1)
+    public static int countAsterisks_simu(String s) {
+        int ans = 0;
+
+        boolean countFlag = true;
+
+        for (char ch : s.toCharArray()) {
+            if (ch == '|') {
+                countFlag = !countFlag;
+            } else if (ch == '*') {
+                if (countFlag) {
+                    ans++;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + countAsterisks("l|*e*et|c**o|*de|"));
         System.out.println("5 ?= " + countAsterisks("yo|uar|e**|b|e***au|tifu|l"));
 
         System.out.println("5 ?= " + countAsterisks_opt("yo|uar|e**|b|e***au|tifu|l"));
+
+        System.out.println("5 ?= " + countAsterisks_simu("yo|uar|e**|b|e***au|tifu|l"));
     }
 }
