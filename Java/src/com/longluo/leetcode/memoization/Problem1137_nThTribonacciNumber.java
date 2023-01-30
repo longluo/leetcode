@@ -59,7 +59,8 @@ public class Problem1137_nThTribonacciNumber {
         return dp[n];
     }
 
-    public static int tribonacci_iter(int n) {
+    // DP time: O(n) space: O(1)
+    public static int tribonacci_dp_opt(int n) {
         if (n == 0) {
             return 0;
         } else if (n == 1 || n == 2) {
@@ -69,6 +70,7 @@ public class Problem1137_nThTribonacciNumber {
         int i_3 = 0;
         int i_2 = 1;
         int i_1 = 1;
+
         int ans = 0;
 
         for (int i = 3; i <= n; i++) {
@@ -81,19 +83,23 @@ public class Problem1137_nThTribonacciNumber {
         return ans;
     }
 
+    // Look Up Table time: O(C) space: O(1)
     static int[] nums = {0, 1, 1, 2, 4, 7, 13, 24, 44, 81, 149, 274, 504, 927, 1705, 3136, 5768, 10609, 19513, 35890, 66012, 121415, 223317, 410744, 755476, 1389537, 2555757, 4700770, 8646064, 15902591, 29249425, 53798080, 98950096, 181997601, 334745777, 615693474, 1132436852, 2082876103};
 
     public static int tribonacci_table(int n) {
         return nums[n];
     }
 
-    public static int tribonacci_matrix(int n) {
+    // Math time: O(logn) sapce: O(C)
+    public static int tribonacci_math(int n) {
         if (n == 0) {
             return 0;
         }
+
         if (n <= 2) {
             return 1;
         }
+
         int[][] q = {{1, 1, 1}, {1, 0, 0}, {0, 1, 0}};
         int[][] res = pow(q, n);
         return res[0][2];
@@ -123,22 +129,33 @@ public class Problem1137_nThTribonacciNumber {
     }
 
     public static void main(String[] args) {
-        System.out.println("0 ?= " + tribonacci_dp(0));
-        System.out.println("0 ?= " + tribonacci_iter(0));
-        System.out.println("1 ?= " + tribonacci_dp(1));
-        System.out.println("1 ?= " + tribonacci_iter(1));
-        System.out.println("1 ?= " + tribonacci_dp(2));
-        System.out.println("1 ?= " + tribonacci_iter(2));
-        System.out.println("2 ?= " + tribonacci_dp(3));
-        System.out.println("2 ?= " + tribonacci_iter(3));
-        System.out.println("4 ?= " + tribonacci_dp(4));
-        System.out.println("4 ?= " + tribonacci_iter(4));
-        System.out.println("1389537 ?= " + tribonacci_dp(25));
-        System.out.println("1389537 ?= " + tribonacci_iter(25));
+        System.out.println("1 ?= " + tribonacci(1));
+        System.out.println("4 ?= " + tribonacci(4));
         System.out.println("1389537 ?= " + tribonacci(25));
 
+        System.out.println("0 ?= " + tribonacci_dp(0));
+        System.out.println("1 ?= " + tribonacci_dp(1));
+        System.out.println("1 ?= " + tribonacci_dp(2));
+        System.out.println("2 ?= " + tribonacci_dp(3));
+        System.out.println("4 ?= " + tribonacci_dp(4));
+        System.out.println("1389537 ?= " + tribonacci_dp(25));
+
+        System.out.println("0 ?= " + tribonacci_dp_opt(0));
+        System.out.println("1 ?= " + tribonacci_dp_opt(1));
+        System.out.println("1 ?= " + tribonacci_dp_opt(2));
+        System.out.println("2 ?= " + tribonacci_dp_opt(3));
+        System.out.println("4 ?= " + tribonacci_dp_opt(4));
+        System.out.println("1389537 ?= " + tribonacci_dp_opt(25));
+
+        System.out.println("2 ?= " + tribonacci_table(3));
+        System.out.println("4 ?= " + tribonacci_table(4));
+        System.out.println("1389537 ?= " + tribonacci_table(25));
+
+        System.out.println("4 ?= " + tribonacci_math(4));
+        System.out.println("1389537 ?= " + tribonacci_math(25));
+
         for (int i = 0; i <= 37; i++) {
-            System.out.print("," + tribonacci_iter(i));
+            System.out.print("," + tribonacci_dp_opt(i));
         }
     }
 }
