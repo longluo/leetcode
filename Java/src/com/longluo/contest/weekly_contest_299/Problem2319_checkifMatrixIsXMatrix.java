@@ -1,7 +1,7 @@
 package com.longluo.contest.weekly_contest_299;
 
 /**
- * 6101. 判断矩阵是否是一个 X 矩阵
+ * 2319. 判断矩阵是否是一个 X 矩阵
  * <p>
  * 如果一个正方形矩阵满足下述 全部 条件，则称之为一个 X 矩阵 ：
  * <p>
@@ -30,7 +30,7 @@ package com.longluo.contest.weekly_contest_299;
  * <p>
  * https://leetcode.cn/problems/check-if-matrix-is-x-matrix/
  */
-public class Problem6101_checkifMatrixIsXMatrix {
+public class Problem2319_checkifMatrixIsXMatrix {
 
     // Simulate time: O(n^2) space: O(1)
     public static boolean checkXMatrix(int[][] grid) {
@@ -53,7 +53,23 @@ public class Problem6101_checkifMatrixIsXMatrix {
         return true;
     }
 
+    // The Logic More Clean
+    public static boolean checkXMatrix_opt(int[][] grid) {
+        int n = grid.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((grid[i][j] == 0) && (i == j || i + j == n - 1)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("false ?= " + checkXMatrix(new int[][]{{5, 7, 0}, {0, 3, 1}, {0, 5, 0}}));
+        System.out.println("false ?= " + checkXMatrix_opt(new int[][]{{5, 7, 0}, {0, 3, 1}, {0, 5, 0}}));
     }
 }
