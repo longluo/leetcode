@@ -119,6 +119,7 @@ public class Problem1137_nThTribonacciNumber {
 
     public static int[][] multiply(int[][] a, int[][] b) {
         int[][] c = new int[3][3];
+
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 c[i][j] = a[i][0] * b[0][j] + a[i][1] * b[1][j] + a[i][2] * b[2][j];
@@ -126,6 +127,17 @@ public class Problem1137_nThTribonacciNumber {
         }
 
         return c;
+    }
+
+    // DP time: O(n) space: O(1)
+    public static int tribonacci_opt(int n) {
+        int dp[] = {0, 1, 1};
+
+        for (int i = 3; i <= n; i++) {
+            dp[i % 3] = dp[0] + dp[1] + dp[2];
+        }
+
+        return dp[n % 3];
     }
 
     public static void main(String[] args) {
@@ -153,6 +165,12 @@ public class Problem1137_nThTribonacciNumber {
 
         System.out.println("4 ?= " + tribonacci_math(4));
         System.out.println("1389537 ?= " + tribonacci_math(25));
+
+        System.out.println("0 ?= " + tribonacci_opt(0));
+        System.out.println("1 ?= " + tribonacci_opt(1));
+        System.out.println("2 ?= " + tribonacci_opt(3));
+        System.out.println("4 ?= " + tribonacci_opt(4));
+        System.out.println("4 ?= " + tribonacci_opt(6));
 
         for (int i = 0; i <= 37; i++) {
             System.out.print("," + tribonacci_dp_opt(i));
