@@ -30,9 +30,10 @@ import java.util.Arrays;
  */
 public class Problem1470_shuffleTheArray {
 
-    // Simu time: O(n) space: O(n)
+    // Simulate time: O(n) space: O(n)
     public static int[] shuffle(int[] nums, int n) {
         int[] res = new int[n * 2];
+
         int j = 0;
         for (int i = 0; i < 2 * n; ) {
             res[i++] = nums[j];
@@ -46,6 +47,7 @@ public class Problem1470_shuffleTheArray {
     // Opt time: O(n) space: O(n)
     public static int[] shuffle_opt(int[] nums, int n) {
         int[] res = new int[n * 2];
+
         for (int i = 0; i < n; i++) {
             res[2 * i] = nums[i];
             res[2 * i + 1] = nums[i + n];
