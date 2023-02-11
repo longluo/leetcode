@@ -49,6 +49,7 @@ import java.util.PriorityQueue;
  */
 public class Problem2335_fillCups {
 
+    // PriorityQueue time: O(max(N)) space: O(C)
     public static int fillCups_pq(int[] amount) {
         PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
 
