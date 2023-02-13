@@ -18,14 +18,15 @@ package com.longluo.studyplan.programming_skills;
  * 提示：
  * 0 <= low <= high <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/count-odd-numbers-in-an-interval-range/
+ * https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range/
  */
 public class Problem1523_countOdds {
 
     // BF time: O(n) space: O(1)
     // TimeOut
-    public static int countOdds_bf_ot(int low, int high) {
+    public static int countOdds_bf(int low, int high) {
         int ans = 0;
+
         for (int i = low; i <= high; i++) {
             if (i % 2 == 1) {
                 ans++;
@@ -38,6 +39,7 @@ public class Problem1523_countOdds {
     // BF Optimize time: O(n / 2) space: O(1)
     public static int countOdds_bf_opt(int low, int high) {
         int ans = 0;
+
         if (low % 2 == 0) {
             low++;
         }
@@ -54,6 +56,7 @@ public class Problem1523_countOdds {
         if (low % 2 == 0) {
             low++;
         }
+
         if (high % 2 == 0) {
             high--;
         }
@@ -61,7 +64,22 @@ public class Problem1523_countOdds {
         return (high - low) / 2 + 1;
     }
 
-    public static void main(String[] args) {
+    // Math time: O(1) space: O(1)
+    public static int countOdds(int low, int high) {
+        return (high + 1) / 2 - low /2;
+    }
 
+    public static void main(String[] args) {
+        System.out.println("3 ?= " + countOdds_bf(3, 7));
+        System.out.println("1 ?= " + countOdds_bf(8, 10));
+
+        System.out.println("3 ?= " + countOdds_bf_opt(3, 7));
+        System.out.println("1 ?= " + countOdds_bf_opt(8, 10));
+
+        System.out.println("3 ?= " + countOdds_math(3, 7));
+        System.out.println("1 ?= " + countOdds_math(8, 10));
+
+        System.out.println("3 ?= " + countOdds(3, 7));
+        System.out.println("1 ?= " + countOdds(8, 10));
     }
 }
