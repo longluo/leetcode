@@ -23,13 +23,51 @@ package com.longluo.studyplan.programming_skills;
  */
 public class Problem67_addBinary {
 
+    // Simulate time: O(m+n) space: O(m+n)
+    public static String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+
+        int carry = 0;
+
+        while (i >= 0 || j >= 0) {
+            if (i >= 0 && j >= 0) {
+                int sum = (a.charAt(i) - '0') + (b.charAt(j) - '0') + carry;
+                sb.append(sum % 2);
+                carry = sum / 2;
+
+                i--;
+                j--;
+            } else if (i >= 0) {
+                int sum = (a.charAt(i) - '0') + carry;
+                sb.append(sum % 2);
+                carry = sum / 2;
+
+                i--;
+            } else {
+                int sum = (b.charAt(j) - '0') + carry;
+                sb.append(sum % 2);
+                carry = sum / 2;
+                j--;
+            }
+        }
+
+        if (carry > 0) {
+            sb.append('1');
+        }
+
+        return sb.reverse().toString();
+    }
+
     // BF API time: O(n) space: O(1)
     // The Length Too long Failed
+    // WA
     public static String addBinary_api(String a, String b) {
-        int numA = Integer.parseInt(a, 2);
-        int numB = Integer.parseInt(b, 2);
-        int ans = numA + numB;
-        return Integer.toBinaryString(ans);
+        long numA = Long.parseLong(a, 2);
+        long numB = Long.parseLong(b, 2);
+        return Long.toBinaryString(numA + numB);
     }
 
     // BF Simulate time: O(n) space: O(1)
@@ -61,5 +99,9 @@ public class Problem67_addBinary {
 
         System.out.println("100 ?= " + addBinary_simu("11", "1"));
         System.out.println("10101 ?= " + addBinary_simu("1010", "1011"));
+
+        System.out.println("100 ?= " + addBinary("11", "1"));
+        System.out.println("11110 ?= " + addBinary("1111", "1111"));
+        System.out.println("10101 ?= " + addBinary("1010", "1011"));
     }
 }
