@@ -33,9 +33,41 @@ import java.util.List;
  * num 不包含任何前导零，除了零本身
  * 1 <= k <= 10^4
  * <p>
- * https://leetcode-cn.com/problems/add-to-array-form-of-integer/
+ * https://leetcode.cn/problems/add-to-array-form-of-integer/
  */
 public class Problem989_addToArrayFormOfInteger {
+
+    // Math time: O(n) space: O(n)
+    public static List<Integer> addToArrayForm_math(int[] num, int k) {
+        int n = num.length;
+        int carry = 0;
+
+        List<Integer> ans = new ArrayList<>();
+
+        for (int i = n - 1; i >= 0; i--) {
+            int digit = k % 10;
+            k /= 10;
+
+            int sum = num[i] + digit + carry;
+            ans.add(sum % 10);
+            carry = sum / 10;
+        }
+
+        while (k > 0) {
+            int sum = k % 10 + carry;
+            ans.add(sum % 10);
+            carry = sum / 10;
+            k /= 10;
+        }
+
+        if (carry > 0) {
+            ans.add(carry);
+        }
+
+        Collections.reverse(ans);
+
+        return ans;
+    }
 
     // BF time: O(max(n, logk)) space: O(1)
     public static List<Integer> addToArrayForm(int[] num, int k) {
@@ -66,5 +98,8 @@ public class Problem989_addToArrayFormOfInteger {
         System.out.println("[1, 2, 3, 4] ?= " + addToArrayForm(new int[]{1, 2, 0, 0}, 34));
         System.out.println("[4, 5, 5] ?= " + addToArrayForm(new int[]{2, 7, 4}, 181));
         System.out.println("[1, 0, 2, 1] ?= " + addToArrayForm(new int[]{2, 1, 5}, 806));
+
+        System.out.println("[4, 5, 5] ?= " + addToArrayForm_math(new int[]{2, 7, 4}, 181));
+        System.out.println("[1, 0, 2, 1] ?= " + addToArrayForm_math(new int[]{2, 1, 5}, 806));
     }
 }
