@@ -63,9 +63,30 @@ public class Problem2341_maximumNumberOfPairsInArray {
         return ans;
     }
 
+    // HashMap Count the Odd/Even   time: O(n) space: O(n)
+    public static int[] numberOfPairs_opt(int[] nums) {
+        Map<Integer, Boolean> markMap = new HashMap<>();
+
+        int cnt = 0;
+
+        for (int x : nums) {
+            if (markMap.getOrDefault(x, true)) {
+                markMap.put(x, false);
+                cnt++;
+            } else {
+                markMap.put(x, true);
+                cnt--;
+            }
+        }
+
+        return new int[]{(nums.length - cnt) / 2, cnt};
+    }
+
     public static void main(String[] args) {
         System.out.println("[0, 1] ?= " + Arrays.toString(numberOfPairs(new int[]{0})));
         System.out.println("[1, 0] ?= " + Arrays.toString(numberOfPairs(new int[]{1, 1})));
         System.out.println("[3, 1] ?= " + Arrays.toString(numberOfPairs(new int[]{1, 3, 2, 1, 3, 2, 2})));
+
+        System.out.println("[3, 1] ?= " + Arrays.toString(numberOfPairs_opt(new int[]{1, 3, 2, 1, 3, 2, 2})));
     }
 }
