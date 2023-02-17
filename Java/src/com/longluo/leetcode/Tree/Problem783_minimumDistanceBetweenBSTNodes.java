@@ -13,7 +13,7 @@ import java.util.Queue;
  * <p>
  * 给你一个二叉搜索树的根节点 root ，返回树中任意两不同节点值之间的最小差值 。
  * <p>
- * 注意：本题与 530：https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/ 相同
+ * 注意：本题与 530：https://leetcode.cn/problems/minimum-absolute-difference-in-bst/ 相同
  * <p>
  * 示例 1：
  * 输入：root = [4,2,6,1,3]
@@ -82,6 +82,7 @@ public class Problem783_minimumDistanceBetweenBSTNodes {
         }
 
         inOrder(root.left);
+
         if (pre == -1) {
             pre = root.val;
         } else {
@@ -92,14 +93,45 @@ public class Problem783_minimumDistanceBetweenBSTNodes {
         inOrder(root.right);
     }
 
+
+    // InOrder Opt time: O(n) space: O(n)
+    public static int minDiffInBST_inorder(TreeNode root) {
+        int[] ans = new int[2];
+
+        ans[0] = -1;
+        ans[1] = Integer.MAX_VALUE;
+
+        inOrder(root, ans);
+        return ans[1];
+    }
+
+    public static void inOrder(TreeNode root, int[] res) {
+        if (root == null) {
+            return;
+        }
+
+        inOrder(root.left, res);
+
+        if (res[0] == -1) {
+            res[0] = root.val;
+        } else {
+            res[1] = Math.min(res[1], root.val - res[0]);
+            res[0] = root.val;
+        }
+
+        inOrder(root.right, res);
+    }
+
     public static void main(String[] args) {
         TreeNode tstTree1 = TreeUtils.constructTree(new Integer[]{4, 2, 6, 1, 3});
         System.out.println("1 ?= " + minDiffInBST(tstTree1));
         System.out.println("1 ?= " + minDiffInBST_bfs(tstTree1));
+        System.out.println("1 ?= " + minDiffInBST_inorder(tstTree1));
 
         TreeNode tstTree2 = TreeUtils.constructTree(new Integer[]{1, 0, 48, null, null, 12, 49});
         System.out.println("1 ?= " + minDiffInBST(tstTree2));
         System.out.println("1 ?= " + minDiffInBST_bfs(tstTree2));
+        System.out.println("1 ?= " + minDiffInBST_inorder(tstTree2));
 
         TreeNode tstTree3 = TreeUtils.constructTree(new Integer[]{90, 69, null, 49, 89, null, 52});
         System.out.println("1 ?= " + minDiffInBST(tstTree3));
