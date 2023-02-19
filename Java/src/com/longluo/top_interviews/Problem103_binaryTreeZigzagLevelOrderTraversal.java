@@ -25,7 +25,7 @@ import com.longluo.datastructure.TreeUtils;
  * [15,7]
  * ]
  * <p>
- * https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+ * https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/
  */
 public class Problem103_binaryTreeZigzagLevelOrderTraversal {
 
@@ -102,5 +102,6 @@ public class Problem103_binaryTreeZigzagLevelOrderTraversal {
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{3, 9, 20, null, null, 15, 7});
         System.out.println("[[3], [20,9], [15,7]] ?= " + ArrayUtils.print2DList(zigzagLevelOrder(tst1)));
+        System.out.println("[[3], [20,9], [15,7]] ?= " + ArrayUtils.print2DList(zigzagLevelOrder_link(tst1)));
     }
 }
