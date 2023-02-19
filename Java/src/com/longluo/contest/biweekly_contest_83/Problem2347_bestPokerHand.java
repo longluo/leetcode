@@ -6,7 +6,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 6128. 最好的扑克手牌
+ * https://leetcode.cn/contest/biweekly-contest-83/
+ */
+
+/**
+ * 2347. 最好的扑克手牌
  * <p>
  * 给你一个整数数组 ranks 和一个字符数组 suit 。你有 5 张扑克牌，第 i 张牌大小为 ranks[i] ，花色为 suits[i] 。
  * <p>
@@ -46,7 +50,40 @@ import java.util.Set;
  * <p>
  * https://leetcode.cn/problems/best-poker-hand/
  */
-public class Problem6128_bestPokerHand {
+public class Problem2347_bestPokerHand {
+
+    // HashMap time: O(C) space: O(C)
+    public static String bestHand_hash(int[] ranks, char[] suits) {
+        Set<Character> suitSet = new HashSet<>();
+        for (char ch : suits) {
+            suitSet.add(ch);
+        }
+
+        boolean hasThree = false;
+
+        Map<Integer, Integer> rankMap = new HashMap<>();
+        for (int x : ranks) {
+            int value = rankMap.getOrDefault(x, 0);
+            if (value >= 2) {
+                hasThree = true;
+            }
+            rankMap.put(x, value + 1);
+        }
+
+        if (suitSet.size() == 1) {
+            return "Flush";
+        }
+
+        if (hasThree && rankMap.size() <= 3) {
+            return "Three of a Kind";
+        }
+
+        if (rankMap.size() <= 4) {
+            return "Pair";
+        }
+
+        return "High Card";
+    }
 
     // BF time: O(n) space: O(n)
     public static String bestHand(int[] ranks, char[] suits) {
@@ -82,6 +119,6 @@ public class Problem6128_bestPokerHand {
 
     public static void main(String[] args) {
         System.out.println("Flush ?= " + bestHand(new int[]{13, 2, 3, 1, 9}, new char[]{'a', 'a', 'a', 'a', 'a'}));
-
+        System.out.println("Flush ?= " + bestHand_hash(new int[]{13, 2, 3, 1, 9}, new char[]{'a', 'a', 'a', 'a', 'a'}));
     }
 }
