@@ -51,6 +51,24 @@ public class Problem2 {
         }
     }
 
+    // AC
+    private static long quickPower_opt(int base, int power) {
+        if (power <= 1) {
+            return base;
+        }
+
+        int mod = 1_000_000_007;
+
+        long ret = quickPower(base, power / 2);
+        ret %= mod;
+
+        if (power % 2 == 1) {
+            return base * ret * ret % mod;
+        } else {
+            return ret * ret % mod;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("6 ?= " + monkeyMove(3));
         System.out.println("14 ?= " + monkeyMove(4));
