@@ -46,6 +46,7 @@ public class Problem540_singleElementInASortedArray {
         }
 
         int len = nums.length;
+
         for (int i = 0; i < len; i += 2) {
             if (i == len - 1) {
                 return nums[len - 1];
@@ -72,6 +73,7 @@ public class Problem540_singleElementInASortedArray {
     // XOR Bit time: O(n) space: O(1)
     public static int singleNonDuplicate_bit(int[] nums) {
         int len = nums.length;
+
         int xor = 0;
         for (int i = 0; i < len; i++) {
             xor = xor ^ nums[i];
@@ -82,27 +84,49 @@ public class Problem540_singleElementInASortedArray {
 
     // BinarySearch time: O(logn) space: O(1)
     public static int singleNonDuplicate_bs(int[] nums) {
-        if (nums == null || nums.length <= 1) {
-            return nums[0];
-        }
+        int n = nums.length;
 
-        int ans = 0;
-        int len = nums.length;
         int left = 0;
-        int right = len - 1;
-        while (left <= right) {
+        int right = n - 1;
+
+        while (left < right) {
             int mid = left + (right - left + 1) / 2;
+
+            if (mid % 2 == 0) {
+                if (mid < n - 1 && nums[mid] == nums[mid + 1]) {
+                    left = mid + 2;
+                } else if (mid > 0 && nums[mid] == nums[mid - 1]) {
+                    right = mid - 2;
+                } else {
+                    return nums[mid];
+                }
+            } else {
+                if (mid < n - 1 && nums[mid] == nums[mid + 1]) {
+                    right = mid - 1;
+                } else if (mid > 0 && nums[mid] == nums[mid - 1]) {
+                    left = mid + 1;
+                } else {
+                    return nums[mid];
+                }
+            }
         }
 
-        return ans;
+        return nums[left];
     }
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + singleNonDuplicate(new int[]{1, 1, 2}));
-        System.out.println("2 ?= " + singleNonDuplicate_bf(new int[]{1, 1, 2}));
-        System.out.println("2 ?= " + singleNonDuplicate_opt(new int[]{1, 1, 2}));
         System.out.println("2 ?= " + singleNonDuplicate(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
+
+        System.out.println("2 ?= " + singleNonDuplicate_bf(new int[]{1, 1, 2}));
+
+        System.out.println("2 ?= " + singleNonDuplicate_opt(new int[]{1, 1, 2}));
+
         System.out.println("2 ?= " + singleNonDuplicate_bit(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
-        System.out.println("10 ?= " + singleNonDuplicate_bs(new int[]{3, 3, 7, 7, 10, 11, 11}));
+
+        System.out.println("2 ?= " + singleNonDuplicate_bs(new int[]{1, 1, 2}));
+        System.out.println("2 ?= " + singleNonDuplicate_bs(new int[]{1, 1, 2, 3, 3}));
+        System.out.println("2 ?= " + singleNonDuplicate_bs(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
+        System.out.println("11 ?= " + singleNonDuplicate_bs(new int[]{3, 3, 7, 7, 10, 10, 11}));
     }
 }
