@@ -5,6 +5,7 @@ package com.longluo.studyplan.binary_search.i;
  * <p>
  * 给你一个仅由整数组成的有序数组，其中每个元素都会出现两次，唯有一个数只会出现一次。
  * 请你找出并返回只出现一次的那个数。
+ * <p>
  * 你设计的解决方案必须满足 O(log n) 时间复杂度和 O(1) 空间复杂度。
  * <p>
  * 示例 1:
@@ -19,9 +20,24 @@ package com.longluo.studyplan.binary_search.i;
  * 1 <= nums.length <= 10^5
  * 0 <= nums[i] <= 10^5
  * <p>
- * https://leetcode-cn.com/problems/single-element-in-a-sorted-array/
+ * https://leetcode.cn/problems/single-element-in-a-sorted-array/
  */
 public class Problem540_singleElementInASortedArray {
+
+    // BF time: O(n / 2) space: O(1)
+    public static int singleNonDuplicate_bf(int[] nums) {
+        int n = nums.length;
+
+        for (int i = 0; i < n - 1; i += 2) {
+            if (nums[i] == nums[i + 1]) {
+                continue;
+            }
+
+            return nums[i];
+        }
+
+        return nums[n - 1];
+    }
 
     // BF time: O(n) space: O(1)
     public static int singleNonDuplicate(int[] nums) {
@@ -83,6 +99,7 @@ public class Problem540_singleElementInASortedArray {
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + singleNonDuplicate(new int[]{1, 1, 2}));
+        System.out.println("2 ?= " + singleNonDuplicate_bf(new int[]{1, 1, 2}));
         System.out.println("2 ?= " + singleNonDuplicate_opt(new int[]{1, 1, 2}));
         System.out.println("2 ?= " + singleNonDuplicate(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
         System.out.println("2 ?= " + singleNonDuplicate_bit(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
