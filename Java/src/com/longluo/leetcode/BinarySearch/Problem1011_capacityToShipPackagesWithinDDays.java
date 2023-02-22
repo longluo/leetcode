@@ -1,4 +1,4 @@
-package com.longluo.leetcode.binarysearch;
+package com.longluo.leetcode.BinarySearch;
 
 import java.util.Arrays;
 
@@ -48,9 +48,43 @@ import java.util.Arrays;
  * 1 <= D <= weights.length <= 50000
  * 1 <= weights[i] <= 500
  * <p>
- * https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/
+ * https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days/
  */
 public class Problem1011_capacityToShipPackagesWithinDDays {
+
+    // BF time: O(mn) space: O(1)
+    // AC
+    public static int shipWithinDays_bf(int[] weights, int days) {
+        int sum = 0;
+        int max = 0;
+
+        for (int x : weights) {
+            sum += x;
+            max = Math.max(max, x);
+        }
+
+        int start = Math.max(max, sum / days);
+        int ans = start;
+        for (int i = start; i <= sum; i++) {
+            int cnt = 1;
+            int remain = i;
+            for (int j = 0; j < weights.length; j++) {
+                if (remain < weights[j]) {
+                    remain = i - weights[j];
+                    cnt++;
+                } else {
+                    remain -= weights[j];
+                }
+            }
+
+            if (cnt <= days) {
+                ans = i;
+                break;
+            }
+        }
+
+        return ans;
+    }
 
     public static int shipWithinDays(int[] weights, int D) {
         if (weights == null || weights.length == 0 || D <= 0) {
@@ -141,11 +175,16 @@ public class Problem1011_capacityToShipPackagesWithinDDays {
     }
 
     public static void main(String[] args) {
-        System.out.println("15 ?= " + shipWithinDays(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5));
-        System.out.println("15 ?= " + shipWithinDays_answer(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5));
         System.out.println("6 ?= " + shipWithinDays(new int[]{3, 2, 2, 4, 1, 4}, 3));
-        System.out.println("6 ?= " + shipWithinDays_answer(new int[]{3, 2, 2, 4, 1, 4}, 3));
         System.out.println("3 ?= " + shipWithinDays(new int[]{1, 2, 3, 1, 1}, 4));
+        System.out.println("15 ?= " + shipWithinDays(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5));
+
+        System.out.println("6 ?= " + shipWithinDays_answer(new int[]{3, 2, 2, 4, 1, 4}, 3));
         System.out.println("3 ?= " + shipWithinDays_answer(new int[]{1, 2, 3, 1, 1}, 4));
+        System.out.println("15 ?= " + shipWithinDays_answer(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5));
+
+        System.out.println("6 ?= " + shipWithinDays_bf(new int[]{3, 2, 2, 4, 1, 4}, 3));
+        System.out.println("3 ?= " + shipWithinDays_bf(new int[]{1, 2, 3, 1, 1}, 4));
+        System.out.println("15 ?= " + shipWithinDays_bf(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5));
     }
 }
