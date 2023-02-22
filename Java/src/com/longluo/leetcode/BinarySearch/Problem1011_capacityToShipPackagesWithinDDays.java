@@ -86,6 +86,46 @@ public class Problem1011_capacityToShipPackagesWithinDDays {
         return ans;
     }
 
+    // Binary Search Optimize
+    private static boolean feasible(int[] weights, int c, int days) {
+        int daysNeeded = 1;
+        int currentLoad = 0;
+
+        for (int weight : weights) {
+            currentLoad += weight;
+            if (currentLoad > c) {
+                daysNeeded++;
+                currentLoad = weight;
+            }
+        }
+
+        return daysNeeded <= days;
+    }
+
+    public static int shipWithinDays_bs(int[] weights, int days) {
+        int totalLoad = 0;
+        int maxLoad = 0;
+
+        for (int weight : weights) {
+            totalLoad += weight;
+            maxLoad = Math.max(maxLoad, weight);
+        }
+
+        int l = Math.max(maxLoad, totalLoad / days);
+        int r = Math.min(totalLoad, totalLoad / days + maxLoad);
+
+        while (l < r) {
+            int mid = (l + r) / 2;
+            if (feasible(weights, mid, days)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+
+        return l;
+    }
+
     public static int shipWithinDays(int[] weights, int D) {
         if (weights == null || weights.length == 0 || D <= 0) {
             return 0;
