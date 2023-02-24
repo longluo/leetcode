@@ -1,9 +1,12 @@
 package com.longluo.contest.weekly_contest_304;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.PriorityQueue;
 
 /**
- * 6132. 使数组中所有元素都等于零
+ * 2357. 使数组中所有元素都等于零
  * <p>
  * 给你一个非负整数数组 nums 。在一步操作中，你必须：
  * <p>
@@ -30,7 +33,42 @@ import java.util.Arrays;
  * <p>
  * https://leetcode.cn/problems/make-array-zero-by-subtracting-equal-amounts/
  */
-public class Problem6132_minimumOperations {
+public class Problem2357_minimumOperations {
+
+    // Heap time: O(mnlogn)  space: O(n)
+    public static int minimumOperations_heap(int[] nums) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (int x : nums) {
+            if (x > 0) {
+                pq.offer(x);
+            }
+        }
+
+        int ans = 0;
+        while (!pq.isEmpty()) {
+            int min = pq.poll();
+
+            List<Integer> temp = new ArrayList<>();
+
+            int size = pq.size();
+            for (int i = 0; i < size; i++) {
+                int cur = pq.poll();
+                cur -= min;
+                temp.add(cur);
+            }
+
+            for (int x : temp) {
+                if (x > 0) {
+                    pq.offer(x);
+                }
+            }
+
+            ans++;
+        }
+
+        return ans;
+    }
 
     // Count time: O(n) space: O(1)
     public static int minimumOperations(int[] nums) {
@@ -58,5 +96,8 @@ public class Problem6132_minimumOperations {
         System.out.println("1 ?= " + minimumOperations(new int[]{1}));
         System.out.println("3 ?= " + minimumOperations(new int[]{1, 5, 0, 3, 5}));
         System.out.println("4 ?= " + minimumOperations(new int[]{1, 2, 3, 5}));
+
+        System.out.println("3 ?= " + minimumOperations_heap(new int[]{1, 5, 0, 3, 5}));
+        System.out.println("4 ?= " + minimumOperations_heap(new int[]{1, 2, 3, 5}));
     }
 }
