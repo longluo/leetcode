@@ -1,9 +1,6 @@
 package com.longluo.contest.weekly_contest_304;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * 2357. 使数组中所有元素都等于零
@@ -70,7 +67,7 @@ public class Problem2357_minimumOperations {
         return ans;
     }
 
-    // Count time: O(n) space: O(1)
+    // Greedy + Count time: O(nlogn) space: O(1)
     public static int minimumOperations(int[] nums) {
         int len = nums.length;
         if (len == 1) {
@@ -92,6 +89,19 @@ public class Problem2357_minimumOperations {
         return ans;
     }
 
+    // HashSet time: O(n) space: O(n)
+    public static int minimumOperations_hash(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+
+        for (int x : nums) {
+            if (x > 0) {
+                set.add(x);
+            }
+        }
+
+        return set.size();
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + minimumOperations(new int[]{1}));
         System.out.println("3 ?= " + minimumOperations(new int[]{1, 5, 0, 3, 5}));
@@ -99,5 +109,8 @@ public class Problem2357_minimumOperations {
 
         System.out.println("3 ?= " + minimumOperations_heap(new int[]{1, 5, 0, 3, 5}));
         System.out.println("4 ?= " + minimumOperations_heap(new int[]{1, 2, 3, 5}));
+
+        System.out.println("3 ?= " + minimumOperations_hash(new int[]{1, 5, 0, 3, 5}));
+        System.out.println("4 ?= " + minimumOperations_hash(new int[]{1, 2, 3, 5}));
     }
 }
