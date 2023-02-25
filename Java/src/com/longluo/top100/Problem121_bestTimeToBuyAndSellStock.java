@@ -52,6 +52,9 @@ public class Problem121_bestTimeToBuyAndSellStock {
     // DP time: O(n) space: O(n)
     public static int maxProfit_dp(int[] prices) {
         int len = prices.length;
+
+        // dp[i][0] not hold the stock
+        // dp[i][1] buy and hold the stock
         int[][] dp = new int[len][2];
 
         dp[0][0] = 0;
