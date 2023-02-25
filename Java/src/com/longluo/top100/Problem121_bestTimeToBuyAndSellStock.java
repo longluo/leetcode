@@ -33,15 +33,16 @@ public class Problem121_bestTimeToBuyAndSellStock {
     // TLE
     public static int maxProfit_bf(int[] prices) {
         int len = prices.length;
+
         int maxProfit = 0;
-        for (int i = 0; i < len - 1; i++) {
+
+        for (int i = 0; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
                 if (prices[j] <= prices[i]) {
                     continue;
                 }
 
-                int profit = prices[j] - prices[i];
-                maxProfit = Math.max(maxProfit, profit);
+                maxProfit = Math.max(maxProfit, prices[j] - prices[i]);
             }
         }
 
