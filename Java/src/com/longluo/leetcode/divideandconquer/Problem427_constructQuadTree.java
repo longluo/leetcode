@@ -60,10 +60,11 @@ package com.longluo.leetcode.divideandconquer;
  * n == grid.length == grid[i].length
  * n == 2^x 其中 0 <= x <= 6
  * <p>
- * https://leetcode-cn.com/problems/construct-quad-tree/
+ * https://leetcode.cn/problems/construct-quad-tree/
  */
 public class Problem427_constructQuadTree {
 
+    // TODO: 2023/2/27
     // Definition for a QuadTree node.
     static class Node {
         public boolean val;
@@ -100,7 +101,9 @@ public class Problem427_constructQuadTree {
             this.bottomLeft = bottomLeft;
             this.bottomRight = bottomRight;
         }
-    };
+    }
+
+    ;
 
     public static Node construct(int[][] grid) {
         int n = grid.length;
