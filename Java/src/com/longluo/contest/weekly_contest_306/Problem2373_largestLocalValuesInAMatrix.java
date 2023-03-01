@@ -3,12 +3,16 @@ package com.longluo.contest.weekly_contest_306;
 import java.util.Arrays;
 
 /**
- * 6148. 矩阵中的局部最大值
+ * 2373. 矩阵中的局部最大值
+ * <p>
+ * 简单
  * <p>
  * 给你一个大小为 n x n 的整数矩阵 grid 。
  * 生成一个大小为 (n - 2) x (n - 2) 的整数矩阵  maxLocal ，并满足：
+ * <p>
  * maxLocal[i][j] 等于 grid 中以 i + 1 行和 j + 1 列为中心的 3 x 3 矩阵中的 最大值 。
  * 换句话说，我们希望找出 grid 中每个 3 x 3 矩阵中的最大值。
+ * <p>
  * 返回生成的矩阵。
  * <p>
  * 示例 1：
@@ -29,13 +33,15 @@ import java.util.Arrays;
  * <p>
  * https://leetcode.cn/problems/largest-local-values-in-a-matrix/
  */
-public class Problem6148_largestLocalValuesInAMatrix {
+public class Problem2373_largestLocalValuesInAMatrix {
 
     // Simulate time: O(8*n^2) space: O(1)
     public static int[][] largestLocal(int[][] grid) {
         int[][] dirs = new int[][]{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+
         int n = grid.length;
         int[][] ans = new int[n - 2][n - 2];
+
         for (int i = 1; i < n - 1; i++) {
             for (int j = 1; j < n - 1; j++) {
                 int max = grid[i][j];
@@ -52,7 +58,27 @@ public class Problem6148_largestLocalValuesInAMatrix {
         return ans;
     }
 
+    // Simulate Opt time: O(8*n^2) space: O(1)
+    public static int[][] largestLocal_opt(int[][] grid) {
+        int n = grid.length;
+
+        int[][] ans = new int[n - 2][n - 2];
+
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = 0; j < n - 2; j++) {
+                for (int x = i; x < i + 3; x++) {
+                    for (int y = j; y < j + 3; y++) {
+                        ans[i][j] = Math.max(ans[i][j], grid[x][y]);
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
-        System.out.println(" ?= " + Arrays.deepToString(largestLocal(new int[][]{{1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 2, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}})));
+        System.out.println("[[2, 2, 2], [2, 2, 2], [2, 2, 2]] ?= " + Arrays.deepToString(largestLocal(new int[][]{{1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 2, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}})));
+        System.out.println("[[2, 2, 2], [2, 2, 2], [2, 2, 2]] ?= " + Arrays.deepToString(largestLocal_opt(new int[][]{{1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 2, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}})));
     }
 }
