@@ -149,6 +149,57 @@ public class Problem1345_jumpGame_iv {
         return ans - 1;
     }
 
+    // BFS time: O(n^2) space: O(n)
+    // TLE
+    public static int minJumps(int[] arr) {
+        int len = arr.length;
+        if (len <= 1) {
+            return 0;
+        }
+
+        boolean[] vis = new boolean[len];
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(0);
+        vis[0] = true;
+
+        int ans = 0;
+
+        while (!queue.isEmpty()) {
+            ans++;
+
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int curPos = queue.poll();
+
+                if (curPos == len - 1) {
+                    return ans - 1;
+                }
+
+                int left = curPos - 1;
+                if (left >= 0 && !vis[left]) {
+                    vis[left] = true;
+                    queue.offer(left);
+                }
+
+                int right = curPos + 1;
+                if (right < len && !vis[right]) {
+                    vis[right] = true;
+                    queue.offer(right);
+                }
+
+                for (int j = 0; j < len; j++) {
+                    if (arr[j] == arr[curPos] && curPos != j && !vis[j]) {
+                        vis[j] = true;
+                        queue.offer(j);
+                    }
+                }
+            }
+        }
+
+        return ans - 1;
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + minJumps_bfs(new int[]{7}));
         System.out.println("2 ?= " + minJumps_bfs(new int[]{6, 1, 9}));
@@ -157,5 +208,7 @@ public class Problem1345_jumpGame_iv {
         System.out.println("3 ?= " + minJumps_bfs(new int[]{100, -23, -23, 404, 100, 23, 23, 23, 3, 404}));
 
         System.out.println("3 ?= " + minJumps_bfs_opt(new int[]{100, -23, -23, 404, 100, 23, 23, 23, 3, 404}));
+
+        System.out.println("3 ?= " + minJumps(new int[]{100, -23, -23, 404, 100, 23, 23, 23, 3, 404}));
     }
 }
