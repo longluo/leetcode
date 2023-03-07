@@ -1,5 +1,8 @@
 package com.longluo.studyplan.binary_search.i;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 1539. 第 k 个缺失的正整数
  * <p>
@@ -22,25 +25,52 @@ package com.longluo.studyplan.binary_search.i;
  * 1 <= k <= 1000
  * 对于所有 1 <= i < j <= arr.length 的 i 和 j 满足 arr[i] < arr[j]
  * <p>
- * https://leetcode-cn.com/problems/kth-missing-positive-number/
+ * https://leetcode.cn/problems/kth-missing-positive-number/
  */
 public class Problem1539_kthMissingPositiveNumber {
+
+    // Set time: O(n) space: O(n)
+    public static int findKthPositive_set(int[] arr, int k) {
+        Set<Integer> set = new HashSet<>();
+        for (int x : arr) {
+            set.add(x);
+        }
+
+        int ans = 0;
+        for (int i = 1; ; i++) {
+            if (set.contains(i)) {
+                continue;
+            }
+
+            k--;
+            if (k == 0) {
+                ans = i;
+                break;
+            }
+        }
+
+        return ans;
+    }
 
     // BF time: O(n) space: O(1)
     public static int findKthPositive_bf(int[] arr, int k) {
         int len = arr.length;
+
         if (arr[len - 1] < len + k) {
             return len + k;
         } else if (arr[0] > k) {
             return k;
         }
+
         int i = 0;
         int j = 1;
+
         while (i < len) {
             if (arr[i] == j) {
                 i++;
                 j++;
             }
+
             while (i < len && arr[i] > j) {
                 if (k == 1) {
                     return j;
@@ -82,7 +112,7 @@ public class Problem1539_kthMissingPositiveNumber {
         return len + k;
     }
 
-    // Count the array element less than k O(n) O(1)
+    // Count the array element less than k O(n)  O(1)
     public static int findKthPositive_simple(int[] arr, int k) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] <= k) {
@@ -121,5 +151,8 @@ public class Problem1539_kthMissingPositiveNumber {
 
         System.out.println("9 ?= " + findKthPositive_bs(new int[]{2, 3, 4, 7, 11}, 5));
         System.out.println("6 ?= " + findKthPositive_bs(new int[]{1, 2, 3, 4}, 2));
+
+        System.out.println("9 ?= " + findKthPositive_set(new int[]{2, 3, 4, 7, 11}, 5));
+        System.out.println("6 ?= " + findKthPositive_set(new int[]{1, 2, 3, 4}, 2));
     }
 }
