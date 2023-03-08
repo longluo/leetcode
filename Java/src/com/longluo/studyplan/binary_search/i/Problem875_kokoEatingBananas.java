@@ -84,9 +84,8 @@ public class Problem875_kokoEatingBananas {
         for (int i = 1; i < max; i++) {
             int cnt = 0;
 
-            for (int j = 0; j < len; j++) {
-                int mod = piles[j] % i;
-                cnt += mod == 0 ? piles[j] / i : piles[j] / i + 1;
+            for (int x : piles) {
+                cnt += (x + i - 1) / i;
                 if (cnt > h) {
                     break;
                 }
@@ -104,12 +103,14 @@ public class Problem875_kokoEatingBananas {
     // TLE
     // Worse than from small to big
     public static int minEatingSpeed_bf(int[] piles, int h) {
+        int len = piles.length;
+
         int max = Integer.MIN_VALUE;
         for (int pile : piles) {
             max = Math.max(max, pile);
         }
 
-        if (piles.length >= h) {
+        if (len >= h) {
             return max;
         }
 
@@ -169,9 +170,16 @@ public class Problem875_kokoEatingBananas {
     // BinarySearch Opt time: O(nlogn) space: O(1)
     // remove mod
     public static int minEatingSpeed_bs_opt(int[] piles, int h) {
-        int max = 1;
-        for (int pile : piles) {
-            max = Math.max(max, pile);
+        int max = 0;
+        long sum = 0;
+
+        for (int x : piles) {
+            sum += x;
+            max = Math.max(max, x);
+        }
+
+        if (piles.length >= h) {
+            return max;
         }
 
         int left = 1;
@@ -182,8 +190,8 @@ public class Problem875_kokoEatingBananas {
 
             int cnt = 0;
 
-            for (int pile : piles) {
-                cnt += (pile + mid - 1) / mid;
+            for (int x : piles) {
+                cnt += (x + mid - 1) / mid;
             }
 
             if (cnt > h) {
