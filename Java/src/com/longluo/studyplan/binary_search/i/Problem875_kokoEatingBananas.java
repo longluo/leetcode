@@ -34,6 +34,40 @@ public class Problem875_kokoEatingBananas {
 
     // BF time: O(n^2) space: O(1)
     // TLE
+    public static int minEatingSpeed_20230308(int[] piles, int h) {
+        long sum = 0;
+        int min = Integer.MAX_VALUE;
+        int max = 0;
+
+        for (int x : piles) {
+            sum += x;
+            min = Math.min(min, x);
+            max = Math.max(max, x);
+        }
+
+        long average = sum / h;
+        long right = Math.max(average, max);
+
+        long ans = right;
+
+        for (long i = right; i >= 0; i--) {
+            int cnt = 0;
+
+            for (int x : piles) {
+                cnt += (x + i - 1) / i;
+            }
+
+            if (cnt > h) {
+                ans = i + 1;
+                break;
+            }
+        }
+
+        return (int) ans;
+    }
+
+    // BF time: O(n^2) space: O(1)
+    // TLE
     public static int minEatingSpeed(int[] piles, int h) {
         int len = piles.length;
 
@@ -168,5 +202,8 @@ public class Problem875_kokoEatingBananas {
 
         System.out.println("4 ?= " + minEatingSpeed_bs(new int[]{3, 6, 7, 11}, 8));
         System.out.println("4 ?= " + minEatingSpeed_bs_opt(new int[]{3, 6, 7, 11}, 8));
+
+        System.out.println("4 ?= " + minEatingSpeed_20230308(new int[]{3, 6, 7, 11}, 8));
+        System.out.println("4 ?= " + minEatingSpeed_20230308(new int[]{3, 6, 7, 11}, 8));
     }
 }
