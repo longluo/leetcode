@@ -4,6 +4,9 @@ package com.longluo.contest.weekly_contest_321;
  * https://leetcode.cn/contest/weekly-contest-321
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 2488. 统计中位数为 K 的子数组
  * <p>
@@ -108,6 +111,36 @@ public class Problem2488_countSubarraysWithMedianK {
         return ans;
     }
 
+    // HashMap time: O(n) space: O(n)
+    public static int countSubarrays_hashmap(int[] nums, int k) {
+        int len = nums.length;
+
+        int idx = 0;
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == k) {
+                idx = i;
+                break;
+            }
+        }
+
+        Map<Integer, Integer> countMap = new HashMap<>();
+        countMap.put(0, 1);
+
+        for (int i = idx - 1, sum = 0; i >= 0; i--) {
+            sum += nums[i] < k ? 1 : -1;
+            countMap.put(sum, countMap.getOrDefault(sum, 0) + 1);
+        }
+
+        int ans = countMap.get(0) + countMap.getOrDefault(-1, 0);
+        for (int i = idx + 1, sum = 0; i < len; i++) {
+            sum += nums[i] > k ? 1 : -1;
+            ans += countMap.getOrDefault(sum, 0) + countMap.getOrDefault(sum - 1, 0);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + countSubarrays(new int[]{2, 3, 1}, 3));
         System.out.println("3 ?= " + countSubarrays(new int[]{3, 2, 1, 4, 5}, 4));
@@ -118,6 +151,9 @@ public class Problem2488_countSubarraysWithMedianK {
         System.out.println("3 ?= " + countSubarrays_prefix(new int[]{3, 2, 1, 4, 5}, 4));
         System.out.println("3 ?= " + countSubarrays_prefix(new int[]{2, 5, 1, 4, 3, 6}, 1));
         System.out.println("13 ?= " + countSubarrays_prefix(new int[]{5, 19, 11, 15, 13, 16, 4, 6, 2, 7, 10, 8, 18, 20, 1, 3, 17, 9, 12, 14}, 6));
+
+        System.out.println("3 ?= " + countSubarrays_hashmap(new int[]{3, 2, 1, 4, 5}, 4));
+        System.out.println("13 ?= " + countSubarrays_hashmap(new int[]{5, 19, 11, 15, 13, 16, 4, 6, 2, 7, 10, 8, 18, 20, 1, 3, 17, 9, 12, 14}, 6));
     }
 }
 
