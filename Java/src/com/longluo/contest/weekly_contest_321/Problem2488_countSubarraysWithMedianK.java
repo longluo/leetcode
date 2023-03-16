@@ -75,35 +75,33 @@ public class Problem2488_countSubarraysWithMedianK {
         return ans;
     }
 
-    public static int countSubarrays_opt(int[] nums, int k) {
-        int n = nums.length;
+    // PrefixSums time: O(n^2) space: O(n)
+    // TLE
+    public static int countSubarrays_prefix(int[] nums, int k) {
+        int len = nums.length;
 
-        int idx = -1;
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == k) {
-                idx = i;
-                break;
+        int[] prefixSums = new int[len + 1];
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > k) {
+                prefixSums[i + 1] = prefixSums[i] + 1;
+            } else if (nums[i] < k) {
+                prefixSums[i + 1] = prefixSums[i] - 1;
+            } else {
+                prefixSums[i + 1] = prefixSums[i];
             }
         }
 
-        int ans = 1;
+        int ans = 0;
 
-        int[][] left = new int[n + 1][2];
-        int[][] right = new int[n + 1][2];
-
-        for (int i = idx - 1; i >= 0; i--) {
-            if (nums[i] < k) {
-                left[i][0] = left[i + 1][0] + 1;
-            } else {
-                left[i][1] = left[i + 1][1] + 1;
-            }
-        }
-
-        for (int i = idx + 1; i < n; i++) {
-            if (nums[i] < k) {
-                right[i][0] = right[i - 1][0] + 1;
-            } else {
-                right[i][1] = right[i - 1][1] + 1;
+        for (int i = 1; i <= len; i++) {
+            for (int j = 0; j <= len - i; j++) {
+                int sum = prefixSums[j + i] - prefixSums[j];
+                if (i % 2 == 0) {
+                    ans += sum == 1 ? 1 : 0;
+                } else {
+                    ans += sum == 0 ? 1 : 0;
+                }
             }
         }
 
@@ -111,14 +109,15 @@ public class Problem2488_countSubarraysWithMedianK {
     }
 
     public static void main(String[] args) {
-        System.out.println("3 ?= " + countSubarrays(new int[]{3, 2, 1, 4, 5}, 4));
         System.out.println("1 ?= " + countSubarrays(new int[]{2, 3, 1}, 3));
+        System.out.println("3 ?= " + countSubarrays(new int[]{3, 2, 1, 4, 5}, 4));
+        System.out.println("3 ?= " + countSubarrays(new int[]{2, 5, 1, 4, 3, 6}, 1));
         System.out.println("13 ?= " + countSubarrays(new int[]{5, 19, 11, 15, 13, 16, 4, 6, 2, 7, 10, 8, 18, 20, 1, 3, 17, 9, 12, 14}, 6));
 
-        System.out.println("13 ?= " + countSubarrays_opt(new int[]{5, 19, 11, 15, 13, 16, 4, 6, 2, 7, 10, 8, 18, 20, 1, 3, 17, 9, 12, 14}, 6));
-        System.out.println("3 ?= " + countSubarrays_opt(new int[]{2, 5, 1, 4, 3, 6}, 1));
-        System.out.println("3 ?= " + countSubarrays_opt(new int[]{3, 2, 1, 4, 5}, 4));
-        System.out.println("1 ?= " + countSubarrays_opt(new int[]{2, 3, 1}, 3));
+        System.out.println("1 ?= " + countSubarrays_prefix(new int[]{2, 3, 1}, 3));
+        System.out.println("3 ?= " + countSubarrays_prefix(new int[]{3, 2, 1, 4, 5}, 4));
+        System.out.println("3 ?= " + countSubarrays_prefix(new int[]{2, 5, 1, 4, 3, 6}, 1));
+        System.out.println("13 ?= " + countSubarrays_prefix(new int[]{5, 19, 11, 15, 13, 16, 4, 6, 2, 7, 10, 8, 18, 20, 1, 3, 17, 9, 12, 14}, 6));
     }
 }
 
