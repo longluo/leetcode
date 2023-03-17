@@ -64,7 +64,40 @@ public class Problem2389_answerQueries {
         return ans;
     }
 
+    // PrefixSum time: O(nm) space: O(n)
+    public static int[] answerQueries_prefixSum(int[] nums, int[] queries) {
+        Arrays.sort(nums);
+
+        int n = nums.length;
+        int m = queries.length;
+
+        int[] prefixSums = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefixSums[i + 1] = prefixSums[i] + nums[i];
+        }
+
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            if (prefixSums[n] <= queries[i]) {
+                ans[i] = n;
+                continue;
+            }
+
+            for (int j = 1; j <= n; j++) {
+                if (prefixSums[j] <= queries[i]) {
+                    continue;
+                }
+
+                ans[i] = j - 1;
+                break;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 3, 4] ?= " + Arrays.toString(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21})));
+        System.out.println("[2, 3, 4] ?= " + Arrays.toString(answerQueries_prefixSum(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21})));
     }
 }
