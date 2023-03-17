@@ -96,8 +96,41 @@ public class Problem2389_answerQueries {
         return ans;
     }
 
+    // BinarySearch time: O(nlogn + mlogn) space: O(n)
+    public static int[] answerQueries_binarySearch(int[] nums, int[] queries) {
+        Arrays.sort(nums);
+
+        int n = nums.length;
+        int m = queries.length;
+
+        int[] prefixSums = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefixSums[i + 1] = prefixSums[i] + nums[i];
+        }
+
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            int left = 0;
+            int right = n;
+
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (prefixSums[mid] <= queries[i]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+
+            ans[i] = prefixSums[left] > queries[i] ? left - 1 : left;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, 3, 4] ?= " + Arrays.toString(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21})));
         System.out.println("[2, 3, 4] ?= " + Arrays.toString(answerQueries_prefixSum(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21})));
+        System.out.println("[2, 3, 4] ?= " + Arrays.toString(answerQueries_binarySearch(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21})));
     }
 }
