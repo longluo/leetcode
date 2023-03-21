@@ -1,7 +1,7 @@
 package com.longluo.contest.biweekly_contest_83;
 
 /**
- * 6129. 全 0 子数组的数目
+ * 2348. 全 0 子数组的数目
  * <p>
  * 给你一个整数数组 nums ，返回全部为 0 的 子数组 数目。
  * 子数组 是一个数组中一段连续非空元素组成的序列。
@@ -34,12 +34,13 @@ package com.longluo.contest.biweekly_contest_83;
  * <p>
  * https://leetcode.cn/problems/number-of-zero-filled-subarrays/
  */
-public class Problem6129_NumberOfZeroFilledSubarrays {
+public class Problem2348_NumberOfZeroFilledSubarrays {
 
     // Math time: O(n) space: O(1)
     public static long zeroFilledSubarray(int[] nums) {
         long ans = 0;
         long cnt = 0;
+
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == 0) {
                 cnt++;
@@ -54,7 +55,25 @@ public class Problem6129_NumberOfZeroFilledSubarrays {
         return ans;
     }
 
+    // Math time: O(n) space: O(1)
+    public static long zeroFilledSubarray_opt(int[] nums) {
+        long ans = 0;
+        long subArrays = 0;
+
+        for (int x : nums) {
+            if (x == 0) {
+                subArrays++;
+                ans += subArrays;
+            } else {
+                subArrays = 0;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("6 ?= " + zeroFilledSubarray(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
+        System.out.println("6 ?= " + zeroFilledSubarray_opt(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
     }
 }
