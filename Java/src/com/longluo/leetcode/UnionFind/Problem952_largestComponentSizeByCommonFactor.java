@@ -1,7 +1,4 @@
-package com.longluo.leetcode.unionfind;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.longluo.leetcode.UnionFind;
 
 /**
  * 952. 按公因数计算最大组件大小
@@ -33,7 +30,7 @@ import java.util.List;
  */
 public class Problem952_largestComponentSizeByCommonFactor {
 
-    // UnionFind
+    // UnionFind time: O(n^2) space: O(n)
     // TLE
     public static int largestComponentSize(int[] nums) {
         int len = nums.length;
