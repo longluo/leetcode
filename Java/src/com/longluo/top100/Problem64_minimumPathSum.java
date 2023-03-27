@@ -21,14 +21,15 @@ package com.longluo.top100;
  * 1 <= m, n <= 200
  * 0 <= grid[i][j] <= 100
  * <p>
- * https://leetcode-cn.com/problems/minimum-path-sum/
+ * https://leetcode.cn/problems/minimum-path-sum/
  */
 public class Problem64_minimumPathSum {
 
-    // DP time: O(n) space: O(n)
+    // DP time: O(mn) space: O(mn)
     public static int minPathSum_dp(int[][] grid) {
         int row = grid.length;
         int col = grid[0].length;
+
         int[][] dp = new int[row][col];
         dp[0][0] = grid[0][0];
 
