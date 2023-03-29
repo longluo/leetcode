@@ -35,6 +35,11 @@ public class Problem1641_countSortedVowelStrings {
         return (n + 4) * (n + 3) * (n + 2) * (n + 1) / 24;
     }
 
+    // TODO: 2023/3/29
+    public static int countVowelStrings_dp(int n) {
+        return 0;
+    }
+
     public static void main(String[] args) {
         System.out.println("5 ?= " + countVowelStrings(1));
         System.out.println("15 ?= " + countVowelStrings(2));
