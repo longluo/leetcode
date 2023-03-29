@@ -31,12 +31,22 @@ package com.longluo.leetcode.dp;
 public class Problem1641_countSortedVowelStrings {
 
     // Math time: O(1) space: O(1)
+    // put n balls into m boxes, box can be empty.
     public static int countVowelStrings(int n) {
         return (n + 4) * (n + 3) * (n + 2) * (n + 1) / 24;
     }
 
-    // TODO: 2023/3/29
+    // DP
+    // TODO: 2023/3/29  
     public static int countVowelStrings_dp(int n) {
+
+        return 0;
+    }
+
+    // Recursive
+    // TODO: 2023/3/29  
+    public static int countVowelStrings_recursive(int n) {
+
         return 0;
     }
 
