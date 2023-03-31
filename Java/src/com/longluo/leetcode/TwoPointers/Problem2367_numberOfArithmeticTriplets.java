@@ -54,8 +54,38 @@ public class Problem2367_numberOfArithmeticTriplets {
         return ans;
     }
 
+    // Two Pointers time: O(n^2) space: O(1)
+    public static int arithmeticTriplets_tp(int[] nums, int diff) {
+        int ans = 0;
+
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1, k = n - 1; j < k; ) {
+                while (j < k && nums[j] - nums[i] < diff) {
+                    j++;
+                }
+
+                while (j < k && nums[k] - nums[j] > diff) {
+                    k--;
+                }
+
+                if (j < k && nums[j] - nums[i] == diff && nums[k] - nums[j] == diff) {
+                    ans++;
+                }
+
+                break;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + arithmeticTriplets_bf(new int[]{0, 1, 4, 6, 7, 10}, 3));
         System.out.println("2 ?= " + arithmeticTriplets_bf(new int[]{4, 5, 6, 7, 8, 9}, 2));
+
+        System.out.println("2 ?= " + arithmeticTriplets_tp(new int[]{0, 1, 4, 6, 7, 10}, 3));
+        System.out.println("2 ?= " + arithmeticTriplets_tp(new int[]{4, 5, 6, 7, 8, 9}, 2));
     }
 }
