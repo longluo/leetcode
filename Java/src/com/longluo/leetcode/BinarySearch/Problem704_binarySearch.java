@@ -1,4 +1,4 @@
-package com.longluo.leetcode.binarysearch;
+package com.longluo.leetcode.BinarySearch;
 
 /**
  * 704. Binary Search
@@ -25,13 +25,14 @@ package com.longluo.leetcode.binarysearch;
  * All the integers in nums are unique.
  * nums is sorted in ascending order.
  * <p>
- * https://leetcode.com/problems/binary-search/
+ * https://leetcode.cn/problems/binary-search/
  */
 public class Problem704_binarySearch {
 
     // BF time: O(n) space: O(1)
     public static int search_bf(int[] nums, int target) {
         int len = nums.length;
+
         for (int i = 0; i < len; i++) {
             if (nums[i] == target) {
                 return i;
@@ -41,8 +42,10 @@ public class Problem704_binarySearch {
         return -1;
     }
 
+    // BF Opt time: O(n) space: O(1)
     public static int search_bf_opt(int[] nums, int target) {
         int len = nums.length;
+
         for (int i = 0; i < len; i++) {
             if (nums[i] > target) {
                 break;
@@ -54,16 +57,18 @@ public class Problem704_binarySearch {
         return -1;
     }
 
+    // BinarySearch time: O(logn) space: O(1)
     public static int search_bs(int[] nums, int target) {
-        int len = nums.length;
-        int low = 0;
-        int high = len - 1;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
             if (nums[mid] < target) {
-                low = mid + 1;
+                left = mid + 1;
             } else if (nums[mid] > target) {
-                high = mid - 1;
+                right = mid - 1;
             } else {
                 return mid;
             }
@@ -95,6 +100,7 @@ public class Problem704_binarySearch {
     public static int search_bs_less(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
+
         while (left < right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] < target) {
