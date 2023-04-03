@@ -28,16 +28,21 @@ import java.util.Arrays;
  * 1 <= people.length <= 50000
  * 1 <= people[i] <= limit <= 30000
  * <p>
- * https://leetcode-cn.com/problems/boats-to-save-people/
+ * https://leetcode.cn/problems/boats-to-save-people/
  */
 public class Problem881_boatsToSavePeople {
 
+    // BF time: O(nlogn) space: O(logn)
     public static int numRescueBoats_bf(int[] people, int limit) {
         int len = people.length;
+
         Arrays.sort(people);
+
         int ans = 0;
+
         int idx = 0;
         int right = len - 1;
+
         while (idx < len) {
             while (idx < len && people[idx] == 0) {
                 idx++;
@@ -63,12 +68,15 @@ public class Problem881_boatsToSavePeople {
         return ans;
     }
 
+    // Sort + Two Pointers time: O(nlogn) space: O(logn)
     public static int numRescueBoats(int[] people, int limit) {
-        int len = people.length;
         Arrays.sort(people);
+
         int left = 0;
-        int right = len - 1;
+        int right = people.length - 1;
+
         int ans = 0;
+
         while (left <= right) {
             if (people[left] + people[right] <= limit) {
                 left++;
