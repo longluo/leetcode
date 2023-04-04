@@ -52,6 +52,25 @@ public class Problem2405_optimalPartitionOfString {
         return ans + 1;
     }
 
+    // Bit time: O(n) space: O(1)
+    public static int partitionString_bit(String s) {
+        int ans = 1;
+        int mask = 0;
+
+        for (char ch : s.toCharArray()) {
+            int shift = ch - 'a';
+
+            if ((mask & (1 << shift)) > 0) {
+                ans++;
+                mask = 0;
+            }
+
+            mask |= 1 << shift;
+        }
+
+        return ans;
+    }
+
     public static int partitionString(String s) {
         int len = s.length();
 
@@ -98,5 +117,8 @@ public class Problem2405_optimalPartitionOfString {
         System.out.println("4 ?= " + partitionString_map("hdklqkcssgxlvehva"));
 
         System.out.println("4 ?= " + partitionString_hashset("hdklqkcssgxlvehva"));
+
+        System.out.println("4 ?= " + partitionString_bit("abacaba"));
+        System.out.println("4 ?= " + partitionString_bit("hdklqkcssgxlvehva"));
     }
 }
