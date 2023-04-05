@@ -71,9 +71,50 @@ public class Problem2439_minimizeMaximumOfArray {
         return left;
     }
 
+    // BF time: O(n*max(n)) space: O(1)
+    // TLE
+    public static int minimizeArrayValue_bf(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        int max = 0;
+
+        for (int x : nums) {
+            min = Math.min(min, x);
+            max = Math.max(max, x);
+        }
+
+        int ans = max;
+
+        for (int i = max; i >= min; i--) {
+            long sum = 0;
+
+            boolean flag = true;
+
+            for (int x : nums) {
+                if (x <= i) {
+                    sum += i - x;
+                } else {
+                    if (sum < x - i) {
+                        flag = false;
+                        break;
+                    } else {
+                        sum -= x - i;
+                    }
+                }
+            }
+
+            if (flag) {
+                ans = Math.min(ans, i);
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("10 ?= " + minimizeArrayValue(new int[]{10, 1}));
         System.out.println("5 ?= " + minimizeArrayValue(new int[]{3, 7, 1, 6}));
         System.out.println("16 ?= " + minimizeArrayValue(new int[]{13, 13, 20, 0, 8, 9, 9}));
+
+        System.out.println("16 ?= " + minimizeArrayValue_bf(new int[]{13, 13, 20, 0, 8, 9, 9}));
     }
 }
