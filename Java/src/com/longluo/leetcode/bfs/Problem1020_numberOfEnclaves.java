@@ -30,6 +30,7 @@ import java.util.Queue;
  */
 public class Problem1020_numberOfEnclaves {
 
+    //
     public static int numEnclaves(int[][] grid) {
         if (grid == null || grid.length <= 2 || grid[0].length <= 2) {
             return 0;
@@ -37,27 +38,33 @@ public class Problem1020_numberOfEnclaves {
 
         int row = grid.length;
         int col = grid[0].length;
+
         int[][] step = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
         boolean[][] visited = new boolean[row][col];
         Queue<int[]> queue = new LinkedList<>();
+
         for (int i = 0; i < row; i++) {
             if (grid[i][0] == 1) {
                 queue.offer(new int[]{i, 0});
                 grid[i][0] = 2;
                 visited[i][0] = true;
             }
+
             if (grid[i][col - 1] == 1) {
                 queue.offer(new int[]{i, col - 1});
                 grid[i][col - 1] = 2;
                 visited[i][col - 1] = true;
             }
         }
+
         for (int i = 0; i < col; i++) {
             if (grid[0][i] == 1) {
                 queue.offer(new int[]{0, i});
                 grid[0][i] = 2;
                 visited[0][i] = true;
             }
+
             if (grid[row - 1][i] == 1) {
                 queue.offer(new int[]{row - 1, i});
                 grid[row - 1][i] = 2;
@@ -67,12 +74,15 @@ public class Problem1020_numberOfEnclaves {
 
         while (!queue.isEmpty()) {
             int[] pos = queue.poll();
+
             for (int i = 0; i < 4; i++) {
                 int nextX = pos[0] + step[i][0];
                 int nextY = pos[1] + step[i][1];
+
                 if (nextX < 0 || nextX >= row || nextY < 0 || nextY >= col) {
                     continue;
                 }
+
                 if (!visited[nextX][nextY]) {
                     if (grid[nextX][nextY] == 1) {
                         queue.offer(new int[]{nextX, nextY});
@@ -84,6 +94,7 @@ public class Problem1020_numberOfEnclaves {
         }
 
         int ans = 0;
+
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (grid[i][j] == 1) {
@@ -95,7 +106,7 @@ public class Problem1020_numberOfEnclaves {
         return ans;
     }
 
-
+    //
     public static int numEnclaves_uf(int[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
@@ -105,6 +116,7 @@ public class Problem1020_numberOfEnclaves {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1) {
+
                     int index = i * n + j;
                     if (j + 1 < n && grid[i][j + 1] == 1) {
                         uf.union(index, index + 1);
@@ -189,7 +201,6 @@ public class Problem1020_numberOfEnclaves {
             return onEdge[find(i)];
         }
     }
-
 
     public static void main(String[] args) {
         System.out.println("3 ?= " + numEnclaves(new int[][]{{0, 0, 0, 0}, {1, 0, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}}));
