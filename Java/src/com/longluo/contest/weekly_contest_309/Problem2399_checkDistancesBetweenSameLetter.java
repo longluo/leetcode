@@ -77,8 +77,30 @@ public class Problem2399_checkDistancesBetweenSameLetter {
         return true;
     }
 
+    public static boolean checkDistances_opt(String s, int[] distance) {
+        int n = s.length();
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            if (map.containsKey(ch)) {
+                int last = map.get(ch);
+                if (i - last != distance[ch - 'a']) {
+                    return false;
+                }
+            } else {
+                map.put(ch, i);
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
         System.out.println("false ?= " + checkDistances("aa", new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+        System.out.println("false ?= " + checkDistances_opt("abaccb",
+                new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
     }
 }
