@@ -77,6 +77,7 @@ public class Problem2399_checkDistancesBetweenSameLetter {
         return true;
     }
 
+    // HashMap time: O(n) space: O(C)
     public static boolean checkDistances_opt(String s, int[] distance) {
         int n = s.length();
 
@@ -86,7 +87,7 @@ public class Problem2399_checkDistancesBetweenSameLetter {
             char ch = s.charAt(i);
             if (map.containsKey(ch)) {
                 int last = map.get(ch);
-                if (i - last != distance[ch - 'a']) {
+                if (i - last - 1 != distance[ch - 'a']) {
                     return false;
                 }
             } else {
@@ -100,7 +101,8 @@ public class Problem2399_checkDistancesBetweenSameLetter {
     public static void main(String[] args) {
         System.out.println("true ?= " + checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
         System.out.println("false ?= " + checkDistances("aa", new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
-        System.out.println("false ?= " + checkDistances_opt("abaccb",
+
+        System.out.println("true ?= " + checkDistances_opt("abaccb",
                 new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
     }
 }
