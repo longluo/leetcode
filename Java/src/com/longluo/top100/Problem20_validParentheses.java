@@ -8,7 +8,6 @@ import java.util.*;
  * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
  * <p>
  * 有效字符串需满足：
- * <p>
  * 左括号必须用相同类型的右括号闭合。
  * 左括号必须以正确的顺序闭合。
  * <p>
@@ -39,6 +38,27 @@ import java.util.*;
  * https://leetcode.com/problems/valid-parentheses/
  */
 public class Problem20_validParentheses {
+
+    // StringBuilder time: O(n) space: O(n)
+    public static boolean isValid_sb(String s) {
+        StringBuilder sb = new StringBuilder();
+
+        for (char ch : s.toCharArray()) {
+            if (sb.length() == 0) {
+                sb.append(ch);
+            } else {
+                if ((ch == ')' && sb.charAt(sb.length() - 1) == '(')
+                        || (ch == ']' && sb.charAt(sb.length() - 1) == '[')
+                        || (ch == '}' && sb.charAt(sb.length() - 1) == '{')) {
+                    sb.deleteCharAt(sb.length() - 1);
+                } else {
+                    sb.append(ch);
+                }
+            }
+        }
+
+        return sb.length() == 0;
+    }
 
     // Stack time: O(n) space: O(n)
     public static boolean isValid(String s) {
@@ -104,5 +124,8 @@ public class Problem20_validParentheses {
         System.out.println("false ?= " + isValid("(]"));
         System.out.println("false ?= " + isValid("([}}])"));
         System.out.println("false ?= " + isValid_map("([}}])"));
+
+        System.out.println("true ?= " + isValid_sb("()"));
+        System.out.println("false ?= " + isValid_sb("(]"));
     }
 }
