@@ -1,5 +1,6 @@
 package com.longluo.contest.weekly_contest_309;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -98,11 +99,35 @@ public class Problem2399_checkDistancesBetweenSameLetter {
         return true;
     }
 
+    // Array time: O(n) space: O(C)
+    public static boolean checkDistances_array(String s, int[] distance) {
+        int[] pos = new int[26];
+
+        Arrays.fill(pos, -1);
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (pos[ch - 'a'] >= 0) {
+                if (i - pos[ch - 'a'] - 1 != distance[ch - 'a']) {
+                    return false;
+                }
+            } else {
+                pos[ch - 'a'] = i;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
         System.out.println("false ?= " + checkDistances("aa", new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
 
         System.out.println("true ?= " + checkDistances_opt("abaccb",
+                new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+
+        System.out.println("false ?= " + checkDistances_array("aa", new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+        System.out.println("true ?= " + checkDistances_array("abaccb",
                 new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
     }
 }
