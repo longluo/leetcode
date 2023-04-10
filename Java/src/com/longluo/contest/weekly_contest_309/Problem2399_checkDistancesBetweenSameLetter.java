@@ -78,6 +78,21 @@ public class Problem2399_checkDistancesBetweenSameLetter {
         return true;
     }
 
+    // BF time: O(n^2) space: O(1)
+    public static boolean checkDistances_bf(String s, int[] distance) {
+        int n = s.length();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (s.charAt(i) == s.charAt(j) && j - i - 1 != distance[s.charAt(i) - 'a']) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     // HashMap time: O(n) space: O(C)
     public static boolean checkDistances_opt(String s, int[] distance) {
         int n = s.length();
@@ -128,6 +143,10 @@ public class Problem2399_checkDistancesBetweenSameLetter {
 
         System.out.println("false ?= " + checkDistances_array("aa", new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
         System.out.println("true ?= " + checkDistances_array("abaccb",
+                new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+
+        System.out.println("false ?= " + checkDistances_bf("aa", new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+        System.out.println("true ?= " + checkDistances_bf("abaccb",
                 new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
     }
 }
