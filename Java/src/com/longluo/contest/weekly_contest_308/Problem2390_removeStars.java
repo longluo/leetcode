@@ -37,6 +37,7 @@ package com.longluo.contest.weekly_contest_308;
  */
 public class Problem2390_removeStars {
 
+    // StringBuilder time: O(n) space: O(n)
     public static String removeStars(String s) {
         int len = s.length();
         StringBuilder sb = new StringBuilder(len);
