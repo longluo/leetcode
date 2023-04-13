@@ -82,7 +82,7 @@ public class Problem2404_mostFrequentEvenElement {
         return ans == Integer.MAX_VALUE ? -1 : ans;
     }
 
-    //
+    // PriorityQueue time: O(n + nlogn) space: O(n)
     public static int mostFrequentEven_pq(int[] nums) {
         Map<Integer, Integer> freqMap = new HashMap<>();
 
@@ -106,5 +106,8 @@ public class Problem2404_mostFrequentEvenElement {
 
         System.out.println("2 ?= " + mostFrequentEven_hashmap(new int[]{0, 1, 2, 2, 4, 4, 1}));
         System.out.println("-1 ?= " + mostFrequentEven_hashmap(new int[]{29, 47, 21, 41, 13, 37, 25, 7}));
+
+        System.out.println("2 ?= " + mostFrequentEven_pq(new int[]{0, 1, 2, 2, 4, 4, 1}));
+        System.out.println("-1 ?= " + mostFrequentEven_pq(new int[]{29, 47, 21, 41, 13, 37, 25, 7}));
     }
 }
