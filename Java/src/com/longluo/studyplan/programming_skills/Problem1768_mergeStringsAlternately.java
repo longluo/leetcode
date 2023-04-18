@@ -5,6 +5,7 @@ package com.longluo.studyplan.programming_skills;
  * <p>
  * 给你两个字符串 word1 和 word2 。请你从 word1 开始，通过交替添加字母来合并字符串。如果一个字符串比另一个字符串长，
  * 就将多出来的字母追加到合并后字符串的末尾。
+ * <p>
  * 返回 合并后的字符串 。
  * <p>
  * 示例 1：
@@ -35,7 +36,7 @@ package com.longluo.studyplan.programming_skills;
  * 1 <= word1.length, word2.length <= 100
  * word1 和 word2 由小写英文字母组成
  * <p>
- * https://leetcode.cn  /problems/merge-strings-alternately/
+ * https://leetcode.cn/problems/merge-strings-alternately/
  */
 public class Problem1768_mergeStringsAlternately {
 
@@ -64,7 +65,30 @@ public class Problem1768_mergeStringsAlternately {
         return sb.toString();
     }
 
+    // Two Pointers time: O(m+n) space: O(m+n)
+    public static String mergeAlternately_opt(String word1, String word2) {
+        StringBuilder ans = new StringBuilder();
+
+        for (int i = 0, j = 0; i < word1.length() || j < word2.length(); ) {
+            if (i < word1.length() && j < word2.length()) {
+                ans.append(word1.charAt(i));
+                ans.append(word2.charAt(j));
+                i++;
+                j++;
+            } else if (i < word1.length()) {
+                ans.append(word1.charAt(i));
+                i++;
+            } else {
+                ans.append(word2.charAt(j));
+                j++;
+            }
+        }
+
+        return ans.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println("apbqcr ?= " + mergeAlternately("abc", "pqr"));
+        System.out.println("apbqcr ?= " + mergeAlternately_opt("abc", "pqr"));
     }
 }
