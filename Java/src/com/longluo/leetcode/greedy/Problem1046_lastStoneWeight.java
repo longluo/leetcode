@@ -6,9 +6,11 @@ import java.util.*;
  * 1046. 最后一块石头的重量
  * <p>
  * 有一堆石头，每块石头的重量都是正整数。
+ * <p>
  * 每一回合，从中选出两块 最重的 石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x <= y。那么粉碎的可能结果如下：
  * 如果 x == y，那么两块石头都会被完全粉碎；
  * 如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+ * <p>
  * 最后，最多只会剩下一块石头。返回此石头的重量。如果没有石头剩下，就返回 0。
  * <p>
  * 示例：
@@ -28,7 +30,6 @@ import java.util.*;
  */
 public class Problem1046_lastStoneWeight {
 
-    // TODO: 2022/7/3
     // BF time: O(nlogn) space: O(logn)
     public static int lastStoneWeight_bf(int[] stones) {
         int len = stones.length;
@@ -47,6 +48,31 @@ public class Problem1046_lastStoneWeight {
         }
 
         return stones[len - 1];
+    }
+
+    // List time: O(nlogn) space: O(n)
+    public static int lastStoneWeight_list(int[] stones) {
+        List<Integer> list = new ArrayList<>();
+
+        for (int x : stones) {
+            list.add(x);
+        }
+
+        while (list.size() > 1) {
+            Collections.sort(list, Collections.reverseOrder());
+
+            int first = list.get(0);
+            int second = list.get(1);
+
+            list.remove(Integer.valueOf(first));
+            list.remove(Integer.valueOf(second));
+
+            if (first > second) {
+                list.add(first - second);
+            }
+        }
+
+        return list.size() > 0 ? list.get(0) : 0;
     }
 
     // LinkedList time: O(nlogn) space: O(logn)
@@ -104,6 +130,9 @@ public class Problem1046_lastStoneWeight {
 
     public static void main(String[] args) {
         System.out.println("1 ?= " + lastStoneWeight_bf(new int[]{2, 7, 4, 1, 8, 1}));
+
+        System.out.println("1 ?= " + lastStoneWeight_list(new int[]{2, 7, 4, 1, 8, 1}));
+
         System.out.println("1 ?= " + lastStoneWeight(new int[]{2, 7, 4, 1, 8, 1}));
         System.out.println("2 ?= " + lastStoneWeight(new int[]{1, 3}));
         System.out.println("0 ?= " + lastStoneWeight(new int[]{2, 2}));
