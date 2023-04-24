@@ -77,21 +77,16 @@ public class Problem1046_lastStoneWeight {
 
     // LinkedList time: O(nlogn) space: O(logn)
     public static int lastStoneWeight(int[] stones) {
-        if (stones.length <= 1) {
-            return stones[0];
-        }
-
         List<Integer> res = new LinkedList<>();
-        for (int num : stones) {
-            res.add(num);
+
+        for (int x : stones) {
+            res.add(x);
         }
 
         while (res.size() > 1) {
             Collections.sort(res, Collections.reverseOrder());
+
             if (res.get(0).equals(res.get(1))) {
-                if (res.size() == 2) {
-                    return 0;
-                }
                 res.remove(0);
                 res.remove(0);
             } else {
@@ -100,20 +95,15 @@ public class Problem1046_lastStoneWeight {
             }
         }
 
-        return res.get(0);
+        return res.size() > 0 ? res.get(0) : 0;
     }
 
     // Max Heap time: O(nlogn) space: O(n)
-    public static int lastStoneWeight2(int[] stones) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
+    public static int lastStoneWeight_pq(int[] stones) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
 
-        for (int num : stones) {
-            pq.offer(num);
+        for (int x : stones) {
+            pq.offer(x);
         }
 
         while (pq.size() > 1) {
@@ -138,9 +128,9 @@ public class Problem1046_lastStoneWeight {
         System.out.println("0 ?= " + lastStoneWeight(new int[]{2, 2}));
         System.out.println("2 ?= " + lastStoneWeight(new int[]{10, 4, 2, 10}));
 
-        System.out.println("1 ?= " + lastStoneWeight2(new int[]{2, 7, 4, 1, 8, 1}));
-        System.out.println("2 ?= " + lastStoneWeight2(new int[]{1, 3}));
-        System.out.println("0 ?= " + lastStoneWeight2(new int[]{2, 2}));
-        System.out.println("2 ?= " + lastStoneWeight2(new int[]{10, 4, 2, 10}));
+        System.out.println("1 ?= " + lastStoneWeight_pq(new int[]{2, 7, 4, 1, 8, 1}));
+        System.out.println("2 ?= " + lastStoneWeight_pq(new int[]{1, 3}));
+        System.out.println("0 ?= " + lastStoneWeight_pq(new int[]{2, 2}));
+        System.out.println("2 ?= " + lastStoneWeight_pq(new int[]{10, 4, 2, 10}));
     }
 }
