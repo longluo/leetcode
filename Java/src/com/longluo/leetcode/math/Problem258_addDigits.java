@@ -20,30 +20,33 @@ package com.longluo.leetcode.math;
  * 提示：
  * 0 <= num <= 2^31 - 1
  * <p>
- * https://leetcode-cn.com/problems/add-digits/
+ * https://leetcode.cn/problems/add-digits/
  */
 public class Problem258_addDigits {
 
-    public static int addDigits(int num) {
+    // Math time: O(1) space: O(1)
+    public static int addDigits_math(int num) {
         if (num == 0) {
             return 0;
         }
 
         if (num % 9 == 0) {
             return 9;
-        } else {
-            return num % 9;
         }
+
+        return num % 9;
     }
 
-    public static int addDigits_bf(int num) {
+    // Recursion time: O(logn) space: O(1)
+    public static int addDigits(int num) {
         int ans = 0;
+
         if (num >= 10) {
             while (num > 0) {
                 ans += num % 10;
                 num /= 10;
             }
-            ans = addDigits_bf(ans);
+            ans = addDigits(ans);
         } else {
             ans = num;
         }
@@ -58,7 +61,10 @@ public class Problem258_addDigits {
         System.out.println("1 ?= " + addDigits(10));
         System.out.println("2 ?= " + addDigits(38));
 
-        System.out.println("2 ?= " + addDigits_bf(38));
+        System.out.println("2 ?= " + addDigits(38));
+
+        System.out.println("9 ?= " + addDigits_math(9));
+        System.out.println("2 ?= " + addDigits_math(38));
     }
 }
 
