@@ -1,11 +1,14 @@
 package com.longluo.leetcode.math;
 
+import java.util.Arrays;
+
 /**
  * 319. 灯泡开关
  * <p>
  * 初始时有 n 个灯泡处于关闭状态。第一轮，你将会打开所有灯泡。接下来的第二轮，你将会每两个灯泡关闭一个。
  * 第三轮，你每三个灯泡就切换一个灯泡的开关（即，打开变关闭，关闭变打开）。第 i 轮，你每 i 个灯泡就切换一个灯泡的开关。
  * 直到第 n 轮，你只需要切换最后一个灯泡的开关。
+ * <p>
  * 找出并返回 n 轮后有多少个亮着的灯泡。
  * <p>
  * 示例 1：
@@ -30,7 +33,7 @@ package com.longluo.leetcode.math;
  * 提示：
  * 0 <= n <= 10^9
  * <p>
- * https://leetcode-cn.com/problems/bulb-switcher/
+ * https://leetcode.cn/problems/bulb-switcher/
  */
 public class Problem319_bulbSwitcher {
 
@@ -62,6 +65,28 @@ public class Problem319_bulbSwitcher {
         return ans;
     }
 
+    // Simulate time: O(n^2) space: O(n)
+    public static int bulbSwitch_simu(int n) {
+        if (n == 0) {
+            return 0;
+        }
+
+        int[] bulps = new int[n];
+
+        Arrays.fill(bulps, 1);
+
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (j % i == 0) {
+                    bulps[j - 1] = 1 - bulps[j - 1];
+                }
+            }
+        }
+
+        return Arrays.stream(bulps).sum();
+    }
+
+    // Math time: O(logn) space: O(1)
     public static int bulbSwitch_fast(int n) {
         return (int) Math.sqrt(n + 0.5);
     }
@@ -73,6 +98,14 @@ public class Problem319_bulbSwitcher {
         System.out.println("1 ?= " + bulbSwitch(3));
         System.out.println("2 ?= " + bulbSwitch(4));
         System.out.println("2 ?= " + bulbSwitch(5));
-        System.out.println("2 ?= " + bulbSwitch(99999));
+        System.out.println("316 ?= " + bulbSwitch(99999));
+
+        System.out.println("1 ?= " + bulbSwitch_simu(2));
+        System.out.println("1 ?= " + bulbSwitch_simu(3));
+        System.out.println("2 ?= " + bulbSwitch_simu(4));
+        System.out.println("2 ?= " + bulbSwitch_simu(5));
+        System.out.println("316 ?= " + bulbSwitch_simu(99999));
+
+        System.out.println("316 ?= " + bulbSwitch_fast(99999));
     }
 }
