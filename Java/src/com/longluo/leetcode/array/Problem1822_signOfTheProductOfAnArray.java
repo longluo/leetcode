@@ -31,25 +31,28 @@ package com.longluo.leetcode.array;
  * 1 <= nums.length <= 1000
  * -100 <= nums[i] <= 100
  * <p>
- * https://leetcode-cn.com/problems/sign-of-the-product-of-an-array/
+ * https://leetcode.cn/problems/sign-of-the-product-of-an-array/
  */
 public class Problem1822_signOfTheProductOfAnArray {
 
-    // BF 计算负数数目  O(n) O(1)
+    // Math time: O(n) space: O(1)
     public static int arraySign(int[] nums) {
-        int negativeNum = 0;
-        for (int num : nums) {
-            if (num == 0) {
+        int negCnt = 0;
+
+        for (int x : nums) {
+            if (x == 0) {
                 return 0;
-            } else if (num < 0) {
-                negativeNum++;
+            } else if (x < 0) {
+                negCnt++;
             }
         }
 
-        return negativeNum % 2 == 0 ? 1 : -1;
+        return negCnt % 2 == 0 ? 1 : -1;
     }
 
     public static void main(String[] args) {
-
+        System.out.println("1 ?= " + arraySign(new int[]{-1, -2, -3, -4, 3, 2, 1}));
+        System.out.println("0 ?= " + arraySign(new int[]{1, 5, 0, 2, -3}));
+        System.out.println("-1 ?= " + arraySign(new int[]{-1, 1, -1, 1, -1}));
     }
 }
