@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * https://leetcode.cn/contest/weekly-contest-286/
+ */
+
+/**
  * 2215. 找出两数组的不同
  * <p>
  * 给你两个下标从 0 开始的整数数组 nums1 和 nums2 ，请你返回一个长度为 2 的列表 answer ，其中：
@@ -36,13 +40,16 @@ import java.util.Set;
  */
 public class Problem2215_findDifference {
 
-    // TODO: 2022/6/2
+    // HashSet time: O(n) space: O(n)
     public static List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
         List<List<Integer>> ans = new ArrayList<>();
+
         Set<Integer> list1 = new HashSet<>();
         Set<Integer> list2 = new HashSet<>();
+
         Set<Integer> set1 = new HashSet<>();
         Set<Integer> set2 = new HashSet<>();
+
         for (int num : nums1) {
             set1.add(num);
         }
@@ -62,14 +69,60 @@ public class Problem2215_findDifference {
 
         List<Integer> one = new ArrayList<>(list1);
         List<Integer> two = new ArrayList<>(list2);
+
         ans.add(one);
         ans.add(two);
 
         return ans;
     }
 
+    // BF time: O(mn) space: O(n)
+    public static List<List<Integer>> findDifference_bf(int[] nums1, int[] nums2) {
+        List<List<Integer>> ans = new ArrayList<>();
+
+        Set<Integer> onlyInNum1 = new HashSet<>();
+
+        for (int x : nums1) {
+            boolean flag = true;
+            for (int y : nums2) {
+                if (x == y) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                onlyInNum1.add(x);
+            }
+        }
+
+        Set<Integer> onlyInNum2 = new HashSet<>();
+
+        for (int x : nums2) {
+            boolean flag = true;
+            for (int y : nums1) {
+                if (x == y) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                onlyInNum2.add(x);
+            }
+        }
+
+        ans.add(new ArrayList<>(onlyInNum1));
+        ans.add(new ArrayList<>(onlyInNum2));
+
+        return ans;
+    }
 
     public static void main(String[] args) {
-        findDifference(new int[]{1, 1, 3, 3}, new int[]{1, 1, 2, 2});
+        System.out.println("[[1, 3], [4, 6]] ?= " + findDifference(new int[]{1, 2, 3}, new int[]{2, 4, 6}));
+        System.out.println("[[3], []] ?= " + findDifference(new int[]{1, 2, 3, 3}, new int[]{1, 1, 2, 2}));
+
+        System.out.println("[[1, 3], [4, 6]] ?= " + findDifference_bf(new int[]{1, 2, 3}, new int[]{2, 4, 6}));
+        System.out.println("[[3], []] ?= " + findDifference_bf(new int[]{1, 2, 3, 3}, new int[]{1, 1, 2, 2}));
     }
 }
