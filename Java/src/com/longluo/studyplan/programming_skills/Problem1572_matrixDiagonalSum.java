@@ -30,17 +30,19 @@ package com.longluo.studyplan.programming_skills;
  * 1 <= n <= 100
  * 1 <= mat[i][j] <= 100
  * <p>
- * https://leetcode-cn.com/problems/matrix-diagonal-sum/
+ * https://leetcode.cn/problems/matrix-diagonal-sum/
  */
 public class Problem1572_matrixDiagonalSum {
 
     // BF time: O(n^2) space: O(1)
     public static int diagonalSum_bf(int[][] mat) {
-        int row = mat.length;
+        int n = mat.length;
+
         int sum = 0;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < row; j++) {
-                if (i == j || i + j == row - 1) {
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j || i + j == n - 1) {
                     sum += mat[i][j];
                 }
             }
@@ -52,7 +54,9 @@ public class Problem1572_matrixDiagonalSum {
     // time: O(n) space: O(1)
     public static int diagonalSum_opt(int[][] mat) {
         int row = mat.length;
+
         int sum = 0;
+
         for (int i = 0; i < row; i++) {
             sum += mat[i][i];
             sum += mat[i][row - 1 - i];
@@ -64,7 +68,9 @@ public class Problem1572_matrixDiagonalSum {
     // time: O(n) space: O(1)
     public static int diagonalSum_on(int[][] mat) {
         int row = mat.length;
+
         int sum = 0;
+
         for (int i = 0; i < row; i++) {
             sum += mat[i][i] + mat[i][row - 1 - i];
         }
@@ -73,6 +79,8 @@ public class Problem1572_matrixDiagonalSum {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("25 ?= " + diagonalSum_bf(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
+        System.out.println("25 ?= " + diagonalSum_opt(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
+        System.out.println("25 ?= " + diagonalSum_on(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
     }
 }
