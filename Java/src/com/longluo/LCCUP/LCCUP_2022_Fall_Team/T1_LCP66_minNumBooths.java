@@ -1,4 +1,4 @@
-package com.longluo.contest.LCCUP2022_Team;
+package com.longluo.LCCUP.LCCUP_2022_Fall_Team;
 
 /**
  * LCP 66. 最小展台数量
@@ -29,7 +29,7 @@ package com.longluo.contest.LCCUP2022_Team;
  * <p>
  * https://leetcode.cn/problems/600YaG/
  */
-public class Problem1_minNumBooths {
+public class T1_LCP66_minNumBooths {
 
     // Count time: O(26*n) space: O(26)
     public static int minNumBooths(String[] demand) {
