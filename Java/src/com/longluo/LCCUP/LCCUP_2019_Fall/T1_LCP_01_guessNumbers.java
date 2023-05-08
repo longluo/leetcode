@@ -1,4 +1,4 @@
-package com.longluo.LCCUP;
+package com.longluo.LCCUP.LCCUP_2019_Fall;
 
 /**
  * LCP 01. 猜数字
@@ -26,7 +26,7 @@ package com.longluo.LCCUP;
  * <p>
  * https://leetcode.cn/problems/guess-numbers/
  */
-public class LCP01_guessNumbers {
+public class T1_LCP_01_guessNumbers {
 
     // Simulate time: O(C) space: O(1)
     public static int game(int[] guess, int[] answer) {
