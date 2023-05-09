@@ -86,8 +86,69 @@ public class T3_LCP08_getTriggerTime {
         return ans;
     }
 
+    // BinarySearch time: O(nlogm) space: O(m)
+    public static int[] getTriggerTime_bs(int[][] increase, int[][] requirements) {
+        int m = increase.length;
+
+        int[][] sums = new int[m + 1][3];
+
+        for (int i = 0; i < m; i++) {
+            sums[i + 1][0] = increase[i][0] + sums[i][0];
+            sums[i + 1][1] = increase[i][1] + sums[i][1];
+            sums[i + 1][2] = increase[i][2] + sums[i][2];
+        }
+
+        int n = requirements.length;
+
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+
+        for (int i = 0; i < n; i++) {
+            int lowBound = binarySearch(sums, requirements[i][0]);
+            if (lowBound < 0) {
+                continue;
+            }
+
+            for (int j = lowBound; j < m + 1; j++) {
+                if (sums[j][1] >= requirements[i][1] && sums[j][2] >= requirements[i][2]) {
+                    ans[i] = j;
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    private static int binarySearch(int[][] array, int target) {
+        int m = array.length;
+
+        if (array[m - 1][0] < target) {
+            return -1;
+        } else if (array[0][0] >= target) {
+            return 0;
+        }
+
+        int left = 0;
+        int right = m - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (array[mid][0] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return left;
+    }
+
     public static void main(String[] args) {
         System.out.println("[2, -1, 3, -1] ?= " + Arrays.toString(getTriggerTime(new int[][]{{2, 8, 4}, {2, 5, 0}, {10, 9, 8}}, new int[][]{{2, 11, 3}, {15, 10, 7}, {9, 17, 12}, {8, 1, 14}})));
         System.out.println("[0] ?= " + Arrays.toString(getTriggerTime(new int[][]{{1, 1, 1}}, new int[][]{{0, 0, 0}})));
+
+        System.out.println("[2, -1, 3, -1] ?= " + Arrays.toString(getTriggerTime_bs(new int[][]{{2, 8, 4}, {2, 5, 0}, {10, 9, 8}}, new int[][]{{2, 11, 3}, {15, 10, 7}, {9, 17, 12}, {8, 1, 14}})));
+        System.out.println("[0] ?= " + Arrays.toString(getTriggerTime_bs(new int[][]{{1, 1, 1}}, new int[][]{{0, 0, 0}})));
     }
 }
