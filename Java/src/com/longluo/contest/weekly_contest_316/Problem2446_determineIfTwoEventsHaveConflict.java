@@ -1,16 +1,18 @@
 package com.longluo.contest.weekly_contest_316;
 
 /**
- * 6214. 判断两个事件是否存在冲突
+ * https://leetcode.cn/contest/weekly-contest-316/
+ */
+
+/**
+ * 2446. 判断两个事件是否存在冲突
  * <p>
  * 给你两个字符串数组 event1 和 event2 ，表示发生在同一天的两个闭区间时间段事件，其中：
- * <p>
  * event1 = [startTime1, endTime1] 且
  * event2 = [startTime2, endTime2]
  * 事件的时间为有效的 24 小时制且按 HH:MM 格式给出。
  * <p>
  * 当两个事件存在某个非空的交集时（即，某些时刻是两个事件都包含的），则认为出现 冲突 。
- * <p>
  * 如果两个事件之间存在冲突，返回 true ；否则，返回 false 。
  * <p>
  * 示例 1：
@@ -37,7 +39,7 @@ package com.longluo.contest.weekly_contest_316;
  * <p>
  * https://leetcode.cn/problems/determine-if-two-events-have-conflict/
  */
-public class Problem6214_determineIfTwoEventsHaveConflict {
+public class Problem2446_determineIfTwoEventsHaveConflict {
 
     // Simulate time: O(1) space: O(1)
     public static boolean haveConflict(String[] event1, String[] event2) {
