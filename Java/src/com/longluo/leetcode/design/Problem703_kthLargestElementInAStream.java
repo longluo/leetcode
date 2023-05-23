@@ -34,12 +34,12 @@ import java.util.*;
  * 最多调用 add 方法 10^4 次
  * 题目数据保证，在查找第 k 大元素时，数组中至少有 k 个元素
  * <p>
- * https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/
+ * https://leetcode.cn/problems/kth-largest-element-in-a-stream/
  */
 public class Problem703_kthLargestElementInAStream {
 
     // BF ArrayList time: O(nlogn) space: O(n)
-    class KthLargest {
+    static class KthLargest {
         List<Integer> numList;
         int kLargest;
 
@@ -60,9 +60,10 @@ public class Problem703_kthLargestElementInAStream {
     }
 
     // Heap time: O(nlogk) space: O(k)
-    class KthLargest_Heap {
+    static class KthLargest_Heap {
         PriorityQueue<Integer> pq;
         int kLargest;
+
         public KthLargest_Heap(int k, int[] nums) {
             kLargest = k;
             pq = new PriorityQueue<>();
@@ -87,6 +88,12 @@ public class Problem703_kthLargestElementInAStream {
      * int param_1 = obj.add(val);
      */
     public static void main(String[] args) {
+        KthLargest kthLargest = new KthLargest(3, new int[]{4, 5, 8, 2});
+        System.out.println("4 ?= " + kthLargest.add(3));
+        System.out.println("5 ?= " + kthLargest.add(5));
 
+        KthLargest_Heap kthLargest_heap = new KthLargest_Heap(3, new int[]{4, 5, 8, 2});
+        System.out.println("4 ?= " + kthLargest_heap.add(3));
+        System.out.println("5 ?= " + kthLargest_heap.add(5));
     }
 }
