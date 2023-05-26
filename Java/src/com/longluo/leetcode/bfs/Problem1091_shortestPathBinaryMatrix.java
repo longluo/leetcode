@@ -90,7 +90,6 @@ public class Problem1091_shortestPathBinaryMatrix {
     }
 
     // BFS Distance time: O(n^2) space: O(n^2)
-    // TLE
     public static int shortestPathBinaryMatrix_dist(int[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
@@ -130,7 +129,7 @@ public class Problem1091_shortestPathBinaryMatrix {
                         continue;
                     }
 
-                    if (dist[nextX][nextY] < dist[cur[0]][cur[1]] + 1) {
+                    if (dist[nextX][nextY] <= dist[cur[0]][cur[1]] + 1) {
                         continue;
                     }
 
