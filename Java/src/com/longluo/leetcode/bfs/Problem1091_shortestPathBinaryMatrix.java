@@ -1,8 +1,6 @@
 package com.longluo.leetcode.bfs;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /**
@@ -38,7 +36,7 @@ import java.util.Queue;
  */
 public class Problem1091_shortestPathBinaryMatrix {
 
-    // BFS time: O(n) space: O(n)
+    // BFS time: O(n^2) space: O(n^2)
     public static int shortestPathBinaryMatrix(int[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0) {
             return -1;
