@@ -28,12 +28,12 @@ package com.longluo.studyplan.programming_skills;
  * carType 取值为 1， 2 或 3
  * 最多会调用 addCar 函数 1000 次
  * <p>
- * https://leetcode-cn.com/problems/design-parking-system/
+ * https://leetcode.cn/problems/design-parking-system/
  */
 public class Problem1603_designParkingSystem {
 
     // Simulate time: O(1) space: O(1)
-    class ParkingSystem {
+    static class ParkingSystem {
         int[] carParkingLot = new int[3];
 
         public ParkingSystem(int big, int medium, int small) {
@@ -48,6 +48,10 @@ public class Problem1603_designParkingSystem {
     }
 
     public static void main(String[] args) {
-
+        ParkingSystem parkingSystem = new ParkingSystem(1, 1, 0);
+        System.out.println("true ?= " + parkingSystem.addCar(1));
+        System.out.println("true ?= " + parkingSystem.addCar(2));
+        System.out.println("false ?= " + parkingSystem.addCar(3));
+        System.out.println("false ?= " + parkingSystem.addCar(1));
     }
 }
