@@ -4,7 +4,9 @@ import java.util.*;
 
 /**
  * 705. 设计哈希集合
+ * <p>
  * 不使用任何内建的哈希表库设计一个哈希集合（HashSet）。
+ * <p>
  * 实现 MyHashSet类：
  * void add(key) 向哈希集合中插入值 key 。
  * bool contains(key) 返回哈希集合中是否存在这个值 key 。
@@ -16,7 +18,6 @@ import java.util.*;
  * [[], [1], [2], [1], [3], [2], [2], [2], [2]]
  * 输出：
  * [null, null, null, true, false, null, true, null, false]
- * <p>
  * 解释：
  * MyHashSet myHashSet = new MyHashSet();
  * myHashSet.add(1);      // set = [1]
@@ -36,7 +37,7 @@ import java.util.*;
  */
 public class Problem705_designHashSet {
 
-    class MyHashSet {
+    static class MyHashSet {
         private static final int BASE = 593;
         private LinkedList[] data;
 
@@ -52,6 +53,7 @@ public class Problem705_designHashSet {
 
         public void add(int key) {
             int loc = hash(key);
+
             Iterator<Integer> iterator = data[loc].iterator();
             while (iterator.hasNext()) {
                 Integer number = iterator.next();
@@ -59,6 +61,7 @@ public class Problem705_designHashSet {
                     return;
                 }
             }
+
             data[loc].offerLast(key);
         }
 
@@ -86,6 +89,7 @@ public class Problem705_designHashSet {
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -94,11 +98,62 @@ public class Problem705_designHashSet {
         }
     }
 
-/**
- * Your MyHashSet object will be instantiated and called as such:
- * MyHashSet obj = new MyHashSet();
- * obj.add(key);
- * obj.remove(key);
- * boolean param_3 = obj.contains(key);
- */
+    static class MyHashSet_list {
+        List<Integer> dataList;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public MyHashSet_list() {
+            dataList = new ArrayList<>();
+        }
+
+        public void add(int key) {
+            for (int x : dataList) {
+                if (x == key) {
+                    return;
+                }
+            }
+
+            dataList.add(key);
+        }
+
+        public void remove(int key) {
+            for (int i = 0; i < dataList.size(); i++) {
+                if (dataList.get(i) == key) {
+                    dataList.remove(i);
+                    break;
+                }
+            }
+        }
+
+        public boolean contains(int key) {
+            for (int x : dataList) {
+                if (x == key) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    /**
+     * Your MyHashSet object will be instantiated and called as such:
+     * MyHashSet obj = new MyHashSet();
+     * obj.add(key);
+     * obj.remove(key);
+     * boolean param_3 = obj.contains(key);
+     */
+    public static void main(String[] args) {
+        MyHashSet myHashSet = new MyHashSet();
+        myHashSet.add(1);
+        myHashSet.add(2);
+        System.out.println("true ?= " + myHashSet.contains(1));
+        System.out.println("false ?= " + myHashSet.contains(3));
+        myHashSet.add(2);      // set = [1, 2]
+        System.out.println("true ?= " + myHashSet.contains(2));
+        myHashSet.remove(2);   // set = [1]
+        System.out.println("false ?= " + myHashSet.contains(2));
+    }
 }
