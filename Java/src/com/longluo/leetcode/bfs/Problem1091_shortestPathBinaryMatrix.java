@@ -1,6 +1,5 @@
 package com.longluo.leetcode.bfs;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -142,12 +141,69 @@ public class Problem1091_shortestPathBinaryMatrix {
         return -1;
     }
 
+    // BFS Opt time: O(n^2) space: O(n^2)
+    public static int shortestPathBinaryMatrix_opt(int[][] grid) {
+        int n = grid.length;
+
+        if (grid[0][0] == 1 || grid[n - 1][n - 1] == 1) {
+            return -1;
+        }
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{0, 0});
+
+        boolean[][] visited = new boolean[n][n];
+        visited[0][0] = true;
+
+        int steps = 0;
+
+        while (!queue.isEmpty()) {
+            steps++;
+
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                int[] cur = queue.poll();
+
+                int x = cur[0];
+                int y = cur[1];
+
+                if (x == n - 1 && y == n - 1) {
+                    return steps;
+                }
+
+                for (int j = -1; j <= 1; j++) {
+                    for (int k = -1; k <= 1; k++) {
+                        int nextX = x + j;
+                        int nextY = y + k;
+
+                        if (nextX < 0 || nextX >= n || nextY < 0 || nextY >= n) {
+                            continue;
+                        }
+
+                        if (grid[nextX][nextY] == 1 || visited[nextX][nextY]) {
+                            continue;
+                        }
+
+                        visited[nextX][nextY] = true;
+                        queue.offer(new int[]{nextX, nextY});
+                    }
+                }
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("2 ?= " + shortestPathBinaryMatrix(new int[][]{{0, 1}, {1, 0}}));
         System.out.println("-1 ?= " + shortestPathBinaryMatrix(new int[][]{{0, 0, 0, 0, 1}, {1, 0, 0, 0, 0}, {0, 1, 0, 1, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 0}}));
 
         System.out.println("2 ?= " + shortestPathBinaryMatrix_dist(new int[][]{{0, 1}, {1, 0}}));
         System.out.println("-1 ?= " + shortestPathBinaryMatrix_dist(new int[][]{{0, 0, 0, 0, 1}, {1, 0, 0, 0, 0}, {0, 1, 0, 1, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 0}}));
+
+        System.out.println("2 ?= " + shortestPathBinaryMatrix_opt(new int[][]{{0, 1}, {1, 0}}));
+        System.out.println("-1 ?= " + shortestPathBinaryMatrix_opt(new int[][]{{0, 0, 0, 0, 1}, {1, 0, 0, 0, 0}, {0, 1, 0, 1, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 0}}));
     }
 }
 
