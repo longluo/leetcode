@@ -1,8 +1,6 @@
 package com.longluo.leetcode.dfs;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 1376. 通知所有员工所需的时间
@@ -115,11 +113,60 @@ public class Problem1376_timeNeededToInformAllEmployees {
         return Arrays.stream(time).max().getAsInt();
     }
 
+    // BFS time: O(n) space: O(n)
+    public static int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+        List<Integer>[] graph = new List[n];
+
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (manager[i] == -1) {
+                graph[headID].add(i);
+            } else {
+                graph[manager[i]].add(i);
+            }
+        }
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{headID, informTime[headID]});
+
+        boolean[] visited = new boolean[n];
+        visited[headID] = true;
+
+        int[] time = new int[n];
+        time[headID] = informTime[headID];
+
+        while (!queue.isEmpty()) {
+            int[] curNode = queue.poll();
+
+            int id = curNode[0];
+            int cost = curNode[1];
+
+            List<Integer> adjs = graph[id];
+
+            for (int nextId : adjs) {
+                if (visited[nextId]) {
+                    continue;
+                }
+
+                visited[nextId] = true;
+                time[nextId] = cost + informTime[nextId];
+                queue.offer(new int[]{nextId, time[nextId]});
+            }
+        }
+
+        return Arrays.stream(time).max().getAsInt();
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + numOfMinutes_bfs(1, 0, new int[]{-1}, new int[]{0}));
         System.out.println("1 ?= " + numOfMinutes_bfs(6, 2, new int[]{2, 2, -1, 2, 2, 2}, new int[]{0, 0, 1, 0, 0, 0}));
         System.out.println("2560 ?= " + numOfMinutes_bfs(11, 4, new int[]{5, 9, 6, 10, -1, 8, 9, 1, 9, 3, 4}, new int[]{0, 213, 0, 253, 686, 170, 975, 0, 261, 309, 337})); // 686 + 337 + 253 +
 
         System.out.println("2560 ?= " + numOfMinutes_bfs_opt(11, 4, new int[]{5, 9, 6, 10, -1, 8, 9, 1, 9, 3, 4}, new int[]{0, 213, 0, 253, 686, 170, 975, 0, 261, 309, 337})); // 686 + 337 + 253 +
+
+        System.out.println("2560 ?= " + numOfMinutes(11, 4, new int[]{5, 9, 6, 10, -1, 8, 9, 1, 9, 3, 4}, new int[]{0, 213, 0, 253, 686, 170, 975, 0, 261, 309, 337})); // 686 + 337 + 253 +
     }
 }
