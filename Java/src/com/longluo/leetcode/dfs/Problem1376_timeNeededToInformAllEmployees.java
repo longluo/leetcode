@@ -81,9 +81,45 @@ public class Problem1376_timeNeededToInformAllEmployees {
         return Arrays.stream(time).max().getAsInt();
     }
 
+    // BFS Opt time: O(n^2) space: O(n)
+    // TLE
+    public static int numOfMinutes_bfs_opt(int n, int headID, int[] manager, int[] informTime) {
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{headID, informTime[headID]});
+
+        boolean[] visited = new boolean[n];
+        visited[headID] = true;
+
+        int[] time = new int[n];
+        time[headID] = informTime[headID];
+
+        while (!queue.isEmpty()) {
+            int[] curNode = queue.poll();
+
+            int id = curNode[0];
+            int cost = curNode[1];
+
+            for (int j = 0; j < n; j++) {
+                if (visited[j]) {
+                    continue;
+                }
+
+                if (manager[j] == id) {
+                    visited[j] = true;
+                    time[j] = cost + informTime[j];
+                    queue.offer(new int[]{j, time[j]});
+                }
+            }
+        }
+
+        return Arrays.stream(time).max().getAsInt();
+    }
+
     public static void main(String[] args) {
         System.out.println("0 ?= " + numOfMinutes_bfs(1, 0, new int[]{-1}, new int[]{0}));
         System.out.println("1 ?= " + numOfMinutes_bfs(6, 2, new int[]{2, 2, -1, 2, 2, 2}, new int[]{0, 0, 1, 0, 0, 0}));
         System.out.println("2560 ?= " + numOfMinutes_bfs(11, 4, new int[]{5, 9, 6, 10, -1, 8, 9, 1, 9, 3, 4}, new int[]{0, 213, 0, 253, 686, 170, 975, 0, 261, 309, 337})); // 686 + 337 + 253 +
+
+        System.out.println("2560 ?= " + numOfMinutes_bfs_opt(11, 4, new int[]{5, 9, 6, 10, -1, 8, 9, 1, 9, 3, 4}, new int[]{0, 213, 0, 253, 686, 170, 975, 0, 261, 309, 337})); // 686 + 337 + 253 +
     }
 }
