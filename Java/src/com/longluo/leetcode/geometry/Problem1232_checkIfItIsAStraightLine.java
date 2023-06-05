@@ -5,6 +5,7 @@ package com.longluo.leetcode.geometry;
  * <p>
  * 在一个 XY 坐标系中有一些点，我们用数组 coordinates 来分别记录它们的坐标，
  * 其中 coordinates[i] = [x, y]表示横坐标为 x、纵坐标为 y 的点。
+ * <p>
  * 请你来判断，这些点是否在该坐标系中属于同一条直线上，是则返回 true，否则请返回 false。
  * <p>
  * 示例 1：
@@ -21,7 +22,7 @@ package com.longluo.leetcode.geometry;
  * -10^4 <= coordinates[i][0], coordinates[i][1] <= 10^4
  * coordinates 中不含重复的点
  * <p>
- * https://leetcode-cn.com/problems/check-if-it-is-a-straight-line/
+ * https://leetcode.cn/problems/check-if-it-is-a-straight-line/
  */
 public class Problem1232_checkIfItIsAStraightLine {
 
@@ -77,8 +78,10 @@ public class Problem1232_checkIfItIsAStraightLine {
     // Geometry Set P0 as the origin time: O(n) space: O(1)
     public static boolean checkStraightLine_opt(int[][] coordinates) {
         int len = coordinates.length;
+
         int deltaX = coordinates[0][0];
         int deltaY = coordinates[0][1];
+
         for (int i = 1; i < len; i++) {
             coordinates[i][0] -= deltaX;
             coordinates[i][1] -= deltaY;
@@ -99,6 +102,7 @@ public class Problem1232_checkIfItIsAStraightLine {
     public static void main(String[] args) {
         System.out.println("true ?= " + checkStraightLine(new int[][]{{2, 1}, {4, 2}, {6, 3}}));
         System.out.println("true ?= " + checkStraightLine(new int[][]{{0, 0}, {0, 1}, {0, -1}}));
+
         System.out.println("true ?= " + checkStraightLine_opt(new int[][]{{1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 6}, {6, 7}}));
     }
 }
