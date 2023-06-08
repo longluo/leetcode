@@ -6,12 +6,12 @@ package com.longluo.leetcode.BinarySearch;
  * 给你一个 m * n 的矩阵 grid，矩阵中的元素无论是按行还是按列，都以非递增顺序排列。 请你统计并返回 grid 中 负数 的数目。
  * <p>
  * 示例 1：
- * 输入：grid = [[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]
+ * 输入：grid = [[4,3,2,-1}, {3,2,1,-1}, {1,1,-1,-2}, {-1,-1,-2,-3]]
  * 输出：8
  * 解释：矩阵中共有 8 个负数。
  * <p>
  * 示例 2：
- * 输入：grid = [[3,2],[1,0]]
+ * 输入：grid = [[3,2}, {1,0]]
  * 输出：0
  * <p>
  * 提示：
@@ -45,6 +45,7 @@ public class Problem1351_countNegatives {
     // BF Opt time: O(m*n) space: O(1)
     public static int countNegatives_bf_opt(int[][] grid) {
         int ans = 0;
+
         int row = grid.length;
         int col = grid[0].length;
 
@@ -79,6 +80,7 @@ public class Problem1351_countNegatives {
     // Coord time: O(m + n) space: O(1)
     public static int countNegatives_coord(int[][] grid) {
         int ans = 0;
+
         int row = grid.length;
         int col = grid[0].length;
 
@@ -105,8 +107,10 @@ public class Problem1351_countNegatives {
     // BS time: O(mlogn) space: O(1)
     public static int countNegatives_bs(int[][] grid) {
         int ans = 0;
+
         int row = grid.length;
         int col = grid[0].length;
+
         if (grid[0][0] < 0) {
             return row * col;
         } else if (grid[row - 1][col - 1] >= 0) {
@@ -153,8 +157,9 @@ public class Problem1351_countNegatives {
 
     // TODO: 2022/4/1
     // 对角线二分搜索
-    
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        System.out.println("8 ?= " + countNegatives_bf(new int[][]{{4, 3, 2, -1}, {3, 2, 1, -1}, {1, 1, -1, -2}, {-1, -1, -2, -3}}));
+        System.out.println("0 ?= " + countNegatives_bf(new int[][]{{3, 2}, {1, 0}}));
     }
 }
