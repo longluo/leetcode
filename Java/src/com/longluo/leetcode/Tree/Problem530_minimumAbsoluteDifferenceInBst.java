@@ -1,10 +1,9 @@
-package com.longluo.leetcode.tree;
+package com.longluo.leetcode.Tree;
 
 import com.longluo.datastructure.TreeNode;
 import com.longluo.datastructure.TreeUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 530. 二叉搜索树的最小绝对差
@@ -26,20 +25,24 @@ import java.util.List;
  * <p>
  * 提示：
  * 树中至少有 2 个节点。
- * 本题与 783 https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes/ 相同
+ * 本题与 783 https://leetcode.cn/problems/minimum-distance-between-bst-nodes/ 相同
  * <p>
- * https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/
+ * https://leetcode.cn/problems/minimum-absolute-difference-in-bst/
  */
 public class Problem530_minimumAbsoluteDifferenceInBst {
 
+    // InOrder time: O(n) space: O(n)
     public static int getMinimumDifference(TreeNode root) {
         if (root == null) {
             return 0;
         }
 
         int ans = Integer.MAX_VALUE;
+
         List<Integer> numsList = new ArrayList<>();
+
         inOrder(root, numsList);
+
         for (int i = 0; i < numsList.size() - 1; i++) {
             ans = Math.min(ans, numsList.get(i + 1) - numsList.get(i));
         }
@@ -57,10 +60,11 @@ public class Problem530_minimumAbsoluteDifferenceInBst {
         inOrder(root.right, list);
     }
 
+    // DFS time: O(n) space: O(n)
     static int ans;
     static int prev;
 
-    public static int getMinimumDifference_2(TreeNode root) {
+    public static int getMinimumDifference_dfs(TreeNode root) {
         ans = Integer.MAX_VALUE;
         prev = -1;
         dfs(root);
@@ -79,16 +83,45 @@ public class Problem530_minimumAbsoluteDifferenceInBst {
         } else {
             prev = root.val;
         }
+
         dfs(root.right);
+    }
+
+    // InOrder + Stack time: O(n) space: O(n)
+    public static int getMinimumDifference_stk(TreeNode root) {
+        Stack<TreeNode> stk = new Stack<>();
+
+        TreeNode preNode = null;
+        TreeNode curNode = root;
+
+        int min = Integer.MAX_VALUE;
+
+        while (curNode != null || !stk.isEmpty()) {
+            if (curNode != null) {
+                stk.push(curNode);
+                curNode = curNode.left;
+            } else {
+                curNode = stk.pop();
+                if (preNode != null) {
+                    min = Math.min(min, curNode.val - preNode.val);
+                }
+                preNode = curNode;
+                curNode = curNode.right;
+            }
+        }
+
+        return min;
     }
 
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, null, 3, 2, null});
         System.out.println("1 ?= " + getMinimumDifference(tst1));
-        System.out.println("1 ?= " + getMinimumDifference_2(tst1));
+        System.out.println("1 ?= " + getMinimumDifference_dfs(tst1));
+        System.out.println("1 ?= " + getMinimumDifference_stk(tst1));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{1, null, 2});
         System.out.println("1 ?= " + getMinimumDifference(tst2));
-        System.out.println("1 ?= " + getMinimumDifference_2(tst2));
+        System.out.println("1 ?= " + getMinimumDifference_dfs(tst2));
+        System.out.println("1 ?= " + getMinimumDifference_stk(tst2));
     }
 }
