@@ -113,15 +113,48 @@ public class Problem530_minimumAbsoluteDifferenceInBst {
         return min;
     }
 
+    public static int getMinimumDifference_bfs(TreeNode root) {
+        List<Integer> nodeList = new ArrayList<>();
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode curNode = queue.poll();
+
+            nodeList.add(curNode.val);
+
+            if (curNode.left != null) {
+                queue.offer(curNode.left);
+            }
+
+            if (curNode.right != null) {
+                queue.offer(curNode.right);
+            }
+        }
+
+        int ans = Integer.MAX_VALUE;
+
+        Collections.sort(nodeList);
+
+        for (int i = 0; i < nodeList.size() - 1; i++) {
+            ans = Math.min(ans, nodeList.get(i + 1) - nodeList.get(i));
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         TreeNode tst1 = TreeUtils.constructTree(new Integer[]{1, null, 3, 2, null});
         System.out.println("1 ?= " + getMinimumDifference(tst1));
         System.out.println("1 ?= " + getMinimumDifference_dfs(tst1));
         System.out.println("1 ?= " + getMinimumDifference_stk(tst1));
+        System.out.println("1 ?= " + getMinimumDifference_bfs(tst1));
 
         TreeNode tst2 = TreeUtils.constructTree(new Integer[]{1, null, 2});
         System.out.println("1 ?= " + getMinimumDifference(tst2));
         System.out.println("1 ?= " + getMinimumDifference_dfs(tst2));
         System.out.println("1 ?= " + getMinimumDifference_stk(tst2));
+        System.out.println("1 ?= " + getMinimumDifference_bfs(tst2));
     }
 }
