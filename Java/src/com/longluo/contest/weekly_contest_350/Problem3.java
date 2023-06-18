@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class Problem3 {
 
+    static int ans = 0;
+
     public static int specialPerm(int[] nums) {
         int MOD = 1_000_000_007;
 
@@ -16,20 +18,21 @@ public class Problem3 {
             return 1;
         }
 
-        List<List<Integer>> ans = new ArrayList<>();
+        ans = 0;
 
         boolean[] vis = new boolean[n];
 
-        backtrack(ans, new ArrayList<>(), nums, vis, 0);
+        backtrack(new ArrayList<>(), nums, vis, 0);
 
-        return ans.size() % MOD;
+        return ans % MOD;
     }
 
-    public static void backtrack(List<List<Integer>> res, List<Integer> list, int[] nums, boolean[] visited, int idx) {
+    public static void backtrack(List<Integer> list, int[] nums, boolean[] visited, int idx) {
         int n = nums.length;
 
         if (idx == n) {
-            res.add(new ArrayList<>(list));
+            ans++;
+            ans %= 1_000_000_007;
             return;
         }
 
@@ -47,7 +50,7 @@ public class Problem3 {
             visited[i] = true;
             list.add(nums[i]);
 
-            backtrack(res, list, nums, visited, idx + 1);
+            backtrack(list, nums, visited, idx + 1);
 
             visited[i] = false;
             list.remove(list.size() - 1);
