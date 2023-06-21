@@ -44,8 +44,18 @@ public class Problem1262_greatestSumDivisibleByThree {
         for (int i = 1; i < n; i++) {
             int mod = nums[i] % 3;
 
-            for (int j = 0; j < 3; j++) {
-                dp[i][(j + mod) % 3] = dp[i - 1][j] + nums[i];
+            if (mod == 0) {
+                dp[i][0] = dp[i - 1][0] + nums[i];
+                dp[i][1] = dp[i - 1][1] > 0 ? dp[i - 1][1] + nums[i] : dp[i - 1][1];
+                dp[i][2] = dp[i - 1][2] > 0 ? dp[i - 1][2] + nums[i] : dp[i - 1][2];
+            } else if (mod == 1) {
+                dp[i][0] = dp[i - 1][2] > 0 ? Math.max(dp[i - 1][0], dp[i - 1][2] + nums[i]) : dp[i - 1][0];
+                dp[i][1] = Math.max(dp[i - 1][0] + nums[i], dp[i - 1][1]);
+                dp[i][2] = dp[i - 1][1] > 0 ? Math.max(dp[i - 1][2], dp[i - 1][1] + nums[i]) : dp[i - 1][2];
+            } else {
+                dp[i][0] = dp[i - 1][1] > 0 ? Math.max(dp[i - 1][0], dp[i - 1][1] + nums[i]) : dp[i - 1][0];
+                dp[i][1] = dp[i - 1][2] > 0 ? Math.max(dp[i - 1][1], dp[i - 1][2] + nums[i]) : dp[i - 1][1];
+                dp[i][2] = Math.max(dp[i - 1][0] + nums[i], dp[i - 1][2]);
             }
 
             max = Math.max(max, dp[i][0]);
@@ -103,10 +113,11 @@ public class Problem1262_greatestSumDivisibleByThree {
     }
 
     public static void main(String[] args) {
-        System.out.println("0 ?= " + maxSumDivThree(new int[]{4}));
-        System.out.println("9 ?= " + maxSumDivThree(new int[]{1, 2, 3, 4}));
+        System.out.println("12 ?= " + maxSumDivThree(new int[]{4, 1, 5, 3, 1}));
         System.out.println("18 ?= " + maxSumDivThree(new int[]{3, 6, 5, 1, 8}));
         System.out.println("12 ?= " + maxSumDivThree(new int[]{1, 2, 3, 4, 4}));
+        System.out.println("0 ?= " + maxSumDivThree(new int[]{4}));
+        System.out.println("9 ?= " + maxSumDivThree(new int[]{1, 2, 3, 4}));
 
         System.out.println("9 ?= " + maxSumDivThree_bf(new int[]{1, 2, 3, 4}));
         System.out.println("18 ?= " + maxSumDivThree_bf(new int[]{3, 6, 5, 1, 8}));
