@@ -6,17 +6,13 @@ package com.longluo.contest.biweekly_contest_107;
 public class Problem2 {
 
     public static int longestString(int x, int y, int z) {
-        int ans = 0;
+        int ans = 2 * z;
 
         if (x == y) {
-            ans += 2 * (x + y);
-        } else if (x > y) {
-            ans += 2 * (2 * y + 1);
+            ans += 4 * x;
         } else {
-            ans += 2 * (2 * x + 1);
+            ans += 4 * Math.min(x, y) + 2;
         }
-
-        ans += 2 * z;
 
         return ans;
     }
