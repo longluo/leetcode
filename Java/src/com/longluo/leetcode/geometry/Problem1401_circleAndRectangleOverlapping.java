@@ -59,9 +59,21 @@ public class Problem1401_circleAndRectangleOverlapping {
         return false;
     }
 
+    // Best time: O(1) space: O(1)
+    public static boolean checkOverlap_best(int radius, int xCenter, int yCenter, int x1, int y1, int x2, int y2) {
+        float v_x = Math.abs(xCenter - (float) (x1 + x2) / 2) - (float) (x2 - x1) / 2;
+        float v_y = Math.abs(yCenter - (float) (y1 + y2) / 2) - (float) (y2 - y1) / 2;
+
+        return Math.max(0, v_x) * Math.max(0, v_x) + Math.max(0, v_y) * Math.max(0, v_y) <= radius * radius;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + checkOverlap(1, 0, 0, 1, -1, 3, 1));
         System.out.println("false ?= " + checkOverlap(1, 1, 1, 1, -3, 2, -1));
         System.out.println("true ?= " + checkOverlap(1, 1, 1, -3, -3, 3, 3));
+
+        System.out.println("false ?= " + checkOverlap_best(1, 0, 3, 7, 3, 10, 6));
+        System.out.println("true ?= " + checkOverlap_best(2, 8, 6, 5, 1, 10, 4));
+        System.out.println("true ?= " + checkOverlap_best(1, 1, 1, -3, -3, 3, 3));
     }
 }
