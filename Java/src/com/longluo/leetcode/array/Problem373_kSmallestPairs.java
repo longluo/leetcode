@@ -1,6 +1,8 @@
 package com.longluo.leetcode.array;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -33,29 +35,36 @@ import java.util.List;
  * nums1, nums2 均为升序排列
  * 1 <= k <= 1000
  * <p>
- * https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/
+ * https://leetcode.cn/problems/find-k-pairs-with-smallest-sums/
  */
 public class Problem373_kSmallestPairs {
 
+    // MLE
     public static List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
-        List<List<Integer>> ans = new ArrayList<>();
-        int len1 = nums1.length;
-        int len2 = nums2.length;
-        List<Integer> one = new ArrayList<>();
-        one.add(nums1[0]);
-        one.add(nums2[0]);
-        ans.add(one);
-        for (int i = 1, j = 1; i < len1 && j < len2;) {
-            int u = nums1[i];
-            int v = nums2[j];
+        List<List<Integer>> sorted = new ArrayList<>();
 
+        for (int i = 0; i < nums1.length; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                List<Integer> item = new ArrayList<>();
+
+                item.add(nums1[i]);
+                item.add(nums2[j]);
+                sorted.add(item);
+            }
         }
 
-        return ans;
+        Collections.sort(sorted, new Comparator<List<Integer>>() {
+            @Override
+            public int compare(List<Integer> a, List<Integer> b) {
+                return a.get(0) + a.get(1) - (b.get(0) + b.get(1));
+            }
+        });
+
+        return k >= sorted.size() ? sorted : sorted.subList(0, k);
     }
 
     public static void main(String[] args) {
-        System.out.println("[1,2],[1,4],[1,6] ?= " + kSmallestPairs(new int[]{1, 7, 11}, new int[]{2, 4, 6}, 3));
+        System.out.println("[1, 2],[1,4],[1,6] ?= " + kSmallestPairs(new int[]{1, 7, 11}, new int[]{2, 4, 6}, 3));
         System.out.println("[1,1],[1,1] ?= " + kSmallestPairs(new int[]{1, 1, 2}, new int[]{1, 2, 3}, 2));
         System.out.println("[[1,1],[1,1],[2,1],[1,2],[1,2],[2,2],[1,3],[1,3],[2,3]] ?= " + kSmallestPairs(new int[]{1, 1, 2}, new int[]{1, 2, 3}, 10));
         System.out.println("[1,3],[2,3] ?= " + kSmallestPairs(new int[]{1, 2}, new int[]{3}, 2));
