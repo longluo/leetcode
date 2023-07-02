@@ -6,39 +6,29 @@ package com.longluo.contest.weekly_contest_352;
 public class Problem1 {
 
     public static int longestAlternatingSubarray(int[] nums, int threshold) {
-        int n = nums.length;
         int ans = 0;
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (nums[i] % 2 != 0 || nums[i] > threshold) {
                 continue;
             }
 
-            for (int j = i; j < n; j++) {
-                if (nums[j] > threshold) {
+            int cnt = 1;
+            int prev = nums[i];
+
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] > threshold || prev % 2 == nums[j] % 2) {
                     break;
                 }
 
-                if (check(nums, i, j, threshold)) {
-                    ans = Math.max(ans, j - i + 1);
-                }
+                cnt++;
+                prev = nums[j];
             }
+
+            ans = Math.max(ans, cnt);
         }
 
         return ans;
-    }
-
-    private static boolean check(int[] nums, int left, int right, int threshold) {
-        boolean flag = true;
-
-        for (int i = left; i < right; i++) {
-            if (nums[i] > threshold || nums[i] % 2 == nums[i + 1] % 2) {
-                flag = false;
-                break;
-            }
-        }
-
-        return flag;
     }
 
     public static void main(String[] args) {
