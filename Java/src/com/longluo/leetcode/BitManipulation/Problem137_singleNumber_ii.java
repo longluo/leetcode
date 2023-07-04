@@ -1,4 +1,4 @@
-package com.longluo.leetcode.bitmanipulation;
+package com.longluo.leetcode.BitManipulation;
 
 import java.util.*;
 
@@ -26,30 +26,21 @@ import java.util.*;
  */
 public class Problem137_singleNumber_ii {
 
-    public static int singleNumber(int[] nums) {
-        if (nums == null || nums.length <= 3) {
-            return nums[0];
-        }
-
-        int n = nums.length;
+    // HashMap time: O(n) space: O(n)
+    public static int singleNumber_hashmap(int[] nums) {
         Map<Integer, Integer> freq = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            if (freq.containsKey(nums[i])) {
-                freq.put(nums[i], freq.get(nums[i]) + 1);
-            } else {
-                freq.put(nums[i], 1);
-            }
+
+        for (int x : nums) {
+            freq.put(x, freq.getOrDefault(x, 0) + 1);
         }
 
-        int ans = 0;
         for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
             if (entry.getValue() == 1) {
-                ans = entry.getKey();
-                break;
+                return entry.getKey();
             }
         }
 
-        return ans;
+        return nums[0];
     }
 
     public static int singleNumber_bit(int[] nums) {
@@ -67,11 +58,11 @@ public class Problem137_singleNumber_ii {
     }
 
     public static void main(String[] args) {
-        System.out.println("3 ?= " + singleNumber(new int[]{2, 2, 3, 2}));
+        System.out.println("3 ?= " + singleNumber_hashmap(new int[]{2, 2, 3, 2}));
         System.out.println("3 ?= " + singleNumber_bit(new int[]{2, 2, 3, 2}));
-        System.out.println("2 ?= " + singleNumber(new int[]{2}));
+        System.out.println("2 ?= " + singleNumber_hashmap(new int[]{2}));
         System.out.println("2 ?= " + singleNumber_bit(new int[]{2}));
-        System.out.println("99 ?= " + singleNumber(new int[]{0, 1, 0, 1, 0, 1, 99}));
+        System.out.println("99 ?= " + singleNumber_hashmap(new int[]{0, 1, 0, 1, 0, 1, 99}));
         System.out.println("99 ?= " + singleNumber_bit(new int[]{0, 1, 0, 1, 0, 1, 99}));
     }
 }
