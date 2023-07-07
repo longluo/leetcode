@@ -32,17 +32,18 @@ import java.util.List;
  * 链表中节点的数目在范围 [0, 5 * 10^4] 内
  * -10^5 <= Node.val <= 10^5
  * <p>
- * https://leetcode.com/problems/sort-list/
+ * https://leetcode.cn/problems/sort-list/
  */
 public class Problem148_sortList {
 
-    // BF + List time: O(n) space: O(n)
+    // BF + List time: O(nlogn) space: O(n)
     public static ListNode sortList_bf(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
         ListNode pNode = head;
+
         List<Integer> nodeList = new ArrayList<>();
         while (pNode != null) {
             nodeList.add(pNode.val);
@@ -50,6 +51,7 @@ public class Problem148_sortList {
         }
 
         Collections.sort(nodeList);
+
         ListNode dummyNode = new ListNode(-1);
         pNode = dummyNode;
         for (int i = 0; i < nodeList.size(); i++) {
@@ -60,29 +62,29 @@ public class Problem148_sortList {
         return dummyNode.next;
     }
 
-    // BF + List Opt time: O(n) space: O(n)
+    // BF + List Opt time: O(nlogn) space: O(n)
     public static ListNode sortList_bf_opt(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
-        ListNode currNode = head;
+        ListNode pNode = head;
+
         List<ListNode> nodeList = new ArrayList<>();
-        while (currNode != null) {
-            nodeList.add(currNode);
-            currNode = currNode.next;
+        while (pNode != null) {
+            nodeList.add(pNode);
+            pNode = pNode.next;
         }
 
-        nodeList.sort((o1, o2) -> o1.val - o2.val);
+        nodeList.sort(Comparator.comparingInt(o -> o.val));
 
-        int len = nodeList.size();
         ListNode dummyNode = new ListNode(-1);
         ListNode preNode = dummyNode;
-        for (int i = 0; i < len; i++) {
-            currNode = nodeList.get(i);
-            preNode.next = currNode;
-            currNode.next = null;
-            preNode = currNode;
+        for (int i = 0; i < nodeList.size(); i++) {
+            pNode = nodeList.get(i);
+            preNode.next = pNode;
+            pNode.next = null;
+            preNode = pNode;
         }
 
         return dummyNode.next;
@@ -147,8 +149,10 @@ public class Problem148_sortList {
 
     public static void main(String[] args) {
         ListNode tst1 = LinkedListNodeUtils.constructListNode(new int[]{4, 2, 1, 3});
-        System.out.println(LinkedListNodeUtils.printLinkedList(sortList_merge(tst1)));
+
         System.out.println(LinkedListNodeUtils.printLinkedList(sortList_bf(tst1)));
         System.out.println(LinkedListNodeUtils.printLinkedList(sortList_bf_opt(tst1)));
+
+        System.out.println(LinkedListNodeUtils.printLinkedList(sortList_merge(tst1)));
     }
 }
