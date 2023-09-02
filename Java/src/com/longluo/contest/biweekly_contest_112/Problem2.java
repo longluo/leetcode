@@ -10,26 +10,26 @@ public class Problem2 {
             return true;
         }
 
-        int[] oddcnt1 = new int[26];
-        int[] oddcnt2 = new int[26];
+        int len = s1.length();
 
-        int[] evencnt1 = new int[26];
-        int[] evencnt2 = new int[26];
+        int[] odd1 = new int[26];
+        int[] even1 = new int[26];
 
-        int n = s1.length();
+        int[] odd2 = new int[26];
+        int[] even2 = new int[26];
 
-        for (int i = 0; i < n; i += 2) {
-            evencnt1[s1.charAt(i) - 'a']++;
-            evencnt2[s2.charAt(i) - 'a']++;
-        }
-
-        for (int i = 1; i < n; i += 2) {
-            oddcnt1[s1.charAt(i) - 'a']++;
-            oddcnt2[s2.charAt(i) - 'a']++;
+        for (int i = 0; i < len; i++) {
+            if (i % 2 == 0) {
+                even1[s1.charAt(i) - 'a']++;
+                even2[s2.charAt(i) - 'a']++;
+            } else {
+                odd1[s1.charAt(i) - 'a']++;
+                odd2[s2.charAt(i) - 'a']++;
+            }
         }
 
         for (int i = 0; i < 26; i++) {
-            if (oddcnt1[i] != oddcnt2[i] || evencnt1[i] != evencnt2[i]) {
+            if (odd1[i] != odd2[i] || even1[i] != even2[i]) {
                 return false;
             }
         }

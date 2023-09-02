@@ -50,8 +50,38 @@ public class Problem1 {
         return true;
     }
 
+    public static boolean canBeEqual_bf(String s1, String s2) {
+        boolean[] masks = new boolean[4];
+
+        for (int i = 0; i < 4; i++) {
+            char ch = s1.charAt(i);
+
+            boolean flag = false;
+
+            for (int j = 0; j < 4; j += 2) {
+                int loc = (i + j) % 4;
+
+                if (!masks[loc] && s2.charAt(loc) == ch) {
+                    flag = true;
+                    masks[loc] = true;
+                    break;
+                }
+            }
+
+            if (!flag) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("true ?= " + canBeEqual("abcd", "cdab"));
         System.out.println("false ?= " + canBeEqual("abcd", "dacb"));
+
+        System.out.println("true ?= " + canBeEqual_bf("abcd", "abcd"));
+        System.out.println("true ?= " + canBeEqual_bf("abcd", "cdab"));
+        System.out.println("false ?= " + canBeEqual_bf("abcd", "dacb"));
     }
 }

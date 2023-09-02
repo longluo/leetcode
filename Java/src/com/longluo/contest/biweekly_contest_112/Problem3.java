@@ -10,43 +10,49 @@ public class Problem3 {
     public static long maxSum(List<Integer> nums, int m, int k) {
         int n = nums.size();
 
-        long max = 0;
+        Map<Integer, Integer> countMap = new HashMap<>();
 
         long sum = 0;
 
-        Map<Integer, Integer> map = new HashMap<>();
-
         for (int i = 0; i < k; i++) {
-            sum += nums.get(i);
-            map.put(nums.get(i), map.getOrDefault(nums.get(i), 0) + 1);
+            int value = nums.get(i);
+            sum += value;
+            countMap.put(value, countMap.getOrDefault(value, 0) + 1);
         }
 
-        if (map.size() >= m) {
-            max = Math.max(max, sum);
+        long ans = 0;
+
+        if (countMap.size() >= m) {
+            ans = Math.max(ans, sum);
         }
 
         int left = 0;
         int right = k;
 
         while (left < right && right < n) {
-            map.put(nums.get(right), map.getOrDefault(nums.get(right), 0) + 1);
+            int rVal = nums.get(right);
+
+            countMap.put(rVal, countMap.getOrDefault(rVal, 0) + 1);
             sum += nums.get(right);
-            if (map.get(nums.get(left)) > 1) {
-                map.put(nums.get(left), map.getOrDefault(nums.get(left), 0) - 1);
+
+            int lVal = nums.get(left);
+
+            if (countMap.get(lVal) > 1) {
+                countMap.put(lVal, countMap.getOrDefault(lVal, 0) - 1);
             } else {
-                map.remove(nums.get(left));
+                countMap.remove(lVal);
             }
             sum -= nums.get(left);
 
-            if (map.size() >= m) {
-                max = Math.max(max, sum);
+            if (countMap.size() >= m) {
+                ans = Math.max(ans, sum);
             }
 
             left++;
             right++;
         }
 
-        return max;
+        return ans;
     }
 
     public static void main(String[] args) {
