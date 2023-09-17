@@ -8,15 +8,16 @@ import java.util.*;
 public class Problem1 {
 
     public static int sumIndicesWithKSetBits(List<Integer> nums, int k) {
-        int sum = 0;
+        int ans = 0;
 
         for (int i = 0; i < nums.size(); i++) {
-            if (Integer.bitCount(i) == k) {
-                sum += nums.get(i);
+            int bits = Integer.bitCount(i);
+            if (bits == k) {
+                ans += nums.get(i);
             }
         }
 
-        return sum;
+        return ans;
     }
 
     public static void main(String[] args) {
