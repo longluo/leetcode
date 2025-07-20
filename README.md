@@ -126,5 +126,25 @@
 [我的Leetcode的解题](http://www.longluo.me/blog/2020/12/09/Leetcode-Solutions/)
 [《剑指Offer》刷题记录](http://www.longluo.me/blog/2020/12/20/Coding-Interviews/)
 
-Welcome to [My Website](http://www.longluo.me)
+Welcome to [My Website](https://www.longluo.me)
+
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="
+      https://api.star-history.com/svg?repos=longluo/leetcode&type=Date&theme=dark
+    "
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="
+      https://api.star-history.com/svg?repos=longluo/leetcode&type=Date
+    "
+  />
+  <img
+    alt="Star History Chart"
+    src="https://api.star-history.com/svg?repos=longluo/leetcode&type=Date"
+  />
+</picture>
+
 
