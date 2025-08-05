@@ -5,7 +5,7 @@ package com.longluo.misc.codejam;
  */
 public class GoogleCodeJam_2008Round1A_ProblemC_Numbers {
 
-    private static int[][] matrix_multi(int[][] A, int[][] B) {
+    private static int[][] matrixMultiplication(int[][] A, int[][] B) {
         if (A == null || A[0] == null || B == null || B[0] == null || A[0].length != B.length) {
             return null;
         }
@@ -33,37 +33,70 @@ public class GoogleCodeJam_2008Round1A_ProblemC_Numbers {
         return C;
     }
 
-    private static int[][] fast_exponentiation(int[][] A, int n) {
+    private static int[][] fastExponentiation(int[][] A, int n) {
         if (n == 1) {
             return A;
         }
 
         if (n % 2 == 0) {
-            int[][] A_m = fast_exponentiation(A, n / 2);
-            return matrix_multi(A_m, A_m);
+            int[][] A_m = fastExponentiation(A, n / 2);
+            return matrixMultiplication(A_m, A_m);
         } else {
-            return matrix_multi(A, fast_exponentiation(A, n - 1));
+            return matrixMultiplication(A, fastExponentiation(A, n - 1));
         }
     }
 
     private static String findLast3Digits(int n) {
         int[][] A = {{3, 5}, {1, 3}};
 
-        int[][] A_n = fast_exponentiation(A, n);
+//        int[][] A_n = fastExponentiation(A, n);
+
+        int[][] A_n = fastExponentiation(A, (n - 3) % 100 + 3);
 
         int result = (2 * A_n[0][0] + 999) % 1000;
 
-        StringBuilder sb = new StringBuilder(3);
+        return String.format("%03d", result);
+    }
 
-        if (result > 100) {
-            sb.append(result);
-        } else if (result > 10) {
-            sb.append("0").append(result);
-        } else {
-            sb.append("00").append(result);
+
+    private static int[] multiply(int[] a, int[] b) {
+        int[] c = new int[4];
+        c[0] = (a[0] * b[0] + a[1] * b[2]) % 1000;
+        c[1] = (a[0] * b[1] + a[1] * b[3]) % 1000;
+        c[2] = (a[2] * b[0] + a[3] * b[2]) % 1000;
+        c[3] = (a[2] * b[1] + a[3] * b[3]) % 1000;
+        return c;
+    }
+
+    private static int fastMatrix(int n) {
+        if (n == 0) {
+            return 2;
+        } else if (n == 1) {
+            return 6;
+        } else if (n == 2) {
+            return 28;
         }
 
-        return sb.toString();
+        n -= 2;
+
+        int[] mat = {0, 1, 996, 6};
+        int[] smat = mat.clone();
+
+        while (n > 0) {
+            if ((n & 1) == 1) {
+                mat = multiply(mat, smat);
+            }
+            smat = multiply(smat, smat);
+            n >>= 1;
+        }
+
+        return (mat[0] * 6 + mat[1] * 28) % 1000;
+    }
+
+    private static String findLast3Digits_rec(int n) {
+//        int result = (fastMatrix(n) + 999) % 1000;
+        int result = (fastMatrix((n - 3) % 100 + 3) + 999) % 1000;
+        return String.format("%03d", result);
     }
 
     public static void main(String[] args) {
@@ -79,5 +112,18 @@ public class GoogleCodeJam_2008Round1A_ProblemC_Numbers {
         System.out.println("743 ?= " + findLast3Digits(1023) + ", " + "743".equals(findLast3Digits(1023)));
         System.out.println("663 ?= " + findLast3Digits(1999999995) + ", " + "663".equals(findLast3Digits(1999999995)));
 
+        System.out.println("\n ================== \n");
+
+        System.out.println("005 ?= " + findLast3Digits(1) + ", " + "005".equals(findLast3Digits_rec(1)));
+        System.out.println("027 ?= " + findLast3Digits(2) + ", " + "027".equals(findLast3Digits_rec(2)));
+        System.out.println("143 ?= " + findLast3Digits(3) + ", " + "143".equals(findLast3Digits_rec(3)));
+        System.out.println("751 ?= " + findLast3Digits(4) + ", " + "751".equals(findLast3Digits_rec(4)));
+        System.out.println("935 ?= " + findLast3Digits(5) + ", " + "935".equals(findLast3Digits_rec(5)));
+        System.out.println("607 ?= " + findLast3Digits(6) + ", " + "607".equals(findLast3Digits_rec(6)));
+        System.out.println("647 ?= " + findLast3Digits(30) + ", " + "647".equals(findLast3Digits_rec(30)));
+
+        System.out.println("143 ?= " + findLast3Digits(103) + ", " + "143".equals(findLast3Digits_rec(103)));
+        System.out.println("743 ?= " + findLast3Digits(1023) + ", " + "743".equals(findLast3Digits_rec(1023)));
+        System.out.println("663 ?= " + findLast3Digits(1999999995) + ", " + "663".equals(findLast3Digits_rec(1999999995)));
     }
 }
