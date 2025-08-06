@@ -99,6 +99,36 @@ public class GoogleCodeJam_2008Round1A_ProblemC_Numbers {
         return String.format("%03d", result);
     }
 
+
+    private static int quickMultiply(int n) {
+        if (n == 0) {
+            return 2;
+        } else if (n == 1) {
+            return 6;
+        }
+
+        n -= 2;
+
+        int[][] mat = {{6, -4}, {1, 0}};
+        int[][] smat = mat.clone();
+
+        while (n > 0) {
+            if ((n & 1) == 1) {
+                mat = matrixMultiplication(mat, smat);
+            }
+            smat = matrixMultiplication(smat, smat);
+            n >>= 1;
+        }
+
+        return (6 * mat[0][0] + 2 * mat[0][1]) % 1000;
+    }
+
+    private static String findLast3Digits_3(int n) {
+//        int result = (quickMultiply((n - 3) % 100 + 3) + 999) % 1000;
+        int result = (quickMultiply(n) + 999) % 1000;
+        return String.format("%03d", result);
+    }
+
     public static void main(String[] args) {
         System.out.println("005 ?= " + findLast3Digits(1) + ", " + "005".equals(findLast3Digits(1)));
         System.out.println("027 ?= " + findLast3Digits(2) + ", " + "027".equals(findLast3Digits(2)));
@@ -114,16 +144,30 @@ public class GoogleCodeJam_2008Round1A_ProblemC_Numbers {
 
         System.out.println("\n ================== \n");
 
-        System.out.println("005 ?= " + findLast3Digits(1) + ", " + "005".equals(findLast3Digits_rec(1)));
-        System.out.println("027 ?= " + findLast3Digits(2) + ", " + "027".equals(findLast3Digits_rec(2)));
-        System.out.println("143 ?= " + findLast3Digits(3) + ", " + "143".equals(findLast3Digits_rec(3)));
-        System.out.println("751 ?= " + findLast3Digits(4) + ", " + "751".equals(findLast3Digits_rec(4)));
-        System.out.println("935 ?= " + findLast3Digits(5) + ", " + "935".equals(findLast3Digits_rec(5)));
-        System.out.println("607 ?= " + findLast3Digits(6) + ", " + "607".equals(findLast3Digits_rec(6)));
-        System.out.println("647 ?= " + findLast3Digits(30) + ", " + "647".equals(findLast3Digits_rec(30)));
+        System.out.println("005 ?= " + findLast3Digits_rec(1) + ", " + "005".equals(findLast3Digits_rec(1)));
+        System.out.println("027 ?= " + findLast3Digits_rec(2) + ", " + "027".equals(findLast3Digits_rec(2)));
+        System.out.println("143 ?= " + findLast3Digits_rec(3) + ", " + "143".equals(findLast3Digits_rec(3)));
+        System.out.println("751 ?= " + findLast3Digits_rec(4) + ", " + "751".equals(findLast3Digits_rec(4)));
+        System.out.println("935 ?= " + findLast3Digits_rec(5) + ", " + "935".equals(findLast3Digits_rec(5)));
+        System.out.println("607 ?= " + findLast3Digits_rec(6) + ", " + "607".equals(findLast3Digits_rec(6)));
+        System.out.println("647 ?= " + findLast3Digits_rec(30) + ", " + "647".equals(findLast3Digits_rec(30)));
 
-        System.out.println("143 ?= " + findLast3Digits(103) + ", " + "143".equals(findLast3Digits_rec(103)));
-        System.out.println("743 ?= " + findLast3Digits(1023) + ", " + "743".equals(findLast3Digits_rec(1023)));
-        System.out.println("663 ?= " + findLast3Digits(1999999995) + ", " + "663".equals(findLast3Digits_rec(1999999995)));
+        System.out.println("143 ?= " + findLast3Digits_rec(103) + ", " + "143".equals(findLast3Digits_rec(103)));
+        System.out.println("743 ?= " + findLast3Digits_rec(1023) + ", " + "743".equals(findLast3Digits_rec(1023)));
+        System.out.println("663 ?= " + findLast3Digits_rec(1999999995) + ", " + "663".equals(findLast3Digits_rec(1999999995)));
+
+        System.out.println("\n ================== \n");
+
+        System.out.println("005 ?= " + findLast3Digits_3(1) + ", " + "005".equals(findLast3Digits_3(1)));
+        System.out.println("027 ?= " + findLast3Digits_3(2) + ", " + "027".equals(findLast3Digits_3(2)));
+        System.out.println("143 ?= " + findLast3Digits_3(3) + ", " + "143".equals(findLast3Digits_3(3)));
+        System.out.println("751 ?= " + findLast3Digits_3(4) + ", " + "751".equals(findLast3Digits_3(4)));
+        System.out.println("935 ?= " + findLast3Digits_3(5) + ", " + "935".equals(findLast3Digits_3(5)));
+        System.out.println("607 ?= " + findLast3Digits_3(6) + ", " + "607".equals(findLast3Digits_3(6)));
+        System.out.println("647 ?= " + findLast3Digits_3(30) + ", " + "647".equals(findLast3Digits_3(30)));
+
+        System.out.println("143 ?= " + findLast3Digits_3(103) + ", " + "143".equals(findLast3Digits_3(103)));
+        System.out.println("743 ?= " + findLast3Digits_3(1023) + ", " + "743".equals(findLast3Digits_3(1023)));
+        System.out.println("663 ?= " + findLast3Digits_3(1999999995) + ", " + "663".equals(findLast3Digits_3(1999999995)));
     }
 }
