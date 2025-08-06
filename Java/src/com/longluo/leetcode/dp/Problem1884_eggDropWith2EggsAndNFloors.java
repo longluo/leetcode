@@ -38,6 +38,11 @@ package com.longluo.leetcode.dp;
  */
 public class Problem1884_eggDropWith2EggsAndNFloors {
 
+    /**
+     * Dynamic Programming Solution
+     * @param n
+     * @return
+     */
     public static int twoEggDrop(int n) {
         int[][] dp = new int[2][n + 1];
 
@@ -63,7 +68,7 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
     }
 
     /**
-     * Math
+     * Math Solution
      *
      * @param n
      * @return
@@ -74,9 +79,25 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
 
     public static void main(String[] args) {
         System.out.println("2 ?= " + twoEggDrop(2));
+        System.out.println("3 ?= " + twoEggDrop(4));
+        System.out.println("4 ?= " + twoEggDrop(7));
+        System.out.println("5 ?= " + twoEggDrop(13));
+        System.out.println("7 ?= " + twoEggDrop(25));
+        System.out.println("10 ?= " + twoEggDrop(55));
+        System.out.println("12 ?= " + twoEggDrop(67));
+        System.out.println("13 ?= " + twoEggDrop(82));
         System.out.println("14 ?= " + twoEggDrop(100));
 
+        System.out.println("\n ============= \n");
+
         System.out.println("2 ?= " + twoEggDrop_math(2));
+        System.out.println("3 ?= " + twoEggDrop_math(4));
+        System.out.println("4 ?= " + twoEggDrop_math(7));
+        System.out.println("5 ?= " + twoEggDrop_math(13));
+        System.out.println("7 ?= " + twoEggDrop_math(25));
+        System.out.println("10 ?= " + twoEggDrop_math(55));
+        System.out.println("12 ?= " + twoEggDrop_math(67));
+        System.out.println("13 ?= " + twoEggDrop_math(82));
         System.out.println("14 ?= " + twoEggDrop_math(100));
     }
 }
