@@ -99,7 +99,6 @@ public class GoogleCodeJam_2008Round1A_ProblemC_Numbers {
         return String.format("%03d", result);
     }
 
-
     private static int quickMultiply(int n) {
         if (n == 0) {
             return 2;
@@ -129,7 +128,55 @@ public class GoogleCodeJam_2008Round1A_ProblemC_Numbers {
         return String.format("%03d", result);
     }
 
+    /**
+     * Period is 25 from No. 3
+     * 143 751 935 607 903 991 335 047 943 471 055 447 463 991 095 607 263 151 855 527 743 351 135 407 903
+     */
+    private static String findLast3Digits_4(int n) {
+        int number = (n - 3) % 100 + 3;
+
+        int mid = (752 + number * (number - 1) * (200 * number * number + 520)) % 1000;
+
+        int result = (int) (((Math.pow(3, number) * mid) + 999) % 1000);
+
+        return String.format("%03d", result);
+    }
+
+    /**
+     * Period is 100 from No. 3
+     * 005 027
+     * 143 751 935 607 903 991 335 047 943 471 055 447 463 991 095 607 263 151 855 527 743 351 135 407 903 791 135 647 343 471 455 847 263 191 095 807 463 551 455 527 343 951 335 207 903 591 935 247 743 471 855 247 063 391 095 007 663 951 055 527 943 551 535 007 903 391 735 847 143 471 255 647 863 591 095 207 863 351 655 527 543 151 735 807 903 191 535 447 543 471 655 047 663 791 095 407 063 751 255 527
+     */
     public static void main(String[] args) {
+        for (int i = 1; i < 3; i++) {
+            System.out.print(" " + findLast3Digits(i));
+        }
+
+        System.out.println();
+
+        for (int i = 3; i < 103; i++) {
+            System.out.print(" " + findLast3Digits(i));
+        }
+
+        System.out.println();
+
+        for (int i = 103; i < 206; i++) {
+            System.out.print(" " + findLast3Digits(i));
+        }
+
+        System.out.println("\n ================== Remainder ============= \n");
+
+        for (int i = 3; i < 103; i++) {
+            System.out.print(" " + findLast3Digits_4(i));
+        }
+
+        System.out.println();
+
+        for (int i = 103; i < 206; i++) {
+            System.out.print(" " + findLast3Digits_4(i));
+        }
+
+        /*
         System.out.println("005 ?= " + findLast3Digits(1) + ", " + "005".equals(findLast3Digits(1)));
         System.out.println("027 ?= " + findLast3Digits(2) + ", " + "027".equals(findLast3Digits(2)));
         System.out.println("143 ?= " + findLast3Digits(3) + ", " + "143".equals(findLast3Digits(3)));
@@ -169,5 +216,27 @@ public class GoogleCodeJam_2008Round1A_ProblemC_Numbers {
         System.out.println("143 ?= " + findLast3Digits_3(103) + ", " + "143".equals(findLast3Digits_3(103)));
         System.out.println("743 ?= " + findLast3Digits_3(1023) + ", " + "743".equals(findLast3Digits_3(1023)));
         System.out.println("663 ?= " + findLast3Digits_3(1999999995) + ", " + "663".equals(findLast3Digits_3(1999999995)));
+
+        System.out.println("\n ================== Remainder ============= \n");
+
+        for (int i = 1; i < 105; i++) {
+            System.out.print(" " + i + "," + findLast3Digits_4(i));
+            if (i % 10 == 0) {
+                System.out.println();
+            }
+        }
+
+        System.out.println("005 ?= " + findLast3Digits_4(1) + ", " + "005".equals(findLast3Digits_4(1)));
+        System.out.println("027 ?= " + findLast3Digits_4(2) + ", " + "027".equals(findLast3Digits_4(2)));
+        System.out.println("143 ?= " + findLast3Digits_4(3) + ", " + "143".equals(findLast3Digits_4(3)));
+        System.out.println("751 ?= " + findLast3Digits_4(4) + ", " + "751".equals(findLast3Digits_4(4)));
+        System.out.println("935 ?= " + findLast3Digits_4(5) + ", " + "935".equals(findLast3Digits_4(5)));
+        System.out.println("607 ?= " + findLast3Digits_4(6) + ", " + "607".equals(findLast3Digits_4(6)));
+        System.out.println("647 ?= " + findLast3Digits_4(30) + ", " + "647".equals(findLast3Digits_4(30)));
+
+        System.out.println("143 ?= " + findLast3Digits_4(103) + ", " + "143".equals(findLast3Digits_4(103)));
+        System.out.println("743 ?= " + findLast3Digits_4(1023) + ", " + "743".equals(findLast3Digits_4(1023)));
+        System.out.println("663 ?= " + findLast3Digits_4(1999999995) + ", " + "663".equals(findLast3Digits_4(1999999995)));
+    */
     }
 }
