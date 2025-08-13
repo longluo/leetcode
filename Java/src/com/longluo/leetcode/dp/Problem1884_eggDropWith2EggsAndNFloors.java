@@ -1,5 +1,8 @@
 package com.longluo.leetcode.dp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 1884. 鸡蛋掉落-两枚鸡蛋
  * <p>
@@ -103,6 +106,38 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
         return minTries;
     }
 
+    static Map<Long, Integer> memoMap = new HashMap<>();
+
+    private static long getKey(int eggs, int floor) {
+        return ((long) eggs << 32) | floor;
+    }
+
+    private static int eggDroppingWithMemo(int eggs, int floors) {
+        if (eggs == 1) {
+            return floors;
+        }
+
+        if (floors == 0 || floors == 1) {
+            return floors;
+        }
+
+        long key = getKey(eggs, floors);
+        if (memoMap.containsKey(key)) {
+            return memoMap.get(key);
+        }
+
+        int minTries = Integer.MAX_VALUE;
+
+        for (int i = 1; i <= floors; i++) {
+            int worst = Math.max(eggDroppingWithMemo(eggs, floors - i), eggDroppingWithMemo(eggs - 1, i - 1));
+            minTries = Math.min(minTries, 1 + worst);
+        }
+
+        memoMap.put(key, minTries);
+
+        return minTries;
+    }
+
     /**
      * Recursion Solution
      *
@@ -111,6 +146,16 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
      */
     public static int twoEggDrop_rec(int n) {
         return eggDropping(2, n);
+    }
+
+    /**
+     * Recursion Solution Better
+     *
+     * @param n
+     * @return
+     */
+    public static int twoEggDrop_rec_opt(int n) {
+        return eggDroppingWithMemo(2, n);
     }
 
     public static void main(String[] args) {
@@ -145,10 +190,25 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
         System.out.println("4 ?= " + twoEggDrop_rec(7));
         System.out.println("5 ?= " + twoEggDrop_rec(13));
         System.out.println("7 ?= " + twoEggDrop_rec(25));
-        System.out.println("10 ?= " + twoEggDrop_rec(55));
-        System.out.println("12 ?= " + twoEggDrop_rec(67));
-        System.out.println("13 ?= " + twoEggDrop_rec(82));
-        System.out.println("14 ?= " + twoEggDrop_rec(100));
+        // Too Slow
+//        System.out.println("10 ?= " + twoEggDrop_rec(55));
+//        System.out.println("12 ?= " + twoEggDrop_rec(67));
+//        System.out.println("13 ?= " + twoEggDrop_rec(82));
+//        System.out.println("14 ?= " + twoEggDrop_rec(100));
+
+        System.out.println("OK");
+
+        System.out.println("=== Recursion Better === ");
+
+        System.out.println("2 ?= " + twoEggDrop_rec_opt(2));
+        System.out.println("3 ?= " + twoEggDrop_rec_opt(4));
+        System.out.println("4 ?= " + twoEggDrop_rec_opt(7));
+        System.out.println("5 ?= " + twoEggDrop_rec_opt(13));
+        System.out.println("7 ?= " + twoEggDrop_rec_opt(25));
+        System.out.println("10 ?= " + twoEggDrop_rec_opt(55));
+        System.out.println("12 ?= " + twoEggDrop_rec_opt(67));
+        System.out.println("13 ?= " + twoEggDrop_rec_opt(82));
+        System.out.println("14 ?= " + twoEggDrop_rec_opt(100));
 
         System.out.println("OK");
     }
