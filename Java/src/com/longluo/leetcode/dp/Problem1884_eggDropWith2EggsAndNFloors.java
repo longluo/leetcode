@@ -40,6 +40,7 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
 
     /**
      * Dynamic Programming Solution
+     *
      * @param n
      * @return
      */
@@ -77,7 +78,44 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
         return (int) Math.ceil((Math.sqrt(1 + 8 * n) - 1) / 2);
     }
 
+    /**
+     * Recursion Solution
+     *
+     * @param eggs
+     * @param floors
+     * @return
+     */
+    private static int eggDropping(int eggs, int floors) {
+        if (eggs == 1) {
+            return floors;
+        }
+
+        if (floors == 0 || floors == 1) {
+            return floors;
+        }
+
+        int minTries = Integer.MAX_VALUE;
+
+        for (int i = 1; i <= floors; i++) {
+            minTries = Math.min(minTries, 1 + Math.max(eggDropping(eggs, floors - i), eggDropping(eggs - 1, i - 1)));
+        }
+
+        return minTries;
+    }
+
+    /**
+     * Recursion Solution
+     *
+     * @param n
+     * @return
+     */
+    public static int twoEggDrop_rec(int n) {
+        return eggDropping(2, n);
+    }
+
     public static void main(String[] args) {
+        System.out.println("=== DP === ");
+
         System.out.println("2 ?= " + twoEggDrop(2));
         System.out.println("3 ?= " + twoEggDrop(4));
         System.out.println("4 ?= " + twoEggDrop(7));
@@ -88,7 +126,7 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
         System.out.println("13 ?= " + twoEggDrop(82));
         System.out.println("14 ?= " + twoEggDrop(100));
 
-        System.out.println("\n ============= \n");
+        System.out.println("=== Math === ");
 
         System.out.println("2 ?= " + twoEggDrop_math(2));
         System.out.println("3 ?= " + twoEggDrop_math(4));
@@ -99,5 +137,19 @@ public class Problem1884_eggDropWith2EggsAndNFloors {
         System.out.println("12 ?= " + twoEggDrop_math(67));
         System.out.println("13 ?= " + twoEggDrop_math(82));
         System.out.println("14 ?= " + twoEggDrop_math(100));
+
+        System.out.println("=== Recursion === ");
+
+        System.out.println("2 ?= " + twoEggDrop_rec(2));
+        System.out.println("3 ?= " + twoEggDrop_rec(4));
+        System.out.println("4 ?= " + twoEggDrop_rec(7));
+        System.out.println("5 ?= " + twoEggDrop_rec(13));
+        System.out.println("7 ?= " + twoEggDrop_rec(25));
+        System.out.println("10 ?= " + twoEggDrop_rec(55));
+        System.out.println("12 ?= " + twoEggDrop_rec(67));
+        System.out.println("13 ?= " + twoEggDrop_rec(82));
+        System.out.println("14 ?= " + twoEggDrop_rec(100));
+
+        System.out.println("OK");
     }
 }
