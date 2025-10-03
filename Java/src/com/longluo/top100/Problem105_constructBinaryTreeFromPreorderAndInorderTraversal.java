@@ -26,7 +26,7 @@ import com.longluo.datastructure.TreeUtils;
  * preorder 保证 为二叉树的前序遍历序列
  * inorder 保证 为二叉树的中序遍历序列
  * <p>
- * https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+ * https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
  */
 public class Problem105_constructBinaryTreeFromPreorderAndInorderTraversal {
 
@@ -59,12 +59,45 @@ public class Problem105_constructBinaryTreeFromPreorderAndInorderTraversal {
         return root;
     }
 
-    // TODO: 2022/6/29  
+    // TODO: 2022/6/29
+    public static TreeNode buildTree_my(int[] preorder, int[] inorder) {
+        int len = preorder.length;
+        return helper(preorder, 0, len - 1, inorder, 0, len - 1);
+    }
+
+    public static TreeNode helper(int[] preOrder, int pStart, int pEnd, int[] inOrder, int iStart, int iEnd) {
+        if (pStart > pEnd || pStart >= preOrder.length) {
+            return null;
+        }
+
+        int rootVal = preOrder[pStart];
+
+        TreeNode root = new TreeNode(rootVal);
+
+        int i_root_idx = 0;
+
+        for (int i = iStart; i <= iEnd; i++) {
+            if (inOrder[i] == rootVal) {
+                i_root_idx = i;
+                break;
+            }
+        }
+
+        int leftTreeLength = i_root_idx - iStart;
+
+        root.left = helper(preOrder, pStart + 1, pStart + leftTreeLength, inOrder, iStart, i_root_idx - 1);
+        root.right = helper(preOrder, pStart + leftTreeLength + 1, pEnd, inOrder, i_root_idx + 1, iEnd);
+
+        return root;
+    }
 
     public static void main(String[] args) {
         // [-1]
         TreeUtils.printTree(buildTree(new int[]{-1}, new int[]{-1}));
         // [3,9,20,null,null,15,7]
         TreeUtils.printTree(buildTree(new int[]{3, 9, 20, 15, 7}, new int[]{9, 3, 15, 20, 7}));
+
+        TreeUtils.printTree(buildTree_my(new int[]{-1}, new int[]{-1}));
+        TreeUtils.printTree(buildTree_my(new int[]{3, 9, 20, 15, 7}, new int[]{9, 3, 15, 20, 7}));
     }
 }
