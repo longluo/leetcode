@@ -42,6 +42,41 @@ public class Problem1 {
         return ans;
     }
 
+    public static int minimumRightShifts_opt(List<Integer> nums) {
+        int len = nums.size();
+
+        int mid = -1;
+
+        int idx = 0;
+
+        for (idx = 1; idx < len; idx++) {
+            if (nums.get(idx) > nums.get(idx - 1)) {
+                continue;
+            }
+
+            mid = idx;
+            break;
+        }
+
+        for (idx++; idx < len; idx++) {
+            if (nums.get(idx) > nums.get(idx - 1)) {
+                continue;
+            }
+
+            return -1;
+        }
+
+        if (mid == -1) {
+            return 0;
+        }
+
+        if (mid != len - 1 && nums.get(len - 1) > nums.get(0)) {
+            return -1;
+        }
+
+        return len - mid;
+    }
+
     public static void main(String[] args) {
         List<Integer> tst1 = new ArrayList<>();
         tst1.add(3);
@@ -51,6 +86,7 @@ public class Problem1 {
         tst1.add(2);
 
         System.out.println("2 ?= " + minimumRightShifts(tst1));
+        System.out.println("2 ?= " + minimumRightShifts_opt(tst1));
 
         List<Integer> tst2 = new ArrayList<>();
         tst2.add(2);
@@ -58,5 +94,13 @@ public class Problem1 {
         tst2.add(4);
 
         System.out.println("-1 ?= " + minimumRightShifts(tst2));
+        System.out.println("-1 ?= " + minimumRightShifts_opt(tst2));
+
+        List<Integer> tst3 = new ArrayList<>();
+        tst3.add(1);
+        tst3.add(3);
+        tst3.add(5);
+
+        System.out.println("0 ?= " + minimumRightShifts_opt(tst3));
     }
 }
