@@ -13,22 +13,24 @@ public class Problem4014_minimumTotalPriceAfterApplyingDiscounts {
         Arrays.sort(prices);
         Arrays.sort(discounts);
 
-        double sum = 0.0;
+        double ans = 0.0;
 
         int priceLen = prices.length;
-        int disLen = discounts.length - 1;
+        int disLen = discounts.length;
 
-        for (int i = priceLen - 1; i >= 0; i--) {
-            if (disLen >= 0) {
-                sum += prices[i] * (((double) (100 - discounts[disLen])) / 100);
+        for (int i = priceLen - 1, j = disLen - 1; i >= 0; i--, j--) {
+            if (j >= 0) {
+                double price = prices[i];
+                double discount = discounts[j];
+                ans += price * (100 - discount) / 100;
             } else {
-                sum += prices[i];
+                ans += prices[i];
             }
 
             disLen--;
         }
 
-        return sum;
+        return ans;
     }
 
     public static void main(String[] args) {
