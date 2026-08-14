@@ -46,7 +46,7 @@ package com.longluo.leetcode.design;
  * update，current，maximum 和 minimum 总 调用次数不超过 10^5 。
  * current，maximum 和 minimum 被调用时，update 操作 至少 已经被调用过 一次 。
  * <p>
- * https://leetcode-cn.com/problems/stock-price-fluctuation/
+ * https://leetcode.cn/problems/stock-price-fluctuation/
  */
 public class Problem2034_stockPriceFluctuation {
 
@@ -62,14 +62,17 @@ public class Problem2034_stockPriceFluctuation {
 
         public int current() {
 
+            return 0;
         }
 
         public int maximum() {
 
+            return 0;
         }
 
         public int minimum() {
 
+            return 0;
         }
     }
 

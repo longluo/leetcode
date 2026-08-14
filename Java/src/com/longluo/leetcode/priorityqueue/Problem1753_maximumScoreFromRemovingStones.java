@@ -1,8 +1,5 @@
 package com.longluo.leetcode.priorityqueue;
 
-import com.longluo.contest.weekly_contest_310.Problem1;
-
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**

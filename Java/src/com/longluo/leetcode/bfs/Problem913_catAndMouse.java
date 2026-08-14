@@ -36,12 +36,13 @@ package com.longluo.leetcode.bfs;
  * graph[i] 互不相同
  * 猫和老鼠在游戏中总是移动
  * <p>
- * https://leetcode-cn.com/problems/cat-and-mouse/
+ * https://leetcode.cn/problems/cat-and-mouse/
  */
 public class Problem913_catAndMouse {
 
     public static int catMouseGame(int[][] graph) {
 
+        return 0;
     }
 
     public static void main(String[] args) {
