@@ -77,9 +77,66 @@ public class Problem443_stringCompression {
         return sb.length();
     }
 
+    // Two Pointers time: O(n) space: O(1)
+    public static int compress_better(char[] chars) {
+        int idx = 0;
+        int grpLen = 1;
+
+        int ans = 0;
+
+        while (idx < chars.length) {
+            grpLen = 1;
+            while (idx + grpLen < chars.length && chars[idx + grpLen] == chars[idx]) {
+                grpLen++;
+            }
+
+            chars[ans++] = chars[idx];
+            if (grpLen > 1) {
+                for (char ch : Integer.toString(grpLen).toCharArray()) {
+                    chars[ans++] = ch;
+                }
+            }
+
+            idx += grpLen;
+        }
+
+        return ans;
+    }
+
+    // Two Pointers time: O(n) space: O(1)
+    public static int compress_opt(char[] chars) {
+        int ans = 0;
+
+        int left = 0;
+
+        for (int i = 0; i < chars.length; i++) {
+            if (i == chars.length - 1 || chars[i] != chars[i + 1]) {
+                chars[ans++] = chars[i];
+                int cnt = i - left + 1;
+                if (cnt > 1) {
+                    for (char ch : Integer.toString(cnt).toCharArray()) {
+                        chars[ans++] = ch;
+                    }
+                }
+
+                left = i + 1;
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         System.out.println("1 ?= " + compress(new char[]{'a'}));
         System.out.println("6 ?= " + compress(new char[]{'a', 'a', 'b', 'b', 'c', 'c', 'c'}));
         System.out.println("4 ?= " + compress(new char[]{'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'}));
+
+        System.out.println("1 ?= " + compress_better(new char[]{'a'}));
+        System.out.println("6 ?= " + compress_better(new char[]{'a', 'a', 'b', 'b', 'c', 'c', 'c'}));
+        System.out.println("4 ?= " + compress_better(new char[]{'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'}));
+
+        System.out.println("1 ?= " + compress_opt(new char[]{'a'}));
+        System.out.println("6 ?= " + compress_opt(new char[]{'a', 'a', 'b', 'b', 'c', 'c', 'c'}));
+        System.out.println("4 ?= " + compress_opt(new char[]{'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'}));
     }
 }
