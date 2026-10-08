@@ -120,6 +120,30 @@ public class Problem1021_removeOuterParentheses {
         return sb.toString();
     }
 
+    // Remove the Parentheses whose depth = 0 time: O(n) space: O(1)
+    public static String removeOuterParentheses_depth(String s) {
+        char[] array = s.toCharArray();
+        int size = 0;
+        int depth = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') {
+                if (depth > 0) {
+                    array[size++] = ch;
+                }
+                depth++;
+            } else {
+                depth--;
+                if (depth > 0) {
+                    array[size++] = ch;
+                }
+            }
+        }
+
+        return new String(array, 0, size);
+    }
+
+
     public static void main(String[] args) {
         System.out.println("()()() ?= " + removeOuterParentheses_stack("(()())(())"));
         System.out.println("()()()()(()) ?= " + removeOuterParentheses_stack("(()())(())(()(()))"));
@@ -128,5 +152,9 @@ public class Problem1021_removeOuterParentheses {
         System.out.println("()()() ?= " + removeOuterParentheses_cnt("(()())(())"));
         System.out.println("()()() ?= " + removeOuterParentheses_opt("(()())(())"));
         System.out.println(" ?= " + removeOuterParentheses_cnt("()()"));
+
+        System.out.println("()()() ?= " + removeOuterParentheses_depth("(()())(())"));
+        System.out.println("()()() ?= " + removeOuterParentheses_depth("(()())(())"));
+        System.out.println(" ?= " + removeOuterParentheses_depth("()()"));
     }
 }
